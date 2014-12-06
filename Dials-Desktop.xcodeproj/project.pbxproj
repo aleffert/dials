@@ -7,31 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		776414E01A32ADC9005E381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776414DF1A32ADC9005E381A /* AppDelegate.swift */; };
-		776414E21A32ADC9005E381A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 776414E11A32ADC9005E381A /* Images.xcassets */; };
-		776414E51A32ADC9005E381A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776414E31A32ADC9005E381A /* MainMenu.xib */; };
-		776414F11A32ADC9005E381A /* DialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776414F01A32ADC9005E381A /* DialsTests.swift */; };
+		776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415001A32AF94005E381A /* ConsoleWindow.xib */; };
+		776415031A32AF94005E381A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415011A32AF94005E381A /* MainMenu.xib */; };
+		776415061A32AF9F005E381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415041A32AF9F005E381A /* AppDelegate.swift */; };
+		776415071A32AF9F005E381A /* ConsoleWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415051A32AF9F005E381A /* ConsoleWindowController.swift */; };
+		7764150B1A32C064005E381A /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764150A1A32C064005E381A /* DeviceController.swift */; };
+		77AAE4F11A32C36D00998E36 /* DialsShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AAE4F01A32C36D00998E36 /* DialsShared.framework */; };
+		77AAE4F81A32C66600998E36 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4F71A32C66600998E36 /* Device.swift */; };
+		77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE4FB1A32CFA600998E36 /* Images.xcassets */; };
+		77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		776414EB1A32ADC9005E381A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 776414D21A32ADC9005E381A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 776414D91A32ADC9005E381A;
-			remoteInfo = Dials;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		776414DA1A32ADC9005E381A /* Dials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dials.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		776414DE1A32ADC9005E381A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		776414DF1A32ADC9005E381A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		776414E11A32ADC9005E381A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		776414E41A32ADC9005E381A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		776414EA1A32ADC9005E381A /* DialsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		776414EF1A32ADC9005E381A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		776414F01A32ADC9005E381A /* DialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialsTests.swift; sourceTree = "<group>"; };
+		776415001A32AF94005E381A /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConsoleWindow.xib; path = Desktop/XIB/ConsoleWindow.xib; sourceTree = SOURCE_ROOT; };
+		776415011A32AF94005E381A /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Desktop/XIB/MainMenu.xib; sourceTree = SOURCE_ROOT; };
+		776415041A32AF9F005E381A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Desktop/Source/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		776415051A32AF9F005E381A /* ConsoleWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsoleWindowController.swift; path = Desktop/Source/ConsoleWindowController.swift; sourceTree = SOURCE_ROOT; };
+		776415081A32AFA8005E381A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Desktop/Info.plist; sourceTree = SOURCE_ROOT; };
+		7764150A1A32C064005E381A /* DeviceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceController.swift; path = Desktop/Source/DeviceController.swift; sourceTree = SOURCE_ROOT; };
+		77AAE4F01A32C36D00998E36 /* DialsShared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DialsShared.framework; path = build/Debug/DialsShared.framework; sourceTree = "<group>"; };
+		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
+		77AAE4FB1A32CFA600998E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Desktop/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisibleStrings.swift; path = Desktop/Source/VisibleStrings.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,13 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		776414E71A32ADC9005E381A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				77AAE4F11A32C36D00998E36 /* DialsShared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,8 +47,8 @@
 		776414D11A32ADC9005E381A = {
 			isa = PBXGroup;
 			children = (
+				77AAE4F01A32C36D00998E36 /* DialsShared.framework */,
 				776414DC1A32ADC9005E381A /* Dials */,
-				776414ED1A32ADC9005E381A /* DialsTests */,
 				776414DB1A32ADC9005E381A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,7 +57,6 @@
 			isa = PBXGroup;
 			children = (
 				776414DA1A32ADC9005E381A /* Dials.app */,
-				776414EA1A32ADC9005E381A /* DialsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,9 +64,12 @@
 		776414DC1A32ADC9005E381A /* Dials */ = {
 			isa = PBXGroup;
 			children = (
-				776414DF1A32ADC9005E381A /* AppDelegate.swift */,
-				776414E11A32ADC9005E381A /* Images.xcassets */,
-				776414E31A32ADC9005E381A /* MainMenu.xib */,
+				776415041A32AF9F005E381A /* AppDelegate.swift */,
+				776415051A32AF9F005E381A /* ConsoleWindowController.swift */,
+				7764150A1A32C064005E381A /* DeviceController.swift */,
+				77AAE4F71A32C66600998E36 /* Device.swift */,
+				77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */,
+				776414FC1A32AF07005E381A /* Resources */,
 				776414DD1A32ADC9005E381A /* Supporting Files */,
 			);
 			path = Dials;
@@ -84,26 +78,27 @@
 		776414DD1A32ADC9005E381A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				776414DE1A32ADC9005E381A /* Info.plist */,
+				776415081A32AFA8005E381A /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		776414ED1A32ADC9005E381A /* DialsTests */ = {
+		776414FC1A32AF07005E381A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				776414F01A32ADC9005E381A /* DialsTests.swift */,
-				776414EE1A32ADC9005E381A /* Supporting Files */,
+				77AAE4FB1A32CFA600998E36 /* Images.xcassets */,
+				776414FD1A32AF0E005E381A /* XIB */,
 			);
-			path = DialsTests;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		776414EE1A32ADC9005E381A /* Supporting Files */ = {
+		776414FD1A32AF0E005E381A /* XIB */ = {
 			isa = PBXGroup;
 			children = (
-				776414EF1A32ADC9005E381A /* Info.plist */,
+				776415001A32AF94005E381A /* ConsoleWindow.xib */,
+				776415011A32AF94005E381A /* MainMenu.xib */,
 			);
-			name = "Supporting Files";
+			name = XIB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,24 +121,6 @@
 			productReference = 776414DA1A32ADC9005E381A /* Dials.app */;
 			productType = "com.apple.product-type.application";
 		};
-		776414E91A32ADC9005E381A /* DialsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 776414F71A32ADC9005E381A /* Build configuration list for PBXNativeTarget "DialsTests" */;
-			buildPhases = (
-				776414E61A32ADC9005E381A /* Sources */,
-				776414E71A32ADC9005E381A /* Frameworks */,
-				776414E81A32ADC9005E381A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				776414EC1A32ADC9005E381A /* PBXTargetDependency */,
-			);
-			name = DialsTests;
-			productName = DialsTests;
-			productReference = 776414EA1A32ADC9005E381A /* DialsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -155,13 +132,9 @@
 					776414D91A32ADC9005E381A = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
-					776414E91A32ADC9005E381A = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 776414D91A32ADC9005E381A;
-					};
 				};
 			};
-			buildConfigurationList = 776414D51A32ADC9005E381A /* Build configuration list for PBXProject "Dials" */;
+			buildConfigurationList = 776414D51A32ADC9005E381A /* Build configuration list for PBXProject "Dials-Desktop" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -175,7 +148,6 @@
 			projectRoot = "";
 			targets = (
 				776414D91A32ADC9005E381A /* Dials */,
-				776414E91A32ADC9005E381A /* DialsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -185,15 +157,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				776414E21A32ADC9005E381A /* Images.xcassets in Resources */,
-				776414E51A32ADC9005E381A /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		776414E81A32ADC9005E381A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */,
+				776415031A32AF94005E381A /* MainMenu.xib in Resources */,
+				776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,38 +170,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				776414E01A32ADC9005E381A /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		776414E61A32ADC9005E381A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				776414F11A32ADC9005E381A /* DialsTests.swift in Sources */,
+				7764150B1A32C064005E381A /* DeviceController.swift in Sources */,
+				776415071A32AF9F005E381A /* ConsoleWindowController.swift in Sources */,
+				776415061A32AF9F005E381A /* AppDelegate.swift in Sources */,
+				77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */,
+				77AAE4F81A32C66600998E36 /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		776414EC1A32ADC9005E381A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 776414D91A32ADC9005E381A /* Dials */;
-			targetProxy = 776414EB1A32ADC9005E381A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		776414E31A32ADC9005E381A /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				776414E41A32ADC9005E381A /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		776414F21A32ADC9005E381A /* Debug */ = {
@@ -266,6 +209,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -303,6 +247,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -320,7 +265,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Dials/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Desktop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -331,52 +280,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Dials/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Desktop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		776414F81A32ADC9005E381A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DialsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/MacOS/Dials";
-			};
-			name = Debug;
-		};
-		776414F91A32ADC9005E381A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DialsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/MacOS/Dials";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		776414D51A32ADC9005E381A /* Build configuration list for PBXProject "Dials" */ = {
+		776414D51A32ADC9005E381A /* Build configuration list for PBXProject "Dials-Desktop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				776414F21A32ADC9005E381A /* Debug */,
@@ -392,14 +309,7 @@
 				776414F61A32ADC9005E381A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		776414F71A32ADC9005E381A /* Build configuration list for PBXNativeTarget "DialsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				776414F81A32ADC9005E381A /* Debug */,
-				776414F91A32ADC9005E381A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
