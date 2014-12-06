@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ConsoleWindowController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="bodyView" destination="uvS-Ec-rbg" id="1QB-FO-RDa"/>
+                <outlet property="connectPrompt" destination="aq1-mR-wJg" id="EKj-Fb-rwV"/>
                 <outlet property="connectionOptions" destination="duh-kh-Gcr" id="kZV-R5-SW6"/>
                 <outlet property="emptyView" destination="5yi-3j-sZN" id="iaw-jo-REt"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="oi3-8B-Geh"/>

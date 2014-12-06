@@ -7,27 +7,21 @@
 //
 
 import Cocoa
-import DialsShared
 
 protocol DeviceControllerDelegate : class {
     func deviceControllerUpdatedDevices(controller : DeviceController)
 }
 
 class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
-    let browser : NSNetServiceBrowser
-    var devices : [Device]
+    let browser : NSNetServiceBrowser = NSNetServiceBrowser()
+    var devices : [Device] = []
     var running : Bool = false
     weak var delegate : DeviceControllerDelegate?
     
-    override init() {
-        browser = NSNetServiceBrowser()
-        devices = []
-        super.init()
-    }
-    
     func start() {
         if !running {
-            browser.searchForServicesOfType(DialsNetServiceName, inDomain: "")
+            browser.delegate = self
+            browser.searchForServicesOfType(DLSNetServiceName, inDomain: "")
         }
         running = true
     }
@@ -49,13 +43,15 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
     
     func netServiceBrowser(browser: NSNetServiceBrowser, didFindService service: NSNetService, moreComing: Bool) {
         let found = countElements(devices.filter { $0.backedByNetService(service) }) > 0
-        if found {
-            devices.append(Device(service: service))
+        if !found {
+            devices.append(Device(service: service, delegate : self))
         }
+        delegate?.deviceControllerUpdatedDevices(self)
     }
     
     func netServiceBrowser(browser: NSNetServiceBrowser, didRemoveService service: NSNetService, moreComing: Bool) {
-        self.devices = self.devices.filter{ !$0.backedByNetService(service) }
+        devices = devices.filter{ !$0.backedByNetService(service) }
+        delegate?.deviceControllerUpdatedDevices(self)
     }
     
     func deviceDidResolveAddress(device: Device) {

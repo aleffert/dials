@@ -12,7 +12,7 @@
 		776415061A32AF9F005E381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415041A32AF9F005E381A /* AppDelegate.swift */; };
 		776415071A32AF9F005E381A /* ConsoleWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415051A32AF9F005E381A /* ConsoleWindowController.swift */; };
 		7764150B1A32C064005E381A /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764150A1A32C064005E381A /* DeviceController.swift */; };
-		77AAE4F11A32C36D00998E36 /* DialsShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AAE4F01A32C36D00998E36 /* DialsShared.framework */; };
+		779250DD1A3353FB00CCC229 /* libDialsShared_Desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */; };
 		77AAE4F81A32C66600998E36 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4F71A32C66600998E36 /* Device.swift */; };
 		77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE4FB1A32CFA600998E36 /* Images.xcassets */; };
 		77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */; };
@@ -26,7 +26,8 @@
 		776415051A32AF9F005E381A /* ConsoleWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsoleWindowController.swift; path = Desktop/Source/ConsoleWindowController.swift; sourceTree = SOURCE_ROOT; };
 		776415081A32AFA8005E381A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Desktop/Info.plist; sourceTree = SOURCE_ROOT; };
 		7764150A1A32C064005E381A /* DeviceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceController.swift; path = Desktop/Source/DeviceController.swift; sourceTree = SOURCE_ROOT; };
-		77AAE4F01A32C36D00998E36 /* DialsShared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DialsShared.framework; path = build/Debug/DialsShared.framework; sourceTree = "<group>"; };
+		779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDialsShared_Desktop.a; path = build/Debug/libDialsShared_Desktop.a; sourceTree = "<group>"; };
+		779250DE1A33554000CCC229 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Desktop/BridgingHeader.h; sourceTree = "<group>"; };
 		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4FB1A32CFA600998E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Desktop/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisibleStrings.swift; path = Desktop/Source/VisibleStrings.swift; sourceTree = SOURCE_ROOT; };
@@ -37,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77AAE4F11A32C36D00998E36 /* DialsShared.framework in Frameworks */,
+				779250DD1A3353FB00CCC229 /* libDialsShared_Desktop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +48,8 @@
 		776414D11A32ADC9005E381A = {
 			isa = PBXGroup;
 			children = (
-				77AAE4F01A32C36D00998E36 /* DialsShared.framework */,
+				779250DE1A33554000CCC229 /* BridgingHeader.h */,
+				779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */,
 				776414DC1A32ADC9005E381A /* Dials */,
 				776414DB1A32ADC9005E381A /* Products */,
 			);
@@ -269,9 +271,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Shared/",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Desktop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Desktop/BridgingHeader.h";
 			};
 			name = Debug;
 		};
@@ -284,9 +293,16 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Shared/",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Desktop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Desktop/BridgingHeader.h";
 			};
 			name = Release;
 		};

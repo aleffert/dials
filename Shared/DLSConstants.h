@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 
-extern NSString * const DialsNetServiceName;
+extern NSString * const DLSNetServiceName;
 

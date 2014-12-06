@@ -10,9 +10,10 @@ import Cocoa
 
 class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
     
-    @IBOutlet var emptyView : NSView?
-    @IBOutlet var bodyView : NSView?
-    @IBOutlet var connectionOptions : NSPopUpButton?
+    @IBOutlet var emptyView : NSView!
+    @IBOutlet var bodyView : NSView!
+    @IBOutlet var connectionOptions : NSPopUpButton!
+    @IBOutlet var connectPrompt : NSTextField!
     
     let deviceController : DeviceController = DeviceController()
 
@@ -26,6 +27,7 @@ class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
         contentView.addSubview(emptyView!)
         
         deviceController.delegate = self
+        deviceController.start()
         
         generatePopupMenu()
     }
@@ -35,15 +37,17 @@ class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
     }
     
     func generatePopupMenu() {
-        connectionOptions?.hidden = !deviceController.hasDevices
+        connectionOptions.hidden = !deviceController.hasDevices
+        connectPrompt.hidden = !connectionOptions!.hidden
         
-        connectionOptions?.menu?.removeAllItems()
+        connectionOptions.menu?.removeAllItems()
         
-        connectionOptions?.menu?.addItemWithTitle(VisibleStrings.ConnectDevice.rawValue, action: nil, keyEquivalent: "")
-        connectionOptions?.enabled = false
+        connectionOptions.menu?.addItemWithTitle(VisibleStrings.NoDeviceSelected.rv, action: nil, keyEquivalent: "")
         
         for device in deviceController.knownDevices {
-            connectionOptions?.menu?.addItemWithTitle(device.displayName, action: Selector("choseDeviceOption"), keyEquivalent: "")
+            let item = NSMenuItem(title : device.displayName, action: Selector("choseDeviceOption:"), keyEquivalent: "")
+            item.representedObject = device
+            connectionOptions.menu?.addItem(item)
         }
     }
     

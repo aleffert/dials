@@ -10,5 +10,9 @@ import Cocoa
 
 enum VisibleStrings : String {
     case NoDeviceSelected = "No Device Selected"
-    case ConnectDevice = "Connect a Device"
+    case UnknownHost = "Unknown"
+    
+    var rv : String {
+        return self.rawValue
+    }
 }

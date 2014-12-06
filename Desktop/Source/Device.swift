@@ -19,13 +19,14 @@ class Device: NSObject, NSNetServiceDelegate {
     let service : NSNetService
     weak var delegate : DeviceDelegate?
     
-    init(service : NSNetService) {
+    init(service : NSNetService, delegate : DeviceDelegate) {
         self.service = service
+        self.delegate = delegate
         super.init()
         service.delegate = self
         
         if service.hostName == nil {
-            service.resolveWithTimeout(0);
+            service.resolveWithTimeout(60);
         }
     }
     
@@ -34,11 +35,11 @@ class Device: NSObject, NSNetServiceDelegate {
     }
     
     var displayName : String {
-        return "\(service.name): \(service.hostName)"
+        return "\(service.name)@\(service.hostName ?? VisibleStrings.UnknownHost.rv)"
     }
     
     func netServiceDidResolveAddress(sender: NSNetService) {
-        self.delegate?.deviceDidResolveAddress(self)
+        delegate?.deviceDidResolveAddress(self)
     }
     
     func backedByNetService(service : NSNetService) -> Bool {
