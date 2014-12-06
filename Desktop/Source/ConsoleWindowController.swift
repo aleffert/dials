@@ -10,12 +10,13 @@ import Cocoa
 
 class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
     
-    @IBOutlet var emptyView : NSView!
-    @IBOutlet var bodyView : NSView!
-    @IBOutlet var connectionOptions : NSPopUpButton!
-    @IBOutlet var connectPrompt : NSTextField!
+    @IBOutlet private var emptyView : NSView!
+    @IBOutlet private var bodyView : NSView!
+    @IBOutlet private var connectionOptions : NSPopUpButton!
+    @IBOutlet private var connectPrompt : NSTextField!
     
-    let deviceController : DeviceController = DeviceController()
+    private let deviceController : DeviceController = DeviceController()
+    private var currentConnection : DeviceConnection?
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -31,12 +32,7 @@ class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
         
         generatePopupMenu()
     }
-    
-    func deviceControllerUpdatedDevices(controller: DeviceController) {
-        generatePopupMenu()
-    }
-    
-    func generatePopupMenu() {
+    private func generatePopupMenu() {
         connectionOptions.hidden = !deviceController.hasDevices
         connectPrompt.hidden = !connectionOptions!.hidden
         
@@ -51,7 +47,36 @@ class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
         }
     }
     
-    func choseDeviceOption(sender : NSMenuItem) {
+    func connectToDevice(device : Device?) {
+        currentConnection?.close()
+        currentConnection = device?.openConnection(delegate : self)
     }
+    
+    func choseDeviceOption(sender : NSMenuItem) {
+        let device = sender.representedObject as Device?
+        if currentConnection != nil && currentConnection!.isConnectedToDevice(device) {
+            deviceController.saveLastDevice(device)
+            connectToDevice(device)
+        }
+    }
+}
 
+extension ConsoleWindowController : DeviceControllerDelegate {
+    
+    func deviceControllerUpdatedDevices(controller: DeviceController) {
+        generatePopupMenu()
+    }
+    
+}
+
+extension ConsoleWindowController : DeviceConnectionDelegate {
+    
+    func connectionClosed(connection: DeviceConnection) {
+        currentConnection = nil;
+    }
+    
+    func connection(connection: DeviceConnection, receivedData: NSData, header: [String : String]) {
+        NSLog("header is \(header)")
+    }
+    
 }

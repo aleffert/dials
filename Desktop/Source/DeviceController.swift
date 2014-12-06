@@ -8,12 +8,15 @@
 
 import Cocoa
 
+private let LastDeviceServiceKey = "com.akivaleffert.Dials.LastDeviceServiceKey";
+private let LastDeviceHostNameKey = "com.akivaleffert.Dials.LastDeviceHostNameKey";
+
 protocol DeviceControllerDelegate : class {
     func deviceControllerUpdatedDevices(controller : DeviceController)
 }
 
 class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
-    let browser : NSNetServiceBrowser = NSNetServiceBrowser()
+    private let browser : NSNetServiceBrowser = NSNetServiceBrowser()
     var devices : [Device] = []
     var running : Bool = false
     weak var delegate : DeviceControllerDelegate?
@@ -42,7 +45,7 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
     }
     
     func netServiceBrowser(browser: NSNetServiceBrowser, didFindService service: NSNetService, moreComing: Bool) {
-        let found = countElements(devices.filter { $0.backedByNetService(service) }) > 0
+        let found = countElements(devices.filter { $0.isBackedByNetService(service) }) > 0
         if !found {
             devices.append(Device(service: service, delegate : self))
         }
@@ -50,12 +53,18 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
     }
     
     func netServiceBrowser(browser: NSNetServiceBrowser, didRemoveService service: NSNetService, moreComing: Bool) {
-        devices = devices.filter{ !$0.backedByNetService(service) }
+        devices = devices.filter{ !$0.isBackedByNetService(service) }
         delegate?.deviceControllerUpdatedDevices(self)
     }
     
     func deviceDidResolveAddress(device: Device) {
         delegate?.deviceControllerUpdatedDevices(self)
+    }
+    
+    
+    func saveLastDevice(device : Device?) {
+        NSUserDefaults.standardUserDefaults().setObject(device?.serviceName, forKey: LastDeviceServiceKey)
+        NSUserDefaults.standardUserDefaults().setObject(device?.hostName, forKey: LastDeviceHostNameKey)
     }
     
 }

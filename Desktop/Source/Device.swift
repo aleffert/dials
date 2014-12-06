@@ -14,7 +14,7 @@ protocol DeviceDelegate : class {
     func deviceDidResolveAddress(device : Device)
 }
 
-class Device: NSObject, NSNetServiceDelegate {
+class Device: NSObject {
     
     let service : NSNetService
     weak var delegate : DeviceDelegate?
@@ -38,12 +38,20 @@ class Device: NSObject, NSNetServiceDelegate {
         return "\(service.name)@\(service.hostName ?? VisibleStrings.UnknownHost.rv)"
     }
     
-    func netServiceDidResolveAddress(sender: NSNetService) {
-        delegate?.deviceDidResolveAddress(self)
+    var serviceName : String {
+        return service.name
     }
     
-    func backedByNetService(service : NSNetService) -> Bool {
+    var hostName : String! {
+        return service.hostName
+    }
+    
+    func isBackedByNetService(service : NSNetService) -> Bool {
         return self.service.isEqual(service)
+    }
+    
+    func openConnection(#delegate : DeviceConnectionDelegate) -> DeviceConnection {
+        return DeviceConnection(device : self, service: service)
     }
     
     func hash() -> Int {
@@ -56,6 +64,10 @@ class Device: NSObject, NSNetServiceDelegate {
         }
         return false;
     }
-    
-    
+}
+
+extension Device : NSNetServiceDelegate {
+    func netServiceDidResolveAddress(sender: NSNetService) {
+        delegate?.deviceDidResolveAddress(self)
+    }
 }

@@ -13,6 +13,7 @@
 		776415071A32AF9F005E381A /* ConsoleWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415051A32AF9F005E381A /* ConsoleWindowController.swift */; };
 		7764150B1A32C064005E381A /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764150A1A32C064005E381A /* DeviceController.swift */; };
 		779250DD1A3353FB00CCC229 /* libDialsShared_Desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */; };
+		779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779250F61A336E9B00CCC229 /* DeviceConnection.swift */; };
 		77AAE4F81A32C66600998E36 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4F71A32C66600998E36 /* Device.swift */; };
 		77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE4FB1A32CFA600998E36 /* Images.xcassets */; };
 		77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */; };
@@ -28,6 +29,7 @@
 		7764150A1A32C064005E381A /* DeviceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceController.swift; path = Desktop/Source/DeviceController.swift; sourceTree = SOURCE_ROOT; };
 		779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDialsShared_Desktop.a; path = build/Debug/libDialsShared_Desktop.a; sourceTree = "<group>"; };
 		779250DE1A33554000CCC229 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Desktop/BridgingHeader.h; sourceTree = "<group>"; };
+		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4FB1A32CFA600998E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Desktop/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisibleStrings.swift; path = Desktop/Source/VisibleStrings.swift; sourceTree = SOURCE_ROOT; };
@@ -68,6 +70,7 @@
 			children = (
 				776415041A32AF9F005E381A /* AppDelegate.swift */,
 				776415051A32AF9F005E381A /* ConsoleWindowController.swift */,
+				779250F61A336E9B00CCC229 /* DeviceConnection.swift */,
 				7764150A1A32C064005E381A /* DeviceController.swift */,
 				77AAE4F71A32C66600998E36 /* Device.swift */,
 				77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */,
@@ -177,6 +180,7 @@
 				776415061A32AF9F005E381A /* AppDelegate.swift in Sources */,
 				77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */,
 				77AAE4F81A32C66600998E36 /* Device.swift in Sources */,
+				779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
