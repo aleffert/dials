@@ -9,14 +9,18 @@
 /* Begin PBXBuildFile section */
 		779250E31A3358C800CCC229 /* DLSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 779250E21A3358C800CCC229 /* DLSConstants.m */; };
 		779250E41A3358DE00CCC229 /* DLSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 779250E21A3358C800CCC229 /* DLSConstants.m */; };
-		77DD9B2B1A3398D500F17C1E /* DLSBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2A1A3398D000F17C1E /* DLSBufferedStream.m */; };
-		77DD9B2C1A3398D800F17C1E /* DLSBufferedStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2A1A3398D000F17C1E /* DLSBufferedStream.m */; };
+		77DD9B2B1A3398D500F17C1E /* DLSChannelStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2A1A3398D000F17C1E /* DLSChannelStream.m */; };
+		77DD9B2C1A3398D800F17C1E /* DLSChannelStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2A1A3398D000F17C1E /* DLSChannelStream.m */; };
 		77DD9B2F1A339A0600F17C1E /* DLSBufferedStreamReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 77DD9B2D1A339A0600F17C1E /* DLSBufferedStreamReader.h */; };
 		77DD9B301A339A0600F17C1E /* DLSBufferedStreamReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2E1A339A0600F17C1E /* DLSBufferedStreamReader.m */; };
 		77DD9B311A339A0600F17C1E /* DLSBufferedStreamReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2E1A339A0600F17C1E /* DLSBufferedStreamReader.m */; };
 		77DD9B341A33A0F400F17C1E /* DLSBufferedStreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 77DD9B321A33A0F400F17C1E /* DLSBufferedStreamWriter.h */; };
 		77DD9B351A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B331A33A0F400F17C1E /* DLSBufferedStreamWriter.m */; };
 		77DD9B361A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B331A33A0F400F17C1E /* DLSBufferedStreamWriter.m */; };
+		77F4F58F1A33B43F00A48A76 /* DLSBufferedStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F4F58D1A33B43F00A48A76 /* DLSBufferedStream.h */; };
+		77F4F5941A33B5D800A48A76 /* DLSOwnedChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F4F5921A33B5D800A48A76 /* DLSOwnedChannel.h */; };
+		77F4F5951A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5931A33B5D800A48A76 /* DLSOwnedChannel.m */; };
+		77F4F5961A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5931A33B5D800A48A76 /* DLSOwnedChannel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,12 +41,15 @@
 		779250E01A3358C800CCC229 /* DialsShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialsShared.h; path = Shared/DialsShared.h; sourceTree = SOURCE_ROOT; };
 		779250E11A3358C800CCC229 /* DLSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSConstants.h; path = Shared/DLSConstants.h; sourceTree = SOURCE_ROOT; };
 		779250E21A3358C800CCC229 /* DLSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSConstants.m; path = Shared/DLSConstants.m; sourceTree = SOURCE_ROOT; };
-		77DD9B291A3398D000F17C1E /* DLSBufferedStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DLSBufferedStream.h; path = Shared/DLSBufferedStream.h; sourceTree = SOURCE_ROOT; };
-		77DD9B2A1A3398D000F17C1E /* DLSBufferedStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DLSBufferedStream.m; path = Shared/DLSBufferedStream.m; sourceTree = SOURCE_ROOT; };
+		77DD9B291A3398D000F17C1E /* DLSChannelStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DLSChannelStream.h; path = Shared/DLSChannelStream.h; sourceTree = SOURCE_ROOT; };
+		77DD9B2A1A3398D000F17C1E /* DLSChannelStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DLSChannelStream.m; path = Shared/DLSChannelStream.m; sourceTree = SOURCE_ROOT; };
 		77DD9B2D1A339A0600F17C1E /* DLSBufferedStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSBufferedStreamReader.h; path = Shared/DLSBufferedStreamReader.h; sourceTree = SOURCE_ROOT; };
 		77DD9B2E1A339A0600F17C1E /* DLSBufferedStreamReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSBufferedStreamReader.m; path = Shared/DLSBufferedStreamReader.m; sourceTree = SOURCE_ROOT; };
 		77DD9B321A33A0F400F17C1E /* DLSBufferedStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSBufferedStreamWriter.h; path = Shared/DLSBufferedStreamWriter.h; sourceTree = SOURCE_ROOT; };
 		77DD9B331A33A0F400F17C1E /* DLSBufferedStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSBufferedStreamWriter.m; path = Shared/DLSBufferedStreamWriter.m; sourceTree = SOURCE_ROOT; };
+		77F4F58D1A33B43F00A48A76 /* DLSBufferedStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSBufferedStream.h; path = Shared/DLSBufferedStream.h; sourceTree = SOURCE_ROOT; };
+		77F4F5921A33B5D800A48A76 /* DLSOwnedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSOwnedChannel.h; path = Shared/DLSOwnedChannel.h; sourceTree = SOURCE_ROOT; };
+		77F4F5931A33B5D800A48A76 /* DLSOwnedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSOwnedChannel.m; path = Shared/DLSOwnedChannel.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +90,15 @@
 		776415181A32C1D1005E381A /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				77DD9B291A3398D000F17C1E /* DLSBufferedStream.h */,
-				77DD9B2A1A3398D000F17C1E /* DLSBufferedStream.m */,
+				77F4F58D1A33B43F00A48A76 /* DLSBufferedStream.h */,
 				77DD9B2D1A339A0600F17C1E /* DLSBufferedStreamReader.h */,
 				77DD9B2E1A339A0600F17C1E /* DLSBufferedStreamReader.m */,
 				77DD9B321A33A0F400F17C1E /* DLSBufferedStreamWriter.h */,
 				77DD9B331A33A0F400F17C1E /* DLSBufferedStreamWriter.m */,
+				77DD9B291A3398D000F17C1E /* DLSChannelStream.h */,
+				77DD9B2A1A3398D000F17C1E /* DLSChannelStream.m */,
+				77F4F5921A33B5D800A48A76 /* DLSOwnedChannel.h */,
+				77F4F5931A33B5D800A48A76 /* DLSOwnedChannel.m */,
 				779250E01A3358C800CCC229 /* DialsShared.h */,
 				779250E11A3358C800CCC229 /* DLSConstants.h */,
 				779250E21A3358C800CCC229 /* DLSConstants.m */,
@@ -104,6 +114,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77F4F5941A33B5D800A48A76 /* DLSOwnedChannel.h in Headers */,
+				77F4F58F1A33B43F00A48A76 /* DLSBufferedStream.h in Headers */,
 				77DD9B341A33A0F400F17C1E /* DLSBufferedStreamWriter.h in Headers */,
 				77DD9B2F1A339A0600F17C1E /* DLSBufferedStreamReader.h in Headers */,
 			);
@@ -187,7 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				77DD9B301A339A0600F17C1E /* DLSBufferedStreamReader.m in Sources */,
-				77DD9B2C1A3398D800F17C1E /* DLSBufferedStream.m in Sources */,
+				77DD9B2C1A3398D800F17C1E /* DLSChannelStream.m in Sources */,
+				77F4F5951A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */,
 				779250E31A3358C800CCC229 /* DLSConstants.m in Sources */,
 				77DD9B351A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */,
 			);
@@ -198,7 +211,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				77DD9B311A339A0600F17C1E /* DLSBufferedStreamReader.m in Sources */,
-				77DD9B2B1A3398D500F17C1E /* DLSBufferedStream.m in Sources */,
+				77DD9B2B1A3398D500F17C1E /* DLSChannelStream.m in Sources */,
+				77F4F5961A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */,
 				779250E41A3358DE00CCC229 /* DLSConstants.m in Sources */,
 				77DD9B361A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */,
 			);

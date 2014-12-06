@@ -1,24 +1,26 @@
 //
-//  DLSBufferedStream.m
+//  DLSChannelStream.m
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 12/6/14.
 //  Copyright (c) 2014 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSBufferedStream.h"
+#import "DLSChannelStream.h"
 
 #import "DLSBufferedStreamReader.h"
 #import "DLSBufferedStreamWriter.h"
 
-@interface DLSBufferedStream () <DLSBufferedStreamReaderDelegate, DLSBufferedStreamWriterDelegate>
+@interface DLSChannelStream () <DLSBufferedStreamReaderDelegate, DLSBufferedStreamWriterDelegate>
 
 @property (strong, nonatomic) DLSBufferedStreamReader* streamReader;
 @property (strong, nonatomic) DLSBufferedStreamWriter* streamWriter;
 
+@property (strong, nonatomic) NSData* currentHeader;
+
 @end
 
-@implementation DLSBufferedStream
+@implementation DLSChannelStream
 
 - (id)initWithNetService:(NSNetService*)service {
     NSInputStream* inputStream;
@@ -38,12 +40,20 @@
     return self;
 }
 
-- (void)sendMessage:(NSData *)data {
+- (void)sendMessage:(NSData *)data onChannel:(id<DLSChannel>)channel {
+    [self.streamWriter enqueueMessage:[NSKeyedArchiver archivedDataWithRootObject:channel]];
     [self.streamWriter enqueueMessage:data];
 }
 
 - (void)streamReader:(DLSBufferedStreamReader *)reader receivedMessage:(NSData *)data {
-    [self.delegate stream:self receivedMessage:data];
+    if(self.currentHeader == nil) {
+        self.currentHeader = data;
+    }
+    else {
+        DLSOwnedChannel* channel = [NSKeyedUnarchiver unarchiveObjectWithData:self.currentHeader];
+        [self.delegate stream:self receivedMessage:data onChannel:channel];
+        self.currentHeader = nil;
+    }
 }
 
 - (void)streamWriterClosed:(DLSBufferedStreamWriter *)writer {

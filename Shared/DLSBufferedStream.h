@@ -9,23 +9,3 @@
 #import <Foundation/Foundation.h>
 
 typedef int64_t DLSStreamSize;
-
-@class DLSBufferedStream;
-
-@protocol DLSBufferedStreamDelegate
-
-- (void)streamClosed:(DLSBufferedStream*)stream;
-- (void)stream:(DLSBufferedStream*)stream receivedMessage:(NSData*)data;
-
-@end
-
-@interface DLSBufferedStream : NSObject
-
-- (id)initWithInputStream:(NSInputStream*)inputStream outputStream:(NSOutputStream*)outputStream;
-- (id)initWithNetService:(NSNetService*)service;
-
-@property (weak, nonatomic) id delegate;
-
-- (void)sendMessage:(NSData*)data;
-
-@end
