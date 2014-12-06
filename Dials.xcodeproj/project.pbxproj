@@ -1,0 +1,407 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		776414E01A32ADC9005E381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776414DF1A32ADC9005E381A /* AppDelegate.swift */; };
+		776414E21A32ADC9005E381A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 776414E11A32ADC9005E381A /* Images.xcassets */; };
+		776414E51A32ADC9005E381A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776414E31A32ADC9005E381A /* MainMenu.xib */; };
+		776414F11A32ADC9005E381A /* DialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776414F01A32ADC9005E381A /* DialsTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		776414EB1A32ADC9005E381A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 776414D21A32ADC9005E381A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 776414D91A32ADC9005E381A;
+			remoteInfo = Dials;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		776414DA1A32ADC9005E381A /* Dials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dials.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		776414DE1A32ADC9005E381A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		776414DF1A32ADC9005E381A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		776414E11A32ADC9005E381A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		776414E41A32ADC9005E381A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		776414EA1A32ADC9005E381A /* DialsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		776414EF1A32ADC9005E381A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		776414F01A32ADC9005E381A /* DialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialsTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		776414D71A32ADC9005E381A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		776414E71A32ADC9005E381A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		776414D11A32ADC9005E381A = {
+			isa = PBXGroup;
+			children = (
+				776414DC1A32ADC9005E381A /* Dials */,
+				776414ED1A32ADC9005E381A /* DialsTests */,
+				776414DB1A32ADC9005E381A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		776414DB1A32ADC9005E381A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				776414DA1A32ADC9005E381A /* Dials.app */,
+				776414EA1A32ADC9005E381A /* DialsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		776414DC1A32ADC9005E381A /* Dials */ = {
+			isa = PBXGroup;
+			children = (
+				776414DF1A32ADC9005E381A /* AppDelegate.swift */,
+				776414E11A32ADC9005E381A /* Images.xcassets */,
+				776414E31A32ADC9005E381A /* MainMenu.xib */,
+				776414DD1A32ADC9005E381A /* Supporting Files */,
+			);
+			path = Dials;
+			sourceTree = "<group>";
+		};
+		776414DD1A32ADC9005E381A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				776414DE1A32ADC9005E381A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		776414ED1A32ADC9005E381A /* DialsTests */ = {
+			isa = PBXGroup;
+			children = (
+				776414F01A32ADC9005E381A /* DialsTests.swift */,
+				776414EE1A32ADC9005E381A /* Supporting Files */,
+			);
+			path = DialsTests;
+			sourceTree = "<group>";
+		};
+		776414EE1A32ADC9005E381A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				776414EF1A32ADC9005E381A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		776414D91A32ADC9005E381A /* Dials */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 776414F41A32ADC9005E381A /* Build configuration list for PBXNativeTarget "Dials" */;
+			buildPhases = (
+				776414D61A32ADC9005E381A /* Sources */,
+				776414D71A32ADC9005E381A /* Frameworks */,
+				776414D81A32ADC9005E381A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dials;
+			productName = Dials;
+			productReference = 776414DA1A32ADC9005E381A /* Dials.app */;
+			productType = "com.apple.product-type.application";
+		};
+		776414E91A32ADC9005E381A /* DialsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 776414F71A32ADC9005E381A /* Build configuration list for PBXNativeTarget "DialsTests" */;
+			buildPhases = (
+				776414E61A32ADC9005E381A /* Sources */,
+				776414E71A32ADC9005E381A /* Frameworks */,
+				776414E81A32ADC9005E381A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				776414EC1A32ADC9005E381A /* PBXTargetDependency */,
+			);
+			name = DialsTests;
+			productName = DialsTests;
+			productReference = 776414EA1A32ADC9005E381A /* DialsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		776414D21A32ADC9005E381A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				TargetAttributes = {
+					776414D91A32ADC9005E381A = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					776414E91A32ADC9005E381A = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 776414D91A32ADC9005E381A;
+					};
+				};
+			};
+			buildConfigurationList = 776414D51A32ADC9005E381A /* Build configuration list for PBXProject "Dials" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 776414D11A32ADC9005E381A;
+			productRefGroup = 776414DB1A32ADC9005E381A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				776414D91A32ADC9005E381A /* Dials */,
+				776414E91A32ADC9005E381A /* DialsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		776414D81A32ADC9005E381A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				776414E21A32ADC9005E381A /* Images.xcassets in Resources */,
+				776414E51A32ADC9005E381A /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		776414E81A32ADC9005E381A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		776414D61A32ADC9005E381A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				776414E01A32ADC9005E381A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		776414E61A32ADC9005E381A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				776414F11A32ADC9005E381A /* DialsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		776414EC1A32ADC9005E381A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 776414D91A32ADC9005E381A /* Dials */;
+			targetProxy = 776414EB1A32ADC9005E381A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		776414E31A32ADC9005E381A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				776414E41A32ADC9005E381A /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		776414F21A32ADC9005E381A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		776414F31A32ADC9005E381A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		776414F51A32ADC9005E381A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Dials/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		776414F61A32ADC9005E381A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Dials/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		776414F81A32ADC9005E381A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DialsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/MacOS/Dials";
+			};
+			name = Debug;
+		};
+		776414F91A32ADC9005E381A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DialsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/MacOS/Dials";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		776414D51A32ADC9005E381A /* Build configuration list for PBXProject "Dials" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				776414F21A32ADC9005E381A /* Debug */,
+				776414F31A32ADC9005E381A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		776414F41A32ADC9005E381A /* Build configuration list for PBXNativeTarget "Dials" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				776414F51A32ADC9005E381A /* Debug */,
+				776414F61A32ADC9005E381A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		776414F71A32ADC9005E381A /* Build configuration list for PBXNativeTarget "DialsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				776414F81A32ADC9005E381A /* Debug */,
+				776414F91A32ADC9005E381A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 776414D21A32ADC9005E381A /* Project object */;
+}
