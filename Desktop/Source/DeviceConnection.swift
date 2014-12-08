@@ -8,17 +8,23 @@
 
 import Cocoa
 
-protocol DeviceConnectionDelegate {
+protocol DeviceConnectionDelegate : class {
     func connectionClosed(connection : DeviceConnection)
-    func connection(connection : DeviceConnection, receivedData : NSData, header : [String:String])
+    func connection(connection : DeviceConnection, receivedData : NSData, channel : DLSOwnedChannel)
 }
 
-class DeviceConnection {
+class DeviceConnection : DLSChannelStreamDelegate {
     
-    let device : Device
+    private let device : Device
+    private let stream : DLSChannelStream
     
-    init(device : Device, service : NSNetService) {
+    private weak var delegate : DeviceConnectionDelegate?
+    
+    init(device : Device, service : NSNetService, delegate : DeviceConnectionDelegate) {
         self.device = device
+        self.delegate = delegate
+        self.stream = DLSChannelStream(netService: service)
+        self.stream.delegate = self
     }
     
     func isConnectedToDevice(device : Device?) -> Bool {
@@ -26,5 +32,18 @@ class DeviceConnection {
     }
     
     func close() {
+        self.stream.close()
+    }
+    
+    func sendMessage(message : NSData, channel : DLSChannel) {
+        self.stream.sendMessage(message, onChannel: channel)
+    }
+    
+    func stream(stream: DLSChannelStream!, receivedMessage data: NSData!, onChannel channel: DLSOwnedChannel!) {
+        delegate?.connection(self, receivedData: data, channel: channel)
+    }
+    
+    func streamClosed(stream: DLSChannelStream!) {
+        delegate?.connectionClosed(self)
     }
 }

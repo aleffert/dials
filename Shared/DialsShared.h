@@ -7,4 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import "DLSConstants.h"
+#import "DLSOwnedChannel.h"
+#import "DLSChannelStream.h"
+#import "NSObject+DLSDeallocAction.h"

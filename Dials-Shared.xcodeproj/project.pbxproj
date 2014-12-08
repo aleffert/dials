@@ -18,9 +18,11 @@
 		77DD9B351A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B331A33A0F400F17C1E /* DLSBufferedStreamWriter.m */; };
 		77DD9B361A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B331A33A0F400F17C1E /* DLSBufferedStreamWriter.m */; };
 		77F4F58F1A33B43F00A48A76 /* DLSBufferedStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F4F58D1A33B43F00A48A76 /* DLSBufferedStream.h */; };
-		77F4F5941A33B5D800A48A76 /* DLSOwnedChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F4F5921A33B5D800A48A76 /* DLSOwnedChannel.h */; };
 		77F4F5951A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5931A33B5D800A48A76 /* DLSOwnedChannel.m */; };
 		77F4F5961A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5931A33B5D800A48A76 /* DLSOwnedChannel.m */; };
+		77F4F5AE1A354FD100A48A76 /* NSObject+DLSDeallocAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F4F5AC1A354FD100A48A76 /* NSObject+DLSDeallocAction.h */; };
+		77F4F5AF1A354FD100A48A76 /* NSObject+DLSDeallocAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5AD1A354FD100A48A76 /* NSObject+DLSDeallocAction.m */; };
+		77F4F5B01A354FD100A48A76 /* NSObject+DLSDeallocAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5AD1A354FD100A48A76 /* NSObject+DLSDeallocAction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +52,8 @@
 		77F4F58D1A33B43F00A48A76 /* DLSBufferedStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSBufferedStream.h; path = Shared/DLSBufferedStream.h; sourceTree = SOURCE_ROOT; };
 		77F4F5921A33B5D800A48A76 /* DLSOwnedChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSOwnedChannel.h; path = Shared/DLSOwnedChannel.h; sourceTree = SOURCE_ROOT; };
 		77F4F5931A33B5D800A48A76 /* DLSOwnedChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSOwnedChannel.m; path = Shared/DLSOwnedChannel.m; sourceTree = SOURCE_ROOT; };
+		77F4F5AC1A354FD100A48A76 /* NSObject+DLSDeallocAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+DLSDeallocAction.h"; path = "Shared/NSObject+DLSDeallocAction.h"; sourceTree = SOURCE_ROOT; };
+		77F4F5AD1A354FD100A48A76 /* NSObject+DLSDeallocAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+DLSDeallocAction.m"; path = "Shared/NSObject+DLSDeallocAction.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,8 @@
 		776415181A32C1D1005E381A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				77F4F5AC1A354FD100A48A76 /* NSObject+DLSDeallocAction.h */,
+				77F4F5AD1A354FD100A48A76 /* NSObject+DLSDeallocAction.m */,
 				77F4F58D1A33B43F00A48A76 /* DLSBufferedStream.h */,
 				77DD9B2D1A339A0600F17C1E /* DLSBufferedStreamReader.h */,
 				77DD9B2E1A339A0600F17C1E /* DLSBufferedStreamReader.m */,
@@ -114,8 +120,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77F4F5941A33B5D800A48A76 /* DLSOwnedChannel.h in Headers */,
 				77F4F58F1A33B43F00A48A76 /* DLSBufferedStream.h in Headers */,
+				77F4F5AE1A354FD100A48A76 /* NSObject+DLSDeallocAction.h in Headers */,
 				77DD9B341A33A0F400F17C1E /* DLSBufferedStreamWriter.h in Headers */,
 				77DD9B2F1A339A0600F17C1E /* DLSBufferedStreamReader.h in Headers */,
 			);
@@ -202,6 +208,7 @@
 				77DD9B2C1A3398D800F17C1E /* DLSChannelStream.m in Sources */,
 				77F4F5951A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */,
 				779250E31A3358C800CCC229 /* DLSConstants.m in Sources */,
+				77F4F5AF1A354FD100A48A76 /* NSObject+DLSDeallocAction.m in Sources */,
 				77DD9B351A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +221,7 @@
 				77DD9B2B1A3398D500F17C1E /* DLSChannelStream.m in Sources */,
 				77F4F5961A33B5D800A48A76 /* DLSOwnedChannel.m in Sources */,
 				779250E41A3358DE00CCC229 /* DLSConstants.m in Sources */,
+				77F4F5B01A354FD100A48A76 /* NSObject+DLSDeallocAction.m in Sources */,
 				77DD9B361A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

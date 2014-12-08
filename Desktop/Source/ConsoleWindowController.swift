@@ -8,19 +8,29 @@
 
 import Cocoa
 
-class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
+class ConsoleWindowController: NSWindowController {
     
     @IBOutlet private var emptyView : NSView!
     @IBOutlet private var bodyView : NSView!
-    @IBOutlet private var connectionOptions : NSPopUpButton!
-    @IBOutlet private var connectPrompt : NSTextField!
     
     private let deviceController : DeviceController = DeviceController()
     private var currentConnection : DeviceConnection?
+    
+    private let pluginController : PluginController = PluginController()
+    private let itemsChangedBroadcaster : Broadcaster<ConnectionStatus> = Broadcaster()
+    
+    override func awakeFromNib() {
+        window?.titleVisibility = .Hidden
+    }
 
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.titlebarAppearsTransparent = true;
+        let toolbar = NSToolbar(identifier: "ConsoleWindowToolbarIdentifier")
+        toolbar.delegate = self
+        toolbar.visible = true
+        window?.toolbar = toolbar
+        window?.movableByWindowBackground = true
         
         let contentView = (window?.contentView as NSView)
         emptyView?.frame = contentView.bounds;
@@ -32,18 +42,25 @@ class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
         
         generatePopupMenu()
     }
+    
     private func generatePopupMenu() {
-        connectionOptions.hidden = !deviceController.hasDevices
-        connectPrompt.hidden = !connectionOptions!.hidden
         
-        connectionOptions.menu?.removeAllItems()
+        var items : [NSMenuItem] = []
         
-        connectionOptions.menu?.addItemWithTitle(VisibleStrings.NoDeviceSelected.rv, action: nil, keyEquivalent: "")
-        
-        for device in deviceController.knownDevices {
-            let item = NSMenuItem(title : device.displayName, action: Selector("choseDeviceOption:"), keyEquivalent: "")
-            item.representedObject = device
-            connectionOptions.menu?.addItem(item)
+        if deviceController.hasDevices {
+            items.append(NSMenuItem(title : VisibleStrings.NoDeviceSelected.rv, action: nil, keyEquivalent: ""))
+            items.append(NSMenuItem.separatorItem())
+            
+            for device in deviceController.knownDevices {
+                let item = NSMenuItem(title : device.displayName, action: Selector("choseDeviceOption:"), keyEquivalent: "")
+                item.representedObject = device
+                items.append(item)
+            }
+            
+            itemsChangedBroadcaster.notifyListeners(.Available(items))
+        }
+        else {
+            itemsChangedBroadcaster.notifyListeners(.None)
         }
     }
     
@@ -61,6 +78,39 @@ class ConsoleWindowController: NSWindowController, DeviceControllerDelegate {
     }
 }
 
+extension ConsoleWindowController : NSToolbarDelegate {
+    func toolbarAllowedItemIdentifiers(toolbar: NSToolbar) -> [AnyObject] {
+        return [NSToolbarFlexibleSpaceItemIdentifier, ConnectionStatusToolbarItemIdentifier]
+    }
+    
+    func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [AnyObject] {
+        return [NSToolbarFlexibleSpaceItemIdentifier, ConnectionStatusToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier]
+    }
+    
+    func toolbar(toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        if itemIdentifier == ConnectionStatusToolbarItemIdentifier {
+            return ConnectionStatusToolbarItem(changeBroadcaster: itemsChangedBroadcaster)
+        }
+        else {
+            return NSToolbarItem(itemIdentifier: itemIdentifier)
+        }
+    }
+}
+
+extension ConsoleWindowController : PluginContext {
+    func addViewController(controller: NSViewController, plugin: Plugin) {
+        
+    }
+    
+    func removeViewController(controller: NSViewController, plugin: Plugin) {
+        
+    }
+    
+    func sendMessage(data: NSData, channel: DLSChannel, plugin: Plugin) {
+        self.currentConnection?.sendMessage(data, channel : channel)
+    }
+}
+
 extension ConsoleWindowController : DeviceControllerDelegate {
     
     func deviceControllerUpdatedDevices(controller: DeviceController) {
@@ -75,8 +125,9 @@ extension ConsoleWindowController : DeviceConnectionDelegate {
         currentConnection = nil;
     }
     
-    func connection(connection: DeviceConnection, receivedData: NSData, header: [String : String]) {
-        NSLog("header is \(header)")
+    func connection(connection: DeviceConnection, receivedData: NSData, channel: DLSOwnedChannel) {
+        pluginController.routeMessage(receivedData, channel : channel)
+        NSLog("channel is \(channel)")
     }
     
 }

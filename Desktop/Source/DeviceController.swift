@@ -49,12 +49,16 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
         if !found {
             devices.append(Device(service: service, delegate : self))
         }
-        delegate?.deviceControllerUpdatedDevices(self)
+        if !moreComing {
+            delegate?.deviceControllerUpdatedDevices(self)
+        }
     }
     
     func netServiceBrowser(browser: NSNetServiceBrowser, didRemoveService service: NSNetService, moreComing: Bool) {
         devices = devices.filter{ !$0.isBackedByNetService(service) }
-        delegate?.deviceControllerUpdatedDevices(self)
+        if !moreComing {
+            delegate?.deviceControllerUpdatedDevices(self)
+        }
     }
     
     func deviceDidResolveAddress(device: Device) {

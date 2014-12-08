@@ -56,22 +56,29 @@
     }
 }
 
-- (void)streamWriterClosed:(DLSBufferedStreamWriter *)writer {
-    [self.streamReader close];
+- (void)clearStreams {
     self.streamReader = nil;
     self.streamReader.delegate = nil;
     self.streamWriter = nil;
     self.streamWriter.delegate = nil;
+}
+
+- (void)streamWriterClosed:(DLSBufferedStreamWriter *)writer {
+    [self.streamReader close];
+    [self clearStreams];
     [self.delegate streamClosed:self];
 }
 
 - (void)streamReaderClosed:(DLSBufferedStreamReader *)reader {
     [self.streamWriter close];
-    self.streamReader = nil;
-    self.streamReader.delegate = nil;
-    self.streamWriter = nil;
-    self.streamWriter.delegate = nil;
+    [self clearStreams];
     [self.delegate streamClosed:self];
+}
+
+- (void)close {
+    [self.streamReader close];
+    [self.streamWriter close];
+    [self clearStreams];
 }
 
 @end

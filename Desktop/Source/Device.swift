@@ -51,7 +51,7 @@ class Device: NSObject {
     }
     
     func openConnection(#delegate : DeviceConnectionDelegate) -> DeviceConnection {
-        return DeviceConnection(device : self, service: service)
+        return DeviceConnection(device : self, service: service, delegate : delegate)
     }
     
     func hash() -> Int {

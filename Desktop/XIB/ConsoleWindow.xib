@@ -7,8 +7,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ConsoleWindowController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="bodyView" destination="uvS-Ec-rbg" id="1QB-FO-RDa"/>
-                <outlet property="connectPrompt" destination="aq1-mR-wJg" id="EKj-Fb-rwV"/>
-                <outlet property="connectionOptions" destination="duh-kh-Gcr" id="kZV-R5-SW6"/>
                 <outlet property="emptyView" destination="5yi-3j-sZN" id="iaw-jo-REt"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="oi3-8B-Geh"/>
             </connections>
@@ -24,34 +22,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="HFZ-BT-HaB">
+                        <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
+                    </visualEffectView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="uvS-Ec-rbg">
-                        <rect key="frame" x="0.0" y="0.0" width="476" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="476" height="255"/>
                     </customView>
-                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="duh-kh-Gcr">
-                        <rect key="frame" x="136" y="257" width="205" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="200" id="3gB-wF-hDV"/>
-                        </constraints>
-                        <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="bsg-WI-yPL" id="q0q-tE-R8D">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" id="ru1-lF-K4D">
-                                <items>
-                                    <menuItem title="Item 1" state="on" id="bsg-WI-yPL"/>
-                                    <menuItem title="Item 2" id="mmo-se-4RA"/>
-                                    <menuItem title="Item 3" id="e1N-U4-kM4"/>
-                                </items>
-                            </menu>
-                        </popUpButtonCell>
-                    </popUpButton>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="HFZ-BT-HaB" secondAttribute="trailing" id="B0m-aT-LVk"/>
                     <constraint firstItem="uvS-Ec-rbg" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="C7m-1P-Cbm"/>
-                    <constraint firstItem="duh-kh-Gcr" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="4" id="DvP-gk-eLM"/>
-                    <constraint firstItem="duh-kh-Gcr" firstAttribute="centerX" secondItem="EiT-Mj-1SZ" secondAttribute="centerX" id="LgW-Uu-ECH"/>
-                    <constraint firstAttribute="centerX" secondItem="uvS-Ec-rbg" secondAttribute="centerX" id="P5E-pf-fz4"/>
+                    <constraint firstAttribute="bottom" secondItem="HFZ-BT-HaB" secondAttribute="bottom" id="Hi0-mX-6o2"/>
+                    <constraint firstItem="uvS-Ec-rbg" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="30" id="LJJ-qA-u7m"/>
                     <constraint firstAttribute="bottom" secondItem="uvS-Ec-rbg" secondAttribute="bottom" id="W5n-n1-bvt"/>
-                    <constraint firstItem="uvS-Ec-rbg" firstAttribute="top" secondItem="duh-kh-Gcr" secondAttribute="bottom" constant="4" id="axT-8Q-61s"/>
+                    <constraint firstItem="HFZ-BT-HaB" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="loT-6a-706"/>
+                    <constraint firstItem="HFZ-BT-HaB" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="oP7-Dz-kju"/>
+                    <constraint firstAttribute="trailing" secondItem="uvS-Ec-rbg" secondAttribute="trailing" id="oXM-zP-sK4"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="281" y="451.5"/>
@@ -64,24 +50,14 @@
                     <rect key="frame" x="0.0" y="20" width="407" height="496"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="empty-console" id="0MO-Gn-awU"/>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aq1-mR-wJg">
-                    <rect key="frame" x="105" y="558" width="196" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Start Your iOS App to Continue" id="zM3-1n-WiA">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" white="0.11216517857142858" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
             </subviews>
             <constraints>
-                <constraint firstItem="aq1-mR-wJg" firstAttribute="top" secondItem="5yi-3j-sZN" secondAttribute="top" constant="6" id="Aa5-3b-iyl"/>
                 <constraint firstItem="oo2-6n-VAi" firstAttribute="leading" secondItem="5yi-3j-sZN" secondAttribute="leading" id="RdF-jk-Yls"/>
-                <constraint firstAttribute="centerX" secondItem="aq1-mR-wJg" secondAttribute="centerX" id="UCz-bs-N3N"/>
                 <constraint firstAttribute="trailing" secondItem="oo2-6n-VAi" secondAttribute="trailing" id="cSh-VT-6nB"/>
-                <constraint firstItem="oo2-6n-VAi" firstAttribute="top" secondItem="aq1-mR-wJg" secondAttribute="bottom" constant="42" id="mNI-LC-zvn"/>
+                <constraint firstItem="oo2-6n-VAi" firstAttribute="top" secondItem="5yi-3j-sZN" secondAttribute="top" constant="65" id="vQZ-df-rnG"/>
                 <constraint firstAttribute="bottom" secondItem="oo2-6n-VAi" secondAttribute="bottom" constant="20" id="wTs-1r-hug"/>
             </constraints>
-            <point key="canvasLocation" x="273.5" y="-174.5"/>
+            <point key="canvasLocation" x="273.5" y="18.5"/>
         </customView>
     </objects>
     <resources>

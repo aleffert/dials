@@ -24,8 +24,9 @@
 - (id)initWithInputStream:(NSInputStream*)inputStream outputStream:(NSOutputStream*)outputStream;
 - (id)initWithNetService:(NSNetService*)service;
 
-@property (weak, nonatomic) id delegate;
+@property (weak, nonatomic) id <DLSChannelStreamDelegate> delegate;
 
 - (void)sendMessage:(NSData*)data onChannel:(id <DLSChannel>)channel;
+- (void)close;
 
 @end
