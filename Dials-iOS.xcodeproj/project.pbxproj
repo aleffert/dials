@@ -14,7 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		779250DA1A3353F100CCC229 /* libDialsShared-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libDialsShared-iOS.a"; path = "../../../../../../../../Documents/Projects/Dials/build/Debug-iphoneos/libDialsShared-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		779250DA1A3353F100CCC229 /* libDialsShared-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libDialsShared-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250E91A33592100CCC229 /* Dials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dials.h; path = iOS/Dials.h; sourceTree = SOURCE_ROOT; };
 		779250EA1A33592100CCC229 /* DLSDials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSDials.h; path = iOS/DLSDials.h; sourceTree = SOURCE_ROOT; };
 		779250EB1A33592100CCC229 /* DLSDials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSDials.m; path = iOS/DLSDials.m; sourceTree = SOURCE_ROOT; };

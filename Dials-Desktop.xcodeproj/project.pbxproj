@@ -33,7 +33,7 @@
 		776415051A32AF9F005E381A /* ConsoleWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsoleWindowController.swift; path = Desktop/Source/ConsoleWindowController.swift; sourceTree = SOURCE_ROOT; };
 		776415081A32AFA8005E381A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Desktop/Info.plist; sourceTree = SOURCE_ROOT; };
 		7764150A1A32C064005E381A /* DeviceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceController.swift; path = Desktop/Source/DeviceController.swift; sourceTree = SOURCE_ROOT; };
-		779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDialsShared_Desktop.a; path = ../../../../../../../../Documents/Projects/Dials/build/Debug/libDialsShared_Desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDialsShared_Desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250DE1A33554000CCC229 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Desktop/BridgingHeader.h; sourceTree = "<group>"; };
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
@@ -302,7 +302,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Shared/",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Desktop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -325,7 +324,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Shared/",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Desktop/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

@@ -8,6 +8,15 @@
 
 import Cocoa
 
+class NamedGroup<A> {
+    var items : [A] = []
+    var name : String
+    
+    init(name : String) {
+        self.name = name
+    }
+}
+
 class ConsoleWindowController: NSWindowController {
     
     @IBOutlet private var emptyView : NSView!
@@ -18,6 +27,8 @@ class ConsoleWindowController: NSWindowController {
     
     private let pluginController : PluginController = PluginController()
     private let itemsChangedBroadcaster : Broadcaster<ConnectionStatus> = Broadcaster()
+    
+    private var controllers : [NamedGroup<NSViewController>] = []
     
     override func awakeFromNib() {
         window?.titleVisibility = .Hidden
@@ -99,11 +110,24 @@ extension ConsoleWindowController : NSToolbarDelegate {
 
 extension ConsoleWindowController : PluginContext {
     func addViewController(controller: NSViewController, plugin: Plugin) {
+        for group in controllers {
+            if group.name == plugin.name {
+                group.items.append(controller)
+                return
+            }
+        }
         
+        let group = NamedGroup<NSViewController>(name : plugin.name)
+        group.items.append(controller)
+        controllers.append(group)
     }
     
     func removeViewController(controller: NSViewController, plugin: Plugin) {
-        
+        for group in controllers {
+            if group.name == plugin.name {
+                group.items.filter { return $0 != controller }
+            }
+        }
     }
     
     func sendMessage(data: NSData, channel: DLSChannel, plugin: Plugin) {
