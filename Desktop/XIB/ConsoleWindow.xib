@@ -40,6 +40,17 @@
                     <constraint firstAttribute="trailing" secondItem="uvS-Ec-rbg" secondAttribute="trailing" id="oXM-zP-sK4"/>
                 </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="C8AEB75D-92D8-4AD1-97BE-78456B35DA18" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="WTr-4a-4JN">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="JUI-cD-Wr1"/>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="JUI-cD-Wr1"/>
+                </defaultToolbarItems>
+                <connections>
+                    <outlet property="delegate" destination="-2" id="G18-db-RIc"/>
+                </connections>
+            </toolbar>
             <point key="canvasLocation" x="281" y="451.5"/>
         </window>
         <customView id="5yi-3j-sZN">

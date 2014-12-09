@@ -12,7 +12,7 @@ let ConnectionStatusToolbarItemIdentifier = "ConnectionStatusToolbarItemIdentifi
 
 enum ConnectionStatus {
     case None
-    case Available([NSMenuItem])
+    case Available([Device])
 }
 
 class ConnectionStatusToolbarItem: NSToolbarItem {
@@ -27,8 +27,8 @@ class ConnectionStatusToolbarItem: NSToolbarItem {
             switch r {
             case .None:
                 self?.statusView.showNoDevicesLabel()
-            case let .Available(items):
-                self?.statusView.showItems(items)
+            case let .Available(devices):
+                self?.statusView.showDevices(devices)
             }
             }, owner : self)
     }

@@ -27,10 +27,6 @@ class ConsoleWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.titlebarAppearsTransparent = true;
-        let toolbar = NSToolbar(identifier: "ConsoleWindowToolbarIdentifier")
-        toolbar.delegate = self
-        toolbar.visible = true
-        window?.toolbar = toolbar
         window?.movableByWindowBackground = true
         
         let contentView = (window?.contentView as NSView)
@@ -41,24 +37,12 @@ class ConsoleWindowController: NSWindowController {
         deviceController.delegate = self
         deviceController.start()
         
-        generatePopupMenu()
+        devicesChanged()
     }
     
-    private func generatePopupMenu() {
-        
-        var items : [NSMenuItem] = []
-        
+    private func devicesChanged() {
         if deviceController.hasDevices {
-            items.append(NSMenuItem(title : VisibleStrings.NoDeviceSelected.rv, action: nil, keyEquivalent: ""))
-            items.append(NSMenuItem.separatorItem())
-            
-            for device in deviceController.knownDevices {
-                let item = NSMenuItem(title : device.displayName, action: Selector("choseDeviceOption:"), keyEquivalent: "")
-                item.representedObject = device
-                items.append(item)
-            }
-            
-            itemsChangedBroadcaster.notifyListeners(.Available(items))
+            itemsChangedBroadcaster.notifyListeners(.Available(deviceController.knownDevices))
         }
         else {
             itemsChangedBroadcaster.notifyListeners(.None)
@@ -115,7 +99,7 @@ extension ConsoleWindowController : PluginContext {
 extension ConsoleWindowController : DeviceControllerDelegate {
     
     func deviceControllerUpdatedDevices(controller: DeviceController) {
-        generatePopupMenu()
+        devicesChanged()
     }
     
 }

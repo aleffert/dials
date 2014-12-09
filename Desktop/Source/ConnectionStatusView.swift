@@ -46,7 +46,7 @@ class ConnectionStatusView : NSView {
         return false
     }
     
-    func showItems(items : [NSMenuItem], animated : Bool = true) {
+    func showDevices(devices : [Device], animated : Bool = true) {
         let labelView = animated ? label.animator() : label
         let popupView = animated ? popup.animator() : popup
         
@@ -54,6 +54,15 @@ class ConnectionStatusView : NSView {
         popupView.hidden = false
 
         popup.menu?.removeAllItems()
+        var items : [NSMenuItem] = []
+        items.append(NSMenuItem(title : VisibleStrings.NoDeviceSelected.rv, action: nil, keyEquivalent: ""))
+        items.append(NSMenuItem.separatorItem())
+        
+        for device in devices {
+            let item = NSMenuItem(title : device.displayName, action: Selector("choseDeviceOption:"), keyEquivalent: "")
+            item.representedObject = device
+            items.append(item)
+        }
         items.map { self.popup.menu?.addItem($0) }
     }
     
