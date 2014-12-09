@@ -10,7 +10,7 @@ import Cocoa
 
 // Simple class to send to plugins, guaranteeing a retain cycle break
 class PluginContextBouncer: NSObject, PluginContext {
-    weak var backingContext : PluginContext?
+    private weak var backingContext : PluginContext?
     
     init(backing : PluginContext) {
         backingContext = backing

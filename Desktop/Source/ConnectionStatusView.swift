@@ -10,8 +10,8 @@ import Cocoa
 
 class ConnectionStatusView : NSView {
     
-    let popup : NSPopUpButton = NSPopUpButton(frame: CGRectZero, pullsDown: false)
-    let label : NSTextField = NSTextField(frame: CGRectZero)
+    private let popup : NSPopUpButton = NSPopUpButton(frame: CGRectZero, pullsDown: false)
+    private let label : NSTextField = NSTextField(frame: CGRectZero)
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -23,7 +23,7 @@ class ConnectionStatusView : NSView {
         setup()
     }
     
-    func setup() {
+    private func setup() {
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         addConstraint(NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: label, attribute: .CenterX, multiplier: 1, constant: 0))
@@ -63,10 +63,5 @@ class ConnectionStatusView : NSView {
         
         labelView.hidden = false
         popupView.hidden = true
-    }
-    
-
-    override var mouseDownCanMoveWindow : Bool {
-        return true
     }
 }

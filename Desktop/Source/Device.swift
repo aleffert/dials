@@ -15,9 +15,8 @@ protocol DeviceDelegate : class {
 }
 
 class Device: NSObject {
-    
-    let service : NSNetService
-    weak var delegate : DeviceDelegate?
+    private let service : NSNetService
+    private weak var delegate : DeviceDelegate?
     
     init(service : NSNetService, delegate : DeviceDelegate) {
         self.service = service

@@ -14,6 +14,8 @@
 		7764150B1A32C064005E381A /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764150A1A32C064005E381A /* DeviceController.swift */; };
 		779250DD1A3353FB00CCC229 /* libDialsShared_Desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */; };
 		779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779250F61A336E9B00CCC229 /* DeviceConnection.swift */; };
+		77A353201A36C87200A65A90 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */; };
+		77A353231A36C8AE00A65A90 /* ViewControllerGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */; };
 		77AAE4F81A32C66600998E36 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4F71A32C66600998E36 /* Device.swift */; };
 		77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE4FB1A32CFA600998E36 /* Images.xcassets */; };
 		77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */; };
@@ -21,7 +23,6 @@
 		77F4F59C1A33D8C700A48A76 /* LiveDialsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F59B1A33D8C700A48A76 /* LiveDialsPlugin.swift */; };
 		77F4F59E1A34A8A000A48A76 /* PluginContextBouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F59D1A34A89C00A48A76 /* PluginContextBouncer.swift */; };
 		77F4F5A31A34D05600A48A76 /* ConnectionStatusToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5A21A34D05600A48A76 /* ConnectionStatusToolbarItem.swift */; };
-		77F4F5A41A34D0FF00A48A76 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5A11A34CEA000A48A76 /* ConnectionStatusView.swift */; };
 		77F4F5A61A34D67B00A48A76 /* Broadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F4F5A51A34D67800A48A76 /* Broadcaster.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,13 +37,14 @@
 		779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDialsShared_Desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250DE1A33554000CCC229 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Desktop/BridgingHeader.h; sourceTree = "<group>"; };
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
+		77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionStatusView.swift; path = Desktop/Source/ConnectionStatusView.swift; sourceTree = SOURCE_ROOT; };
+		77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerGrouper.swift; path = Desktop/Source/ViewControllerGrouper.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4FB1A32CFA600998E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Desktop/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisibleStrings.swift; path = Desktop/Source/VisibleStrings.swift; sourceTree = SOURCE_ROOT; };
 		77F4F5991A33D64100A48A76 /* PluginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PluginController.swift; path = Desktop/Source/PluginController.swift; sourceTree = SOURCE_ROOT; };
 		77F4F59B1A33D8C700A48A76 /* LiveDialsPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LiveDialsPlugin.swift; path = Desktop/Source/LiveDialsPlugin.swift; sourceTree = SOURCE_ROOT; };
 		77F4F59D1A34A89C00A48A76 /* PluginContextBouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PluginContextBouncer.swift; path = Desktop/Source/PluginContextBouncer.swift; sourceTree = SOURCE_ROOT; };
-		77F4F5A11A34CEA000A48A76 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectionStatusView.swift; path = Desktop/ConnectionStatusView.swift; sourceTree = SOURCE_ROOT; };
 		77F4F5A21A34D05600A48A76 /* ConnectionStatusToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionStatusToolbarItem.swift; path = Desktop/Source/ConnectionStatusToolbarItem.swift; sourceTree = SOURCE_ROOT; };
 		77F4F5A51A34D67800A48A76 /* Broadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Broadcaster.swift; path = Desktop/Source/Broadcaster.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -80,18 +82,19 @@
 		776414DC1A32ADC9005E381A /* Dials */ = {
 			isa = PBXGroup;
 			children = (
-				77F4F5A51A34D67800A48A76 /* Broadcaster.swift */,
-				77F4F5A11A34CEA000A48A76 /* ConnectionStatusView.swift */,
-				77F4F5A21A34D05600A48A76 /* ConnectionStatusToolbarItem.swift */,
-				77F4F59D1A34A89C00A48A76 /* PluginContextBouncer.swift */,
-				77F4F5991A33D64100A48A76 /* PluginController.swift */,
-				77F4F59B1A33D8C700A48A76 /* LiveDialsPlugin.swift */,
 				776415041A32AF9F005E381A /* AppDelegate.swift */,
+				77F4F5A51A34D67800A48A76 /* Broadcaster.swift */,
+				77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */,
+				77F4F5A21A34D05600A48A76 /* ConnectionStatusToolbarItem.swift */,
 				776415051A32AF9F005E381A /* ConsoleWindowController.swift */,
 				779250F61A336E9B00CCC229 /* DeviceConnection.swift */,
 				7764150A1A32C064005E381A /* DeviceController.swift */,
 				77AAE4F71A32C66600998E36 /* Device.swift */,
+				77F4F59D1A34A89C00A48A76 /* PluginContextBouncer.swift */,
+				77F4F5991A33D64100A48A76 /* PluginController.swift */,
+				77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */,
 				77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */,
+				77A353211A36C89200A65A90 /* Plugins */,
 				776414FC1A32AF07005E381A /* Resources */,
 				776414DD1A32ADC9005E381A /* Supporting Files */,
 			);
@@ -122,6 +125,14 @@
 				776415011A32AF94005E381A /* MainMenu.xib */,
 			);
 			name = XIB;
+			sourceTree = "<group>";
+		};
+		77A353211A36C89200A65A90 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				77F4F59B1A33D8C700A48A76 /* LiveDialsPlugin.swift */,
+			);
+			name = Plugins;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7764150B1A32C064005E381A /* DeviceController.swift in Sources */,
-				77F4F5A41A34D0FF00A48A76 /* ConnectionStatusView.swift in Sources */,
+				77A353201A36C87200A65A90 /* ConnectionStatusView.swift in Sources */,
 				77F4F5A61A34D67B00A48A76 /* Broadcaster.swift in Sources */,
 				77F4F59A1A33D64100A48A76 /* PluginController.swift in Sources */,
 				776415071A32AF9F005E381A /* ConsoleWindowController.swift in Sources */,
@@ -202,6 +213,7 @@
 				776415061A32AF9F005E381A /* AppDelegate.swift in Sources */,
 				77F4F59C1A33D8C700A48A76 /* LiveDialsPlugin.swift in Sources */,
 				77F4F5A31A34D05600A48A76 /* ConnectionStatusToolbarItem.swift in Sources */,
+				77A353231A36C8AE00A65A90 /* ViewControllerGrouper.swift in Sources */,
 				77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */,
 				77AAE4F81A32C66600998E36 /* Device.swift in Sources */,
 				779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */,

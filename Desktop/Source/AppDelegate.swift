@@ -11,7 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    var consoleWindowController : ConsoleWindowController?
+    private var consoleWindowController : ConsoleWindowController?
 
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {

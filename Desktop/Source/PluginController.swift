@@ -26,7 +26,7 @@ protocol Plugin {
 
 class PluginController: NSObject {
     
-    var plugins : [Plugin] = []
+    private var plugins : [Plugin] = []
     
     func registerDefaultPlugins() {
         registerPlugin(LiveDialsPlugin())

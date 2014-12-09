@@ -14,8 +14,8 @@ class LiveDialsPlugin: NSObject, Plugin {
 
     var displayName : String = "Control Panel"
     
-    var knownChannels : [String:NSViewController] = [:]
-    var context : PluginContext?
+    private var knownChannels : [String:NSViewController] = [:]
+    private var context : PluginContext?
     
     func receiveMessage(data: NSData, channel: DLSChannel) {
         if knownChannels[channel.name] == nil {

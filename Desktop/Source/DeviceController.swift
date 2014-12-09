@@ -17,8 +17,8 @@ protocol DeviceControllerDelegate : class {
 
 class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
     private let browser : NSNetServiceBrowser = NSNetServiceBrowser()
-    var devices : [Device] = []
-    var running : Bool = false
+    private var devices : [Device] = []
+    private var running : Bool = false
     weak var delegate : DeviceControllerDelegate?
     
     func start() {
