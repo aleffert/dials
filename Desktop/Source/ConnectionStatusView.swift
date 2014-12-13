@@ -8,6 +8,12 @@
 
 import Cocoa
 
+enum ConnectionStatus {
+    case None
+    case Active(current: Device, all : [Device])
+    case Available([Device])
+}
+
 class ConnectionStatusView : NSView {
     
     private let popup : NSPopUpButton = NSPopUpButton(frame: CGRectZero, pullsDown: false)
@@ -46,31 +52,57 @@ class ConnectionStatusView : NSView {
         return false
     }
     
-    func showDevices(devices : [Device], animated : Bool = true) {
-        let labelView = animated ? label.animator() : label
-        let popupView = animated ? popup.animator() : popup
+    private func showDevices(devices : [Device], current : Device?, animated : Bool = true) {
+        NSAnimationContext.runAnimationGroup({ (ctx) -> Void in
+            ctx.duration = animated ? 0.2 : 0
+            self.label.animator().hidden = true
+            self.popup.animator().hidden = false
+            }, completionHandler: nil)
         
-        labelView.hidden = true
-        popupView.hidden = false
+        let action = Selector("choseDeviceOption:")
+        var allDevices = devices
 
-        popup.menu?.removeAllItems()
+        popup.removeAllItems()
         var items : [NSMenuItem] = []
-        items.append(NSMenuItem(title : VisibleStrings.NoDeviceSelected.rv, action: nil, keyEquivalent: ""))
+        if let d = current {
+            items.append(NSMenuItem(title : VisibleStrings.Disconnect.rv, action : action, keyEquivalent : ""))
+            if find(allDevices, d) == nil {
+                allDevices.insert(d, atIndex: 0)
+            }
+        }
+        else {
+            items.append(NSMenuItem(title : VisibleStrings.NoDeviceSelected.rv, action: nil, keyEquivalent: ""))
+        }
         items.append(NSMenuItem.separatorItem())
         
-        for device in devices {
-            let item = NSMenuItem(title : device.displayName, action: Selector("choseDeviceOption:"), keyEquivalent: "")
+        for device in allDevices {
+            let item = NSMenuItem(title : device.displayName, action: action, keyEquivalent: "")
             item.representedObject = device
             items.append(item)
         }
-        items.map { self.popup.menu?.addItem($0) }
+        items.map {item -> Void in
+            self.popup.menu?.addItem(item)
+            if current?.isEqual(item.representedObject) ?? false {
+                self.popup.selectItem(item)
+            }
+            return
+        }
+        popup.synchronizeTitleAndSelectedItem()
     }
     
-    func showNoDevicesLabel(animated : Bool = true) {
-        let labelView = animated ? label.animator() : label
-        let popupView = animated ? popup.animator() : popup
-        
-        labelView.hidden = false
-        popupView.hidden = true
+    private func showNoDevicesLabel(animated : Bool = true) {
+        NSAnimationContext.runAnimationGroup({ (ctx) -> Void in
+            ctx.duration = animated ? 0.2 : 0
+            self.label.animator().hidden = false
+            self.popup.animator().hidden = true
+            }, completionHandler: nil)
+    }
+    
+    func useStatus(status : ConnectionStatus) {
+        switch(status) {
+        case .None: showNoDevicesLabel(animated: true)
+        case let .Available(devices): showDevices(devices, current : nil, animated: true)
+        case let .Active(current : current, devices : devices): showDevices(devices, current : current, animated : true)
+        }
     }
 }

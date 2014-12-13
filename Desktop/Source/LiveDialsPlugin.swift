@@ -28,7 +28,7 @@ class LiveDialsPlugin: NSObject, Plugin {
         self.context = context
     }
     
-    func disconnected() {
+    func connectionClosed() {
         for (name, controller) in knownChannels {
             context?.removeViewController(controller, plugin: self)
         }

@@ -15,7 +15,7 @@ protocol DeviceConnectionDelegate : class {
 
 class DeviceConnection : DLSChannelStreamDelegate {
     
-    private let device : Device
+    let device : Device
     private let stream : DLSChannelStream
     
     private weak var delegate : DeviceConnectionDelegate?

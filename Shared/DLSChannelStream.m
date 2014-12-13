@@ -36,8 +36,14 @@
         self.streamReader.delegate = self;
         self.streamWriter = [[DLSBufferedStreamWriter alloc] initWithOutputStream:outputStream];
         self.streamWriter.delegate = self;
+        [self open];
     }
     return self;
+}
+
+- (void)open {
+    [self.streamReader open];
+    [self.streamWriter open];
 }
 
 - (void)sendMessage:(NSData *)data onChannel:(id<DLSChannel>)channel {

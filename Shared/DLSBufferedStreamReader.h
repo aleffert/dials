@@ -23,7 +23,7 @@
 
 @property (weak, nonatomic) id <DLSBufferedStreamReaderDelegate> delegate;
 
-- (void)start;
+- (void)open;
 - (void)close;
 
 @end

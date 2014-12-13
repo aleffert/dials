@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		77012B681A356B6E00919B3C /* Dials.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77270F471A35639C000755D5 /* Dials.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7787FF3E1A3BF29300074DBC /* Dials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77270F471A35639C000755D5 /* Dials.framework */; };
 		7792504D1A3348B900CCC229 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792504A1A3348B900CCC229 /* AppDelegate.m */; };
 		7792504E1A3348B900CCC229 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792504C1A3348B900CCC229 /* ViewController.m */; };
 		779250571A3348C700CCC229 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779250541A3348C700CCC229 /* Images.xcassets */; };
@@ -15,19 +15,6 @@
 		77F4F5971A33B79200A48A76 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779250501A3348C700CCC229 /* LaunchScreen.xib */; };
 		77F4F5981A33B79200A48A76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779250521A3348C700CCC229 /* Main.storyboard */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		77270F451A356330000755D5 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 12;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				77012B681A356B6E00919B3C /* Dials.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		77270F471A35639C000755D5 /* Dials.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7787FF3E1A3BF29300074DBC /* Dials.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,7 +93,6 @@
 				77AAE52A1A33477E00998E36 /* Sources */,
 				77AAE52B1A33477E00998E36 /* Frameworks */,
 				77AAE52C1A33477E00998E36 /* Resources */,
-				77270F451A356330000755D5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -278,7 +265,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DialsShared/",
@@ -293,7 +283,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DialsShared/",

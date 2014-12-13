@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) id <DLSBufferedStreamWriterDelegate> delegate;
 
-- (void)start;
+- (void)open;
 - (void)close;
 
 - (void)enqueueMessage:(NSData*)data;

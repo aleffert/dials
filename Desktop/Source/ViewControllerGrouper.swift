@@ -39,4 +39,14 @@ class ViewControllerGrouper: NSObject {
         }
     }
     
+    var hasMultipleItems : Bool {
+        if controllers.count > 0 {
+            return true
+        }
+        else if controllers.count == 1 && controllers[0].items.count > 1 {
+            return true
+        }
+        return false
+    }
+    
 }

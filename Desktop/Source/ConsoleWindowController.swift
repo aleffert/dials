@@ -12,6 +12,7 @@ class ConsoleWindowController: NSWindowController {
     
     @IBOutlet private var emptyView : NSView!
     @IBOutlet private var bodyView : NSView!
+    @IBOutlet private var titleBarBackground : NSVisualEffectView?
     
     private let deviceController : DeviceController = DeviceController()
     private var currentConnection : DeviceConnection?
@@ -19,6 +20,7 @@ class ConsoleWindowController: NSWindowController {
     private let pluginController : PluginController = PluginController()
     private let viewGrouper : ViewControllerGrouper = ViewControllerGrouper()
     private let itemsChangedBroadcaster : Broadcaster<ConnectionStatus> = Broadcaster()
+    private let sidebarController = SidebarSplitViewController(nibName : "SidebarSplitView", bundle : nil)!
     
     override func awakeFromNib() {
         window?.titleVisibility = .Hidden
@@ -29,19 +31,24 @@ class ConsoleWindowController: NSWindowController {
         window?.titlebarAppearsTransparent = true;
         window?.movableByWindowBackground = true
         
-        let contentView = (window?.contentView as NSView)
-        emptyView?.frame = contentView.bounds;
-        emptyView?.autoresizingMask = .ViewHeightSizable | .ViewWidthSizable
-        contentView.addSubview(emptyView!)
-        
         deviceController.delegate = self
         deviceController.start()
         
         devicesChanged()
+        
+        let contentView = window?.contentView as NSView
+        contentView.addSubview(sidebarController.view, positioned: .Below, relativeTo: emptyView)
+        sidebarController.view.hidden = true
+        sidebarController.view.addConstraintsMatchingSuperviewBounds()
+        
+        contentView.superview?.addConstraint(NSLayoutConstraint(item: titleBarBackground!, attribute: .Bottom, relatedBy: .Equal, toItem: window?.contentLayoutGuide, attribute: .Top, multiplier: 1, constant: 0))
     }
     
     private func devicesChanged() {
-        if deviceController.hasDevices {
+        if let device = currentConnection?.device {
+            itemsChangedBroadcaster.notifyListeners(.Active(current : device, all : deviceController.knownDevices))
+        }
+        else if deviceController.hasDevices {
             itemsChangedBroadcaster.notifyListeners(.Available(deviceController.knownDevices))
         }
         else {
@@ -52,13 +59,36 @@ class ConsoleWindowController: NSWindowController {
     func connectToDevice(device : Device?) {
         currentConnection?.close()
         currentConnection = device?.openConnection(delegate : self)
+        showSidebarIfNecessary()
+        hideSidebarIfNecessary()
+        devicesChanged()
     }
     
     func choseDeviceOption(sender : NSMenuItem) {
-        let device = sender.representedObject as Device?
-        if currentConnection != nil && currentConnection!.isConnectedToDevice(device) {
-            deviceController.saveLastDevice(device)
-            connectToDevice(device)
+        let device = (sender.representedObject as Device?)
+        deviceController.saveLastDevice(device)
+        connectToDevice(device)
+    }
+    
+    func showSidebarIfNecessary() {
+        if currentConnection != nil && !self.emptyView.hidden {
+            self.emptyView.animator().hidden = true
+            self.sidebarController.view.animator().hidden = false
+        }
+        
+        if viewGrouper.hasMultipleItems {
+            sidebarController.showSidebar()
+        }
+    }
+    
+    func hideSidebarIfNecessary() {
+        if currentConnection == nil && self.emptyView.hidden {
+            self.emptyView.animator().hidden = false
+            self.sidebarController.view.animator().hidden = true
+        }
+        
+        if !viewGrouper.hasMultipleItems {
+            sidebarController.hideSidebar()
         }
     }
 }
@@ -85,10 +115,12 @@ extension ConsoleWindowController : NSToolbarDelegate {
 extension ConsoleWindowController : PluginContext {
     func addViewController(controller: NSViewController, plugin: Plugin) {
         viewGrouper.addViewController(controller, groupName : plugin.name)
+        showSidebarIfNecessary()
     }
     
     func removeViewController(controller: NSViewController, plugin: Plugin) {
         viewGrouper.removeViewController(controller, groupName : plugin.name)
+        hideSidebarIfNecessary()
     }
     
     func sendMessage(data: NSData, channel: DLSChannel, plugin: Plugin) {
@@ -107,7 +139,9 @@ extension ConsoleWindowController : DeviceControllerDelegate {
 extension ConsoleWindowController : DeviceConnectionDelegate {
     
     func connectionClosed(connection: DeviceConnection) {
+        pluginController.connectionClosed()
         currentConnection = nil;
+        hideSidebarIfNecessary()
     }
     
     func connection(connection: DeviceConnection, receivedData: NSData, channel: DLSOwnedChannel) {

@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="bodyView" destination="uvS-Ec-rbg" id="1QB-FO-RDa"/>
                 <outlet property="emptyView" destination="5yi-3j-sZN" id="iaw-jo-REt"/>
+                <outlet property="titleBarBackground" destination="HFZ-BT-HaB" id="DU3-yP-wEy"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="oi3-8B-Geh"/>
             </connections>
         </customObject>
@@ -18,22 +19,45 @@
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="240" width="476" height="285"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <value key="minSize" type="size" width="476" height="285"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" material="appearanceBased" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="HFZ-BT-HaB">
+                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uvS-Ec-rbg">
+                        <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="5yi-3j-sZN">
+                                <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="10" verticalCompressionResistancePriority="10" translatesAutoresizingMaskIntoConstraints="NO" id="oo2-6n-VAi">
+                                        <rect key="frame" x="0.0" y="20" width="476" height="200"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="empty-console" id="0MO-Gn-awU"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="oo2-6n-VAi" firstAttribute="leading" secondItem="5yi-3j-sZN" secondAttribute="leading" id="RdF-jk-Yls"/>
+                                    <constraint firstAttribute="trailing" secondItem="oo2-6n-VAi" secondAttribute="trailing" id="cSh-VT-6nB"/>
+                                    <constraint firstItem="oo2-6n-VAi" firstAttribute="top" secondItem="5yi-3j-sZN" secondAttribute="top" constant="65" id="vQZ-df-rnG"/>
+                                    <constraint firstAttribute="bottom" secondItem="oo2-6n-VAi" secondAttribute="bottom" constant="20" id="wTs-1r-hug"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="5yi-3j-sZN" secondAttribute="bottom" id="0AQ-bq-kir"/>
+                            <constraint firstItem="5yi-3j-sZN" firstAttribute="top" secondItem="uvS-Ec-rbg" secondAttribute="top" id="2x8-VA-Xy2"/>
+                            <constraint firstItem="5yi-3j-sZN" firstAttribute="leading" secondItem="uvS-Ec-rbg" secondAttribute="leading" id="6cM-u5-Wsw"/>
+                            <constraint firstAttribute="trailing" secondItem="5yi-3j-sZN" secondAttribute="trailing" id="L36-kH-4r1"/>
+                        </constraints>
+                    </customView>
+                    <visualEffectView ambiguous="YES" misplaced="YES" blendingMode="behindWindow" material="titlebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="HFZ-BT-HaB">
                         <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
                     </visualEffectView>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="uvS-Ec-rbg">
-                        <rect key="frame" x="0.0" y="0.0" width="476" height="255"/>
-                    </customView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="HFZ-BT-HaB" secondAttribute="trailing" id="B0m-aT-LVk"/>
                     <constraint firstItem="uvS-Ec-rbg" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="C7m-1P-Cbm"/>
-                    <constraint firstAttribute="bottom" secondItem="HFZ-BT-HaB" secondAttribute="bottom" id="Hi0-mX-6o2"/>
-                    <constraint firstItem="uvS-Ec-rbg" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="30" id="LJJ-qA-u7m"/>
+                    <constraint firstItem="uvS-Ec-rbg" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="LJJ-qA-u7m"/>
                     <constraint firstAttribute="bottom" secondItem="uvS-Ec-rbg" secondAttribute="bottom" id="W5n-n1-bvt"/>
                     <constraint firstItem="HFZ-BT-HaB" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="loT-6a-706"/>
                     <constraint firstItem="HFZ-BT-HaB" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="oP7-Dz-kju"/>
@@ -51,25 +75,8 @@
                     <outlet property="delegate" destination="-2" id="G18-db-RIc"/>
                 </connections>
             </toolbar>
-            <point key="canvasLocation" x="281" y="451.5"/>
+            <point key="canvasLocation" x="281" y="407.5"/>
         </window>
-        <customView id="5yi-3j-sZN">
-            <rect key="frame" x="0.0" y="0.0" width="407" height="581"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="10" verticalCompressionResistancePriority="10" translatesAutoresizingMaskIntoConstraints="NO" id="oo2-6n-VAi">
-                    <rect key="frame" x="0.0" y="20" width="407" height="496"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="empty-console" id="0MO-Gn-awU"/>
-                </imageView>
-            </subviews>
-            <constraints>
-                <constraint firstItem="oo2-6n-VAi" firstAttribute="leading" secondItem="5yi-3j-sZN" secondAttribute="leading" id="RdF-jk-Yls"/>
-                <constraint firstAttribute="trailing" secondItem="oo2-6n-VAi" secondAttribute="trailing" id="cSh-VT-6nB"/>
-                <constraint firstItem="oo2-6n-VAi" firstAttribute="top" secondItem="5yi-3j-sZN" secondAttribute="top" constant="65" id="vQZ-df-rnG"/>
-                <constraint firstAttribute="bottom" secondItem="oo2-6n-VAi" secondAttribute="bottom" constant="20" id="wTs-1r-hug"/>
-            </constraints>
-            <point key="canvasLocation" x="273.5" y="18.5"/>
-        </customView>
     </objects>
     <resources>
         <image name="empty-console" width="113" height="456"/>

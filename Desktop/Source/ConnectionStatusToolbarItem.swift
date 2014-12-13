@@ -10,11 +10,6 @@ import Cocoa
 
 let ConnectionStatusToolbarItemIdentifier = "ConnectionStatusToolbarItemIdentifier"
 
-enum ConnectionStatus {
-    case None
-    case Available([Device])
-}
-
 class ConnectionStatusToolbarItem: NSToolbarItem {
     
     let statusView : ConnectionStatusView
@@ -23,13 +18,9 @@ class ConnectionStatusToolbarItem: NSToolbarItem {
         self.statusView = ConnectionStatusView(frame : CGRectMake(0, 0, 250, 30))
         super.init(itemIdentifier: itemIdentifier)
         self.view = statusView
-        changeBroadcaster.addListener({[weak self] r in
-            switch r {
-            case .None:
-                self?.statusView.showNoDevicesLabel()
-            case let .Available(devices):
-                self?.statusView.showDevices(devices)
-            }
+        changeBroadcaster.addListener({[weak self] status in
+                self?.statusView.useStatus(status)
+                return
             }, owner : self)
     }
     

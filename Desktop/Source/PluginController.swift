@@ -21,7 +21,7 @@ protocol Plugin {
     func receiveMessage(data : NSData, channel : DLSChannel)
     
     func connectedWithContext(context : PluginContext)
-    func disconnected()
+    func connectionClosed()
 }
 
 class PluginController: NSObject {
@@ -48,6 +48,12 @@ class PluginController: NSObject {
     func routeMessage(data : NSData, channel : DLSOwnedChannel) {
         let plugin = pluginWithName(channel.owner)
         plugin?.receiveMessage(data, channel: channel)
+    }
+    
+    func connectionClosed() {
+        for plugin in plugins {
+            plugin.connectionClosed()
+        }
     }
    
 }

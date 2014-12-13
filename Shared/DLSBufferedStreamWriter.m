@@ -40,8 +40,9 @@
     return self;
 }
 
-- (void)start {
+- (void)open {
     [self.stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.stream open];
 }
 
 - (void)close {
@@ -86,6 +87,7 @@
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered:
             [self.delegate streamWriterClosed:self];
+            
             break;
         case NSStreamEventHasSpaceAvailable:
             [self sendAvailableBytes];

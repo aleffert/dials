@@ -41,8 +41,9 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
     self.buffer = [NSMutableData dataWithCapacity:self.bytesRemaining];
 }
 
-- (void)start {
+- (void)open {
     [self.stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.stream open];
 }
 
 - (void)close {

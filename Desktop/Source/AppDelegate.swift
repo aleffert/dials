@@ -13,7 +13,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var consoleWindowController : ConsoleWindowController?
 
-
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         consoleWindowController = ConsoleWindowController(windowNibName: "ConsoleWindow")
         consoleWindowController?.window?.makeKeyAndOrderFront(nil)

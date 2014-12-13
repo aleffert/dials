@@ -10,6 +10,7 @@ import Cocoa
 
 enum VisibleStrings : String {
     case NoDeviceSelected = "No Device Selected"
+    case Disconnect = "Disconnect"
     case UnknownHost = "Unknown"
     case NoDevicesFound = "Start Your iOS App to Continue"
     

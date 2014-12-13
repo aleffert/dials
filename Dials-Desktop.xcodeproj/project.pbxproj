@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */; };
 		776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415001A32AF94005E381A /* ConsoleWindow.xib */; };
 		776415031A32AF94005E381A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415011A32AF94005E381A /* MainMenu.xib */; };
 		776415061A32AF9F005E381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415041A32AF9F005E381A /* AppDelegate.swift */; };
 		776415071A32AF9F005E381A /* ConsoleWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415051A32AF9F005E381A /* ConsoleWindowController.swift */; };
 		7764150B1A32C064005E381A /* DeviceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764150A1A32C064005E381A /* DeviceController.swift */; };
+		7783CDA31A3B2848005E34D9 /* SidebarSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7783CDA21A3B2848005E34D9 /* SidebarSplitViewController.swift */; };
+		7783CDA51A3B2911005E34D9 /* SidebarSplitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7783CDA41A3B2911005E34D9 /* SidebarSplitView.xib */; };
 		779250DD1A3353FB00CCC229 /* libDialsShared_Desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */; };
 		779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779250F61A336E9B00CCC229 /* DeviceConnection.swift */; };
 		77A353201A36C87200A65A90 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */; };
@@ -27,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSView+Layout.swift"; path = "Desktop/Source/NSView+Layout.swift"; sourceTree = SOURCE_ROOT; };
 		776414DA1A32ADC9005E381A /* Dials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dials.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776415001A32AF94005E381A /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConsoleWindow.xib; path = Desktop/XIB/ConsoleWindow.xib; sourceTree = SOURCE_ROOT; };
 		776415011A32AF94005E381A /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Desktop/XIB/MainMenu.xib; sourceTree = SOURCE_ROOT; };
@@ -34,6 +38,8 @@
 		776415051A32AF9F005E381A /* ConsoleWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConsoleWindowController.swift; path = Desktop/Source/ConsoleWindowController.swift; sourceTree = SOURCE_ROOT; };
 		776415081A32AFA8005E381A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Desktop/Info.plist; sourceTree = SOURCE_ROOT; };
 		7764150A1A32C064005E381A /* DeviceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceController.swift; path = Desktop/Source/DeviceController.swift; sourceTree = SOURCE_ROOT; };
+		7783CDA21A3B2848005E34D9 /* SidebarSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SidebarSplitViewController.swift; path = Desktop/Source/SidebarSplitViewController.swift; sourceTree = SOURCE_ROOT; };
+		7783CDA41A3B2911005E34D9 /* SidebarSplitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SidebarSplitView.xib; path = Desktop/XIB/SidebarSplitView.xib; sourceTree = SOURCE_ROOT; };
 		779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDialsShared_Desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250DE1A33554000CCC229 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Desktop/BridgingHeader.h; sourceTree = "<group>"; };
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
@@ -82,6 +88,8 @@
 		776414DC1A32ADC9005E381A /* Dials */ = {
 			isa = PBXGroup;
 			children = (
+				7783CDA21A3B2848005E34D9 /* SidebarSplitViewController.swift */,
+				772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */,
 				776415041A32AF9F005E381A /* AppDelegate.swift */,
 				77F4F5A51A34D67800A48A76 /* Broadcaster.swift */,
 				77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */,
@@ -121,6 +129,7 @@
 		776414FD1A32AF0E005E381A /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				7783CDA41A3B2911005E34D9 /* SidebarSplitView.xib */,
 				776415001A32AF94005E381A /* ConsoleWindow.xib */,
 				776415011A32AF94005E381A /* MainMenu.xib */,
 			);
@@ -193,6 +202,7 @@
 			files = (
 				77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */,
 				776415031A32AF94005E381A /* MainMenu.xib in Resources */,
+				7783CDA51A3B2911005E34D9 /* SidebarSplitView.xib in Resources */,
 				776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,8 +223,10 @@
 				776415061A32AF9F005E381A /* AppDelegate.swift in Sources */,
 				77F4F59C1A33D8C700A48A76 /* LiveDialsPlugin.swift in Sources */,
 				77F4F5A31A34D05600A48A76 /* ConnectionStatusToolbarItem.swift in Sources */,
+				772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */,
 				77A353231A36C8AE00A65A90 /* ViewControllerGrouper.swift in Sources */,
 				77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */,
+				7783CDA31A3B2848005E34D9 /* SidebarSplitViewController.swift in Sources */,
 				77AAE4F81A32C66600998E36 /* Device.swift in Sources */,
 				779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */,
 			);
