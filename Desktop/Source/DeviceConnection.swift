@@ -13,7 +13,7 @@ protocol DeviceConnectionDelegate : class {
     func connection(connection : DeviceConnection, receivedData : NSData, channel : DLSOwnedChannel)
 }
 
-class DeviceConnection : DLSChannelStreamDelegate {
+class DeviceConnection : NSObject, DLSChannelStreamDelegate  {
     
     let device : Device
     private let stream : DLSChannelStream
@@ -24,6 +24,7 @@ class DeviceConnection : DLSChannelStreamDelegate {
         self.device = device
         self.delegate = delegate
         self.stream = DLSChannelStream(netService: service)
+        super.init()
         self.stream.delegate = self
     }
     

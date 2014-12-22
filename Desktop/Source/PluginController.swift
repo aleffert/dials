@@ -8,25 +8,14 @@
 
 import Cocoa
 
-protocol PluginContext : class {
-    func sendMessage(data : NSData, channel: DLSChannel, plugin : Plugin)
-    func addViewController(controller : NSViewController, plugin : Plugin)
-    func removeViewController(controller : NSViewController, plugin : Plugin)
-}
-
-protocol Plugin {
-    var name : String {get}
-    var displayName : String {get}
-    
-    func receiveMessage(data : NSData, channel : DLSChannel)
-    
-    func connectedWithContext(context : PluginContext)
-    func connectionClosed()
-}
-
 class PluginController: NSObject {
     
     private var plugins : [Plugin] = []
+    
+    override init() {
+        super.init()
+        self.registerDefaultPlugins()
+    }
     
     func registerDefaultPlugins() {
         registerPlugin(LiveDialsPlugin())
@@ -55,5 +44,11 @@ class PluginController: NSObject {
             plugin.connectionClosed()
         }
     }
-   
+    
+    func connectedWithContext(context : PluginContext) {
+        for plugin in plugins {
+            plugin.connectedWithContext(context)
+        }
+    }
+
 }

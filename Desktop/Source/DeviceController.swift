@@ -41,11 +41,11 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
     }
     
     var hasDevices : Bool {
-        return countElements(self.knownDevices) > 0
+        return self.knownDevices.count > 0
     }
     
     func netServiceBrowser(browser: NSNetServiceBrowser, didFindService service: NSNetService, moreComing: Bool) {
-        let found = countElements(devices.filter { $0.isBackedByNetService(service) }) > 0
+        let found = (devices.filter { $0.isBackedByNetService(service) }).count > 0
         if !found {
             devices.append(Device(service: service, delegate : self))
         }

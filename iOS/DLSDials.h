@@ -13,6 +13,16 @@
 
 + (DLSDials*)shared;
 
+/// Starts Dials, advertising it over Bonjour.
+/// Same as [dials startWithPlugins:[dials defaultPlugins]]
 - (void)start;
+
+/// Starts Dials, advertising it over Bonjour, allowing the caller to specify
+/// the available plugins.
+/// @param plugins An array of plugins that implement <DLSPlugin>
+- (void)startWithPlugins:(NSArray*)plugins;
+
+/// @return A list of plugins implementing <DLSPlugin>
+- (NSArray*)defaultPlugins;
 
 @end

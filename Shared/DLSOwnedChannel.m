@@ -40,7 +40,7 @@ static NSString* const DLSOwnedChannelOwnerKey = @"DLSOwnedChannelOwnerKey";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.name forKey:DLSOwnedChannelNameKey];
-    [aCoder encodeObject:self.name forKey:DLSOwnedChannelOwnerKey];
+    [aCoder encodeObject:self.owner forKey:DLSOwnedChannelOwnerKey];
 }
 
 @end

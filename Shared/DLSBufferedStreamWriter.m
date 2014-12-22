@@ -10,6 +10,9 @@
 
 #import "DLSBufferedStream.h"
 
+#import <arpa/inet.h>
+#import <net/if.h>
+
 @interface DLSQueuedMessage : NSObject
 
 @property (assign, nonatomic) DLSStreamSize bytesRemaining;
@@ -53,7 +56,7 @@
 - (void)enqueueMessage:(NSData *)data {
     DLSQueuedMessage* headerMessage = [[DLSQueuedMessage alloc] init];
     headerMessage.bytesRemaining = sizeof(DLSStreamSize);
-    DLSStreamSize length = CFSwapInt64HostToBig(headerMessage.bytesRemaining);
+    DLSStreamSize length = CFSwapInt64HostToBig(data.length);
     headerMessage.data = [[NSData alloc] initWithBytes:&length length:sizeof(DLSStreamSize)];
     [self.messages addObject:headerMessage];
     
@@ -70,8 +73,10 @@
         DLSQueuedMessage* message = [self.messages firstObject];
         if(message) {
             uint8_t* bytes = ((uint8_t*)message.data.bytes) + message.data.length - message.bytesRemaining;
-            NSInteger bytesWritten = [self.stream write:bytes maxLength:message.bytesRemaining];
-            message.bytesRemaining = message.bytesRemaining - bytesWritten;
+            if(message.bytesRemaining != 0) {
+                NSInteger bytesWritten = [self.stream write:bytes maxLength:message.bytesRemaining];
+                message.bytesRemaining = message.bytesRemaining - bytesWritten;
+            }
             if(message.bytesRemaining == 0) {
                 [self.messages removeObject:message];
             }
@@ -87,7 +92,6 @@
         case NSStreamEventErrorOccurred:
         case NSStreamEventEndEncountered:
             [self.delegate streamWriterClosed:self];
-            
             break;
         case NSStreamEventHasSpaceAvailable:
             [self sendAvailableBytes];

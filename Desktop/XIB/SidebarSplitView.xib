@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
+        <deployment version="101000" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SidebarSplitViewController" customModule="Dials" customModuleProvider="target">
             <connections>
+                <outlet property="sourceItemView" destination="Yhn-YA-fv4" id="NZ0-2A-9ZK"/>
                 <outlet property="view" destination="Yhn-YA-fv4" id="PIz-F3-vx7"/>
             </connections>
         </customObject>
@@ -20,13 +22,13 @@
                     <autoresizingMask key="autoresizingMask"/>
                 </customView>
                 <customView fixedFrame="YES" id="mvT-Rd-hCg">
-                    <rect key="frame" x="157.5" y="0.0" width="305.5" height="608"/>
+                    <rect key="frame" x="158" y="0.0" width="305" height="608"/>
                     <autoresizingMask key="autoresizingMask"/>
                 </customView>
             </subviews>
             <holdingPriorities>
-                <real value="437"/>
-                <real value="250"/>
+                <real value="346"/>
+                <real value="142"/>
             </holdingPriorities>
             <connections>
                 <outlet property="delegate" destination="-2" id="lq1-Eb-3MC"/>

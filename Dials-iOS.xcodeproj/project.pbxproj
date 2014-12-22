@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7787FF431A3CA35200074DBC /* DLSPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7787FF411A3CA35200074DBC /* DLSPlugin.h */; };
+		7787FF491A3CAD1700074DBC /* DLSLiveDialsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787FF481A3CACBF00074DBC /* DLSLiveDialsPlugin.m */; };
+		7787FF4A1A3CAD1A00074DBC /* DLSLiveDialsPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7787FF471A3CACBF00074DBC /* DLSLiveDialsPlugin.h */; };
 		779250DB1A3353F100CCC229 /* libDialsShared-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 779250DA1A3353F100CCC229 /* libDialsShared-iOS.a */; };
 		779250EC1A33592100CCC229 /* Dials.h in Headers */ = {isa = PBXBuildFile; fileRef = 779250E91A33592100CCC229 /* Dials.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779250ED1A33592100CCC229 /* DLSDials.h in Headers */ = {isa = PBXBuildFile; fileRef = 779250EA1A33592100CCC229 /* DLSDials.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -14,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7787FF411A3CA35200074DBC /* DLSPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSPlugin.h; path = iOS/DLSPlugin.h; sourceTree = SOURCE_ROOT; };
+		7787FF471A3CACBF00074DBC /* DLSLiveDialsPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DLSLiveDialsPlugin.h; path = iOS/DLSLiveDialsPlugin.h; sourceTree = SOURCE_ROOT; };
+		7787FF481A3CACBF00074DBC /* DLSLiveDialsPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DLSLiveDialsPlugin.m; path = iOS/DLSLiveDialsPlugin.m; sourceTree = SOURCE_ROOT; };
 		779250DA1A3353F100CCC229 /* libDialsShared-iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libDialsShared-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250E91A33592100CCC229 /* Dials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dials.h; path = iOS/Dials.h; sourceTree = SOURCE_ROOT; };
 		779250EA1A33592100CCC229 /* DLSDials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSDials.h; path = iOS/DLSDials.h; sourceTree = SOURCE_ROOT; };
@@ -54,6 +60,9 @@
 		77AAE50B1A32D26500998E36 /* Dials-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7787FF471A3CACBF00074DBC /* DLSLiveDialsPlugin.h */,
+				7787FF481A3CACBF00074DBC /* DLSLiveDialsPlugin.m */,
+				7787FF411A3CA35200074DBC /* DLSPlugin.h */,
 				779250E91A33592100CCC229 /* Dials.h */,
 				779250EA1A33592100CCC229 /* DLSDials.h */,
 				779250EB1A33592100CCC229 /* DLSDials.m */,
@@ -77,6 +86,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7787FF431A3CA35200074DBC /* DLSPlugin.h in Headers */,
+				7787FF4A1A3CAD1A00074DBC /* DLSLiveDialsPlugin.h in Headers */,
 				779250EC1A33592100CCC229 /* Dials.h in Headers */,
 				779250ED1A33592100CCC229 /* DLSDials.h in Headers */,
 			);
@@ -149,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7787FF491A3CAD1700074DBC /* DLSLiveDialsPlugin.m in Sources */,
 				779250EE1A33592100CCC229 /* DLSDials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +213,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -246,6 +259,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -257,6 +271,7 @@
 		77AAE5201A32D26500998E36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -269,12 +284,14 @@
 				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		77AAE5211A32D26500998E36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;

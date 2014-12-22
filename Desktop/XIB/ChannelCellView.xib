@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <tableCellView id="bp9-Je-6Ns">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="33"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qi7-Lg-bNv">
+                    <rect key="frame" x="6" y="-20" width="188" height="72"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="IW5-k1-DEW">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Qi7-Lg-bNv" secondAttribute="trailing" constant="8" id="13G-WB-Ryr"/>
+                <constraint firstAttribute="centerY" secondItem="Qi7-Lg-bNv" secondAttribute="centerY" id="DOb-kx-vq5"/>
+                <constraint firstAttribute="centerX" secondItem="Qi7-Lg-bNv" secondAttribute="centerX" id="ev7-Qk-DZt"/>
+                <constraint firstItem="Qi7-Lg-bNv" firstAttribute="leading" secondItem="bp9-Je-6Ns" secondAttribute="leading" constant="8" id="u5w-vw-Jgr"/>
+            </constraints>
+            <connections>
+                <outlet property="textField" destination="Qi7-Lg-bNv" id="dr5-kO-8ed"/>
+            </connections>
+            <point key="canvasLocation" x="202" y="248.5"/>
+        </tableCellView>
+    </objects>
+</document>

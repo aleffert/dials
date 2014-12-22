@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
     if(self != nil) {
         self.stream = stream;
         self.stream.delegate = self;
+        [self prepareForHeader];
     }
     return self;
 }
@@ -38,7 +39,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 - (void)prepareForHeader {
     self.readState = DLSBufferedStreamReaderStateReadingHeader;
     self.bytesRemaining = sizeof(DLSStreamSize);
-    self.buffer = [NSMutableData dataWithCapacity:self.bytesRemaining];
+    self.buffer = [NSMutableData dataWithLength:self.bytesRemaining];
 }
 
 - (void)open {
@@ -53,19 +54,26 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 }
 
 - (void)readHeader {
-    NSInteger bytesRead = [self.stream read:self.buffer.mutableBytes maxLength:self.bytesRemaining];
+    uint8_t* bytes = self.buffer.mutableBytes + self.buffer.length - self.bytesRemaining;
+    NSInteger bytesRead = [self.stream read:bytes maxLength:self.bytesRemaining];
     self.bytesRemaining = self.bytesRemaining - bytesRead;
     if(self.bytesRemaining == 0) {
         int64_t bodySize = 0;
         [self.buffer getBytes:&bodySize length:sizeof(bodySize)];
         self.bytesRemaining = CFSwapInt64BigToHost(bodySize);
-        self.buffer = [NSMutableData dataWithCapacity:self.bytesRemaining];
-        self.readState = DLSBufferedStreamReaderStateReadingBody;
+        if(self.bytesRemaining == 0) {
+            [self.delegate streamReader:self receivedMessage:[NSData data]];
+            [self prepareForHeader];
+        }
+        else {
+            self.buffer = [NSMutableData dataWithLength:self.bytesRemaining];
+            self.readState = DLSBufferedStreamReaderStateReadingBody;
+        }
     }
 }
 
 - (void)readBody {
-    uint8_t* bytes = self.buffer.mutableBytes + self.buffer.length;
+    uint8_t* bytes = self.buffer.mutableBytes + self.buffer.length - self.bytesRemaining;
     
     NSInteger bytesRead = [self.stream read:bytes maxLength:self.bytesRemaining];
     self.bytesRemaining = self.bytesRemaining - bytesRead;
