@@ -12,7 +12,6 @@ class ConsoleWindowController: NSWindowController {
     
     @IBOutlet private var emptyView : NSView!
     @IBOutlet private var bodyView : NSView!
-    @IBOutlet private var titleBarBackground : NSVisualEffectView!
     @IBOutlet private var sidebarTable : NSTableView!
     
     @IBOutlet private var bodyController : NSViewController!
@@ -35,7 +34,6 @@ class ConsoleWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        window?.titlebarAppearsTransparent = true;
         window?.movableByWindowBackground = true
         
         
@@ -51,8 +49,7 @@ class ConsoleWindowController: NSWindowController {
         sidebarView.alphaValue = 0
         sidebarView.addConstraintsMatchingSuperviewBounds()
         
-        contentView.superview!.addConstraint(NSLayoutConstraint(item: titleBarBackground!, attribute: .Bottom, relatedBy: .Equal, toItem: window?.contentLayoutGuide, attribute: .Top, multiplier: 1, constant: 0))
-        contentView.superview!.addConstraint(NSLayoutConstraint(item: bodyView, attribute: .Top, relatedBy: .Equal, toItem: window?.contentLayoutGuide, attribute: .Top, multiplier: 1, constant: 0))
+        contentView.superview!.addConstraint(NSLayoutConstraint(item: bodyView, attribute: .Top, relatedBy: .Equal, toItem: window?.contentView, attribute: .Top, multiplier: 1, constant: 0))
         
         sidebarTable?.setDelegate(viewGrouper)
         sidebarTable?.setDataSource(viewGrouper)

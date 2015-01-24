@@ -10,7 +10,6 @@
                 <outlet property="bodyView" destination="4af-qp-IdF" id="I8g-bF-2b1"/>
                 <outlet property="emptyView" destination="bPu-Mz-IIM" id="Ehd-jl-1dc"/>
                 <outlet property="sidebarTable" destination="3al-Y2-Pur" id="0fc-A6-c8S"/>
-                <outlet property="titleBarBackground" destination="fsC-gw-caX" id="SaU-sx-57q"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="oi3-8B-Geh"/>
             </connections>
         </customObject>
@@ -24,7 +23,6 @@
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" viewBased="YES" floatsGroupRows="NO" id="3al-Y2-Pur">
-                        <rect key="frame" x="0.0" y="0.0" width="238" height="134"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <size key="intercellSpacing" width="3" height="2"/>
                         <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -67,11 +65,11 @@
                 </subviews>
                 <nil key="backgroundColor"/>
             </clipView>
-            <scroller key="horizontalScroller" hidden="YES" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="YES" id="BbY-V3-pX7">
+            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="BbY-V3-pX7">
                 <rect key="frame" x="1" y="119" width="223" height="15"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
-            <scroller key="verticalScroller" hidden="YES" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="NO" id="8Up-dH-4yh">
+            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="8Up-dH-4yh">
                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
