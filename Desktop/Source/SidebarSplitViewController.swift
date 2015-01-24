@@ -51,6 +51,7 @@ class SidebarSplitViewController: NSSplitViewController {
         self.splitView.vertical = true
         self.splitView.dividerStyle = .Thin
         self.splitView.autosaveName = SidebarSplitViewName
+        self.splitView.identifier = SidebarSplitViewName
         self.view = self.splitView
     }
     
