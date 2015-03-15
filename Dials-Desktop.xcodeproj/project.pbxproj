@@ -45,7 +45,6 @@
 		7783CDA21A3B2848005E34D9 /* SidebarSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SidebarSplitViewController.swift; path = Desktop/Source/SidebarSplitViewController.swift; sourceTree = SOURCE_ROOT; };
 		7783CDA41A3B2911005E34D9 /* SidebarSplitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SidebarSplitView.xib; path = Desktop/XIB/SidebarSplitView.xib; sourceTree = SOURCE_ROOT; };
 		7787FF451A3CA3D400074DBC /* Plugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plugin.swift; path = Desktop/Source/Plugin.swift; sourceTree = SOURCE_ROOT; };
-		779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libDialsShared_Desktop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250DE1A33554000CCC229 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Desktop/BridgingHeader.h; sourceTree = "<group>"; };
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
 		77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionStatusView.swift; path = Desktop/Source/ConnectionStatusView.swift; sourceTree = SOURCE_ROOT; };
@@ -77,7 +76,6 @@
 			children = (
 				774D160C1AB5D36900613F24 /* libDialsShared-Desktop.a */,
 				779250DE1A33554000CCC229 /* BridgingHeader.h */,
-				779250DC1A3353FB00CCC229 /* libDialsShared_Desktop.a */,
 				776414DC1A32ADC9005E381A /* Dials */,
 				776414DB1A32ADC9005E381A /* Products */,
 			);

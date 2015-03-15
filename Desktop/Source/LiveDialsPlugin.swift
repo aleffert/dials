@@ -24,11 +24,19 @@ class LiveDialsPlugin: NSObject, Plugin {
     private var context : PluginContext?
     
     func receiveMessage(data: NSData, channel: DLSChannel) {
-        if knownChannels[channel.name] == nil {
+        let channelName = channel.name ?? "test"
+        if knownChannels[channelName] == nil {
             let controller = DummyViewController(nibName: nil, bundle: nil)!
-            controller.title = channel.name
+            controller.title = channelName
             context?.addViewController(controller, plugin:self)
-            knownChannels[channel.name] = controller
+            knownChannels[channelName] = controller
+        }
+        let message: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
+        if let addMessage = message as? DLSLiveDialsAddMessage {
+            handleAddMessage(addMessage)
+        }
+        else if let removeMessage = message as? DLSLiveDialsRemoveMessage {
+            handleRemoveMessage(removeMessage)
         }
     }
     
@@ -41,5 +49,13 @@ class LiveDialsPlugin: NSObject, Plugin {
             context?.removeViewController(controller, plugin: self)
         }
         knownChannels = [:]
+    }
+    
+    func handleAddMessage(message : DLSLiveDialsAddMessage) {
+        println("add message");
+    }
+    
+    func handleRemoveMessage(message : DLSLiveDialsRemoveMessage) {
+        println("remove message");
     }
 }
