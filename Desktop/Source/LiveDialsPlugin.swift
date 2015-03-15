@@ -16,7 +16,7 @@ class DummyViewController : NSViewController {
 
 class LiveDialsPlugin: NSObject, Plugin {
     
-    var name : String = "com.akivaleffert.live-dials"
+    var name : String = DLSLiveDialsPluginName
 
     var displayName : String = "Control Panel"
     

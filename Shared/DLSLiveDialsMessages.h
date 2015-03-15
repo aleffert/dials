@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* const DLSLiveDialsPluginName;
+
 @class DLSLiveDial;
 
 @interface DLSLiveDialsAddMessage : NSObject <NSCoding>

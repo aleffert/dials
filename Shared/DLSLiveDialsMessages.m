@@ -8,6 +8,8 @@
 
 #import "DLSLiveDialsMessages.h"
 
+NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
+
 @implementation DLSLiveDialsAddMessage
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

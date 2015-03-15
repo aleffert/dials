@@ -61,7 +61,7 @@
 }
 
 - (NSString*)name {
-    return @"com.akivaleffert.live-dials";
+    return DLSLiveDialsPluginName;
 }
 
 - (void)connectedWithContext:(id<DLSPluginContext>)context {
