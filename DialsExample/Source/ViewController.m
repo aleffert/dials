@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import <Dials/Dials.h>
+
 @interface ViewController ()
 
 @end
@@ -17,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    DLSAddButtonAction(^{
+        NSLog(@"action");
+    });
 }
 
 - (void)didReceiveMemoryWarning {

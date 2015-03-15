@@ -29,7 +29,7 @@ class Broadcaster<A>: NSObject {
         let l = Listener(f)
         listeners.append(l)
         
-        owner?.performActionOnDealloc{[weak self] in
+        owner?.dls_performActionOnDealloc{[weak self] in
             self?.removeListener(l)
             return
         }

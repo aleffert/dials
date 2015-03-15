@@ -1,0 +1,15 @@
+//
+//  Dials-iOS.pch
+//  Dials-iOS
+//
+//  Created by Akiva Leffert on 3/15/15.
+//  Copyright (c) 2015 Akiva Leffert. All rights reserved.
+//
+
+#ifndef Dials_iOS_pch
+#define Dials_iOS_pch
+
+#import <DialsShared.h>
+#import <Foundation/Foundation.h>
+
+#endif

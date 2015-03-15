@@ -8,7 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DLSActionDescription.h"
 #import "DLSConstants.h"
 #import "DLSOwnedChannel.h"
 #import "DLSChannelStream.h"
+#import "DLSLiveDial.h"
+#import "DLSLiveDialsMessages.h"
+#import "DLSRemovable.h"
+#import "DLSSliderDescription.h"
+#import "DLSToggleDescription.h"
+
 #import "NSObject+DLSDeallocAction.h"

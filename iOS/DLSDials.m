@@ -8,8 +8,6 @@
 
 #import "DLSDials.h"
 
-#import <DialsShared.h>
-
 #import "DLSLiveDialsPlugin.h"
 #import "DLSPlugin.h"
 
@@ -66,7 +64,7 @@
 }
 
 - (NSArray*)defaultPlugins {
-    return @[[[DLSLiveDialsPlugin alloc] init]];
+    return @[[DLSLiveDialsPlugin sharedPlugin]];
 }
 
 - (void)startWithPlugins:(NSArray*)plugins {

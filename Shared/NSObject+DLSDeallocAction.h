@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol DLSRemovable;
+
 @interface NSObject (DLSDeallocAction)
 
-- (void)performActionOnDealloc:(void(^)(void))action;
+- (id <DLSRemovable>)dls_performActionOnDealloc:(void(^)(void))action;
 
 @end

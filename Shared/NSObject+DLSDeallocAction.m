@@ -8,11 +8,13 @@
 
 #import "NSObject+DLSDeallocAction.h"
 
+#import "DLSRemovable.h"
 #import <objc/runtime.h>
 
-@interface DLSDeallocActionRunner : NSObject
+@interface DLSDeallocActionRunner : NSObject <DLSRemovable>
 
 @property (copy, nonatomic) void (^action)(void);
+@property (copy, nonatomic) void (^removeAction)(DLSDeallocActionRunner* caller);
 
 @end
 
@@ -24,17 +26,26 @@
     }
 }
 
+- (void)remove {
+    self.action = nil;
+    self.removeAction(self);
+}
+
 @end
 
 
 @implementation NSObject (DLSDeallocAction)
 
-- (void)performActionOnDealloc:(void(^)(void))action {
+- (id <DLSRemovable>)dls_performActionOnDealloc:(void(^)(void))action {
     DLSDeallocActionRunner* runner = [[DLSDeallocActionRunner alloc] init];
     runner.action = action;
-    @synchronized(self) {
-        objc_setAssociatedObject(runner, (__bridge void*)runner, runner, OBJC_ASSOCIATION_RETAIN);
-    }
+    __weak __typeof(self) weakself = self;
+    runner.removeAction = ^(DLSDeallocActionRunner* caller){
+        objc_setAssociatedObject(weakself, (__bridge void*)caller, caller, OBJC_ASSOCIATION_RETAIN);
+    };
+    
+    objc_setAssociatedObject(self, (__bridge void*)runner, runner, OBJC_ASSOCIATION_RETAIN);
+    return runner;
 }
 
 @end
