@@ -204,14 +204,22 @@
 			name = Plugins;
 			sourceTree = "<group>";
 		};
-		77A353211A36C89200A65A90 /* Plugins */ = {
+		778876F51ABE34DB00AB5580 /* LiveDials */ = {
 			isa = PBXGroup;
 			children = (
 				778876B91AB64F6700AB5580 /* LiveDialPaneViewController.swift */,
-				778876E81ABE104F00AB5580 /* Controls */,
 				778876D71ABDC27400AB5580 /* LiveDialController.swift */,
 				778876D81ABDC27400AB5580 /* LiveDialView.swift */,
 				77F4F59B1A33D8C700A48A76 /* LiveDialsPlugin.swift */,
+			);
+			name = LiveDials;
+			sourceTree = "<group>";
+		};
+		77A353211A36C89200A65A90 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				778876E81ABE104F00AB5580 /* Controls */,
+				778876F51ABE34DB00AB5580 /* LiveDials */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -361,6 +369,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -398,6 +407,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;

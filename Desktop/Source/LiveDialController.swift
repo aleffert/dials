@@ -32,6 +32,10 @@ class LiveDialController : LiveDialViewDelegate, Equatable {
         return contentView.dial
     }
     
+    var view : NSView {
+        return self.contentView
+    }
+    
 }
 
 func < (left : LiveDialController, right : LiveDialController) -> Bool {

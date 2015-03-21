@@ -28,10 +28,18 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
         self.channel = channel
         self.delegate = delegate
         super.init(nibName: "LiveDialPaneViewController", bundle: nil)
+        self.title = channel.name
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        for controller in dialControllers {
+            self.stackView?.addView(controller.view, inGravity: .Top)
+        }
     }
     
     func addDial(dial : DLSLiveDial) {
@@ -43,10 +51,12 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
             left < right
         }
         let i = find(dialControllers, controller)!
-        NSAnimationContext.runAnimationGroup({ctx in
-            ctx.allowsImplicitAnimation = true
-            self.stackView?.insertView(contentView, atIndex: i, inGravity: .Top)
-        }, completionHandler: nil)
+        if(self.viewLoaded) {
+            NSAnimationContext.runAnimationGroup({ctx in
+                ctx.allowsImplicitAnimation = true
+                self.stackView?.insertView(contentView, atIndex: i, inGravity: .Top)
+            }, completionHandler: nil)
+        }
     }
     
     func removeDialWithID(dialID : String) {

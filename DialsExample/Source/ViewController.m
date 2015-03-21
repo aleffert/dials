@@ -26,11 +26,14 @@
         NSLog(@"action");
     });
     
+    [[DLSLiveDialsPlugin sharedPlugin] beginGroupWithName:@"test1"];
     DLSAddSlider(box.alpha, 0, 1, YES);
+    [[DLSLiveDialsPlugin sharedPlugin] endGroup];
     
+    [[DLSLiveDialsPlugin sharedPlugin] beginGroupWithName:@"test2"];
     DLSAddToggle(box.hidden);
-    
     DLSAddColor(box.backgroundColor);
+    [[DLSLiveDialsPlugin sharedPlugin] endGroup];
 }
 
 - (void)didReceiveMemoryWarning {

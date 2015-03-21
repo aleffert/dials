@@ -50,6 +50,7 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     
     func handleRemoveMessage(message : DLSLiveDialsRemoveMessage, channel : String) {
         let controller = knownChannels[channel]
+        controller?.removeDialWithID(message.uuid)
         println("remove message");
     }
     
