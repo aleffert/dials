@@ -17,6 +17,7 @@
         self.type = [aDecoder decodeObjectForKey:@"type"];
         self.uuid = [aDecoder decodeObjectForKey:@"uuid"];
         self.value = [aDecoder decodeObjectForKey:@"value"];
+        self.displayName = [aDecoder decodeObjectForKey:@"displayName"];
     }
     return self;
 }
@@ -26,6 +27,7 @@
     [aCoder encodeObject:self.type forKey:@"type"];
     [aCoder encodeObject:self.uuid forKey:@"uuid"];
     [aCoder encodeObject:self.value forKey:@"value"];
+    [aCoder encodeObject:self.displayName forKey:@"displayName"];
 }
 
 @end

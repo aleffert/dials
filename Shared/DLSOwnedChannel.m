@@ -43,4 +43,12 @@ static NSString* const DLSOwnedChannelOwnerKey = @"DLSOwnedChannelOwnerKey";
     [aCoder encodeObject:self.owner forKey:DLSOwnedChannelOwnerKey];
 }
 
+- (NSUInteger)hash {
+    return [self.name hash] ^ [self.owner hash];
+}
+
+- (BOOL)isEqual:(id)object {
+    return [object isKindOfClass:[DLSOwnedChannel class]] && [[object name] isEqual:self.name] && [[object owner] isEqualToString:[self owner]];
+}
+
 @end

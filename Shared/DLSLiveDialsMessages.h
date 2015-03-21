@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString* const DLSLiveDialsPluginName;
+extern NSString* const DLSLiveDialsPluginDefaultGroup;
 
 @class DLSLiveDial;
 
@@ -26,7 +27,9 @@ extern NSString* const DLSLiveDialsPluginName;
 
 @interface DLSLiveDialsChangeMessage : NSObject <NSCoding>
 
+- (id)initWithUUID:(NSString*)uuid value:(id <NSCoding>)value;
+
 @property (copy, nonatomic) NSString* uuid;
-@property (strong, nonatomic) id value;
+@property (strong, nonatomic) id <NSCoding> value;
 
 @end

@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    DLSAddButtonAction(^{
+    DLSAddButtonAction(@"Action", ^{
         NSLog(@"action");
     });
 }

@@ -8,35 +8,27 @@
 
 import Cocoa
 
-class DummyViewController : NSViewController {
-    override func loadView() {
-        self.view = NSView(frame: CGRectZero)
-    }
-}
-
-class LiveDialsPlugin: NSObject, Plugin {
+class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     
     var name : String = DLSLiveDialsPluginName
 
     var displayName : String = "Control Panel"
     
-    private var knownChannels : [String:NSViewController] = [:]
+    private var knownChannels : [String:LiveDialPaneViewController] = [:]
     private var context : PluginContext?
     
     func receiveMessage(data: NSData, channel: DLSChannel) {
-        let channelName = channel.name ?? "test"
-        if knownChannels[channelName] == nil {
-            let controller = DummyViewController(nibName: nil, bundle: nil)!
-            controller.title = channelName
+        if knownChannels[channel.name] == nil {
+            let controller = LiveDialPaneViewController(channel : channel, delegate : self)!
             context?.addViewController(controller, plugin:self)
-            knownChannels[channelName] = controller
+            knownChannels[channel.name] = controller
         }
         let message: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
         if let addMessage = message as? DLSLiveDialsAddMessage {
-            handleAddMessage(addMessage)
+            handleAddMessage(addMessage, channel: channel.name)
         }
         else if let removeMessage = message as? DLSLiveDialsRemoveMessage {
-            handleRemoveMessage(removeMessage)
+            handleRemoveMessage(removeMessage, channel : channel.name)
         }
     }
     
@@ -51,11 +43,19 @@ class LiveDialsPlugin: NSObject, Plugin {
         knownChannels = [:]
     }
     
-    func handleAddMessage(message : DLSLiveDialsAddMessage) {
-        println("add message");
+    func handleAddMessage(message : DLSLiveDialsAddMessage, channel: String) {
+        let controller = knownChannels[channel]
+        controller?.addDial(message.dial)
     }
     
-    func handleRemoveMessage(message : DLSLiveDialsRemoveMessage) {
+    func handleRemoveMessage(message : DLSLiveDialsRemoveMessage, channel : String) {
+        let controller = knownChannels[channel]
         println("remove message");
+    }
+    
+    func paneController(controller: LiveDialPaneViewController, changedDial dial: DLSLiveDial, toValue value: NSCoding?) {
+        var message = DLSLiveDialsChangeMessage(UUID: dial.uuid, value: value)
+        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+        context?.sendMessage(data, channel: controller.channel, plugin: self)
     }
 }

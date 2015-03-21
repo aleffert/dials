@@ -9,12 +9,9 @@
 #import "DLSLiveDialsMessages.h"
 
 NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
+NSString* const DLSLiveDialsPluginDefaultGroup = @"$$DEFAULT_GROUP$$";
 
 @implementation DLSLiveDialsAddMessage
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.dial forKey:@"dial"];
-}
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -24,13 +21,13 @@ NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.dial forKey:@"dial"];
+}
+
 @end
 
 @implementation DLSLiveDialsRemoveMessage
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.uuid forKey:@"uuid"];
-}
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -40,14 +37,21 @@ NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.uuid forKey:@"uuid"];
+}
 
 @end
 
 @implementation DLSLiveDialsChangeMessage
 
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.uuid forKey:@"uuid"];
-    [aCoder encodeObject:self.value forKey:@"value"];
+- (id)initWithUUID:(NSString*)uuid value:(id <NSCoding>)value {
+    self = [super init];
+    if(self != nil) {
+        self.uuid = uuid;
+        self.value = value;
+    }
+    return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -58,5 +62,11 @@ NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
     }
     return self;
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.uuid forKey:@"uuid"];
+    [aCoder encodeObject:self.value forKey:@"value"];
+}
+
 
 @end
