@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DLSTypeDescription;
+@protocol DLSEditorDescription;
 
 @interface DLSLiveDial : NSObject <NSCoding>
 
 @property (copy, nonatomic) NSString* group;
-@property (strong, nonatomic) id <DLSTypeDescription> type;
+@property (strong, nonatomic) id <DLSEditorDescription> editor;
 @property (copy, nonatomic) NSString* uuid;
 @property (strong, nonatomic) id <NSCoding> value;
 @property (strong, nonatomic) NSString* displayName;

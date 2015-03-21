@@ -10,7 +10,7 @@
 
 @implementation DLSActionDescription
 
-+ (DLSActionDescription*)action {
++ (DLSActionDescription*)editor {
     return [[DLSActionDescription alloc] init];
 }
 

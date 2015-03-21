@@ -80,13 +80,13 @@
     [self sendRemoveMessageWithUUID:uuid];
 }
 
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value type:(id<DLSTypeDescription>)type displayName:(NSString*)displayName file:(char *)file line:(size_t)line {
+- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id<DLSEditorDescription>)editor displayName:(NSString*)displayName file:(char *)file line:(size_t)line {
     __weak __typeof(self)owner = self;
     
     DLSLiveDial* dial = [[DLSLiveDial alloc] init];
     dial.value = value;
     dial.group = self.currentGroup;
-    dial.type = type;
+    dial.editor = editor;
     dial.uuid = [NSUUID UUID].UUIDString;
     dial.displayName = displayName;
     
@@ -160,7 +160,7 @@
 
 @implementation NSObject (DLSLiveDialsHelpers)
 
-- (id <DLSRemovable>)dls_addDialForProperty:(NSString *)property type:(id<DLSTypeDescription>)type file:(char *)file line:(size_t)line {
+- (id <DLSRemovable>)dls_addDialForProperty:(NSString *)property editor:(id<DLSEditorDescription>)editor file:(char *)file line:(size_t)line {
     __weak __typeof(self) weakself = self;
     DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] init];
     wrapper.getter = ^{
@@ -170,7 +170,7 @@
         [weakself setValue:value forKeyPath:property];
     };
     id value = wrapper.getter();
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value type:type displayName:property file:file line:line];
+    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:property file:file line:line];
     [self dls_performActionOnDealloc:^{
         [removable remove];
     }];
@@ -186,7 +186,7 @@
     wrapper.setter = ^(id value) {
         action();
     };
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:nil type:[DLSActionDescription action] displayName:name file:file line:line];
+    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:nil editor:[DLSActionDescription editor] displayName:name file:file line:line];
     [self dls_performActionOnDealloc:^{
         [removable remove];
     }];

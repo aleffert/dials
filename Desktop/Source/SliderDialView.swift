@@ -12,7 +12,7 @@ import AppKit
 extension DLSSliderDescription : LiveDialViewGenerating {
     func generate() -> LiveDialView {
         let view = LiveDialView.freshViewFromNib("SliderDialView") as SliderDialView
-        view.typeDescription = self
+        view.editorDescription = self
         return view
     }
 }
@@ -21,11 +21,11 @@ class SliderDialView : LiveDialView {
     @IBOutlet private var slider : NSSlider?
     @IBOutlet private var name : NSTextField?
     
-    var typeDescription : DLSSliderDescription? {
+    var editorDescription : DLSSliderDescription? {
         didSet {
-            slider?.minValue = typeDescription!.min
-            slider?.maxValue = typeDescription!.max
-            slider?.continuous = typeDescription!.continuous
+            slider?.minValue = editorDescription!.min
+            slider?.maxValue = editorDescription!.max
+            slider?.continuous = editorDescription!.continuous
         }
     }
     

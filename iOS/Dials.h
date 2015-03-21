@@ -15,11 +15,12 @@ FOUNDATION_EXPORT double Dials_iOSVersionNumber;
 FOUNDATION_EXPORT const unsigned char Dials_iOSVersionString[];
 
 #import <Dials/DLSActionDescription.h>
+#import <Dials/DLSColorDescription.h>
 #import <Dials/DLSDescribable.h>
 #import <Dials/DLSDials.h>
 #import <Dials/DLSLiveDialsPlugin.h>
 #import <Dials/DLSRemovable.h>
 #import <Dials/DLSSliderDescription.h>
 #import <Dials/DLSToggleDescription.h>
-#import <Dials/DLSTypeDescription.h>
+#import <Dials/DLSEditorDescription.h>
 #import <Dials/UIView+DLSDescribable.h>

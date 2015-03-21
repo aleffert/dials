@@ -9,9 +9,9 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
-#import "DLSTypeDescription.h"
+#import "DLSEditorDescription.h"
 
-@interface DLSSliderDescription : NSObject <DLSTypeDescription>
+@interface DLSSliderDescription : NSObject <DLSEditorDescription>
 
 + (DLSSliderDescription*)zeroOneSlider;
 + (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max continuous:(BOOL)continuous;

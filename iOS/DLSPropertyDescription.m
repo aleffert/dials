@@ -12,7 +12,7 @@
 
 @interface DLSPropertyDescription ()
 
-@property (strong, nonatomic) id <DLSTypeDescription> typeDescription;
+@property (strong, nonatomic) id <DLSEditorDescription> editorDescription;
 @property (strong, nonatomic) id <DLSValueExchanger> valueExchanger;
 @property (copy, nonatomic) NSString* name;
 
@@ -20,16 +20,16 @@
 
 @implementation DLSPropertyDescription
 
-+ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name type:(id <DLSTypeDescription>)type exchanger:(id <DLSValueExchanger>)exchanger {
++ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditorDescription>)type exchanger:(id <DLSValueExchanger>)exchanger {
     DLSPropertyDescription* description = [[DLSPropertyDescription alloc] init];
     description.name = name;
-    description.typeDescription = type;
+    description.editorDescription = type;
     description.valueExchanger = exchanger;
     return description;
 }
 
 @end
 
-DLSPropertyDescription* DLSKeyPathProperty(NSString* name, id <DLSTypeDescription> description) {
-    return [DLSPropertyDescription propertyDescriptionWithName:name type:description exchanger:[DLSKeyPathExchanger exchangerWithKeyPath:name]];
+DLSPropertyDescription* DLSKeyPathProperty(NSString* name, id <DLSEditorDescription> description) {
+    return [DLSPropertyDescription propertyDescriptionWithName:name editor:description exchanger:[DLSKeyPathExchanger exchangerWithKeyPath:name]];
 }

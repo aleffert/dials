@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="LiveDialViewNibOwner" customModule="Dials" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="Q6u-3N-JbC"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="ColorDialView" customModule="Dials" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="g6X-tV-mdT">
+                    <rect key="frame" x="20" y="8" width="37" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="094-xG-eM9"/>
+                        <constraint firstAttribute="width" constant="37" id="aXm-gQ-icD"/>
+                    </constraints>
+                    <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="colorChanged:" target="c22-O7-iKe" id="yHb-CB-gx8"/>
+                    </connections>
+                </colorWell>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x4n-gZ-zuf">
+                    <rect key="frame" x="63" y="12" width="38" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="0yd-q2-kDB">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="x4n-gZ-zuf" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="2Zq-Zp-xEV"/>
+                <constraint firstItem="x4n-gZ-zuf" firstAttribute="centerY" secondItem="g6X-tV-mdT" secondAttribute="centerY" id="EkZ-BZ-MJ3"/>
+                <constraint firstItem="x4n-gZ-zuf" firstAttribute="leading" secondItem="g6X-tV-mdT" secondAttribute="trailing" constant="8" symbolic="YES" id="L9V-dm-6Vb"/>
+                <constraint firstItem="g6X-tV-mdT" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="8" id="PXB-HV-R4v"/>
+                <constraint firstItem="g6X-tV-mdT" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="nGi-Sw-Ns9"/>
+                <constraint firstAttribute="bottom" secondItem="g6X-tV-mdT" secondAttribute="bottom" constant="8" id="oIb-2F-Arh"/>
+            </constraints>
+            <connections>
+                <outlet property="name" destination="x4n-gZ-zuf" id="tLt-BO-I4v"/>
+                <outlet property="well" destination="g6X-tV-mdT" id="Wrf-vI-UEr"/>
+            </connections>
+            <point key="canvasLocation" x="293" y="278"/>
+        </customView>
+    </objects>
+</document>

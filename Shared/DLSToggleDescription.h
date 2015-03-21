@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DLSTypeDescription.h"
+#import "DLSEditorDescription.h"
 
-@interface DLSToggleDescription : NSObject <DLSTypeDescription>
+@interface DLSToggleDescription : NSObject <DLSEditorDescription>
 
-+ (DLSToggleDescription*)toggle;
++ (DLSToggleDescription*)editor;
 
 @end

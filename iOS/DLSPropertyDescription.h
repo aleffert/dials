@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DLSTypeDescription;
+@protocol DLSEditorDescription;
 @protocol DLSValueExchanger;
 
 @interface DLSPropertyDescription : NSObject
 
-+ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name type:(id <DLSTypeDescription>)type exchanger:(id <DLSValueExchanger>)exchanger;
++ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditorDescription>)editor exchanger:(id <DLSValueExchanger>)exchanger;
 
-@property (readonly, strong, nonatomic) id <DLSTypeDescription> typeDescription;
+@property (readonly, strong, nonatomic) id <DLSEditorDescription> editorDescription;
 @property (readonly, strong, nonatomic) id <DLSValueExchanger> valueExchanger;
 @property (readonly, copy, nonatomic) NSString* name;
 
 @end
 
-DLSPropertyDescription* DLSKeyPathProperty(NSString* name, id <DLSTypeDescription> description);
+DLSPropertyDescription* DLSKeyPathProperty(NSString* name, id <DLSEditorDescription> description);

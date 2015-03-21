@@ -30,10 +30,6 @@
     return description;
 }
 
-- (NSString*)identifier {
-    return @"DLSSliderDescription";
-}
-
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {

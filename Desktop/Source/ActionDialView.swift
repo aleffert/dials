@@ -9,10 +9,6 @@
 import Foundation
 import AppKit
 
-private class ActionDialViewNibOwner {
-    @IBOutlet var view : LiveDialView?
-}
-
 extension DLSActionDescription : LiveDialViewGenerating {
     func generate() -> LiveDialView {
         return LiveDialView.freshViewFromNib("ActionDialView")
@@ -31,7 +27,7 @@ class ActionDialView : LiveDialView {
     
     override var dial : DLSLiveDial? {
         didSet {
-            button?.stringValue = dial!.displayName
+            button?.title = dial!.displayName
         }
     }
 }

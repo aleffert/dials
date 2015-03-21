@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DLSTypeDescription.h"
+#import "DLSEditorDescription.h"
 
-@interface DLSActionDescription : NSObject <DLSTypeDescription>
+@interface DLSActionDescription : NSObject <DLSEditorDescription>
 
-+ (DLSActionDescription*)action;
++ (DLSActionDescription*)editor;
 
 @end

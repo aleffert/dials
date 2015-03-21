@@ -1,5 +1,5 @@
 //
-//  DLSTypeDescription.h
+//  DLSEditorDescription.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/14/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DLSTypeDescription <NSObject, NSCoding>
+@protocol DLSEditorDescription <NSObject, NSCoding>
 
 @end
 

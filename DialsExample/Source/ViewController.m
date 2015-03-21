@@ -27,6 +27,10 @@
     });
     
     DLSAddSlider(box.alpha, 0, 1, YES);
+    
+    DLSAddToggle(box.hidden);
+    
+    DLSAddColor(box.backgroundColor);
 }
 
 - (void)didReceiveMemoryWarning {

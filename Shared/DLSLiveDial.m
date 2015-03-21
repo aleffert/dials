@@ -14,7 +14,7 @@
     self = [super init];
     if(self != nil) {
         self.group = [aDecoder decodeObjectForKey:@"group"];
-        self.type = [aDecoder decodeObjectForKey:@"type"];
+        self.editor = [aDecoder decodeObjectForKey:@"editor"];
         self.uuid = [aDecoder decodeObjectForKey:@"uuid"];
         self.value = [aDecoder decodeObjectForKey:@"value"];
         self.displayName = [aDecoder decodeObjectForKey:@"displayName"];
@@ -24,7 +24,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.group forKey:@"group"];
-    [aCoder encodeObject:self.type forKey:@"type"];
+    [aCoder encodeObject:self.editor forKey:@"editor"];
     [aCoder encodeObject:self.uuid forKey:@"uuid"];
     [aCoder encodeObject:self.value forKey:@"value"];
     [aCoder encodeObject:self.displayName forKey:@"displayName"];

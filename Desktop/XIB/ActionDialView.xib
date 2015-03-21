@@ -32,6 +32,9 @@
                 <constraint firstItem="gFd-ZK-fwq" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="8" id="Msg-Er-q8G"/>
                 <constraint firstAttribute="bottom" secondItem="gFd-ZK-fwq" secondAttribute="bottom" constant="8" id="jU1-0I-8JO"/>
             </constraints>
+            <connections>
+                <outlet property="button" destination="gFd-ZK-fwq" id="0UO-JD-Fs6"/>
+            </connections>
             <point key="canvasLocation" x="127" y="278"/>
         </customView>
     </objects>

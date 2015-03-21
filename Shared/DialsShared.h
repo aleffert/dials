@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "DLSActionDescription.h"
+#import "DLSColorDescription.h"
 #import "DLSConstants.h"
 #import "DLSOwnedChannel.h"
 #import "DLSChannelStream.h"
