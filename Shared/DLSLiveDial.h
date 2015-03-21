@@ -15,7 +15,7 @@
 @property (copy, nonatomic) NSString* group;
 @property (strong, nonatomic) id <DLSTypeDescription> type;
 @property (copy, nonatomic) NSString* uuid;
-@property (strong, nonatomic) id value;
+@property (strong, nonatomic) id <NSCoding> value;
 @property (strong, nonatomic) NSString* displayName;
 
 @end

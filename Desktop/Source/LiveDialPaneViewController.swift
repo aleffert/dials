@@ -7,6 +7,11 @@
 //
 
 import Cocoa
+class FlippedClipView : NSClipView {
+    override var flipped : Bool {
+        return true;
+    }
+}
 
 protocol LiveDialPaneViewControllerDelegate : class {
     func paneController(controller : LiveDialPaneViewController, changedDial dial: DLSLiveDial, toValue value : NSCoding?)

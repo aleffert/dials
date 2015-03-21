@@ -13,25 +13,25 @@ private class ActionDialViewNibOwner {
     @IBOutlet var view : LiveDialView?
 }
 
-class FlippedClipView : NSClipView {
-    override var flipped : Bool {
-        return true;
-    }
-}
-
 extension DLSActionDescription : LiveDialViewGenerating {
     func generate() -> LiveDialView {
-        var objects : NSArray?
-        let owner = ActionDialViewNibOwner()
-        NSBundle.mainBundle().loadNibNamed("ActionDialView", owner: owner, topLevelObjects: &objects)
-        return owner.view!
+        return LiveDialView.freshViewFromNib("ActionDialView")
     }
 }
 
 class ActionDialView : LiveDialView {
-    @IBAction func buttonPressed(sender : AnyObject) {
+    
+    @IBOutlet var button : NSButton?
+    
+    @IBAction func buttonPressed(sender : NSButton) {
         dial.map {
             self.delegate?.dialView(self, changedDial: $0, toValue: nil)
+        }
+    }
+    
+    override var dial : DLSLiveDial? {
+        didSet {
+            button?.stringValue = dial!.displayName
         }
     }
 }

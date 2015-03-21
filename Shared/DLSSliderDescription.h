@@ -14,10 +14,10 @@
 @interface DLSSliderDescription : NSObject <DLSTypeDescription>
 
 + (DLSSliderDescription*)zeroOneSlider;
-+ (DLSSliderDescription*)sliderWithMin:(CGFloat)min max:(CGFloat)max continuous:(BOOL)continuous;
++ (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max continuous:(BOOL)continuous;
 
-@property (readonly, assign, nonatomic) CGFloat min;
-@property (readonly, assign, nonatomic) CGFloat max;
+@property (readonly, assign, nonatomic) double min;
+@property (readonly, assign, nonatomic) double max;
 @property (readonly, assign, nonatomic) BOOL continuous;
 
 @end

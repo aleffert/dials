@@ -12,6 +12,8 @@
 
 @interface ViewController ()
 
+@property (strong, nonatomic) IBOutlet UIView* box;
+
 @end
 
 @implementation ViewController
@@ -23,6 +25,8 @@
     DLSAddButtonAction(@"Action", ^{
         NSLog(@"action");
     });
+    
+    DLSAddSlider(box.alpha, 0, 1, YES);
 }
 
 - (void)didReceiveMemoryWarning {

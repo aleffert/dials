@@ -10,8 +10,8 @@
 
 @interface DLSSliderDescription ()
 
-@property (assign, nonatomic) CGFloat min;
-@property (assign, nonatomic) CGFloat max;
+@property (assign, nonatomic) double min;
+@property (assign, nonatomic) double max;
 @property (assign, nonatomic) BOOL continuous;
 
 @end
@@ -22,7 +22,7 @@
     return [self sliderWithMin:0 max:1 continuous:YES];
 }
 
-+ (DLSSliderDescription*)sliderWithMin:(CGFloat)min max:(CGFloat)max continuous:(BOOL)continuous {
++ (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max continuous:(BOOL)continuous {
     DLSSliderDescription* description = [[DLSSliderDescription alloc] init];
     description.min = min;
     description.max = max;
@@ -37,17 +37,17 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        self.min = [aDecoder decodeFloatForKey:@"min"];
-        self.max = [aDecoder decodeFloatForKey:@"max"];
+        self.min = [aDecoder decodeDoubleForKey:@"min"];
+        self.max = [aDecoder decodeDoubleForKey:@"max"];
         self.continuous = [aDecoder decodeBoolForKey:@"continuous"];
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeFloat:self.min forKey:@"min"];
-    [aCoder encodeFloat:self.max forKey:@"max"];
-    [aCoder encodeFloat:self.continuous forKey:@"continuous"];
+    [aCoder encodeDouble:self.min forKey:@"min"];
+    [aCoder encodeDouble:self.max forKey:@"max"];
+    [aCoder encodeBool:self.continuous forKey:@"continuous"];
 }
 
 @end

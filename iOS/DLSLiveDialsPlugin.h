@@ -41,6 +41,6 @@
 
 #define DLSAddButtonAction(buttonName, action) [self dls_addDialForAction:action name:buttonName file:__FILE__ line:__LINE__]
 
-#define DLSAddControl(propertyName, typeDescription) [self addDialForProperty:propertyName type:typeDescription file:__FILE__ line:__LINE__]
-#define DLSAddSlider(propertyName, minValue, maxValue, isContinuous) DLSAddControler(propertyName, [DLSSliderDescription sliderWithMin:minValue max:maxValue continuous:isContinuous])
+#define DLSAddControl(propertyName, typeDescription) [self dls_addDialForProperty:@"" #propertyName type:typeDescription file:__FILE__ line:__LINE__]
+#define DLSAddSlider(propertyName, minValue, maxValue, isContinuous) DLSAddControl(propertyName, [DLSSliderDescription sliderWithMin:minValue max:maxValue continuous:isContinuous])
 #define DLSAddToggle(propertyName) DLSAddControler(propertyName, [DLSToggleDescription toggle])
