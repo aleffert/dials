@@ -87,6 +87,8 @@
     dial.value = value;
     dial.group = self.currentGroup;
     dial.editor = editor;
+    dial.file = [NSString stringWithUTF8String:file];
+    dial.line = line;
     dial.uuid = [NSUUID UUID].UUIDString;
     dial.displayName = displayName;
     
