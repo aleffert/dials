@@ -66,7 +66,7 @@ class SidebarSplitViewController: NSSplitViewController {
     func useBodyContent(view : NSView) {
         for child in contentItem.viewController.view.subviews as Array<NSView> {
             if child != view {
-                view.removeFromSuperview()
+                child.removeFromSuperview()
             }
         }
         contentItem.viewController.view.addSubview(view)

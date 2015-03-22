@@ -34,18 +34,28 @@
 
 @interface NSObject (DLSLiveDialsHelpers)
 
-- (id <DLSRemovable>)dls_addDialForProperty:(NSString*)property editor:(id <DLSEditorDescription>)type file:(char*)file line:(size_t)line;
+- (id <DLSRemovable>)dls_addDialForProperty:(NSString*)property editor:(id <DLSEditorDescription>)editor file:(char*)file line:(size_t)line;
 - (id <DLSRemovable>)dls_addDialForAction:(void(^)(void))action name:(NSString*)name file:(char*)file line:(size_t)line;
+- (id <DLSRemovable>)dls_addDialForGetter:(id(^)(void))getter setter:(void(^)(id))setter name:(NSString*)displayName editor:(id<DLSEditorDescription>)editor file:(char *)file line:(size_t)line;
 
 @end
 
 #define DLSAddButtonAction(buttonName, action) [self dls_addDialForAction:action name:buttonName file:__FILE__ line:__LINE__]
 
+#define DLSAddControl(displayName, getterAction, setterAction, editorDescription) \
+    [self dls_addDialForGetter:getterAction setter:setterAction name:displayName editor:editorDescription file:__FILE__ line:__LINE__]
+#define DLSAddToggleControl(label, symbol) \
+    DLSAddControl(label, ^{ return @(symbol); }, ^(id updatedValue) { symbol = [updatedValue boolValue];}, [DLSToggleDescription editor])
+
 // MARK: Base
 /// Creates a new live dial based on a given keypath and its type
-#define DLSAddControl(keyPath, editorDescription) [self dls_addDialForProperty:@"" #keyPath editor:editorDescription file:__FILE__ line:__LINE__]
+#define DLSAddControlForKeyPath(keyPath, editorDescription) \
+[self dls_addDialForProperty:@"" #keyPath editor:editorDescription file:__FILE__ line:__LINE__]
 
 // Per Type Conveniences
-#define DLSAddColor(keyPath) DLSAddControl(keyPath, [DLSColorDescription editor])
-#define DLSAddSlider(keyPath, minValue, maxValue, isContinuous) DLSAddControl(keyPath, [DLSSliderDescription sliderWithMin:minValue max:maxValue continuous:isContinuous])
-#define DLSAddToggle(keyPath) DLSAddControl(keyPath, [DLSToggleDescription editor])
+#define DLSAddColorForKeyPath(keyPath) \
+    DLSAddControlForKeyPath(keyPath, [DLSColorDescription editor])
+#define DLSAddSliderForKeyPath(keyPath, minValue, maxValue, isContinuous) \
+    DLSAddControlForKeyPath(keyPath, [DLSSliderDescription sliderWithMin:minValue max:maxValue continuous:isContinuous])
+#define DLSAddToggleForKeyPath(keyPath) \
+    DLSAddControlForKeyPath(keyPath, [DLSToggleDescription editor])

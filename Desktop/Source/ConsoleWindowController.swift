@@ -165,14 +165,14 @@ extension ConsoleWindowController : NSToolbarDelegate {
 extension ConsoleWindowController : PluginContext {
     func addViewController(controller: NSViewController, plugin: Plugin) {
         viewGrouper.addViewController(controller, plugin : plugin)
-        showSidebarIfNecessary()
         sidebarTable.reloadData()
+        showSidebarIfNecessary()
     }
     
     func removeViewController(controller: NSViewController, plugin: Plugin) {
         viewGrouper.removeViewController(controller, plugin : plugin)
-        hideSidebarIfNecessary()
         sidebarTable.reloadData()
+        hideSidebarIfNecessary()
     }
     
     func sendMessage(data: NSData, channel: DLSChannel, plugin: Plugin) {

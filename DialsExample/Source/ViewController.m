@@ -10,11 +10,14 @@
 
 #import <Dials/Dials.h>
 
+static BOOL foo = true;
+
 @interface ViewController ()
 
 @property (strong, nonatomic) IBOutlet UIView* box;
 
 @end
+
 
 @implementation ViewController
 
@@ -26,13 +29,12 @@
         NSLog(@"action");
     });
     
-    [[DLSLiveDialsPlugin sharedPlugin] beginGroupWithName:@"test1"];
-    DLSAddSlider(box.alpha, 0, 1, YES);
-    [[DLSLiveDialsPlugin sharedPlugin] endGroup];
+    DLSAddToggleControl(@"Foo", foo);
     
-    [[DLSLiveDialsPlugin sharedPlugin] beginGroupWithName:@"test2"];
-    DLSAddToggle(box.hidden);
-    DLSAddColor(box.backgroundColor);
+    [[DLSLiveDialsPlugin sharedPlugin] beginGroupWithName:@"test1"];
+    DLSAddSliderForKeyPath(box.alpha, 0, 1, YES);
+    DLSAddToggleForKeyPath(box.hidden);
+    DLSAddColorForKeyPath(box.backgroundColor);
     [[DLSLiveDialsPlugin sharedPlugin] endGroup];
 }
 

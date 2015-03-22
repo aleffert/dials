@@ -54,6 +54,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     }
 
     func addViewController(controller: NSViewController, plugin: Plugin) {
+        var found = false
         for group in groups {
             if group.name == plugin.name {
                 group.items.append(controller)
@@ -62,14 +63,19 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
                         return left.title < right.title
                     })
                 }
-                rows = buildRowList()
-                return
+                found = true
+                break
             }
         }
         
-        let group = NamedGroup<NSViewController>(name: plugin.name, displayName: plugin.displayName)
-        group.items = [controller]
-        groups.append(group)
+        if !found {
+            let group = NamedGroup<NSViewController>(name: plugin.name, displayName: plugin.displayName)
+            group.items = [controller]
+            groups.append(group)
+        }
+        groups.sort { (left, right) -> Bool in
+            return left.displayName < right.displayName
+        }
         rows = buildRowList()
     }
     
@@ -87,21 +93,15 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         return rows.count > 0
     }
     
-    func titleForRow(row : Int) -> String {
-        let item = rows[row]
-        switch(item) {
-        case .Heading(let group): return group.displayName
-        case .Singleton(let group): return group.displayName
-        case .Controller(let controller): return controller.title!
-        }
-    }
-    
     func controllerForRow(row : Int) -> NSViewController? {
         let item = rows[row]
         switch(item) {
-        case .Heading(let group): return nil
-        case .Singleton(let group): return group.items[0]
-        case .Controller(let controller): return controller
+        case .Heading(_):
+            return nil
+        case .Singleton(let group):
+            return group.items[0]
+        case .Controller(let controller):
+            return controller
         }
     }
     
@@ -111,14 +111,40 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeViewWithIdentifier(ViewControllerGrouperCellIdentifier, owner: nil) as NSTableCellView
-        cell.textField?.stringValue = titleForRow(row)
+        let item = rows[row]
+        switch(item) {
+        case .Heading(let group):
+            cell.textField?.stringValue = group.displayName
+        case .Singleton(let group):
+            cell.textField?.stringValue = group.displayName
+            cell.textField?.font = NSFont.boldSystemFontOfSize(11)
+        case .Controller(let controller):
+            cell.textField?.stringValue = controller.title ?? "Item"
+            cell.textField?.font = NSFont.systemFontOfSize(12)
+        }
         return cell
+    }
+    
+    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        let item = rows[row]
+        switch(item) {
+        case .Singleton(_): fallthrough
+        case .Heading(_):
+            if row == 0 {
+                return 20
+            }
+            else {
+                return 24
+            }
+        case .Controller(_):
+            return 20
+        }
     }
     
     func tableView(tableView: NSTableView, isGroupRow row: Int) -> Bool {
         let item = rows[row]
         switch(item) {
-        case .Singleton(_): return true
+        case .Singleton(_): return false
         case .Heading(_): return true
         case .Controller(_): return false
         }
@@ -153,8 +179,9 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
             let proposed = (i + existingIndex + rows.count) % rows.count
             let item = rows[proposed]
             switch(item) {
+            case .Singleton(_): return proposed
             case .Controller(_): return proposed
-            default: continue
+            case .Heading(_): continue
             }
         }
         return existingIndex

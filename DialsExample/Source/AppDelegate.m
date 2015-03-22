@@ -10,6 +10,31 @@
 
 #import <Dials/Dials.h>
 
+@interface TestPlugin : NSObject <DLSPlugin>
+
+@end
+
+@implementation TestPlugin
+
+- (NSString*)name {
+    return @"Test";
+}
+
+- (void)connectedWithContext:(id<DLSPluginContext>)context {
+    id <DLSChannel> channel = [context channelWithName:@"foo" forPlugin:self];
+    [context sendMessage:[NSData data] onChannel:channel fromPlugin:self];
+}
+
+- (void)connectionClosed {
+    
+}
+
+- (void)receiveMessage:(NSData *)message onChannel:(id<DLSChannel>)channel {
+    
+}
+
+@end
+
 @interface AppDelegate ()
 
 @end
@@ -19,7 +44,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [[DLSDials shared] start];
+    [[DLSDials shared] startWithPlugins:[[[DLSDials shared] defaultPlugins] arrayByAddingObject:[[TestPlugin alloc] init]]];
     return YES;
 }
 

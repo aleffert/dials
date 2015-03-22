@@ -160,37 +160,39 @@
 
 @implementation NSObject (DLSLiveDialsHelpers)
 
-- (id <DLSRemovable>)dls_addDialForProperty:(NSString *)property editor:(id<DLSEditorDescription>)editor file:(char *)file line:(size_t)line {
-    __weak __typeof(self) weakself = self;
+- (id <DLSRemovable>)dls_addDialForGetter:(id(^)(void))getter setter:(void(^)(id))setter name:(NSString*)displayName editor:(id<DLSEditorDescription>)editor file:(char *)file line:(size_t)line {
     DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] init];
-    wrapper.getter = ^{
-        return [weakself valueForKeyPath:property];
-    };
-    wrapper.setter = ^(id value) {
-        [weakself setValue:value forKeyPath:property];
-    };
+    wrapper.getter = getter;
+    wrapper.setter = setter;
+    
     id value = wrapper.getter();
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:property file:file line:line];
+    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName file:file line:line];
     [self dls_performActionOnDealloc:^{
         [removable remove];
     }];
     return removable;
 }
 
-- (id <DLSRemovable>)dls_addDialForAction:(void (^)(void))action name:(NSString*)name file:(char *)file line:(size_t)line {
+- (id <DLSRemovable>)dls_addDialForProperty:(NSString *)property editor:(id<DLSEditorDescription>)editor file:(char *)file line:(size_t)line {
+    __weak __typeof(self) weakself = self;
+    id(^getter)(void) = ^{
+        return [weakself valueForKeyPath:property];
+    };
+    void(^setter)(id) = ^(id value) {
+        [weakself setValue:value forKeyPath:property];
+    };
 
-    DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] init];
-    wrapper.getter = ^id{
+    return [self dls_addDialForGetter:getter setter:setter name:property editor:editor file:file line:line];
+}
+
+- (id <DLSRemovable>)dls_addDialForAction:(void (^)(void))action name:(NSString*)name file:(char *)file line:(size_t)line {
+    id(^getter)(void) = ^id{
         return nil;
     };
-    wrapper.setter = ^(id value) {
+    void(^setter)(id) = ^(id value) {
         action();
     };
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:nil editor:[DLSActionDescription editor] displayName:name file:file line:line];
-    [self dls_performActionOnDealloc:^{
-        [removable remove];
-    }];
-    return removable;
+    return [self dls_addDialForGetter:getter setter:setter name:name editor:[DLSActionDescription editor] file:file line:line];
 }
 
 @end
