@@ -22,7 +22,7 @@ class ConsoleWindowController: NSWindowController {
     private let pluginController : PluginController = PluginController()
     private let viewGrouper : ViewControllerGrouper = ViewControllerGrouper()
     private let itemsChangedBroadcaster : Broadcaster<ConnectionStatus> = Broadcaster()
-    private let sidebarController = SidebarSplitViewController(nibName : "SidebarSplitView", bundle : nil)!
+    private let sidebarController = SidebarSplitViewController(nibName : nil, bundle : nil)!
     private lazy var contextBouncer : PluginContextBouncer = {
         return PluginContextBouncer(backing: self)
     }()
@@ -110,6 +110,36 @@ class ConsoleWindowController: NSWindowController {
         if !viewGrouper.hasMultipleItems {
             sidebarController.hideSidebar()
         }
+    }
+    
+    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == Selector("showPreviousTab:") || menuItem.action == Selector("showNextTab:") {
+            return self.viewGrouper.hasMultipleItems
+        }
+        else if menuItem.action == Selector("toggleSidebar:") {
+            if sidebarController.isSidebarVisible {
+                menuItem.title = "Hide Sidebar"
+            }
+            else {
+                menuItem.title = "Show Sidebar"
+            }
+            return self.viewGrouper.hasMultipleItems
+        }
+        return true
+    }
+    
+    func toggleSidebar(sender : AnyObject) {
+        sidebarController.toggleSidebar()
+    }
+    
+    func showPreviousTab(sender : NSMenuItem) {
+        let index = viewGrouper.previousTabIndex(sidebarTable.selectedRow)
+        sidebarTable.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+    }
+    
+    func showNextTab(sender : NSMenuItem) {
+        let index = viewGrouper.nextTabIndex(sidebarTable.selectedRow)
+        sidebarTable.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
     }
 }
 

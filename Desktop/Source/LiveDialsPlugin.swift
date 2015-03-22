@@ -17,6 +17,10 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     private var knownChannels : [String:LiveDialPaneViewController] = [:]
     private var context : PluginContext?
     
+    var shouldSortChildren : Bool {
+        return true
+    }
+    
     func receiveMessage(data: NSData, channel: DLSChannel) {
         if knownChannels[channel.name] == nil {
             let controller = LiveDialPaneViewController(channel : channel, delegate : self)!

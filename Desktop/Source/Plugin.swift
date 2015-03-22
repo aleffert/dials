@@ -15,8 +15,10 @@ protocol PluginContext : class {
 }
 
 protocol Plugin {
-    var name : String {get}
-    var displayName : String {get}
+    var name : String { get }
+    var displayName : String { get }
+    
+    var shouldSortChildren : Bool { get }
     
     func receiveMessage(data : NSData, channel : DLSChannel)
     

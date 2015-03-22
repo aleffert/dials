@@ -14,17 +14,14 @@ private let SidebarSplitViewName = "SidebarSplitViewName"
 class EmptyViewController : NSViewController {
     override func loadView() {
         self.view = NSView(frame: CGRectMake(0, 0, 100, 100))
+        self.view.addConstraint(NSLayoutConstraint(item: self.view, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: SidebarMinWidth))
     }
 }
 
 class SidebarSplitViewController: NSSplitViewController {
     
-//    var resizing = false
-//    var sidebarVisible = false
-//    var lastSize : CGFloat = SidebarMinWidth
-    
-    let sidebarItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
-    let contentItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
+    private let sidebarItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
+    private let contentItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -36,6 +33,7 @@ class SidebarSplitViewController: NSSplitViewController {
     }
     
     private func setupItems() {
+        sidebarItem.canCollapse = true
         sidebarItem.collapsed = true
     }
     
@@ -82,40 +80,13 @@ class SidebarSplitViewController: NSSplitViewController {
     func hideSidebar() {
         sidebarItem.animator().collapsed = true
     }
-//    
-//    func splitView(splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool {
-//        return !sidebarVisible && subview == sidebarView
-//    }
-//    
-//    func splitView(splitView: NSSplitView, shouldHideDividerAtIndex dividerIndex: Int) -> Bool {
-//        return !sidebarVisible
-//    }
-//    
-//    func splitView(splitView: NSSplitView, constrainMinCoordinate proposedMinimumPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat {
-//        if resizing && dividerIndex == 0 && !sidebarVisible {
-//            return 0
-//        }
-//        else if resizing && dividerIndex == 0 {
-//            return SidebarMinWidth
-//        }
-//        else {
-//            return proposedMinimumPosition
-//        }
-//    }
-//    
-//    func splitView(splitView: NSSplitView, shouldAdjustSizeOfSubview view: NSView) -> Bool {
-//        return resizing || view == self.contentView
-//    }
-//    
-//    func splitViewWillResizeSubviews(notification: NSNotification) {
-//        resizing = notification.userInfo?["NSSplitViewDividerIndex"] != nil
-//    }
-//    
-//    func splitViewDidResizeSubviews(notification: NSNotification) {
-//        resizing = false
-//        let width = self.sidebarView!.bounds.size.width
-//        if width > 0 && sidebarVisible {
-//            lastSize = width
-//        }
-//    }
+    
+    var isSidebarVisible : Bool {
+        return !sidebarItem.collapsed
+    }
+    
+    func toggleSidebar() {
+        sidebarItem.animator().collapsed = !sidebarItem.collapsed
+    }
+
 }
