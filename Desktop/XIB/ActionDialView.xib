@@ -12,11 +12,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView verticalHuggingPriority="1000" id="c22-O7-iKe" customClass="ActionDialView" customModule="Dials" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="110" height="37"/>
+            <rect key="frame" x="0.0" y="0.0" width="70" height="21"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gFd-ZK-fwq">
-                    <rect key="frame" x="14" y="1" width="82" height="32"/>
+                    <rect key="frame" x="-6" y="-7" width="82" height="32"/>
                     <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3yD-zi-6xk">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -27,15 +27,14 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="gFd-ZK-fwq" secondAttribute="trailing" constant="20" symbolic="YES" id="By7-a7-odw"/>
-                <constraint firstItem="gFd-ZK-fwq" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="Dw7-6K-yGS"/>
-                <constraint firstItem="gFd-ZK-fwq" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="8" id="Msg-Er-q8G"/>
-                <constraint firstAttribute="bottom" secondItem="gFd-ZK-fwq" secondAttribute="bottom" constant="8" id="jU1-0I-8JO"/>
+                <constraint firstItem="gFd-ZK-fwq" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="Dw7-6K-yGS"/>
+                <constraint firstItem="gFd-ZK-fwq" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="Msg-Er-q8G"/>
+                <constraint firstAttribute="bottom" secondItem="gFd-ZK-fwq" secondAttribute="bottom" id="jU1-0I-8JO"/>
             </constraints>
             <connections>
                 <outlet property="button" destination="gFd-ZK-fwq" id="0UO-JD-Fs6"/>
             </connections>
-            <point key="canvasLocation" x="127" y="278"/>
+            <point key="canvasLocation" x="109" y="265.5"/>
         </customView>
     </objects>
 </document>

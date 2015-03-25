@@ -10,5 +10,7 @@
 
 @protocol DLSEditorDescription <NSObject, NSCoding>
 
+@property (readonly, nonatomic) BOOL canRevert;
+
 @end
 

@@ -21,4 +21,8 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
 }
 
+- (BOOL)canRevert {
+    return false;
+}
+
 @end

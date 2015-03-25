@@ -14,4 +14,14 @@ extension Optional {
             f(v)
         }
     }
+    
+    func bind<U>(f : T -> U?) -> U? {
+        if let v = self {
+            return f(v)
+        }
+        else {
+            return nil
+        }
+    }
+    
 }

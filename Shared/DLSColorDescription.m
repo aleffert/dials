@@ -23,4 +23,8 @@
     // no properties
 }
 
+- (BOOL)canRevert {
+    return true;
+}
+
 @end

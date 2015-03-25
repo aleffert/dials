@@ -14,10 +14,9 @@
 @interface DLSSliderDescription : NSObject <DLSEditorDescription>
 
 + (DLSSliderDescription*)zeroOneSlider;
-+ (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max continuous:(BOOL)continuous;
++ (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max;
 
 @property (readonly, assign, nonatomic) double min;
 @property (readonly, assign, nonatomic) double max;
-@property (readonly, assign, nonatomic) BOOL continuous;
 
 @end

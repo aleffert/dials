@@ -63,4 +63,12 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
         context?.sendMessage(data, channel: controller.channel, plugin: self)
     }
+    
+    func paneController(controller: LiveDialPaneViewController, shouldSaveDial dial: DLSLiveDial, withValue value: NSCoding?) {
+        let codeManager = CodeManager()
+        let symbol = codeManager.findSymbolWithName(dial.displayName, inFile:dial.file)
+        symbol.bind {
+            codeManager.updateSymbol($0, toValue: value, withEditor:dial.editor!, inFile:dial.file)
+        }
+    }
 }

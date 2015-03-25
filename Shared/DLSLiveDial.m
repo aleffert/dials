@@ -19,6 +19,8 @@
         self.uuid = [aDecoder decodeObjectForKey:@"uuid"];
         self.value = [aDecoder decodeObjectForKey:@"value"];
         
+        self.canSave = [aDecoder decodeBoolForKey:@"canSave"];
+        
         self.file = [aDecoder decodeObjectForKey:@"file"];
         self.line = [aDecoder decodeIntegerForKey:@"line"];
     }
@@ -31,6 +33,8 @@
     [aCoder encodeObject:self.uuid forKey:@"uuid"];
     [aCoder encodeObject:self.value forKey:@"value"];
     [aCoder encodeObject:self.displayName forKey:@"displayName"];
+    
+    [aCoder encodeBool:self.canSave forKey:@"canSave"];
     
     [aCoder encodeObject:self.file forKey:@"file"];
     [aCoder encodeInteger:self.line forKey:@"line"];

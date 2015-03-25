@@ -17,6 +17,17 @@ extension DLSSliderDescription : LiveDialViewGenerating {
     }
 }
 
+extension DLSSliderDescription : CodeGenerating {
+    func codeForValue(value: NSCoding?) -> String {
+        if let v = value as? NSNumber {
+            return stringFromNumber(v)
+        }
+        else {
+            return "0"
+        }
+    }
+}
+
 class SliderDialView : LiveDialView {
     @IBOutlet private var slider : NSSlider?
     @IBOutlet private var name : NSTextField?
@@ -28,14 +39,13 @@ class SliderDialView : LiveDialView {
         didSet {
             slider?.minValue = editorDescription!.min
             slider?.maxValue = editorDescription!.max
-            slider?.continuous = editorDescription!.continuous
-            minLabel?.doubleValue = editorDescription!.min
-            maxLabel?.doubleValue = editorDescription!.max
+            minLabel?.stringValue = stringFromNumber(editorDescription!.min)
+            maxLabel?.stringValue = stringFromNumber(editorDescription!.max)
         }
     }
     
     @IBAction private func sliderChanged(sender : NSSlider) {
-        currentLabel?.stringValue = NSString(format: "%.2f", sender.floatValue)
+        currentLabel?.stringValue = stringFromNumber(sender.floatValue)
         self.delegate?.dialView(self, changedDial: dial!, toValue: sender.floatValue)
     }
     
@@ -43,7 +53,7 @@ class SliderDialView : LiveDialView {
         didSet {
             let value = (dial?.value() as? NSNumber)?.floatValue ?? 0
             slider?.floatValue = value
-            currentLabel?.stringValue = NSString(format: "%.2f", value)
+            currentLabel?.stringValue = stringFromNumber(value)
             
             name?.stringValue = dial?.displayName ?? "Slider"
         }

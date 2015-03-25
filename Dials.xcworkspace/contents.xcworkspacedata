@@ -8,9 +8,9 @@
       location = "group:Dials-iOS.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Dials-Shared.xcodeproj">
+      location = "group:Dials-Desktop.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Dials-Desktop.xcodeproj">
+      location = "group:Dials-Shared.xcodeproj">
    </FileRef>
 </Workspace>

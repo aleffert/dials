@@ -12,11 +12,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe" customClass="ToggleDialView" customModule="Dials" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="357" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="234" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="1h5-Dc-hWp">
-                    <rect key="frame" x="18" y="6" width="62" height="18"/>
+                    <rect key="frame" x="-2" y="-2" width="238" height="34"/>
                     <buttonCell key="cell" type="check" title="Check" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="SU1-kL-qa9">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -27,14 +27,15 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="1h5-Dc-hWp" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="KMx-Kj-mzi"/>
-                <constraint firstItem="1h5-Dc-hWp" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="8" id="LlQ-qK-ZOS"/>
-                <constraint firstAttribute="bottom" secondItem="1h5-Dc-hWp" secondAttribute="bottom" constant="8" id="gJG-VX-ihc"/>
+                <constraint firstItem="1h5-Dc-hWp" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="KMx-Kj-mzi"/>
+                <constraint firstItem="1h5-Dc-hWp" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="LlQ-qK-ZOS"/>
+                <constraint firstAttribute="bottom" secondItem="1h5-Dc-hWp" secondAttribute="bottom" id="gJG-VX-ihc"/>
+                <constraint firstAttribute="trailing" secondItem="1h5-Dc-hWp" secondAttribute="trailing" id="iJ7-sm-4zk"/>
             </constraints>
             <connections>
                 <outlet property="button" destination="1h5-Dc-hWp" id="hhv-dn-oes"/>
             </connections>
-            <point key="canvasLocation" x="134.5" y="164.5"/>
+            <point key="canvasLocation" x="73" y="164"/>
         </customView>
     </objects>
 </document>

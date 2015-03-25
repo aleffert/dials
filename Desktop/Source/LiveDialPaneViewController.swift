@@ -15,6 +15,7 @@ class FlippedClipView : NSClipView {
 
 protocol LiveDialPaneViewControllerDelegate : class {
     func paneController(controller : LiveDialPaneViewController, changedDial dial: DLSLiveDial, toValue value : NSCoding?)
+    func paneController(controller : LiveDialPaneViewController, shouldSaveDial dial: DLSLiveDial, withValue value : NSCoding?)
 }
 
 class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
@@ -54,7 +55,7 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
         if(self.viewLoaded) {
             NSAnimationContext.runAnimationGroup({ctx in
                 ctx.allowsImplicitAnimation = true
-                self.stackView?.insertView(contentView, atIndex: i, inGravity: .Top)
+                self.stackView?.insertView(controller.view, atIndex: i, inGravity: .Top)
             }, completionHandler: nil)
         }
     }
@@ -77,5 +78,10 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
     func dialController(controller: LiveDialController, changedDial dial: DLSLiveDial, toValue value: NSCoding?) {
         delegate?.paneController(self, changedDial: dial, toValue: value)
     }
+    
+    func dialController(controller: LiveDialController, shouldSaveDial dial: DLSLiveDial, withValue value: NSCoding?) {
+        delegate?.paneController(self, shouldSaveDial: dial, withValue: value)
+    }
+    
 
 }

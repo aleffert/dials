@@ -18,6 +18,8 @@
 @property (copy, nonatomic) NSString* uuid;
 @property (strong, nonatomic) id <NSCoding> value;
 
+@property (assign, nonatomic) BOOL canSave;
+
 @property (copy, nonatomic) NSString* file;
 @property (assign, nonatomic) size_t line;
 

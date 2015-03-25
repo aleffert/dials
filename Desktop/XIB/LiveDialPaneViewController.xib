@@ -22,7 +22,10 @@
                         <rect key="frame" x="1" y="1" width="166" height="79"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView orientation="vertical" alignment="leading" spacing="1" hasEqualSpacing="YES" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="5X7-5p-tMN"/>
+                            <stackView orientation="vertical" alignment="leading" spacing="3" hasEqualSpacing="YES" horizontalStackHuggingPriority="750" horizontalHuggingPriority="249" verticalHuggingPriority="750" placeholderIntrinsicWidth="480" placeholderIntrinsicHeight="251" translatesAutoresizingMaskIntoConstraints="NO" id="5X7-5p-tMN">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="251"/>
+                                <edgeInsets key="edgeInsets" left="20" right="20" top="4" bottom="4"/>
+                            </stackView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5X7-5p-tMN" secondAttribute="trailing" id="7Wc-wQ-Gby"/>

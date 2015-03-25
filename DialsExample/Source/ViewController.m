@@ -11,6 +11,7 @@
 #import <Dials/Dials.h>
 
 static BOOL foo = true;
+static CGFloat bar = 3;
 
 @interface ViewController ()
 
@@ -30,17 +31,13 @@ static BOOL foo = true;
     });
     
     DLSAddToggleControl(@"Foo", foo);
+    DLSAddSliderControl(@"Bar", bar, 0, 5);
     
     [[DLSLiveDialsPlugin sharedPlugin] beginGroupWithName:@"test1"];
-    DLSAddSliderForKeyPath(box.alpha, 0, 1, YES);
+    DLSAddSliderForKeyPath(box.alpha, 0, 1);
     DLSAddToggleForKeyPath(box.hidden);
     DLSAddColorForKeyPath(box.backgroundColor);
     [[DLSLiveDialsPlugin sharedPlugin] endGroup];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

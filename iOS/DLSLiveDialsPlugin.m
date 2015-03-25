@@ -80,7 +80,7 @@
     [self sendRemoveMessageWithUUID:uuid];
 }
 
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id<DLSEditorDescription>)editor displayName:(NSString*)displayName file:(char *)file line:(size_t)line {
+- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id<DLSEditorDescription>)editor displayName:(NSString*)displayName canSave:(BOOL)canSave  file:(char *)file line:(size_t)line {
     __weak __typeof(self)owner = self;
     
     DLSLiveDial* dial = [[DLSLiveDial alloc] init];
@@ -89,6 +89,7 @@
     dial.editor = editor;
     dial.file = [NSString stringWithUTF8String:file];
     dial.line = line;
+    dial.canSave = canSave;
     dial.uuid = [NSUUID UUID].UUIDString;
     dial.displayName = displayName;
     
@@ -162,13 +163,13 @@
 
 @implementation NSObject (DLSLiveDialsHelpers)
 
-- (id <DLSRemovable>)dls_addDialForGetter:(id(^)(void))getter setter:(void(^)(id))setter name:(NSString*)displayName editor:(id<DLSEditorDescription>)editor file:(char *)file line:(size_t)line {
+- (id <DLSRemovable>)dls_addDialForGetter:(id(^)(void))getter setter:(void(^)(id))setter name:(NSString*)displayName editor:(id<DLSEditorDescription>)editor canSave:(BOOL)canSave file:(char *)file line:(size_t)line {
     DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] init];
     wrapper.getter = getter;
     wrapper.setter = setter;
     
     id value = wrapper.getter();
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName file:file line:line];
+    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName canSave:canSave file:file line:line];
     [self dls_performActionOnDealloc:^{
         [removable remove];
     }];
@@ -184,7 +185,7 @@
         [weakself setValue:value forKeyPath:property];
     };
 
-    return [self dls_addDialForGetter:getter setter:setter name:property editor:editor file:file line:line];
+    return [self dls_addDialForGetter:getter setter:setter name:property editor:editor canSave:NO file:file line:line];
 }
 
 - (id <DLSRemovable>)dls_addDialForAction:(void (^)(void))action name:(NSString*)name file:(char *)file line:(size_t)line {
@@ -194,7 +195,7 @@
     void(^setter)(id) = ^(id value) {
         action();
     };
-    return [self dls_addDialForGetter:getter setter:setter name:name editor:[DLSActionDescription editor] file:file line:line];
+    return [self dls_addDialForGetter:getter setter:setter name:name editor:[DLSActionDescription editor] canSave:NO file:file line:line];
 }
 
 @end
