@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7787FF3E1A3BF29300074DBC /* Dials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77270F471A35639C000755D5 /* Dials.framework */; };
+		77567B581AC6C66900877A7B /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77567B571AC6C66900877A7B /* TestViewController.swift */; };
+		77567B5E1AC6CCD100877A7B /* Dials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77567B5D1AC6CCD100877A7B /* Dials.framework */; };
+		77567B6B1AC6FCD600877A7B /* Dials.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77567B5D1AC6CCD100877A7B /* Dials.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7792504D1A3348B900CCC229 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792504A1A3348B900CCC229 /* AppDelegate.m */; };
 		7792504E1A3348B900CCC229 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792504C1A3348B900CCC229 /* ViewController.m */; };
 		779250571A3348C700CCC229 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779250541A3348C700CCC229 /* Images.xcassets */; };
@@ -16,8 +18,23 @@
 		77F4F5981A33B79200A48A76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779250521A3348C700CCC229 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		77567B691AC6FC6900877A7B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				77567B6B1AC6FCD600877A7B /* Dials.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		77270F471A35639C000755D5 /* Dials.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77567B561AC6C66800877A7B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		77567B571AC6C66900877A7B /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestViewController.swift; path = Source/TestViewController.swift; sourceTree = "<group>"; };
+		77567B5D1AC6CCD100877A7B /* Dials.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dials.framework; path = "Dials.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250471A3348A900CCC229 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		779250491A3348B900CCC229 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/AppDelegate.h; sourceTree = "<group>"; };
 		7792504A1A3348B900CCC229 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/AppDelegate.m; sourceTree = "<group>"; };
@@ -35,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7787FF3E1A3BF29300074DBC /* Dials.framework in Frameworks */,
+				77567B5E1AC6CCD100877A7B /* Dials.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +62,7 @@
 		77AAE5251A33477D00998E36 = {
 			isa = PBXGroup;
 			children = (
-				77270F471A35639C000755D5 /* Dials.framework */,
+				77567B5D1AC6CCD100877A7B /* Dials.framework */,
 				77AAE5301A33477E00998E36 /* DialsExample */,
 				77AAE52F1A33477E00998E36 /* Products */,
 			);
@@ -62,6 +79,7 @@
 		77AAE5301A33477E00998E36 /* DialsExample */ = {
 			isa = PBXGroup;
 			children = (
+				77567B571AC6C66900877A7B /* TestViewController.swift */,
 				779250491A3348B900CCC229 /* AppDelegate.h */,
 				7792504A1A3348B900CCC229 /* AppDelegate.m */,
 				7792504B1A3348B900CCC229 /* ViewController.h */,
@@ -70,6 +88,7 @@
 				779250501A3348C700CCC229 /* LaunchScreen.xib */,
 				779250521A3348C700CCC229 /* Main.storyboard */,
 				77AAE5311A33477E00998E36 /* Supporting Files */,
+				77567B561AC6C66800877A7B /* Bridging-Header.h */,
 			);
 			path = DialsExample;
 			sourceTree = "<group>";
@@ -93,6 +112,7 @@
 				77AAE52A1A33477E00998E36 /* Sources */,
 				77AAE52B1A33477E00998E36 /* Frameworks */,
 				77AAE52C1A33477E00998E36 /* Resources */,
+				77567B691AC6FC6900877A7B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -155,6 +175,7 @@
 			files = (
 				7792504D1A3348B900CCC229 /* AppDelegate.m in Sources */,
 				77AAE5341A33477E00998E36 /* main.m in Sources */,
+				77567B581AC6C66900877A7B /* TestViewController.swift in Sources */,
 				7792504E1A3348B900CCC229 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,7 +290,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DialsShared/",
@@ -278,6 +303,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DialsExample/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -285,7 +312,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/DialsShared/",
@@ -294,6 +325,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DialsExample/Bridging-Header.h";
 			};
 			name = Release;
 		};

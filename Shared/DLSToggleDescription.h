@@ -12,6 +12,6 @@
 
 @interface DLSToggleDescription : NSObject <DLSEditorDescription>
 
-+ (DLSToggleDescription*)editor;
++ (instancetype)editor;
 
 @end

@@ -16,6 +16,8 @@
 + (DLSSliderDescription*)zeroOneSlider;
 + (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max;
 
+- (id)initWithMin:(double)min max:(double)max;
+
 @property (readonly, assign, nonatomic) double min;
 @property (readonly, assign, nonatomic) double max;
 

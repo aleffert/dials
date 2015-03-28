@@ -14,6 +14,8 @@
 
 @interface DLSPropertyWrapper : NSObject
 
+- (id)initWithGetter:(id (^)(void))getter setter:(void(^)(id))setter;
+
 @property (copy, nonatomic) id (^getter)(void);
 @property (copy, nonatomic) void (^setter)(id);
 
@@ -28,7 +30,7 @@
 - (void)beginGroupWithName:(NSString*)name;
 - (void)endGroup;
 
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id <DLSEditorDescription>)editor displayName:(NSString*)displayName canSave:(BOOL)canSave file:(char*)file line:(size_t)line;
+- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id <DLSEditorDescription>)editor displayName:(NSString*)displayName canSave:(BOOL)canSave file:(NSString*)file line:(size_t)line;
 
 @end
 

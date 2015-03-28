@@ -10,6 +10,15 @@
 
 @implementation DLSPropertyWrapper
 
+- (id)initWithGetter:(id (^)(void))getter setter:(void(^)(id))setter {
+    self = [super init];
+    if(self != nil) {
+        self.getter = getter;
+        self.setter = setter;
+    }
+    return self;
+}
+
 @end
 
 @interface DLSActiveDialRecord : NSObject <DLSRemovable>
@@ -80,14 +89,14 @@
     [self sendRemoveMessageWithUUID:uuid];
 }
 
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id<DLSEditorDescription>)editor displayName:(NSString*)displayName canSave:(BOOL)canSave  file:(char *)file line:(size_t)line {
+- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id<DLSEditorDescription>)editor displayName:(NSString*)displayName canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
     __weak __typeof(self)owner = self;
     
     DLSLiveDial* dial = [[DLSLiveDial alloc] init];
     dial.value = value;
     dial.group = self.currentGroup;
     dial.editor = editor;
-    dial.file = [NSString stringWithUTF8String:file];
+    dial.file = file;
     dial.line = line;
     dial.canSave = canSave;
     dial.uuid = [NSUUID UUID].UUIDString;
@@ -168,8 +177,10 @@
     wrapper.getter = getter;
     wrapper.setter = setter;
     
+    NSString* fileName = [NSString stringWithUTF8String:file];
+    
     id value = wrapper.getter();
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName canSave:canSave file:file line:line];
+    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName canSave:canSave file:fileName line:line];
     [self dls_performActionOnDealloc:^{
         [removable remove];
     }];

@@ -28,6 +28,7 @@
 		774D16091AB5430200613F24 /* DLSActionDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 774D16061AB5430200613F24 /* DLSActionDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		774D160A1AB5430200613F24 /* DLSActionDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D16071AB5430200613F24 /* DLSActionDescription.m */; };
 		774D160B1AB5430200613F24 /* DLSActionDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D16071AB5430200613F24 /* DLSActionDescription.m */; };
+		77567B681AC6EF5500877A7B /* NSObject+DLSDeallocAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F4F5AC1A354FD100A48A76 /* NSObject+DLSDeallocAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		778876ED1ABE13B100AB5580 /* DLSColorDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 778876EB1ABE133A00AB5580 /* DLSColorDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		778876EE1ABE13B200AB5580 /* DLSColorDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 778876EB1ABE133A00AB5580 /* DLSColorDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		778876EF1ABE13D200AB5580 /* DLSColorDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 778876EC1ABE133A00AB5580 /* DLSColorDescription.m */; };
@@ -192,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				774D15EB1AB4EFC900613F24 /* DLSRemovable.h in Headers */,
+				77567B681AC6EF5500877A7B /* NSObject+DLSDeallocAction.h in Headers */,
 				778876ED1ABE13B100AB5580 /* DLSColorDescription.h in Headers */,
 				774D15E71AB4CE0E00613F24 /* DLSSliderDescription.h in Headers */,
 				774D15E51AB4CE0E00613F24 /* DLSEditorDescription.h in Headers */,
@@ -354,6 +356,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -401,6 +404,7 @@
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

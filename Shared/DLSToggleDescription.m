@@ -10,7 +10,7 @@
 
 @implementation DLSToggleDescription
 
-+ (DLSToggleDescription*)editor {
++ (instancetype)editor {
     return [[DLSToggleDescription alloc] init];
 }
 

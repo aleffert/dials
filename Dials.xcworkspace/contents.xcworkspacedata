@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DialsExample.xcodeproj">
+      location = "absolute:DialsExample.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Dials-iOS.xcodeproj">

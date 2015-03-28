@@ -22,10 +22,17 @@
 }
 
 + (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max {
-    DLSSliderDescription* description = [[DLSSliderDescription alloc] init];
-    description.min = min;
-    description.max = max;
+    DLSSliderDescription* description = [[DLSSliderDescription alloc] initWithMin:min max:max];
     return description;
+}
+
+- (id)initWithMin:(double)min max:(double)max {
+    self = [super init];
+    if(self != nil) {
+        self.min = min;
+        self.max = max;
+    }
+    return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

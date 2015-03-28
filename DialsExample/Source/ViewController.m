@@ -10,6 +10,8 @@
 
 #import <Dials/Dials.h>
 
+#import "DialsExample-Swift.h"
+
 static BOOL foo = true;
 static CGFloat bar = 3;
 
@@ -38,6 +40,11 @@ static CGFloat bar = 3;
     DLSAddToggleForKeyPath(box.hidden);
     DLSAddColorForKeyPath(box.backgroundColor);
     [[DLSLiveDialsPlugin sharedPlugin] endGroup];
+}
+
+- (IBAction)push:(id)sender {
+    TestViewController* controller = [[TestViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

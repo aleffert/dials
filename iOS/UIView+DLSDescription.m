@@ -18,7 +18,8 @@
     [context addGroupWithName:@"View"
                   properties: @[
                                 DLSKeyPathProperty(@"alpha", [DLSSliderDescription zeroOneSlider]),
-                                DLSKeyPathProperty(@"hidden", [DLSToggleDescription editor])
+                                DLSKeyPathProperty(@"hidden", [DLSToggleDescription editor]),
+                                DLSKeyPathProperty(@"backgroundColor", [DLSColorDescription editor])
                                  ]];
 }
 
