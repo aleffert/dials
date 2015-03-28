@@ -56,11 +56,11 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 - (void)readHeader {
     uint8_t* bytes = self.buffer.mutableBytes + self.buffer.length - self.bytesRemaining;
     NSInteger bytesRead = [self.stream read:bytes maxLength:self.bytesRemaining];
-    self.bytesRemaining = self.bytesRemaining - bytesRead;
+    self.bytesRemaining = self.bytesRemaining - (DLSStreamSize)bytesRead;
     if(self.bytesRemaining == 0) {
-        int64_t bodySize = 0;
+        int32_t bodySize = 0;
         [self.buffer getBytes:&bodySize length:sizeof(bodySize)];
-        self.bytesRemaining = CFSwapInt64BigToHost(bodySize);
+        self.bytesRemaining = (DLSStreamSize)CFSwapInt32BigToHost(bodySize);
         if(self.bytesRemaining == 0) {
             [self.delegate streamReader:self receivedMessage:[NSData data]];
             [self prepareForHeader];
@@ -75,7 +75,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 - (void)readBody {
     uint8_t* bytes = self.buffer.mutableBytes + self.buffer.length - self.bytesRemaining;
     
-    NSInteger bytesRead = [self.stream read:bytes maxLength:self.bytesRemaining];
+    DLSStreamSize bytesRead = (DLSStreamSize)[self.stream read:bytes maxLength:self.bytesRemaining];
     self.bytesRemaining = self.bytesRemaining - bytesRead;
     if(self.bytesRemaining == 0) {
         [self.delegate streamReader:self receivedMessage:self.buffer];

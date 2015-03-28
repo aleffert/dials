@@ -56,13 +56,13 @@
 - (void)enqueueMessage:(NSData *)data {
     DLSQueuedMessage* headerMessage = [[DLSQueuedMessage alloc] init];
     headerMessage.bytesRemaining = sizeof(DLSStreamSize);
-    DLSStreamSize length = CFSwapInt64HostToBig(data.length);
+    DLSStreamSize length = CFSwapInt32HostToBig((DLSStreamSize)data.length);
     headerMessage.data = [[NSData alloc] initWithBytes:&length length:sizeof(DLSStreamSize)];
     [self.messages addObject:headerMessage];
     
     DLSQueuedMessage* bodyMessage = [[DLSQueuedMessage alloc] init];
     bodyMessage.data = data;
-    bodyMessage.bytesRemaining = data.length;
+    bodyMessage.bytesRemaining = (DLSStreamSize)data.length;
     [self.messages addObject:bodyMessage];
     
     [self sendAvailableBytes];
@@ -75,7 +75,7 @@
             uint8_t* bytes = ((uint8_t*)message.data.bytes) + message.data.length - message.bytesRemaining;
             if(message.bytesRemaining != 0) {
                 NSInteger bytesWritten = [self.stream write:bytes maxLength:message.bytesRemaining];
-                message.bytesRemaining = message.bytesRemaining - bytesWritten;
+                message.bytesRemaining = message.bytesRemaining - (DLSStreamSize)bytesWritten;
             }
             if(message.bytesRemaining == 0) {
                 [self.messages removeObject:message];

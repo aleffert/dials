@@ -25,4 +25,3 @@ FOUNDATION_EXPORT const unsigned char Dials_iOSVersionString[];
 #import <Dials/DLSEditorDescription.h>
 #import <Dials/NSObject+DLSDeallocAction.h>
 #import <Dials/UIView+DLSDescribable.h>
-#import <Dials/Dials-Swift.h>

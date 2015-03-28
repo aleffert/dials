@@ -9,8 +9,8 @@
 import Cocoa
 
 // This is SUPER primitive. Hopefully some day the clang and swiftc libraries will
-// be part of the system, but for now they are super heavy dependencies to be
-// avoided
+// be part of the system, but for now clang is a super heavy dependencies to be
+// avoided and swiftc isn't useful
 
 public class CodeManager: NSObject {
     
@@ -38,7 +38,7 @@ public class CodeManager: NSObject {
             objcAction: {c in
                 self.findSymbolWithObjectiveCName(name, inString: c)
             }, swiftAction: {c in
-                return .Failure("Unimp")
+                self.findSymbolWithSwiftName(name, inString: c)
             }
         )
     }
@@ -50,9 +50,14 @@ public class CodeManager: NSObject {
             return (match as? NSTextCheckingResult).toResult("Description not found")
             }.bind {(m : NSTextCheckingResult) in
             let range = m.rangeAtIndex(1)
-            let result = (code as NSString).substringWithRange(range).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let result = (code as NSString).substringWithRange(range).stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "\t\n\r &"))
             return .Success(Box(result))
         }
+    }
+    
+    public func findSymbolWithSwiftName(name : String, inString code : String) -> Result<String> {
+        let pattern = NSString(format: "DLSAdd[A-Za-z]*Control\\([ ]*\"%@\"[ ]*,([^,\n]*).*\\)", NSRegularExpression.escapedPatternForString(name))
+        return findSymbolWithPattern(pattern, inString: code)
     }
     
     public func findSymbolWithObjectiveCName(name : String, inString code : String) -> Result<String> {
@@ -61,12 +66,26 @@ public class CodeManager: NSObject {
     }
     
     public func updateObjectiveCSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditorDescription, inString code : String) -> Result<String> {
-        let pattern = NSString(format : "(%@)([\r\n ]*)=([\r\n ]*)(.*)", NSRegularExpression.escapedPatternForString(symbol))
+        let pattern = NSString(format : "([\r\n ]+)(%@)([\r\n ]*)=([\r\n ]*)(.*);", NSRegularExpression.escapedPatternForString(symbol))
         let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
         return codeGenerator.bind {generator in
                 NSRegularExpression.compile(pattern).bind {
                 let replacementCode = generator.codeForValue(value)
-                let template = NSString(format:"$1$2=$3%@$4", NSRegularExpression.escapedTemplateForString(replacementCode))
+                let template = NSString(format:"$1$2$3=$4%@;", NSRegularExpression.escapedTemplateForString(replacementCode))
+                let range = NSMakeRange(0, countElements(code))
+                let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template)
+                return .Success(Box(result))
+            }
+        }
+    }
+    
+    func updateSwiftSymbol(symbol : String, toValue value : NSCoding?, withEditor editor : DLSEditorDescription, inString code : String) -> Result<String> {
+        let pattern = NSString(format : "([\r\n ]+)(%@)(.*)([\r\n ]*)=([\r\n ]*)(.*)", NSRegularExpression.escapedPatternForString(symbol))
+        let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
+        return codeGenerator.bind {generator in
+            NSRegularExpression.compile(pattern).bind {
+                let replacementCode = generator.codeForValue(value)
+                let template = NSString(format:"$1$2$3$4=$5%@", NSRegularExpression.escapedTemplateForString(replacementCode))
                 let range = NSMakeRange(0, countElements(code))
                 let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template)
                 return .Success(Box(result))
@@ -76,10 +95,10 @@ public class CodeManager: NSObject {
     
     public func updateSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditorDescription, inFile file : String) -> Result<()> {
         return branchWithFileName(file,
-            objcAction: {(code : String) -> Result<String> in
+            objcAction: {code in
                 self.updateObjectiveCSymbol(symbol, toValue: value, withEditor: editor, inString: code)
-            }, swiftAction: {c in
-                return .Failure("Unimplemented")
+            }, swiftAction: {code in
+                self.updateSwiftSymbol(symbol, toValue: value, withEditor: editor, inString:code)
             }
         ).bind {r in
             var error : NSError?

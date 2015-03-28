@@ -9,6 +9,8 @@
 import UIKit
 import Dials
 
+var foo : Float = .5
+
 class TestViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -17,10 +19,11 @@ class TestViewController: UIViewController {
         
         DLSLiveDialsPlugin.sharedPlugin().beginGroupWithName("Swift!")
         
-        AddAction("perform", { () -> () in
+        DLSAddAction("perform", { () -> () in
             NSLog("performed")
         }, owner: self)
-        AddColorControl(keyPath: "view.backgroundColor", self)
+        DLSAddColorControl(keyPath: "view.backgroundColor", self)
+        DLSAddSliderControl("example", &foo, owner: self)
         DLSLiveDialsPlugin.sharedPlugin().endGroup()
     }
 

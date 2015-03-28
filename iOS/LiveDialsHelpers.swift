@@ -50,9 +50,9 @@ public extension DLSLiveDialsPlugin {
     }
 }
 
-public func AddControl<A>(displayName : String, wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, _ owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
+public func DLSAddControl<A>(displayName : String, wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, canSave: Bool = false, _ owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
     
-    let remove = DLSLiveDialsPlugin.sharedPlugin().addDial(wrapper, value: value, editor: editor, displayName: displayName, canSave: false, file: file, line: line)
+    let remove = DLSLiveDialsPlugin.sharedPlugin().addDial(wrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file : file, line : line)
     if let o : AnyObject = owner {
         o.dls_performActionOnDealloc({ () -> Void in
             remove.remove()
@@ -61,7 +61,7 @@ public func AddControl<A>(displayName : String, wrapper : PropertyWrapper<A>, va
     return remove
 }
 
-public func AddAction(displayName : String, action : () -> (), owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) {
+public func DLSAddAction(displayName : String, action : () -> (), owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) {
     let getter : () -> NSString = {
         action()
         return ""
@@ -70,29 +70,45 @@ public func AddAction(displayName : String, action : () -> (), owner : AnyObject
         return
     }
     let wrapper = PropertyWrapper(get: getter, set : setter)
-    AddControl(displayName, wrapper, getter(), DLSActionDescription(), owner, line, file)
+    DLSAddControl(displayName, wrapper, "", DLSActionDescription(), canSave : true, owner, line, file)
 }
 
-public func AddColorControl(displayName : String, inout x : UIColor, owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__ ) -> DLSRemovable {
-    return AddControl(displayName, PropertyWrapper(value : &x), x, DLSColorDescription(),  owner, line, file)
+public func DLSAddColorControl(displayName : String, inout x : UIColor, owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__ ) -> DLSRemovable {
+    return DLSAddControl(displayName, PropertyWrapper(value : &x), x, DLSColorDescription(), canSave : false, owner, line, file)
 }
 
-public func AddColorControl(#keyPath : String, owner : AnyObject, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
+public func DLSAddColorControl(#keyPath : String, owner : AnyObject, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
     let wrapper = PropertyWrapper<NSObject>(owner, keyPath)
-    return AddControl(keyPath, wrapper, wrapper.get(), DLSColorDescription(), owner, line, file)
+    return DLSAddControl(keyPath, wrapper, wrapper.get(), DLSColorDescription(), canSave : false, owner, line, file)
 }
 
-public func AddSliderControl(displayName : String, inout x : Float, owner : AnyObject? = nil, min : Double = 0, max : Double = 1, _ line : UInt = __LINE__, _ file : String = __FILE__ ) -> DLSRemovable {
+public func DLSAddSliderControl(displayName : String, inout x : Float, owner : AnyObject? = nil, min : Double = 0, max : Double = 1, _ line : UInt = __LINE__, _ file : String = __FILE__ ) -> DLSRemovable {
     let wrapper = PropertyWrapper(get: {
         NSNumber(float: x)
         }, set: {
             x = $0.floatValue
         }
     )
-    return AddControl(displayName, wrapper, wrapper.get(), DLSSliderDescription(min: min, max: max), owner, line, file)
+    return DLSAddControl(displayName, wrapper, wrapper.get(), DLSSliderDescription(min: min, max: max), canSave: true, owner, line, file)
 }
 
-public func AddSliderControl(#keyPath : String, owner : AnyObject, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
+public func DLSAddSliderControl(#keyPath : String, min : Double, max : Double, owner : AnyObject, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
     let wrapper = PropertyWrapper<NSObject>(owner, keyPath)
-    return AddControl(keyPath, wrapper, wrapper.get(), DLSColorDescription(), owner, line, file)
+    return DLSAddControl(keyPath, wrapper, wrapper.get(), DLSSliderDescription(min: min, max: max), canSave : false, owner, line, file)
 }
+
+public func DLSAddToggleControl(displayName : String, inout x : Float, owner : AnyObject? = nil, min : Double = 0, max : Double = 1, _ line : UInt = __LINE__, _ file : String = __FILE__ ) -> DLSRemovable {
+    let wrapper = PropertyWrapper(get: {
+        NSNumber(float: x)
+        }, set: {
+            x = $0.floatValue
+        }
+    )
+    return DLSAddControl(displayName, wrapper, wrapper.get(), DLSSliderDescription(min: min, max: max), canSave : true, owner, line, file)
+}
+
+public func DLSAddToggleControl(#keyPath : String, owner : AnyObject, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
+    let wrapper = PropertyWrapper<NSObject>(owner, keyPath)
+    return DLSAddControl(keyPath, wrapper, wrapper.get(), DLSToggleDescription(), canSave : false, owner, line, file)
+}
+
