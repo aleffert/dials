@@ -1,3 +1,3 @@
 language: objective-c
-before_installt: bin/install_deps.sh
+before_install: bin/install_deps.sh
 script: bin/buildall.sh
