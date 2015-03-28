@@ -1,0 +1,3 @@
+language: objective-c
+before_script: bin/install_deps.sh
+script: bin/buildall.sh

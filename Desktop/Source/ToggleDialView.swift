@@ -15,6 +15,17 @@ extension DLSToggleDescription : LiveDialViewGenerating {
     }
 }
 
+extension DLSToggleDescription : CodeGenerating {
+    func codeForValue(value: NSCoding?) -> String {
+        if let v = value as? NSNumber {
+            return v.boolValue ? "true" : "false"
+        }
+        else {
+            return "false"
+        }
+    }
+}
+
 class ToggleDialView : LiveDialView {
     @IBOutlet private var button : NSButton?
     
