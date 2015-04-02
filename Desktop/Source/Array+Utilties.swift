@@ -9,7 +9,9 @@
 import Foundation
 
 extension Array {
-    func indexOf(predicate : T -> Bool) -> Int? {
+    // This should really return an Int? instead of a sentinal
+    // but it caused a weird crash when using it. Seems like a compiler bug
+    func indexOf(predicate : T -> Bool) -> Int {
         var i = 0
         for element in self {
             if predicate(element) {
@@ -17,6 +19,6 @@ extension Array {
             }
             i = i + 1
         }
-        return nil
+        return NSNotFound
     }
 }

@@ -14,6 +14,34 @@ extension DLSColorDescription : LiveDialViewGenerating {
     }
 }
 
+extension DLSColorDescription : CodeGenerating {
+    func objcCodeForValue(value: NSCoding?) -> String {
+        if let c = value as? NSColor {
+            let red = c.redComponent
+            let green = c.greenComponent
+            let blue = c.blueComponent
+            let alpha = c.alphaComponent
+            return "[[UIColor alloc] initWithRed:\(red) green:\(green) blue:\(blue) alpha:\(alpha)]"
+        }
+        else {
+            return "nil"
+        }
+    }
+    
+    func swiftCodeForValue(value: NSCoding?) -> String {
+        if let c = value as? NSColor {
+            let red = c.redComponent
+            let green = c.greenComponent
+            let blue = c.blueComponent
+            let alpha = c.alphaComponent
+            return "UIColor(red:\(red) green:\(green) blue:\(blue) alpha:\(alpha))"
+        }
+        else {
+            return "nil"
+        }
+    }
+}
+
 class ColorDialView : LiveDialView {
     
     @IBOutlet private var well : NSColorWell?

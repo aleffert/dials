@@ -18,13 +18,21 @@ extension DLSSliderDescription : LiveDialViewGenerating {
 }
 
 extension DLSSliderDescription : CodeGenerating {
-    func codeForValue(value: NSCoding?) -> String {
+    private func codeForValue(value : NSCoding?) -> String {
         if let v = value as? NSNumber {
-            return stringFromNumber(v)
+            return stringFromNumber(v, requireIntegerPart: true)
         }
         else {
             return "0"
         }
+    }
+    
+    func objcCodeForValue(value: NSCoding?) -> String {
+        return codeForValue(value)
+    }
+    
+    func swiftCodeForValue(value: NSCoding?) -> String {
+        return codeForValue(value)
     }
 }
 

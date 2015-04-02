@@ -70,7 +70,7 @@ public class CodeManager: NSObject {
         let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
         return codeGenerator.bind {generator in
                 NSRegularExpression.compile(pattern).bind {
-                let replacementCode = generator.codeForValue(value)
+                let replacementCode = generator.objcCodeForValue(value)
                 let template = NSString(format:"$1$2$3=$4%@;", NSRegularExpression.escapedTemplateForString(replacementCode))
                 let range = NSMakeRange(0, countElements(code))
                 let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template)
@@ -84,7 +84,7 @@ public class CodeManager: NSObject {
         let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
         return codeGenerator.bind {generator in
             NSRegularExpression.compile(pattern).bind {
-                let replacementCode = generator.codeForValue(value)
+                let replacementCode = generator.swiftCodeForValue(value)
                 let template = NSString(format:"$1$2$3$4=$5%@", NSRegularExpression.escapedTemplateForString(replacementCode))
                 let range = NSMakeRange(0, countElements(code))
                 let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template)

@@ -25,7 +25,7 @@ class TestPlugin : Plugin {
     }
     
     func connectionClosed() {
-        context?.removeViewController(controller!, plugin: self)
+        if let c = controller { context?.removeViewController(c, plugin: self) }
     }
     
     func receiveMessage(data: NSData, channel: DLSChannel) {

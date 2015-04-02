@@ -43,6 +43,10 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
         }
     }
     
+    var isEmpty : Bool {
+        return self.dialControllers.count == 0
+    }
+    
     func addDial(dial : DLSLiveDial) {
         let contentView = (dial.editor as LiveDialViewGenerating).generate()
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,9 +68,9 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
         let index = dialControllers.indexOf {
             $0.dial?.uuid == dialID
         }
-        index.ifValue {
-            self.dialControllers.removeAtIndex($0)
-            let view = self.stackView?.views[$0] as NSView
+        if index != NSNotFound {
+            self.dialControllers.removeAtIndex(index)
+            let view = self.stackView?.views[index] as NSView
             
             NSAnimationContext.runAnimationGroup({ctx in
                 ctx.allowsImplicitAnimation = true

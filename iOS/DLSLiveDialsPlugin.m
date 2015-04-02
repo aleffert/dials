@@ -85,12 +85,12 @@
 }
 
 - (void)removeRecordWithUUID:(NSString*)uuid {
-    [self.activeDials removeObjectForKey:uuid];
     [self sendRemoveMessageWithUUID:uuid];
+    [self.activeDials removeObjectForKey:uuid];
 }
 
 - (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id<DLSEditorDescription>)editor displayName:(NSString*)displayName canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
-    __weak __typeof(self)owner = self;
+    __weak __typeof(self) owner = self;
     
     DLSLiveDial* dial = [[DLSLiveDial alloc] init];
     dial.value = value;
@@ -149,8 +149,8 @@
 - (void)sendRemoveMessageWithUUID:(NSString*)uuid {
     DLSLiveDialsRemoveMessage* message = [[DLSLiveDialsRemoveMessage alloc] init];
     message.uuid = uuid;
-    DLSLiveDial* dial = self.activeDials[uuid];
-    id <DLSChannel> channel = [self.context channelWithName:dial.group forPlugin:self];
+    DLSActiveDialRecord* record = self.activeDials[uuid];
+    id <DLSChannel> channel = [self.context channelWithName:record.dial.group forPlugin:self];
     [self sendMessage:message onChannel:channel];
 }
 

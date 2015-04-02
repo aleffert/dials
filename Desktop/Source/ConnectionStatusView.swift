@@ -99,7 +99,7 @@ class ConnectionStatusView : NSView {
     }
     
     func useStatus(status : ConnectionStatus) {
-        switch(status) {
+        switch status {
         case .None: showNoDevicesLabel(animated: true)
         case let .Available(devices): showDevices(devices, current : nil, animated: true)
         case let .Active(current : current, devices : devices): showDevices(devices, current : current, animated : true)

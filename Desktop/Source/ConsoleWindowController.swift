@@ -163,15 +163,32 @@ extension ConsoleWindowController : NSToolbarDelegate {
 }
 
 extension ConsoleWindowController : PluginContext {
-    func addViewController(controller: NSViewController, plugin: Plugin) {
-        viewGrouper.addViewController(controller, plugin : plugin)
+    
+    private func updateControllersWithAction(action : () -> ()) {
+        let currentIndexes = sidebarTable.selectedRowIndexes;
+        let currentSelection = viewGrouper.controllersForRowIndexes(currentIndexes)
+        
+        action()
+        
+        let newSelection = viewGrouper.rowIndexesForControllers(currentSelection)
         sidebarTable.reloadData()
+        if currentIndexes.count > 0 {
+            sidebarTable.selectRowIndexes(newSelection, byExtendingSelection: false)
+        }
+    }
+    
+    func addViewController(controller: NSViewController, plugin: Plugin) {
+        updateControllersWithAction {
+            self.viewGrouper.addViewController(controller, plugin : plugin)
+        }
         showSidebarIfNecessary()
     }
     
     func removeViewController(controller: NSViewController, plugin: Plugin) {
-        viewGrouper.removeViewController(controller, plugin : plugin)
-        sidebarTable.reloadData()
+        updateControllersWithAction {
+            self.viewGrouper.removeViewController(controller, plugin : plugin)
+        }
+        
         hideSidebarIfNecessary()
     }
     

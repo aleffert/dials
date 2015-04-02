@@ -9,7 +9,7 @@
 #import "DLSLiveDialsMessages.h"
 
 NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
-NSString* const DLSLiveDialsPluginDefaultGroup = @"$$DEFAULT_GROUP$$";
+NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 
 @implementation DLSLiveDialsAddMessage
 

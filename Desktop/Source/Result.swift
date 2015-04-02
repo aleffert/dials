@@ -20,14 +20,14 @@ public enum Result<A> {
     case Failure(String)
     
     public func bind<T>(f : A -> Result<T>) -> Result<T> {
-        switch(self) {
+        switch self {
         case Success(let v): return f(v.value)
         case Failure(let s): return .Failure(s)
         }
     }
     
     public func ifSuccess(f : A -> Void) -> Result<A> {
-        switch(self) {
+        switch self {
         case Success(let v): f(v.value)
         case Failure(_): break
         }
@@ -35,7 +35,7 @@ public enum Result<A> {
     }
     
     public func ifFailure(f : String -> Void) -> Result<A> {
-        switch(self) {
+        switch self {
         case Success(_): break
         case Failure(let message): f(message)
         }

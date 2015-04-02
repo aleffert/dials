@@ -95,7 +95,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     
     func controllerForRow(row : Int) -> NSViewController? {
         let item = rows[row]
-        switch(item) {
+        switch item {
         case .Heading(_):
             return nil
         case .Singleton(let group):
@@ -112,7 +112,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeViewWithIdentifier(ViewControllerGrouperCellIdentifier, owner: nil) as NSTableCellView
         let item = rows[row]
-        switch(item) {
+        switch item {
         case .Heading(let group):
             cell.textField?.stringValue = group.displayName
         case .Singleton(let group):
@@ -127,7 +127,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     
     func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         let item = rows[row]
-        switch(item) {
+        switch item {
         case .Singleton(_): fallthrough
         case .Heading(_):
             if row == 0 {
@@ -143,7 +143,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     
     func tableView(tableView: NSTableView, isGroupRow row: Int) -> Bool {
         let item = rows[row]
-        switch(item) {
+        switch item {
         case .Singleton(_): return false
         case .Heading(_): return true
         case .Controller(_): return false
@@ -166,11 +166,41 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     func tableViewSelectionDidChange(notification: NSNotification) {
         let tableView = notification.object as NSTableView
         let selection = tableView.selectedRow
-        if selection != NSNotFound {
+        if selection != -1 {
             if let controller = controllerForRow(selection) {
                 delegate?.controllerGroupSelectedController(controller)
             }
         }
+    }
+    
+    func controllersForRowIndexes(indexes : NSIndexSet) -> [NSViewController] {
+        var result : [NSViewController] = []
+        for i in 0 ..< rows.count {
+            let row = rows[i]
+            if indexes.containsIndex(i) {
+                switch row {
+                case let .Singleton(group):
+                    result.append(group.items[0])
+                case let .Heading(_):
+                    continue
+                case let .Controller(c):
+                    result.append(c)
+                }
+            }
+        }
+        return result
+    }
+    
+    func rowIndexesForControllers(controllers : [NSViewController]) -> NSIndexSet {
+        let result = NSMutableIndexSet()
+        for i in 0 ..< rows.count {
+            if let c = controllerForRow(i) {
+                if (find(controllers, c) != nil) {
+                    result.addIndex(i)
+                }
+            }
+        }
+        return result
     }
     
     private func adjacentTabIndex(existingIndex : Int, range : [Int]) -> Int {
@@ -178,7 +208,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         for i in range {
             let proposed = (i + existingIndex + rows.count) % rows.count
             let item = rows[proposed]
-            switch(item) {
+            switch item {
             case .Singleton(_): return proposed
             case .Controller(_): return proposed
             case .Heading(_): continue

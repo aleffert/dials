@@ -1,5 +1,5 @@
 //
-//  LiveDialsPlugin.swift
+//  DLSLiveDialsPlugin+SwiftAdditions.swift
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 3/28/15.
@@ -28,11 +28,12 @@ public class PropertyWrapper<A : AnyObject> {
     }
     
     init(_ owner : AnyObject, _ keyPath : String) {
-        get = {
-            return owner.valueForKeyPath(keyPath) as A
+        get = {[weak owner] in
+            return owner?.valueForKeyPath(keyPath) as A
         }
-        set = {
-            owner.setValue($0, forKeyPath:keyPath)
+        set = {[weak owner] (v : A) in
+            owner?.setValue(v, forKeyPath:keyPath)
+            return
         }
     }
 }

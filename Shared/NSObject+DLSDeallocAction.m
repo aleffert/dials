@@ -28,7 +28,10 @@
 
 - (void)remove {
     self.action = nil;
-    self.removeAction(self);
+    if(self.removeAction) {
+        self.removeAction(self);
+    }
+    self.removeAction = nil;
 }
 
 @end
@@ -41,7 +44,7 @@
     runner.action = action;
     __weak __typeof(self) weakself = self;
     runner.removeAction = ^(DLSDeallocActionRunner* caller){
-        objc_setAssociatedObject(weakself, (__bridge void*)caller, caller, OBJC_ASSOCIATION_RETAIN);
+        objc_setAssociatedObject(weakself, (__bridge void*)caller, nil, OBJC_ASSOCIATION_RETAIN);
     };
     
     objc_setAssociatedObject(self, (__bridge void*)runner, runner, OBJC_ASSOCIATION_RETAIN);

@@ -19,8 +19,11 @@ class LiveDialController : NSObject, LiveDialViewDelegate, Equatable {
     @IBOutlet var containerView : NSView?
     @IBOutlet var revertButton : NSButton?
     @IBOutlet var saveButton : NSButton?
+    @IBOutlet var openButton : NSButton?
     
     var currentValue : NSCoding?
+    var updated : Bool = false
+    var mouseInView : Bool = false
 
     let contentView : LiveDialView
     
@@ -35,15 +38,31 @@ class LiveDialController : NSObject, LiveDialViewDelegate, Equatable {
         contentView.delegate = self
         NSBundle.mainBundle().loadNibNamed("LiveDialCellView", owner: self, topLevelObjects: nil)
         bodyView?.translatesAutoresizingMaskIntoConstraints = false
+        let area = NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .MouseEnteredAndExited | .InVisibleRect, owner: self, userInfo: nil)
+        bodyView?.addTrackingArea(area)
         containerView?.addSubview(contentView)
         contentView.addConstraintsMatchingSuperviewBounds()
-        revertButton?.enabled = dial.editor.canRevert
-        saveButton?.enabled = dial.canSave
+        validateButtons(animated : false)
+    }
+    
+    func validateButtons(#animated : Bool) {
+        NSAnimationContext.runAnimationGroup({ ctx in
+            ctx.allowsImplicitAnimation = true
+            if let d = self.contentView.dial {
+                self.revertButton?.enabled = d.editor.canRevert && self.updated
+                self.saveButton?.enabled = d.canSave && self.updated
+            }
+            self.revertButton?.hidden = !self.mouseInView
+            self.saveButton?.hidden = !self.mouseInView
+            self.openButton?.hidden = !self.mouseInView
+        }, completionHandler: nil)
     }
     
     func dialView(view: LiveDialView, changedDial dial: DLSLiveDial, toValue value: NSCoding?) {
         currentValue = value
+        updated = true
         delegate?.dialController(self, changedDial:dial, toValue: value)
+        validateButtons(animated: true)
     }
     
     var dial : DLSLiveDial? {
@@ -54,6 +73,16 @@ class LiveDialController : NSObject, LiveDialViewDelegate, Equatable {
         return bodyView!
     }
     
+    func mouseEntered(theEvent: NSEvent) {
+        mouseInView = true
+        validateButtons(animated: true)
+    }
+    
+    func mouseExited(theEvent: NSEvent) {
+        mouseInView = false
+        validateButtons(animated: true)
+    }
+    
     @IBAction func openFilePressed(sender : AnyObject) {
         contentView.dial.map { NSWorkspace.sharedWorkspace().openFile($0.file) }
     }
@@ -61,10 +90,17 @@ class LiveDialController : NSObject, LiveDialViewDelegate, Equatable {
     @IBAction func revertPressed(sender : AnyObject) {
         contentView.dial = contentView.dial
         delegate?.dialController(self, changedDial: contentView.dial!, toValue: contentView.dial!.value())
+        updated = false
+        validateButtons(animated: true)
     }
     
     @IBAction func saveFilePressed(sender : AnyObject) {
-        delegate?.dialController(self, shouldSaveDial : contentView.dial!, withValue: currentValue)
+        if let d = contentView.dial {
+            delegate?.dialController(self, shouldSaveDial : contentView.dial!, withValue: currentValue)
+            d.setValue(currentValue)
+            updated = false
+            validateButtons(animated: true)
+        }
     }
 }
 

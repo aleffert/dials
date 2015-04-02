@@ -9,7 +9,7 @@
 import UIKit
 import Dials
 
-var foo : Float = .5
+var foo : Float = 0.5
 
 class TestViewController: UIViewController {
 

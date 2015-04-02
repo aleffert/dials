@@ -68,7 +68,6 @@
 }
 
 - (void)startWithPlugins:(NSArray*)plugins {
-    
     NSAssert(!self.running, @"Error: Dials already started");
     self.plugins = plugins;
     [self startBroadcast];
@@ -110,6 +109,10 @@
             [plugin connectedWithContext:self.contextBouncer];
         }
     });
+}
+
+- (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict {
+    NSLog(@"Error starting dials: %@", errorDict);
 }
 
 - (void)stream:(DLSChannelStream *)stream receivedMessage:(NSData *)data onChannel:(DLSOwnedChannel *)channel {
