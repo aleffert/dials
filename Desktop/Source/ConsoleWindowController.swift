@@ -8,6 +8,8 @@
 
 import Cocoa
 
+private let LastKnownDeviceKey = "DLSLastKnownDeviceKey"
+
 class ConsoleWindowController: NSWindowController {
     
     @IBOutlet private var emptyView : NSView!
@@ -15,6 +17,7 @@ class ConsoleWindowController: NSWindowController {
     @IBOutlet private var sidebarTable : NSTableView!
     
     @IBOutlet private var bodyController : NSViewController!
+    
     
     private let deviceController : DeviceController = DeviceController()
     private var currentConnection : DeviceConnection?
@@ -60,12 +63,28 @@ class ConsoleWindowController: NSWindowController {
         viewGrouper.delegate = self
     }
     
+    private func lastKnownConnection() -> String? {
+        return NSUserDefaults.standardUserDefaults().objectForKey(LastKnownDeviceKey) as? String
+    }
+    
+    private func saveLastKnownConnection(connection : String) {
+        NSUserDefaults.standardUserDefaults().setObject(connection, forKey: LastKnownDeviceKey)
+    }
+    
     private func devicesChanged() {
         if let device = currentConnection?.device {
             itemsChangedBroadcaster.notifyListeners(.Active(current : device, all : deviceController.knownDevices))
         }
         else if deviceController.hasDevices {
             itemsChangedBroadcaster.notifyListeners(.Available(deviceController.knownDevices))
+            if let lastKnown = lastKnownConnection() {
+                for device in deviceController.knownDevices {
+                    if device.displayName == lastKnown {
+                        connectToDevice(device)
+                        break
+                    }
+                }
+            }
         }
         else {
             itemsChangedBroadcaster.notifyListeners(.None)
@@ -79,6 +98,7 @@ class ConsoleWindowController: NSWindowController {
         hideSidebarIfNecessary()
         devicesChanged()
         self.pluginController.connectedWithContext(self.contextBouncer)
+        device.bind { self.saveLastKnownConnection($0.displayName) }
     }
     
     func choseDeviceOption(sender : NSMenuItem) {
