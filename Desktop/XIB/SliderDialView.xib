@@ -26,7 +26,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ee-Rw-kE9">
                     <rect key="frame" x="34" y="0.0" width="31" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Min" id="YLo-C0-5ND">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -34,23 +34,23 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kyE-t1-QGD">
                     <rect key="frame" x="248" y="-1" width="35" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Max" id="SrH-3y-66Q">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vKd-n8-3ra">
-                    <rect key="frame" x="133" y="0.0" width="50" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Current" id="d4I-TH-v03">
-                        <font key="font" metaFont="system"/>
+                <textField horizontalHuggingPriority="248" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vKd-n8-3ra">
+                    <rect key="frame" x="48" y="0.0" width="220" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Current" id="d4I-TH-v03">
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L51-bt-0om">
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="L51-bt-0om">
                     <rect key="frame" x="-2" y="5" width="38" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="jor-Jp-UOi">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -64,9 +64,10 @@
                 <constraint firstItem="4JH-Mf-l8t" firstAttribute="leading" secondItem="L51-bt-0om" secondAttribute="trailing" constant="16" id="J1i-t9-gli"/>
                 <constraint firstItem="4JH-Mf-l8t" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="SdC-Pv-745"/>
                 <constraint firstItem="4JH-Mf-l8t" firstAttribute="leading" secondItem="8ee-Rw-kE9" secondAttribute="centerX" id="TOo-5I-JJz"/>
+                <constraint firstItem="vKd-n8-3ra" firstAttribute="leading" secondItem="4JH-Mf-l8t" secondAttribute="leading" id="U2Z-ga-aCl"/>
                 <constraint firstItem="vKd-n8-3ra" firstAttribute="centerY" secondItem="8ee-Rw-kE9" secondAttribute="centerY" id="aYR-NP-ZZX"/>
                 <constraint firstAttribute="centerY" secondItem="L51-bt-0om" secondAttribute="centerY" id="fzh-Fk-hLf"/>
-                <constraint firstItem="vKd-n8-3ra" firstAttribute="centerX" secondItem="4JH-Mf-l8t" secondAttribute="centerX" id="mx3-pH-2Zy"/>
+                <constraint firstItem="vKd-n8-3ra" firstAttribute="trailing" secondItem="4JH-Mf-l8t" secondAttribute="trailing" id="mSj-Kh-9xl"/>
                 <constraint firstItem="L51-bt-0om" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="tYZ-qW-OCk"/>
                 <constraint firstAttribute="trailing" secondItem="kyE-t1-QGD" secondAttribute="trailing" id="uz9-uD-wj0"/>
             </constraints>
