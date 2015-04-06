@@ -8,19 +8,6 @@
 
 #import "DLSLiveDialsPlugin.h"
 
-@implementation DLSPropertyWrapper
-
-- (id)initWithGetter:(id (^)(void))getter setter:(void(^)(id))setter {
-    self = [super init];
-    if(self != nil) {
-        self.getter = getter;
-        self.setter = setter;
-    }
-    return self;
-}
-
-@end
-
 @interface DLSActiveDialRecord : NSObject <DLSRemovable>
 
 @property (strong, nonatomic) DLSLiveDial* dial;

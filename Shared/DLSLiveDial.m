@@ -8,36 +8,38 @@
 
 #import "DLSLiveDial.h"
 
+#import "DLSConstants.h"
+
 @implementation DLSLiveDial
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        self.displayName = [aDecoder decodeObjectForKey:@"displayName"];
-        self.editor = [aDecoder decodeObjectForKey:@"editor"];
-        self.group = [aDecoder decodeObjectForKey:@"group"];
-        self.uuid = [aDecoder decodeObjectForKey:@"uuid"];
-        self.value = [aDecoder decodeObjectForKey:@"value"];
+        DLSDecodeObject(aDecoder, displayName);
+        DLSDecodeObject(aDecoder, editor);
+        DLSDecodeObject(aDecoder, group);
+        DLSDecodeObject(aDecoder, uuid);
+        DLSDecodeObject(aDecoder, value);
         
-        self.canSave = [aDecoder decodeBoolForKey:@"canSave"];
+        DLSDecodeBool(aDecoder, canSave);
         
-        self.file = [aDecoder decodeObjectForKey:@"file"];
-        self.line = [aDecoder decodeIntegerForKey:@"line"];
+        DLSDecodeObject(aDecoder, file);
+        DLSDecodeInteger(aDecoder, line);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.group forKey:@"group"];
-    [aCoder encodeObject:self.editor forKey:@"editor"];
-    [aCoder encodeObject:self.uuid forKey:@"uuid"];
-    [aCoder encodeObject:self.value forKey:@"value"];
-    [aCoder encodeObject:self.displayName forKey:@"displayName"];
+    DLSEncodeObject(aCoder, group);
+    DLSEncodeObject(aCoder, displayName);
+    DLSEncodeObject(aCoder, editor);
+    DLSEncodeObject(aCoder, uuid);
+    DLSEncodeObject(aCoder, value);
     
-    [aCoder encodeBool:self.canSave forKey:@"canSave"];
+    DLSEncodeBool(aCoder, canSave);
     
-    [aCoder encodeObject:self.file forKey:@"file"];
-    [aCoder encodeInteger:self.line forKey:@"line"];
+    DLSEncodeObject(aCoder, file);
+    DLSEncodeInteger(aCoder, line);
 }
 
 @end

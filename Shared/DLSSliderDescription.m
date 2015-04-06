@@ -8,6 +8,8 @@
 
 #import "DLSSliderDescription.h"
 
+#import "DLSConstants.h"
+
 @interface DLSSliderDescription ()
 
 @property (assign, nonatomic) double min;
@@ -38,15 +40,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        self.min = [aDecoder decodeDoubleForKey:@"min"];
-        self.max = [aDecoder decodeDoubleForKey:@"max"];
+        DLSDecodeDouble(aDecoder, min);
+        DLSDecodeDouble(aDecoder, max);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeDouble:self.min forKey:@"min"];
-    [aCoder encodeDouble:self.max forKey:@"max"];
+    DLSEncodeDouble(aCoder, min);
+    DLSEncodeDouble(aCoder, max);
 }
 
 - (BOOL)canRevert {

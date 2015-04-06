@@ -15,14 +15,16 @@
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
+    // no properties
     return [super init];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    // no properties
 }
 
 - (BOOL)canRevert {
-    return false;
+    return NO;
 }
 
 @end

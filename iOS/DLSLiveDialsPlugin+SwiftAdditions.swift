@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Type carrying version of DLSPropertyWrapper
 public class PropertyWrapper<A : AnyObject> {
     
     let get : () -> A
@@ -40,14 +41,12 @@ public class PropertyWrapper<A : AnyObject> {
 
 public extension DLSLiveDialsPlugin {
     func addDial<A>(wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, displayName : String, canSave : Bool, file : String, line : UInt) -> DLSRemovable {
-        let wrapperWrapper = DLSPropertyWrapper()
-        wrapperWrapper.getter = {
+        let wrapperWrapper = DLSPropertyWrapper(getter: {
             wrapper.get()
-        }
-        wrapperWrapper.setter = {
+        }, setter : {
             wrapper.set($0 as A)
-        }
-        return self.addDialWithWrapper(wrapperWrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file: file, line: line)
+        })
+        return addDialWithWrapper(wrapperWrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file: file, line: line)
     }
 }
 

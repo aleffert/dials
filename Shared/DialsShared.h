@@ -15,8 +15,10 @@
 #import "DLSChannelStream.h"
 #import "DLSLiveDial.h"
 #import "DLSLiveDialsMessages.h"
+#import "DLSPropertyWrapper.h"
 #import "DLSRemovable.h"
 #import "DLSSliderDescription.h"
 #import "DLSToggleDescription.h"
+#import "DLSViewAdjustMessages.h"
 
 #import "NSObject+DLSDeallocAction.h"

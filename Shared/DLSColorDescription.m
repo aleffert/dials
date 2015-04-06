@@ -16,7 +16,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     // no properties
-    return self;
+    return [self init];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -24,7 +24,7 @@
 }
 
 - (BOOL)canRevert {
-    return true;
+    return YES;
 }
 
 @end

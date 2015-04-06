@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class DLSDescriptionContext;
+@protocol DLSDescriptionContext;
 
 @protocol DLSDescribable <NSObject>
 
 /// Must call super
-- (void)dls_describe:(DLSDescriptionContext*)context;
++ (void)dls_describe:(id <DLSDescriptionContext>)context;
 
 @end

@@ -13,11 +13,14 @@
 
 @interface DLSPropertyDescription : NSObject
 
-+ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditorDescription>)editor exchanger:(id <DLSValueExchanger>)exchanger;
++ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditorDescription>)editor exchanger:(id <DLSValueExchanger>)valueExchanger;
 
 @property (readonly, strong, nonatomic) id <DLSEditorDescription> editorDescription;
-@property (readonly, strong, nonatomic) id <DLSValueExchanger> valueExchanger;
+@property (readonly, strong, nonatomic) DLSPropertyWrapper* valueExchanger;
+/// Should be unique within a class and its parents
 @property (readonly, copy, nonatomic) NSString* name;
+/// Can be anything. If nil, the "name" property will be used for display
+@property (readonly, copy, nonatomic) NSString* displayName;
 
 @end
 

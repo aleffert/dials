@@ -14,7 +14,15 @@
 
 @end
 
-@interface DLSDescriptionGroups : NSObject <DLSDescriptionContext>
+@interface DLSDescriptionGroup : NSObject
+
+@property (copy, nonatomic) NSString* displayName;
+/// Array of DLSPropertyDescription*
+@property (copy, nonatomic) NSArray* properties;
+
+@end
+
+@interface DLSDescriptionAccumulator : NSObject <DLSDescriptionContext>
 
 @property (readonly, nonatomic) NSArray* groups;
 

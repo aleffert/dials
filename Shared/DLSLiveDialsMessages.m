@@ -8,6 +8,8 @@
 
 #import "DLSLiveDialsMessages.h"
 
+#import "DLSConstants.h"
+
 NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
 NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 
@@ -16,13 +18,13 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        self.dial = [aDecoder decodeObjectForKey:@"dial"];
+        DLSDecodeObject(aDecoder, dial);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.dial forKey:@"dial"];
+    DLSEncodeObject(aCoder, dial);
 }
 
 @end
@@ -32,13 +34,13 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        self.uuid = [aDecoder decodeObjectForKey:@"uuid"];
+        DLSDecodeObject(aDecoder, uuid);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.uuid forKey:@"uuid"];
+    DLSEncodeObject(aCoder, uuid);
 }
 
 @end
@@ -57,15 +59,15 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        self.uuid = [aDecoder decodeObjectForKey:@"uuid"];
-        self.value = [aDecoder decodeObjectForKey:@"value"];
+        DLSDecodeObject(aDecoder, uuid);
+        DLSDecodeObject(aDecoder, value);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.uuid forKey:@"uuid"];
-    [aCoder encodeObject:self.value forKey:@"value"];
+    DLSEncodeObject(aCoder, uuid);
+    DLSEncodeObject(aCoder, value);
 }
 
 

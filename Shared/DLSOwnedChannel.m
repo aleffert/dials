@@ -8,8 +8,7 @@
 
 #import "DLSOwnedChannel.h"
 
-static NSString* const DLSOwnedChannelNameKey = @"DLSOwnedChannelNameKey";
-static NSString* const DLSOwnedChannelOwnerKey = @"DLSOwnedChannelOwnerKey";
+#import "DLSConstants.h"
 
 @interface DLSOwnedChannel ()
 
@@ -32,15 +31,15 @@ static NSString* const DLSOwnedChannelOwnerKey = @"DLSOwnedChannelOwnerKey";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        self.name = [aDecoder decodeObjectForKey:DLSOwnedChannelNameKey];
-        self.owner = [aDecoder decodeObjectForKey:DLSOwnedChannelOwnerKey];
+        DLSDecodeObject(aDecoder, name);
+        DLSDecodeObject(aDecoder, owner);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:self.name forKey:DLSOwnedChannelNameKey];
-    [aCoder encodeObject:self.owner forKey:DLSOwnedChannelOwnerKey];
+    DLSEncodeObject(aCoder, name);
+    DLSEncodeObject(aCoder, owner);
 }
 
 - (NSUInteger)hash {

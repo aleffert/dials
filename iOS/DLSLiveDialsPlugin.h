@@ -10,18 +10,9 @@
 
 #import <Dials/DLSPlugin.h>
 
-@protocol DLSRemovable;
-
-@interface DLSPropertyWrapper : NSObject
-
-- (id)initWithGetter:(id (^)(void))getter setter:(void(^)(id))setter;
-
-@property (copy, nonatomic) id (^getter)(void);
-@property (copy, nonatomic) void (^setter)(id);
-
-@end
-
+@class DLSPropertyWrapper;
 @protocol DLSEditorDescription;
+@protocol DLSRemovable;
 
 @interface DLSLiveDialsPlugin : NSObject <DLSPlugin>
 

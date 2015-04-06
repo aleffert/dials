@@ -8,37 +8,6 @@
 
 import Cocoa
 
-class TestPlugin : Plugin {
-    var context : PluginContext?
-    var controller : NSViewController?
-    
-    var name : String {
-        return "Test"
-    }
-    
-    var displayName : String {
-        return "Test Plugin"
-    }
-    
-    func connectedWithContext(context: PluginContext) {
-        self.context = context
-    }
-    
-    func connectionClosed() {
-        if let c = controller { context?.removeViewController(c, plugin: self) }
-    }
-    
-    func receiveMessage(data: NSData, channel: DLSChannel) {
-        controller = NSViewController(nibName: nil, bundle: nil)!
-        controller?.view = NSView(frame: NSMakeRect(0, 0, 100, 100))
-        context?.addViewController(controller!, plugin: self)
-    }
-    
-    var shouldSortChildren : Bool {
-        return false
-    }
-}
-
 class PluginController: NSObject {
     
     private var plugins : [Plugin] = []
@@ -50,7 +19,7 @@ class PluginController: NSObject {
     
     func registerDefaultPlugins() {
         registerPlugin(LiveDialsPlugin())
-        registerPlugin(TestPlugin())
+        registerPlugin(ViewAdjustPlugin())
     }
     
     func registerPlugin(plugin : Plugin) {
