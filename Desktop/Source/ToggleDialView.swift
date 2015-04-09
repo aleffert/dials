@@ -10,7 +10,7 @@ import Cocoa
 
 extension DLSToggleDescription : LiveDialViewGenerating {
     func generate() -> LiveDialView {
-        let view = LiveDialView.freshViewFromNib("ToggleDialView") as ToggleDialView
+        let view = LiveDialView.freshViewFromNib("ToggleDialView") as! ToggleDialView
         return view
     }
 }

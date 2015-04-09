@@ -110,7 +110,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     }
     
     func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeViewWithIdentifier(ViewControllerGrouperCellIdentifier, owner: nil) as NSTableCellView
+        let cell = tableView.makeViewWithIdentifier(ViewControllerGrouperCellIdentifier, owner: nil) as! NSTableCellView
         let item = rows[row]
         switch item {
         case .Heading(let group):
@@ -164,7 +164,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     }
     
     func tableViewSelectionDidChange(notification: NSNotification) {
-        let tableView = notification.object as NSTableView
+        let tableView = notification.object as! NSTableView
         let selection = tableView.selectedRow
         if selection != -1 {
             if let controller = controllerForRow(selection) {

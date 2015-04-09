@@ -12,7 +12,7 @@ class Listener<A> {
     
     let block : A -> Void
     
-    init(block : A -> Void) {
+    init(_ block : A -> Void) {
         self.block = block
     }
     
@@ -21,11 +21,11 @@ class Listener<A> {
     }
 }
 
-class Broadcaster<A>: NSObject {
+class Broadcaster<A> {
     
     private var listeners : [Listener<A>] = []
     
-    func addListener(f : A -> Void, owner : AnyObject? = nil) -> Listener<A> {
+    func addListener(owner : AnyObject? = nil, f : A -> Void) -> Listener<A> {
         let l = Listener(f)
         listeners.append(l)
         

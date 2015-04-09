@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-#import <Dials/Dials.h>
+#import <Dials/DialsFramework.h>
 
 #import "DialsExample-Swift.h"
 

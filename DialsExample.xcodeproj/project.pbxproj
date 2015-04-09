@@ -34,7 +34,7 @@
 /* Begin PBXFileReference section */
 		77567B561AC6C66800877A7B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		77567B571AC6C66900877A7B /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestViewController.swift; path = Source/TestViewController.swift; sourceTree = "<group>"; };
-		77567B5D1AC6CCD100877A7B /* Dials.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dials.framework; path = "Dials.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		77567B5D1AC6CCD100877A7B /* Dials.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		779250471A3348A900CCC229 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		779250491A3348B900CCC229 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/AppDelegate.h; sourceTree = "<group>"; };
 		7792504A1A3348B900CCC229 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/AppDelegate.m; sourceTree = "<group>"; };
@@ -303,7 +303,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DialsExample/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/DialsExample/Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -325,7 +325,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DialsExample/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/DialsExample/Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -10,9 +10,9 @@
 
 @interface DLSPropertyWrapper : NSObject
 
-- (id)initWithGetter:(id (^)(void))getter setter:(void(^)(id))setter NS_DESIGNATED_INITIALIZER;
+- (__nonnull id)initWithGetter:(__nullable id (^__nonnull)(void))getter setter:(void(^__nonnull)(__nullable id))setter NS_DESIGNATED_INITIALIZER;
 
-@property (copy, nonatomic) id (^getter)(void);
-@property (copy, nonatomic) void (^setter)(id);
+@property (copy, nonatomic) __nullable id (^__nonnull getter)(void);
+@property (copy, nonatomic) void (^__nonnull setter)(__nullable id);
 
 @end

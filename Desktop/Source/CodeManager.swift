@@ -19,10 +19,10 @@ public class CodeManager: NSObject {
         let content = NSString(contentsOfFile: file, encoding: NSUTF8StringEncoding, error: &error)
         if let c = content {
             if file.pathExtension == "m" || file.pathExtension == "mm" {
-                return objcAction(c)
+                return objcAction(c as String)
             }
             else if file.pathExtension == "swift" {
-                return swiftAction(c)
+                return swiftAction(c as String)
             }
             else {
                 return .Failure("Unknown file extensions: \(file.pathExtension)")
@@ -46,7 +46,7 @@ public class CodeManager: NSObject {
     private func findSymbolWithPattern(pattern : String, inString code : String) -> Result<String> {
         return NSRegularExpression.compile(pattern).bind {matcher in
             let options = NSMatchingOptions()
-            let match: AnyObject? = matcher.matchesInString(code, options: options, range: NSMakeRange(0, countElements(code))).first
+            let match: AnyObject? = matcher.matchesInString(code, options: options, range: NSMakeRange(0, count(code))).first
             return (match as? NSTextCheckingResult).toResult("Description not found")
             }.bind {(m : NSTextCheckingResult) in
             let range = m.rangeAtIndex(1)
@@ -57,23 +57,26 @@ public class CodeManager: NSObject {
     
     public func findSymbolWithSwiftName(name : String, inString code : String) -> Result<String> {
         let pattern = NSString(format: "DLSAdd[A-Za-z]*Control\\([ ]*\"%@\"[ ]*,([^,\n]*).*\\)", NSRegularExpression.escapedPatternForString(name))
-        return findSymbolWithPattern(pattern, inString: code)
+        return findSymbolWithPattern(pattern as String, inString: code)
     }
     
     public func findSymbolWithObjectiveCName(name : String, inString code : String) -> Result<String> {
         let pattern = NSString(format: "DLSAdd[A-Za-z]*Control\\([ ]*@\"%@\"[ ]*,([^,\n]*).*\\)", NSRegularExpression.escapedPatternForString(name))
-        return findSymbolWithPattern(pattern, inString: code)
+        return findSymbolWithPattern(pattern as String, inString: code)
     }
     
     public func updateObjectiveCSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditorDescription, inString code : String) -> Result<String> {
         let pattern = NSString(format : "([\r\n ]+)(%@)([\r\n ]*)=([\r\n ]*)(.*);", NSRegularExpression.escapedPatternForString(symbol))
         let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
         return codeGenerator.bind {generator in
-                NSRegularExpression.compile(pattern).bind {
+            NSRegularExpression.compile(pattern as String).bind {
                 let replacementCode = generator.objcCodeForValue(value)
                 let template = NSString(format:"$1$2$3=$4%@;", NSRegularExpression.escapedTemplateForString(replacementCode))
-                let range = NSMakeRange(0, countElements(code))
-                let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template)
+                let range = NSMakeRange(0, count(code))
+                let result = $0.stringByReplacingMatchesInString(code,
+                    options: NSMatchingOptions(),
+                    range: range,
+                    withTemplate: template as String)
                 return .Success(Box(result))
             }
         }
@@ -83,11 +86,11 @@ public class CodeManager: NSObject {
         let pattern = NSString(format : "([\r\n ]+)(%@)(.*)([\r\n ]*)=([\r\n ]*)(.*)", NSRegularExpression.escapedPatternForString(symbol))
         let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
         return codeGenerator.bind {generator in
-            NSRegularExpression.compile(pattern).bind {
+            NSRegularExpression.compile(pattern as String).bind {
                 let replacementCode = generator.swiftCodeForValue(value)
                 let template = NSString(format:"$1$2$3$4=$5%@", NSRegularExpression.escapedTemplateForString(replacementCode))
-                let range = NSMakeRange(0, countElements(code))
-                let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template)
+                let range = NSMakeRange(0, count(code))
+                let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template as String)
                 return .Success(Box(result))
             }
         }

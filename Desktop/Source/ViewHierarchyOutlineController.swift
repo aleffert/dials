@@ -16,7 +16,7 @@ class ViewHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOutl
             return hierarchy.count
         }
         else {
-            let record = hierarchy[item as NSString]
+            let record = hierarchy[item as! NSString]
             return record?.children.count ?? 0
         }
     }

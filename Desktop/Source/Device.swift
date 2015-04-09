@@ -53,8 +53,10 @@ class Device: NSObject {
         return DeviceConnection(device : self, service: service, delegate : delegate)
     }
     
-    func hash() -> Int {
-        return self.service.hash;
+    override var hash : Int {
+        get {
+            return self.service.hash
+        }
     }
     
     override func isEqual(object: AnyObject?) -> Bool {

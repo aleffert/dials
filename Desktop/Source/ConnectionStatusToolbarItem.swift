@@ -18,10 +18,10 @@ class ConnectionStatusToolbarItem: NSToolbarItem {
         self.statusView = ConnectionStatusView(frame : CGRectMake(0, 0, 250, 30))
         super.init(itemIdentifier: itemIdentifier)
         self.view = statusView
-        changeBroadcaster.addListener({[weak self] status in
-                self?.statusView.useStatus(status)
-                return
-            }, owner : self)
+        changeBroadcaster.addListener(owner : self) {[weak self] status in
+            self?.statusView.useStatus(status)
+            return
+        }
     }
     
     convenience init(changeBroadcaster : Broadcaster<ConnectionStatus>) {

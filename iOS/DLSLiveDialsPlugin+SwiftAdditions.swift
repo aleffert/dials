@@ -30,7 +30,7 @@ public class PropertyWrapper<A : AnyObject> {
     
     init(_ owner : AnyObject, _ keyPath : String) {
         get = {[weak owner] in
-            return owner?.valueForKeyPath(keyPath) as A
+            return owner?.valueForKeyPath(keyPath) as! A
         }
         set = {[weak owner] (v : A) in
             owner?.setValue(v, forKeyPath:keyPath)
@@ -40,13 +40,14 @@ public class PropertyWrapper<A : AnyObject> {
 }
 
 public extension DLSLiveDialsPlugin {
-    func addDial<A>(wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, displayName : String, canSave : Bool, file : String, line : UInt) -> DLSRemovable {
+    func addDial<A : AnyObject>(wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, displayName : String, canSave : Bool, file : String, line : UInt) -> DLSRemovable {
         let wrapperWrapper = DLSPropertyWrapper(getter: {
             wrapper.get()
         }, setter : {
-            wrapper.set($0 as A)
+            wrapper.set($0 as! A)
         })
-        return addDialWithWrapper(wrapperWrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file: file, line: line)
+        
+        return addDialWithWrapper(wrapperWrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file: file, line: Int(line))
     }
 }
 
@@ -61,7 +62,7 @@ public func DLSAddControl<A>(displayName : String, wrapper : PropertyWrapper<A>,
     return remove
 }
 
-public func DLSAddAction(displayName : String, action : () -> (), owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) {
+public func DLSAddAction(displayName : String, action : (() -> ()), owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) {
     let getter : () -> NSString = {
         action()
         return ""

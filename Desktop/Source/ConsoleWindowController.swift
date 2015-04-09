@@ -43,7 +43,7 @@ class ConsoleWindowController: NSWindowController {
         devicesChanged()
         bodyController.addChildViewController(sidebarController)
         
-        let contentView = window?.contentView as NSView
+        let contentView = window?.contentView as! NSView
         let sidebarView = sidebarController.view
         bodyView.addSubview(sidebarView)
         sidebarView.alphaValue = 0
@@ -82,7 +82,7 @@ class ConsoleWindowController: NSWindowController {
     }
     
     func choseDeviceOption(sender : NSMenuItem) {
-        let device = (sender.representedObject as Device?)
+        let device = (sender.representedObject as! Device?)
         deviceController.saveLastDevice(device)
         if device == nil && self.currentConnection != nil {
             self.pluginController.connectionClosed()

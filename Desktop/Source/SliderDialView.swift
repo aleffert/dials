@@ -11,7 +11,7 @@ import AppKit
 
 extension DLSSliderDescription : LiveDialViewGenerating {
     func generate() -> LiveDialView {
-        let view = LiveDialView.freshViewFromNib("SliderDialView") as SliderDialView
+        let view = LiveDialView.freshViewFromNib("SliderDialView") as! SliderDialView
         view.editorDescription = self
         return view
     }

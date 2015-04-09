@@ -109,7 +109,7 @@
 		7788771C1AC0E16300AB5580 /* NSRegularExpression+Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSRegularExpression+Result.swift"; path = "Desktop/Source/NSRegularExpression+Result.swift"; sourceTree = SOURCE_ROOT; };
 		778877201AC0E55D00AB5580 /* Optional+Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Optional+Result.swift"; path = "Desktop/Source/Optional+Result.swift"; sourceTree = SOURCE_ROOT; };
 		778877231AC1182900AB5580 /* CodeGenerating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodeGenerating.swift; path = Desktop/Source/CodeGenerating.swift; sourceTree = SOURCE_ROOT; };
-		779250DE1A33554000CCC229 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BridgingHeader.h; path = Desktop/BridgingHeader.h; sourceTree = "<group>"; };
+		779250DE1A33554000CCC229 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Desktop/Bridging-Header.h"; sourceTree = "<group>"; };
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
 		77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionStatusView.swift; path = Desktop/Source/ConnectionStatusView.swift; sourceTree = SOURCE_ROOT; };
 		77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerGrouper.swift; path = Desktop/Source/ViewControllerGrouper.swift; sourceTree = SOURCE_ROOT; };
@@ -147,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				774D160C1AB5D36900613F24 /* libDialsShared-Desktop.a */,
-				779250DE1A33554000CCC229 /* BridgingHeader.h */,
+				779250DE1A33554000CCC229 /* Bridging-Header.h */,
 				776414DC1A32ADC9005E381A /* Dials */,
 				778877031ABFA04F00AB5580 /* Tests */,
 				776414DB1A32ADC9005E381A /* Products */,
@@ -344,7 +344,7 @@
 		776414D21A32ADC9005E381A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 				TargetAttributes = {
 					776414D91A32ADC9005E381A = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -503,7 +503,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = macosx10.10;
+				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -541,7 +541,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SDKROOT = macosx10.10;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -563,7 +563,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Desktop/BridgingHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Desktop/Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -585,7 +585,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Desktop/BridgingHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Desktop/Bridging-Header.h";
 			};
 			name = Release;
 		};
