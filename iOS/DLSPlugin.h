@@ -13,18 +13,18 @@
 
 @protocol DLSPluginContext <NSObject>
 
-- (id <DLSChannel>)channelWithName:(NSString*)name forPlugin:(id <DLSPlugin>)plugin;
-- (void)sendMessage:(NSData*)message onChannel:(id<DLSChannel>)channel fromPlugin:(id <DLSPlugin>)plugin;
+- (id <DLSChannel> __nonnull)channelWithName:( NSString* __nonnull )name forPlugin:(__nonnull id <DLSPlugin>)plugin;
+- (void)sendMessage:(NSData* __nonnull)message onChannel:(id<DLSChannel> __nonnull)channel fromPlugin:(__nonnull id <DLSPlugin>)plugin;
 
 @end
 
 @protocol DLSPlugin <NSObject>
 
-@property (readonly, nonatomic, copy) NSString* name;
+@property (readonly, nonatomic, copy) NSString*__nonnull name;
 
-- (void)receiveMessage:(NSData*)message onChannel:(id <DLSChannel>)channel;
+- (void)receiveMessage:(NSData* __nonnull)message onChannel:(id <DLSChannel> __nonnull)channel;
 
-- (void)connectedWithContext:(id <DLSPluginContext>)context;
+- (void)connectedWithContext:(id <DLSPluginContext> __nonnull)context;
 - (void)connectionClosed;
 
 @end
