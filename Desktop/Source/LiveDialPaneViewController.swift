@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+
+@IBDesignable
 class FlippedClipView : NSClipView {
     override var flipped : Bool {
         return true;
@@ -23,13 +25,13 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
     @IBOutlet private var stackView : NSStackView?
     private var dialControllers : [LiveDialController] = []
     weak var delegate : LiveDialPaneViewControllerDelegate?
-    let channel : DLSChannel
+    let group : String
     
-    init?(channel : DLSChannel, delegate : LiveDialPaneViewControllerDelegate) {
-        self.channel = channel
+    init?(group : String, delegate : LiveDialPaneViewControllerDelegate) {
+        self.group = group
         self.delegate = delegate
         super.init(nibName: "LiveDialPaneViewController", bundle: nil)
-        self.title = channel.name
+        self.title = group
     }
 
     required init?(coder: NSCoder) {
@@ -48,7 +50,7 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
     }
     
     func addDial(dial : DLSLiveDial) {
-        let contentView = (dial.editor as! LiveDialViewGenerating).generate()
+        let contentView = (dial.editor as! EditorViewGenerating).generate()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         let controller = LiveDialController(dial : dial, contentView : contentView, delegate : self)
         dialControllers.append(controller)
@@ -66,7 +68,7 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
     
     func removeDialWithID(dialID : String) {
         let index = dialControllers.indexOf {
-            $0.dial?.uuid == dialID
+            $0.dial.uuid == dialID
         }
         if index != NSNotFound {
             self.dialControllers.removeAtIndex(index)

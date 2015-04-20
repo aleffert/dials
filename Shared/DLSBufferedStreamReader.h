@@ -12,16 +12,16 @@
 
 @protocol DLSBufferedStreamReaderDelegate <NSObject>
 
-- (void)streamReader:(DLSBufferedStreamReader*)reader receivedMessage:(NSData*)data;
-- (void)streamReaderClosed:(DLSBufferedStreamReader *)reader;
+- (void)streamReader:(DLSBufferedStreamReader* __nonnull)reader receivedMessage:(NSData* __nonnull)data;
+- (void)streamReaderClosed:(DLSBufferedStreamReader* __nonnull)reader;
 
 @end
 
 @interface DLSBufferedStreamReader : NSObject
 
-- (id)initWithInputStream:(NSInputStream*)stream;
+- (nonnull id)initWithInputStream:(NSInputStream* __nonnull)stream;
 
-@property (weak, nonatomic) id <DLSBufferedStreamReaderDelegate> delegate;
+@property (weak, nonatomic, nullable) id <DLSBufferedStreamReaderDelegate> delegate;
 
 - (void)open;
 - (void)close;

@@ -8,24 +8,37 @@
 
 import Cocoa
 
-class ViewAdjustViewController: NSViewController {
+protocol ViewAdjustViewControllerDelegate : class {
+    func viewAdjustController(controller : ViewAdjustViewController, selectedViewWithID viewID : NSString?)
+    func viewAdjustController(controller : ViewAdjustViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+}
+
+class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineControllerDelegate, ViewAdjustPropertyTableControllerDelegate {
     
-    @IBOutlet weak var visualContainer : NSView?
-    @IBOutlet weak var outlineContainer : NSView?
-    @IBOutlet weak var dialsContainer : NSView?
+    weak var delegate : ViewAdjustViewControllerDelegate?
     
-    @IBOutlet weak var outlineView : NSOutlineView?
-    
-    let outlineController = ViewHierarchyOutlineController()
+    @IBOutlet var propertyTableController : ViewAdjustPropertyTableController?
+    @IBOutlet var outlineController : ViewAdjustHierarchyOutlineController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        outlineView?.setDataSource(outlineController)
-        outlineView?.setDelegate(outlineController)
+        outlineController?.delegate = self
+        propertyTableController?.delegate = self
     }
     
-    func receivedHierarchy(hierarchy : NSArray) {
-        outlineController.useHierarchy(hierarchy)
-        outlineView?.reloadData()
+    func receivedHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], topLevel : [NSString]) {
+        outlineController?.useHierarchy(hierarchy, topLevel : topLevel)
+    }
+    
+    func receivedViewRecord(record : DLSViewRecord) {
+        propertyTableController?.useRecord(record)
+    }
+    
+    func outlineController(controller: ViewAdjustHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
+        delegate?.viewAdjustController(self, selectedViewWithID: viewID)
+    }
+    
+    func tableController(controller: ViewAdjustPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
+        delegate?.viewAdjustController(self, valueChangedWithRecord: record)
     }
 }

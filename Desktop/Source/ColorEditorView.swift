@@ -1,5 +1,5 @@
 //
-//  ColorDialView.swift
+//  ColorEditorView.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 3/21/15.
@@ -8,9 +8,9 @@
 
 import Cocoa
 
-extension DLSColorDescription : LiveDialViewGenerating {
-    func generate() -> LiveDialView {
-        return LiveDialView.freshViewFromNib("ColorDialView")
+extension DLSColorDescription : EditorViewGenerating {
+    func generate() -> EditorView {
+        return EditorView.freshViewFromNib("ColorEditorView")
     }
 }
 
@@ -42,23 +42,23 @@ extension DLSColorDescription : CodeGenerating {
     }
 }
 
-class ColorDialView : LiveDialView {
+class ColorEditorView : EditorView {
     
     @IBOutlet private var well : NSColorWell?
     @IBOutlet private var name : NSTextField?
     
     @IBAction func colorChanged(well : NSColorWell) {
-        dial.map {
-            self.delegate?.dialView(self, changedDial: $0, toValue: well.color)
+        info.map {
+            self.delegate?.editorView(self, changedInfo: $0, toValue: well.color)
         }
     }
     
-    override var dial : DLSLiveDial? {
+    override var info : EditorInfo? {
         didSet {
-            let value = dial?.value() as? NSColor
-            well?.color = value ?? NSColor.clearColor()
+            let color = info?.value as? NSColor
+            well?.color = color ?? NSColor.clearColor()
             
-            name?.stringValue = dial!.displayName
+            name?.stringValue = info?.name ?? "Color"
         }
     }
 }

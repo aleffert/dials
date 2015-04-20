@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewAdjustPlugin: Plugin {
+class ViewAdjustPlugin: Plugin, ViewAdjustViewControllerDelegate {
     
     var controller : ViewAdjustViewController?
     var context : PluginContext?
@@ -32,6 +32,7 @@ class ViewAdjustPlugin: Plugin {
     func connectedWithContext(context: PluginContext) {
         self.context = context
         let controller = ViewAdjustViewController(nibName: "ViewAdjustViewController", bundle: nil)!
+        controller.delegate = self
         self.controller = controller
         self.context?.addViewController(controller, plugin: self)
     }
@@ -42,13 +43,40 @@ class ViewAdjustPlugin: Plugin {
         controller = nil
     }
     
-    func receiveMessage(data: NSData, channel: DLSChannel) {
-        let message: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
-        if let hierarchyMessage = message as? DLSViewAdjustFullHierarchyMessage {
-            controller?.receivedHierarchy(hierarchyMessage.hierarchy)
+    func receiveMessage(data: NSData) {
+        let message : AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
+        if let m = message as? DLSViewAdjustFullHierarchyMessage {
+            handleFullHierarchyMessage(m)
+        }
+        else if let m = message as? DLSViewAdjustViewPropertiesMessage {
+            handleViewPropertiesMessage(m)
         }
         else {
             assertionFailure("Unknown message type: \(message)")
         }
+    }
+
+    func handleFullHierarchyMessage(message : DLSViewAdjustFullHierarchyMessage) {
+        let hierarchy = message.hierarchy as! [NSString:DLSViewHierarchyRecord]
+        let topLevel = message.topLevel as! [NSString]
+        controller?.receivedHierarchy(hierarchy, topLevel : topLevel)
+    }
+    
+    func handleViewPropertiesMessage(message : DLSViewAdjustViewPropertiesMessage) {
+        controller?.receivedViewRecord(message.record)
+    }
+    
+    //MARK: ViewAdjustViewControllerDelegate
+    
+    func viewAdjustController(controller: ViewAdjustViewController, selectedViewWithID viewID: NSString?) {
+        let message = DLSViewAdjustSelectViewMessage(viewID: viewID as String?)
+        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+        context?.sendMessage(data, plugin: self)
+    }
+    
+    func viewAdjustController(controller: ViewAdjustViewController, valueChangedWithRecord record: DLSChangeViewValueRecord) {
+        let message = DLSViewAdjustValueChangedMessage(record : record)
+        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+        context?.sendMessage(data, plugin: self)
     }
 }

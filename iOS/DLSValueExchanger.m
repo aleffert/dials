@@ -16,7 +16,7 @@
 
 @implementation DLSKeyPathExchanger
 
-+ (instancetype)exchangerWithKeyPath:(NSString *)keyPath {
++ (instancetype)keyPathExchangerWithKeyPath:(NSString *)keyPath {
     DLSKeyPathExchanger* exchanger = [[DLSKeyPathExchanger alloc] init];
     exchanger.keyPath = keyPath;
     return exchanger;

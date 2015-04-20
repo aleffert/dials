@@ -8,9 +8,9 @@
 
 import Cocoa
 
-extension DLSToggleDescription : LiveDialViewGenerating {
-    func generate() -> LiveDialView {
-        let view = LiveDialView.freshViewFromNib("ToggleDialView") as! ToggleDialView
+extension DLSToggleDescription : EditorViewGenerating {
+    func generate() -> EditorView {
+        let view = EditorView.freshViewFromNib("ToggleEditorView") as! ToggleEditorView
         return view
     }
 }
@@ -35,18 +35,18 @@ extension DLSToggleDescription : CodeGenerating {
     }
 }
 
-class ToggleDialView : LiveDialView {
+class ToggleEditorView : EditorView {
     @IBOutlet private var button : NSButton?
     
     @IBAction private func buttonToggled(sender : NSButton) {
-        self.delegate?.dialView(self, changedDial: dial!, toValue: sender.state)
+        self.delegate?.editorView(self, changedInfo: info!, toValue: sender.state)
     }
     
-    override var dial : DLSLiveDial? {
+    override var info : EditorInfo? {
         didSet {
-            let value = dial?.value() as? NSNumber
-            button?.state = value?.integerValue ?? 0
-            button?.title = dial?.displayName ?? "Option"
+            let state = info?.value as? NSNumber
+            button?.state = state?.integerValue ?? 0
+            button?.title = info?.name ?? "Option"
         }
     }
 }

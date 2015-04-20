@@ -8,21 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DLSChannel;
 @protocol DLSPlugin;
 
 @protocol DLSPluginContext <NSObject>
 
-- (id <DLSChannel> __nonnull)channelWithName:( NSString* __nonnull )name forPlugin:(__nonnull id <DLSPlugin>)plugin;
-- (void)sendMessage:(NSData* __nonnull)message onChannel:(id<DLSChannel> __nonnull)channel fromPlugin:(__nonnull id <DLSPlugin>)plugin;
+- (void)sendMessage:(NSData* __nonnull)message fromPlugin:(__nonnull id <DLSPlugin>)plugin;
 
 @end
 
 @protocol DLSPlugin <NSObject>
 
-@property (readonly, nonatomic, copy) NSString*__nonnull name;
+@property (readonly, nonatomic, copy, nonnull) NSString* name;
 
-- (void)receiveMessage:(NSData* __nonnull)message onChannel:(id <DLSChannel> __nonnull)channel;
+- (void)receiveMessage:(NSData* __nonnull)message;
 
 - (void)connectedWithContext:(id <DLSPluginContext> __nonnull)context;
 - (void)connectionClosed;

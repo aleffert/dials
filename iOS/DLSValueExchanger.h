@@ -17,6 +17,6 @@
 
 @interface DLSKeyPathExchanger : NSObject <DLSValueExchanger>
 
-+ (instancetype)exchangerWithKeyPath:(NSString*)keyPath;
++ (instancetype)keyPathExchangerWithKeyPath:(NSString*)keyPath;
 
 @end

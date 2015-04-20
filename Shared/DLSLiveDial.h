@@ -12,15 +12,16 @@
 
 @interface DLSLiveDial : NSObject <NSCoding>
 
-@property (copy, nonatomic) NSString* displayName;
-@property (strong, nonatomic) id <DLSEditorDescription> editor;
-@property (copy, nonatomic) NSString* group;
-@property (copy, nonatomic) NSString* uuid;
-@property (strong, nonatomic) id <NSCoding> value;
+@property (strong, nonatomic, nonnull) id <DLSEditorDescription> editor;
+@property (strong, nonatomic, nullable) id <NSCoding> value;
+
+@property (copy, nonatomic, nonnull) NSString* displayName;
+@property (copy, nonatomic, nonnull) NSString* group;
+@property (copy, nonatomic, nonnull) NSString* uuid;
 
 @property (assign, nonatomic) BOOL canSave;
 
-@property (copy, nonatomic) NSString* file;
+@property (copy, nonatomic, nullable) NSString* file;
 @property (assign, nonatomic) size_t line;
 
 @end

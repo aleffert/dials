@@ -9,24 +9,23 @@
 #import <Foundation/Foundation.h>
 
 @class DLSChannelStream;
-@class DLSOwnedChannel;
-@protocol DLSChannel;
+@class DLSChannel;
 
 @protocol DLSChannelStreamDelegate
 
-- (void)streamClosed:(DLSChannelStream*)stream;
-- (void)stream:(DLSChannelStream*)stream receivedMessage:(NSData*)data onChannel:(DLSOwnedChannel*)channel;
+- (void)streamClosed:(DLSChannelStream* __nonnull)stream;
+- (void)stream:(DLSChannelStream* __nonnull)stream receivedMessage:(NSData* __nonnull)data onChannel:(DLSChannel* __nonnull)channel;
 
 @end
 
 @interface DLSChannelStream : NSObject
 
-- (id)initWithInputStream:(NSInputStream*)inputStream outputStream:(NSOutputStream*)outputStream;
-- (id)initWithNetService:(NSNetService*)service;
+- (nonnull id)initWithInputStream:(NSInputStream* __nonnull)inputStream outputStream:(NSOutputStream* __nonnull)outputStream;
+- (nonnull id)initWithNetService:(NSNetService* __nonnull)service;
 
-@property (weak, nonatomic) id <DLSChannelStreamDelegate> delegate;
+@property (weak, nonatomic, nullable) id <DLSChannelStreamDelegate> delegate;
 
-- (void)sendMessage:(NSData*)data onChannel:(id <DLSChannel>)channel;
+- (void)sendMessage:(NSData* __nonnull)data onChannel:(DLSChannel* __nonnull)channel;
 - (void)close;
 
 @end

@@ -14,23 +14,25 @@ protocol LiveDialControllerDelegate : class {
     func dialController(controller : LiveDialController, shouldSaveDial dial : DLSLiveDial, withValue value : NSCoding?)
 }
 
-class LiveDialController : NSObject, LiveDialViewDelegate, Equatable {
+class LiveDialController : NSObject, EditorViewDelegate, Equatable {
     @IBOutlet var bodyView : NSView?
     @IBOutlet var containerView : NSView?
     @IBOutlet var revertButton : NSButton?
     @IBOutlet var saveButton : NSButton?
     @IBOutlet var openButton : NSButton?
     
-    var currentValue : NSCoding?
-    var updated : Bool = false
-    var mouseInView : Bool = false
+    private var currentValue : NSCoding?
+    private var updated : Bool = false
+    private var mouseInView : Bool = false
 
-    let contentView : LiveDialView
+    private let contentView : EditorView
+    let dial : DLSLiveDial
     
     weak var delegate : LiveDialControllerDelegate?
     
-    init(dial : DLSLiveDial, contentView : LiveDialView, delegate : LiveDialControllerDelegate) {
-        contentView.dial = dial
+    init(dial : DLSLiveDial, contentView : EditorView, delegate : LiveDialControllerDelegate) {
+        contentView.info = EditorInfo(editor : dial.editor, name : dial.displayName, value : dial.value())
+        self.dial = dial
         self.delegate = delegate
         self.contentView = contentView
         currentValue = dial.value()
@@ -48,25 +50,19 @@ class LiveDialController : NSObject, LiveDialViewDelegate, Equatable {
     func validateButtons(#animated : Bool) {
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.allowsImplicitAnimation = true
-            if let d = self.contentView.dial {
-                self.revertButton?.enabled = d.editor.canRevert && self.updated
-                self.saveButton?.enabled = d.canSave && self.updated
-            }
+            self.revertButton?.enabled = self.dial.editor.canRevert && self.updated
+            self.saveButton?.enabled = self.dial.canSave && self.updated && self.dial.file != nil
             self.revertButton?.hidden = !self.mouseInView
             self.saveButton?.hidden = !self.mouseInView
             self.openButton?.hidden = !self.mouseInView
         }, completionHandler: nil)
     }
     
-    func dialView(view: LiveDialView, changedDial dial: DLSLiveDial, toValue value: NSCoding?) {
+    func editorView(view: EditorView, changedInfo info: EditorInfo, toValue value: NSCoding?) {
         currentValue = value
         updated = true
         delegate?.dialController(self, changedDial:dial, toValue: value)
         validateButtons(animated: true)
-    }
-    
-    var dial : DLSLiveDial? {
-        return contentView.dial
     }
     
     var view : NSView {
@@ -84,30 +80,28 @@ class LiveDialController : NSObject, LiveDialViewDelegate, Equatable {
     }
     
     @IBAction func openFilePressed(sender : AnyObject) {
-        contentView.dial.map { NSWorkspace.sharedWorkspace().openFile($0.file) }
+        dial.file.map { NSWorkspace.sharedWorkspace().openFile($0) }
     }
     
     @IBAction func revertPressed(sender : AnyObject) {
-        contentView.dial = contentView.dial
-        delegate?.dialController(self, changedDial: contentView.dial!, toValue: contentView.dial!.value())
+        contentView.info = contentView.info
+        delegate?.dialController(self, changedDial: dial, toValue: contentView.info!.value)
         updated = false
         validateButtons(animated: true)
     }
     
     @IBAction func saveFilePressed(sender : AnyObject) {
-        if let d = contentView.dial {
-            delegate?.dialController(self, shouldSaveDial : contentView.dial!, withValue: currentValue)
-            d.setValue(currentValue)
-            updated = false
-            validateButtons(animated: true)
-        }
+        delegate?.dialController(self, shouldSaveDial : dial, withValue: currentValue)
+        dial.setValue(currentValue)
+        updated = false
+        validateButtons(animated: true)
     }
 }
 
 func < (left : LiveDialController, right : LiveDialController) -> Bool {
-    return left.contentView.dial?.displayName < right.contentView.dial?.displayName
+    return left.dial.displayName < right.dial.displayName
 }
 
 func == (left : LiveDialController, right : LiveDialController) -> Bool {
-    return left.contentView.dial?.uuid == right.contentView.dial?.uuid
+    return left.dial.uuid == right.dial.uuid
 }

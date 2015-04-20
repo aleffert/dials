@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-extern NSString * const DLSNetServiceName;
+extern NSString * const __nonnull DLSNetServiceName;
 
 #define DLSConstant(key) @"DLSKey" #key
 

@@ -9,9 +9,9 @@
 import Foundation
 import AppKit
 
-extension DLSSliderDescription : LiveDialViewGenerating {
-    func generate() -> LiveDialView {
-        let view = LiveDialView.freshViewFromNib("SliderDialView") as! SliderDialView
+extension DLSSliderDescription : EditorViewGenerating {
+    func generate() -> EditorView {
+        let view = EditorView.freshViewFromNib("SliderEditorView") as! SliderEditorView
         view.editorDescription = self
         return view
     }
@@ -36,7 +36,7 @@ extension DLSSliderDescription : CodeGenerating {
     }
 }
 
-class SliderDialView : LiveDialView {
+class SliderEditorView : EditorView {
     @IBOutlet private var slider : NSSlider?
     @IBOutlet private var name : NSTextField?
     @IBOutlet private var minLabel : NSTextField?
@@ -54,16 +54,16 @@ class SliderDialView : LiveDialView {
     
     @IBAction private func sliderChanged(sender : NSSlider) {
         currentLabel?.stringValue = stringFromNumber(sender.floatValue)
-        self.delegate?.dialView(self, changedDial: dial!, toValue: sender.floatValue)
+        self.delegate?.editorView(self, changedInfo: info!, toValue: sender.floatValue)
     }
     
-    override var dial : DLSLiveDial? {
+    override var info : EditorInfo? {
         didSet {
-            let value = (dial?.value() as? NSNumber)?.floatValue ?? 0
-            slider?.floatValue = value
-            currentLabel?.stringValue = stringFromNumber(value)
+            let floatValue = (info?.value as? NSNumber)?.floatValue ?? 0
+            slider?.floatValue = floatValue
+            currentLabel?.stringValue = stringFromNumber(floatValue)
             
-            name?.stringValue = dial?.displayName ?? "Slider"
+            name?.stringValue = info?.name ?? "Slider"
         }
     }
 }

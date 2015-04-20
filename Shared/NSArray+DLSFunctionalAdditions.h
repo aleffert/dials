@@ -12,6 +12,6 @@
 
 /// Returns an array by applying a functional to every element of an array
 /// If the function returns nil, that item is ignored
-- (NSArray*)dls_map:(id(^)(id o))mapper;
+- (nonnull NSArray*)dls_map:(id __nullable (^ __nonnull)(id __nonnull o))mapper;
 
 @end

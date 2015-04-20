@@ -14,25 +14,29 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
 
     var displayName : String = "Control Panel"
     
-    private var knownChannels : [String:LiveDialPaneViewController] = [:]
+    private var knownGroups : [String:LiveDialPaneViewController] = [:]
     private var context : PluginContext?
     
     var shouldSortChildren : Bool {
         return true
     }
     
-    func receiveMessage(data: NSData, channel: DLSChannel) {
-        if knownChannels[channel.name] == nil {
-            let controller = LiveDialPaneViewController(channel : channel, delegate : self)!
-            context?.addViewController(controller, plugin:self)
-            knownChannels[channel.name] = controller
+    func receiveMessage(data: NSData) {
+        let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? DLSLiveDialsMessage
+        
+        if let group = message?.group {
+            if knownGroups[group] == nil {
+                let controller = LiveDialPaneViewController(group : group, delegate : self)!
+                context?.addViewController(controller, plugin:self)
+                knownGroups[group] = controller
+            }
         }
-        let message: AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
+        
         if let addMessage = message as? DLSLiveDialsAddMessage {
-            handleAddMessage(addMessage, channel: channel.name)
+            handleAddMessage(addMessage)
         }
         else if let removeMessage = message as? DLSLiveDialsRemoveMessage {
-            handleRemoveMessage(removeMessage, channel : channel.name)
+            handleRemoveMessage(removeMessage)
         }
     }
     
@@ -41,39 +45,39 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     }
     
     func connectionClosed() {
-        for (name, controller) in knownChannels {
+        for (name, controller) in knownGroups {
             context?.removeViewController(controller, plugin: self)
         }
-        knownChannels = [:]
+        knownGroups = [:]
     }
     
-    func handleAddMessage(message : DLSLiveDialsAddMessage, channel: String) {
-        let controller = knownChannels[channel]
+    func handleAddMessage(message : DLSLiveDialsAddMessage) {
+        let controller = knownGroups[message.group]
         controller?.addDial(message.dial)
     }
     
-    func handleRemoveMessage(message : DLSLiveDialsRemoveMessage, channel : String) {
-        let controller = knownChannels[channel]
+    func handleRemoveMessage(message : DLSLiveDialsRemoveMessage) {
+        let controller = knownGroups[message.group]
         if let c = controller {
             c.removeDialWithID(message.uuid)
             if c.isEmpty {
                 self.context?.removeViewController(c, plugin: self)
-                knownChannels.removeValueForKey(channel)
+                knownGroups.removeValueForKey(message.group)
             }
         }
     }
     
     func paneController(controller: LiveDialPaneViewController, changedDial dial: DLSLiveDial, toValue value: NSCoding?) {
-        var message = DLSLiveDialsChangeMessage(UUID: dial.uuid, value: value)
+        var message = DLSLiveDialsChangeMessage(UUID: dial.uuid, value: value, group : controller.group as String)
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
-        context?.sendMessage(data, channel: controller.channel, plugin: self)
+        context?.sendMessage(data, plugin: self)
     }
     
     func paneController(controller: LiveDialPaneViewController, shouldSaveDial dial: DLSLiveDial, withValue value: NSCoding?) {
         let codeManager = CodeManager()
-        let symbol = codeManager.findSymbolWithName(dial.displayName, inFile:dial.file)
+        let symbol = codeManager.findSymbolWithName(dial.displayName, inFile:dial.file!)
         symbol.bind {
-            codeManager.updateSymbol($0, toValue: value, withEditor:dial.editor!, inFile:dial.file)
+            codeManager.updateSymbol($0, toValue: value, withEditor:dial.editor, inFile:dial.file!)
         }
     }
 }

@@ -46,7 +46,7 @@
     [self.streamWriter open];
 }
 
-- (void)sendMessage:(NSData *)data onChannel:(id<DLSChannel>)channel {
+- (void)sendMessage:(NSData *)data onChannel:(DLSChannel*)channel {
     [self.streamWriter enqueueMessage:[NSKeyedArchiver archivedDataWithRootObject:channel]];
     [self.streamWriter enqueueMessage:data];
 }
@@ -56,7 +56,7 @@
         self.currentHeader = data;
     }
     else {
-        DLSOwnedChannel* channel = [NSKeyedUnarchiver unarchiveObjectWithData:self.currentHeader];
+        DLSChannel* channel = [NSKeyedUnarchiver unarchiveObjectWithData:self.currentHeader];
         [self.delegate stream:self receivedMessage:data onChannel:channel];
         self.currentHeader = nil;
     }

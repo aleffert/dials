@@ -192,8 +192,9 @@ extension ConsoleWindowController : PluginContext {
         hideSidebarIfNecessary()
     }
     
-    func sendMessage(data: NSData, channel: DLSChannel, plugin: Plugin) {
-        self.currentConnection?.sendMessage(data, channel : channel)
+    func sendMessage(data: NSData, plugin: Plugin) {
+        let channel = DLSChannel(name : plugin.name)
+        self.currentConnection?.sendMessage(data, channel: channel)
     }
 }
 
@@ -220,7 +221,7 @@ extension ConsoleWindowController : DeviceConnectionDelegate {
         devicesChanged()
     }
     
-    func connection(connection: DeviceConnection, receivedData: NSData, channel: DLSOwnedChannel) {
+    func connection(connection: DeviceConnection, receivedData: NSData, channel: DLSChannel) {
         pluginController.routeMessage(receivedData, channel : channel)
     }
     

@@ -8,28 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* const DLSLiveDialsPluginName;
-extern NSString* const DLSLiveDialsPluginDefaultGroup;
+extern NSString* const __nonnull DLSLiveDialsPluginName;
+extern NSString* const __nonnull DLSLiveDialsPluginDefaultGroup;
 
 @class DLSLiveDial;
 
-@interface DLSLiveDialsAddMessage : NSObject <NSCoding>
+@interface DLSLiveDialsMessage : NSObject <NSCoding>
 
-@property (strong, nonatomic) DLSLiveDial* dial;
+- (nonnull id)initWithGroup:(NSString* __nonnull)group;
 
-@end
-
-@interface DLSLiveDialsRemoveMessage : NSObject <NSCoding>
-
-@property (copy, nonatomic) NSString* uuid;
+@property (copy, nonatomic, nonnull) NSString* group;
 
 @end
 
-@interface DLSLiveDialsChangeMessage : NSObject <NSCoding>
+@interface DLSLiveDialsAddMessage : DLSLiveDialsMessage <NSCoding>
 
-- (id)initWithUUID:(NSString*)uuid value:(id <NSCoding>)value;
+@property (strong, nonatomic, nonnull) DLSLiveDial* dial;
 
-@property (copy, nonatomic) NSString* uuid;
-@property (strong, nonatomic) id <NSCoding> value;
+@end
+
+@interface DLSLiveDialsRemoveMessage : DLSLiveDialsMessage <NSCoding>
+
+@property (copy, nonatomic, nonnull) NSString* uuid;
+
+@end
+
+@interface DLSLiveDialsChangeMessage : DLSLiveDialsMessage <NSCoding>
+
+- (nonnull id)initWithUUID:(NSString* __nonnull)uuid value:(id <NSCoding> __nullable)value group:(NSString* __nonnull)group;
+
+@property (copy, nonatomic, nonnull) NSString* uuid;
+@property (strong, nonatomic, nullable) id <NSCoding> value;
 
 @end

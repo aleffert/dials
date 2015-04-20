@@ -22,12 +22,8 @@
 
 @implementation DLSPluginContextBouncer
 
-- (id <DLSChannel>)channelWithName:(NSString *)name forPlugin:(id <DLSPlugin>)plugin {
-    return [self.backingContext channelWithName:name forPlugin:plugin];
-}
-
-- (void)sendMessage:(NSData *)message onChannel:(id<DLSChannel>)channel fromPlugin:(id <DLSPlugin>)plugin {
-    [self.backingContext sendMessage:message onChannel:channel fromPlugin:plugin];
+- (void)sendMessage:(NSData *)message fromPlugin:(id <DLSPlugin>)plugin {
+    [self.backingContext sendMessage:message fromPlugin:plugin];
 }
 
 @end
@@ -116,10 +112,10 @@
     NSLog(@"Error starting dials: %@", errorDict);
 }
 
-- (void)stream:(DLSChannelStream *)stream receivedMessage:(NSData *)data onChannel:(DLSOwnedChannel *)channel {
+- (void)stream:(DLSChannelStream *)stream receivedMessage:(NSData *)data onChannel:(DLSChannel *)channel {
     for(id <DLSPlugin> plugin in self.plugins) {
-        if([plugin.name isEqual:channel.owner]) {
-            [plugin receiveMessage:data onChannel:channel];
+        if([plugin.name isEqual:channel.name]) {
+            [plugin receiveMessage:data];
         }
     }
 }
@@ -134,12 +130,9 @@
     [self startBroadcast];
 }
 
-- (void)sendMessage:(NSData *)message onChannel:(id<DLSChannel>)channel fromPlugin:(id<DLSPlugin>)plugin {
+- (void)sendMessage:(NSData *)message fromPlugin:(id<DLSPlugin>)plugin {
+    DLSChannel* channel = [[DLSChannel alloc] initWithName:plugin.name];
     [self.stream sendMessage:message onChannel:channel];
-}
-
-- (id <DLSChannel>)channelWithName:(NSString *)name forPlugin:(id <DLSPlugin>)plugin {
-    return [[DLSOwnedChannel alloc] initWithOwner:plugin.name name:name];
 }
 
 @end

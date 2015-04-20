@@ -16,8 +16,8 @@ class PluginContextBouncer: NSObject, PluginContext {
         backingContext = backing
     }
     
-    func sendMessage(data : NSData, channel: DLSChannel, plugin : Plugin) {
-        backingContext?.sendMessage(data, channel: channel, plugin: plugin)
+    func sendMessage(data : NSData, plugin : Plugin) {
+        backingContext?.sendMessage(data, plugin: plugin)
     }
     
     func addViewController(controller: NSViewController, plugin: Plugin) {

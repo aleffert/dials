@@ -12,6 +12,6 @@
 
 @interface NSObject (DLSDeallocAction)
 
-- (id <DLSRemovable>)dls_performActionOnDealloc:(void(^)(void))action;
+- (nonnull id <DLSRemovable>)dls_performActionOnDealloc:(void(^ __nonnull)(void))action;
 
 @end

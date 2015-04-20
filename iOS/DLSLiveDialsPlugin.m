@@ -104,12 +104,12 @@
 
 #pragma mark Messages
 
-- (void)sendMessage:(id <NSCoding>)message onChannel:(id<DLSChannel>)channel {
+- (void)sendMessage:(id <NSCoding>)message {
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:message];
-    [self.context sendMessage:data onChannel:channel fromPlugin:self];
+    [self.context sendMessage:data fromPlugin:self];
 }
 
-- (void)receiveMessage:(NSData *)messageData onChannel:(id<DLSChannel>)channel {
+- (void)receiveMessage:(NSData *)messageData {
     id message = [NSKeyedUnarchiver unarchiveObjectWithData:messageData];
     if([message isKindOfClass:[DLSLiveDialsChangeMessage class]]) {
         [self handleChangeMessage:message];
@@ -129,16 +129,17 @@
 - (void)sendAddMessageForDial:(DLSLiveDial*)dial {
     DLSLiveDialsAddMessage* message = [[DLSLiveDialsAddMessage alloc] init];
     message.dial = dial;
-    id <DLSChannel> channel = [self.context channelWithName:dial.group forPlugin:self];
-    [self sendMessage:message onChannel:channel];
+    message.group = dial.group;
+    [self sendMessage:message];
 }
 
 - (void)sendRemoveMessageWithUUID:(NSString*)uuid {
+    DLSActiveDialRecord* record = self.activeDials[uuid];
+    
     DLSLiveDialsRemoveMessage* message = [[DLSLiveDialsRemoveMessage alloc] init];
     message.uuid = uuid;
-    DLSActiveDialRecord* record = self.activeDials[uuid];
-    id <DLSChannel> channel = [self.context channelWithName:record.dial.group forPlugin:self];
-    [self sendMessage:message onChannel:channel];
+    message.group = record.dial.group;
+    [self sendMessage:message];
 }
 
 #pragma mark Groups

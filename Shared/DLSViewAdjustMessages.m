@@ -32,30 +32,13 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 
 @end
 
-@implementation DLSPropertyGroup
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
-    if(self != nil) {
-        DLSDecodeObject(aDecoder, name);
-        DLSDecodeObject(aDecoder, items);
-    }
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder {
-    DLSEncodeObject(aCoder, name);
-    DLSEncodeObject(aCoder, items);
-}
-
-@end
 
 @implementation DLSViewHierarchyRecord
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        DLSDecodeObject(aDecoder, uuid);
+        DLSDecodeObject(aDecoder, viewID);
         DLSDecodeObject(aDecoder, children);
         DLSDecodeObject(aDecoder, displayName);
         DLSDecodeObject(aDecoder, className);
@@ -64,10 +47,10 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    DLSDecodeObject(aCoder, uuid);
-    DLSDecodeObject(aCoder, children);
-    DLSDecodeObject(aCoder, displayName);
-    DLSDecodeObject(aCoder, className);
+    DLSEncodeObject(aCoder, viewID);
+    DLSEncodeObject(aCoder, children);
+    DLSEncodeObject(aCoder, displayName);
+    DLSEncodeObject(aCoder, className);
 }
 
 @end
@@ -77,7 +60,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        DLSDecodeObject(aDecoder, uuid);
+        DLSDecodeObject(aDecoder, viewID);
         DLSDecodeObject(aDecoder, propertyGroups);
         DLSDecodeObject(aDecoder, className);
         DLSDecodeObject(aDecoder, values);
@@ -86,10 +69,42 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    DLSDecodeObject(aCoder, uuid);
-    DLSDecodeObject(aCoder, propertyGroups);
-    DLSDecodeObject(aCoder, className);
-    DLSDecodeObject(aCoder, values);
+    DLSEncodeObject(aCoder, viewID);
+    DLSEncodeObject(aCoder, propertyGroups);
+    DLSEncodeObject(aCoder, className);
+    DLSEncodeObject(aCoder, values);
+}
+
+@end
+
+@implementation DLSChangeViewValueRecord
+
+- (id)initWithViewID:(NSString*)viewID name:(NSString*)name group:(NSString*)group value:(id <NSCoding>)value {
+    if(self != nil) {
+        self.viewID = viewID;
+        self.name = name;
+        self.group = group;
+        self.value = value;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self != nil) {
+        DLSDecodeObject(aDecoder, viewID);
+        DLSDecodeObject(aDecoder, name);
+        DLSDecodeObject(aDecoder, group);
+        DLSDecodeObject(aDecoder, value);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodeObject(aCoder, viewID);
+    DLSEncodeObject(aCoder, name);
+    DLSEncodeObject(aCoder, group);
+    DLSEncodeObject(aCoder, value);
 }
 
 @end
@@ -100,25 +115,78 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     self = [super init];
     if(self != nil) {
         DLSDecodeObject(aDecoder, hierarchy);
+        DLSDecodeObject(aDecoder, topLevel);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeObject(aCoder, hierarchy);
+    DLSEncodeObject(aCoder, topLevel);
 }
 
 @end
 
-@implementation DLSViewAdjustRequestHierarchyMessage
+@implementation DLSViewAdjustViewPropertiesMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    // no properties
-    return [super init];
+    self = [super init];
+    if(self != nil) {
+        DLSDecodeObject(aDecoder, record);
+    }
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    // no properties
+    DLSEncodeObject(aCoder, record);
+}
+
+@end
+
+@implementation DLSViewAdjustSelectViewMessage
+
+- (id)initWithViewID:(NSString*)viewID {
+    self = [super init];
+    if(self != nil) {
+        self.viewID = viewID;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self != nil) {
+        DLSDecodeObject(aDecoder, viewID);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodeObject(aCoder, viewID);
+}
+
+@end
+
+@implementation DLSViewAdjustValueChangedMessage
+
+- (id)initWithRecord:(DLSChangeViewValueRecord*)record {
+    self = [super init];
+    if(self != nil) {
+        self.record = record;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self != nil) {
+        DLSDecodeObject(aDecoder, record);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodeObject(aCoder, record);
 }
 
 @end

@@ -12,10 +12,9 @@
 		773E67AC1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 773E67AA1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		773E67AD1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 773E67AB1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.m */; };
 		774D15BF1AB4BD6500613F24 /* UIView+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 774D15BD1AB4BD6500613F24 /* UIView+DLSDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		774D15C01AB4BD6500613F24 /* UIView+DLSDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D15BE1AB4BD6500613F24 /* UIView+DLSDescription.m */; };
+		774D15C01AB4BD6500613F24 /* UIView+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D15BE1AB4BD6500613F24 /* UIView+DLSDescribable.m */; };
 		774D15C21AB4BE0A00613F24 /* DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 774D15BA1AB4BC8800613F24 /* DLSDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		774D15C61AB4BFF800613F24 /* DLSDescriptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D15C41AB4BFF800613F24 /* DLSDescriptionContext.m */; };
-		774D15D61AB4C47C00613F24 /* DLSPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D15D41AB4C47C00613F24 /* DLSPropertyDescription.m */; };
 		7787FF431A3CA35200074DBC /* DLSPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7787FF411A3CA35200074DBC /* DLSPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7787FF491A3CAD1700074DBC /* DLSLiveDialsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787FF481A3CACBF00074DBC /* DLSLiveDialsPlugin.m */; };
 		7787FF4A1A3CAD1A00074DBC /* DLSLiveDialsPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7787FF471A3CACBF00074DBC /* DLSLiveDialsPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,7 +22,8 @@
 		779250ED1A33592100CCC229 /* DLSDials.h in Headers */ = {isa = PBXBuildFile; fileRef = 779250EA1A33592100CCC229 /* DLSDials.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779250EE1A33592100CCC229 /* DLSDials.m in Sources */ = {isa = PBXBuildFile; fileRef = 779250EB1A33592100CCC229 /* DLSDials.m */; };
 		77B0B9FD1AD1B29200E81A67 /* DLSValueExchanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B0B9FB1AD1B29200E81A67 /* DLSValueExchanger.m */; };
-		77B0BA011AD1B58F00E81A67 /* UIView+DLSViewAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B0B9FF1AD1B58F00E81A67 /* UIView+DLSViewAdjust.m */; };
+		77B2355D1AE2F86400599722 /* UIView+DLSViewID.h in Headers */ = {isa = PBXBuildFile; fileRef = 77B2355B1AE2F86400599722 /* UIView+DLSViewID.h */; };
+		77B2355E1AE2F86400599722 /* UIView+DLSViewID.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B2355C1AE2F86400599722 /* UIView+DLSViewID.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,11 +32,9 @@
 		773E67AB1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSViewAdjustPlugin.m; path = iOS/DLSViewAdjustPlugin.m; sourceTree = SOURCE_ROOT; };
 		774D15BA1AB4BC8800613F24 /* DLSDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DLSDescribable.h; path = iOS/DLSDescribable.h; sourceTree = SOURCE_ROOT; };
 		774D15BD1AB4BD6500613F24 /* UIView+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DLSDescribable.h"; path = "iOS/UIView+DLSDescribable.h"; sourceTree = SOURCE_ROOT; };
-		774D15BE1AB4BD6500613F24 /* UIView+DLSDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DLSDescription.m"; path = "iOS/UIView+DLSDescription.m"; sourceTree = SOURCE_ROOT; };
+		774D15BE1AB4BD6500613F24 /* UIView+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DLSDescribable.m"; path = "iOS/UIView+DLSDescribable.m"; sourceTree = SOURCE_ROOT; };
 		774D15C31AB4BFF800613F24 /* DLSDescriptionContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSDescriptionContext.h; path = iOS/DLSDescriptionContext.h; sourceTree = SOURCE_ROOT; };
 		774D15C41AB4BFF800613F24 /* DLSDescriptionContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSDescriptionContext.m; path = iOS/DLSDescriptionContext.m; sourceTree = SOURCE_ROOT; };
-		774D15D31AB4C47C00613F24 /* DLSPropertyDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSPropertyDescription.h; path = iOS/DLSPropertyDescription.h; sourceTree = SOURCE_ROOT; };
-		774D15D41AB4C47C00613F24 /* DLSPropertyDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSPropertyDescription.m; path = iOS/DLSPropertyDescription.m; sourceTree = SOURCE_ROOT; };
 		774D16041AB53D2A00613F24 /* Dials-iOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Dials-iOS.pch"; path = "iOS/Dials-iOS.pch"; sourceTree = SOURCE_ROOT; };
 		77567B641AC6D29300877A7B /* DLSLiveDialsPlugin+SwiftAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DLSLiveDialsPlugin+SwiftAdditions.swift"; path = "iOS/DLSLiveDialsPlugin+SwiftAdditions.swift"; sourceTree = SOURCE_ROOT; };
 		7787FF411A3CA35200074DBC /* DLSPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSPlugin.h; path = iOS/DLSPlugin.h; sourceTree = SOURCE_ROOT; };
@@ -50,8 +48,8 @@
 		77AAE5091A32D26500998E36 /* Dials.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B0B9FA1AD1B29200E81A67 /* DLSValueExchanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSValueExchanger.h; path = iOS/DLSValueExchanger.h; sourceTree = SOURCE_ROOT; };
 		77B0B9FB1AD1B29200E81A67 /* DLSValueExchanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSValueExchanger.m; path = iOS/DLSValueExchanger.m; sourceTree = SOURCE_ROOT; };
-		77B0B9FE1AD1B58F00E81A67 /* UIView+DLSViewAdjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DLSViewAdjust.h"; path = "iOS/UIView+DLSViewAdjust.h"; sourceTree = SOURCE_ROOT; };
-		77B0B9FF1AD1B58F00E81A67 /* UIView+DLSViewAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DLSViewAdjust.m"; path = "iOS/UIView+DLSViewAdjust.m"; sourceTree = SOURCE_ROOT; };
+		77B2355B1AE2F86400599722 /* UIView+DLSViewID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DLSViewID.h"; path = "iOS/UIView+DLSViewID.h"; sourceTree = SOURCE_ROOT; };
+		77B2355C1AE2F86400599722 /* UIView+DLSViewID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DLSViewID.m"; path = "iOS/UIView+DLSViewID.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,13 +82,11 @@
 			children = (
 				77B0B9FA1AD1B29200E81A67 /* DLSValueExchanger.h */,
 				77B0B9FB1AD1B29200E81A67 /* DLSValueExchanger.m */,
-				774D15D31AB4C47C00613F24 /* DLSPropertyDescription.h */,
-				774D15D41AB4C47C00613F24 /* DLSPropertyDescription.m */,
 				774D15C31AB4BFF800613F24 /* DLSDescriptionContext.h */,
 				774D15C41AB4BFF800613F24 /* DLSDescriptionContext.m */,
 				774D15BA1AB4BC8800613F24 /* DLSDescribable.h */,
 				774D15BD1AB4BD6500613F24 /* UIView+DLSDescribable.h */,
-				774D15BE1AB4BD6500613F24 /* UIView+DLSDescription.m */,
+				774D15BE1AB4BD6500613F24 /* UIView+DLSDescribable.m */,
 			);
 			name = Descriptions;
 			sourceTree = "<group>";
@@ -116,8 +112,8 @@
 		77AAE50B1A32D26500998E36 /* Dials-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				77B0B9FE1AD1B58F00E81A67 /* UIView+DLSViewAdjust.h */,
-				77B0B9FF1AD1B58F00E81A67 /* UIView+DLSViewAdjust.m */,
+				77B2355B1AE2F86400599722 /* UIView+DLSViewID.h */,
+				77B2355C1AE2F86400599722 /* UIView+DLSViewID.m */,
 				774D16041AB53D2A00613F24 /* Dials-iOS.pch */,
 				774D15C11AB4BD6D00613F24 /* Descriptions */,
 				773E67BA1ACEE9B500E1BB0A /* Plugins */,
@@ -151,6 +147,7 @@
 				774D15BF1AB4BD6500613F24 /* UIView+DLSDescribable.h in Headers */,
 				773E67AC1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.h in Headers */,
 				779250ED1A33592100CCC229 /* DLSDials.h in Headers */,
+				77B2355D1AE2F86400599722 /* UIView+DLSViewID.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,13 +220,12 @@
 			files = (
 				770F22331AD62E5600471B5E /* DLSLiveDialsPlugin+SwiftAdditions.swift in Sources */,
 				773E67AD1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.m in Sources */,
+				77B2355E1AE2F86400599722 /* UIView+DLSViewID.m in Sources */,
 				7787FF491A3CAD1700074DBC /* DLSLiveDialsPlugin.m in Sources */,
 				779250EE1A33592100CCC229 /* DLSDials.m in Sources */,
 				77B0B9FD1AD1B29200E81A67 /* DLSValueExchanger.m in Sources */,
 				774D15C61AB4BFF800613F24 /* DLSDescriptionContext.m in Sources */,
-				774D15C01AB4BD6500613F24 /* UIView+DLSDescription.m in Sources */,
-				774D15D61AB4C47C00613F24 /* DLSPropertyDescription.m in Sources */,
-				77B0BA011AD1B58F00E81A67 /* UIView+DLSViewAdjust.m in Sources */,
+				774D15C01AB4BD6500613F24 /* UIView+DLSDescribable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

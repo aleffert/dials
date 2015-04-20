@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class DLSPropertyDescription;
+
 @protocol DLSDescriptionContext;
+@protocol DLSValueExchanger;
 
 @protocol DLSDescribable <NSObject>
 
+- (id <DLSValueExchanger>)dls_valueExchangerForProperty:(NSString*)property inGroup:(NSString*)group;
+
 /// Must call super
-+ (void)dls_describe:(id <DLSDescriptionContext>)context;
+- (void)dls_describe:(id <DLSDescriptionContext>)context;
 
 @end

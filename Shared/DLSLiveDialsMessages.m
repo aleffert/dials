@@ -13,10 +13,33 @@
 NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.live-dials";
 NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 
-@implementation DLSLiveDialsAddMessage
+@implementation DLSLiveDialsMessage
+
+- (id)initWithGroup:(NSString *)group {
+    if(self != nil) {
+        self.group = group;
+    }
+    return self;
+}
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
+    if(self != nil) {
+        DLSDecodeObject(aDecoder, group);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodeObject(aCoder, group);
+}
+
+@end
+
+@implementation DLSLiveDialsAddMessage
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if(self != nil) {
         DLSDecodeObject(aDecoder, dial);
     }
@@ -24,6 +47,7 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     DLSEncodeObject(aCoder, dial);
 }
 
@@ -32,7 +56,7 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 @implementation DLSLiveDialsRemoveMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
+    self = [super initWithCoder:aDecoder];
     if(self != nil) {
         DLSDecodeObject(aDecoder, uuid);
     }
@@ -40,6 +64,7 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     DLSEncodeObject(aCoder, uuid);
 }
 
@@ -47,8 +72,8 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 
 @implementation DLSLiveDialsChangeMessage
 
-- (id)initWithUUID:(NSString*)uuid value:(id <NSCoding>)value {
-    self = [super init];
+- (id)initWithUUID:(NSString*)uuid value:(id <NSCoding>)value group:(NSString *)group{
+    self = [super initWithGroup:group];
     if(self != nil) {
         self.uuid = uuid;
         self.value = value;
@@ -57,7 +82,7 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super init];
+    self = [super initWithCoder:aDecoder];
     if(self != nil) {
         DLSDecodeObject(aDecoder, uuid);
         DLSDecodeObject(aDecoder, value);
@@ -66,6 +91,7 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     DLSEncodeObject(aCoder, uuid);
     DLSEncodeObject(aCoder, value);
 }

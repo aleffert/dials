@@ -10,7 +10,7 @@ import Cocoa
 
 protocol DeviceConnectionDelegate : class {
     func connectionClosed(connection : DeviceConnection)
-    func connection(connection : DeviceConnection, receivedData : NSData, channel : DLSOwnedChannel)
+    func connection(connection : DeviceConnection, receivedData : NSData, channel : DLSChannel)
 }
 
 class DeviceConnection : NSObject, DLSChannelStreamDelegate  {
@@ -40,11 +40,11 @@ class DeviceConnection : NSObject, DLSChannelStreamDelegate  {
         self.stream.sendMessage(message, onChannel: channel)
     }
     
-    func stream(stream: DLSChannelStream!, receivedMessage data: NSData!, onChannel channel: DLSOwnedChannel!) {
+    func stream(stream: DLSChannelStream, receivedMessage data: NSData, onChannel channel: DLSChannel) {
         delegate?.connection(self, receivedData: data, channel: channel)
     }
     
-    func streamClosed(stream: DLSChannelStream!) {
+    func streamClosed(stream: DLSChannelStream) {
         delegate?.connectionClosed(self)
     }
 }

@@ -35,9 +35,9 @@ class PluginController: NSObject {
         return nil
     }
     
-    func routeMessage(data : NSData, channel : DLSOwnedChannel) {
-        let plugin = pluginWithName(channel.owner)
-        plugin?.receiveMessage(data, channel: channel)
+    func routeMessage(data : NSData, channel : DLSChannel) {
+        let plugin = pluginWithName(channel.name)
+        plugin?.receiveMessage(data)
     }
     
     func connectionClosed() {

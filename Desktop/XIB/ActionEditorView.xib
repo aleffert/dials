@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LiveDialViewNibOwner" customModule="Dials" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="EditorViewNibOwner" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="c22-O7-iKe" id="toj-1a-NUD"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView verticalHuggingPriority="1000" id="c22-O7-iKe" customClass="ActionDialView" customModule="Dials" customModuleProvider="target">
+        <customView verticalHuggingPriority="1000" id="c22-O7-iKe" customClass="ActionEditorView" customModule="Dials">
             <rect key="frame" x="0.0" y="0.0" width="86" height="18"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>

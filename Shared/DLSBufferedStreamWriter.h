@@ -12,19 +12,19 @@
 
 @protocol DLSBufferedStreamWriterDelegate <NSObject>
 
-- (void)streamWriterClosed:(DLSBufferedStreamWriter*)writer;
+- (void)streamWriterClosed:(DLSBufferedStreamWriter* __nonnull)writer;
 
 @end
 
 @interface DLSBufferedStreamWriter : NSObject
 
-- (id)initWithOutputStream:(NSOutputStream*)stream;
+- (nonnull id)initWithOutputStream:(NSOutputStream* __nonnull)stream;
 
-@property (weak, nonatomic) id <DLSBufferedStreamWriterDelegate> delegate;
+@property (weak, nonatomic, nullable) id <DLSBufferedStreamWriterDelegate> delegate;
 
 - (void)open;
 - (void)close;
 
-- (void)enqueueMessage:(NSData*)data;
+- (void)enqueueMessage:(NSData* __nonnull)data;
 
 @end

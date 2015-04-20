@@ -8,10 +8,6 @@
 
 #import "DLSDescriptionContext.h"
 
-@implementation DLSDescriptionGroup
-
-@end
-
 @interface DLSDescriptionAccumulator ()
 
 @property (strong, nonatomic) NSMutableArray* savedGroups;
@@ -29,7 +25,7 @@
 }
 
 - (void)addGroupWithName:(NSString*)name properties:(NSArray*)properties {
-    DLSDescriptionGroup* group = [[DLSDescriptionGroup alloc] init];
+    DLSPropertyGroup* group = [[DLSPropertyGroup alloc] init];
     group.displayName = name;
     group.properties = properties;
     [self.savedGroups addObject:group];
