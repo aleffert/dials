@@ -50,7 +50,7 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
     func validateButtons(#animated : Bool) {
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.allowsImplicitAnimation = true
-            self.revertButton?.enabled = self.dial.editor.canRevert && self.updated
+            self.revertButton?.enabled = self.dial.editor.readOnly && self.updated
             self.saveButton?.enabled = self.dial.canSave && self.updated && self.dial.file != nil
             self.revertButton?.hidden = !self.mouseInView
             self.saveButton?.hidden = !self.mouseInView

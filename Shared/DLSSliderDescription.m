@@ -51,7 +51,7 @@
     DLSEncodeDouble(aCoder, max);
 }
 
-- (BOOL)canRevert {
+- (BOOL)readOnly {
     return true;
 }
 

@@ -20,6 +20,7 @@
 #import "DLSPropertyWrapper.h"
 #import "DLSRemovable.h"
 #import "DLSSliderDescription.h"
+#import "DLSStepperDescription.h"
 #import "DLSToggleDescription.h"
 #import "DLSViewAdjustMessages.h"
 

@@ -10,13 +10,20 @@
 
 @protocol DLSValueExchanger <NSObject>
 
-- (id <NSCoding>)extractValueFromObject:(id)object;
-- (void)applyValue:(id <NSCoding>)value toObject:(id)object;
+- (id)extractValueFromObject:(id)object;
+- (void)applyValue:(id)value toObject:(id)object;
 
 @end
 
 @interface DLSKeyPathExchanger : NSObject <DLSValueExchanger>
 
 + (instancetype)keyPathExchangerWithKeyPath:(NSString*)keyPath;
+
+@end
+
+// Wraps up a CGColor so that everything who sees it gets a UIColor
+@interface DLSCGColorCoercionExchanger : NSObject <DLSValueExchanger>
+
+- (id)initWithBackingExchanger:(id <DLSValueExchanger>)exchanger;
 
 @end

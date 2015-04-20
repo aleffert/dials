@@ -16,7 +16,11 @@
 @implementation UIView (DLSDescribable)
 
 - (id <DLSValueExchanger>)dls_valueExchangerForProperty:(NSString*)property inGroup:(NSString*)group {
-    return [DLSKeyPathExchanger keyPathExchangerWithKeyPath:property];
+    id <DLSValueExchanger> exchanger = [DLSKeyPathExchanger keyPathExchangerWithKeyPath:property];
+    if([property isEqualToString:@"layer.borderColor"]) {
+        return [[DLSCGColorCoercionExchanger alloc]initWithBackingExchanger:exchanger];
+    }
+    return exchanger;
 }
 
 - (void)dls_describe:(id <DLSDescriptionContext>)context {
@@ -25,6 +29,13 @@
                                 DLSProperty(@"alpha", [DLSSliderDescription zeroOneSlider]),
                                 DLSProperty(@"hidden", [DLSToggleDescription editor]),
                                 DLSProperty(@"backgroundColor", [DLSColorDescription editor])
+                                 ]];
+    
+    [context addGroupWithName:@"Layer"
+                   properties: @[
+                                 DLSProperty(@"layer.cornerRadius", [DLSStepperDescription editor]),
+                                 DLSProperty(@"layer.borderWidth", [DLSStepperDescription editor]),
+                                 DLSProperty(@"layer.borderColor", [DLSColorDescription editor]),
                                  ]];
 }
 

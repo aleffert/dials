@@ -61,6 +61,10 @@
 		77B2356E1AE3742E00599722 /* DLSPropertyGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 77B235651AE3736500599722 /* DLSPropertyGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77B2356F1AE3744600599722 /* DLSPropertyGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B235661AE3736500599722 /* DLSPropertyGroup.m */; };
 		77B235701AE3744600599722 /* DLSPropertyGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B235661AE3736500599722 /* DLSPropertyGroup.m */; };
+		77B235941AE5637400599722 /* DLSStepperDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77B235921AE5637400599722 /* DLSStepperDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77B235951AE5637400599722 /* DLSStepperDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77B235921AE5637400599722 /* DLSStepperDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77B235961AE5637400599722 /* DLSStepperDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B235931AE5637400599722 /* DLSStepperDescription.m */; };
+		77B235971AE5637400599722 /* DLSStepperDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B235931AE5637400599722 /* DLSStepperDescription.m */; };
 		77DD9B2B1A3398D500F17C1E /* DLSChannelStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2A1A3398D000F17C1E /* DLSChannelStream.m */; };
 		77DD9B2C1A3398D800F17C1E /* DLSChannelStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 77DD9B2A1A3398D000F17C1E /* DLSChannelStream.m */; };
 		77DD9B2F1A339A0600F17C1E /* DLSBufferedStreamReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 77DD9B2D1A339A0600F17C1E /* DLSBufferedStreamReader.h */; };
@@ -121,6 +125,8 @@
 		77B235661AE3736500599722 /* DLSPropertyGroup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DLSPropertyGroup.m; path = Shared/DLSPropertyGroup.m; sourceTree = SOURCE_ROOT; };
 		77B235671AE373B200599722 /* DLSPropertyDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSPropertyDescription.h; path = Shared/DLSPropertyDescription.h; sourceTree = SOURCE_ROOT; };
 		77B235681AE373B200599722 /* DLSPropertyDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSPropertyDescription.m; path = Shared/DLSPropertyDescription.m; sourceTree = SOURCE_ROOT; };
+		77B235921AE5637400599722 /* DLSStepperDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSStepperDescription.h; path = Shared/DLSStepperDescription.h; sourceTree = SOURCE_ROOT; };
+		77B235931AE5637400599722 /* DLSStepperDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSStepperDescription.m; path = Shared/DLSStepperDescription.m; sourceTree = SOURCE_ROOT; };
 		77DD9B291A3398D000F17C1E /* DLSChannelStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DLSChannelStream.h; path = Shared/DLSChannelStream.h; sourceTree = SOURCE_ROOT; };
 		77DD9B2A1A3398D000F17C1E /* DLSChannelStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DLSChannelStream.m; path = Shared/DLSChannelStream.m; sourceTree = SOURCE_ROOT; };
 		77DD9B2D1A339A0600F17C1E /* DLSBufferedStreamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSBufferedStreamReader.h; path = Shared/DLSBufferedStreamReader.h; sourceTree = SOURCE_ROOT; };
@@ -163,6 +169,8 @@
 				774D15D91AB4C62F00613F24 /* DLSToggleDescription.m */,
 				77A8B1E21A7436A800A2D09E /* DLSSliderDescription.h */,
 				77A8B1E31A7436A800A2D09E /* DLSSliderDescription.m */,
+				77B235921AE5637400599722 /* DLSStepperDescription.h */,
+				77B235931AE5637400599722 /* DLSStepperDescription.m */,
 				774D15B91AB4B92C00613F24 /* DLSEditorDescription.h */,
 			);
 			name = "Editor Descriptions";
@@ -247,6 +255,7 @@
 				77B235691AE373B200599722 /* DLSPropertyDescription.h in Headers */,
 				774D15E71AB4CE0E00613F24 /* DLSSliderDescription.h in Headers */,
 				77B0BA041AD1BE6600E81A67 /* NSArray+DLSFunctionalAdditions.h in Headers */,
+				77B235941AE5637400599722 /* DLSStepperDescription.h in Headers */,
 				774D15E51AB4CE0E00613F24 /* DLSEditorDescription.h in Headers */,
 				77B2356D1AE3742D00599722 /* DLSPropertyGroup.h in Headers */,
 				774D15E61AB4CE0E00613F24 /* DLSToggleDescription.h in Headers */,
@@ -273,6 +282,7 @@
 				774D15E31AB4CE0C00613F24 /* DLSToggleDescription.h in Headers */,
 				774D15F91AB5387800613F24 /* DLSLiveDialsMessages.h in Headers */,
 				773E67B11ACDFD5400E1BB0A /* DLSViewAdjustMessages.h in Headers */,
+				77B235951AE5637400599722 /* DLSStepperDescription.h in Headers */,
 				77B2356A1AE373B200599722 /* DLSPropertyDescription.h in Headers */,
 				774D15E41AB4CE0C00613F24 /* DLSSliderDescription.h in Headers */,
 				77917A041AD1B137002D3D7C /* DLSPropertyWrapper.h in Headers */,
@@ -374,6 +384,7 @@
 				77B0BA061AD1BE6600E81A67 /* NSArray+DLSFunctionalAdditions.m in Sources */,
 				77F4F5AF1A354FD100A48A76 /* NSObject+DLSDeallocAction.m in Sources */,
 				77DD9B351A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */,
+				77B235961AE5637400599722 /* DLSStepperDescription.m in Sources */,
 				77A8B1E51A7436A800A2D09E /* DLSSliderDescription.m in Sources */,
 				778876F01ABE13D300AB5580 /* DLSColorDescription.m in Sources */,
 				775EA0D31AD1AC8000713882 /* DLSPropertyWrapper.m in Sources */,
@@ -399,6 +410,7 @@
 				77B0BA071AD1BE6600E81A67 /* NSArray+DLSFunctionalAdditions.m in Sources */,
 				77DD9B361A33A0F400F17C1E /* DLSBufferedStreamWriter.m in Sources */,
 				77A8B1E61A7436A800A2D09E /* DLSSliderDescription.m in Sources */,
+				77B235971AE5637400599722 /* DLSStepperDescription.m in Sources */,
 				774D160B1AB5430200613F24 /* DLSActionDescription.m in Sources */,
 				778876EF1ABE13D200AB5580 /* DLSColorDescription.m in Sources */,
 				775EA0D41AD1AC8000713882 /* DLSPropertyWrapper.m in Sources */,

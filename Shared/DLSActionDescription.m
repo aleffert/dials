@@ -23,7 +23,7 @@
     // no properties
 }
 
-- (BOOL)canRevert {
+- (BOOL)readOnly {
     return NO;
 }
 
