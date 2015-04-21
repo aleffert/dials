@@ -22,8 +22,10 @@
 		779250ED1A33592100CCC229 /* DLSDials.h in Headers */ = {isa = PBXBuildFile; fileRef = 779250EA1A33592100CCC229 /* DLSDials.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		779250EE1A33592100CCC229 /* DLSDials.m in Sources */ = {isa = PBXBuildFile; fileRef = 779250EB1A33592100CCC229 /* DLSDials.m */; };
 		77B0B9FD1AD1B29200E81A67 /* DLSValueExchanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B0B9FB1AD1B29200E81A67 /* DLSValueExchanger.m */; };
-		77B2355D1AE2F86400599722 /* UIView+DLSViewID.h in Headers */ = {isa = PBXBuildFile; fileRef = 77B2355B1AE2F86400599722 /* UIView+DLSViewID.h */; };
-		77B2355E1AE2F86400599722 /* UIView+DLSViewID.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B2355C1AE2F86400599722 /* UIView+DLSViewID.m */; };
+		77B2355D1AE2F86400599722 /* UIView+DLSViewAdjust.h in Headers */ = {isa = PBXBuildFile; fileRef = 77B2355B1AE2F86400599722 /* UIView+DLSViewAdjust.h */; };
+		77B2355E1AE2F86400599722 /* UIView+DLSViewAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 77B2355C1AE2F86400599722 /* UIView+DLSViewAdjust.m */; };
+		77BC3EA61AE5FAEE00E51529 /* NSObject+DLSSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 77BC3EA41AE5FAEE00E51529 /* NSObject+DLSSwizzle.h */; };
+		77BC3EA71AE5FAEE00E51529 /* NSObject+DLSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 77BC3EA51AE5FAEE00E51529 /* NSObject+DLSSwizzle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,8 +50,10 @@
 		77AAE5091A32D26500998E36 /* Dials.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Dials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77B0B9FA1AD1B29200E81A67 /* DLSValueExchanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSValueExchanger.h; path = iOS/DLSValueExchanger.h; sourceTree = SOURCE_ROOT; };
 		77B0B9FB1AD1B29200E81A67 /* DLSValueExchanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSValueExchanger.m; path = iOS/DLSValueExchanger.m; sourceTree = SOURCE_ROOT; };
-		77B2355B1AE2F86400599722 /* UIView+DLSViewID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DLSViewID.h"; path = "iOS/UIView+DLSViewID.h"; sourceTree = SOURCE_ROOT; };
-		77B2355C1AE2F86400599722 /* UIView+DLSViewID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DLSViewID.m"; path = "iOS/UIView+DLSViewID.m"; sourceTree = SOURCE_ROOT; };
+		77B2355B1AE2F86400599722 /* UIView+DLSViewAdjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+DLSViewAdjust.h"; path = "iOS/UIView+DLSViewAdjust.h"; sourceTree = SOURCE_ROOT; };
+		77B2355C1AE2F86400599722 /* UIView+DLSViewAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+DLSViewAdjust.m"; path = "iOS/UIView+DLSViewAdjust.m"; sourceTree = SOURCE_ROOT; };
+		77BC3EA41AE5FAEE00E51529 /* NSObject+DLSSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+DLSSwizzle.h"; path = "iOS/NSObject+DLSSwizzle.h"; sourceTree = SOURCE_ROOT; };
+		77BC3EA51AE5FAEE00E51529 /* NSObject+DLSSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+DLSSwizzle.m"; path = "iOS/NSObject+DLSSwizzle.m"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,8 +116,10 @@
 		77AAE50B1A32D26500998E36 /* Dials-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				77B2355B1AE2F86400599722 /* UIView+DLSViewID.h */,
-				77B2355C1AE2F86400599722 /* UIView+DLSViewID.m */,
+				77BC3EA41AE5FAEE00E51529 /* NSObject+DLSSwizzle.h */,
+				77BC3EA51AE5FAEE00E51529 /* NSObject+DLSSwizzle.m */,
+				77B2355B1AE2F86400599722 /* UIView+DLSViewAdjust.h */,
+				77B2355C1AE2F86400599722 /* UIView+DLSViewAdjust.m */,
 				774D16041AB53D2A00613F24 /* Dials-iOS.pch */,
 				774D15C11AB4BD6D00613F24 /* Descriptions */,
 				773E67BA1ACEE9B500E1BB0A /* Plugins */,
@@ -144,10 +150,11 @@
 				774D15C21AB4BE0A00613F24 /* DLSDescribable.h in Headers */,
 				77341ACB1AD63905004023CD /* DialsFramework.h in Headers */,
 				7787FF4A1A3CAD1A00074DBC /* DLSLiveDialsPlugin.h in Headers */,
+				77BC3EA61AE5FAEE00E51529 /* NSObject+DLSSwizzle.h in Headers */,
 				774D15BF1AB4BD6500613F24 /* UIView+DLSDescribable.h in Headers */,
 				773E67AC1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.h in Headers */,
 				779250ED1A33592100CCC229 /* DLSDials.h in Headers */,
-				77B2355D1AE2F86400599722 /* UIView+DLSViewID.h in Headers */,
+				77B2355D1AE2F86400599722 /* UIView+DLSViewAdjust.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,9 +227,10 @@
 			files = (
 				770F22331AD62E5600471B5E /* DLSLiveDialsPlugin+SwiftAdditions.swift in Sources */,
 				773E67AD1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.m in Sources */,
-				77B2355E1AE2F86400599722 /* UIView+DLSViewID.m in Sources */,
+				77B2355E1AE2F86400599722 /* UIView+DLSViewAdjust.m in Sources */,
 				7787FF491A3CAD1700074DBC /* DLSLiveDialsPlugin.m in Sources */,
 				779250EE1A33592100CCC229 /* DLSDials.m in Sources */,
+				77BC3EA71AE5FAEE00E51529 /* NSObject+DLSSwizzle.m in Sources */,
 				77B0B9FD1AD1B29200E81A67 /* DLSValueExchanger.m in Sources */,
 				774D15C61AB4BFF800613F24 /* DLSDescriptionContext.m in Sources */,
 				774D15C01AB4BD6500613F24 /* UIView+DLSDescribable.m in Sources */,

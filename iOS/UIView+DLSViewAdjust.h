@@ -1,5 +1,5 @@
 //
-//  UIView+DLSViewID.h
+//  UIView+DLSViewAdjust.h
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 4/18/15.
@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (DLSViewID)
+@interface UIView (DLSViewAdjust)
+
++ (void)dls_setListening:(BOOL)listening;
 
 @property (readonly, nonatomic) NSString* dls_viewID;
 

@@ -7,9 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import <Dials/DLSPlugin.h>
 
 @interface DLSViewAdjustPlugin : NSObject <DLSPlugin>
+
++(instancetype)sharedPlugin;
+
+@end
+
+@interface DLSViewAdjustPlugin (DLSPrivate)
+
+- (void)viewChanged:(UIView*)view;
 
 @end

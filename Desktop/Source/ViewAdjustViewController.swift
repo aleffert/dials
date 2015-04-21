@@ -34,6 +34,13 @@ class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineCont
         propertyTableController?.useRecord(record)
     }
     
+    func receivedUpdatedViews(records : [DLSViewHierarchyRecord], topLevel : [NSString]) {
+        outlineController?.takeUpdateRecords(records, topLevel : topLevel)
+        if !(outlineController?.hasSelection ?? false) {
+            propertyTableController?.clear()
+        }
+    }
+    
     func outlineController(controller: ViewAdjustHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
         delegate?.viewAdjustController(self, selectedViewWithID: viewID)
     }

@@ -167,6 +167,24 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 
 @end
 
+@implementation DLSViewAdjustUpdatedViewsMessage
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self != nil) {
+        DLSDecodeObject(aDecoder, records);
+        DLSDecodeObject(aDecoder, topLevel);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodeObject(aCoder, records);
+    DLSEncodeObject(aCoder, topLevel);
+}
+
+@end
+
 @implementation DLSViewAdjustValueChangedMessage
 
 - (id)initWithRecord:(DLSChangeViewValueRecord*)record {

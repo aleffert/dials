@@ -85,4 +85,31 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
         self.topLevel = topLevel
         outlineView?.reloadData()
     }
+    
+    func collectActiveEntries(inout entries : [NSString:DLSViewHierarchyRecord], roots : [NSString]) {
+        for root in roots {
+            let record = hierarchy[root]
+            entries[root] = hierarchy[root]
+            if let record = record {
+                collectActiveEntries(&entries, roots: record.children as! [NSString])
+            }
+        }
+    }
+    
+    var hasSelection : Bool {
+        return outlineView?.selectedRow != -1
+    }
+    
+    func takeUpdateRecords(records : [DLSViewHierarchyRecord], topLevel : [NSString]) {
+        self.topLevel = topLevel
+        for record in records {
+            hierarchy[record.viewID] = record
+        }
+        outlineView?.reloadData()
+        
+        // now garbage collect
+        var entries : [NSString:DLSViewHierarchyRecord] = [:]
+        collectActiveEntries(&entries, roots:topLevel)
+        hierarchy = entries
+    }
 }

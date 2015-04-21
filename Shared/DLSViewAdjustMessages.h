@@ -58,14 +58,23 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 /// [NSString(viewID) : DLSViewHierarchyRecord(view info)]
 @property (copy, nonatomic, nonnull) NSDictionary* hierarchy;
-/// NSString of record UUIDs
-@property (strong, nonatomic, nonnull) NSArray* topLevel;
+/// NSString(record UUIDs)]
+@property (copy, nonatomic, nonnull) NSArray* topLevel;
 
 @end
 
 @interface DLSViewAdjustViewPropertiesMessage : NSObject <NSCoding>
 
 @property (strong, nonatomic, nonnull) DLSViewRecord* record;
+
+@end
+
+@interface DLSViewAdjustUpdatedViewsMessage : NSObject <NSCoding>
+
+/// [DLSViewHierarchyRecord]
+@property (copy, nonatomic, nonnull) NSArray* records;
+/// NSString(record UUIDs)]
+@property (copy, nonatomic, nonnull) NSArray* topLevel;
 
 @end
 

@@ -38,7 +38,7 @@
 
 @implementation DLSLiveDialsPlugin
 
-+(instancetype)sharedPlugin {
++ (instancetype)sharedPlugin {
     static dispatch_once_t onceToken;
     static DLSLiveDialsPlugin* sharedPlugin;
     dispatch_once(&onceToken, ^{

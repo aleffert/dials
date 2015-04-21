@@ -18,7 +18,7 @@
 #import "NSArray+DLSFunctionalAdditions.h"
 #import "NSTimer+DLSBlockActions.h"
 #import "UIView+DLSDescribable.h"
-#import "UIView+DLSViewID.h"
+#import "UIView+DLSViewAdjust.h"
 
 @interface DLSViewAdjustPlugin ()
 
@@ -33,9 +33,24 @@
 @property (weak, nonatomic) UIView* selectedView;
 @property (strong, nonatomic) id <DLSRemovable> updateTimer;
 
+@property (strong, nonatomic) NSHashTable* updatedViews;
+
+@property (strong, nonatomic) id windowChangedListener;
+@property (assign, nonatomic) BOOL viewChanged;
+
 @end
 
 @implementation DLSViewAdjustPlugin
+
++ (instancetype)sharedPlugin {
+    static dispatch_once_t onceToken;
+    static DLSViewAdjustPlugin* sharedPlugin;
+    dispatch_once(&onceToken, ^{
+        sharedPlugin = [[DLSViewAdjustPlugin alloc] init];
+    });
+    return sharedPlugin;
+}
+
 
 - (NSString*)name {
     return DLSViewAdjustPluginName;
@@ -45,11 +60,21 @@
     self.context = context;
     self.classDescriptions = [[NSMutableDictionary alloc] init];
     self.classPropertyDescriptions = [[NSMutableDictionary alloc] init];
+    self.updatedViews = [NSHashTable weakObjectsHashTable];
     self.viewIDs = [NSMapTable strongToWeakObjectsMapTable];
     [self sendMessage:[self fullHierarchyMessage]];
+    [UIView dls_setListening:YES];
+    __weak __typeof(self) weakself = self;
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIWindowDidBecomeVisibleNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
+            [weakself viewChanged:window];
+        }
+    }];
 }
 
 - (void)connectionClosed {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.windowChangedListener];
+    [UIView dls_setListening:NO];
     self.classDescriptions = nil;
     self.classPropertyDescriptions = nil;
     self.context = nil;
@@ -88,28 +113,41 @@
     return viewID;
 }
 
-
-- (NSString*)captureView:(UIView*)view intoEntryMap:(NSMutableDictionary*)entries {
+- (DLSViewHierarchyRecord*)captureView:(UIView*)view {
     DLSViewHierarchyRecord* record = [[DLSViewHierarchyRecord alloc] init];
-    record.children = [view.subviews dls_map:^id(UIView* child) {
-        return [self captureView:child intoEntryMap:entries];
-    }];
     record.viewID = [self viewIDForView:view];
     record.className = NSStringFromClass(view.class);
     record.displayName = record.className;
+    record.children = [view.subviews dls_map:^id(UIView* child) {
+        return [self viewIDForView:child];
+    }];
+    return record;
+}
+
+- (NSArray*)topLevelViewIDs {
+    return [[[UIApplication sharedApplication] windows] dls_map:^id(UIWindow* window) {
+        return [self viewIDForView:window];
+    }];
+}
+
+- (void)captureView:(UIView*)view intoEntryMap:(NSMutableDictionary*)entries {
+    DLSViewHierarchyRecord* record = [self captureView:view];
     [entries setObject:record forKey:record.viewID];
-    return record.viewID;
+    for(UIView* subview in view.subviews) {
+        [self captureView:subview intoEntryMap:entries];
+    }
 }
 
 - (DLSViewAdjustFullHierarchyMessage*)fullHierarchyMessage {
     NSMutableDictionary* entries = [[NSMutableDictionary alloc] init];
-    NSArray* topLevel = [[[UIApplication sharedApplication] windows] dls_map:^id(UIWindow* window) {
-        return [self captureView:window intoEntryMap:entries];
-    }];
+    
+    for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
+        [self captureView:window intoEntryMap:entries];
+    }
     
     DLSViewAdjustFullHierarchyMessage* message = [[DLSViewAdjustFullHierarchyMessage alloc] init];
     message.hierarchy = entries;
-    message.topLevel = topLevel;
+    message.topLevel = [self topLevelViewIDs];
     
     return message;
 }
@@ -159,6 +197,19 @@
     }];
 }
 
+- (void)sendChangedViews {
+    NSMutableArray* records = [[NSMutableArray alloc] init];
+    for(UIView* view in self.updatedViews) {
+        [records addObject:[self captureView:view]];
+    }
+    [self.updatedViews removeAllObjects];
+    
+    DLSViewAdjustUpdatedViewsMessage* message = [[DLSViewAdjustUpdatedViewsMessage alloc] init];
+    message.records = records;
+    message.topLevel = [self topLevelViewIDs];
+    [self sendMessage:message];
+}
+
 #pragma mark Message Handlers
 
 - (void)sendMessage:(id <NSCoding>)message {
@@ -179,6 +230,26 @@
     UIView* view = [self.viewIDs objectForKey:message.record.viewID];
     id <DLSValueExchanger> exchanger = [view dls_valueExchangerForProperty:message.record.name inGroup:message.record.group];
     [exchanger applyValue:message.record.value toObject:view];
+}
+
+@end
+
+
+@implementation DLSViewAdjustPlugin (DLSPrivate)
+
+- (void)viewChanged:(UIView *)view {
+    [self.updatedViews addObject:view];
+    if(!self.viewChanged) {
+        self.viewChanged = YES;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.viewChanged = NO;
+            [self sendChangedViews];
+        });
+    }
+    if(view == self.selectedView) {
+        self.selectedView = nil;
+        [self.updateTimer remove];
+    }
 }
 
 @end

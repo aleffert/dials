@@ -61,7 +61,7 @@
 }
 
 - (NSArray*)defaultPlugins {
-    return @[[DLSLiveDialsPlugin sharedPlugin], [[DLSViewAdjustPlugin alloc] init]];
+    return @[[DLSLiveDialsPlugin sharedPlugin], [DLSViewAdjustPlugin sharedPlugin]];
 }
 
 - (void)startWithPlugins:(NSArray*)plugins {
