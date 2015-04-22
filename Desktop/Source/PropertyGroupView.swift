@@ -13,7 +13,7 @@ protocol PropertyGroupViewDelegate: class {
 }
 
 class PropertyGroupViewOwner : NSObject {
-    @IBOutlet var view : PropertyGroupView?
+    @IBOutlet var view : PropertyGroupView!
 }
 
 class PropertyGroupView: NSView, EditorViewDelegate {
@@ -37,6 +37,7 @@ class PropertyGroupView: NSView, EditorViewDelegate {
         for view in propertyStack?.views ?? [] {
             propertyStack?.removeView(view as! NSView)
         }
+        propertyViews = [:]
         for description in group.properties as! [DLSPropertyDescription] {
             let generator = description.editorDescription as? EditorViewGenerating
             let view = generator?.generate()
@@ -50,6 +51,7 @@ class PropertyGroupView: NSView, EditorViewDelegate {
                 container.addSubview(v)
                 v.addConstraintsMatchingSuperviewBounds()
                 propertyStack?.addView(container, inGravity: .Top)
+                propertyViews[description.name] = v
             }
         }
     }
