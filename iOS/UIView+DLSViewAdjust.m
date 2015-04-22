@@ -44,7 +44,7 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 - (void)dls_didMoveToSuperview {
     [self dls_didMoveToSuperview];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChanged:self];
+    [[DLSViewAdjustPlugin sharedPlugin] viewChanged:self.superview];
 }
 
 - (void)dls_exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2 {
@@ -79,6 +79,7 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 - (void)dls_didMoveToWindow {
     [self dls_didMoveToWindow];
+    [[DLSViewAdjustPlugin sharedPlugin] viewChanged:self.superview];
     [[DLSViewAdjustPlugin sharedPlugin] viewChanged:self];
 }
 

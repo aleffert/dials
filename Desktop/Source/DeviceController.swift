@@ -44,6 +44,10 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
         return self.knownDevices.count > 0
     }
     
+    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didNotSearch errorDict: [NSObject : AnyObject]) {
+        NSLog("Error starting bonjour browser: \(errorDict)")
+    }
+    
     func netServiceBrowser(browser: NSNetServiceBrowser, didFindService service: NSNetService, moreComing: Bool) {
         let found = (devices.filter { $0.isBackedByNetService(service) }).count > 0
         if !found {

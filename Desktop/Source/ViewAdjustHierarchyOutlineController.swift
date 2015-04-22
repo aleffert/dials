@@ -88,9 +88,8 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
     
     func collectActiveEntries(inout entries : [NSString:DLSViewHierarchyRecord], roots : [NSString]) {
         for root in roots {
-            let record = hierarchy[root]
-            entries[root] = hierarchy[root]
-            if let record = record {
+            if let record = hierarchy[root] {
+                entries[root] = record
                 collectActiveEntries(&entries, roots: record.children as! [NSString])
             }
         }

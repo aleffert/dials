@@ -238,6 +238,9 @@
 @implementation DLSViewAdjustPlugin (DLSPrivate)
 
 - (void)viewChanged:(UIView *)view {
+    if(view == nil) {
+        return;
+    }
     [self.updatedViews addObject:view];
     if(!self.viewChanged) {
         self.viewChanged = YES;
