@@ -11,6 +11,8 @@
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 
+@class DLSTransform3D;
+
 typedef UIColor DLSColor;
 #else
 
@@ -32,7 +34,7 @@ extern NSString * const __nonnull DLSNetServiceName;
 #define DLSEncodeBool(coder, key) [coder encodeBool:self.key forKey:DLSConstant(key)]
 #define DLSEncodeInteger(coder, key) [coder encodeInteger:self.key forKey:DLSConstant(key)]
 #define DLSEncodeDouble(coder, key) [coder encodeDouble:self.key forKey:DLSConstant(key)]
-#define DLSEncodeTransform3D(coder, key) [coder encodeObject:[NSValue valueWithCATransform3D:self.key] forKey:DLSConstant(key)]
+#define DLSEncodeTransform3D(coder, key) [coder encodeObject:[[DLSTransform3D alloc] initWithTransform:self.key] forKey:DLSConstant(key)]
 
 #if TARGET_OS_IPHONE
 
@@ -52,7 +54,7 @@ extern NSString * const __nonnull DLSNetServiceName;
 #define DLSDecodeBool(decoder, key) self.key = [decoder decodeBoolForKey:DLSConstant(key)]
 #define DLSDecodeInteger(decoder, key) self.key = [decoder decodeIntegerForKey:DLSConstant(key)]
 #define DLSDecodeDouble(decoder, key) self.key = [decoder decodeDoubleForKey:DLSConstant(key)]
-#define DLSDecodeTransform3D(decoder, key) self.key = [[decoder decodeObjectForKey:DLSConstant(key)] CATransform3DValue]
+#define DLSDecodeTransform3D(decoder, key) self.key = [[decoder decodeObjectForKey:DLSConstant(key)] transform]
 
 #if TARGET_OS_IPHONE
 
