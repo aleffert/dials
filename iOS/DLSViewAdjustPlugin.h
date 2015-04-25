@@ -13,12 +13,15 @@
 
 @interface DLSViewAdjustPlugin : NSObject <DLSPlugin>
 
-+(instancetype)sharedPlugin;
++ (instancetype)sharedPlugin;
 
 @end
 
 @interface DLSViewAdjustPlugin (DLSPrivate)
 
-- (void)viewChanged:(UIView*)view;
+// Call when a cheap view property changes
+- (void)viewChangedSurface:(UIView*)view;
+// Call when an expensive view property changes
+- (void)viewChangedDisplay:(UIView*)view;
 
 @end

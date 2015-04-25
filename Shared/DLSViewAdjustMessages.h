@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import <CoreGraphics/CoreGraphics.h>
+#import <QuartzCore/QuartzCore.h>
+
+#import "DLSConstants.h"
+
 extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 @protocol DLSEditorDescription;
@@ -20,6 +25,19 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 @end
 
+@interface DLSViewRenderingRecord : NSObject <NSCoding>
+// TODO: Add remaining layer properties
+
+// See corresponding CALayer properties
+
+@property (assign, nonatomic) CGPoint anchorPoint;
+@property (strong, nonatomic, nullable) DLSColor* backgroundColor;
+@property (assign, nonatomic) CGRect bounds;
+@property (assign, nonatomic) CGPoint position;
+@property (assign, nonatomic) CATransform3D transform3D;
+
+@end
+
 @interface DLSViewHierarchyRecord : NSObject <NSCoding>
 /// Unique id of the corresponding view
 @property (copy, nonatomic, nonnull) NSString* viewID;
@@ -27,6 +45,8 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @property (copy, nonatomic, nonnull) NSArray* children;
 @property (copy, nonatomic, nonnull) NSString* displayName;
 @property (copy, nonatomic, nonnull) NSString* className;
+
+@property (strong, nonatomic, nonnull) DLSViewRenderingRecord* renderingInfo;
 
 @end
 
@@ -59,7 +79,7 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 /// [NSString(viewID) : DLSViewHierarchyRecord(view info)]
 @property (copy, nonatomic, nonnull) NSDictionary* hierarchy;
 /// NSString(record UUIDs)]
-@property (copy, nonatomic, nonnull) NSArray* topLevel;
+@property (copy, nonatomic, nonnull) NSArray* roots;
 
 @end
 
@@ -74,7 +94,7 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 /// [DLSViewHierarchyRecord]
 @property (copy, nonatomic, nonnull) NSArray* records;
 /// NSString(record UUIDs)]
-@property (copy, nonatomic, nonnull) NSArray* topLevel;
+@property (copy, nonatomic, nonnull) NSArray* roots;
 
 @end
 

@@ -67,7 +67,7 @@
     __weak __typeof(self) weakself = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:UIWindowDidBecomeVisibleNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
-            [weakself viewChanged:window];
+            [weakself viewChangedSurface:window];
         }
     }];
 }
@@ -113,6 +113,16 @@
     return viewID;
 }
 
+- (DLSViewRenderingRecord*)renderingInfoForView:(UIView*)view {
+    DLSViewRenderingRecord* record = [[DLSViewRenderingRecord alloc] init];
+    record.anchorPoint = view.layer.anchorPoint;
+    record.bounds = view.layer.bounds;
+    record.position = view.layer.position;
+    record.backgroundColor = view.backgroundColor;
+    record.transform3D = view.layer.transform;
+    return record;
+}
+
 - (DLSViewHierarchyRecord*)captureView:(UIView*)view {
     DLSViewHierarchyRecord* record = [[DLSViewHierarchyRecord alloc] init];
     record.viewID = [self viewIDForView:view];
@@ -121,10 +131,11 @@
     record.children = [view.subviews dls_map:^id(UIView* child) {
         return [self viewIDForView:child];
     }];
+    record.renderingInfo = [self renderingInfoForView:view];
     return record;
 }
 
-- (NSArray*)topLevelViewIDs {
+- (NSArray*)rootViewIDs {
     return [[[UIApplication sharedApplication] windows] dls_map:^id(UIWindow* window) {
         return [self viewIDForView:window];
     }];
@@ -147,7 +158,7 @@
     
     DLSViewAdjustFullHierarchyMessage* message = [[DLSViewAdjustFullHierarchyMessage alloc] init];
     message.hierarchy = entries;
-    message.topLevel = [self topLevelViewIDs];
+    message.roots = [self rootViewIDs];
     
     return message;
 }
@@ -206,7 +217,7 @@
     
     DLSViewAdjustUpdatedViewsMessage* message = [[DLSViewAdjustUpdatedViewsMessage alloc] init];
     message.records = records;
-    message.topLevel = [self topLevelViewIDs];
+    message.roots = [self rootViewIDs];
     [self sendMessage:message];
 }
 
@@ -237,7 +248,7 @@
 
 @implementation DLSViewAdjustPlugin (DLSPrivate)
 
-- (void)viewChanged:(UIView *)view {
+- (void)viewChangedSurface:(UIView *)view {
     if(view == nil) {
         return;
     }
@@ -253,6 +264,11 @@
         self.selectedView = nil;
         [self.updateTimer remove];
     }
+}
+
+- (void)viewChangedDisplay:(UIView *)view {
+    // TODO
+    NSLog(@"view changed display: %@", view);
 }
 
 @end

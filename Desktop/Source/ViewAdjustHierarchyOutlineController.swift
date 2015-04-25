@@ -14,15 +14,14 @@ protocol ViewAdjustHierarchyOutlineControllerDelegate : class {
 
 class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
-    @IBOutlet var outlineView : NSOutlineView?
+    @IBOutlet private var outlineView : NSOutlineView?
     weak var delegate : ViewAdjustHierarchyOutlineControllerDelegate?
     
     // NSOutlineView requires direct object identity so we need a way to convert
     // ids to a canonical representation
     var canonicalKeys : MapTable<NSString, NSString> = MapTable(kind:.StrongToWeak)
     
-    var hierarchy : [NSString:DLSViewHierarchyRecord] = [:]
-    var topLevel : [NSString] = []
+    private var hierarchy = ViewAdjustHierarchy()
     
     private func canonicalize(value : NSString) -> NSString {
         if let canon = canonicalKeys[value] {
@@ -36,7 +35,7 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
     
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
         if item == nil {
-            return topLevel.count
+            return hierarchy.roots.count
         }
         else {
             let record = hierarchy[item as! NSString]
@@ -46,7 +45,7 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
     
     func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
         if item == nil {
-            return canonicalize(topLevel[index])
+            return canonicalize(hierarchy.roots[index])
         }
         else {
             let record = hierarchy[item as! NSString]
@@ -80,35 +79,25 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
         }
     }
     
-    func useHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], topLevel : [NSString]) {
-        self.hierarchy = hierarchy
-        self.topLevel = topLevel
+    func useHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], roots : [NSString]) {
+        self.hierarchy.map = hierarchy
+        self.hierarchy.roots = roots
         outlineView?.reloadData()
-    }
-    
-    func collectActiveEntries(inout entries : [NSString:DLSViewHierarchyRecord], roots : [NSString]) {
-        for root in roots {
-            if let record = hierarchy[root] {
-                entries[root] = record
-                collectActiveEntries(&entries, roots: record.children as! [NSString])
-            }
-        }
     }
     
     var hasSelection : Bool {
         return outlineView?.selectedRow != -1
     }
     
-    func takeUpdateRecords(records : [DLSViewHierarchyRecord], topLevel : [NSString]) {
-        self.topLevel = topLevel
+    func takeUpdateRecords(records : [DLSViewHierarchyRecord], roots : [NSString]) {
+        self.hierarchy.roots = roots
         for record in records {
             hierarchy[record.viewID] = record
         }
         outlineView?.reloadData()
         
-        // now garbage collect
-        var entries : [NSString:DLSViewHierarchyRecord] = [:]
-        collectActiveEntries(&entries, roots:topLevel)
-        hierarchy = entries
+        // thanks to the update we may have unrechable nodes
+        // GC frequency is an obvious optimization avenue
+        hierarchy.collectGarbage()
     }
 }

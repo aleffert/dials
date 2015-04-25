@@ -26,16 +26,16 @@ class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineCont
         propertyTableController?.delegate = self
     }
     
-    func receivedHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], topLevel : [NSString]) {
-        outlineController?.useHierarchy(hierarchy, topLevel : topLevel)
+    func receivedHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], roots : [NSString]) {
+        outlineController?.useHierarchy(hierarchy, roots : roots)
     }
     
     func receivedViewRecord(record : DLSViewRecord) {
         propertyTableController?.useRecord(record)
     }
     
-    func receivedUpdatedViews(records : [DLSViewHierarchyRecord], topLevel : [NSString]) {
-        outlineController?.takeUpdateRecords(records, topLevel : topLevel)
+    func receivedUpdatedViews(records : [DLSViewHierarchyRecord], roots : [NSString]) {
+        outlineController?.takeUpdateRecords(records, roots : roots)
         if !(outlineController?.hasSelection ?? false) {
             propertyTableController?.clear()
         }

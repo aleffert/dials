@@ -32,6 +32,29 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 
 @end
 
+@implementation DLSViewRenderingRecord
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self != nil) {
+        DLSDecodePoint(aDecoder, anchorPoint);
+        DLSDecodeObject(aDecoder, backgroundColor);
+        DLSDecodeRect(aDecoder, bounds);
+        DLSDecodePoint(aDecoder, position);
+        DLSDecodeTransform3D(aDecoder, transform3D);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodePoint(aCoder, anchorPoint);
+    DLSEncodeObject(aCoder, backgroundColor);
+    DLSEncodeRect(aCoder, bounds);
+    DLSEncodePoint(aCoder, position);
+    DLSEncodeTransform3D(aCoder, transform3D);
+}
+
+@end
 
 @implementation DLSViewHierarchyRecord
 
@@ -42,6 +65,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
         DLSDecodeObject(aDecoder, children);
         DLSDecodeObject(aDecoder, displayName);
         DLSDecodeObject(aDecoder, className);
+        DLSDecodeObject(aDecoder, renderingInfo);
     }
     return self;
 }
@@ -51,6 +75,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     DLSEncodeObject(aCoder, children);
     DLSEncodeObject(aCoder, displayName);
     DLSEncodeObject(aCoder, className);
+    DLSEncodeObject(aCoder, renderingInfo);
 }
 
 @end
@@ -115,14 +140,14 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     self = [super init];
     if(self != nil) {
         DLSDecodeObject(aDecoder, hierarchy);
-        DLSDecodeObject(aDecoder, topLevel);
+        DLSDecodeObject(aDecoder, roots);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeObject(aCoder, hierarchy);
-    DLSEncodeObject(aCoder, topLevel);
+    DLSEncodeObject(aCoder, roots);
 }
 
 @end
@@ -173,14 +198,14 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     self = [super init];
     if(self != nil) {
         DLSDecodeObject(aDecoder, records);
-        DLSDecodeObject(aDecoder, topLevel);
+        DLSDecodeObject(aDecoder, roots);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeObject(aCoder, records);
-    DLSEncodeObject(aCoder, topLevel);
+    DLSEncodeObject(aCoder, roots);
 }
 
 @end

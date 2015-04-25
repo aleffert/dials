@@ -46,6 +46,8 @@
 		779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779250F61A336E9B00CCC229 /* DeviceConnection.swift */; };
 		77A353201A36C87200A65A90 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */; };
 		77A353231A36C8AE00A65A90 /* ViewControllerGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */; };
+		77A6F9A91AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A6F9A81AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift */; };
+		77A6F9AD1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A6F9AC1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift */; };
 		77AAE4F81A32C66600998E36 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4F71A32C66600998E36 /* Device.swift */; };
 		77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE4FB1A32CFA600998E36 /* Images.xcassets */; };
 		77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */; };
@@ -121,6 +123,8 @@
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
 		77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionStatusView.swift; path = Desktop/Source/ConnectionStatusView.swift; sourceTree = SOURCE_ROOT; };
 		77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerGrouper.swift; path = Desktop/Source/ViewControllerGrouper.swift; sourceTree = SOURCE_ROOT; };
+		77A6F9A81AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewAdjustVisualOutlineController.swift; path = Desktop/Source/ViewAdjustVisualOutlineController.swift; sourceTree = SOURCE_ROOT; };
+		77A6F9AC1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewAdjustHierarchy.swift; path = Desktop/Source/ViewAdjustHierarchy.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4FB1A32CFA600998E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Desktop/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisibleStrings.swift; path = Desktop/Source/VisibleStrings.swift; sourceTree = SOURCE_ROOT; };
@@ -182,6 +186,7 @@
 		776414DC1A32ADC9005E381A /* Dials */ = {
 			isa = PBXGroup;
 			children = (
+				77A6F9AC1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift */,
 				77B2358E1AE4BFFD00599722 /* ViewOwner.swift */,
 				77B2358C1AE4BDE900599722 /* BackgroundColorView.swift */,
 				77B235591AE2C37300599722 /* MapTable.swift */,
@@ -326,6 +331,7 @@
 				77B235801AE44D3900599722 /* PropertyGroupView.swift */,
 				77B235741AE3E9B200599722 /* ViewAdjustPropertyTableController.swift */,
 				77B0BA091AD1E8AD00E81A67 /* ViewAdjustHierarchyOutlineController.swift */,
+				77A6F9A81AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift */,
 				773E67B41ACDFE7600E1BB0A /* ViewAdjustViewController.swift */,
 				773E67A21ACDF82E00E1BB0A /* ViewAdjustPlugin.swift */,
 			);
@@ -449,6 +455,7 @@
 				77F4F5A61A34D67B00A48A76 /* Broadcaster.swift in Sources */,
 				778876DF1ABDFECB00AB5580 /* SliderEditor.swift in Sources */,
 				773E67A31ACDF82E00E1BB0A /* ViewAdjustPlugin.swift in Sources */,
+				77A6F9AD1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift in Sources */,
 				778877211AC0E55D00AB5580 /* Optional+Result.swift in Sources */,
 				77B235991AE5648F00599722 /* StepperEditor.swift in Sources */,
 				778876E51ABE100700AB5580 /* ToggleEditor.swift in Sources */,
@@ -472,6 +479,7 @@
 				77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */,
 				778876BB1AB64F6700AB5580 /* LiveDialPaneViewController.swift in Sources */,
 				77B2358F1AE4BFFD00599722 /* ViewOwner.swift in Sources */,
+				77A6F9A91AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift in Sources */,
 				778876DD1ABDC91E00AB5580 /* Optional+Utilities.swift in Sources */,
 				778877101ABFA71D00AB5580 /* Result.swift in Sources */,
 				77B235751AE3E9B200599722 /* ViewAdjustPropertyTableController.swift in Sources */,

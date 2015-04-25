@@ -13,7 +13,7 @@
 #import "DialsExample-Swift.h"
 
 static BOOL foo = true;
-static CGFloat bar = 0.45;
+static CGFloat bar = 3.72;
 
 @interface ViewController ()
 
