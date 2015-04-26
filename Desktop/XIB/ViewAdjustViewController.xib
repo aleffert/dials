@@ -6,9 +6,10 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViewAdjustViewController" customModule="Dials" customModuleProvider="target">
             <connections>
-                <outlet property="outlineController" destination="IQn-sv-Ncx" id="ZPE-CV-uTV"/>
+                <outlet property="hierarchyOutlineController" destination="IQn-sv-Ncx" id="HTD-PU-DGC"/>
                 <outlet property="propertyTableController" destination="aXz-rw-3Vm" id="SgA-oM-8J7"/>
                 <outlet property="view" destination="c22-O7-iKe" id="b1F-l3-PB6"/>
+                <outlet property="visualOutlineController" destination="rqI-S3-wMV" id="yYd-Bq-N02"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -30,9 +31,18 @@
                                         <customView id="AFy-nW-3cg" customClass="BackgroundColorView" customModule="Dials" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="310" height="269"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="JYb-gz-P0O">
+                                                    <rect key="frame" x="0.0" y="0.0" width="310" height="269"/>
+                                                </customView>
+                                            </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="JYb-gz-P0O" secondAttribute="bottom" id="KO2-L4-Z96"/>
+                                                <constraint firstItem="JYb-gz-P0O" firstAttribute="top" secondItem="AFy-nW-3cg" secondAttribute="top" id="Ldh-lG-5lE"/>
+                                                <constraint firstAttribute="trailing" secondItem="JYb-gz-P0O" secondAttribute="trailing" id="b5v-Yq-xym"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="h3P-jc-Jq8"/>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="p7x-Cr-oxu"/>
+                                                <constraint firstItem="JYb-gz-P0O" firstAttribute="leading" secondItem="AFy-nW-3cg" secondAttribute="leading" id="rf2-wi-TXg"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
@@ -51,7 +61,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <outlineView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="14" outlineTableColumn="8V3-nh-SxG" id="Iez-KT-nUR">
-                                                                <rect key="frame" x="0.0" y="0.0" width="311" height="0.0"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="310" height="0.0"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <size key="intercellSpacing" width="3" height="0.0"/>
                                                                 <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -180,15 +190,16 @@
                                         <rect key="frame" x="1" y="80" width="166" height="15"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
-                                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="jDg-Kp-R9b">
+                                    <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="jDg-Kp-R9b">
                                         <rect key="frame" x="167" y="1" width="15" height="79"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                 </scrollView>
-                                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hK1-He-7kB" userLabel="Empty View">
+                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="hK1-He-7kB" userLabel="Empty View">
+                                    <rect key="frame" x="0.0" y="0.0" width="174" height="470"/>
                                     <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wdm-aL-Hv1">
-                                            <rect key="frame" x="-2" y="-249.5" width="178" height="29"/>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wdm-aL-Hv1">
+                                            <rect key="frame" x="-2" y="220" width="178" height="29"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Pick a View" id="9FG-3b-CFc">
                                                 <font key="font" metaFont="system" size="24"/>
                                                 <color key="textColor" white="0.56523143799999997" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
@@ -243,6 +254,12 @@
         <customObject id="IQn-sv-Ncx" customClass="ViewAdjustHierarchyOutlineController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="outlineView" destination="Iez-KT-nUR" id="PYg-RW-HQu"/>
+            </connections>
+        </customObject>
+        <customObject id="rqI-S3-wMV" customClass="ViewAdjustVisualOutlineController" customModule="Dials" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="JYb-gz-P0O" id="IsB-8c-KTn"/>
+                <outlet property="view" destination="AFy-nW-3cg" id="YA2-7J-sgk"/>
             </connections>
         </customObject>
     </objects>

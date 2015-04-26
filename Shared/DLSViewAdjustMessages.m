@@ -40,7 +40,11 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     if(self != nil) {
         DLSDecodePoint(aDecoder, anchorPoint);
         DLSDecodeObject(aDecoder, backgroundColor);
+        DLSDecodeDouble(aDecoder, borderWidth);
+        DLSDecodeObject(aDecoder, borderColor);
         DLSDecodeRect(aDecoder, bounds);
+        DLSDecodeDouble(aDecoder, cornerRadius);
+        DLSDecodeDouble(aDecoder, opacity);
         DLSDecodePoint(aDecoder, position);
         DLSDecodeTransform3D(aDecoder, transform3D);
     }
@@ -50,7 +54,11 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodePoint(aCoder, anchorPoint);
     DLSEncodeObject(aCoder, backgroundColor);
+    DLSEncodeDouble(aCoder, borderWidth);
+    DLSEncodeObject(aCoder, borderColor);
     DLSEncodeRect(aCoder, bounds);
+    DLSEncodeDouble(aCoder, cornerRadius);
+    DLSEncodeDouble(aCoder, opacity);
     DLSEncodePoint(aCoder, position);
     DLSEncodeTransform3D(aCoder, transform3D);
 }
@@ -142,6 +150,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     if(self != nil) {
         DLSDecodeObject(aDecoder, hierarchy);
         DLSDecodeObject(aDecoder, roots);
+        DLSDecodeSize(aDecoder, screenSize);
     }
     return self;
 }
@@ -149,6 +158,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeObject(aCoder, hierarchy);
     DLSEncodeObject(aCoder, roots);
+    DLSEncodeSize(aCoder, screenSize);
 }
 
 @end
@@ -200,6 +210,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     if(self != nil) {
         DLSDecodeObject(aDecoder, records);
         DLSDecodeObject(aDecoder, roots);
+        DLSDecodeSize(aDecoder, screenSize);
     }
     return self;
 }
@@ -207,6 +218,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeObject(aCoder, records);
     DLSEncodeObject(aCoder, roots);
+    DLSEncodeSize(aCoder, screenSize);
 }
 
 @end

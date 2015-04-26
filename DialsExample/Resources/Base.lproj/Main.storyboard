@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bfA-nf-0od">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bfA-nf-0od">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,9 +18,21 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MkO-9N-tgW">
                                 <rect key="frame" x="147" y="142" width="306" height="316"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIr-Oz-zYQ">
+                                        <rect key="frame" x="54" y="66" width="197" height="184"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="197" id="GV8-Dz-pNM"/>
+                                            <constraint firstAttribute="height" constant="184" id="Tsx-Gg-suG"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="gIr-Oz-zYQ" firstAttribute="leading" secondItem="MkO-9N-tgW" secondAttribute="leading" constant="54" id="7Hq-fS-pyr"/>
                                     <constraint firstAttribute="width" constant="306" id="O3z-mr-IQ2"/>
+                                    <constraint firstItem="gIr-Oz-zYQ" firstAttribute="top" secondItem="MkO-9N-tgW" secondAttribute="top" constant="66" id="czp-jX-WZy"/>
                                     <constraint firstAttribute="height" constant="316" id="rLG-Vg-0XF"/>
                                 </constraints>
                             </view>

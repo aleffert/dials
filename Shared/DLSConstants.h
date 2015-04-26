@@ -40,11 +40,13 @@ extern NSString * const __nonnull DLSNetServiceName;
 
 #define DLSEncodeRect(coder, key) [coder encodeCGRect:self.key forKey:DLSConstant(key)]
 #define DLSEncodePoint(coder, key) [coder encodeCGPoint:self.key forKey:DLSConstant(key)]
+#define DLSEncodeSize(coder, key) [coder encodeCGSize:self.key forKey:DLSConstant(key)]
 
 #else
 
 #define DLSEncodeRect(coder, key) [coder encodeRect:self.key forKey:DLSConstant(key)]
 #define DLSEncodePoint(coder, key) [coder encodePoint:self.key forKey:DLSConstant(key)]
+#define DLSEncodeSize(coder, key) [coder encodeSize:self.key forKey:DLSConstant(key)]
 
 #endif
 
@@ -54,16 +56,18 @@ extern NSString * const __nonnull DLSNetServiceName;
 #define DLSDecodeBool(decoder, key) self.key = [decoder decodeBoolForKey:DLSConstant(key)]
 #define DLSDecodeInteger(decoder, key) self.key = [decoder decodeIntegerForKey:DLSConstant(key)]
 #define DLSDecodeDouble(decoder, key) self.key = [decoder decodeDoubleForKey:DLSConstant(key)]
-#define DLSDecodeTransform3D(decoder, key) self.key = [[decoder decodeObjectForKey:DLSConstant(key)] transform]
+#define DLSDecodeTransform3D(decoder, key) self.key = [(DLSTransform3D*)[decoder decodeObjectForKey:DLSConstant(key)] transform]
 
 #if TARGET_OS_IPHONE
 
 #define DLSDecodeRect(decoder, key) self.key = [decoder decodeCGRectForKey:DLSConstant(key)]
 #define DLSDecodePoint(decoder, key) self.key = [decoder decodeCGPointForKey:DLSConstant(key)]
+#define DLSDecodeSize(decoder, key) self.key = [decoder decodeCGSizeForKey:DLSConstant(key)]
 
 #else
 
 #define DLSDecodeRect(decoder, key) self.key = [decoder decodeRectForKey:DLSConstant(key)]
 #define DLSDecodePoint(decoder, key) self.key = [decoder decodePointForKey:DLSConstant(key)]
+#define DLSDecodeSize(decoder, key) self.key = [decoder decodeSizeForKey:DLSConstant(key)]
 
 #endif

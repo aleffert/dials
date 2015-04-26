@@ -14,14 +14,15 @@ protocol ViewAdjustHierarchyOutlineControllerDelegate : class {
 
 class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
-    @IBOutlet private var outlineView : NSOutlineView?
+    @IBOutlet private var outlineView : NSOutlineView!
     weak var delegate : ViewAdjustHierarchyOutlineControllerDelegate?
     
     // NSOutlineView requires direct object identity so we need a way to convert
     // ids to a canonical representation
-    var canonicalKeys : MapTable<NSString, NSString> = MapTable(kind:.StrongToWeak)
+    // TODO: GC these
+    var canonicalKeys : [NSString: NSString] = [:]
     
-    private var hierarchy = ViewAdjustHierarchy()
+    let hierarchy = ViewAdjustHierarchy()
     
     private func canonicalize(value : NSString) -> NSString {
         if let canon = canonicalKeys[value] {
@@ -82,7 +83,7 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
     func useHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], roots : [NSString]) {
         self.hierarchy.map = hierarchy
         self.hierarchy.roots = roots
-        outlineView?.reloadData()
+        outlineView.reloadData()
     }
     
     var hasSelection : Bool {
@@ -94,10 +95,24 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
         for record in records {
             hierarchy[record.viewID] = record
         }
-        outlineView?.reloadData()
         
-        // thanks to the update we may have unrechable nodes
-        // GC frequency is an obvious optimization avenue
+        let selectedRow = outlineView!.selectedRow
+        var selectedItem : NSString? = nil
+        if selectedRow != -1 {
+            selectedItem = outlineView.itemAtRow(selectedRow) as? NSString
+        }
+        
+        outlineView.reloadData()
+        
+        if let item = selectedItem {
+            let row = outlineView.rowForItem(item)
+            if row != -1 {
+                outlineView.selectRowIndexes(NSIndexSet(index:row), byExtendingSelection: false)
+            }
+        }
+        
+        // thanks to the update we may have unrechable nodes so GC them
+        // Changing GC frequency is an obvious optimization avenue
         hierarchy.collectGarbage()
     }
 }

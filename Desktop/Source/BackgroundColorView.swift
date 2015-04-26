@@ -23,4 +23,8 @@ import Cocoa
         NSRectFill(dirtyRect)
     }
     
+    override var flipped : Bool {
+        return true
+    }
+    
 }

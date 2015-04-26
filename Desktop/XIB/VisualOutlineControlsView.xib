@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="VisualOutlineControlsView" customModule="Dials" customModuleProvider="target">
+            <connections>
+                <outlet property="bodyView" destination="c22-O7-iKe" id="9zx-Fe-Onz"/>
+                <outlet property="depthSlider" destination="DbE-HR-dlc" id="0Va-fv-8WV"/>
+                <outlet property="zoomSlider" destination="0pB-W5-K6s" id="ajg-Kd-5IH"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="BackgroundColorView" customModule="Dials" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="533" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qrz-5e-sOw">
+                    <rect key="frame" x="18" y="4" width="35" height="14"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Zoom" id="5Db-vD-xbb">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0pB-W5-K6s">
+                    <rect key="frame" x="59" y="2" width="150" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" priority="250" constant="150" id="TVi-8i-YeH"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="p6D-ka-3Dd"/>
+                    </constraints>
+                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-1" maxValue="1" tickMarkPosition="above" sliderType="linear" id="lYN-OM-DB2"/>
+                    <connections>
+                        <action selector="zoomChanged:" target="-2" id="qTY-ST-7Bb"/>
+                    </connections>
+                </slider>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="Kgi-Un-dY2">
+                    <rect key="frame" x="425" y="4" width="88" height="14"/>
+                    <buttonCell key="cell" type="inline" title="Clear Rotation" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="2ye-jR-FDG">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="resetTransform:" target="-2" id="fDq-hg-GJQ"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="tSX-us-vJ2">
+                    <rect key="frame" x="265" y="3" width="44" height="14"/>
+                    <buttonCell key="cell" type="inline" title="Depth" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="8oI-Ce-1dQ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="resetTransform:" target="-2" id="2PF-oS-Ul9"/>
+                    </connections>
+                </button>
+                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DbE-HR-dlc">
+                    <rect key="frame" x="317" y="2" width="100" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="1R6-xd-BMo"/>
+                    </constraints>
+                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" maxValue="30" doubleValue="10" tickMarkPosition="above" sliderType="linear" id="uSa-EZ-6kc"/>
+                    <connections>
+                        <action selector="depthChanged:" target="-2" id="kB0-WY-2fd"/>
+                    </connections>
+                </slider>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Kgi-Un-dY2" firstAttribute="leading" secondItem="DbE-HR-dlc" secondAttribute="trailing" constant="8" symbolic="YES" id="Bfp-nB-d91"/>
+                <constraint firstAttribute="bottom" secondItem="0pB-W5-K6s" secondAttribute="bottom" constant="3" id="E7p-Ff-Ufj"/>
+                <constraint firstItem="0pB-W5-K6s" firstAttribute="baseline" secondItem="Qrz-5e-sOw" secondAttribute="baseline" constant="1" id="GFt-h8-qoY"/>
+                <constraint firstItem="tSX-us-vJ2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0pB-W5-K6s" secondAttribute="trailing" constant="8" symbolic="YES" id="N5m-Tj-edZ"/>
+                <constraint firstAttribute="centerY" secondItem="DbE-HR-dlc" secondAttribute="centerY" id="PcY-lb-9bp"/>
+                <constraint firstAttribute="trailing" secondItem="Kgi-Un-dY2" secondAttribute="trailing" constant="20" symbolic="YES" id="SH4-zd-l3D"/>
+                <constraint firstItem="DbE-HR-dlc" firstAttribute="leading" secondItem="tSX-us-vJ2" secondAttribute="trailing" constant="8" symbolic="YES" id="VgC-91-L22"/>
+                <constraint firstItem="Qrz-5e-sOw" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="aLn-2T-TlL"/>
+                <constraint firstAttribute="centerY" secondItem="tSX-us-vJ2" secondAttribute="centerY" constant="-0.5" id="sIk-1P-m5I"/>
+                <constraint firstAttribute="centerY" secondItem="0pB-W5-K6s" secondAttribute="centerY" id="st3-hw-45H"/>
+                <constraint firstItem="0pB-W5-K6s" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="3" id="vi7-Mf-7E1"/>
+                <constraint firstAttribute="centerY" secondItem="Kgi-Un-dY2" secondAttribute="centerY" id="y4M-kr-ChY"/>
+                <constraint firstItem="0pB-W5-K6s" firstAttribute="leading" secondItem="Qrz-5e-sOw" secondAttribute="trailing" constant="8" symbolic="YES" id="ySZ-Ed-usB"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                    <color key="value" white="1" alpha="0.46000000000000002" colorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="271.5" y="134.5"/>
+        </customView>
+    </objects>
+</document>

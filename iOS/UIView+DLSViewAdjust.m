@@ -27,9 +27,12 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
     [[DLSViewAdjustPlugin sharedPlugin] viewChangedDisplay:self.dls_view];
 }
 
-- (CAAnimation*)dls_animationForKey:(NSString *)key {
-    CAAnimation* result = [self dls_animationForKey:key];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self.dls_view];
+- (id <CAAction>)dls_actionForKey:(NSString *)key {
+    id <CAAction> result = [self dls_actionForKey:key];
+    
+    if(![key isEqualToString:@"delegate"] && ![key isEqualToString:@"sublayers"]) {
+        [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self.dls_view];
+    };
     return result;
 }
 
@@ -40,6 +43,7 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 + (void)dls_setListening:(BOOL)listening {
     static BOOL sIsListening = NO;
     if(sIsListening != listening) {
+        sIsListening = listening;
         // cheap property changes
         NSError* error = nil;
         [self dls_swizzleMethod:@selector(didMoveToSuperview) withMethod:@selector(dls_didMoveToSuperview) error:&error];
@@ -64,7 +68,7 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
         [CALayer dls_swizzleMethod:@selector(display) withMethod:@selector(dls_display) error:&error];
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [CALayer dls_swizzleMethod:@selector(animationForKey:) withMethod:@selector(dls_animationForKey:) error:&error];
+        [CALayer dls_swizzleMethod:@selector(actionForKey:) withMethod:@selector(dls_actionForKey:) error:&error];
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
     }
 }

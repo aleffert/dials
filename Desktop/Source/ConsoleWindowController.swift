@@ -198,6 +198,9 @@ extension ConsoleWindowController : PluginContext {
     }
     
     func addViewController(controller: NSViewController, plugin: Plugin) {
+         // Load the view now since having unloaded views makes the model simpler
+        let _ = controller.view
+        
         updateControllersWithAction {
             self.viewGrouper.addViewController(controller, plugin : plugin)
         }

@@ -51,6 +51,8 @@
 		77AAE4F81A32C66600998E36 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4F71A32C66600998E36 /* Device.swift */; };
 		77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77AAE4FB1A32CFA600998E36 /* Images.xcassets */; };
 		77AAE4FE1A32CFB300998E36 /* VisibleStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */; };
+		77AD6A751AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77AD6A741AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib */; };
+		77AD6A791AEC2FFF00BB4CB3 /* VisualOutlineControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AD6A781AEC2FFF00BB4CB3 /* VisualOutlineControlsView.swift */; };
 		77B0BA0A1AD1E90000E81A67 /* ViewAdjustHierarchyOutlineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B0BA091AD1E8AD00E81A67 /* ViewAdjustHierarchyOutlineController.swift */; };
 		77B2355A1AE2C37300599722 /* MapTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B235591AE2C37300599722 /* MapTable.swift */; };
 		77B235751AE3E9B200599722 /* ViewAdjustPropertyTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B235741AE3E9B200599722 /* ViewAdjustPropertyTableController.swift */; };
@@ -128,6 +130,8 @@
 		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4FB1A32CFA600998E36 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Desktop/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		77AAE4FD1A32CFB300998E36 /* VisibleStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisibleStrings.swift; path = Desktop/Source/VisibleStrings.swift; sourceTree = SOURCE_ROOT; };
+		77AD6A741AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VisualOutlineControlsView.xib; path = Desktop/XIB/VisualOutlineControlsView.xib; sourceTree = SOURCE_ROOT; };
+		77AD6A781AEC2FFF00BB4CB3 /* VisualOutlineControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualOutlineControlsView.swift; path = Desktop/Source/VisualOutlineControlsView.swift; sourceTree = SOURCE_ROOT; };
 		77B0BA091AD1E8AD00E81A67 /* ViewAdjustHierarchyOutlineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAdjustHierarchyOutlineController.swift; path = Desktop/Source/ViewAdjustHierarchyOutlineController.swift; sourceTree = SOURCE_ROOT; };
 		77B235591AE2C37300599722 /* MapTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapTable.swift; path = Desktop/Source/MapTable.swift; sourceTree = SOURCE_ROOT; };
 		77B235741AE3E9B200599722 /* ViewAdjustPropertyTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewAdjustPropertyTableController.swift; path = Desktop/Source/ViewAdjustPropertyTableController.swift; sourceTree = SOURCE_ROOT; };
@@ -240,6 +244,7 @@
 		776414FD1A32AF0E005E381A /* XIB */ = {
 			isa = PBXGroup;
 			children = (
+				77AD6A741AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib */,
 				778876E91ABE105A00AB5580 /* Editors */,
 				778876EA1ABE106200AB5580 /* Plugins */,
 				776415001A32AF94005E381A /* ConsoleWindow.xib */,
@@ -334,6 +339,7 @@
 				77A6F9A81AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift */,
 				773E67B41ACDFE7600E1BB0A /* ViewAdjustViewController.swift */,
 				773E67A21ACDF82E00E1BB0A /* ViewAdjustPlugin.swift */,
+				77AD6A781AEC2FFF00BB4CB3 /* VisualOutlineControlsView.swift */,
 			);
 			name = ViewAdjust;
 			sourceTree = "<group>";
@@ -430,6 +436,7 @@
 				778876E31ABE0F7F00AB5580 /* ToggleEditorView.xib in Resources */,
 				776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */,
 				77B2357A1AE43B0800599722 /* PropertyGroupView.xib in Resources */,
+				77AD6A751AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +475,7 @@
 				7787FF461A3CA3D400074DBC /* Plugin.swift in Sources */,
 				778876DA1ABDC27400AB5580 /* LiveDialController.swift in Sources */,
 				778876F71ABF600800AB5580 /* FormattingUtilities.swift in Sources */,
+				77AD6A791AEC2FFF00BB4CB3 /* VisualOutlineControlsView.swift in Sources */,
 				776415061A32AF9F005E381A /* AppDelegate.swift in Sources */,
 				778877241AC1182900AB5580 /* CodeGenerating.swift in Sources */,
 				77F4F59C1A33D8C700A48A76 /* LiveDialsPlugin.swift in Sources */,

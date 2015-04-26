@@ -116,9 +116,13 @@
 - (DLSViewRenderingRecord*)renderingInfoForView:(UIView*)view {
     DLSViewRenderingRecord* record = [[DLSViewRenderingRecord alloc] init];
     record.anchorPoint = view.layer.anchorPoint;
+    record.borderColor = view.layer.borderColor ? [[UIColor alloc] initWithCGColor:view.layer.borderColor] : nil;
+    record.borderWidth = view.layer.borderWidth;
     record.bounds = view.layer.bounds;
+    record.opacity = view.layer.opacity;
     record.position = view.layer.position;
     record.backgroundColor = view.backgroundColor;
+    record.cornerRadius = view.layer.cornerRadius;
     record.transform3D = view.layer.transform;
     return record;
 }
@@ -159,6 +163,9 @@
     DLSViewAdjustFullHierarchyMessage* message = [[DLSViewAdjustFullHierarchyMessage alloc] init];
     message.hierarchy = entries;
     message.roots = [self rootViewIDs];
+    
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    message.screenSize = screenSize;
     
     return message;
 }
@@ -209,6 +216,10 @@
 }
 
 - (void)sendChangedViews {
+    for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
+        [self.updatedViews addObject:window];
+    }
+    
     NSMutableArray* records = [[NSMutableArray alloc] init];
     for(UIView* view in self.updatedViews) {
         [records addObject:[self captureView:view]];
@@ -218,6 +229,9 @@
     DLSViewAdjustUpdatedViewsMessage* message = [[DLSViewAdjustUpdatedViewsMessage alloc] init];
     message.records = records;
     message.roots = [self rootViewIDs];
+    
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    message.screenSize = screenSize;
     [self sendMessage:message];
 }
 
@@ -268,7 +282,6 @@
 
 - (void)viewChangedDisplay:(UIView *)view {
     // TODO
-    NSLog(@"view changed display: %@", view);
 }
 
 @end

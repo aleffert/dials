@@ -32,7 +32,11 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 @property (assign, nonatomic) CGPoint anchorPoint;
 @property (strong, nonatomic, nullable) DLSColor* backgroundColor;
+@property (assign, nonatomic) CGFloat borderWidth;
+@property (strong, nonatomic, nullable) DLSColor* borderColor;
 @property (assign, nonatomic) CGRect bounds;
+@property (assign, nonatomic) CGFloat cornerRadius;
+@property (assign, nonatomic) CGFloat opacity;
 @property (assign, nonatomic) CGPoint position;
 @property (assign, nonatomic) CATransform3D transform3D;
 
@@ -80,6 +84,7 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @property (copy, nonatomic, nonnull) NSDictionary* hierarchy;
 /// NSString(record UUIDs)]
 @property (copy, nonatomic, nonnull) NSArray* roots;
+@property (assign, nonatomic) CGSize screenSize;
 
 @end
 
@@ -95,6 +100,7 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @property (copy, nonatomic, nonnull) NSArray* records;
 /// NSString(record UUIDs)]
 @property (copy, nonatomic, nonnull) NSArray* roots;
+@property (assign, nonatomic) CGSize screenSize;
 
 @end
 

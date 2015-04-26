@@ -62,7 +62,7 @@ class ViewAdjustPlugin: Plugin, ViewAdjustViewControllerDelegate {
     func handleFullHierarchyMessage(message : DLSViewAdjustFullHierarchyMessage) {
         let hierarchy = message.hierarchy as! [NSString:DLSViewHierarchyRecord]
         let roots = message.roots as! [NSString]
-        controller?.receivedHierarchy(hierarchy, roots : roots)
+        controller?.receivedHierarchy(hierarchy, roots : roots, screenSize : message.screenSize)
     }
     
     func handleViewPropertiesMessage(message : DLSViewAdjustViewPropertiesMessage) {
@@ -70,7 +70,7 @@ class ViewAdjustPlugin: Plugin, ViewAdjustViewControllerDelegate {
     }
     
     func handleUpdatedViewsMessage(message : DLSViewAdjustUpdatedViewsMessage) {
-        controller?.receivedUpdatedViews(message.records as! [DLSViewHierarchyRecord], roots: message.roots as! [NSString])
+        controller?.receivedUpdatedViews(message.records as! [DLSViewHierarchyRecord], roots: message.roots as! [NSString], screenSize : message.screenSize)
     }
     
     //MARK: ViewAdjustViewControllerDelegate
