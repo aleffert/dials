@@ -18,15 +18,15 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Qrz-5e-sOw">
-                    <rect key="frame" x="18" y="4" width="35" height="14"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Zoom" id="5Db-vD-xbb">
+                    <rect key="frame" x="18" y="4" width="38" height="14"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Zoom:" id="5Db-vD-xbb">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0pB-W5-K6s">
-                    <rect key="frame" x="59" y="2" width="150" height="17"/>
+                    <rect key="frame" x="56" y="2" width="150" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" priority="250" constant="150" id="TVi-8i-YeH"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="p6D-ka-3Dd"/>
@@ -46,9 +46,9 @@
                         <action selector="resetTransform:" target="-2" id="fDq-hg-GJQ"/>
                     </connections>
                 </button>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="tSX-us-vJ2">
-                    <rect key="frame" x="265" y="3" width="44" height="14"/>
-                    <buttonCell key="cell" type="inline" title="Depth" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="8oI-Ce-1dQ">
+                <button horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="tSX-us-vJ2">
+                    <rect key="frame" x="267" y="3" width="48" height="14"/>
+                    <buttonCell key="cell" type="inline" title="Depth:" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="8oI-Ce-1dQ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
@@ -74,13 +74,13 @@
                 <constraint firstItem="tSX-us-vJ2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0pB-W5-K6s" secondAttribute="trailing" constant="8" symbolic="YES" id="N5m-Tj-edZ"/>
                 <constraint firstAttribute="centerY" secondItem="DbE-HR-dlc" secondAttribute="centerY" id="PcY-lb-9bp"/>
                 <constraint firstAttribute="trailing" secondItem="Kgi-Un-dY2" secondAttribute="trailing" constant="20" symbolic="YES" id="SH4-zd-l3D"/>
-                <constraint firstItem="DbE-HR-dlc" firstAttribute="leading" secondItem="tSX-us-vJ2" secondAttribute="trailing" constant="8" symbolic="YES" id="VgC-91-L22"/>
+                <constraint firstItem="DbE-HR-dlc" firstAttribute="leading" secondItem="tSX-us-vJ2" secondAttribute="trailing" constant="2" id="VgC-91-L22"/>
                 <constraint firstItem="Qrz-5e-sOw" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="aLn-2T-TlL"/>
-                <constraint firstAttribute="centerY" secondItem="tSX-us-vJ2" secondAttribute="centerY" constant="-0.5" id="sIk-1P-m5I"/>
+                <constraint firstAttribute="centerY" secondItem="tSX-us-vJ2" secondAttribute="centerY" id="sIk-1P-m5I"/>
                 <constraint firstAttribute="centerY" secondItem="0pB-W5-K6s" secondAttribute="centerY" id="st3-hw-45H"/>
                 <constraint firstItem="0pB-W5-K6s" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="3" id="vi7-Mf-7E1"/>
                 <constraint firstAttribute="centerY" secondItem="Kgi-Un-dY2" secondAttribute="centerY" id="y4M-kr-ChY"/>
-                <constraint firstItem="0pB-W5-K6s" firstAttribute="leading" secondItem="Qrz-5e-sOw" secondAttribute="trailing" constant="8" symbolic="YES" id="ySZ-Ed-usB"/>
+                <constraint firstItem="0pB-W5-K6s" firstAttribute="leading" secondItem="Qrz-5e-sOw" secondAttribute="trailing" constant="2" id="ySZ-Ed-usB"/>
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">

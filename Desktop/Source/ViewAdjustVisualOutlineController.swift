@@ -54,6 +54,8 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     private var rotationOffset = NSZeroPoint
     private var activeOffset = NSZeroPoint
     
+    private var gestureMagnification : CGFloat = 1
+    
     var screenSize = CGSizeZero {
         didSet {
             updateBodyTransforms()
@@ -71,8 +73,11 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         
         updateBodyTransforms()
         
-        let gesture = NSPanGestureRecognizer(target: self, action: Selector("pan:"))
-        contentView.addGestureRecognizer(gesture)
+        let panGesture = NSPanGestureRecognizer(target: self, action: Selector("pan:"))
+        contentView.addGestureRecognizer(panGesture)
+        
+        let zoomGesture = NSMagnificationGestureRecognizer(target : self, action : Selector("magnify:"))
+        contentView.addGestureRecognizer(zoomGesture)
     }
     
     override func viewDidLayout() {
@@ -118,30 +123,12 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         }
     }
     
-    func controlsView(view: VisualOutlineControlsView, changedZoom zoomScale: CGFloat) {
-        updateBodyTransforms()
-    }
-    
-    func controlsView(view: VisualOutlineControlsView, changedDepth depth: CGFloat) {
-        for layer in layers.values {
-            layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(layer.hierarchyDepth) * depth)
-            layer.borderLayer.transform = layer.contentLayer.transform
-        }
-    }
-    
-    func controlsViewResetTransform(view: VisualOutlineControlsView) {
-        rotationOffset = NSZeroPoint
-        updateBodyTransforms()
-    }
-    
     func offsetToRadians(v : CGFloat) -> CGFloat {
         return v / 90
     }
     
     func updateBodyTransforms() {
-        // Scale comes in at [-1, 1]. Need to convert to [.5, 2] where f(0) = 0
-        let zoomScale = controlsView.zoom
-        let scale = zoomScale < 0 ? (zoomScale / 2 + 1) : (zoomScale + 1)
+        let scale = gestureMagnification * controlsView.zoom
         let translate = CATransform3DMakeTranslation(-screenSize.width / 2, -screenSize.height / 2, 0)
         let scaleTransform = CATransform3DMakeScale(-scale, -scale, 1)
         let offset = CGPointMake(rotationOffset.x + activeOffset.x, rotationOffset.y + activeOffset.y)
@@ -150,6 +137,15 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         let rotationTransform = CATransform3DConcat(xRotation, yRotation)
         bodyLayer.transform = CATransform3DConcat(CATransform3DConcat(translate, scaleTransform), rotationTransform)
     }
+    
+    func updateDepths(depth : CGFloat) {
+        for layer in layers.values {
+            layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(layer.hierarchyDepth) * depth)
+            layer.borderLayer.transform = layer.contentLayer.transform
+        }
+    }
+    
+    // MARK: Gesture Handling
     
     func pan(sender : NSPanGestureRecognizer) {
         switch sender.state {
@@ -176,5 +172,34 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         default:
             break
         }
+    }
+    
+    func magnify(sender : NSMagnificationGestureRecognizer) {
+        switch sender.state {
+        case .Changed:
+            gestureMagnification = 1 + sender.magnification
+            updateBodyTransforms()
+        case .Ended:
+            controlsView.zoom = gestureMagnification * controlsView.zoom
+            gestureMagnification = 1
+            updateBodyTransforms()
+        default:
+            break
+        }
+    }
+    
+    // MARK: Controls View Delegate
+    
+    func controlsView(view: VisualOutlineControlsView, changedZoom zoomScale: CGFloat) {
+        updateBodyTransforms()
+    }
+    
+    func controlsView(view: VisualOutlineControlsView, changedDepth depth: CGFloat) {
+        updateDepths(depth)
+    }
+    
+    func controlsViewResetTransform(view: VisualOutlineControlsView) {
+        rotationOffset = NSZeroPoint
+        updateBodyTransforms()
     }
 }

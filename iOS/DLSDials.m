@@ -78,6 +78,7 @@
 - (void)startBroadcast {
     NSString* appName = [[NSBundle mainBundle] infoDictionary][(__bridge NSString*)kCFBundleNameKey];
     self.broadcastService = [[NSNetService alloc] initWithDomain:@"" type:DLSNetServiceName name:appName];
+    self.broadcastService.includesPeerToPeer = true;
     self.broadcastService.delegate = self;
     [self.broadcastService publishWithOptions:NSNetServiceListenForConnections];
 }
@@ -106,10 +107,6 @@
             [plugin connectedWithContext:self.contextBouncer];
         }
     });
-}
-
-- (void)netService:(NSNetService *)sender didNotPublish:(NSDictionary *)errorDict {
-    NSLog(@"Error starting dials: %@", errorDict);
 }
 
 - (void)stream:(DLSChannelStream *)stream receivedMessage:(NSData *)data onChannel:(DLSChannel *)channel {

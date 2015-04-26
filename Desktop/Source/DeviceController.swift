@@ -23,6 +23,7 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
     
     func start() {
         if !running {
+            browser.includesPeerToPeer = true
             browser.delegate = self
             browser.searchForServicesOfType(DLSNetServiceName, inDomain: "")
         }

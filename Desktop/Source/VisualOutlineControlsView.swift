@@ -45,7 +45,15 @@ class VisualOutlineControlsView: NSView {
     }
     
     var zoom : CGFloat {
-        return CGFloat(self.zoomSlider.floatValue)
+        get {
+            // Scale comes in at [-1, 1]. Need to convert to [.5, 2] where f(0) = 0
+            let zoomScale = self.zoomSlider.floatValue
+            return CGFloat(zoomScale < 0 ? (zoomScale / 2 + 1) : (zoomScale + 1))
+        }
+        set(scale) {
+            let value = scale > 1 ? scale - 1 : (scale - 1) * 2
+            self.zoomSlider.floatValue = Float(value)
+        }
     }
     
     var depthOffset : CGFloat {
