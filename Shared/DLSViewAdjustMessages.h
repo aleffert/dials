@@ -105,6 +105,15 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 @end
 
+
+@interface DLSViewAdjustUpdatedContentsMessage : NSObject <NSCoding>
+
+/// [NSString:NSData(UIImage)]
+@property (copy, nonatomic, nonnull) NSDictionary* contents;
+@property (copy, nonatomic, nonnull) NSArray* empties;
+
+@end
+
 #pragma mark Sent by Desktop
 @interface DLSViewAdjustSelectViewMessage : NSObject <NSCoding>
 

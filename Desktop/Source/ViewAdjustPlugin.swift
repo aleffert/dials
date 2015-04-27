@@ -54,6 +54,9 @@ class ViewAdjustPlugin: Plugin, ViewAdjustViewControllerDelegate {
         else if let m = message as? DLSViewAdjustUpdatedViewsMessage {
             handleUpdatedViewsMessage(m)
         }
+        else if let m = message as? DLSViewAdjustUpdatedContentsMessage {
+            handleUpdatedContentsMessage(m)
+        }
         else {
             assertionFailure("Unknown message type: \(message)")
         }
@@ -71,6 +74,10 @@ class ViewAdjustPlugin: Plugin, ViewAdjustViewControllerDelegate {
     
     func handleUpdatedViewsMessage(message : DLSViewAdjustUpdatedViewsMessage) {
         controller?.receivedUpdatedViews(message.records as! [DLSViewHierarchyRecord], roots: message.roots as! [NSString], screenSize : message.screenSize)
+    }
+    
+    func handleUpdatedContentsMessage(message : DLSViewAdjustUpdatedContentsMessage) {
+        controller?.receivedContents(message.contents as! [NSString:NSData], empties : message.empties as! [NSString])
     }
     
     //MARK: ViewAdjustViewControllerDelegate

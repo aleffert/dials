@@ -33,10 +33,12 @@
 @property (weak, nonatomic) UIView* selectedView;
 @property (strong, nonatomic) id <DLSRemovable> updateTimer;
 
-@property (strong, nonatomic) NSHashTable* updatedViews;
+@property (strong, nonatomic) NSHashTable* surfaceUpdatedViews;
+@property (strong, nonatomic) NSHashTable* displayUpdatedViews;
 
 @property (strong, nonatomic) id windowChangedListener;
-@property (assign, nonatomic) BOOL viewChanged;
+@property (assign, nonatomic) BOOL surfaceViewChanged;
+@property (assign, nonatomic) BOOL displayViewChanged;
 
 @end
 
@@ -51,7 +53,6 @@
     return sharedPlugin;
 }
 
-
 - (NSString*)name {
     return DLSViewAdjustPluginName;
 }
@@ -60,9 +61,12 @@
     self.context = context;
     self.classDescriptions = [[NSMutableDictionary alloc] init];
     self.classPropertyDescriptions = [[NSMutableDictionary alloc] init];
-    self.updatedViews = [NSHashTable weakObjectsHashTable];
+    self.surfaceUpdatedViews = [NSHashTable weakObjectsHashTable];
+    self.displayUpdatedViews = [NSHashTable weakObjectsHashTable];
     self.viewIDs = [NSMapTable strongToWeakObjectsMapTable];
     [self sendMessage:[self fullHierarchyMessage]];
+    [self sendAllKnownViewContentsMessage];
+    
     [UIView dls_setListening:YES];
     __weak __typeof(self) weakself = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:UIWindowDidBecomeVisibleNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
@@ -171,6 +175,17 @@
     return message;
 }
 
+- (void)sendAllKnownViewContentsMessage {
+    NSMutableArray* views = [[NSMutableArray alloc] init];
+    for(NSString* key in self.viewIDs.keyEnumerator) {
+        UIView* view = [self.viewIDs objectForKey:key];
+        if(key) {
+            [views addObject:view];
+        }
+    }
+    [self sendChangedDisplayViews:views];
+}
+
 #pragma mark Updates
 
 - (void)sendInfoForView:(UIView*)view {
@@ -216,16 +231,15 @@
     }];
 }
 
-- (void)sendChangedViews {
+- (void)sendChangedSurfaceViews {
     for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
-        [self.updatedViews addObject:window];
+        [self.surfaceUpdatedViews addObject:window];
     }
     
     NSMutableArray* records = [[NSMutableArray alloc] init];
-    for(UIView* view in self.updatedViews) {
+    for(UIView* view in self.surfaceUpdatedViews) {
         [records addObject:[self captureView:view]];
     }
-    [self.updatedViews removeAllObjects];
     
     DLSViewAdjustUpdatedViewsMessage* message = [[DLSViewAdjustUpdatedViewsMessage alloc] init];
     message.records = records;
@@ -233,6 +247,42 @@
     
     CGSize screenSize = [UIScreen mainScreen].bounds.size;
     message.screenSize = screenSize;
+    [self sendMessage:message];
+}
+
+- (void)sendChangedDisplayViews:(NSArray*)views {
+    NSMutableDictionary* records = [[NSMutableDictionary alloc] init];
+    NSMutableArray* empties = [[NSMutableArray alloc] init];
+    for(UIView* view in views) {
+        id image = view.layer.contents;
+        UIImage* uiImage = nil;
+        if(image != nil) {
+            UIGraphicsBeginImageContextWithOptions(view.layer.bounds.size, NO, view.layer.rasterizationScale);
+            CGContextRef context = UIGraphicsGetCurrentContext();
+            CGContextTranslateCTM(context, view.layer.bounds.size.width, view.layer.bounds.size.height);
+            CGContextScaleCTM(context, -1, -1);
+            [view.layer renderInContext:context];
+            UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            uiImage = result;
+            
+            NSData* imageData = UIImagePNGRepresentation(uiImage);
+            if(imageData) {
+                records[[self viewIDForView:view]] = imageData;
+            }
+            else {
+                [empties addObject:[self viewIDForView:view]];
+            }
+        }
+        else {
+            [empties addObject:[self viewIDForView:view]];
+        }
+    }
+    
+    DLSViewAdjustUpdatedContentsMessage* message = [[DLSViewAdjustUpdatedContentsMessage alloc] init];
+    message.contents = records;
+    message.empties = empties;
+    
     [self sendMessage:message];
 }
 
@@ -267,12 +317,13 @@
     if(view == nil) {
         return;
     }
-    [self.updatedViews addObject:view];
-    if(!self.viewChanged) {
-        self.viewChanged = YES;
+    [self.surfaceUpdatedViews addObject:view];
+    if(!self.surfaceViewChanged) {
+        self.surfaceViewChanged = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.viewChanged = NO;
-            [self sendChangedViews];
+            self.surfaceViewChanged = NO;
+            [self sendChangedSurfaceViews];
+            [self.surfaceUpdatedViews removeAllObjects];
         });
     }
     if(view == self.selectedView) {
@@ -282,7 +333,18 @@
 }
 
 - (void)viewChangedDisplay:(UIView *)view {
-    // TODO
+    if(view == nil) {
+        return;
+    }
+    [self.displayUpdatedViews addObject:view];
+    if(!self.displayViewChanged) {
+        self.displayViewChanged = YES;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.displayViewChanged = NO;
+            [self sendChangedDisplayViews:self.displayUpdatedViews.allObjects];
+            [self.displayUpdatedViews removeAllObjects];
+        });
+    }
 }
 
 @end

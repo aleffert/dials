@@ -31,6 +31,8 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     
     private var currentSelection : NSString?
     
+    private var contents : [NSString:NSImage] = [:]
+    
     var screenSize = CGSizeZero {
         didSet {
             updateBodyTransforms()
@@ -82,6 +84,7 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 layer.bounds = record.renderingInfo.bounds
                 layer.contentLayer.cornerRadius = record.renderingInfo.cornerRadius
                 layer.contentLayer.opacity = Float(record.renderingInfo.opacity)
+                layer.contentLayer.contents = contents[record.viewID]
                 layer.position = record.renderingInfo.position
                 layer.anchorPoint = record.renderingInfo.anchorPoint
                 layer.transform = record.renderingInfo.transform3D
@@ -102,6 +105,16 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 layers[node] = nil
             }
         }
+    }
+    
+    func takeContents(contents : [NSString:NSData], empties : [NSString]) {
+        for (key, imageData) in contents {
+            self.contents[key] = NSImage(data: imageData)
+        }
+        for key in empties {
+            self.contents[key] = nil
+        }
+        // TODO Garbage collect this
     }
     
     func offsetToRadians(v : CGFloat) -> CGFloat {
@@ -248,7 +261,7 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     }
     
     override func mouseExited(theEvent: NSEvent) {
-        
+        updateHighlights()
     }
     
     // MARK: Controls View Delegate

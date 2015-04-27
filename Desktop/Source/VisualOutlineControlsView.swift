@@ -44,6 +44,11 @@ class VisualOutlineControlsView: NSView {
         self.delegate?.controlsView(self, changedDepth: CGFloat(sender.floatValue))
     }
     
+    @IBAction private func resetZoom(sender : AnyObject) {
+        zoom = 1
+        self.delegate?.controlsView(self, changedZoom: 1)
+    }
+    
     var zoom : CGFloat {
         get {
             // Scale comes in at [-1, 1]. Need to convert to [.5, 2] where f(0) = 0

@@ -48,6 +48,10 @@ class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineCont
         visualOutlineController.screenSize = screenSize
     }
     
+    func receivedContents(contents : [NSString:NSData], empties:[NSString]) {
+        visualOutlineController.takeContents(contents, empties : empties)
+    }
+    
     func outlineController(controller: ViewAdjustHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
         delegate?.viewAdjustController(self, selectedViewWithID: viewID)
         visualOutlineController.selectViewWithID(viewID)

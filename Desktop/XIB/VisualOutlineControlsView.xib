@@ -66,16 +66,29 @@
                         <action selector="depthChanged:" target="-2" id="kB0-WY-2fd"/>
                     </connections>
                 </slider>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="hDR-EY-gfG">
+                    <rect key="frame" x="214" y="4" width="43" height="14"/>
+                    <buttonCell key="cell" type="inline" title="Reset" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="UB0-sw-J43">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="resetZoom:" target="-2" id="MlX-G6-foG"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="Kgi-Un-dY2" firstAttribute="leading" secondItem="DbE-HR-dlc" secondAttribute="trailing" constant="8" symbolic="YES" id="Bfp-nB-d91"/>
                 <constraint firstAttribute="bottom" secondItem="0pB-W5-K6s" secondAttribute="bottom" constant="3" id="E7p-Ff-Ufj"/>
                 <constraint firstItem="0pB-W5-K6s" firstAttribute="baseline" secondItem="Qrz-5e-sOw" secondAttribute="baseline" constant="1" id="GFt-h8-qoY"/>
-                <constraint firstItem="tSX-us-vJ2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0pB-W5-K6s" secondAttribute="trailing" constant="8" symbolic="YES" id="N5m-Tj-edZ"/>
                 <constraint firstAttribute="centerY" secondItem="DbE-HR-dlc" secondAttribute="centerY" id="PcY-lb-9bp"/>
+                <constraint firstAttribute="centerY" secondItem="hDR-EY-gfG" secondAttribute="centerY" constant="0.5" id="QPZ-AJ-Qnw"/>
                 <constraint firstAttribute="trailing" secondItem="Kgi-Un-dY2" secondAttribute="trailing" constant="20" symbolic="YES" id="SH4-zd-l3D"/>
                 <constraint firstItem="DbE-HR-dlc" firstAttribute="leading" secondItem="tSX-us-vJ2" secondAttribute="trailing" constant="2" id="VgC-91-L22"/>
                 <constraint firstItem="Qrz-5e-sOw" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" symbolic="YES" id="aLn-2T-TlL"/>
+                <constraint firstAttribute="trailing" secondItem="tSX-us-vJ2" secondAttribute="trailing" constant="218" id="cZi-Vn-dOw"/>
+                <constraint firstItem="tSX-us-vJ2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hDR-EY-gfG" secondAttribute="trailing" constant="8" symbolic="YES" id="dr6-og-SRX"/>
+                <constraint firstItem="hDR-EY-gfG" firstAttribute="leading" secondItem="0pB-W5-K6s" secondAttribute="trailing" constant="8" symbolic="YES" id="gEg-gl-Td9"/>
                 <constraint firstAttribute="centerY" secondItem="tSX-us-vJ2" secondAttribute="centerY" id="sIk-1P-m5I"/>
                 <constraint firstAttribute="centerY" secondItem="0pB-W5-K6s" secondAttribute="centerY" id="st3-hw-45H"/>
                 <constraint firstItem="0pB-W5-K6s" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="3" id="vi7-Mf-7E1"/>
@@ -84,7 +97,7 @@
             </constraints>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
-                    <color key="value" white="1" alpha="0.46000000000000002" colorSpace="calibratedWhite"/>
+                    <color key="value" white="1" alpha="0.69000000000000006" colorSpace="calibratedWhite"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="271.5" y="134.5"/>
