@@ -77,6 +77,8 @@
 }
 
 - (void)connectionClosed {
+    self.surfaceUpdatedViews = nil;
+    self.displayUpdatedViews = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self.windowChangedListener];
     [UIView dls_setListening:NO];
     self.classDescriptions = nil;
