@@ -71,6 +71,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     self = [super init];
     if(self != nil) {
         DLSDecodeObject(aDecoder, viewID);
+        DLSDecodeObject(aDecoder, superviewID);
         DLSDecodeObject(aDecoder, children);
         DLSDecodeObject(aDecoder, displayName);
         DLSDecodeObject(aDecoder, className);
@@ -81,6 +82,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeObject(aCoder, viewID);
+    DLSEncodeObject(aCoder, superviewID);
     DLSEncodeObject(aCoder, children);
     DLSEncodeObject(aCoder, displayName);
     DLSEncodeObject(aCoder, className);

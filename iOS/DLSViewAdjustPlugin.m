@@ -130,6 +130,7 @@
 - (DLSViewHierarchyRecord*)captureView:(UIView*)view {
     DLSViewHierarchyRecord* record = [[DLSViewHierarchyRecord alloc] init];
     record.viewID = [self viewIDForView:view];
+    record.superviewID = [self viewIDForView:view.superview];
     record.className = NSStringFromClass(view.class);
     record.displayName = record.className;
     record.children = [view.subviews dls_map:^id(UIView* child) {

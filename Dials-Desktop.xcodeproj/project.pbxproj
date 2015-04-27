@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77191D8F1A3E856A006D248C /* ChannelCellView.xib */; };
+		77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77224B811AEDDE21002C3739 /* ViewFacade.swift */; };
 		772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */; };
 		773E67A31ACDF82E00E1BB0A /* ViewAdjustPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E67A21ACDF82E00E1BB0A /* ViewAdjustPlugin.swift */; };
 		773E67B81ACE0A8000E1BB0A /* ViewAdjustViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */; };
 		773E67B91ACEE4EB00E1BB0A /* ViewAdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E67B41ACDFE7600E1BB0A /* ViewAdjustViewController.swift */; };
+		7748C9B71AEDD88400363932 /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7748C9B61AEDD88400363932 /* MathUtils.swift */; };
 		774D160D1AB5D36900613F24 /* libDialsShared-Desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 774D160C1AB5D36900613F24 /* libDialsShared-Desktop.a */; };
 		776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415001A32AF94005E381A /* ConsoleWindow.xib */; };
 		776415031A32AF94005E381A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415011A32AF94005E381A /* MainMenu.xib */; };
@@ -81,10 +83,12 @@
 
 /* Begin PBXFileReference section */
 		77191D8F1A3E856A006D248C /* ChannelCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChannelCellView.xib; path = Desktop/XIB/ChannelCellView.xib; sourceTree = SOURCE_ROOT; };
+		77224B811AEDDE21002C3739 /* ViewFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewFacade.swift; path = Desktop/Source/ViewFacade.swift; sourceTree = SOURCE_ROOT; };
 		772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSView+Layout.swift"; path = "Desktop/Source/NSView+Layout.swift"; sourceTree = SOURCE_ROOT; };
 		773E67A21ACDF82E00E1BB0A /* ViewAdjustPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewAdjustPlugin.swift; path = Desktop/Source/ViewAdjustPlugin.swift; sourceTree = SOURCE_ROOT; };
 		773E67B41ACDFE7600E1BB0A /* ViewAdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAdjustViewController.swift; path = Desktop/Source/ViewAdjustViewController.swift; sourceTree = SOURCE_ROOT; };
 		773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewAdjustViewController.xib; path = Desktop/XIB/ViewAdjustViewController.xib; sourceTree = SOURCE_ROOT; };
+		7748C9B61AEDD88400363932 /* MathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MathUtils.swift; path = Desktop/Source/MathUtils.swift; sourceTree = SOURCE_ROOT; };
 		774D160C1AB5D36900613F24 /* libDialsShared-Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libDialsShared-Desktop.a"; path = "../../../Library/Developer/Xcode/DerivedData/Dials-dszlxtikntnjoqbsqgddedhnooyt/Build/Products/Debug/libDialsShared-Desktop.a"; sourceTree = "<group>"; };
 		776414DA1A32ADC9005E381A /* Dials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dials.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776415001A32AF94005E381A /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConsoleWindow.xib; path = Desktop/XIB/ConsoleWindow.xib; sourceTree = SOURCE_ROOT; };
@@ -190,6 +194,8 @@
 		776414DC1A32ADC9005E381A /* Dials */ = {
 			isa = PBXGroup;
 			children = (
+				77224B811AEDDE21002C3739 /* ViewFacade.swift */,
+				7748C9B61AEDD88400363932 /* MathUtils.swift */,
 				77A6F9AC1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift */,
 				77B2358E1AE4BFFD00599722 /* ViewOwner.swift */,
 				77B2358C1AE4BDE900599722 /* BackgroundColorView.swift */,
@@ -463,7 +469,9 @@
 				778876DF1ABDFECB00AB5580 /* SliderEditor.swift in Sources */,
 				773E67A31ACDF82E00E1BB0A /* ViewAdjustPlugin.swift in Sources */,
 				77A6F9AD1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift in Sources */,
+				77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */,
 				778877211AC0E55D00AB5580 /* Optional+Result.swift in Sources */,
+				7748C9B71AEDD88400363932 /* MathUtils.swift in Sources */,
 				77B235991AE5648F00599722 /* StepperEditor.swift in Sources */,
 				778876E51ABE100700AB5580 /* ToggleEditor.swift in Sources */,
 				77F4F59A1A33D64100A48A76 /* PluginController.swift in Sources */,

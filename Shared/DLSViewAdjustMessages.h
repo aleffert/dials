@@ -45,6 +45,7 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @interface DLSViewHierarchyRecord : NSObject <NSCoding>
 /// Unique id of the corresponding view
 @property (copy, nonatomic, nonnull) NSString* viewID;
+@property (copy, nonatomic, nullable) NSString* superviewID;
 /// [NSString(uuid)]
 @property (copy, nonatomic, nonnull) NSArray* children;
 @property (copy, nonatomic, nonnull) NSString* displayName;

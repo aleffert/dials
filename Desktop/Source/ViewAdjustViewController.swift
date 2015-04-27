@@ -13,7 +13,7 @@ protocol ViewAdjustViewControllerDelegate : class {
     func viewAdjustController(controller : ViewAdjustViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
 }
 
-class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineControllerDelegate, ViewAdjustPropertyTableControllerDelegate {
+class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineControllerDelegate, ViewAdjustPropertyTableControllerDelegate, ViewAdjustVisualOutlineControllerDelegate {
     
     weak var delegate : ViewAdjustViewControllerDelegate?
     
@@ -25,6 +25,7 @@ class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineCont
         super.viewDidLoad()
         hierarchyOutlineController.delegate = self
         propertyTableController.delegate = self
+        visualOutlineController.delegate = self
         visualOutlineController.hierarchy = hierarchyOutlineController.hierarchy
     }
     
@@ -49,6 +50,11 @@ class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineCont
     
     func outlineController(controller: ViewAdjustHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
         delegate?.viewAdjustController(self, selectedViewWithID: viewID)
+        visualOutlineController.selectViewWithID(viewID)
+    }
+    
+    func visualOutlineController(controller: ViewAdjustVisualOutlineController, selectedViewWithID viewID: NSString?) {
+        hierarchyOutlineController.selectViewWithID(viewID)
     }
     
     func tableController(controller: ViewAdjustPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {

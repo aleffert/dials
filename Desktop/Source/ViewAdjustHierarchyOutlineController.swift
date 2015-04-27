@@ -90,6 +90,29 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
         return outlineView?.selectedRow != -1
     }
     
+    func selectViewWithID(viewID : NSString?) {
+        if let viewID = viewID {
+            var parents : [NSString] = []
+            var current = hierarchy[viewID]?.superviewID
+            while current != nil {
+                parents.insert(current!, atIndex: 0)
+                current = hierarchy[current!]?.superviewID
+            }
+            
+            for item in parents {
+                outlineView.expandItem(canonicalize(item))
+            }
+            
+            let row = outlineView.rowForItem(canonicalize(viewID))
+            if row != -1 {
+                outlineView.selectRowIndexes(NSIndexSet(index:row), byExtendingSelection: false)
+            }
+        }
+        else {
+            outlineView.deselectAll(nil)
+        }
+    }
+    
     func takeUpdateRecords(records : [DLSViewHierarchyRecord], roots : [NSString]) {
         self.hierarchy.roots = roots
         for record in records {
@@ -111,7 +134,7 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
             }
         }
         
-        // thanks to the update we may have unrechable nodes so GC them
+        // thanks to the update we may have unreachable nodes so GC them
         // Changing GC frequency is an obvious optimization avenue
         hierarchy.collectGarbage()
     }
