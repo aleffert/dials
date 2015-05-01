@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc protocol CodeGenerating {
+protocol CodeGenerating {
     func objcCodeForValue(value : NSCoding?) -> String
     func swiftCodeForValue(value : NSCoding?) -> String
 }

@@ -76,6 +76,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
         DLSDecodeObject(aDecoder, displayName);
         DLSDecodeObject(aDecoder, className);
         DLSDecodeObject(aDecoder, renderingInfo);
+        DLSDecodeObject(aDecoder, address);
     }
     return self;
 }
@@ -87,6 +88,7 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.view-adjust";
     DLSEncodeObject(aCoder, displayName);
     DLSEncodeObject(aCoder, className);
     DLSEncodeObject(aCoder, renderingInfo);
+    DLSEncodeObject(aCoder, address);
 }
 
 @end

@@ -50,6 +50,7 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @property (copy, nonatomic, nonnull) NSArray* children;
 @property (copy, nonatomic, nonnull) NSString* displayName;
 @property (copy, nonatomic, nonnull) NSString* className;
+@property (copy, nonatomic, nonnull) NSString* address;
 
 @property (strong, nonatomic, nonnull) DLSViewRenderingRecord* renderingInfo;
 

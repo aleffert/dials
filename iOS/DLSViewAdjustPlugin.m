@@ -142,6 +142,7 @@
     record.children = [view.subviews dls_map:^id(UIView* child) {
         return [self viewIDForView:child];
     }];
+    record.address = [NSString stringWithFormat:@"%p", view];
     record.renderingInfo = [self renderingInfoForView:view];
     return record;
 }

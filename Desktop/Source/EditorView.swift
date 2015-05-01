@@ -34,6 +34,6 @@ class EditorView : NSView {
     }
 }
 
-@objc protocol EditorViewGenerating : class {
+protocol EditorViewGenerating {
     func generate() -> EditorView
 }
