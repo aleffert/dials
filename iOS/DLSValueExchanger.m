@@ -24,7 +24,7 @@
     return exchanger;
 }
 
-- (id <NSCoding>)extractValueFromObject:(id)object {
+- (id)extractValueFromObject:(id)object {
     return [object valueForKeyPath:self.keyPath];
 }
 
@@ -49,7 +49,7 @@
     return self;
 }
 
-- (id <NSCoding>)extractValueFromObject:(id)object {
+- (id)extractValueFromObject:(id)object {
     CGColorRef color = (__bridge CGColorRef)[self.backing extractValueFromObject:object];
     UIColor* result = [UIColor colorWithCGColor:color];
     return result;
@@ -58,6 +58,23 @@
 - (void)applyValue:(id)value toObject:(id)object {
     CGColorRef color = [value CGColor];
     [self.backing applyValue:(__bridge id)color toObject:object];
+}
+
+@end
+
+@implementation DLSViewControllerClassExchanger
+
+- (id)extractValueFromObject:(id)object {
+    id parent = [object nextResponder];
+    while (parent != nil && ![parent isKindOfClass:[UIViewController class]]) {
+        parent = [parent nextResponder];
+    }
+    // Skip the module name
+    return [parent class] ? [[NSStringFromClass([parent class]) componentsSeparatedByString:@"."] lastObject] : @"None";
+}
+
+- (void)applyValue:(id)value toObject:(id)object {
+    // nothing to do
 }
 
 @end

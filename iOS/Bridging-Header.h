@@ -14,4 +14,5 @@
 #import <Dials/DLSColorDescription.h>
 #import <Dials/DLSActionDescription.h>
 #import <Dials/DLSSliderDescription.h>
+#import <Dials/DLSTextFieldDescription.h>
 #import <Dials/DLSToggleDescription.h>

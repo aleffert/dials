@@ -15,6 +15,8 @@
 		774D15C01AB4BD6500613F24 /* UIView+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D15BE1AB4BD6500613F24 /* UIView+DLSDescribable.m */; };
 		774D15C21AB4BE0A00613F24 /* DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 774D15BA1AB4BC8800613F24 /* DLSDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		774D15C61AB4BFF800613F24 /* DLSDescriptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D15C41AB4BFF800613F24 /* DLSDescriptionContext.m */; };
+		775B9DF31AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h in Headers */ = {isa = PBXBuildFile; fileRef = 775B9DF11AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h */; };
+		775B9DF41AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 775B9DF21AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m */; };
 		7787FF431A3CA35200074DBC /* DLSPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7787FF411A3CA35200074DBC /* DLSPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7787FF491A3CAD1700074DBC /* DLSLiveDialsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7787FF481A3CACBF00074DBC /* DLSLiveDialsPlugin.m */; };
 		7787FF4A1A3CAD1A00074DBC /* DLSLiveDialsPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7787FF471A3CACBF00074DBC /* DLSLiveDialsPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -39,6 +41,8 @@
 		774D15C41AB4BFF800613F24 /* DLSDescriptionContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSDescriptionContext.m; path = iOS/DLSDescriptionContext.m; sourceTree = SOURCE_ROOT; };
 		774D16041AB53D2A00613F24 /* Dials-iOS.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Dials-iOS.pch"; path = "iOS/Dials-iOS.pch"; sourceTree = SOURCE_ROOT; };
 		77567B641AC6D29300877A7B /* DLSLiveDialsPlugin+SwiftAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DLSLiveDialsPlugin+SwiftAdditions.swift"; path = "iOS/DLSLiveDialsPlugin+SwiftAdditions.swift"; sourceTree = SOURCE_ROOT; };
+		775B9DF11AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+DLSViewAdjust.h"; path = "iOS/UILabel+DLSViewAdjust.h"; sourceTree = SOURCE_ROOT; };
+		775B9DF21AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+DLSViewAdjust.m"; path = "iOS/UILabel+DLSViewAdjust.m"; sourceTree = SOURCE_ROOT; };
 		7787FF411A3CA35200074DBC /* DLSPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSPlugin.h; path = iOS/DLSPlugin.h; sourceTree = SOURCE_ROOT; };
 		7787FF471A3CACBF00074DBC /* DLSLiveDialsPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DLSLiveDialsPlugin.h; path = iOS/DLSLiveDialsPlugin.h; sourceTree = SOURCE_ROOT; };
 		7787FF481A3CACBF00074DBC /* DLSLiveDialsPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DLSLiveDialsPlugin.m; path = iOS/DLSLiveDialsPlugin.m; sourceTree = SOURCE_ROOT; };
@@ -118,6 +122,8 @@
 			children = (
 				77BC3EA41AE5FAEE00E51529 /* NSObject+DLSSwizzle.h */,
 				77BC3EA51AE5FAEE00E51529 /* NSObject+DLSSwizzle.m */,
+				775B9DF11AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h */,
+				775B9DF21AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m */,
 				77B2355B1AE2F86400599722 /* UIView+DLSViewAdjust.h */,
 				77B2355C1AE2F86400599722 /* UIView+DLSViewAdjust.m */,
 				774D16041AB53D2A00613F24 /* Dials-iOS.pch */,
@@ -147,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7787FF431A3CA35200074DBC /* DLSPlugin.h in Headers */,
+				775B9DF31AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h in Headers */,
 				774D15C21AB4BE0A00613F24 /* DLSDescribable.h in Headers */,
 				77341ACB1AD63905004023CD /* DialsFramework.h in Headers */,
 				7787FF4A1A3CAD1A00074DBC /* DLSLiveDialsPlugin.h in Headers */,
@@ -231,6 +238,7 @@
 				7787FF491A3CAD1700074DBC /* DLSLiveDialsPlugin.m in Sources */,
 				779250EE1A33592100CCC229 /* DLSDials.m in Sources */,
 				77BC3EA71AE5FAEE00E51529 /* NSObject+DLSSwizzle.m in Sources */,
+				775B9DF41AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m in Sources */,
 				77B0B9FD1AD1B29200E81A67 /* DLSValueExchanger.m in Sources */,
 				774D15C61AB4BFF800613F24 /* DLSDescriptionContext.m in Sources */,
 				774D15C01AB4BD6500613F24 /* UIView+DLSDescribable.m in Sources */,

@@ -27,3 +27,7 @@
 - (id)initWithBackingExchanger:(id <DLSValueExchanger>)exchanger;
 
 @end
+
+@interface DLSViewControllerClassExchanger : NSObject <DLSValueExchanger>
+
+@end

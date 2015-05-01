@@ -109,10 +109,13 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     
     func takeContents(contents : [NSString:NSData], empties : [NSString]) {
         for (key, imageData) in contents {
-            self.contents[key] = NSImage(data: imageData)
+            let image = NSImage(data: imageData)
+            self.contents[key] = image
+            layers[key]?.contentLayer.contents = image
         }
         for key in empties {
             self.contents[key] = nil
+            layers[key]?.contentLayer.contents = nil
         }
         // TODO Garbage collect this
     }

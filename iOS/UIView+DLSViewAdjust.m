@@ -30,7 +30,10 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 - (id <CAAction>)dls_actionForKey:(NSString *)key {
     id <CAAction> result = [self dls_actionForKey:key];
     
-    if(![key isEqualToString:@"delegate"] && ![key isEqualToString:@"sublayers"]) {
+    if([key isEqualToString:@"contents"]) {
+        [[DLSViewAdjustPlugin sharedPlugin] viewChangedDisplay:self.dls_view];
+    }
+    else if(![key isEqualToString:@"delegate"] && ![key isEqualToString:@"sublayers"]) {
         [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self.dls_view];
     };
     return result;

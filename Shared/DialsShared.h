@@ -21,6 +21,7 @@
 #import "DLSRemovable.h"
 #import "DLSSliderDescription.h"
 #import "DLSStepperDescription.h"
+#import "DLSTextFieldDescription.h"
 #import "DLSToggleDescription.h"
 #import "DLSViewAdjustMessages.h"
 

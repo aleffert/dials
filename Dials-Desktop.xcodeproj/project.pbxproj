@@ -10,6 +10,8 @@
 		77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77191D8F1A3E856A006D248C /* ChannelCellView.xib */; };
 		77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77224B811AEDDE21002C3739 /* ViewFacade.swift */; };
 		772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */; };
+		773C5AD11AF335DD00F6AD59 /* TextFieldEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773C5AD01AF335D200F6AD59 /* TextFieldEditor.swift */; };
+		773C5AD51AF337EE00F6AD59 /* TextFieldEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773C5AD41AF337EE00F6AD59 /* TextFieldEditorView.xib */; };
 		773E67A31ACDF82E00E1BB0A /* ViewAdjustPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E67A21ACDF82E00E1BB0A /* ViewAdjustPlugin.swift */; };
 		773E67B81ACE0A8000E1BB0A /* ViewAdjustViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */; };
 		773E67B91ACEE4EB00E1BB0A /* ViewAdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E67B41ACDFE7600E1BB0A /* ViewAdjustViewController.swift */; };
@@ -35,7 +37,6 @@
 		778876E51ABE100700AB5580 /* ToggleEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778876E41ABE100700AB5580 /* ToggleEditor.swift */; };
 		778876E71ABE101E00AB5580 /* LiveDialPaneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778876E61ABE101E00AB5580 /* LiveDialPaneViewController.xib */; };
 		778876F21ABE16E800AB5580 /* ColorEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778876F11ABE16E800AB5580 /* ColorEditor.swift */; };
-		778876F41ABE184600AB5580 /* ColorEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778876F31ABE184600AB5580 /* ColorEditorView.xib */; };
 		778876F71ABF600800AB5580 /* FormattingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778876F61ABF5FCA00AB5580 /* FormattingUtilities.swift */; };
 		778876F91ABF869C00AB5580 /* LiveDialCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 778876F81ABF869C00AB5580 /* LiveDialCellView.xib */; };
 		778876FB1ABF9C8B00AB5580 /* CodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778876FA1ABF9C8B00AB5580 /* CodeManager.swift */; };
@@ -85,6 +86,8 @@
 		77191D8F1A3E856A006D248C /* ChannelCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChannelCellView.xib; path = Desktop/XIB/ChannelCellView.xib; sourceTree = SOURCE_ROOT; };
 		77224B811AEDDE21002C3739 /* ViewFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewFacade.swift; path = Desktop/Source/ViewFacade.swift; sourceTree = SOURCE_ROOT; };
 		772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSView+Layout.swift"; path = "Desktop/Source/NSView+Layout.swift"; sourceTree = SOURCE_ROOT; };
+		773C5AD01AF335D200F6AD59 /* TextFieldEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextFieldEditor.swift; path = Desktop/Source/TextFieldEditor.swift; sourceTree = SOURCE_ROOT; };
+		773C5AD41AF337EE00F6AD59 /* TextFieldEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TextFieldEditorView.xib; path = Desktop/XIB/TextFieldEditorView.xib; sourceTree = SOURCE_ROOT; };
 		773E67A21ACDF82E00E1BB0A /* ViewAdjustPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewAdjustPlugin.swift; path = Desktop/Source/ViewAdjustPlugin.swift; sourceTree = SOURCE_ROOT; };
 		773E67B41ACDFE7600E1BB0A /* ViewAdjustViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewAdjustViewController.swift; path = Desktop/Source/ViewAdjustViewController.swift; sourceTree = SOURCE_ROOT; };
 		773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewAdjustViewController.xib; path = Desktop/XIB/ViewAdjustViewController.xib; sourceTree = SOURCE_ROOT; };
@@ -112,7 +115,6 @@
 		778876E41ABE100700AB5580 /* ToggleEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToggleEditor.swift; path = Desktop/Source/ToggleEditor.swift; sourceTree = SOURCE_ROOT; };
 		778876E61ABE101E00AB5580 /* LiveDialPaneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LiveDialPaneViewController.xib; path = Desktop/XIB/LiveDialPaneViewController.xib; sourceTree = SOURCE_ROOT; };
 		778876F11ABE16E800AB5580 /* ColorEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorEditor.swift; path = Desktop/Source/ColorEditor.swift; sourceTree = SOURCE_ROOT; };
-		778876F31ABE184600AB5580 /* ColorEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ColorEditorView.xib; path = Desktop/XIB/ColorEditorView.xib; sourceTree = SOURCE_ROOT; };
 		778876F61ABF5FCA00AB5580 /* FormattingUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FormattingUtilities.swift; path = Desktop/Source/FormattingUtilities.swift; sourceTree = SOURCE_ROOT; };
 		778876F81ABF869C00AB5580 /* LiveDialCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LiveDialCellView.xib; path = Desktop/XIB/LiveDialCellView.xib; sourceTree = SOURCE_ROOT; };
 		778876FA1ABF9C8B00AB5580 /* CodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodeManager.swift; path = Desktop/Source/CodeManager.swift; sourceTree = SOURCE_ROOT; };
@@ -267,6 +269,7 @@
 				778876F11ABE16E800AB5580 /* ColorEditor.swift */,
 				778876DE1ABDFECB00AB5580 /* SliderEditor.swift */,
 				77B235981AE5648F00599722 /* StepperEditor.swift */,
+				773C5AD01AF335D200F6AD59 /* TextFieldEditor.swift */,
 				778876E41ABE100700AB5580 /* ToggleEditor.swift */,
 				778876D81ABDC27400AB5580 /* EditorView.swift */,
 			);
@@ -277,9 +280,9 @@
 			isa = PBXGroup;
 			children = (
 				778876D01ABBDC1600AB5580 /* ActionEditorView.xib */,
-				778876F31ABE184600AB5580 /* ColorEditorView.xib */,
 				778876E01ABE050E00AB5580 /* SliderEditorView.xib */,
 				77B2359A1AE56FD400599722 /* StepperEditorView.xib */,
+				773C5AD41AF337EE00F6AD59 /* TextFieldEditorView.xib */,
 				778876E21ABE0F7F00AB5580 /* ToggleEditorView.xib */,
 			);
 			name = Editors;
@@ -434,10 +437,10 @@
 				778876E71ABE101E00AB5580 /* LiveDialPaneViewController.xib in Resources */,
 				778876D11ABBDC1600AB5580 /* ActionEditorView.xib in Resources */,
 				778876E11ABE050E00AB5580 /* SliderEditorView.xib in Resources */,
-				778876F41ABE184600AB5580 /* ColorEditorView.xib in Resources */,
 				77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */,
 				778876F91ABF869C00AB5580 /* LiveDialCellView.xib in Resources */,
 				773E67B81ACE0A8000E1BB0A /* ViewAdjustViewController.xib in Resources */,
+				773C5AD51AF337EE00F6AD59 /* TextFieldEditorView.xib in Resources */,
 				776415031A32AF94005E381A /* MainMenu.xib in Resources */,
 				778876E31ABE0F7F00AB5580 /* ToggleEditorView.xib in Resources */,
 				776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */,
@@ -497,6 +500,7 @@
 				77B2358F1AE4BFFD00599722 /* ViewOwner.swift in Sources */,
 				77A6F9A91AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift in Sources */,
 				778876DD1ABDC91E00AB5580 /* Optional+Utilities.swift in Sources */,
+				773C5AD11AF335DD00F6AD59 /* TextFieldEditor.swift in Sources */,
 				778877101ABFA71D00AB5580 /* Result.swift in Sources */,
 				77B235751AE3E9B200599722 /* ViewAdjustPropertyTableController.swift in Sources */,
 				7783CDA31A3B2848005E34D9 /* SidebarSplitViewController.swift in Sources */,

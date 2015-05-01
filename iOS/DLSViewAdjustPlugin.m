@@ -107,7 +107,7 @@
     if(result == nil) {
         DLSDescriptionAccumulator* accumulator = [[DLSDescriptionAccumulator alloc] init];
         [klass dls_describe:accumulator];
-        result = accumulator.groups;
+        result = accumulator.groups.reverseObjectEnumerator.allObjects;
         self.classDescriptions[className] = result;
     }
     return result;
@@ -192,20 +192,18 @@
 #pragma mark Updates
 
 - (void)sendInfoForView:(UIView*)view {
-    DLSDescriptionAccumulator* accumulator = [[DLSDescriptionAccumulator alloc] init];
-    [view dls_describe:accumulator];
     
     DLSViewAdjustViewPropertiesMessage* message = [[DLSViewAdjustViewPropertiesMessage alloc] init];
     
     DLSViewRecord* record = [[DLSViewRecord alloc] init];
     record.viewID = [self viewIDForView:view];
-    record.propertyGroups = accumulator.groups;
+    record.propertyGroups = [self descriptionGroupsForClass:view.class];
     record.className = NSStringFromClass(view.class);
     NSMutableDictionary* values = [[NSMutableDictionary alloc] init];
     for(DLSPropertyGroup* group in record.propertyGroups) {
         NSMutableDictionary* groupValues = [[NSMutableDictionary alloc] init];
         for(DLSPropertyDescription* description in group.properties) {
-            id <DLSValueExchanger> exchanger = [view dls_valueExchangerForProperty:description.name inGroup:group.displayName];
+            id <DLSValueExchanger> exchanger = [view.class dls_valueExchangerForProperty:description.name inGroup:group.displayName];
             id <NSCoding> value = [exchanger extractValueFromObject:view];
             if(value != nil) {
                 groupValues[description.name] = value;
@@ -264,7 +262,7 @@
             CGContextRef context = UIGraphicsGetCurrentContext();
             CGContextTranslateCTM(context, view.layer.bounds.size.width, view.layer.bounds.size.height);
             CGContextScaleCTM(context, -1, -1);
-            [view.layer renderInContext:context];
+            [view.layer drawInContext:context];
             UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             uiImage = result;
@@ -307,7 +305,7 @@
 
 - (void)handleViewChangeMessage:(DLSViewAdjustValueChangedMessage*)message {
     UIView* view = [self.viewIDs objectForKey:message.record.viewID];
-    id <DLSValueExchanger> exchanger = [view dls_valueExchangerForProperty:message.record.name inGroup:message.record.group];
+    id <DLSValueExchanger> exchanger = [view.class dls_valueExchangerForProperty:message.record.name inGroup:message.record.group];
     [exchanger applyValue:message.record.value toObject:view];
 }
 
