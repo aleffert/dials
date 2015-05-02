@@ -12,11 +12,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe" customClass="TextFieldEditorView" customModule="Dials" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="88" height="47"/>
+            <rect key="frame" x="0.0" y="0.0" width="129" height="18"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jjg-31-kjl">
-                    <rect key="frame" x="32" y="27" width="33" height="14"/>
+                    <rect key="frame" x="-2" y="2" width="33" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="uks-qt-eHq">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -24,9 +24,9 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="weN-jI-Qpl">
-                    <rect key="frame" x="32" y="6" width="38" height="17"/>
+                    <rect key="frame" x="78" y="2" width="33" height="14"/>
                     <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Label" id="uGb-p8-8qh">
-                        <font key="font" metaFont="system"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -37,12 +37,13 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="weN-jI-Qpl" secondAttribute="trailing" constant="20" symbolic="YES" id="C3Q-mC-kqY"/>
-                <constraint firstAttribute="bottom" secondItem="weN-jI-Qpl" secondAttribute="bottom" constant="6" id="CSS-w6-fmC"/>
-                <constraint firstItem="weN-jI-Qpl" firstAttribute="leading" secondItem="jjg-31-kjl" secondAttribute="leading" id="HBK-RC-3Et"/>
+                <constraint firstAttribute="bottom" secondItem="weN-jI-Qpl" secondAttribute="bottom" constant="2" id="CSS-w6-fmC"/>
+                <constraint firstItem="weN-jI-Qpl" firstAttribute="centerY" secondItem="jjg-31-kjl" secondAttribute="centerY" id="JRz-n8-GDK"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jjg-31-kjl" secondAttribute="trailing" constant="20" symbolic="YES" id="Mlk-1B-lMZ"/>
-                <constraint firstItem="weN-jI-Qpl" firstAttribute="top" secondItem="jjg-31-kjl" secondAttribute="bottom" constant="4" id="Yfa-KX-Gfh"/>
-                <constraint firstItem="jjg-31-kjl" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="6" id="ckS-Kd-kex"/>
-                <constraint firstItem="jjg-31-kjl" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="34" id="xdA-ts-dFO"/>
+                <constraint firstItem="weN-jI-Qpl" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="pkU-ue-NNn"/>
+                <constraint firstItem="weN-jI-Qpl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jjg-31-kjl" secondAttribute="trailing" constant="8" id="qMN-xa-aAd"/>
+                <constraint firstItem="weN-jI-Qpl" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="80" id="qg5-Y0-fuS"/>
+                <constraint firstItem="jjg-31-kjl" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="xdA-ts-dFO"/>
             </constraints>
             <connections>
                 <outlet property="field" destination="weN-jI-Qpl" id="aoe-W7-oSb"/>

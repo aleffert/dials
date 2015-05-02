@@ -53,7 +53,7 @@ class StepperEditorView : EditorView {
             let floatValue = (info?.value as? NSNumber)?.floatValue ?? 0
             stepper?.floatValue = floatValue
             field?.floatValue = floatValue
-            name?.stringValue = info?.name ?? "Stepper"
+            name?.stringValue = info?.displayName ?? "Stepper"
         }
     }
     

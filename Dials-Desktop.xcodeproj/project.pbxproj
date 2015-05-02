@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7708CC491AF57C5700511F3F /* ColorEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7708CC481AF57C5700511F3F /* ColorEditorView.xib */; };
 		77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77191D8F1A3E856A006D248C /* ChannelCellView.xib */; };
 		77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77224B811AEDDE21002C3739 /* ViewFacade.swift */; };
 		772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */; };
@@ -83,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7708CC481AF57C5700511F3F /* ColorEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ColorEditorView.xib; path = Desktop/XIB/ColorEditorView.xib; sourceTree = SOURCE_ROOT; };
 		77191D8F1A3E856A006D248C /* ChannelCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChannelCellView.xib; path = Desktop/XIB/ChannelCellView.xib; sourceTree = SOURCE_ROOT; };
 		77224B811AEDDE21002C3739 /* ViewFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewFacade.swift; path = Desktop/Source/ViewFacade.swift; sourceTree = SOURCE_ROOT; };
 		772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSView+Layout.swift"; path = "Desktop/Source/NSView+Layout.swift"; sourceTree = SOURCE_ROOT; };
@@ -280,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				778876D01ABBDC1600AB5580 /* ActionEditorView.xib */,
+				7708CC481AF57C5700511F3F /* ColorEditorView.xib */,
 				778876E01ABE050E00AB5580 /* SliderEditorView.xib */,
 				77B2359A1AE56FD400599722 /* StepperEditorView.xib */,
 				773C5AD41AF337EE00F6AD59 /* TextFieldEditorView.xib */,
@@ -433,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77B2359B1AE56FD400599722 /* StepperEditorView.xib in Resources */,
+				7708CC491AF57C5700511F3F /* ColorEditorView.xib in Resources */,
 				77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */,
 				778876E71ABE101E00AB5580 /* LiveDialPaneViewController.xib in Resources */,
 				778876D11ABBDC1600AB5580 /* ActionEditorView.xib in Resources */,

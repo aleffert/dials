@@ -31,7 +31,7 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
     weak var delegate : LiveDialControllerDelegate?
     
     init(dial : DLSLiveDial, contentView : EditorView, delegate : LiveDialControllerDelegate) {
-        contentView.info = EditorInfo(editor : dial.editor, name : dial.displayName, value : dial.value())
+        contentView.info = EditorInfo(editor : dial.editor, name : dial.displayName, displayName : dial.displayName, value : dial.value())
         self.dial = dial
         self.delegate = delegate
         self.contentView = contentView

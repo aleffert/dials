@@ -58,7 +58,7 @@ class ColorEditorView : EditorView {
             let color = info?.value as? NSColor
             well?.color = color ?? NSColor.clearColor()
             
-            name?.stringValue = info?.name ?? "Color"
+            name?.stringValue = info?.displayName ?? "Color"
         }
     }
 }

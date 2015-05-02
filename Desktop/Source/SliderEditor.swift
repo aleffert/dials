@@ -63,7 +63,7 @@ class SliderEditorView : EditorView {
             slider?.floatValue = floatValue
             currentLabel?.stringValue = stringFromNumber(floatValue)
             
-            name?.stringValue = info?.name ?? "Slider"
+            name?.stringValue = info?.displayName ?? "Slider"
         }
     }
 }

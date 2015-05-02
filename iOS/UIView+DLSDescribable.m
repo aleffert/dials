@@ -20,7 +20,7 @@
     if([property isEqualToString:@"layer.borderColor"]) {
         return [[DLSCGColorCoercionExchanger alloc] initWithBackingExchanger:exchanger];
     }
-    else if([property isEqualToString:@"Controller"]) {
+    else if([property isEqualToString:@"dials.controller"]) {
         return [[DLSViewControllerClassExchanger alloc] init];
     }
     return exchanger;
@@ -29,16 +29,16 @@
 + (void)dls_describe:(id <DLSDescriptionContext>)context {
     [context addGroupWithName:@"Layer"
                    properties: @[
-                                 DLSProperty(@"layer.cornerRadius", [DLSStepperDescription editor]),
-                                 DLSProperty(@"layer.borderWidth", [DLSStepperDescription editor]),
-                                 DLSProperty(@"layer.borderColor", [DLSColorDescription editor]),
+                                 DLSDisplayProperty(@"Corner Radius", @"layer.cornerRadius", [DLSStepperDescription editor]),
+                                 DLSDisplayProperty(@"Border Width", @"layer.borderWidth", [DLSStepperDescription editor]),
+                                 DLSDisplayProperty(@"Border Color", @"layer.borderColor", [DLSColorDescription editor]),
                                  ]];
     [context addGroupWithName:@"View"
                    properties: @[
-                                 DLSProperty(@"Controller", [DLSTextFieldDescription label]),
+                                 DLSDisplayProperty(@"Controller", @"dials.controller", [DLSTextFieldDescription label]),
                                  DLSProperty(@"alpha", [DLSSliderDescription zeroOneSlider]),
                                  DLSProperty(@"hidden", [DLSToggleDescription editor]),
-                                 DLSProperty(@"backgroundColor", [DLSColorDescription editor])
+                                 DLSDisplayProperty(@"Background", @"backgroundColor", [DLSColorDescription editor])
                                  ]];
 }
 

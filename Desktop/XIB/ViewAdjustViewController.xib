@@ -204,7 +204,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="174" height="470"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wdm-aL-Hv1">
-                                            <rect key="frame" x="-2" y="220" width="178" height="29"/>
+                                            <rect key="frame" x="-2" y="220.5" width="178" height="29"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Pick a View" id="9FG-3b-CFc">
                                                 <font key="font" metaFont="system" size="24"/>
                                                 <color key="textColor" white="0.56523143799999997" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
@@ -228,7 +228,7 @@
                                 <constraint firstItem="jbZ-Fa-YT7" firstAttribute="leading" secondItem="Ly1-tG-nPs" secondAttribute="leading" id="KNL-zm-zDb"/>
                                 <constraint firstItem="jbZ-Fa-YT7" firstAttribute="top" secondItem="Ly1-tG-nPs" secondAttribute="top" id="TMT-QU-2Ep"/>
                                 <constraint firstAttribute="bottom" secondItem="T4j-lb-rzX" secondAttribute="bottom" id="VNB-sn-bNE"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="ZQp-Ei-r96"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="ZQp-Ei-r96"/>
                                 <constraint firstAttribute="bottom" secondItem="hK1-He-7kB" secondAttribute="bottom" id="dB3-0b-tyj"/>
                                 <constraint firstAttribute="trailing" secondItem="T4j-lb-rzX" secondAttribute="trailing" id="iJi-Yd-ABC"/>
                                 <constraint firstAttribute="bottom" secondItem="jbZ-Fa-YT7" secondAttribute="bottom" id="if6-h4-uF0"/>

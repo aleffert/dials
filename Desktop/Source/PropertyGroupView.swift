@@ -44,7 +44,7 @@ class PropertyGroupView: NSView, EditorViewDelegate {
             view?.delegate = self
             view?.translatesAutoresizingMaskIntoConstraints = false
             let value = values[description.name]
-            view?.info = EditorInfo(editor : description.editorDescription, name : description.displayName, value : value)
+            view?.info = EditorInfo(editor : description.editorDescription, name : description.name, displayName : description.displayName, value : value)
             if let v = view {
                 let container = NSView(frame:NSZeroRect)
                 container.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ class PropertyGroupView: NSView, EditorViewDelegate {
     func takeValue(value : NSCoding?, name : String) {
         let view = propertyViews[name]
         if let v = view {
-            v.info = EditorInfo(editor : v.info!.editor, name : v.info!.name, value : value)
+            v.info = EditorInfo(editor : v.info!.editor, name : v.info!.name, displayName : v.info!.displayName, value : value)
         }
     }
     

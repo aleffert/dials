@@ -50,5 +50,14 @@
 @end
 
 DLSPropertyDescription* DLSProperty(NSString* name, id <DLSEditorDescription> description) {
-    return [DLSPropertyDescription propertyDescriptionWithName:name editor:description];
+    NSError* error = nil;
+    NSRegularExpression* expression = [[NSRegularExpression alloc] initWithPattern:@"([A-Z])" options:0 error:&error];
+    NSString* spaced = [name stringByReplacingOccurrencesOfString:@"." withString:@" "];
+    NSCAssert(error == nil, @"Error creating expression to match capitals: %@", error);
+    NSString* niceName = [[expression stringByReplacingMatchesInString:spaced options:0 range:NSMakeRange(0, spaced.length) withTemplate:@" $1"] capitalizedString];
+    return [DLSPropertyDescription propertyDescriptionWithName:name editor:description displayName:niceName];
+}
+
+DLSPropertyDescription* DLSDisplayProperty(NSString* displayName, NSString* name, id <DLSEditorDescription> description) {
+    return [DLSPropertyDescription propertyDescriptionWithName:name editor:description displayName:displayName];
 }

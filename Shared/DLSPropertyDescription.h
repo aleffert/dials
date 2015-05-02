@@ -24,3 +24,5 @@
 @end
 
 DLSPropertyDescription* __nonnull DLSProperty(NSString*__nonnull name, id <DLSEditorDescription> __nonnull description );
+
+DLSPropertyDescription* __nonnull DLSDisplayProperty(NSString*__nonnull displayName, NSString*__nonnull name, id <DLSEditorDescription> __nonnull description );
