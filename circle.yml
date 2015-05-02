@@ -6,8 +6,8 @@ test:
     override:
         - xctool
           -reporter pretty
-          -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-          -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+          -reporter junit:$CIRCLE_TEST_REPORTS/xcode/framework-results.xml
+          -reporter plain:$CIRCLE_ARTIFACTS/framework-xctool.log
           -sdk iphonesimulator
           -workspace 'Dials.xcworkspace'
           -scheme 'Dials.framework'
@@ -15,8 +15,8 @@ test:
           build-tests
           run-tests
         - xctool -reporter pretty
-          -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-          -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
+          -reporter junit:$CIRCLE_TEST_REPORTS/xcode/app-results.xml
+          -reporter plain:$CIRCLE_ARTIFACTS/app-xctool.log
           -sdk macosx
           -workspace 'Dials.xcworkspace'
           -scheme 'Dials.app'
