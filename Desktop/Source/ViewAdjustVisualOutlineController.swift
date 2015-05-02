@@ -10,6 +10,9 @@ import AppKit
 import GLKit
 
 
+private let MinScale : CGFloat = 0.25
+private let MaxScale : CGFloat = 2.0
+
 protocol ViewAdjustVisualOutlineControllerDelegate : class {
     func visualOutlineController(controller : ViewAdjustVisualOutlineController, selectedViewWithID  viewID: NSString?)
 }
@@ -17,7 +20,7 @@ protocol ViewAdjustVisualOutlineControllerDelegate : class {
 class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControlsViewDelegate {
     weak var delegate : ViewAdjustVisualOutlineControllerDelegate?
     
-    @IBOutlet private var contentView : NSView!
+    @IBOutlet private var contentView : BackgroundColorView!
     
     var hierarchy : ViewAdjustHierarchy!
     
@@ -121,13 +124,20 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     }
     
     func offsetToRadians(v : CGFloat) -> CGFloat {
-        return v / 90
+        // Reasonable translation betwen point deltas and a rotation. Entirely empirical
+        return v / 120
+    }
+    
+    func clampScale(scale : CGFloat) -> CGFloat {
+        let clamped = clamp(scale, min: MinScale, max: MaxScale)
+        let delta = scale - clamped
+        return clamped + delta / 4
     }
     
     func updateBodyTransforms() {
-        let scale = gestureMagnification * controlsView.zoom
+        let scale = clampScale(gestureMagnification * controlsView.zoom)
         let translate = CATransform3DMakeTranslation(-screenSize.width / 2, -screenSize.height / 2, 0)
-        let scaleTransform = CATransform3DMakeScale(-scale, -scale, 1)
+        let scaleTransform = CATransform3DMakeScale(scale, scale, scale)
         let offset = CGPointMake(rotationOffset.x + activeOffset.x, rotationOffset.y + activeOffset.y)
         let xRotation = CATransform3DMakeRotation(offsetToRadians(offset.x), 0, 1, 0)
         let yRotation = CATransform3DMakeRotation(offsetToRadians(-offset.y), 1, 0, 0)
@@ -160,28 +170,42 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     
     // MARK: Gesture Handling
     
+    func panChangedWithDelta(delta : CGPoint) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        activeOffset = delta
+        // Ideally we'd just reset the translation, but that seems to be buggy in AppKit
+        updateBodyTransforms()
+        CATransaction.commit()
+    }
+    
+    func panStationary() {
+        rotationOffset.x = rotationOffset.x + activeOffset.x
+        rotationOffset.y = rotationOffset.y + activeOffset.y
+        activeOffset = NSZeroPoint
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        CATransaction.setAnimationDuration(0)
+        updateBodyTransforms()
+        CATransaction.commit()
+    }
+    
+    func panEnded() {
+        panStationary()
+        if fabs(sin(offsetToRadians(rotationOffset.x))) < 0.6 && fabs(sin(offsetToRadians(rotationOffset.y / 90))) < 0.6  && cos(offsetToRadians(rotationOffset.x)) > 0.9 && cos(offsetToRadians(rotationOffset.y)) > 0.9 {
+            rotationOffset = NSZeroPoint
+            updateBodyTransforms()
+        }
+    }
+    
     func pan(sender : NSPanGestureRecognizer) {
         switch sender.state {
         case .Began:
             fallthrough
         case .Changed:
-            activeOffset = sender.translationInView(contentView)
-            // Ideally we'd just reset the translation, but that seems to be buggy in AppKit
-            updateBodyTransforms()
+            panChangedWithDelta(sender.translationInView(contentView))
         case .Ended:
-            rotationOffset.x = rotationOffset.x + activeOffset.x
-            rotationOffset.y = rotationOffset.y + activeOffset.y
-            activeOffset = NSZeroPoint
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
-            CATransaction.setAnimationDuration(0)
-            updateBodyTransforms()
-            CATransaction.commit()
-            
-            if fabs(sin(offsetToRadians(rotationOffset.x))) < 0.6 && fabs(sin(offsetToRadians(rotationOffset.y / 90))) < 0.6  && cos(offsetToRadians(rotationOffset.x)) > 0.9 && cos(offsetToRadians(rotationOffset.y)) > 0.9 {
-                rotationOffset = NSZeroPoint
-                updateBodyTransforms()
-            }
+            panEnded()
         default:
             break
         }
@@ -190,8 +214,11 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     func magnify(sender : NSMagnificationGestureRecognizer) {
         switch sender.state {
         case .Changed:
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             gestureMagnification = 1 + sender.magnification
             updateBodyTransforms()
+            CATransaction.commit()
         case .Ended:
             controlsView.zoom = gestureMagnification * controlsView.zoom
             gestureMagnification = 1
@@ -206,6 +233,17 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         let layer = layerAtPointInContentView(location)
         
         self.delegate?.visualOutlineController(self, selectedViewWithID: layer?.record.viewID)
+    }
+    
+    override func scrollWheel(theEvent: NSEvent) {
+        if theEvent.phase == .Changed {
+            panChangedWithDelta(CGPoint(x : theEvent.scrollingDeltaX, y : -theEvent.scrollingDeltaY))
+            panStationary()
+            CATransaction.commit()
+        }
+        else if theEvent.phase == .Ended {
+            panEnded()
+        }
     }
     
     // MARK: Mouse Move Tracking

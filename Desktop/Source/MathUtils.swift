@@ -53,3 +53,7 @@ func * (left : Mat4, right : Vec3) -> Vec3 {
 func * (left : CATransform3D, right : Vec3) -> Vec3 {
     return left.matrix4 * right
 }
+
+func clamp(value : CGFloat, min minValue : CGFloat, max maxValue : CGFloat) -> CGFloat {
+    return min(max(value, minValue), maxValue)
+}

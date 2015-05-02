@@ -260,8 +260,6 @@
         if(image != nil) {
             UIGraphicsBeginImageContextWithOptions(view.layer.bounds.size, NO, view.layer.rasterizationScale);
             CGContextRef context = UIGraphicsGetCurrentContext();
-            CGContextTranslateCTM(context, view.layer.bounds.size.width, view.layer.bounds.size.height);
-            CGContextScaleCTM(context, -1, -1);
             [view.layer drawInContext:context];
             UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
