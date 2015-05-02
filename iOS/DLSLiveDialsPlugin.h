@@ -16,7 +16,7 @@
 
 @interface DLSLiveDialsPlugin : NSObject <DLSPlugin>
 
-+(instancetype)sharedPlugin;
++(instancetype)activePlugin;
 
 - (void)beginGroupWithName:(NSString*)name;
 - (void)endGroup;

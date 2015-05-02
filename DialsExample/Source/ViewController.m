@@ -35,11 +35,11 @@ static CGFloat bar = 2.12;
     DLSAddToggleControl(@"Foo", foo);
     DLSAddSliderControl(@"Bar", bar, 0, 5);
     
-    [[DLSLiveDialsPlugin sharedPlugin] beginGroupWithName:@"test1"];
+    [[DLSLiveDialsPlugin activePlugin] beginGroupWithName:@"test1"];
     DLSAddSliderForKeyPath(box.alpha, 0, 1);
     DLSAddToggleForKeyPath(box.hidden);
     DLSAddColorForKeyPath(box.backgroundColor);
-    [[DLSLiveDialsPlugin sharedPlugin] endGroup];
+    [[DLSLiveDialsPlugin activePlugin] endGroup];
 }
 
 - (IBAction)push:(id)sender {

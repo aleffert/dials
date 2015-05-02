@@ -53,7 +53,7 @@ public extension DLSLiveDialsPlugin {
 
 public func DLSAddControl<A>(displayName : String, wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, canSave: Bool = false, _ owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
     
-    let remove = DLSLiveDialsPlugin.sharedPlugin().addDial(wrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file : file, line : line)
+    let remove = DLSLiveDialsPlugin.activePlugin().addDial(wrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file : file, line : line)
     if let o : AnyObject = owner {
         o.dls_performActionOnDealloc({ () -> Void in
             remove.remove()

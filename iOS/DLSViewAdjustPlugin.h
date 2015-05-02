@@ -13,15 +13,16 @@
 
 @interface DLSViewAdjustPlugin : NSObject <DLSPlugin>
 
-+ (instancetype)sharedPlugin;
+/// Will be nil if Dials isn't started
++ (instancetype)activePlugin;
 
 @end
 
 @interface DLSViewAdjustPlugin (DLSPrivate)
 
-// Call when a cheap view property changes
+/// Call when a cheap view property changes
 - (void)viewChangedSurface:(UIView*)view;
-// Call when an expensive view property changes
+/// Call when an expensive view property changes
 - (void)viewChangedDisplay:(UIView*)view;
 
 @end

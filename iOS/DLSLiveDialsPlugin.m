@@ -36,15 +36,16 @@
 
 @end
 
+static DLSLiveDialsPlugin* sActivePlugin;
+
 @implementation DLSLiveDialsPlugin
 
-+ (instancetype)sharedPlugin {
-    static dispatch_once_t onceToken;
-    static DLSLiveDialsPlugin* sharedPlugin;
-    dispatch_once(&onceToken, ^{
-        sharedPlugin = [[DLSLiveDialsPlugin alloc] init];
-    });
-    return sharedPlugin;
++ (instancetype)activePlugin {
+    return sActivePlugin;
+}
+
++ (void)setActivePlugin:(DLSLiveDialsPlugin*)plugin {
+    sActivePlugin = plugin;
 }
 
 - (id)init {
@@ -55,6 +56,11 @@
     }
     return self;
 }
+
+- (void)start {
+    [DLSLiveDialsPlugin setActivePlugin:self];
+}
+
 
 - (NSString*)name {
     return DLSLiveDialsPluginName;
@@ -168,7 +174,7 @@
     NSString* fileName = [NSString stringWithUTF8String:file];
     
     id value = wrapper.getter();
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin sharedPlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName canSave:canSave file:fileName line:line];
+    id <DLSRemovable> removable = [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName canSave:canSave file:fileName line:line];
     [self dls_performActionOnDealloc:^{
         [removable remove];
     }];

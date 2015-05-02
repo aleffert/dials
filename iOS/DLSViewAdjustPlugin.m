@@ -42,19 +42,24 @@
 
 @end
 
+static DLSViewAdjustPlugin* sActivePlugin;
+
 @implementation DLSViewAdjustPlugin
 
-+ (instancetype)sharedPlugin {
-    static dispatch_once_t onceToken;
-    static DLSViewAdjustPlugin* sharedPlugin;
-    dispatch_once(&onceToken, ^{
-        sharedPlugin = [[DLSViewAdjustPlugin alloc] init];
-    });
-    return sharedPlugin;
++ (instancetype)activePlugin {
+    return sActivePlugin;
+}
+
++ (void)setActivePlugin:(DLSViewAdjustPlugin*)plugin {
+    sActivePlugin = plugin;
 }
 
 - (NSString*)name {
     return DLSViewAdjustPluginName;
+}
+
+- (void)start {
+    [DLSViewAdjustPlugin setActivePlugin:self];
 }
 
 - (void)connectedWithContext:(id<DLSPluginContext>)context {

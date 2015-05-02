@@ -17,14 +17,14 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
         
-        DLSLiveDialsPlugin.sharedPlugin().beginGroupWithName("Swift!")
+        DLSLiveDialsPlugin.activePlugin().beginGroupWithName("Swift!")
         
         DLSAddAction("perform", { () -> () in
             NSLog("performed")
         }, owner: self)
         DLSAddColorControl(keyPath: "view.backgroundColor", self)
         DLSAddSliderControl("example", &foo, owner: self)
-        DLSLiveDialsPlugin.sharedPlugin().endGroup()
+        DLSLiveDialsPlugin.activePlugin().endGroup()
     }
 
 }

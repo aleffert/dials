@@ -24,17 +24,17 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 - (void)dls_display {
     [self dls_display];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedDisplay:self.dls_view];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedDisplay:self.dls_view];
 }
 
 - (id <CAAction>)dls_actionForKey:(NSString *)key {
     id <CAAction> result = [self dls_actionForKey:key];
     
     if([key isEqualToString:@"contents"]) {
-        [[DLSViewAdjustPlugin sharedPlugin] viewChangedDisplay:self.dls_view];
+        [[DLSViewAdjustPlugin activePlugin] viewChangedDisplay:self.dls_view];
     }
     else if(![key isEqualToString:@"delegate"] && ![key isEqualToString:@"sublayers"]) {
-        [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self.dls_view];
+        [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self.dls_view];
     };
     return result;
 }
@@ -80,48 +80,48 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 - (void)dls_didMoveToSuperview {
     [self dls_didMoveToSuperview];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self.superview];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self.superview];
 }
 
 - (void)dls_exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2 {
     [self dls_exchangeSubviewAtIndex:index1 withSubviewAtIndex:index2];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview {
     [self dls_insertSubview:view aboveSubview:siblingSubview];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_insertSubview:(UIView *)view atIndex:(NSInteger)index {
     [self dls_insertSubview:view atIndex:index];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview {
     [self dls_insertSubview:view belowSubview:siblingSubview];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_bringSubviewToFront:(UIView*)view {
     [self dls_bringSubviewToFront:view];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_sendSubviewToBack:(UIView *)view {
     [self dls_sendSubviewToBack:view];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_didMoveToWindow {
     [self dls_didMoveToWindow];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self.superview];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedSurface:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self.superview];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_drawRect:(CGRect)rect {
     [self dls_drawRect:rect];
-    [[DLSViewAdjustPlugin sharedPlugin] viewChangedDisplay:self];
+    [[DLSViewAdjustPlugin activePlugin] viewChangedDisplay:self];
 }
 
 // Unique ID per view
