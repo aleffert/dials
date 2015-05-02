@@ -64,6 +64,10 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         
         let area = NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .MouseEnteredAndExited | .MouseMoved | .InVisibleRect, owner: self, userInfo: nil)
         contentView.addTrackingArea(area)
+        let currentContent = contentView
+        self.dls_performActionOnDealloc {
+            currentContent.removeTrackingArea(area)
+        }
     }
     
     override func viewDidLayout() {
@@ -71,7 +75,14 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         bodyLayer.position = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds))
     }
     
-    private func visitNodes(nodes : [NSString], parent : CALayer, depth : Int, inout marking : Set<NSString>) {
+    private func visitNodes(nodes : [NSString], parent : CALayer, inout depth : Int, inout marking : Set<NSString>) {
+        
+        // Need to gradually increase this so that children of siblings where
+        // an earlier one has a deeper hierarchy than a later one don't appear on top
+        // of the children of the later one
+        let currentDepth = depth
+        depth = depth + 1
+        
         for node in nodes {
             if let record = hierarchy[node] {
                 let layer = layers[node] ?? ViewFacade(record : record)
@@ -81,27 +92,32 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 layers[node] = layer
                 parent.addSublayer(layer)
                 
-                layer.contentLayer.backgroundColor = record.renderingInfo.backgroundColor?.CGColor
-                layer.contentLayer.borderColor = record.renderingInfo.borderColor?.CGColor
-                layer.contentLayer.borderWidth = record.renderingInfo.borderWidth
+                layer.hierarchyDepth = currentDepth
+                
                 layer.bounds = record.renderingInfo.bounds
-                layer.contentLayer.cornerRadius = record.renderingInfo.cornerRadius
-                layer.contentLayer.opacity = Float(record.renderingInfo.opacity)
-                layer.contentLayer.contents = contents[record.viewID]
                 layer.position = record.renderingInfo.position
                 layer.anchorPoint = record.renderingInfo.anchorPoint
                 layer.transform = record.renderingInfo.transform3D
-                layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(depth) * controlsView.depthOffset)
+                
+                layer.contentLayer.backgroundColor = record.renderingInfo.backgroundColor?.CGColor
+                layer.contentLayer.borderColor = record.renderingInfo.borderColor?.CGColor
+                layer.contentLayer.borderWidth = record.renderingInfo.borderWidth
+                layer.contentLayer.cornerRadius = record.renderingInfo.cornerRadius
+                layer.contentLayer.opacity = Float(record.renderingInfo.opacity)
+                layer.contentLayer.contents = contents[record.viewID]
+                layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(currentDepth) * controlsView.depthOffset)
+                
                 layer.borderLayer.transform = layer.contentLayer.transform
-                layer.hierarchyDepth = depth
-                visitNodes(record.children as! [NSString], parent : layer, depth : depth + 1, marking: &marking)
+                
+                visitNodes(record.children as! [NSString], parent : layer, depth : &depth, marking: &marking)
             }
         }
     }
     
     func updateViews() {
         var unvisited = Set(layers.keys)
-        visitNodes(hierarchy.roots, parent : bodyLayer, depth : 0, marking : &unvisited)
+        var depth = 0
+        visitNodes(hierarchy.roots, parent : bodyLayer, depth : &depth, marking : &unvisited)
         for node in unvisited {
             if let layer = layers[node] {
                 layer.removeFromSuperlayer()

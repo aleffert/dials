@@ -20,7 +20,7 @@
     if([property isEqualToString:@"layer.borderColor"]) {
         return [[DLSCGColorCoercionExchanger alloc] initWithBackingExchanger:exchanger];
     }
-    else if([property isEqualToString:@"View Controller Class"]) {
+    else if([property isEqualToString:@"Controller"]) {
         return [[DLSViewControllerClassExchanger alloc] init];
     }
     return exchanger;
@@ -35,7 +35,7 @@
                                  ]];
     [context addGroupWithName:@"View"
                    properties: @[
-                                 DLSProperty(@"View Controller Class", [DLSTextFieldDescription label]),
+                                 DLSProperty(@"Controller", [DLSTextFieldDescription label]),
                                  DLSProperty(@"alpha", [DLSSliderDescription zeroOneSlider]),
                                  DLSProperty(@"hidden", [DLSToggleDescription editor]),
                                  DLSProperty(@"backgroundColor", [DLSColorDescription editor])

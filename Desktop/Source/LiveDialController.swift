@@ -41,6 +41,10 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
         NSBundle.mainBundle().loadNibNamed("LiveDialCellView", owner: self, topLevelObjects: nil)
         bodyView?.translatesAutoresizingMaskIntoConstraints = false
         let area = NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .MouseEnteredAndExited | .InVisibleRect, owner: self, userInfo: nil)
+        let currentBody = bodyView
+        self.dls_performActionOnDealloc {
+            currentBody?.removeTrackingArea(area)
+        }
         bodyView?.addTrackingArea(area)
         containerView?.addSubview(contentView)
         contentView.addConstraintsMatchingSuperviewBounds()

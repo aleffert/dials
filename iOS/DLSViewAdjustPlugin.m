@@ -70,8 +70,8 @@
     [UIView dls_setListening:YES];
     __weak __typeof(self) weakself = self;
     [[NSNotificationCenter defaultCenter] addObserverForName:UIWindowDidBecomeVisibleNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
-            [weakself viewChangedSurface:window];
+        for(UIView* view in [self rootViews]) {
+            [weakself viewChangedSurface:view];
         }
     }];
 }
@@ -102,6 +102,10 @@
 }
 
 - (NSArray*)descriptionGroupsForClass:(Class)klass {
+    if(klass == nil) {
+        return @[];
+    }
+    
     NSString* className = NSStringFromClass(klass);
     NSArray* result = self.classDescriptions[className];
     if(result == nil) {
@@ -147,8 +151,14 @@
     return record;
 }
 
+- (NSArray*)rootViews {
+    return [[[UIApplication sharedApplication] windows] dls_map:^(UIWindow* window) {
+        return window.isKeyWindow ? window : nil;
+    }];
+}
+
 - (NSArray*)rootViewIDs {
-    return [[[UIApplication sharedApplication] windows] dls_map:^id(UIWindow* window) {
+    return [[self rootViews] dls_map:^id(UIWindow* window) {
         return [self viewIDForView:window];
     }];
 }
@@ -164,8 +174,8 @@
 - (DLSViewAdjustFullHierarchyMessage*)fullHierarchyMessage {
     NSMutableDictionary* entries = [[NSMutableDictionary alloc] init];
     
-    for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
-        [self captureView:window intoEntryMap:entries];
+    for(UIView* view in [self rootViews]) {
+        [self captureView:view intoEntryMap:entries];
     }
     
     DLSViewAdjustFullHierarchyMessage* message = [[DLSViewAdjustFullHierarchyMessage alloc] init];
@@ -233,8 +243,8 @@
 }
 
 - (void)sendChangedSurfaceViews {
-    for(UIWindow* window in [[UIApplication sharedApplication] windows]) {
-        [self.surfaceUpdatedViews addObject:window];
+    for(UIView* view in [self rootViews]) {
+        [self.surfaceUpdatedViews addObject:view];
     }
     
     NSMutableArray* records = [[NSMutableArray alloc] init];
