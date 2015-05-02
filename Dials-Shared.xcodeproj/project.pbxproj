@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7708CC4C1AF58ABC00511F3F /* DLSNetworkMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 7708CC4A1AF58ABC00511F3F /* DLSNetworkMessages.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7708CC4D1AF58ABC00511F3F /* DLSNetworkMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 7708CC4A1AF58ABC00511F3F /* DLSNetworkMessages.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7708CC4E1AF58ABC00511F3F /* DLSNetworkMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708CC4B1AF58ABC00511F3F /* DLSNetworkMessages.m */; };
+		7708CC4F1AF58ABC00511F3F /* DLSNetworkMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 7708CC4B1AF58ABC00511F3F /* DLSNetworkMessages.m */; };
 		773C5ACC1AF3343000F6AD59 /* DLSTextFieldDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 773C5ACA1AF3343000F6AD59 /* DLSTextFieldDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		773C5ACD1AF3343000F6AD59 /* DLSTextFieldDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 773C5ACA1AF3343000F6AD59 /* DLSTextFieldDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		773C5ACE1AF3343000F6AD59 /* DLSTextFieldDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 773C5ACB1AF3343000F6AD59 /* DLSTextFieldDescription.m */; };
@@ -102,6 +106,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7708CC4A1AF58ABC00511F3F /* DLSNetworkMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSNetworkMessages.h; path = Shared/DLSNetworkMessages.h; sourceTree = SOURCE_ROOT; };
+		7708CC4B1AF58ABC00511F3F /* DLSNetworkMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSNetworkMessages.m; path = Shared/DLSNetworkMessages.m; sourceTree = SOURCE_ROOT; };
 		773C5ACA1AF3343000F6AD59 /* DLSTextFieldDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSTextFieldDescription.h; path = Shared/DLSTextFieldDescription.h; sourceTree = SOURCE_ROOT; };
 		773C5ACB1AF3343000F6AD59 /* DLSTextFieldDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSTextFieldDescription.m; path = Shared/DLSTextFieldDescription.m; sourceTree = SOURCE_ROOT; };
 		773E67AE1ACDFD5400E1BB0A /* DLSViewAdjustMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSViewAdjustMessages.h; path = Shared/DLSViewAdjustMessages.h; sourceTree = SOURCE_ROOT; };
@@ -170,6 +176,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7708CC501AF58AE400511F3F /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				773E67AE1ACDFD5400E1BB0A /* DLSViewAdjustMessages.h */,
+				773E67AF1ACDFD5400E1BB0A /* DLSViewAdjustMessages.m */,
+				7708CC4A1AF58ABC00511F3F /* DLSNetworkMessages.h */,
+				7708CC4B1AF58ABC00511F3F /* DLSNetworkMessages.m */,
+				774D15F61AB5387800613F24 /* DLSLiveDialsMessages.h */,
+				774D15F71AB5387800613F24 /* DLSLiveDialsMessages.m */,
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
 		774D15D71AB4C5F600613F24 /* Editor Descriptions */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,17 +255,14 @@
 				77B235681AE373B200599722 /* DLSPropertyDescription.m */,
 				775EA0CF1AD1AC8000713882 /* DLSPropertyWrapper.h */,
 				775EA0D01AD1AC8000713882 /* DLSPropertyWrapper.m */,
-				773E67AE1ACDFD5400E1BB0A /* DLSViewAdjustMessages.h */,
-				773E67AF1ACDFD5400E1BB0A /* DLSViewAdjustMessages.m */,
 				774D15FD1AB53B7D00613F24 /* DLSLiveDial.h */,
 				774D15FE1AB53B7D00613F24 /* DLSLiveDial.m */,
 				774D15E81AB4EEA100613F24 /* DLSRemovable.h */,
+				7708CC501AF58AE400511F3F /* Plugins */,
 				774D15FC1AB5388100613F24 /* Buffers */,
 				774D15D71AB4C5F600613F24 /* Editor Descriptions */,
 				77F4F5AC1A354FD100A48A76 /* NSObject+DLSDeallocAction.h */,
 				77F4F5AD1A354FD100A48A76 /* NSObject+DLSDeallocAction.m */,
-				774D15F61AB5387800613F24 /* DLSLiveDialsMessages.h */,
-				774D15F71AB5387800613F24 /* DLSLiveDialsMessages.m */,
 				77F4F5921A33B5D800A48A76 /* DLSChannel.h */,
 				77F4F5931A33B5D800A48A76 /* DLSChannel.m */,
 				779250E01A3358C800CCC229 /* DialsShared.h */,
@@ -273,6 +289,7 @@
 				77B235691AE373B200599722 /* DLSPropertyDescription.h in Headers */,
 				774D15E71AB4CE0E00613F24 /* DLSSliderDescription.h in Headers */,
 				77B0BA041AD1BE6600E81A67 /* NSArray+DLSFunctionalAdditions.h in Headers */,
+				7708CC4C1AF58ABC00511F3F /* DLSNetworkMessages.h in Headers */,
 				77B235941AE5637400599722 /* DLSStepperDescription.h in Headers */,
 				774D15E51AB4CE0E00613F24 /* DLSEditorDescription.h in Headers */,
 				77B2356D1AE3742D00599722 /* DLSPropertyGroup.h in Headers */,
@@ -294,6 +311,7 @@
 				77AD6A6C1AEBF67E00BB4CB3 /* DLSTransform3D.h in Headers */,
 				77F4F58F1A33B43F00A48A76 /* DLSBufferedStream.h in Headers */,
 				774D16001AB53B7D00613F24 /* DLSLiveDial.h in Headers */,
+				7708CC4D1AF58ABC00511F3F /* DLSNetworkMessages.h in Headers */,
 				774D15E21AB4CE0C00613F24 /* DLSEditorDescription.h in Headers */,
 				77B2356E1AE3742E00599722 /* DLSPropertyGroup.h in Headers */,
 				77B0BA051AD1BE6600E81A67 /* NSArray+DLSFunctionalAdditions.h in Headers */,
@@ -392,6 +410,7 @@
 			files = (
 				77B2356B1AE373B200599722 /* DLSPropertyDescription.m in Sources */,
 				77B235631AE304D100599722 /* NSTimer+DLSBlockActions.m in Sources */,
+				7708CC4E1AF58ABC00511F3F /* DLSNetworkMessages.m in Sources */,
 				77DD9B301A339A0600F17C1E /* DLSBufferedStreamReader.m in Sources */,
 				77DD9B2C1A3398D800F17C1E /* DLSChannelStream.m in Sources */,
 				774D15DB1AB4C62F00613F24 /* DLSToggleDescription.m in Sources */,
@@ -420,6 +439,7 @@
 			files = (
 				77B2356C1AE373B200599722 /* DLSPropertyDescription.m in Sources */,
 				77B235641AE304D100599722 /* NSTimer+DLSBlockActions.m in Sources */,
+				7708CC4F1AF58ABC00511F3F /* DLSNetworkMessages.m in Sources */,
 				774D16021AB53B7D00613F24 /* DLSLiveDial.m in Sources */,
 				77DD9B311A339A0600F17C1E /* DLSBufferedStreamReader.m in Sources */,
 				77DD9B2B1A3398D500F17C1E /* DLSChannelStream.m in Sources */,

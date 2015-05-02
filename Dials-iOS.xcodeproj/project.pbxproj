@@ -17,8 +17,8 @@
 		774D15C61AB4BFF800613F24 /* DLSDescriptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 774D15C41AB4BFF800613F24 /* DLSDescriptionContext.m */; };
 		775B9DF31AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h in Headers */ = {isa = PBXBuildFile; fileRef = 775B9DF11AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h */; };
 		775B9DF41AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 775B9DF21AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m */; };
-		77755DF81AF46BB500899720 /* DLSNetworkPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 77755DF61AF46BB500899720 /* DLSNetworkPlugin.h */; };
-		77755DF91AF46BB500899720 /* DLSNetworkPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77755DF71AF46BB500899720 /* DLSNetworkPlugin.m */; };
+		77755DF81AF46BB500899720 /* DLSNetworkRequestsPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 77755DF61AF46BB500899720 /* DLSNetworkRequestsPlugin.h */; };
+		77755DF91AF46BB500899720 /* DLSNetworkRequestsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77755DF71AF46BB500899720 /* DLSNetworkRequestsPlugin.m */; };
 		77755DFC1AF4737700899720 /* DLSNetworkProxyProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 77755DFA1AF4737700899720 /* DLSNetworkProxyProtocol.h */; };
 		77755DFD1AF4737700899720 /* DLSNetworkProxyProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 77755DFB1AF4737700899720 /* DLSNetworkProxyProtocol.m */; };
 		7787FF431A3CA35200074DBC /* DLSPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 7787FF411A3CA35200074DBC /* DLSPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -47,8 +47,8 @@
 		77567B641AC6D29300877A7B /* DLSLiveDialsPlugin+SwiftAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "DLSLiveDialsPlugin+SwiftAdditions.swift"; path = "iOS/DLSLiveDialsPlugin+SwiftAdditions.swift"; sourceTree = SOURCE_ROOT; };
 		775B9DF11AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+DLSViewAdjust.h"; path = "iOS/UILabel+DLSViewAdjust.h"; sourceTree = SOURCE_ROOT; };
 		775B9DF21AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+DLSViewAdjust.m"; path = "iOS/UILabel+DLSViewAdjust.m"; sourceTree = SOURCE_ROOT; };
-		77755DF61AF46BB500899720 /* DLSNetworkPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSNetworkPlugin.h; path = iOS/DLSNetworkPlugin.h; sourceTree = SOURCE_ROOT; };
-		77755DF71AF46BB500899720 /* DLSNetworkPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSNetworkPlugin.m; path = iOS/DLSNetworkPlugin.m; sourceTree = SOURCE_ROOT; };
+		77755DF61AF46BB500899720 /* DLSNetworkRequestsPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSNetworkRequestsPlugin.h; path = iOS/DLSNetworkRequestsPlugin.h; sourceTree = SOURCE_ROOT; };
+		77755DF71AF46BB500899720 /* DLSNetworkRequestsPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSNetworkRequestsPlugin.m; path = iOS/DLSNetworkRequestsPlugin.m; sourceTree = SOURCE_ROOT; };
 		77755DFA1AF4737700899720 /* DLSNetworkProxyProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSNetworkProxyProtocol.h; path = iOS/DLSNetworkProxyProtocol.h; sourceTree = SOURCE_ROOT; };
 		77755DFB1AF4737700899720 /* DLSNetworkProxyProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DLSNetworkProxyProtocol.m; path = iOS/DLSNetworkProxyProtocol.m; sourceTree = SOURCE_ROOT; };
 		7787FF411A3CA35200074DBC /* DLSPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DLSPlugin.h; path = iOS/DLSPlugin.h; sourceTree = SOURCE_ROOT; };
@@ -88,8 +88,8 @@
 				7787FF471A3CACBF00074DBC /* DLSLiveDialsPlugin.h */,
 				7787FF481A3CACBF00074DBC /* DLSLiveDialsPlugin.m */,
 				77567B641AC6D29300877A7B /* DLSLiveDialsPlugin+SwiftAdditions.swift */,
-				77755DF61AF46BB500899720 /* DLSNetworkPlugin.h */,
-				77755DF71AF46BB500899720 /* DLSNetworkPlugin.m */,
+				77755DF61AF46BB500899720 /* DLSNetworkRequestsPlugin.h */,
+				77755DF71AF46BB500899720 /* DLSNetworkRequestsPlugin.m */,
 				773E67AA1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.h */,
 				773E67AB1ACDFCFF00E1BB0A /* DLSViewAdjustPlugin.m */,
 				7787FF411A3CA35200074DBC /* DLSPlugin.h */,
@@ -166,7 +166,7 @@
 			files = (
 				77755DFC1AF4737700899720 /* DLSNetworkProxyProtocol.h in Headers */,
 				7787FF431A3CA35200074DBC /* DLSPlugin.h in Headers */,
-				77755DF81AF46BB500899720 /* DLSNetworkPlugin.h in Headers */,
+				77755DF81AF46BB500899720 /* DLSNetworkRequestsPlugin.h in Headers */,
 				775B9DF31AF3B0DC001F1ED1 /* UILabel+DLSViewAdjust.h in Headers */,
 				774D15C21AB4BE0A00613F24 /* DLSDescribable.h in Headers */,
 				77341ACB1AD63905004023CD /* DialsFramework.h in Headers */,
@@ -257,7 +257,7 @@
 				774D15C61AB4BFF800613F24 /* DLSDescriptionContext.m in Sources */,
 				77755DFD1AF4737700899720 /* DLSNetworkProxyProtocol.m in Sources */,
 				774D15C01AB4BD6500613F24 /* UIView+DLSDescribable.m in Sources */,
-				77755DF91AF46BB500899720 /* DLSNetworkPlugin.m in Sources */,
+				77755DF91AF46BB500899720 /* DLSNetworkRequestsPlugin.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

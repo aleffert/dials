@@ -20,6 +20,7 @@ class PluginController: NSObject {
     func registerDefaultPlugins() {
         registerPlugin(LiveDialsPlugin())
         registerPlugin(ViewAdjustPlugin())
+        registerPlugin(NetworkRequestsPlugin())
     }
     
     func registerPlugin(plugin : Plugin) {

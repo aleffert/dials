@@ -16,6 +16,7 @@
 #import "DLSPropertyGroup.h"
 #import "DLSLiveDial.h"
 #import "DLSLiveDialsMessages.h"
+#import "DLSNetworkMessages.h"
 #import "DLSPropertyDescription.h"
 #import "DLSPropertyWrapper.h"
 #import "DLSRemovable.h"

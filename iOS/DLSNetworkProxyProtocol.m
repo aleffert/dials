@@ -10,6 +10,7 @@
 
 // Adapted from https://github.com/sanekgusev/SGProxyingURLProtocol
 static NSString* const DLSRequestProcessed = @"DLSRequestProcessed";
+static id <DLSNetworkProxyProtocolDelegate> sDelegate;
 
 @interface DLSNetworkProxyProtocol ()
 
@@ -29,11 +30,16 @@ static NSString* const DLSRequestProcessed = @"DLSRequestProcessed";
     return request;
 }
 
++ (void)setDelegate:(id <DLSNetworkProxyProtocolDelegate>)delegate {
+    sDelegate = delegate;
+}
+
 - (void)startLoading {
     NSMutableURLRequest *request = self.request.mutableCopy;
     [NSURLProtocol setProperty:@YES forKey:DLSRequestProcessed inRequest:request];
     self.uuid = [NSUUID UUID].UUIDString;
     self.underlyingConnection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [sDelegate connectionWithID:self.uuid beganRequest:self.request];
     
 }
 - (void)stopLoading {
@@ -42,6 +48,7 @@ static NSString* const DLSRequestProcessed = @"DLSRequestProcessed";
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [[self client] URLProtocol:self didFailWithError:error];
+    [sDelegate connectionWithID:self.uuid failedWithError:error];
 }
 
 - (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection {
@@ -64,10 +71,12 @@ static NSString* const DLSRequestProcessed = @"DLSRequestProcessed";
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:(NSURLCacheStoragePolicy)[[self request] cachePolicy]];
+    [sDelegate connectionWithID:self.uuid completedWithResponse:response];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [[self client] URLProtocol:self didLoadData:data];
+    [sDelegate connectionWithID:self.uuid receivedData:data];
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {

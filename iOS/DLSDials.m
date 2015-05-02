@@ -9,6 +9,7 @@
 #import "DLSDials.h"
 
 #import "DLSLiveDialsPlugin.h"
+#import "DLSNetworkRequestsPlugin.h"
 #import "DLSPlugin.h"
 #import "DLSViewAdjustPlugin.h"
 
@@ -61,7 +62,7 @@
 }
 
 - (NSArray*)defaultPlugins {
-    return @[[[DLSLiveDialsPlugin alloc] init], [[DLSViewAdjustPlugin alloc] init]];
+    return @[[[DLSLiveDialsPlugin alloc] init], [[DLSViewAdjustPlugin alloc] init], [[DLSNetworkRequestsPlugin alloc] init]];
 }
 
 - (void)startWithPlugins:(NSArray*)plugins {

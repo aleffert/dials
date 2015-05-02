@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7708CC491AF57C5700511F3F /* ColorEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7708CC481AF57C5700511F3F /* ColorEditorView.xib */; };
+		7708CC521AF58FE600511F3F /* NetworkRequestsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7708CC511AF58FE600511F3F /* NetworkRequestsPlugin.swift */; };
+		7708CC541AF592E200511F3F /* NetworkRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7708CC531AF592E200511F3F /* NetworkRequestsViewController.swift */; };
 		77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77191D8F1A3E856A006D248C /* ChannelCellView.xib */; };
 		77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77224B811AEDDE21002C3739 /* ViewFacade.swift */; };
 		772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */; };
@@ -85,6 +87,8 @@
 
 /* Begin PBXFileReference section */
 		7708CC481AF57C5700511F3F /* ColorEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ColorEditorView.xib; path = Desktop/XIB/ColorEditorView.xib; sourceTree = SOURCE_ROOT; };
+		7708CC511AF58FE600511F3F /* NetworkRequestsPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequestsPlugin.swift; path = Desktop/Source/NetworkRequestsPlugin.swift; sourceTree = SOURCE_ROOT; };
+		7708CC531AF592E200511F3F /* NetworkRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequestsViewController.swift; path = Desktop/Source/NetworkRequestsViewController.swift; sourceTree = SOURCE_ROOT; };
 		77191D8F1A3E856A006D248C /* ChannelCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChannelCellView.xib; path = Desktop/XIB/ChannelCellView.xib; sourceTree = SOURCE_ROOT; };
 		77224B811AEDDE21002C3739 /* ViewFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewFacade.swift; path = Desktop/Source/ViewFacade.swift; sourceTree = SOURCE_ROOT; };
 		772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSView+Layout.swift"; path = "Desktop/Source/NSView+Layout.swift"; sourceTree = SOURCE_ROOT; };
@@ -175,6 +179,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7708CC551AF592E900511F3F /* NetworkRequests */ = {
+			isa = PBXGroup;
+			children = (
+				7708CC531AF592E200511F3F /* NetworkRequestsViewController.swift */,
+				7708CC511AF58FE600511F3F /* NetworkRequestsPlugin.swift */,
+			);
+			name = NetworkRequests;
+			sourceTree = "<group>";
+		};
 		776414D11A32ADC9005E381A = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				778876E81ABE104F00AB5580 /* Editors */,
+				7708CC551AF592E900511F3F /* NetworkRequests */,
 				77B235761AE3EAB900599722 /* ViewAdjust */,
 				778876F51ABE34DB00AB5580 /* LiveDials */,
 			);
@@ -479,6 +493,7 @@
 				77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */,
 				778877211AC0E55D00AB5580 /* Optional+Result.swift in Sources */,
 				7748C9B71AEDD88400363932 /* MathUtils.swift in Sources */,
+				7708CC541AF592E200511F3F /* NetworkRequestsViewController.swift in Sources */,
 				77B235991AE5648F00599722 /* StepperEditor.swift in Sources */,
 				778876E51ABE100700AB5580 /* ToggleEditor.swift in Sources */,
 				77F4F59A1A33D64100A48A76 /* PluginController.swift in Sources */,
@@ -512,6 +527,7 @@
 				7788771D1AC0E16300AB5580 /* NSRegularExpression+Result.swift in Sources */,
 				778876FB1ABF9C8B00AB5580 /* CodeManager.swift in Sources */,
 				77AAE4F81A32C66600998E36 /* Device.swift in Sources */,
+				7708CC521AF58FE600511F3F /* NetworkRequestsPlugin.swift in Sources */,
 				779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */,
 				77B235811AE44D3900599722 /* PropertyGroupView.swift in Sources */,
 			);
