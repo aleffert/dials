@@ -18,6 +18,7 @@ static CGFloat bar = 2.12;
 @interface ViewController ()
 
 @property (strong, nonatomic) IBOutlet UIView* box;
+@property (strong, nonatomic) IBOutlet UIImageView* image;
 
 @end
 
@@ -45,6 +46,16 @@ static CGFloat bar = 2.12;
 - (IBAction)push:(id)sender {
     TestViewController* controller = [[TestViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (IBAction)makeRequest:(id)sender {
+    NSURL* url = [NSURL URLWithString:@"http://placekitten.com/g/300/310"];
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.image.image = [UIImage imageWithData:data];
+        });
+    }] resume];
 }
 
 @end

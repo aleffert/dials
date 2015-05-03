@@ -1,12 +1,12 @@
 //
-//  DLSNetworkMessages.m
+//  DLSNetworkRequestsMessages.m
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 5/2/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSNetworkMessages.h"
+#import "DLSNetworkRequestsMessages.h"
 
 #import "DLSConstants.h"
 
@@ -40,6 +40,7 @@ NSString* const DLSNetworkRequestsPluginName = @"com.akivaleffert.dials.network"
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     DLSEncodeObject(aCoder, request);
 }
 
@@ -56,6 +57,7 @@ NSString* const DLSNetworkRequestsPluginName = @"com.akivaleffert.dials.network"
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     DLSEncodeObject(aCoder, connectionID);
     DLSEncodeObject(aCoder, error);
 }
@@ -73,6 +75,7 @@ NSString* const DLSNetworkRequestsPluginName = @"com.akivaleffert.dials.network"
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     DLSEncodeObject(aCoder, data);
 }
 
@@ -89,6 +92,7 @@ NSString* const DLSNetworkRequestsPluginName = @"com.akivaleffert.dials.network"
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    [super encodeWithCoder:aCoder];
     DLSEncodeObject(aCoder, response);
 }
 

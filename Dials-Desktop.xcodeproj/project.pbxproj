@@ -10,6 +10,7 @@
 		7708CC491AF57C5700511F3F /* ColorEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7708CC481AF57C5700511F3F /* ColorEditorView.xib */; };
 		7708CC521AF58FE600511F3F /* NetworkRequestsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7708CC511AF58FE600511F3F /* NetworkRequestsPlugin.swift */; };
 		7708CC541AF592E200511F3F /* NetworkRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7708CC531AF592E200511F3F /* NetworkRequestsViewController.swift */; };
+		7708CC571AF5CC3900511F3F /* NetworkRequestsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7708CC561AF5CC3900511F3F /* NetworkRequestsViewController.xib */; };
 		77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77191D8F1A3E856A006D248C /* ChannelCellView.xib */; };
 		77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77224B811AEDDE21002C3739 /* ViewFacade.swift */; };
 		772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */; };
@@ -89,6 +90,7 @@
 		7708CC481AF57C5700511F3F /* ColorEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ColorEditorView.xib; path = Desktop/XIB/ColorEditorView.xib; sourceTree = SOURCE_ROOT; };
 		7708CC511AF58FE600511F3F /* NetworkRequestsPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequestsPlugin.swift; path = Desktop/Source/NetworkRequestsPlugin.swift; sourceTree = SOURCE_ROOT; };
 		7708CC531AF592E200511F3F /* NetworkRequestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequestsViewController.swift; path = Desktop/Source/NetworkRequestsViewController.swift; sourceTree = SOURCE_ROOT; };
+		7708CC561AF5CC3900511F3F /* NetworkRequestsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NetworkRequestsViewController.xib; path = Desktop/XIB/NetworkRequestsViewController.xib; sourceTree = SOURCE_ROOT; };
 		77191D8F1A3E856A006D248C /* ChannelCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChannelCellView.xib; path = Desktop/XIB/ChannelCellView.xib; sourceTree = SOURCE_ROOT; };
 		77224B811AEDDE21002C3739 /* ViewFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewFacade.swift; path = Desktop/Source/ViewFacade.swift; sourceTree = SOURCE_ROOT; };
 		772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSView+Layout.swift"; path = "Desktop/Source/NSView+Layout.swift"; sourceTree = SOURCE_ROOT; };
@@ -267,7 +269,6 @@
 		776414FD1A32AF0E005E381A /* XIB */ = {
 			isa = PBXGroup;
 			children = (
-				77AD6A741AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib */,
 				778876E91ABE105A00AB5580 /* Editors */,
 				778876EA1ABE106200AB5580 /* Plugins */,
 				776415001A32AF94005E381A /* ConsoleWindow.xib */,
@@ -307,8 +308,10 @@
 		778876EA1ABE106200AB5580 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				7708CC561AF5CC3900511F3F /* NetworkRequestsViewController.xib */,
 				77B235791AE43B0800599722 /* PropertyGroupView.xib */,
 				773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */,
+				77AD6A741AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib */,
 				778876F81ABF869C00AB5580 /* LiveDialCellView.xib */,
 				778876E61ABE101E00AB5580 /* LiveDialPaneViewController.xib */,
 			);
@@ -454,6 +457,7 @@
 				77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */,
 				778876E71ABE101E00AB5580 /* LiveDialPaneViewController.xib in Resources */,
 				778876D11ABBDC1600AB5580 /* ActionEditorView.xib in Resources */,
+				7708CC571AF5CC3900511F3F /* NetworkRequestsViewController.xib in Resources */,
 				778876E11ABE050E00AB5580 /* SliderEditorView.xib in Resources */,
 				77AAE4FC1A32CFA600998E36 /* Images.xcassets in Resources */,
 				778876F91ABF869C00AB5580 /* LiveDialCellView.xib in Resources */,

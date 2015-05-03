@@ -37,36 +37,23 @@ class NetworkRequestsPlugin: Plugin {
     func receiveMessage(data: NSData) {
         let message : AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
         if let m = message as? DLSNetworkConnectionBeganMessage {
-            handleBeganMessage(m)
+            
+            if controller == nil && context != nil {
+                let viewController = NetworkRequestsViewController(nibName: "NetworkRequestsViewController", bundle: nil)!
+                context?.addViewController(viewController, plugin: self)
+                controller = viewController
+            }
+            
+            controller?.handleBeganMessage(m)
         }
         else if let m = message as? DLSNetworkConnectionCompletedMessage {
-            handleCompletedMessage(m)
+            controller?.handleCompletedMessage(m)
         }
         else if let m = message as? DLSNetworkConnectionFailedMessage {
-            handleFailedMessage(m)
+            controller?.handleFailedMessage(m)
         }
         else if let m = message as? DLSNetworkConnectionReceivedDataMessage {
-            handleReceivedDataMessage(m)
+            controller?.handleReceivedDataMessage(m)
         }
-    }
-    
-    func handleBeganMessage(message : DLSNetworkConnectionBeganMessage) {
-        if self.controller == nil && self.context != nil {
-            let viewController = NetworkRequestsViewController(nibName: nil, bundle: nil)!
-            self.context?.addViewController(viewController, plugin: self)
-            controller = viewController
-        }
-    }
-    
-    func handleCompletedMessage(message : DLSNetworkConnectionCompletedMessage) {
-        
-    }
-    
-    func handleFailedMessage(message : DLSNetworkConnectionFailedMessage) {
-        
-    }
-    
-    func handleReceivedDataMessage(message : DLSNetworkConnectionReceivedDataMessage) {
-        
     }
 }

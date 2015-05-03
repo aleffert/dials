@@ -64,7 +64,9 @@ static id <DLSNetworkProxyProtocolDelegate> sDelegate;
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
-    [[self client] URLProtocol:self wasRedirectedToRequest:request redirectResponse:response];
+    if(response) {
+        [[self client] URLProtocol:self wasRedirectedToRequest:request redirectResponse:response];
+    }
     
     return request;
 }

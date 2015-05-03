@@ -1,5 +1,5 @@
 //
-//  DLSNetworkMessages.h
+//  DLSNetworkRequstsMessages.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 5/2/15.

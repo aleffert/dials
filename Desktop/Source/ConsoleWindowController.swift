@@ -56,6 +56,7 @@ class ConsoleWindowController: NSWindowController {
         
         sidebarTable?.setDelegate(viewGrouper)
         sidebarTable?.setDataSource(viewGrouper)
+        sidebarTable?.floatsGroupRows = false
         sidebarController.useSidebarContent(sidebarTable!.enclosingScrollView!)
         
         sidebarTable?.registerNib(NSNib(nibNamed: "ChannelCellView", bundle: nil)!, forIdentifier: ViewControllerGrouperCellIdentifier)
