@@ -285,7 +285,23 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 let dy = pos.cgy - y
                 let dz = pos.cgz - CGFloat(z)
                 let distance = dx * dx + dy * dy + dz * dz
-                if distance < bestDistance {
+                
+                // if the current best is a sibling of this view
+                // they may have the same distance
+                // so make sure we account for the subview ordering
+                var higherSibling = false
+                if let parentID = best?.record.superviewID where parentID == layer.record.superviewID {
+                    let parent = layers[parentID]
+                    let bestParentIndex = parent?.record.children.indexOf {
+                        $0 as! String == best?.record.viewID
+                    }
+                    let currentParentIndex = parent?.record?.children.indexOf {
+                        $0 as! String == layer.record?.viewID
+                    }
+                    higherSibling = currentParentIndex > bestParentIndex
+                }
+                
+                if distance < bestDistance || higherSibling {
                     bestDistance = distance
                     best = layer
                 }
