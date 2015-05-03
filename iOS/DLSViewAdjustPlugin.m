@@ -273,12 +273,17 @@ static DLSViewAdjustPlugin* sActivePlugin;
         id image = view.layer.contents;
         UIImage* uiImage = nil;
         if(image != nil) {
-            UIGraphicsBeginImageContextWithOptions(view.layer.bounds.size, NO, view.layer.rasterizationScale);
-            CGContextRef context = UIGraphicsGetCurrentContext();
-            [view.layer drawInContext:context];
-            UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            uiImage = result;
+            if([[image description] containsString:@"CGImage"]) {
+                uiImage = [UIImage imageWithCGImage:(__bridge CGImageRef)image];
+            }
+            else {
+                UIGraphicsBeginImageContextWithOptions(view.layer.bounds.size, NO, view.layer.rasterizationScale);
+                CGContextRef context = UIGraphicsGetCurrentContext();
+                [view.layer drawInContext:context];
+                UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                uiImage = result;
+            }
             
             NSData* imageData = UIImagePNGRepresentation(uiImage);
             if(imageData) {

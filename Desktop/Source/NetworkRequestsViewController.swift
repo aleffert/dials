@@ -63,8 +63,8 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        // If we don't do this, the table won't properly account for the content inset
-        // this strikes me as an AppKit bug
+        // If we don't do this, the table won't properly account for the content inset.
+        // This strikes me as an AppKit bug
         tableView?.tile()
     }
     
