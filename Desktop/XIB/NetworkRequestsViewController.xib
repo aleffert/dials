@@ -30,7 +30,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="tWO-5G-bjG" viewBased="YES" id="dhO-JE-Yg4">
-                                                <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="636" height="0.0"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                 <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -72,8 +72,8 @@
                                                             </tableCellView>
                                                         </prototypeCellViews>
                                                     </tableColumn>
-                                                    <tableColumn identifier="ResultCodeColumnIdentifier" width="120" minWidth="60" maxWidth="120" id="59h-ZC-36G">
-                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Result Code">
+                                                    <tableColumn identifier="ResultColumnIdentifier" width="120" minWidth="80" maxWidth="120" id="59h-ZC-36G">
+                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Result">
                                                             <font key="font" metaFont="smallSystem"/>
                                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -90,7 +90,7 @@
                                                                 <subviews>
                                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TM3-eQ-4cE">
                                                                         <rect key="frame" x="0.0" y="0.0" width="97" height="17"/>
-                                                                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="XNJ-XV-JwD">
+                                                                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" title="Table View Cell" id="XNJ-XV-JwD">
                                                                             <font key="font" metaFont="system"/>
                                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -151,11 +151,11 @@
                                         </subviews>
                                         <nil key="backgroundColor"/>
                                     </clipView>
-                                    <scroller key="horizontalScroller" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="YES" id="e34-cH-bNI">
+                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="e34-cH-bNI">
                                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
-                                    <scroller key="verticalScroller" hidden="YES" appearanceType="vibrantLight" verticalHuggingPriority="750" horizontal="NO" id="Brc-Ee-Jcm">
+                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Brc-Ee-Jcm">
                                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>

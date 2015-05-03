@@ -48,6 +48,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 }
 
 - (void)close {
+    self.stream.delegate = nil;
     [self.stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [self.stream close];
     self.stream = nil;

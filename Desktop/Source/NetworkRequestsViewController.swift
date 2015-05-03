@@ -9,18 +9,22 @@
 import Cocoa
 
 private let URLColumnIdentifier = "URLColumnIdentifier"
-private let ResultCodeColumnIdentifier = "ResultCodeColumnIdentifier"
+private let ResultColumnIdentifier = "ResultColumnIdentifier"
 private let TimestampColumnIdentifier = "TimestampColumnIdentifier"
 
 class NetworkRequestInfo {
     let request : NSURLRequest
     let timestamp : NSDate
     var response : NSURLResponse?
+    var error : NSError?
+    var data : NSMutableData?
     
-    init(request : NSURLRequest, timestamp : NSDate, response : NSURLResponse?) {
+    init(request : NSURLRequest, timestamp : NSDate, response : NSURLResponse? = nil, error : NSError? = nil) {
         self.request = request
         self.timestamp = timestamp
         self.response = response
+        self.error = error
+        self.data = NSMutableData()
     }
 }
 
@@ -30,8 +34,30 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     var requestIndex : [String : NetworkRequestInfo] = [:]
     @IBOutlet var tableView : NSTableView?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        // If we don't do this, the table won't properly account for the content inset.
+        // This strikes me as an AppKit bug
+        tableView?.tile()
+    }
+    
+    func resultStringForRequest(request : NetworkRequestInfo) -> String {
+        if let response = request.response {
+            if let httpResponse = request.response as? NSHTTPURLResponse {
+                return "\(httpResponse.statusCode) (\(httpResponse.statusCodeDescription))"
+            }
+            else {
+                return "Loaded"
+            }
+        }
+        else {
+            if let error = request.error {
+                return "Error (\(error.code))"
+            }
+            else {
+                return "Loading"
+            }
+        }
     }
     
     func numberOfRowsInTableView(tableView: NSTableView) -> Int {
@@ -44,9 +70,8 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
         if tableColumn?.identifier == URLColumnIdentifier {
             cell.textField?.stringValue = request.request.URL?.absoluteString ?? ""
         }
-        else if tableColumn?.identifier == ResultCodeColumnIdentifier {
-            cell.textField?.stringValue = "Loading"
-            
+        else if tableColumn?.identifier == ResultColumnIdentifier {
+            cell.textField?.stringValue = resultStringForRequest(request)
         }
         else if tableColumn?.identifier == TimestampColumnIdentifier {
             cell.textField?.stringValue = NSDateFormatter.localizedStringFromDate(request.timestamp, dateStyle: .ShortStyle, timeStyle: NSDateFormatterStyle.MediumStyle)
@@ -61,22 +86,21 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
         tableView?.reloadData()
     }
     
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        // If we don't do this, the table won't properly account for the content inset.
-        // This strikes me as an AppKit bug
-        tableView?.tile()
-    }
-    
     func handleCompletedMessage(message : DLSNetworkConnectionCompletedMessage) {
-        
+        let info = requestIndex[message.connectionID]
+        info?.response = message.response
+        tableView?.reloadData()
     }
     
     func handleFailedMessage(message : DLSNetworkConnectionFailedMessage) {
-        
+        let info = requestIndex[message.connectionID]
+        info?.error = message.error
+        tableView?.reloadData()
     }
     
     func handleReceivedDataMessage(message : DLSNetworkConnectionReceivedDataMessage) {
-        
+        let info = requestIndex[message.connectionID]
+        info?.data?.appendData(message.data)
+        tableView?.reloadData()
     }
 }

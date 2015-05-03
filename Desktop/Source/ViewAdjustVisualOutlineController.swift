@@ -253,7 +253,7 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     
     override func scrollWheel(theEvent: NSEvent) {
         if theEvent.phase == .Changed {
-            panChangedWithDelta(CGPoint(x : theEvent.scrollingDeltaX, y : -theEvent.scrollingDeltaY))
+            panChangedWithDelta(CGPoint(x : theEvent.scrollingDeltaX, y : theEvent.scrollingDeltaY))
             panStationary()
             CATransaction.commit()
         }

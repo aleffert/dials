@@ -21,6 +21,7 @@
 		773E67B91ACEE4EB00E1BB0A /* ViewAdjustViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773E67B41ACDFE7600E1BB0A /* ViewAdjustViewController.swift */; };
 		7748C9B71AEDD88400363932 /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7748C9B61AEDD88400363932 /* MathUtils.swift */; };
 		774D160D1AB5D36900613F24 /* libDialsShared-Desktop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 774D160C1AB5D36900613F24 /* libDialsShared-Desktop.a */; };
+		7756776A1AF6A0310085AF6B /* NSHTTPURLResponse+StatusCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775677691AF6A0310085AF6B /* NSHTTPURLResponse+StatusCodes.swift */; };
 		776415021A32AF94005E381A /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415001A32AF94005E381A /* ConsoleWindow.xib */; };
 		776415031A32AF94005E381A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 776415011A32AF94005E381A /* MainMenu.xib */; };
 		776415061A32AF9F005E381A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776415041A32AF9F005E381A /* AppDelegate.swift */; };
@@ -101,6 +102,7 @@
 		773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewAdjustViewController.xib; path = Desktop/XIB/ViewAdjustViewController.xib; sourceTree = SOURCE_ROOT; };
 		7748C9B61AEDD88400363932 /* MathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MathUtils.swift; path = Desktop/Source/MathUtils.swift; sourceTree = SOURCE_ROOT; };
 		774D160C1AB5D36900613F24 /* libDialsShared-Desktop.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libDialsShared-Desktop.a"; path = "../../../Library/Developer/Xcode/DerivedData/Dials-dszlxtikntnjoqbsqgddedhnooyt/Build/Products/Debug/libDialsShared-Desktop.a"; sourceTree = "<group>"; };
+		775677691AF6A0310085AF6B /* NSHTTPURLResponse+StatusCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSHTTPURLResponse+StatusCodes.swift"; path = "Desktop/Source/NSHTTPURLResponse+StatusCodes.swift"; sourceTree = SOURCE_ROOT; };
 		776414DA1A32ADC9005E381A /* Dials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dials.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		776415001A32AF94005E381A /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConsoleWindow.xib; path = Desktop/XIB/ConsoleWindow.xib; sourceTree = SOURCE_ROOT; };
 		776415011A32AF94005E381A /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = Desktop/XIB/MainMenu.xib; sourceTree = SOURCE_ROOT; };
@@ -235,6 +237,7 @@
 				779250F61A336E9B00CCC229 /* DeviceConnection.swift */,
 				7764150A1A32C064005E381A /* DeviceController.swift */,
 				77AAE4F71A32C66600998E36 /* Device.swift */,
+				775677691AF6A0310085AF6B /* NSHTTPURLResponse+StatusCodes.swift */,
 				772C9BD01A373D9D00BE2D32 /* NSView+Layout.swift */,
 				77F4F59D1A34A89C00A48A76 /* PluginContextBouncer.swift */,
 				77F4F5991A33D64100A48A76 /* PluginController.swift */,
@@ -308,12 +311,12 @@
 		778876EA1ABE106200AB5580 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				778876F81ABF869C00AB5580 /* LiveDialCellView.xib */,
+				778876E61ABE101E00AB5580 /* LiveDialPaneViewController.xib */,
 				7708CC561AF5CC3900511F3F /* NetworkRequestsViewController.xib */,
 				77B235791AE43B0800599722 /* PropertyGroupView.xib */,
 				773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */,
 				77AD6A741AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib */,
-				778876F81ABF869C00AB5580 /* LiveDialCellView.xib */,
-				778876E61ABE101E00AB5580 /* LiveDialPaneViewController.xib */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				77AAE4F81A32C66600998E36 /* Device.swift in Sources */,
 				7708CC521AF58FE600511F3F /* NetworkRequestsPlugin.swift in Sources */,
 				779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */,
+				7756776A1AF6A0310085AF6B /* NSHTTPURLResponse+StatusCodes.swift in Sources */,
 				77B235811AE44D3900599722 /* PropertyGroupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

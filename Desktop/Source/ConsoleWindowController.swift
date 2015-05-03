@@ -98,7 +98,9 @@ class ConsoleWindowController: NSWindowController {
         showSidebarIfNecessary()
         hideSidebarIfNecessary()
         devicesChanged()
-        self.pluginController.connectedWithContext(self.contextBouncer)
+        if device != nil {
+            self.pluginController.connectedWithContext(self.contextBouncer)
+        }
         device.bind { self.saveLastKnownConnection($0.displayName) }
     }
     
@@ -107,6 +109,7 @@ class ConsoleWindowController: NSWindowController {
         deviceController.saveLastDevice(device)
         if device == nil && self.currentConnection != nil {
             self.pluginController.connectionClosed()
+            self.saveLastKnownConnection("")
         }
         connectToDevice(device)
     }
