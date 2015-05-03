@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PropertyGroupViewOwner" customModule="Dials" customModuleProvider="target">
@@ -23,7 +23,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <stackView orientation="vertical" alignment="left" hasEqualSpacing="YES" horizontalStackHuggingPriority="256" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="6c9-Mk-Tlg">
+                <stackView orientation="vertical" alignment="left" spacing="4" hasEqualSpacing="YES" horizontalStackHuggingPriority="256" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="6c9-Mk-Tlg">
                     <rect key="frame" x="0.0" y="0.0" width="480" height="246"/>
                     <edgeInsets key="edgeInsets" left="8" right="8" top="0.0" bottom="0.0"/>
                 </stackView>

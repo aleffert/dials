@@ -181,7 +181,7 @@
                                         <rect key="frame" x="1" y="1" width="166" height="79"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <stackView orientation="vertical" alignment="left" horizontalStackHuggingPriority="750" horizontalHuggingPriority="750" placeholderIntrinsicWidth="174" placeholderIntrinsicHeight="469" translatesAutoresizingMaskIntoConstraints="NO" id="4e1-5M-3Yu">
+                                            <stackView orientation="vertical" alignment="left" spacing="4" hasEqualSpacing="YES" horizontalStackHuggingPriority="750" horizontalHuggingPriority="750" placeholderIntrinsicWidth="174" placeholderIntrinsicHeight="469" translatesAutoresizingMaskIntoConstraints="NO" id="4e1-5M-3Yu">
                                                 <rect key="frame" x="0.0" y="1" width="174" height="469"/>
                                             </stackView>
                                         </subviews>
@@ -204,7 +204,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="174" height="470"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Wdm-aL-Hv1">
-                                            <rect key="frame" x="-2" y="220.5" width="178" height="29"/>
+                                            <rect key="frame" x="-2" y="220" width="178" height="29"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Pick a View" id="9FG-3b-CFc">
                                                 <font key="font" metaFont="system" size="24"/>
                                                 <color key="textColor" white="0.56523143799999997" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>

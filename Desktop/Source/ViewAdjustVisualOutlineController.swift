@@ -293,10 +293,10 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 if let parentID = best?.record.superviewID where parentID == layer.record.superviewID {
                     let parent = layers[parentID]
                     let bestParentIndex = parent?.record.children.indexOf {
-                        $0 as! String == best?.record.viewID
+                        $0 as? String == best?.record.viewID
                     }
                     let currentParentIndex = parent?.record?.children.indexOf {
-                        $0 as! String == layer.record?.viewID
+                        $0 as? String == layer.record?.viewID
                     }
                     higherSibling = currentParentIndex > bestParentIndex
                 }

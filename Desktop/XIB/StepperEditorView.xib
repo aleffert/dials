@@ -16,14 +16,14 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MVp-di-oKu">
-                    <rect key="frame" x="77" y="-2" width="19" height="27"/>
+                    <rect key="frame" x="97" y="-2" width="19" height="27"/>
                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="hIQ-9G-hG5"/>
                     <connections>
                         <action selector="stepperChanged:" target="c22-O7-iKe" id="VuJ-L5-oxj"/>
                     </connections>
                 </stepper>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VvJ-UL-tq4">
-                    <rect key="frame" x="95" y="2" width="86" height="19"/>
+                    <rect key="frame" x="115" y="2" width="66" height="19"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="de5-fS-CYU">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -49,7 +49,7 @@
                 <constraint firstItem="VvJ-UL-tq4" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="bYG-Ok-IDI"/>
                 <constraint firstItem="MVp-di-oKu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FJ1-Af-sIt" secondAttribute="trailing" constant="8" id="d98-92-QcX"/>
                 <constraint firstItem="VvJ-UL-tq4" firstAttribute="leading" secondItem="MVp-di-oKu" secondAttribute="trailing" constant="2" id="dDd-cZ-vRP"/>
-                <constraint firstItem="MVp-di-oKu" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="80" id="kYN-98-2Fv"/>
+                <constraint firstItem="MVp-di-oKu" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="100" id="kYN-98-2Fv"/>
                 <constraint firstAttribute="trailing" secondItem="VvJ-UL-tq4" secondAttribute="trailing" id="mFE-O5-dY9"/>
                 <constraint firstAttribute="centerY" secondItem="FJ1-Af-sIt" secondAttribute="centerY" id="pib-fC-yef"/>
             </constraints>

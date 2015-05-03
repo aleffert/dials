@@ -16,14 +16,14 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4JH-Mf-l8t">
-                    <rect key="frame" x="80" y="10" width="177" height="15"/>
+                    <rect key="frame" x="100" y="10" width="157" height="15"/>
                     <sliderCell key="cell" controlSize="mini" continuous="YES" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="ISQ-cF-Ync"/>
                     <connections>
                         <action selector="sliderChanged:" target="c22-O7-iKe" id="Khb-JH-lZM"/>
                     </connections>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ee-Rw-kE9">
-                    <rect key="frame" x="78" y="0.0" width="24" height="14"/>
+                    <rect key="frame" x="98" y="0.0" width="24" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Min" id="YLo-C0-5ND">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -39,7 +39,7 @@
                     </textFieldCell>
                 </textField>
                 <textField horizontalHuggingPriority="248" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vKd-n8-3ra">
-                    <rect key="frame" x="78" y="0.0" width="181" height="14"/>
+                    <rect key="frame" x="98" y="0.0" width="161" height="14"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Current" id="d4I-TH-v03">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -66,7 +66,7 @@
                 <constraint firstItem="4JH-Mf-l8t" firstAttribute="leading" secondItem="8ee-Rw-kE9" secondAttribute="leading" id="TOo-5I-JJz"/>
                 <constraint firstItem="vKd-n8-3ra" firstAttribute="leading" secondItem="4JH-Mf-l8t" secondAttribute="leading" id="U2Z-ga-aCl"/>
                 <constraint firstItem="L51-bt-0om" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="2" id="dNF-HI-QUI"/>
-                <constraint firstItem="vKd-n8-3ra" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="80" id="eDf-tw-YXX"/>
+                <constraint firstItem="vKd-n8-3ra" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="100" id="eDf-tw-YXX"/>
                 <constraint firstItem="vKd-n8-3ra" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="L51-bt-0om" secondAttribute="trailing" constant="8" id="hoo-2d-IkF"/>
                 <constraint firstItem="vKd-n8-3ra" firstAttribute="trailing" secondItem="4JH-Mf-l8t" secondAttribute="trailing" id="mSj-Kh-9xl"/>
                 <constraint firstAttribute="trailing" secondItem="kyE-t1-QGD" secondAttribute="trailing" id="uz9-uD-wj0"/>

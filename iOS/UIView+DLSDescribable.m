@@ -38,6 +38,7 @@
                                  DLSDisplayProperty(@"Controller", @"dials.controller", [DLSTextFieldDescription label]),
                                  DLSProperty(@"alpha", [DLSSliderDescription zeroOneSlider]),
                                  DLSProperty(@"hidden", [DLSToggleDescription editor]),
+                                 DLSProperty(@"clipsToBounds", [DLSToggleDescription editor]),
                                  DLSDisplayProperty(@"Background", @"backgroundColor", [DLSColorDescription editor])
                                  ]];
 }

@@ -24,7 +24,7 @@
                     </textFieldCell>
                 </textField>
                 <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="g6X-tV-mdT">
-                    <rect key="frame" x="80" y="0.0" width="30" height="20"/>
+                    <rect key="frame" x="100" y="0.0" width="30" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="094-xG-eM9"/>
                         <constraint firstAttribute="width" constant="30" id="aXm-gQ-icD"/>
@@ -41,7 +41,7 @@
                 <constraint firstItem="x4n-gZ-zuf" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="GbA-XD-GgT"/>
                 <constraint firstItem="g6X-tV-mdT" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="PXB-HV-R4v"/>
                 <constraint firstItem="g6X-tV-mdT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="x4n-gZ-zuf" secondAttribute="trailing" constant="8" id="Qzd-uV-XoS"/>
-                <constraint firstItem="g6X-tV-mdT" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="80" id="nGi-Sw-Ns9"/>
+                <constraint firstItem="g6X-tV-mdT" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="100" id="nGi-Sw-Ns9"/>
                 <constraint firstAttribute="bottom" secondItem="g6X-tV-mdT" secondAttribute="bottom" id="oIb-2F-Arh"/>
             </constraints>
             <connections>
