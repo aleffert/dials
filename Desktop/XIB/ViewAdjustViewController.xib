@@ -207,7 +207,7 @@
                                             <rect key="frame" x="-2" y="220" width="178" height="29"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Pick a View" id="9FG-3b-CFc">
                                                 <font key="font" metaFont="system" size="24"/>
-                                                <color key="textColor" white="0.56523143799999997" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" white="0.0" alpha="0.48999999999999999" colorSpace="calibratedWhite"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>

@@ -30,6 +30,7 @@ class NetworkRequestsPlugin: Plugin {
     }
     
     func connectionClosed() {
+        controller.map { context?.removeViewController($0, plugin: self) }
         context = nil
         controller = nil
     }

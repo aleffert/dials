@@ -176,8 +176,20 @@
                         <customView id="t4U-52-Yrk">
                             <rect key="frame" x="0.0" y="285" width="480" height="296"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vYf-Wx-629">
+                                    <rect key="frame" x="158" y="134" width="165" height="29"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Pick a Request" id="JLV-cE-Gnb">
+                                        <font key="font" metaFont="system" size="24"/>
+                                        <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="Jn3-Fm-uss"/>
+                                <constraint firstAttribute="centerY" secondItem="vYf-Wx-629" secondAttribute="centerY" constant="0.5" id="TfT-NL-HLZ"/>
+                                <constraint firstAttribute="centerX" secondItem="vYf-Wx-629" secondAttribute="centerX" id="eXC-mo-XgT"/>
                             </constraints>
                         </customView>
                     </subviews>

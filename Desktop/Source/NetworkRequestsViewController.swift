@@ -34,6 +34,12 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     var requestIndex : [String : NetworkRequestInfo] = [:]
     @IBOutlet var tableView : NSTableView?
     
+    lazy var formatter : NSDateFormatter = {
+        let f = NSDateFormatter()
+        f.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
+        return f
+    }()
+    
     override func viewDidAppear() {
         super.viewDidAppear()
         // If we don't do this, the table won't properly account for the content inset.
@@ -74,7 +80,7 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
             cell.textField?.stringValue = resultStringForRequest(request)
         }
         else if tableColumn?.identifier == TimestampColumnIdentifier {
-            cell.textField?.stringValue = NSDateFormatter.localizedStringFromDate(request.timestamp, dateStyle: .ShortStyle, timeStyle: NSDateFormatterStyle.MediumStyle)
+            cell.textField?.stringValue = formatter.stringFromDate(request.timestamp)
         }
         return cell
     }
