@@ -1,4 +1,0 @@
-language: objective-c
-before_install: bin/install_deps.sh
-osx_image: xcode61
-script: bin/buildall.sh
