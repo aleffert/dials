@@ -54,6 +54,9 @@
 		779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779250F61A336E9B00CCC229 /* DeviceConnection.swift */; };
 		77A353201A36C87200A65A90 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */; };
 		77A353231A36C8AE00A65A90 /* ViewControllerGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */; };
+		77A4364A1AF9BE5600F741C5 /* NetworkRequestInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77A436491AF9BE5600F741C5 /* NetworkRequestInfoView.xib */; };
+		77A4364C1AFA466700F741C5 /* NetworkRequestInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A4364B1AFA466700F741C5 /* NetworkRequestInfoView.swift */; };
+		77A4364E1AFA4A3900F741C5 /* NetworkRequestStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A4364D1AFA4A3900F741C5 /* NetworkRequestStatusView.swift */; };
 		77A6F9A91AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A6F9A81AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift */; };
 		77A6F9AD1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A6F9AC1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift */; };
 		77AAE4F81A32C66600998E36 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AAE4F71A32C66600998E36 /* Device.swift */; };
@@ -141,6 +144,9 @@
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
 		77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionStatusView.swift; path = Desktop/Source/ConnectionStatusView.swift; sourceTree = SOURCE_ROOT; };
 		77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewControllerGrouper.swift; path = Desktop/Source/ViewControllerGrouper.swift; sourceTree = SOURCE_ROOT; };
+		77A436491AF9BE5600F741C5 /* NetworkRequestInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NetworkRequestInfoView.xib; path = Desktop/XIB/NetworkRequestInfoView.xib; sourceTree = SOURCE_ROOT; };
+		77A4364B1AFA466700F741C5 /* NetworkRequestInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequestInfoView.swift; path = Desktop/Source/NetworkRequestInfoView.swift; sourceTree = SOURCE_ROOT; };
+		77A4364D1AFA4A3900F741C5 /* NetworkRequestStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequestStatusView.swift; path = Desktop/Source/NetworkRequestStatusView.swift; sourceTree = SOURCE_ROOT; };
 		77A6F9A81AEB01FE0096FCF1 /* ViewAdjustVisualOutlineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewAdjustVisualOutlineController.swift; path = Desktop/Source/ViewAdjustVisualOutlineController.swift; sourceTree = SOURCE_ROOT; };
 		77A6F9AC1AEB03C40096FCF1 /* ViewAdjustHierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewAdjustHierarchy.swift; path = Desktop/Source/ViewAdjustHierarchy.swift; sourceTree = SOURCE_ROOT; };
 		77AAE4F71A32C66600998E36 /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Device.swift; path = Desktop/Source/Device.swift; sourceTree = SOURCE_ROOT; };
@@ -186,6 +192,8 @@
 		7708CC551AF592E900511F3F /* NetworkRequests */ = {
 			isa = PBXGroup;
 			children = (
+				77A4364D1AFA4A3900F741C5 /* NetworkRequestStatusView.swift */,
+				77A4364B1AFA466700F741C5 /* NetworkRequestInfoView.swift */,
 				7708CC531AF592E200511F3F /* NetworkRequestsViewController.swift */,
 				7708CC511AF58FE600511F3F /* NetworkRequestsPlugin.swift */,
 			);
@@ -313,6 +321,7 @@
 			children = (
 				778876F81ABF869C00AB5580 /* LiveDialCellView.xib */,
 				778876E61ABE101E00AB5580 /* LiveDialPaneViewController.xib */,
+				77A436491AF9BE5600F741C5 /* NetworkRequestInfoView.xib */,
 				7708CC561AF5CC3900511F3F /* NetworkRequestsViewController.xib */,
 				77B235791AE43B0800599722 /* PropertyGroupView.xib */,
 				773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */,
@@ -456,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77B2359B1AE56FD400599722 /* StepperEditorView.xib in Resources */,
+				77A4364A1AF9BE5600F741C5 /* NetworkRequestInfoView.xib in Resources */,
 				7708CC491AF57C5700511F3F /* ColorEditorView.xib in Resources */,
 				77191D901A3E856A006D248C /* ChannelCellView.xib in Resources */,
 				778876E71ABE101E00AB5580 /* LiveDialPaneViewController.xib in Resources */,
@@ -500,6 +510,7 @@
 				77224B821AEDDE21002C3739 /* ViewFacade.swift in Sources */,
 				778877211AC0E55D00AB5580 /* Optional+Result.swift in Sources */,
 				7748C9B71AEDD88400363932 /* MathUtils.swift in Sources */,
+				77A4364C1AFA466700F741C5 /* NetworkRequestInfoView.swift in Sources */,
 				7708CC541AF592E200511F3F /* NetworkRequestsViewController.swift in Sources */,
 				77B235991AE5648F00599722 /* StepperEditor.swift in Sources */,
 				778876E51ABE100700AB5580 /* ToggleEditor.swift in Sources */,
@@ -535,6 +546,7 @@
 				778876FB1ABF9C8B00AB5580 /* CodeManager.swift in Sources */,
 				77AAE4F81A32C66600998E36 /* Device.swift in Sources */,
 				7708CC521AF58FE600511F3F /* NetworkRequestsPlugin.swift in Sources */,
+				77A4364E1AFA4A3900F741C5 /* NetworkRequestStatusView.swift in Sources */,
 				779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */,
 				7756776A1AF6A0310085AF6B /* NSHTTPURLResponse+StatusCodes.swift in Sources */,
 				77B235811AE44D3900599722 /* PropertyGroupView.swift in Sources */,

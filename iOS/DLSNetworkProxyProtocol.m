@@ -39,7 +39,6 @@ static id <DLSNetworkProxyProtocolDelegate> sDelegate;
     [NSURLProtocol setProperty:@YES forKey:DLSRequestProcessed inRequest:request];
     self.uuid = [NSUUID UUID].UUIDString;
     self.underlyingConnection = [NSURLConnection connectionWithRequest:request delegate:self];
-    [sDelegate connectionWithID:self.uuid beganRequest:self.request];
     
 }
 - (void)stopLoading {
@@ -64,6 +63,7 @@ static id <DLSNetworkProxyProtocolDelegate> sDelegate;
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
+    [sDelegate connectionWithID:self.uuid beganRequest:request];
     if(response) {
         [[self client] URLProtocol:self wasRedirectedToRequest:request redirectResponse:response];
     }

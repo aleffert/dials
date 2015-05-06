@@ -33,6 +33,8 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     var requests : [NetworkRequestInfo] = []
     var requestIndex : [String : NetworkRequestInfo] = [:]
     @IBOutlet var tableView : NSTableView?
+    @IBOutlet var emptyView : NSView?
+    @IBOutlet var infoView : NetworkRequestInfoView?
     
     lazy var formatter : NSDateFormatter = {
         let f = NSDateFormatter()
@@ -83,6 +85,23 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
             cell.textField?.stringValue = formatter.stringFromDate(request.timestamp)
         }
         return cell
+    }
+    
+    func tableViewSelectionDidChange(notification: NSNotification) {
+        let selection = tableView?.selectedRow ?? -1
+        if selection != -1 {
+            emptyView?.hidden = true
+            infoView?.hidden = false
+            
+            let info = requests[selection]
+            infoView?.requestInfo = info
+        }
+        else {
+            emptyView?.hidden = false
+            infoView?.hidden = true
+            
+            infoView?.requestInfo = nil
+        }
     }
     
     func handleBeganMessage(message : DLSNetworkConnectionBeganMessage) {

@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NetworkRequestsViewController" customModule="Dials" customModuleProvider="target">
             <connections>
+                <outlet property="emptyView" destination="vYf-Wx-629" id="LLV-2k-Lsi"/>
+                <outlet property="infoView" destination="83K-Ks-cg6" id="1uM-lh-22a"/>
                 <outlet property="tableView" destination="dhO-JE-Yg4" id="4kW-Wk-8B8"/>
                 <outlet property="view" destination="c22-O7-iKe" id="zTb-ID-nHP"/>
             </connections>
@@ -29,7 +31,7 @@
                                         <rect key="frame" x="1" y="17" width="238" height="117"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="tWO-5G-bjG" viewBased="YES" id="dhO-JE-Yg4">
+                                            <tableView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowSizeStyle="automatic" headerView="tWO-5G-bjG" viewBased="YES" id="dhO-JE-Yg4">
                                                 <rect key="frame" x="0.0" y="0.0" width="636" height="0.0"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -185,9 +187,16 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
+                                <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="83K-Ks-cg6" customClass="NetworkRequestInfoView" customModule="Dials" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="480" height="296"/>
+                                </customView>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="83K-Ks-cg6" firstAttribute="top" secondItem="t4U-52-Yrk" secondAttribute="top" id="990-0b-39R"/>
+                                <constraint firstAttribute="bottom" secondItem="83K-Ks-cg6" secondAttribute="bottom" id="Hfd-lF-hvr"/>
+                                <constraint firstItem="83K-Ks-cg6" firstAttribute="leading" secondItem="t4U-52-Yrk" secondAttribute="leading" id="Hxf-im-UIF"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="Jn3-Fm-uss"/>
+                                <constraint firstAttribute="trailing" secondItem="83K-Ks-cg6" secondAttribute="trailing" id="R7e-kk-9gc"/>
                                 <constraint firstAttribute="centerY" secondItem="vYf-Wx-629" secondAttribute="centerY" constant="0.5" id="TfT-NL-HLZ"/>
                                 <constraint firstAttribute="centerX" secondItem="vYf-Wx-629" secondAttribute="centerX" id="eXC-mo-XgT"/>
                             </constraints>

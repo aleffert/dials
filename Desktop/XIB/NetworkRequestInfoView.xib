@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NetworkRequestInfoView" customModule="Dials" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="c22-O7-iKe" id="3bI-xz-qdI"/>
+                <outlet property="requestStatusView" destination="SC7-u7-Ztg" id="68a-JR-DeZ"/>
+                <outlet property="responseStatusView" destination="IV4-IX-i40" id="DAm-8a-Fq7"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-XT-JMD">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+                    <subviews>
+                        <customView id="cPM-P0-vPd">
+                            <rect key="frame" x="0.0" y="0.0" width="244" height="272"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tJa-No-Qyn">
+                                    <rect key="frame" x="94" y="251" width="56" height="17"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Request" id="QNM-II-2ND">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <tabView controlSize="small" translatesAutoresizingMaskIntoConstraints="NO" id="mw5-Xo-tws">
+                                    <rect key="frame" x="13" y="10" width="218" height="236"/>
+                                    <tabViewItems>
+                                        <tabViewItem label="Info" identifier="1" id="APo-pZ-PQi">
+                                            <view key="view" id="SC7-u7-Ztg" customClass="NetworkRequestStatusView" customModule="Dials" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="25" width="198" height="198"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                        </tabViewItem>
+                                        <tabViewItem label="Content" identifier="2" id="vW0-gO-XhT">
+                                            <view key="view" id="xqW-wC-TqU">
+                                                <rect key="frame" x="10" y="33" width="198" height="192"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                        </tabViewItem>
+                                    </tabViewItems>
+                                </tabView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="mw5-Xo-tws" secondAttribute="bottom" constant="20" symbolic="YES" id="7so-fT-qBb"/>
+                                <constraint firstAttribute="trailing" secondItem="mw5-Xo-tws" secondAttribute="trailing" constant="20" symbolic="YES" id="AZw-Mb-PtQ"/>
+                                <constraint firstItem="mw5-Xo-tws" firstAttribute="top" secondItem="tJa-No-Qyn" secondAttribute="bottom" constant="8" symbolic="YES" id="Hek-f1-kHv"/>
+                                <constraint firstItem="mw5-Xo-tws" firstAttribute="leading" secondItem="cPM-P0-vPd" secondAttribute="leading" constant="20" symbolic="YES" id="XkP-xf-huh"/>
+                                <constraint firstAttribute="centerX" secondItem="tJa-No-Qyn" secondAttribute="centerX" id="dmL-aF-CnZ"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="mPQ-5N-udg"/>
+                                <constraint firstItem="tJa-No-Qyn" firstAttribute="top" secondItem="cPM-P0-vPd" secondAttribute="top" constant="4" id="yti-yS-ZK7"/>
+                            </constraints>
+                        </customView>
+                        <customView id="7HO-TY-sRl">
+                            <rect key="frame" x="245" y="0.0" width="235" height="272"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <tabView translatesAutoresizingMaskIntoConstraints="NO" id="V6d-3o-xmN">
+                                    <rect key="frame" x="13" y="10" width="209" height="238"/>
+                                    <font key="font" metaFont="system"/>
+                                    <tabViewItems>
+                                        <tabViewItem label="Info" identifier="1" id="JTA-4h-3sV">
+                                            <view key="view" id="IV4-IX-i40" customClass="NetworkRequestStatusView" customModule="Dials" customModuleProvider="target">
+                                                <rect key="frame" x="10" y="33" width="189" height="192"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                        </tabViewItem>
+                                        <tabViewItem label="Content" identifier="2" id="BQs-fn-P7B">
+                                            <view key="view" id="azN-TL-WLz">
+                                                <rect key="frame" x="10" y="33" width="189" height="189"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                        </tabViewItem>
+                                    </tabViewItems>
+                                </tabView>
+                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i9T-ef-1KQ">
+                                    <rect key="frame" x="85" y="250" width="66" height="17"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Response" id="KCR-DD-Uq1">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="75Q-Ki-67f"/>
+                                <constraint firstAttribute="trailing" secondItem="V6d-3o-xmN" secondAttribute="trailing" constant="20" symbolic="YES" id="A9N-KE-J0D"/>
+                                <constraint firstItem="V6d-3o-xmN" firstAttribute="top" secondItem="i9T-ef-1KQ" secondAttribute="bottom" constant="8" symbolic="YES" id="CW0-lW-Enh"/>
+                                <constraint firstAttribute="centerX" secondItem="i9T-ef-1KQ" secondAttribute="centerX" id="VVc-xJ-2he"/>
+                                <constraint firstItem="V6d-3o-xmN" firstAttribute="leading" secondItem="7HO-TY-sRl" secondAttribute="leading" constant="20" symbolic="YES" id="aPk-k4-jIk"/>
+                                <constraint firstAttribute="bottom" secondItem="V6d-3o-xmN" secondAttribute="bottom" constant="20" symbolic="YES" id="uiP-Rg-3ZP"/>
+                            </constraints>
+                        </customView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="tJa-No-Qyn" firstAttribute="baseline" secondItem="i9T-ef-1KQ" secondAttribute="baseline" constant="-1" id="nrg-B2-f6N"/>
+                    </constraints>
+                    <holdingPriorities>
+                        <real value="250"/>
+                        <real value="250"/>
+                    </holdingPriorities>
+                </splitView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="sJj-XT-JMD" secondAttribute="trailing" id="20q-Ka-HdN"/>
+                <constraint firstItem="sJj-XT-JMD" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="NMP-fD-SbX"/>
+                <constraint firstItem="sJj-XT-JMD" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="NrK-dz-PoD"/>
+                <constraint firstAttribute="bottom" secondItem="sJj-XT-JMD" secondAttribute="bottom" id="QJs-ke-MTt"/>
+            </constraints>
+        </customView>
+    </objects>
+</document>
