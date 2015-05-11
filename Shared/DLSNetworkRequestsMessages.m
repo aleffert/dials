@@ -58,7 +58,6 @@ NSString* const DLSNetworkRequestsPluginName = @"com.akivaleffert.dials.network"
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    DLSEncodeObject(aCoder, connectionID);
     DLSEncodeObject(aCoder, error);
 }
 

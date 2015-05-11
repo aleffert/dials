@@ -14,16 +14,15 @@ private let TimestampColumnIdentifier = "TimestampColumnIdentifier"
 
 class NetworkRequestInfo {
     let request : NSURLRequest
-    let timestamp : NSDate
+    let startTime : NSDate
+    var endTime : NSDate?
     var response : NSURLResponse?
     var error : NSError?
     var data : NSMutableData?
     
-    init(request : NSURLRequest, timestamp : NSDate, response : NSURLResponse? = nil, error : NSError? = nil) {
+    init(request : NSURLRequest, startTime : NSDate) {
         self.request = request
-        self.timestamp = timestamp
-        self.response = response
-        self.error = error
+        self.startTime = startTime
         self.data = NSMutableData()
     }
 }
@@ -35,12 +34,6 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet var tableView : NSTableView?
     @IBOutlet var emptyView : NSView?
     @IBOutlet var infoView : NetworkRequestInfoView?
-    
-    lazy var formatter : NSDateFormatter = {
-        let f = NSDateFormatter()
-        f.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
-        return f
-    }()
     
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -82,7 +75,7 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
             cell.textField?.stringValue = resultStringForRequest(request)
         }
         else if tableColumn?.identifier == TimestampColumnIdentifier {
-            cell.textField?.stringValue = formatter.stringFromDate(request.timestamp)
+            cell.textField?.stringValue = request.startTime.preciseDateString
         }
         return cell
     }
@@ -105,7 +98,7 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     }
     
     func handleBeganMessage(message : DLSNetworkConnectionBeganMessage) {
-        let info = NetworkRequestInfo(request: message.request, timestamp: message.timestamp, response: nil)
+        let info = NetworkRequestInfo(request: message.request, startTime: message.timestamp)
         requests.append(info)
         requestIndex[message.connectionID] = info
         tableView?.reloadData()
@@ -114,6 +107,7 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     func handleCompletedMessage(message : DLSNetworkConnectionCompletedMessage) {
         let info = requestIndex[message.connectionID]
         info?.response = message.response
+        info?.endTime = message.timestamp
         tableView?.reloadData()
     }
     

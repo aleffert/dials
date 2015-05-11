@@ -64,13 +64,13 @@ class ViewAdjustPropertyTableController: NSObject, PropertyGroupViewDelegate {
             stackView?.removeView(view as! NSView)
         }
         for group in groups() {
-            let owner = PropertyGroupViewOwner()
-            NSBundle.mainBundle().loadNibNamed("PropertyGroupView", owner: owner, topLevelObjects: nil)
-            owner.view.delegate = self
-            stackView?.addView(owner.view, inGravity: .Top)
+            let groupView  = PropertyGroupView(frame : CGRectZero)
+            groupView.translatesAutoresizingMaskIntoConstraints = false
+            groupView.delegate = self
+            stackView?.addView(groupView, inGravity: .Top)
             let values : [String:NSCoding] = record?.values[group.displayName] as? [String:NSCoding] ?? [:]
-            owner.view.useGroup(group, values: values)
-            groupViews[group.displayName] = owner.view
+            groupView.useGroup(group, values: values)
+            groupViews[group.displayName] = groupView
         }
         
         if count(stackView?.views ?? []) == 0 {

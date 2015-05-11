@@ -28,6 +28,8 @@ class NetworkRequestInfoView: NSView {
         NSBundle.mainBundle().loadNibNamed("NetworkRequestInfoView", owner: self, topLevelObjects: nil)
         addSubview(self.contentView)
         contentView.addConstraintsMatchingSuperviewBounds()
+        requestStatusView.dataExtractor = NetworkRequestStatusView.requestDataExtractor
+        responseStatusView.dataExtractor = NetworkRequestStatusView.responseDataExtractor
     }
     
     

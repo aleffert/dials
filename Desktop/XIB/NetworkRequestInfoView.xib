@@ -43,7 +43,7 @@
                                         </tabViewItem>
                                         <tabViewItem label="Content" identifier="2" id="vW0-gO-XhT">
                                             <view key="view" id="xqW-wC-TqU">
-                                                <rect key="frame" x="10" y="33" width="198" height="192"/>
+                                                <rect key="frame" x="10" y="25" width="198" height="198"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                         </tabViewItem>
@@ -64,13 +64,12 @@
                             <rect key="frame" x="245" y="0.0" width="235" height="272"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <tabView translatesAutoresizingMaskIntoConstraints="NO" id="V6d-3o-xmN">
-                                    <rect key="frame" x="13" y="10" width="209" height="238"/>
-                                    <font key="font" metaFont="system"/>
+                                <tabView controlSize="small" translatesAutoresizingMaskIntoConstraints="NO" id="V6d-3o-xmN">
+                                    <rect key="frame" x="13" y="10" width="209" height="235"/>
                                     <tabViewItems>
                                         <tabViewItem label="Info" identifier="1" id="JTA-4h-3sV">
                                             <view key="view" id="IV4-IX-i40" customClass="NetworkRequestStatusView" customModule="Dials" customModuleProvider="target">
-                                                <rect key="frame" x="10" y="33" width="189" height="192"/>
+                                                <rect key="frame" x="10" y="25" width="189" height="197"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
                                         </tabViewItem>

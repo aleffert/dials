@@ -12,28 +12,38 @@ protocol PropertyGroupViewDelegate: class {
     func propertyGroupView(view : PropertyGroupView, changedItem name : String, toValue value : NSCoding?)
 }
 
-class PropertyGroupViewOwner : NSObject {
-    @IBOutlet var view : PropertyGroupView!
-}
-
 class PropertyGroupView: NSView, EditorViewDelegate {
     
     weak var delegate : PropertyGroupViewDelegate?
     
-    @IBOutlet private var titleView : NSTextField?
-    @IBOutlet private var propertyStack : NSStackView?
+    @IBOutlet private var groupView : GroupContainerView!
+    @IBOutlet private var propertyStack : NSStackView!
     
     private var propertyViews : [String:EditorView] = [:]
     
     var groupName : String?
     
-    override func awakeFromNib() {
-        translatesAutoresizingMaskIntoConstraints = false
+    override init(frame : CGRect) {
+        super.init(frame : frame)
+        setup()
+    }
+    
+    required init!(coder : NSCoder) {
+        super.init(coder : coder)
+        setup()
+    }
+    
+    func setup() {
+        NSBundle.mainBundle().loadNibNamed("PropertyGroupView", owner: self, topLevelObjects: nil)
+        groupView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(groupView)
+        groupView.addConstraintsMatchingSuperviewBounds()
+        groupView.contentView = propertyStack
     }
     
     func useGroup(group : DLSPropertyGroup, values:[String:NSCoding]) {
         groupName = group.displayName
-        titleView?.stringValue = group.displayName
+        groupView.title = group.displayName
         for view in propertyStack?.views ?? [] {
             propertyStack?.removeView(view as! NSView)
         }
