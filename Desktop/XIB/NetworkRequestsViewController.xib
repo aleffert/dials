@@ -180,7 +180,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vYf-Wx-629">
-                                    <rect key="frame" x="158" y="134" width="165" height="29"/>
+                                    <rect key="frame" x="156" y="134" width="169" height="29"/>
                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Pick a Request" id="JLV-cE-Gnb">
                                         <font key="font" metaFont="system" size="24"/>
                                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>

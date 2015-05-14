@@ -11,8 +11,8 @@ import Cocoa
 class NetworkRequestInfoView: NSView {
     
     @IBOutlet var contentView : NSView!
-    @IBOutlet var requestStatusView : NetworkRequestStatusView!
-    @IBOutlet var responseStatusView : NetworkRequestStatusView!
+    @IBOutlet var requestTabController : RequestContentTabController!
+    @IBOutlet var responseTabController : RequestContentTabController!
 
     override init(frame frameRect: NSRect) {
         super.init(frame : frameRect)
@@ -28,15 +28,15 @@ class NetworkRequestInfoView: NSView {
         NSBundle.mainBundle().loadNibNamed("NetworkRequestInfoView", owner: self, topLevelObjects: nil)
         addSubview(self.contentView)
         contentView.addConstraintsMatchingSuperviewBounds()
-        requestStatusView.dataExtractor = NetworkRequestStatusView.requestDataExtractor
-        responseStatusView.dataExtractor = NetworkRequestStatusView.responseDataExtractor
+        requestTabController.dataExtractor = RequestContentTabController.requestDataExtractor
+        responseTabController.dataExtractor = RequestContentTabController.responseDataExtractor
     }
     
     
     var requestInfo : NetworkRequestInfo? {
         didSet {
-            requestStatusView.requestInfo = requestInfo
-            responseStatusView.requestInfo = requestInfo
+            requestTabController.requestInfo = requestInfo
+            responseTabController.requestInfo = requestInfo
         }
     }
 }

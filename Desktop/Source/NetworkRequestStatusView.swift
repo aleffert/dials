@@ -73,14 +73,24 @@ class NetworkRequestStatusView: NSView {
         return result
     }
     
-    private static func messageFields(info : NetworkRequestInfo) -> [(String, String)] {
+    private static func requestMessageFields(info : NetworkRequestInfo) -> [(String, String)] {
         var fields : [(String, String)] = [
             ("Start Date", info.startTime.preciseDateString),
             ("End Date", info.endTime?.preciseDateString ?? "In Progress")
         ]
         
+        if let method = info.request.HTTPMethod {
+            let field = ("Method", method)
+            fields.append(field)
+        }
+        
         if let end = info.endTime {
             let field = ("Duration", "\(Int(end.timeIntervalSinceReferenceDate * 1000 - info.startTime.timeIntervalSinceReferenceDate * 1000))ms")
+            fields.append(field)
+        }
+        
+        if let size = info.request.HTTPBody?.length {
+            let field = ("Size", "\(size) bytes")
             fields.append(field)
         }
         return fields
@@ -88,9 +98,23 @@ class NetworkRequestStatusView: NSView {
     
     static func requestDataExtractor(info : NetworkRequestInfo) -> [(String, NSAttributedString)] {
         return [
-            ("Message", formatPairs(messageFields(info))),
+            ("Message", formatPairs(requestMessageFields(info))),
             ("Headers", formatPairs(info.request.sortedHeaders))
         ]
+    }
+    
+    
+    private static func responseMessageFields(info : NetworkRequestInfo) -> [(String, String)]? {
+        var fields : [(String, String)] = []
+        if let response = info.response as? NSHTTPURLResponse {
+            let field = ("Status", "\(response.statusCode) (\(response.statusCodeDescription))")
+            fields.append(field)
+        }
+        if let size = info.data?.length {
+            let field = ("Size", "\(size) bytes")
+            fields.append(field)
+        }
+        return fields.count > 0 ? fields : nil
     }
     
     static func responseDataExtractor(info : NetworkRequestInfo) -> [(String, NSAttributedString)] {
@@ -106,6 +130,11 @@ class NetworkRequestStatusView: NSView {
                 ("Domain", error.domain),
                 ("Description", error.localizedDescription)
                 ]))
+            elements.append(pair)
+        }
+        
+        if let messageFields = responseMessageFields(info) {
+            let pair = ("Message", formatPairs(messageFields))
             elements.append(pair)
         }
         

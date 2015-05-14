@@ -56,7 +56,7 @@
 		7788CA8A1AFFA6A90040EEF3 /* GroupContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7788CA891AFFA6A90040EEF3 /* GroupContainerView.swift */; };
 		7788CA8C1AFFA7940040EEF3 /* NetworkRequestStatusGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7788CA8B1AFFA7940040EEF3 /* NetworkRequestStatusGroupView.xib */; };
 		7788CA8E1B0030000040EEF3 /* NSDate+PreciseFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7788CA8D1B0030000040EEF3 /* NSDate+PreciseFormatting.swift */; };
-		7788CA901B0048060040EEF3 /* NetworkRequestContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7788CA8F1B0048060040EEF3 /* NetworkRequestContentView.swift */; };
+		7788CA921B038D410040EEF3 /* RequestContentTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7788CA911B038D410040EEF3 /* RequestContentTabController.swift */; };
 		779250F71A336E9B00CCC229 /* DeviceConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779250F61A336E9B00CCC229 /* DeviceConnection.swift */; };
 		77A353201A36C87200A65A90 /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */; };
 		77A353231A36C8AE00A65A90 /* ViewControllerGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A353221A36C8AE00A65A90 /* ViewControllerGrouper.swift */; };
@@ -151,7 +151,7 @@
 		7788CA891AFFA6A90040EEF3 /* GroupContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupContainerView.swift; path = Desktop/Source/GroupContainerView.swift; sourceTree = SOURCE_ROOT; };
 		7788CA8B1AFFA7940040EEF3 /* NetworkRequestStatusGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NetworkRequestStatusGroupView.xib; path = Desktop/XIB/NetworkRequestStatusGroupView.xib; sourceTree = SOURCE_ROOT; };
 		7788CA8D1B0030000040EEF3 /* NSDate+PreciseFormatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSDate+PreciseFormatting.swift"; path = "Desktop/Source/NSDate+PreciseFormatting.swift"; sourceTree = SOURCE_ROOT; };
-		7788CA8F1B0048060040EEF3 /* NetworkRequestContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkRequestContentView.swift; path = Desktop/Source/NetworkRequestContentView.swift; sourceTree = SOURCE_ROOT; };
+		7788CA911B038D410040EEF3 /* RequestContentTabController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestContentTabController.swift; path = Desktop/Source/RequestContentTabController.swift; sourceTree = SOURCE_ROOT; };
 		779250DE1A33554000CCC229 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Bridging-Header.h"; path = "Desktop/Bridging-Header.h"; sourceTree = "<group>"; };
 		779250F61A336E9B00CCC229 /* DeviceConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceConnection.swift; path = Desktop/Source/DeviceConnection.swift; sourceTree = SOURCE_ROOT; };
 		77A3531F1A36C87200A65A90 /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionStatusView.swift; path = Desktop/Source/ConnectionStatusView.swift; sourceTree = SOURCE_ROOT; };
@@ -204,7 +204,7 @@
 		7708CC551AF592E900511F3F /* NetworkRequests */ = {
 			isa = PBXGroup;
 			children = (
-				7788CA8F1B0048060040EEF3 /* NetworkRequestContentView.swift */,
+				7788CA911B038D410040EEF3 /* RequestContentTabController.swift */,
 				77A4364D1AFA4A3900F741C5 /* NetworkRequestStatusView.swift */,
 				77A4364B1AFA466700F741C5 /* NetworkRequestInfoView.swift */,
 				7708CC531AF592E200511F3F /* NetworkRequestsViewController.swift */,
@@ -335,12 +335,12 @@
 		778876EA1ABE106200AB5580 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				7788CA8B1AFFA7940040EEF3 /* NetworkRequestStatusGroupView.xib */,
-				7788CA811AFE67F10040EEF3 /* NetworkRequestStatusView.xib */,
 				778876F81ABF869C00AB5580 /* LiveDialCellView.xib */,
 				778876E61ABE101E00AB5580 /* LiveDialPaneViewController.xib */,
 				77A436491AF9BE5600F741C5 /* NetworkRequestInfoView.xib */,
 				7708CC561AF5CC3900511F3F /* NetworkRequestsViewController.xib */,
+				7788CA8B1AFFA7940040EEF3 /* NetworkRequestStatusGroupView.xib */,
+				7788CA811AFE67F10040EEF3 /* NetworkRequestStatusView.xib */,
 				77B235791AE43B0800599722 /* PropertyGroupView.xib */,
 				773E67B71ACE0A8000E1BB0A /* ViewAdjustViewController.xib */,
 				77AD6A741AEC2D4D00BB4CB3 /* VisualOutlineControlsView.xib */,
@@ -523,7 +523,6 @@
 				778876D51ABDC24F00AB5580 /* Array+Utilties.swift in Sources */,
 				7764150B1A32C064005E381A /* DeviceController.swift in Sources */,
 				778876D91ABDC27400AB5580 /* ActionEditor.swift in Sources */,
-				7788CA901B0048060040EEF3 /* NetworkRequestContentView.swift in Sources */,
 				77A353201A36C87200A65A90 /* ConnectionStatusView.swift in Sources */,
 				77F4F5A61A34D67B00A48A76 /* Broadcaster.swift in Sources */,
 				778876DF1ABDFECB00AB5580 /* SliderEditor.swift in Sources */,
@@ -552,6 +551,7 @@
 				778877241AC1182900AB5580 /* CodeGenerating.swift in Sources */,
 				77F4F59C1A33D8C700A48A76 /* LiveDialsPlugin.swift in Sources */,
 				77F4F5A31A34D05600A48A76 /* ConnectionStatusToolbarItem.swift in Sources */,
+				7788CA921B038D410040EEF3 /* RequestContentTabController.swift in Sources */,
 				772C9BD11A373D9D00BE2D32 /* NSView+Layout.swift in Sources */,
 				778876F21ABE16E800AB5580 /* ColorEditor.swift in Sources */,
 				77B2355A1AE2C37300599722 /* MapTable.swift in Sources */,
