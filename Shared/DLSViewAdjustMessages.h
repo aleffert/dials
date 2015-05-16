@@ -6,12 +6,13 @@
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import "DLSConstants.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 extern NSString* const __nonnull DLSViewAdjustPluginName;
 
@@ -19,8 +20,8 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 @interface DLSPropertyRecord : NSObject <NSCoding>
 
-@property (copy, nonatomic, nonnull) NSString* name;
-@property (strong, nonatomic, nonnull) id <DLSEditorDescription> editor;
+@property (copy, nonatomic) NSString* name;
+@property (strong, nonatomic) id <DLSEditorDescription> editor;
 @property (strong, nonatomic, nullable) id <NSCoding> value;
 
 @end
@@ -44,15 +45,15 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 @interface DLSViewHierarchyRecord : NSObject <NSCoding>
 /// Unique id of the corresponding view
-@property (copy, nonatomic, nonnull) NSString* viewID;
+@property (copy, nonatomic) NSString* viewID;
 @property (copy, nonatomic, nullable) NSString* superviewID;
 /// [NSString(uuid)]
-@property (copy, nonatomic, nonnull) NSArray* children;
-@property (copy, nonatomic, nonnull) NSString* displayName;
-@property (copy, nonatomic, nonnull) NSString* className;
-@property (copy, nonatomic, nonnull) NSString* address;
+@property (copy, nonatomic) NSArray* children;
+@property (copy, nonatomic) NSString* displayName;
+@property (copy, nonatomic) NSString* className;
+@property (copy, nonatomic) NSString* address;
 
-@property (strong, nonatomic, nonnull) DLSViewRenderingRecord* renderingInfo;
+@property (strong, nonatomic) DLSViewRenderingRecord* renderingInfo;
 
 @end
 
@@ -61,20 +62,20 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 /// Unique id of the corresponding view
 @property (copy, nonatomic, nullable) NSString* viewID;
 /// [DLSPropertyGroup]
-@property (copy, nonatomic, nonnull) NSArray* propertyGroups;
-@property (copy, nonatomic, nonnull) NSString* className;
+@property (copy, nonatomic) NSArray* propertyGroups;
+@property (copy, nonatomic) NSString* className;
 /// [NSString(group) : [NSString(name) : NSCoding(value)]
-@property (copy, nonatomic, nonnull) NSDictionary* values;
+@property (copy, nonatomic) NSDictionary* values;
 
 @end
 
 @interface DLSChangeViewValueRecord : NSObject <NSCoding>
 
-- (nonnull id)initWithViewID:(NSString* __nonnull)viewID name:(NSString* __nonnull)name group:(NSString* __nonnull)group value:(id <NSCoding> __nullable)value;
+- (id)initWithViewID:(NSString*)viewID name:(NSString*)name group:(NSString*)group value:(id <NSCoding> __nullable)value;
 
-@property (copy, nonatomic, nonnull) NSString* viewID;
-@property (copy, nonatomic, nonnull) NSString* name;
-@property (copy, nonatomic, nonnull) NSString* group;
+@property (copy, nonatomic) NSString* viewID;
+@property (copy, nonatomic) NSString* name;
+@property (copy, nonatomic) NSString* group;
 @property (strong, nonatomic, nullable) id <NSCoding> value;
 
 @end
@@ -83,25 +84,25 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @interface DLSViewAdjustFullHierarchyMessage : NSObject <NSCoding>
 
 /// [NSString(viewID) : DLSViewHierarchyRecord(view info)]
-@property (copy, nonatomic, nonnull) NSDictionary* hierarchy;
+@property (copy, nonatomic) NSDictionary* hierarchy;
 /// NSString(record UUIDs)]
-@property (copy, nonatomic, nonnull) NSArray* roots;
+@property (copy, nonatomic) NSArray* roots;
 @property (assign, nonatomic) CGSize screenSize;
 
 @end
 
 @interface DLSViewAdjustViewPropertiesMessage : NSObject <NSCoding>
 
-@property (strong, nonatomic, nonnull) DLSViewRecord* record;
+@property (strong, nonatomic) DLSViewRecord* record;
 
 @end
 
 @interface DLSViewAdjustUpdatedViewsMessage : NSObject <NSCoding>
 
 /// [DLSViewHierarchyRecord]
-@property (copy, nonatomic, nonnull) NSArray* records;
+@property (copy, nonatomic) NSArray* records;
 /// NSString(record UUIDs)]
-@property (copy, nonatomic, nonnull) NSArray* roots;
+@property (copy, nonatomic) NSArray* roots;
 @property (assign, nonatomic) CGSize screenSize;
 
 @end
@@ -110,15 +111,15 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @interface DLSViewAdjustUpdatedContentsMessage : NSObject <NSCoding>
 
 /// [NSString:NSData(UIImage)]
-@property (copy, nonatomic, nonnull) NSDictionary* contents;
-@property (copy, nonatomic, nonnull) NSArray* empties;
+@property (copy, nonatomic) NSDictionary* contents;
+@property (copy, nonatomic) NSArray* empties;
 
 @end
 
 #pragma mark Sent by Desktop
 @interface DLSViewAdjustSelectViewMessage : NSObject <NSCoding>
 
-- (nonnull id)initWithViewID:(NSString* __nullable)viewID;
+- (id)initWithViewID:(NSString* __nullable)viewID;
 
 @property (strong, nonatomic, nullable) NSString* viewID;
 
@@ -126,8 +127,10 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 @interface DLSViewAdjustValueChangedMessage : NSObject <NSCoding>
 
-- (nonnull id)initWithRecord:(DLSChangeViewValueRecord* __nonnull)record;
+- (id)initWithRecord:(DLSChangeViewValueRecord*)record;
 
 @property (strong, nonatomic, nullable) DLSChangeViewValueRecord* record;
 
 @end
+
+NS_ASSUME_NONNULL_END

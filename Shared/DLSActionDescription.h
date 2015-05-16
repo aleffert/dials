@@ -12,6 +12,7 @@
 
 @interface DLSActionDescription : NSObject <DLSEditorDescription>
 
+/// Represents a push button
 + (DLSActionDescription*)editor;
 
 @end

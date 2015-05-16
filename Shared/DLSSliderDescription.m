@@ -51,8 +51,4 @@
     DLSEncodeDouble(aCoder, max);
 }
 
-- (BOOL)readOnly {
-    return true;
-}
-
 @end

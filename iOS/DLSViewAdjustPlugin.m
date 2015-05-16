@@ -327,11 +327,6 @@ static DLSViewAdjustPlugin* sActivePlugin;
     [exchanger applyValue:message.record.value toObject:view];
 }
 
-@end
-
-
-@implementation DLSViewAdjustPlugin (DLSPrivate)
-
 - (void)viewChangedSurface:(UIView *)view {
     if(view == nil) {
         return;

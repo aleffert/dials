@@ -28,7 +28,7 @@
     [DLSNetworkProxyProtocol setDelegate:self];
 }
 
-- (void)connectedWithContext:(id<DLSPluginContext> __nonnull)context {
+- (void)connectedWithContext:(id<DLSPluginContext>)context {
     self.context = context;
 }
 
@@ -36,7 +36,7 @@
     self.context = nil;
 }
 
-- (void)receiveMessage:(NSData * __nonnull)message {
+- (void)receiveMessage:(NSData*)message {
     // No known messages
 }
 

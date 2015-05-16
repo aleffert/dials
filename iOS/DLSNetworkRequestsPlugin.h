@@ -10,6 +10,11 @@
 
 #import <Dials/DLSPlugin.h>
 
+
+/// Plugin that tracks all outgoing network requests
+/// that go through the URL loading system.
+/// Desktop side displays information like request length, error,
+/// status code and sent and received data
 @interface DLSNetworkRequestsPlugin : NSObject <DLSPlugin>
 
 @end

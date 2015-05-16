@@ -16,8 +16,8 @@ extension NSRegularExpression {
             options: options,
             error: &error)
         if let e = error {
-            return .Failure(e.localizedDescription)
+            return Failure(e.localizedDescription)
         }
-        return .Success(Box(matcher!))
+        return Success(matcher!)
     }
 }

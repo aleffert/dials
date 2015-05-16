@@ -9,7 +9,7 @@
 import Cocoa
 
 extension DLSStepperDescription : EditorViewGenerating {
-    func generate() -> EditorView {
+    func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("StepperEditorView") as! StepperEditorView
         view.editorDescription = self
         return view
@@ -17,7 +17,8 @@ extension DLSStepperDescription : EditorViewGenerating {
 }
 
 extension DLSStepperDescription : CodeGenerating {
-    private func codeForValue(value : NSCoding?) -> String {
+    
+    func codeForValue(value: NSCoding?, language: Language) -> String {
         if let v = value as? NSNumber {
             return stringFromNumber(v, requireIntegerPart: true)
         }
@@ -26,13 +27,6 @@ extension DLSStepperDescription : CodeGenerating {
         }
     }
     
-    func objcCodeForValue(value: NSCoding?) -> String {
-        return codeForValue(value)
-    }
-    
-    func swiftCodeForValue(value: NSCoding?) -> String {
-        return codeForValue(value)
-    }
 }
 
 class StepperEditorView : EditorView {

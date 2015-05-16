@@ -8,7 +8,7 @@
 
 import Foundation
 
+/// Implement this protocol to support changes back to code
 protocol CodeGenerating {
-    func objcCodeForValue(value : NSCoding?) -> String
-    func swiftCodeForValue(value : NSCoding?) -> String
+    func codeForValue(value : NSCoding?, language : Language) -> String
 }

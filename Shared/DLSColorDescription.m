@@ -23,8 +23,4 @@
     // no properties
 }
 
-- (BOOL)readOnly {
-    return YES;
-}
-
 @end

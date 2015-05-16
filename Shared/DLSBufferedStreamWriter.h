@@ -8,23 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class DLSBufferedStreamWriter;
 
 @protocol DLSBufferedStreamWriterDelegate <NSObject>
 
-- (void)streamWriterClosed:(DLSBufferedStreamWriter* __nonnull)writer;
+- (void)streamWriterClosed:(DLSBufferedStreamWriter*)writer;
 
 @end
 
+/// Simple class for wrapping up an NSOutputStream and buffering the results into discrete
+/// messages.
 @interface DLSBufferedStreamWriter : NSObject
 
-- (nonnull id)initWithOutputStream:(NSOutputStream* __nonnull)stream;
+- (id)initWithOutputStream:(NSOutputStream*)stream;
 
 @property (weak, nonatomic, nullable) id <DLSBufferedStreamWriterDelegate> delegate;
 
 - (void)open;
 - (void)close;
 
-- (void)enqueueMessage:(NSData* __nonnull)data;
+- (void)enqueueMessage:(NSData*)data;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

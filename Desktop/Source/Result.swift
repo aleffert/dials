@@ -41,4 +41,19 @@ public enum Result<A> {
         }
         return self
     }
+    
+    public var value : A?{
+        switch self {
+        case Success(let v): return v.value
+        case Failure(_): return nil
+        }
+    }
+}
+
+public func Success<A>(v : A) -> Result<A> {
+    return Result.Success(Box(v))
+}
+
+public func Failure<A>(s : String) -> Result<A> {
+    return Result.Failure(s)
 }

@@ -50,7 +50,7 @@ class PropertyGroupView: NSView, EditorViewDelegate {
         propertyViews = [:]
         for description in group.properties as! [DLSPropertyDescription] {
             let generator = description.editorDescription as? EditorViewGenerating
-            let view = generator?.generate()
+            let view = generator?.generateView()
             view?.delegate = self
             view?.translatesAutoresizingMaskIntoConstraints = false
             let value = values[description.name]

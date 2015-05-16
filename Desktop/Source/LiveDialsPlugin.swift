@@ -75,9 +75,18 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     
     func paneController(controller: LiveDialPaneViewController, shouldSaveDial dial: DLSLiveDial, withValue value: NSCoding?) {
         let codeManager = CodeManager()
-        let symbol = codeManager.findSymbolWithName(dial.displayName, inFile:dial.file!)
-        symbol.bind {
-            codeManager.updateSymbol($0, toValue: value, withEditor:dial.editor, inFile:dial.file!)
+        let file = dial.file.toResult("Internal Error: Trying to save when file not present")
+        file.bind {file -> Result<()> in
+            let symbol = codeManager.findSymbolWithName(dial.displayName, inFileAtPath:file)
+            return symbol.bind {symbol in
+                codeManager.updateSymbol(symbol, toValue: value, withEditor:dial.editor, atPath:file)
+            }
+        }.ifFailure {message in
+            let alert = NSAlert()
+            alert.messageText = "Error Updating Code"
+            alert.informativeText = message
+            alert.addButtonWithTitle("Okay")
+            alert.runModal()
         }
     }
 }

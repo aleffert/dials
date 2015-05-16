@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/// Represents how a value wants to be edited.
+/// If the readOnly property returns true, then 
 @protocol DLSEditorDescription <NSObject, NSCoding>
-
-@property (readonly, nonatomic) BOOL readOnly;
 
 @end
 

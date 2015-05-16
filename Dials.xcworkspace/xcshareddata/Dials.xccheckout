@@ -10,6 +10,8 @@
 	<string>Dials</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>8360B1C1A804ACBECB3BA45F260138D006B00801</key>
+		<string>bitbucket.org:aleffert/gryscl-client.git</string>
 		<key>BBB76ED97DDDA3B64DB16868E4AFB762DCB20EE4</key>
 		<string>github.com:aleffert/dials.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Dials.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>8360B1C1A804ACBECB3BA45F260138D006B00801</key>
+		<string>../../..</string>
 		<key>BBB76ED97DDDA3B64DB16868E4AFB762DCB20EE4</key>
 		<string>..</string>
 	</dict>
@@ -28,6 +32,14 @@
 	<string>BBB76ED97DDDA3B64DB16868E4AFB762DCB20EE4</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8360B1C1A804ACBECB3BA45F260138D006B00801</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

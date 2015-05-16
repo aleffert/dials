@@ -9,7 +9,7 @@
 import Cocoa
 
 extension DLSTextFieldDescription : EditorViewGenerating {
-    func generate() -> EditorView {
+    func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("TextFieldEditorView") as! TextFieldEditorView
         view.editorDescription = self
         return view
@@ -17,16 +17,17 @@ extension DLSTextFieldDescription : EditorViewGenerating {
 }
 
 extension DLSTextFieldDescription : CodeGenerating {
-    func objcCodeForValue(value: NSCoding?) -> String {
-        if let s = value as? NSString {
-            return "@\"\(s.description)\""
-        }
-        return "nil"
-    }
     
-    func swiftCodeForValue(value: NSCoding?) -> String {
+    func codeForValue(value: NSCoding?, language: Language) -> String {
+        let prefix : String
+        switch language {
+        case .ObjC:
+            prefix = "@"
+        case .Swift:
+            prefix = ""
+        }
         if let s = value as? NSString {
-            return "\"\(s.description)\""
+            return prefix + "\"\(s.description)\""
         }
         return "nil"
     }
@@ -39,7 +40,7 @@ class TextFieldEditorView: EditorView {
     
     var editorDescription : DLSTextFieldDescription? {
         didSet {
-            let editable = !(editorDescription?.readOnly ?? true)
+            let editable = !(editorDescription?.editable ?? true)
             field?.bezeled = editable
             field?.drawsBackground = editable
             field?.editable = editable
@@ -63,4 +64,7 @@ class TextFieldEditorView: EditorView {
         }
     }
 
+    override var readOnly : Bool {
+        return field?.editable ?? false
+    }
 }

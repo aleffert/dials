@@ -13,10 +13,10 @@ import Dials
 extension Optional {
     func toResult(failureString : String) -> Result<T> {
         if let v = self {
-            return .Success(Box(v))
+            return Success(v)
         }
         else {
-            return .Failure(failureString)
+            return Failure(failureString)
         }
     }
 }
@@ -32,7 +32,7 @@ class CodeManagerTests: XCTestCase {
     func testFindSymbolBasic() {
         let path = sampleFilePathWithName("find-name.m")
         path.bind {
-            return CodeManager().findSymbolWithName("Description", inFile: $0)
+            return CodeManager().findSymbolWithName("Description", inFileAtPath: $0)
         }.ifSuccess {(s : String) in
             XCTAssertEqual(s, "SomeBoolean")
         }.ifFailure {
@@ -43,7 +43,7 @@ class CodeManagerTests: XCTestCase {
     func testFindSymbolArguments() {
         let path = sampleFilePathWithName("find-name.m")
         path.bind {
-            CodeManager().findSymbolWithName("Other Content", inFile: $0)
+            CodeManager().findSymbolWithName("Other Content", inFileAtPath: $0)
             }.ifSuccess {
                 XCTAssertEqual($0, "SomeFloat")
             }.ifFailure {
@@ -55,7 +55,7 @@ class CodeManagerTests: XCTestCase {
     func testReplace() {
         let path = sampleFilePathWithName("find-name.m")
         path.bind {
-            CodeManager().findSymbolWithName("Other Content", inFile: $0)
+            CodeManager().findSymbolWithName("Other Content", inFileAtPath: $0)
             }.ifSuccess {
                 XCTAssertEqual($0, "SomeFloat")
             }.ifFailure {

@@ -9,12 +9,12 @@
 import Foundation
 
 extension Optional {
-    func toResult(failureString : String) -> Result<T> {
+    func toResult(failureString : String?) -> Result<T> {
         if let v = self {
-            return .Success(Box(v))
+            return Success(v)
         }
         else {
-            return .Failure(failureString)
+            return Failure(failureString ?? "Unknown Error")
         }
     }
 }

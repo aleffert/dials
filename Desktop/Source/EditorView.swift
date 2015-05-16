@@ -24,11 +24,17 @@ struct EditorInfo {
     let value : NSCoding?
 }
 
+/// Subclass this to add a new editor
 class EditorView : NSView {
-    weak var delegate : EditorViewDelegate?
+    final weak var delegate : EditorViewDelegate?
     var info : EditorInfo?
     
-    class func freshViewFromNib(name : String) -> EditorView {
+    /// Whether the editor is read only
+    var readOnly : Bool {
+        return false
+    }
+    
+    final class func freshViewFromNib(name : String) -> EditorView {
         let owner = EditorViewNibOwner()
         NSBundle.mainBundle().loadNibNamed(name, owner: owner, topLevelObjects: nil)
         return owner.view!
@@ -36,5 +42,5 @@ class EditorView : NSView {
 }
 
 protocol EditorViewGenerating {
-    func generate() -> EditorView
+    func generateView() -> EditorView
 }

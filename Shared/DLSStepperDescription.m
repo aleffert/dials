@@ -41,8 +41,4 @@
     DLSEncodeDouble(aCoder, increment);
 }
 
-- (BOOL)readOnly {
-    return YES;
-}
-
 @end

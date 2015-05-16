@@ -12,7 +12,12 @@
 
 @interface DLSTextFieldDescription : NSObject <DLSEditorDescription, NSCoding>
 
+/// Represents an editable text field
 + (instancetype)textField;
+
+/// Represents a read only label
 + (instancetype)label;
+
+@property (readonly, nonatomic, getter=isEditable) BOOL editable;
 
 @end

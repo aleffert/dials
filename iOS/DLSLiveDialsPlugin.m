@@ -134,6 +134,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 - (void)handleChangeMessage:(DLSLiveDialsChangeMessage*)message {
     DLSActiveDialRecord* record = self.activeDials[message.uuid];
+    record.dial.value = message.value;
     if(record.wrapper.setter) {
         record.wrapper.setter(message.value);
     }
@@ -167,6 +168,12 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 - (void)endGroup {
     [self.groups removeLastObject];
+}
+
+- (void)groupWithName:(NSString*)name actions:(void (^)(void))actions {
+    [self beginGroupWithName:name];
+    actions();
+    [self endGroup];
 }
 
 @end

@@ -8,18 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class DLSBufferedStreamReader;
 
 @protocol DLSBufferedStreamReaderDelegate <NSObject>
 
-- (void)streamReader:(DLSBufferedStreamReader* __nonnull)reader receivedMessage:(NSData* __nonnull)data;
-- (void)streamReaderClosed:(DLSBufferedStreamReader* __nonnull)reader;
+- (void)streamReader:(DLSBufferedStreamReader*)reader receivedMessage:(NSData*)data;
+- (void)streamReaderClosed:(DLSBufferedStreamReader*)reader;
 
 @end
 
+/// Simple class for wrapping up an NSInputStream and buffering the results into discrete
+/// messages.
 @interface DLSBufferedStreamReader : NSObject
 
-- (nonnull id)initWithInputStream:(NSInputStream* __nonnull)stream;
+- (id)initWithInputStream:(NSInputStream*)stream;
 
 @property (weak, nonatomic, nullable) id <DLSBufferedStreamReaderDelegate> delegate;
 
@@ -27,3 +31,6 @@
 - (void)close;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

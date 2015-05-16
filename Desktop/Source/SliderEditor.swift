@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 extension DLSSliderDescription : EditorViewGenerating {
-    func generate() -> EditorView {
+    func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("SliderEditorView") as! SliderEditorView
         view.editorDescription = self
         return view
@@ -18,21 +18,13 @@ extension DLSSliderDescription : EditorViewGenerating {
 }
 
 extension DLSSliderDescription : CodeGenerating {
-    private func codeForValue(value : NSCoding?) -> String {
+    func codeForValue(value : NSCoding?, language : Language) -> String {
         if let v = value as? NSNumber {
             return stringFromNumber(v, requireIntegerPart: true)
         }
         else {
             return "0"
         }
-    }
-    
-    func objcCodeForValue(value: NSCoding?) -> String {
-        return codeForValue(value)
-    }
-    
-    func swiftCodeForValue(value: NSCoding?) -> String {
-        return codeForValue(value)
     }
 }
 

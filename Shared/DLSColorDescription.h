@@ -12,6 +12,7 @@
 
 @interface DLSColorDescription : NSObject <DLSEditorDescription>
 
+/// Represents a color well
 + (instancetype)editor;
 
 @end

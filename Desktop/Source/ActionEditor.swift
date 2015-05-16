@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 extension DLSActionDescription : EditorViewGenerating {
-    func generate() -> EditorView {
+    func generateView() -> EditorView {
         return EditorView.freshViewFromNib("ActionEditorView")
     }
 }
@@ -29,5 +29,9 @@ class ActionEditorView : EditorView {
         didSet {
             button?.title = info!.displayName
         }
+    }
+    
+    override var readOnly : Bool {
+        return true
     }
 }

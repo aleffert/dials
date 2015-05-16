@@ -8,39 +8,42 @@
 
 import Cocoa
 
-// This is SUPER primitive. Hopefully some day the clang and swiftc libraries will
-// be part of the system, but for now clang is a super heavy dependencies to be
-// avoided and swiftc isn't useful
+public enum Language {
+    case ObjC
+    case Swift
+}
 
+// Finds symbols in code and replaces their assignment.
+// This is SUPER primitive. Hopefully some day the clang and swiftc libraries will
+// be part of the system, but for now clang is a super heavy dependency to be
+// avoided and swiftc isn't useful for this
 public class CodeManager: NSObject {
     
-    private func branchWithFileName<A>(file : String, objcAction: String -> Result<A>, swiftAction : String -> Result<A>) -> Result<A> {
-        var error : NSError?
-        let content = NSString(contentsOfFile: file, encoding: NSUTF8StringEncoding, error: &error)
-        if let c = content {
-            if file.pathExtension == "m" || file.pathExtension == "mm" {
-                return objcAction(c as String)
-            }
-            else if file.pathExtension == "swift" {
-                return swiftAction(c as String)
-            }
-            else {
-                return .Failure("Unknown file extensions: \(file.pathExtension)")
-            }
+    private func languageForPath(path : String) -> Result<Language> {
+        if path.pathExtension == "m" || path.pathExtension == "mm" || path.pathExtension == "h" {
+            return Success(.ObjC)
+        }
+        else if path.pathExtension == "swift" {
+            return Success(.Swift)
         }
         else {
-            return .Failure(error?.localizedDescription ?? "Unknown Error loading file: \(file)")
+            return Failure("Unknown file extensions: \(path.pathExtension)")
         }
     }
     
-    public func findSymbolWithName(name : String, inFile file : String) -> Result<String> {
-        return branchWithFileName(file,
-            objcAction: {c in
-                self.findSymbolWithObjectiveCName(name, inString: c)
-            }, swiftAction: {c in
-                self.findSymbolWithSwiftName(name, inString: c)
+    private func loadFileAtPath(path : String) -> Result<String> {
+        var error : NSError?
+        let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: &error)
+        return (content as String?).toResult(error?.localizedDescription)
+    }
+    
+    public func findSymbolWithName(name : String, inFileAtPath path : String) -> Result<String> {
+        return languageForPath(path).bind {lang in
+            let content = self.loadFileAtPath(path)
+            return content.bind {
+                self.findSymbolWithName(name, inString: $0, ofLanguage : lang)
             }
-        )
+        }
     }
     
     private func findSymbolWithPattern(pattern : String, inString code : String) -> Result<String> {
@@ -51,66 +54,68 @@ public class CodeManager: NSObject {
             }.bind {(m : NSTextCheckingResult) in
             let range = m.rangeAtIndex(1)
             let result = (code as NSString).substringWithRange(range).stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "\t\n\r &"))
-            return .Success(Box(result))
+            return Success(result)
         }
     }
     
-    public func findSymbolWithSwiftName(name : String, inString code : String) -> Result<String> {
-        let pattern = NSString(format: "DLSAdd[A-Za-z]*Control\\([ ]*\"%@\"[ ]*,([^,\n]*).*\\)", NSRegularExpression.escapedPatternForString(name))
-        return findSymbolWithPattern(pattern as String, inString: code)
-    }
-    
-    public func findSymbolWithObjectiveCName(name : String, inString code : String) -> Result<String> {
-        let pattern = NSString(format: "DLSAdd[A-Za-z]*Control\\([ ]*@\"%@\"[ ]*,([^,\n]*).*\\)", NSRegularExpression.escapedPatternForString(name))
-        return findSymbolWithPattern(pattern as String, inString: code)
-    }
-    
-    public func updateObjectiveCSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditorDescription, inString code : String) -> Result<String> {
-        let pattern = NSString(format : "([\r\n ]+)(%@)([\r\n ]*)=([\r\n ]*)(.*);", NSRegularExpression.escapedPatternForString(symbol))
-        let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
-        return codeGenerator.bind {generator in
-            NSRegularExpression.compile(pattern as String).bind {
-                let replacementCode = generator.objcCodeForValue(value)
-                let template = NSString(format:"$1$2$3=$4%@;", NSRegularExpression.escapedTemplateForString(replacementCode))
-                let range = NSMakeRange(0, count(code))
-                let result = $0.stringByReplacingMatchesInString(code,
-                    options: NSMatchingOptions(),
-                    range: range,
-                    withTemplate: template as String)
-                return .Success(Box(result))
-            }
+    public func findSymbolWithName(name : String, inString code : String, ofLanguage lang : Language) -> Result<String> {
+        let prefix : String
+        switch lang {
+        case .ObjC:
+            prefix = "@"
+        case .Swift:
+            prefix = ""
         }
+        let escapedName = NSRegularExpression.escapedPatternForString(name)
+        let pattern = "DLSAdd[A-Za-z]*Control\\([ ]*\(prefix)\"\(escapedName)\"[ ]*,([^,\n]*).*\\)"
+        return findSymbolWithPattern(pattern, inString: code)
     }
     
-    func updateSwiftSymbol(symbol : String, toValue value : NSCoding?, withEditor editor : DLSEditorDescription, inString code : String) -> Result<String> {
-        let pattern = NSString(format : "([\r\n ]+)(%@)(.*)([\r\n ]*)=([\r\n ]*)(.*)", NSRegularExpression.escapedPatternForString(symbol))
-        let codeGenerator = (editor as? CodeGenerating).toResult("Cannot generate code")
-        return codeGenerator.bind {generator in
-            NSRegularExpression.compile(pattern as String).bind {
-                let replacementCode = generator.swiftCodeForValue(value)
-                let template = NSString(format:"$1$2$3$4=$5%@", NSRegularExpression.escapedTemplateForString(replacementCode))
-                let range = NSMakeRange(0, count(code))
-                let result = $0.stringByReplacingMatchesInString(code, options: NSMatchingOptions(), range: range, withTemplate: template as String)
-                return .Success(Box(result))
+    public func updateSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditorDescription, atPath path : String) -> Result<()> {
+        // Swift needs monad syntax
+        return languageForPath(path).bind {lang -> Result<String> in
+            return self.loadFileAtPath(path).bind {code in
+                let escapedSymbol = NSRegularExpression.escapedPatternForString(symbol)
+                
+                let generator = (editor as? CodeGenerating).toResult("Cannot generate code")
+                return generator.bind {
+                    let replacementCode = $0.codeForValue(value, language: lang)
+                    let pattern : String
+                    let template : String
+                    
+                    switch lang {
+                    case .ObjC:
+                        pattern = "([\r\n ]+)(\(escapedSymbol))([\r\n ]*)=([\r\n ]*)(.*);"
+                        template = "$1$2$3=$4\(replacementCode);"
+                    case .Swift:
+                        pattern = "([\r\n ]+)(\(escapedSymbol))(.*)([\r\n ]*)=([\r\n ]*)(.*)"
+                        template = "$1$2$3$4=$5\(replacementCode)"
+                    }
+                    
+                    return NSRegularExpression.compile(pattern).bind {
+                        let range = NSMakeRange(0, count(code))
+                        var result = (code as NSString).mutableCopy() as! NSMutableString
+                        let replacementCount = $0.replaceMatchesInString(result, options: NSMatchingOptions(), range: range, withTemplate: template)
+                        if replacementCount == 1 {
+                            return Success(result as String)
+                        }
+                        else if replacementCount == 0 {
+                            return Failure("Couldn't find initializer for \"\(symbol)\" in \"\(path.lastPathComponent)\"")
+                        }
+                        else {
+                            return Failure("Too many matches for \"\(symbol)\" (\(replacementCount)) in \"\(path.lastPathComponent)\". Couldn't decide which to replace.")
+                        }
+                    }
+                }
             }
-        }
-    }
-    
-    public func updateSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditorDescription, inFile file : String) -> Result<()> {
-        return branchWithFileName(file,
-            objcAction: {code in
-                self.updateObjectiveCSymbol(symbol, toValue: value, withEditor: editor, inString: code)
-            }, swiftAction: {code in
-                self.updateSwiftSymbol(symbol, toValue: value, withEditor: editor, inString:code)
-            }
-        ).bind {r in
+        }.bind {r in
             var error : NSError?
-            (r as NSString).writeToFile(file, atomically : true, encoding: NSUTF8StringEncoding, error : &error)
+            (r as NSString).writeToFile(path, atomically : true, encoding: NSUTF8StringEncoding, error : &error)
             if let e = error {
-                return .Failure(e.localizedDescription)
+                return Failure(e.localizedDescription)
             }
             else {
-                return .Success(Box(()))
+                return Success(())
             }
         }
     }

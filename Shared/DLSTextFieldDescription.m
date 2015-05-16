@@ -12,7 +12,7 @@
 
 @interface DLSTextFieldDescription ()
 
-@property (assign, nonatomic) BOOL editable;
+@property (assign, nonatomic, getter=isEditable) BOOL editable;
 
 @end
 
@@ -40,10 +40,6 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeBool(aCoder, editable);
-}
-
-- (BOOL)readOnly {
-    return !self.editable;
 }
 
 @end

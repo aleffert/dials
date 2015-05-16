@@ -8,6 +8,14 @@
 
 import UIKit
 
+/// Simple class that does nothing, but allows returning a non-optional value
+/// for a cleaner interface
+class NullRemovable : NSObject, DLSRemovable {
+    func remove() {
+        // do nothing
+    }
+}
+
 /// Type carrying version of DLSPropertyWrapper
 public class PropertyWrapper<A : AnyObject> {
     
@@ -39,6 +47,7 @@ public class PropertyWrapper<A : AnyObject> {
     }
 }
 
+/// Helpers for DLSLiveDialsPlugin to make it easier to use from Swift
 public extension DLSLiveDialsPlugin {
     func addDial<A : AnyObject>(wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, displayName : String, canSave : Bool, file : String, line : UInt) -> DLSRemovable {
         let wrapperWrapper = DLSPropertyWrapper(getter: {
@@ -53,13 +62,13 @@ public extension DLSLiveDialsPlugin {
 
 public func DLSAddControl<A>(displayName : String, wrapper : PropertyWrapper<A>, value : A, editor : DLSEditorDescription, canSave: Bool = false, _ owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
     
-    let remove = DLSLiveDialsPlugin.activePlugin().addDial(wrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file : file, line : line)
+    let remove = DLSLiveDialsPlugin.activePlugin()?.addDial(wrapper, value: value, editor: editor, displayName: displayName, canSave: canSave, file : file, line : line)
     if let o : AnyObject = owner {
         o.dls_performActionOnDealloc({ () -> Void in
-            remove.remove()
+            remove?.remove()
         })
     }
-    return remove
+    return remove ?? NullRemovable()
 }
 
 public func DLSAddAction(displayName : String, action : (() -> ()), owner : AnyObject? = nil, _ line : UInt = __LINE__, _ file : String = __FILE__) {
@@ -93,7 +102,7 @@ public func DLSAddSliderControl(displayName : String, inout x : Float, owner : A
     return DLSAddControl(displayName, wrapper, wrapper.get(), DLSSliderDescription(min: min, max: max), canSave: true, owner, line, file)
 }
 
-public func DLSAddSliderControl(#keyPath : String, min : Double, max : Double, owner : AnyObject, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
+public func DLSAddSliderControl(#keyPath : String, min : Double = 0, max : Double = 0, owner : AnyObject, _ line : UInt = __LINE__, _ file : String = __FILE__) -> DLSRemovable {
     let wrapper = PropertyWrapper<NSObject>(owner, keyPath)
     return DLSAddControl(keyPath, wrapper, wrapper.get(), DLSSliderDescription(min: min, max: max), canSave : false, owner, line, file)
 }

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 
@@ -22,7 +23,9 @@ typedef NSColor DLSColor;
 
 #endif
 
-extern NSString * const __nonnull DLSNetServiceName;
+NS_ASSUME_NONNULL_BEGIN
+
+extern NSString * const DLSNetServiceName;
 
 // Make sure all our keys are namespaced
 #define DLSConstant(key) @"DLSKey" #key
@@ -71,3 +74,6 @@ extern NSString * const __nonnull DLSNetServiceName;
 #define DLSDecodeSize(decoder, key) self.key = [decoder decodeSizeForKey:DLSConstant(key)]
 
 #endif
+
+
+NS_ASSUME_NONNULL_END

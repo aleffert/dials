@@ -12,6 +12,7 @@
 
 @interface DLSToggleDescription : NSObject <DLSEditorDescription>
 
+/// Represents a togglable check box
 + (instancetype)editor;
 
 @end

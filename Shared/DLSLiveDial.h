@@ -8,16 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol DLSEditorDescription;
 
 @interface DLSLiveDial : NSObject <NSCoding>
 
-@property (strong, nonatomic, nonnull) id <DLSEditorDescription> editor;
+@property (strong, nonatomic) id <DLSEditorDescription> editor;
 @property (strong, nonatomic, nullable) id <NSCoding> value;
 
-@property (copy, nonatomic, nonnull) NSString* displayName;
-@property (copy, nonatomic, nonnull) NSString* group;
-@property (copy, nonatomic, nonnull) NSString* uuid;
+@property (copy, nonatomic) NSString* displayName;
+@property (copy, nonatomic) NSString* group;
+@property (copy, nonatomic) NSString* uuid;
 
 @property (assign, nonatomic) BOOL canSave;
 
@@ -25,3 +27,5 @@
 @property (assign, nonatomic) size_t line;
 
 @end
+
+NS_ASSUME_NONNULL_END

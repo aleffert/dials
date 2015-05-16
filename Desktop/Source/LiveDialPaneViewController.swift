@@ -50,7 +50,7 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
     }
     
     func addDial(dial : DLSLiveDial) {
-        let contentView = (dial.editor as! EditorViewGenerating).generate()
+        let contentView = (dial.editor as! EditorViewGenerating).generateView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         let controller = LiveDialController(dial : dial, contentView : contentView, delegate : self)
         dialControllers.append(controller)

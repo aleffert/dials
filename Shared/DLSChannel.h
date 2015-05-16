@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DLSChannel : NSObject
-- (id __nonnull)initWithName:(NSString * __nonnull)name;
+NS_ASSUME_NONNULL_BEGIN
 
-@property (readonly, copy, nonatomic, nonnull) NSString* name;
+@interface DLSChannel : NSObject
+- (id)initWithName:(NSString*)name;
+
+@property (readonly, copy, nonatomic) NSString* name;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

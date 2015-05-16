@@ -9,28 +9,29 @@
 import Cocoa
 
 extension DLSToggleDescription : EditorViewGenerating {
-    func generate() -> EditorView {
+    func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("ToggleEditorView") as! ToggleEditorView
         return view
     }
 }
 
 extension DLSToggleDescription : CodeGenerating {
-    func objcCodeForValue(value: NSCoding?) -> String {
+
+    func codeForValue(value: NSCoding?, language: Language) -> String {
+        let values : (t : String, f : String)
+        
+        switch language {
+        case .ObjC:
+            values = (t : "YES", f : "NO")
+        case .Swift:
+            values = (t : "true", f : "false")
+        }
+        
         if let v = value as? NSNumber {
-            return v.boolValue ? "YES" : "NO"
+            return v.boolValue ? values.t : values.f
         }
         else {
-            return "NO"
-        }
-    }
-    
-    func swiftCodeForValue(value: NSCoding?) -> String {
-        if let v = value as? NSNumber {
-            return v.boolValue ? "true" : "false"
-        }
-        else {
-            return "false"
+            return values.f
         }
     }
 }
