@@ -7,18 +7,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="NetworkRequestInfoView" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="c22-O7-iKe" id="3bI-xz-qdI"/>
-                <outlet property="requestHex" destination="Bov-Ma-n8g" id="f15-qU-ssL"/>
-                <outlet property="requestImage" destination="nc0-dD-Wl9" id="pCc-md-Bu4"/>
-                <outlet property="requestStatusView" destination="SC7-u7-Ztg" id="68a-JR-DeZ"/>
                 <outlet property="requestTabController" destination="SIM-6G-Xvv" id="z5T-Fk-LRU"/>
-                <outlet property="requestTabs" destination="mw5-Xo-tws" id="G77-XD-qZz"/>
-                <outlet property="requestText" destination="vW0-gO-XhT" id="5fp-BT-Ah8"/>
-                <outlet property="responseHex" destination="9BF-dd-sZa" id="B5E-hR-LIe"/>
-                <outlet property="responseImage" destination="bev-bU-Szr" id="VPH-BF-WhG"/>
-                <outlet property="responseStatusView" destination="IV4-IX-i40" id="DAm-8a-Fq7"/>
                 <outlet property="responseTabController" destination="Pqf-Gb-BVk" id="9L1-Za-YTU"/>
-                <outlet property="responseTabs" destination="V6d-3o-xmN" id="XlK-2z-RXN"/>
-                <outlet property="responseText" destination="BQs-fn-P7B" id="2eU-d8-2gy"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -260,14 +250,6 @@
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     <size key="minSize" width="195" height="197"/>
                                                                     <size key="maxSize" width="463" height="10000000"/>
-                                                                    <attributedString key="textStorage">
-                                                                        <fragment content="Test">
-                                                                            <attributes>
-                                                                                <font key="NSFont" metaFont="smallSystem"/>
-                                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                                            </attributes>
-                                                                        </fragment>
-                                                                    </attributedString>
                                                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <size key="minSize" width="195" height="197"/>
                                                                     <size key="maxSize" width="463" height="10000000"/>

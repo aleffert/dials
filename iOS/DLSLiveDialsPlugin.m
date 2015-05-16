@@ -8,6 +8,13 @@
 
 #import "DLSLiveDialsPlugin.h"
 
+#import "DLSActionDescription.h"
+#import "DLSLiveDialsMessages.h"
+#import "DLSLiveDial.h"
+#import "DLSPropertyWrapper.h"
+#import "DLSRemovable.h"
+#import "NSObject+DLSDeallocAction.h"
+
 @interface DLSActiveDialRecord : NSObject <DLSRemovable>
 
 @property (strong, nonatomic) DLSLiveDial* dial;

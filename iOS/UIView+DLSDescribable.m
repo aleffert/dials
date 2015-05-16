@@ -9,8 +9,13 @@
 
 #import "UIView+DLSDescribable.h"
 
+#import "DLSColorDescription.h"
 #import "DLSDescriptionContext.h"
 #import "DLSPropertyDescription.h"
+#import "DLSSliderDescription.h"
+#import "DLSStepperDescription.h"
+#import "DLSTextFieldDescription.h"
+#import "DLSToggleDescription.h"
 #import "DLSValueExchanger.h"
 
 @implementation UIView (DLSDescribable)

@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "776414D91A32ADC9005E381A"
-               BuildableName = "Dials.app"
-               BlueprintName = "Dials"
-               ReferencedContainer = "container:Dials-Desktop.xcodeproj">
+               BlueprintIdentifier = "77100F121B0780C50082C38B"
+               BuildableName = "Dials.framework"
+               BlueprintName = "Dials.framework"
+               ReferencedContainer = "container:Dials.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,10 +28,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "778877011ABFA04F00AB5580"
-               BuildableName = "Dials-Desktop Tests.xctest"
-               BlueprintName = "Dials-Desktop Tests"
-               ReferencedContainer = "container:Dials-Desktop.xcodeproj">
+               BlueprintIdentifier = "77100F1C1B0780C50082C38B"
+               BuildableName = "Dials.frameworkTests.xctest"
+               BlueprintName = "Dials.frameworkTests"
+               ReferencedContainer = "container:Dials.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,20 +46,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "778877011ABFA04F00AB5580"
-               BuildableName = "Dials-Desktop Tests.xctest"
-               BlueprintName = "Dials-Desktop Tests"
-               ReferencedContainer = "container:Dials-Desktop.xcodeproj">
+               BlueprintIdentifier = "77100F1C1B0780C50082C38B"
+               BuildableName = "Dials.frameworkTests.xctest"
+               BlueprintName = "Dials.frameworkTests"
+               ReferencedContainer = "container:Dials.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "776414D91A32ADC9005E381A"
-            BuildableName = "Dials.app"
-            BlueprintName = "Dials"
-            ReferencedContainer = "container:Dials-Desktop.xcodeproj">
+            BlueprintIdentifier = "77100F121B0780C50082C38B"
+            BuildableName = "Dials.framework"
+            BlueprintName = "Dials.framework"
+            ReferencedContainer = "container:Dials.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -72,35 +72,16 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "776414D91A32ADC9005E381A"
-            BuildableName = "Dials.app"
-            BlueprintName = "Dials"
-            ReferencedContainer = "container:Dials-Desktop.xcodeproj">
+            BlueprintIdentifier = "77100F121B0780C50082C38B"
+            BuildableName = "Dials.framework"
+            BlueprintName = "Dials.framework"
+            ReferencedContainer = "container:Dials.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = ""
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"
-            value = "YES"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </MacroExpansion>
       <AdditionalOptions>
-         <AdditionalOption
-            key = "NSZombieEnabled"
-            value = "YES"
-            isEnabled = "YES">
-         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
@@ -109,16 +90,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "776414D91A32ADC9005E381A"
-            BuildableName = "Dials.app"
-            BlueprintName = "Dials"
-            ReferencedContainer = "container:Dials-Desktop.xcodeproj">
+            BlueprintIdentifier = "77100F121B0780C50082C38B"
+            BuildableName = "Dials.framework"
+            BlueprintName = "Dials.framework"
+            ReferencedContainer = "container:Dials.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "77AAE5081A32D26500998E36"
-               BuildableName = "Dials.framework"
+               BlueprintIdentifier = "77100E2A1B06F5EC0082C38B"
+               BuildableName = "Dials.app"
                BlueprintName = "Dials"
-               ReferencedContainer = "container:Dials-iOS.xcodeproj">
+               ReferencedContainer = "container:Dials.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "77100E391B06F5ED0082C38B"
+               BuildableName = "DialsTests.xctest"
+               BlueprintName = "DialsTests"
+               ReferencedContainer = "container:Dials.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,7 +42,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "77100E391B06F5ED0082C38B"
+               BuildableName = "DialsTests.xctest"
+               BlueprintName = "DialsTests"
+               ReferencedContainer = "container:Dials.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "77100E2A1B06F5EC0082C38B"
+            BuildableName = "Dials.app"
+            BlueprintName = "Dials"
+            ReferencedContainer = "container:Dials.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,15 +72,16 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77AAE5081A32D26500998E36"
-            BuildableName = "Dials.framework"
+            BlueprintIdentifier = "77100E2A1B06F5EC0082C38B"
+            BuildableName = "Dials.app"
             BlueprintName = "Dials"
-            ReferencedContainer = "container:Dials-iOS.xcodeproj">
+            ReferencedContainer = "container:Dials.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -57,15 +91,16 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "77AAE5081A32D26500998E36"
-            BuildableName = "Dials.framework"
+            BlueprintIdentifier = "77100E2A1B06F5EC0082C38B"
+            BuildableName = "Dials.app"
             BlueprintName = "Dials"
-            ReferencedContainer = "container:Dials-iOS.xcodeproj">
+            ReferencedContainer = "container:Dials.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

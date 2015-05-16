@@ -8,6 +8,8 @@
 
 #import "DLSDescriptionContext.h"
 
+#import "DLSPropertyGroup.h"
+
 @interface DLSDescriptionAccumulator ()
 
 @property (strong, nonatomic) NSMutableArray* savedGroups;

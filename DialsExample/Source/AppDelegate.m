@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import <Dials/DialsFramework.h>
+#import <Dials/Dials.h>
 
 @interface TestPlugin : NSObject <DLSPlugin>
 

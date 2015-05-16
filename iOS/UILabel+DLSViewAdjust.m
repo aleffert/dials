@@ -10,6 +10,8 @@
 
 #import "UIView+DLSDescribable.h"
 #import "DLSDescriptionContext.h"
+#import "DLSPropertyDescription.h"
+#import "DLSTextFieldDescription.h"
 
 @implementation UILabel (DLSViewAdjust)
 

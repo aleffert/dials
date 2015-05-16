@@ -20,9 +20,12 @@ FOUNDATION_EXPORT const unsigned char Dials_iOSVersionString[];
 #import <Dials/DLSDials.h>
 #import <Dials/DLSEditorDescription.h>
 #import <Dials/DLSLiveDialsPlugin.h>
+#import <Dials/DLSPropertyDescription.h>
 #import <Dials/DLSPropertyWrapper.h>
 #import <Dials/DLSRemovable.h>
 #import <Dials/DLSSliderDescription.h>
+#import <Dials/DLSStepperDescription.h>
+#import <Dials/DLSTextFieldDescription.h>
 #import <Dials/DLSToggleDescription.h>
 #import <Dials/DLSViewAdjustPlugin.h>
 #import <Dials/NSObject+DLSDeallocAction.h>

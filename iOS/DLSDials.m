@@ -8,6 +8,9 @@
 
 #import "DLSDials.h"
 
+#import "DLSChannel.h"
+#import "DLSChannelStream.h"
+#import "DLSConstants.h"
 #import "DLSLiveDialsPlugin.h"
 #import "DLSNetworkRequestsPlugin.h"
 #import "DLSPlugin.h"

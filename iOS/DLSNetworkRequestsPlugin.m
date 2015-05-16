@@ -8,6 +8,7 @@
 
 #import "DLSNetworkRequestsPlugin.h"
 
+#import "DLSNetworkRequestsMessages.h"
 #import "DLSNetworkProxyProtocol.h"
 
 @interface DLSNetworkRequestsPlugin () <DLSNetworkProxyProtocolDelegate>

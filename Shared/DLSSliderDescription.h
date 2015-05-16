@@ -9,7 +9,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
-#import "DLSEditorDescription.h"
+#import <Dials/DLSEditorDescription.h>
 
 @interface DLSSliderDescription : NSObject <DLSEditorDescription>
 

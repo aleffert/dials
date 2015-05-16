@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DLSEditorDescription.h"
+#import <Dials/DLSEditorDescription.h>
 
 @interface DLSTextFieldDescription : NSObject <DLSEditorDescription, NSCoding>
 
