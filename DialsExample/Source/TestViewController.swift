@@ -17,7 +17,7 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
         
-        DLSLiveDialsPlugin.activePlugin()?.groupWithName("Swift!") {
+        DLSLiveDialsPlugin.activePlugin()?.groupWithName("Swift Test Group") {
             DLSAddAction("perform", owner: self) { _ in
                 NSLog("performed")
             }

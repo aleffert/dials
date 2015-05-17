@@ -18,6 +18,14 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MkO-9N-tgW">
                                 <rect key="frame" x="147" y="142" width="306" height="316"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UyQ-lN-HSQ">
+                                        <rect key="frame" x="37" y="287" width="44" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="306" id="O3z-mr-IQ2"/>
@@ -70,6 +78,7 @@
                     <connections>
                         <outlet property="box" destination="MkO-9N-tgW" id="5Ng-GK-kj6"/>
                         <outlet property="image" destination="Nic-2b-V6E" id="6YH-zl-VNg"/>
+                        <outlet property="label" destination="UyQ-lN-HSQ" id="JOD-4h-t2i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

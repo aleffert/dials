@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Simple class for making it easy to load a nib in a local scope
 class ViewOwner {
     @IBOutlet var view : NSView?
 }

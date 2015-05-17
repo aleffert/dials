@@ -14,11 +14,14 @@
 
 static BOOL foo = true;
 static CGFloat bar = 2.12;
+static CGFloat stepper = 3;
+static NSString* message = @"Something";
 
 @interface ViewController ()
 
 @property (strong, nonatomic) IBOutlet UIView* box;
 @property (strong, nonatomic) IBOutlet UIImageView* image;
+@property (strong, nonatomic) IBOutlet UILabel* label;
 
 @end
 
@@ -36,10 +39,13 @@ static CGFloat bar = 2.12;
     DLSAddToggleControl(@"Foo", foo);
     DLSAddSliderControl(@"Bar", bar, 0, 5);
     
-    [[DLSLiveDialsPlugin activePlugin] beginGroupWithName:@"test1"];
+    [[DLSLiveDialsPlugin activePlugin] beginGroupWithName:@"ObjC Test Group"];
     DLSAddSliderForKeyPath(box.alpha, 0, 1);
     DLSAddToggleForKeyPath(box.hidden);
     DLSAddColorForKeyPath(box.backgroundColor);
+    DLSAddStepperControl(@"A Stepper", stepper);
+    DLSAddTextFieldForKeyPath(label.text);
+    DLSAddLabelControl(@"A message", message);
     [[DLSLiveDialsPlugin activePlugin] endGroup];
 }
 

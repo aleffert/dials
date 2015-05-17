@@ -391,10 +391,8 @@
 		77100E4A1B06F6210082C38B /* Desktop */ = {
 			isa = PBXGroup;
 			children = (
-				77100E4B1B06F6210082C38B /* Bridging-Header.h */,
-				77100E4C1B06F6210082C38B /* Images.xcassets */,
-				77100E4D1B06F6210082C38B /* Info.plist */,
 				77100E4E1B06F6210082C38B /* Source */,
+				77100FCB1B08EC360082C38B /* Supporting Files */,
 				77100E851B06F6210082C38B /* Tests */,
 				77100E8A1B06F6210082C38B /* XIB */,
 			);
@@ -404,60 +402,30 @@
 		77100E4E1B06F6210082C38B /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				77100E4F1B06F6210082C38B /* ActionEditor.swift */,
 				77100E501B06F6210082C38B /* AppDelegate.swift */,
-				77100E511B06F6210082C38B /* Array+Utilties.swift */,
 				77100E521B06F6210082C38B /* BackgroundColorView.swift */,
 				77100E531B06F6210082C38B /* Broadcaster.swift */,
 				77100E541B06F6210082C38B /* CodeGenerating.swift */,
 				77100E551B06F6210082C38B /* CodeManager.swift */,
-				77100E561B06F6210082C38B /* ColorEditor.swift */,
 				77100E571B06F6210082C38B /* ConnectionStatusToolbarItem.swift */,
 				77100E581B06F6210082C38B /* ConnectionStatusView.swift */,
 				77100E591B06F6210082C38B /* ConsoleWindowController.swift */,
 				77100E5A1B06F6210082C38B /* Device.swift */,
 				77100E5B1B06F6210082C38B /* DeviceConnection.swift */,
 				77100E5C1B06F6210082C38B /* DeviceController.swift */,
-				77100E5D1B06F6210082C38B /* EditorView.swift */,
 				77100E5E1B06F6210082C38B /* FormattingUtilities.swift */,
-				77100E5F1B06F6210082C38B /* GroupContainerView.swift */,
-				77100E601B06F6210082C38B /* LiveDialController.swift */,
-				77100E611B06F6210082C38B /* LiveDialPaneViewController.swift */,
-				77100E621B06F6210082C38B /* LiveDialsPlugin.swift */,
 				77100E631B06F6210082C38B /* MapTable.swift */,
-				77100E641B06F6210082C38B /* MathUtils.swift */,
-				77100E651B06F6210082C38B /* NetworkRequestInfoView.swift */,
-				77100E661B06F6210082C38B /* NetworkRequestsPlugin.swift */,
-				77100E671B06F6210082C38B /* NetworkRequestStatusView.swift */,
-				77100E681B06F6210082C38B /* NetworkRequestsViewController.swift */,
-				77100E691B06F6210082C38B /* NSDate+PreciseFormatting.swift */,
-				77100E6A1B06F6210082C38B /* NSHTTPURLResponse+StatusCodes.swift */,
-				77100E6B1B06F6210082C38B /* NSRegularExpression+Result.swift */,
-				77100E6C1B06F6210082C38B /* NSView+Layout.swift */,
-				77100E6D1B06F6210082C38B /* Optional+Result.swift */,
-				77100E6E1B06F6210082C38B /* Optional+Utilities.swift */,
 				77100E6F1B06F6210082C38B /* Plugin.swift */,
 				77100E701B06F6210082C38B /* PluginContextBouncer.swift */,
 				77100E711B06F6210082C38B /* PluginController.swift */,
-				77100E721B06F6210082C38B /* PropertyGroupView.swift */,
 				77100E731B06F6210082C38B /* RequestContentTabController.swift */,
 				77100E741B06F6210082C38B /* Result.swift */,
 				77100E751B06F6210082C38B /* SidebarSplitViewController.swift */,
-				77100E761B06F6210082C38B /* SliderEditor.swift */,
-				77100E771B06F6210082C38B /* StepperEditor.swift */,
-				77100E781B06F6210082C38B /* TextFieldEditor.swift */,
-				77100E791B06F6210082C38B /* ToggleEditor.swift */,
-				77100E7A1B06F6210082C38B /* ViewAdjustHierarchy.swift */,
-				77100E7B1B06F6210082C38B /* ViewAdjustHierarchyOutlineController.swift */,
-				77100E7C1B06F6210082C38B /* ViewAdjustPlugin.swift */,
-				77100E7D1B06F6210082C38B /* ViewAdjustPropertyTableController.swift */,
-				77100E7E1B06F6210082C38B /* ViewAdjustViewController.swift */,
-				77100E7F1B06F6210082C38B /* ViewAdjustVisualOutlineController.swift */,
-				77100E801B06F6210082C38B /* ViewControllerGrouper.swift */,
-				77100E811B06F6210082C38B /* ViewFacade.swift */,
 				77100E821B06F6210082C38B /* ViewOwner.swift */,
 				77100E831B06F6210082C38B /* VisibleStrings.swift */,
-				77100E841B06F6210082C38B /* VisualOutlineControlsView.swift */,
+				77100FCD1B08ECA40082C38B /* Library Additions */,
+				77100FCA1B08EC2B0082C38B /* Editors */,
+				77100FCC1B08EC670082C38B /* Plugins */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -586,6 +554,70 @@
 				77100F671B0781360082C38B /* NSObject+DLSDeallocAction.m */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		77100FCA1B08EC2B0082C38B /* Editors */ = {
+			isa = PBXGroup;
+			children = (
+				77100E4F1B06F6210082C38B /* ActionEditor.swift */,
+				77100E561B06F6210082C38B /* ColorEditor.swift */,
+				77100E5D1B06F6210082C38B /* EditorView.swift */,
+				77100E761B06F6210082C38B /* SliderEditor.swift */,
+				77100E771B06F6210082C38B /* StepperEditor.swift */,
+				77100E781B06F6210082C38B /* TextFieldEditor.swift */,
+				77100E791B06F6210082C38B /* ToggleEditor.swift */,
+			);
+			name = Editors;
+			sourceTree = "<group>";
+		};
+		77100FCB1B08EC360082C38B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				77100E4B1B06F6210082C38B /* Bridging-Header.h */,
+				77100E4C1B06F6210082C38B /* Images.xcassets */,
+				77100E4D1B06F6210082C38B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		77100FCC1B08EC670082C38B /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				77100E5F1B06F6210082C38B /* GroupContainerView.swift */,
+				77100E601B06F6210082C38B /* LiveDialController.swift */,
+				77100E611B06F6210082C38B /* LiveDialPaneViewController.swift */,
+				77100E621B06F6210082C38B /* LiveDialsPlugin.swift */,
+				77100E651B06F6210082C38B /* NetworkRequestInfoView.swift */,
+				77100E661B06F6210082C38B /* NetworkRequestsPlugin.swift */,
+				77100E671B06F6210082C38B /* NetworkRequestStatusView.swift */,
+				77100E681B06F6210082C38B /* NetworkRequestsViewController.swift */,
+				77100E721B06F6210082C38B /* PropertyGroupView.swift */,
+				77100E7A1B06F6210082C38B /* ViewAdjustHierarchy.swift */,
+				77100E7B1B06F6210082C38B /* ViewAdjustHierarchyOutlineController.swift */,
+				77100E7C1B06F6210082C38B /* ViewAdjustPlugin.swift */,
+				77100E7D1B06F6210082C38B /* ViewAdjustPropertyTableController.swift */,
+				77100E7E1B06F6210082C38B /* ViewAdjustViewController.swift */,
+				77100E7F1B06F6210082C38B /* ViewAdjustVisualOutlineController.swift */,
+				77100E801B06F6210082C38B /* ViewControllerGrouper.swift */,
+				77100E811B06F6210082C38B /* ViewFacade.swift */,
+				77100E841B06F6210082C38B /* VisualOutlineControlsView.swift */,
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
+		77100FCD1B08ECA40082C38B /* Library Additions */ = {
+			isa = PBXGroup;
+			children = (
+				77100E511B06F6210082C38B /* Array+Utilties.swift */,
+				77100E641B06F6210082C38B /* MathUtils.swift */,
+				77100E691B06F6210082C38B /* NSDate+PreciseFormatting.swift */,
+				77100E6A1B06F6210082C38B /* NSHTTPURLResponse+StatusCodes.swift */,
+				77100E6B1B06F6210082C38B /* NSRegularExpression+Result.swift */,
+				77100E6C1B06F6210082C38B /* NSView+Layout.swift */,
+				77100E6D1B06F6210082C38B /* Optional+Result.swift */,
+				77100E6E1B06F6210082C38B /* Optional+Utilities.swift */,
+			);
+			name = "Library Additions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

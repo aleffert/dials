@@ -38,6 +38,7 @@ extension NSHTTPURLResponse {
             case 307: return "Temporary Redirect"
             case 308: return "Permanent Redirect"
             
+            // Failure
             case 400: return "Bad Request"
             case 401: return "Unauthorised"
             case 402: return "Payment Required"
