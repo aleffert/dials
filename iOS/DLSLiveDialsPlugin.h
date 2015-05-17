@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Adds a dial. Typically you don't call this directly and instead use one of the convenient macros
 /// or Swift based wrapper functions.
-/// @param wrapper Moves data in and out of the underlying store.
+/// @param wrapper      Moves data in and out of the underlying store.
 /// @param value        The initial value.
 /// @param editor       The desktop side editor for the property.
 /// @param displayName  The user facing name of the dial.

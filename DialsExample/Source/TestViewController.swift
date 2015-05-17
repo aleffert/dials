@@ -18,9 +18,9 @@ class TestViewController: UIViewController {
         self.view.backgroundColor = UIColor.lightGrayColor()
         
         DLSLiveDialsPlugin.activePlugin()?.groupWithName("Swift!") {
-            DLSAddAction("perform", { () -> () in
+            DLSAddAction("perform", owner: self) { _ in
                 NSLog("performed")
-                }, owner: self)
+            }
             DLSAddColorControl(keyPath: "view.backgroundColor", self)
             DLSAddSliderControl("example", &foo, owner: self)
         }
