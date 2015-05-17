@@ -31,15 +31,11 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 
 // See corresponding CALayer properties
 
-@property (assign, nonatomic) CGPoint anchorPoint;
 @property (strong, nonatomic, nullable) DLSColor* backgroundColor;
-@property (assign, nonatomic) CGFloat borderWidth;
 @property (strong, nonatomic, nullable) DLSColor* borderColor;
-@property (assign, nonatomic) CGRect bounds;
-@property (assign, nonatomic) CGFloat cornerRadius;
-@property (assign, nonatomic) CGFloat opacity;
-@property (assign, nonatomic) CGPoint position;
+@property (strong, nonatomic, nullable) DLSColor* shadowColor;
 @property (assign, nonatomic) CATransform3D transform3D;
+@property (copy, nonatomic) NSDictionary* values;
 
 @end
 

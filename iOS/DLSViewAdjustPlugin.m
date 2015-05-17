@@ -130,15 +130,36 @@ static DLSViewAdjustPlugin* sActivePlugin;
 
 - (DLSViewRenderingRecord*)renderingInfoForView:(UIView*)view {
     DLSViewRenderingRecord* record = [[DLSViewRenderingRecord alloc] init];
-    record.anchorPoint = view.layer.anchorPoint;
     record.borderColor = view.layer.borderColor ? [[UIColor alloc] initWithCGColor:view.layer.borderColor] : nil;
-    record.borderWidth = view.layer.borderWidth;
-    record.bounds = view.layer.bounds;
-    record.opacity = view.layer.opacity;
-    record.position = view.layer.position;
     record.backgroundColor = view.backgroundColor;
-    record.cornerRadius = view.layer.cornerRadius;
     record.transform3D = view.layer.transform;
+    
+    NSMutableDictionary* values = [[NSMutableDictionary alloc] init];
+    for(NSString* key in @[
+                           @"anchorPoint",
+                           @"borderWidth",
+                           @"bounds",
+                           @"contentsRect",
+                           @"contentsCenter",
+                           @"contentMode",
+                           @"contentsGravity",
+                           @"cornerRadius",
+                           @"hidden",
+                           @"opacity",
+                           @"position",
+                           @"shadowOpacity",
+                           @"shadowRadius",
+                           @"shadowOffset",
+                           @"shadowPath"]) {
+        id value = [view.layer valueForKey:key];
+        if(value == nil) {
+            values[key] = [NSNull null];
+        }
+        else {
+            values[key] = value;
+        }
+    }
+    record.values = values;
     return record;
 }
 

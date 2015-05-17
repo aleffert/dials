@@ -38,29 +38,21 @@ NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.dials.view-adjust";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        DLSDecodePoint(aDecoder, anchorPoint);
         DLSDecodeObject(aDecoder, backgroundColor);
-        DLSDecodeDouble(aDecoder, borderWidth);
         DLSDecodeObject(aDecoder, borderColor);
-        DLSDecodeRect(aDecoder, bounds);
-        DLSDecodeDouble(aDecoder, cornerRadius);
-        DLSDecodeDouble(aDecoder, opacity);
-        DLSDecodePoint(aDecoder, position);
+        DLSDecodeObject(aDecoder, shadowColor);
         DLSDecodeTransform3D(aDecoder, transform3D);
+        DLSDecodeObject(aDecoder, values);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    DLSEncodePoint(aCoder, anchorPoint);
     DLSEncodeObject(aCoder, backgroundColor);
-    DLSEncodeDouble(aCoder, borderWidth);
     DLSEncodeObject(aCoder, borderColor);
-    DLSEncodeRect(aCoder, bounds);
-    DLSEncodeDouble(aCoder, cornerRadius);
-    DLSEncodeDouble(aCoder, opacity);
-    DLSEncodePoint(aCoder, position);
+    DLSEncodeObject(aCoder, shadowColor);
     DLSEncodeTransform3D(aCoder, transform3D);
+    DLSEncodeObject(aCoder, values);
 }
 
 @end

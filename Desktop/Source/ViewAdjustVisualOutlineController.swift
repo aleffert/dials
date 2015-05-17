@@ -94,18 +94,17 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 
                 layer.hierarchyDepth = currentDepth
                 
-                layer.bounds = record.renderingInfo.bounds
-                layer.position = record.renderingInfo.position
-                layer.anchorPoint = record.renderingInfo.anchorPoint
                 layer.transform = record.renderingInfo.transform3D
                 
                 layer.contentLayer.backgroundColor = record.renderingInfo.backgroundColor?.CGColor
                 layer.contentLayer.borderColor = record.renderingInfo.borderColor?.CGColor
-                layer.contentLayer.borderWidth = record.renderingInfo.borderWidth
-                layer.contentLayer.cornerRadius = record.renderingInfo.cornerRadius
-                layer.contentLayer.opacity = Float(record.renderingInfo.opacity)
                 layer.contentLayer.contents = contents[record.viewID]
+                layer.contentLayer.shadowColor = record.renderingInfo.shadowColor?.CGColor
                 layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(currentDepth) * controlsView.depthOffset)
+                
+                for (key, value) in record.renderingInfo.values {
+                    layer.setValue((value as? NSNull) != nil ? nil : value, forKey: key as! String)
+                }
                 
                 layer.borderLayer.transform = layer.contentLayer.transform
                 

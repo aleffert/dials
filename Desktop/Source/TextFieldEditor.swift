@@ -40,7 +40,7 @@ class TextFieldEditorView: EditorView {
     
     var editorDescription : DLSTextFieldDescription? {
         didSet {
-            let editable = !(editorDescription?.editable ?? true)
+            let editable = (editorDescription?.editable ?? false)
             field?.bezeled = editable
             field?.drawsBackground = editable
             field?.editable = editable
