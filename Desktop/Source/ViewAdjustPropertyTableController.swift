@@ -67,6 +67,7 @@ class ViewAdjustPropertyTableController: NSObject, PropertyGroupViewDelegate {
             let groupView  = PropertyGroupView(frame : CGRectZero)
             groupView.translatesAutoresizingMaskIntoConstraints = false
             groupView.delegate = self
+            groupView.viewID = record?.viewID
             stackView?.addView(groupView, inGravity: .Top)
             let values : [String:NSCoding] = record?.values[group.displayName] as? [String:NSCoding] ?? [:]
             groupView.useGroup(group, values: values)
@@ -90,8 +91,15 @@ class ViewAdjustPropertyTableController: NSObject, PropertyGroupViewDelegate {
     }
     
     func propertyGroupView(view: PropertyGroupView, changedItem name: String, toValue value: NSCoding?) {
-        let changeRecord = DLSChangeViewValueRecord(viewID: record!.viewID!, name: name, group: view.groupName!, value: value)
-        self.delegate?.tableController(self, valueChangedWithRecord : changeRecord)
+        
+        if view.viewID == record?.viewID {
+            // make sure this comes from the current view
+            // to deal with the case where ending first responder on the old view
+            // causes it to send value changed messages
+            
+            let changeRecord = DLSChangeViewValueRecord(viewID: record!.viewID!, name: name, group: view.groupName!, value: value)
+            self.delegate?.tableController(self, valueChangedWithRecord : changeRecord)
+        }
     }
     
 }

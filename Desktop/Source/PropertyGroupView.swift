@@ -16,6 +16,7 @@ class PropertyGroupView: NSView, EditorViewDelegate {
     
     weak var delegate : PropertyGroupViewDelegate?
     
+    var viewID : String?
     @IBOutlet private var groupView : GroupContainerView!
     @IBOutlet private var propertyStack : NSStackView!
     

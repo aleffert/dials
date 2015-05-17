@@ -90,6 +90,15 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
         return outlineView?.selectedRow != -1
     }
     
+    private var selectedViewID : String? {
+        let selectedRow = outlineView!.selectedRow
+        var selectedItem : String? = nil
+        if selectedRow != -1 {
+            selectedItem = outlineView.itemAtRow(selectedRow) as? String
+        }
+        return selectedItem
+    }
+    
     func selectViewWithID(viewID : NSString?) {
         if let viewID = viewID {
             var parents : [NSString] = []
@@ -119,11 +128,7 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
             hierarchy[record.viewID] = record
         }
         
-        let selectedRow = outlineView!.selectedRow
-        var selectedItem : NSString? = nil
-        if selectedRow != -1 {
-            selectedItem = outlineView.itemAtRow(selectedRow) as? NSString
-        }
+        var selectedItem = selectedViewID
         
         outlineView.reloadData()
         
