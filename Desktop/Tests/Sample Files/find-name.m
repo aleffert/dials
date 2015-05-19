@@ -18,8 +18,8 @@ static CGFloat SomeFloat = 10;
 @implementation SomeClass
 
 - (void)viewDidLoad {
-    DLSAddToggleControl(@"Description", SomeBoolean)
-    DLSAddSliderControl( @"Other Content" , SomeFloat, 0, 1, false)
+    DLSControl(@"Description").toggleOf(&SomeBoolean);
+    DLSControl(@"Other Content"). sliderOf(&SomeFloat, 0, 1);
 }
 
 @end

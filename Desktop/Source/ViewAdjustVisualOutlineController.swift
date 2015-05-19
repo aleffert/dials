@@ -103,7 +103,7 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(currentDepth) * controlsView.depthOffset)
                 
                 for (key, value) in record.renderingInfo.values {
-                    layer.setValue((value as? NSNull) != nil ? nil : value, forKey: key as! String)
+                    layer.contentLayer.setValue((value as? NSNull) != nil ? nil : value, forKey: key as! String)
                 }
                 
                 layer.borderLayer.transform = layer.contentLayer.transform

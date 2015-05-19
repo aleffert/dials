@@ -20,7 +20,7 @@ private class EditorViewNibOwner {
 struct EditorInfo {
     let editor : DLSEditorDescription
     let name : String
-    let displayName : String
+    let label : String
     let value : NSCoding?
 }
 

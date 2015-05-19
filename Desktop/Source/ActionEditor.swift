@@ -27,7 +27,7 @@ class ActionEditorView : EditorView {
     
     override var info : EditorInfo? {
         didSet {
-            button?.title = info!.displayName
+            button?.title = info!.label
         }
     }
     

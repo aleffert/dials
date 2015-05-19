@@ -32,20 +32,21 @@ static NSString* message = @"Something";
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    DLSAddButtonAction(@"Action", ^{
+    DLSControlForKeyPath(view.backgroundColor).asColor();
+    DLSControl(@"Action").actionOf(^{
         NSLog(@"action");
     });
     
-    DLSAddToggleControl(@"Foo", foo);
-    DLSAddSliderControl(@"Bar", bar, 0, 5);
+    DLSControl(@"Foo").toggleOf(&foo);
+    DLSControl(@"Bar").sliderOf(&bar, 0, 5);
     
     [[DLSLiveDialsPlugin activePlugin] beginGroupWithName:@"ObjC Test Group"];
-    DLSAddSliderForKeyPath(box.alpha, 0, 1);
-    DLSAddToggleForKeyPath(box.hidden);
-    DLSAddColorForKeyPath(box.backgroundColor);
-    DLSAddStepperControl(@"A Stepper", stepper);
-    DLSAddTextFieldForKeyPath(label.text);
-    DLSAddLabelControl(@"A message", message);
+    DLSControlForKeyPath(box.alpha).asSlider(0, 1);
+    DLSControlForKeyPath(box.hidden).asToggle();
+    DLSControlForKeyPath(box.backgroundColor).asColor();
+    DLSControl(@"A stepper").stepperOf(&stepper);
+    DLSControlForKeyPath(label.text).asTextField();
+    DLSControl(@"A message").labelOf(&message);
     [[DLSLiveDialsPlugin activePlugin] endGroup];
 }
 

@@ -15,7 +15,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        DLSDecodeObject(aDecoder, displayName);
+        DLSDecodeObject(aDecoder, label);
         DLSDecodeObject(aDecoder, editor);
         DLSDecodeObject(aDecoder, group);
         DLSDecodeObject(aDecoder, uuid);
@@ -31,7 +31,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     DLSEncodeObject(aCoder, group);
-    DLSEncodeObject(aCoder, displayName);
+    DLSEncodeObject(aCoder, label);
     DLSEncodeObject(aCoder, editor);
     DLSEncodeObject(aCoder, uuid);
     DLSEncodeObject(aCoder, value);

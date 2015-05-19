@@ -31,7 +31,7 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
     weak var delegate : LiveDialControllerDelegate?
     
     init(dial : DLSLiveDial, contentView : EditorView, delegate : LiveDialControllerDelegate) {
-        contentView.info = EditorInfo(editor : dial.editor, name : dial.displayName, displayName : dial.displayName, value : dial.value())
+        contentView.info = EditorInfo(editor : dial.editor, name : dial.label, label : dial.label, value : dial.value())
         self.dial = dial
         self.delegate = delegate
         self.contentView = contentView
@@ -103,7 +103,7 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
 }
 
 func < (left : LiveDialController, right : LiveDialController) -> Bool {
-    return left.dial.displayName < right.dial.displayName
+    return left.dial.label < right.dial.label
 }
 
 func == (left : LiveDialController, right : LiveDialController) -> Bool {

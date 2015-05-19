@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) id <DLSEditorDescription> editor;
 @property (strong, nonatomic, nullable) id <NSCoding> value;
 
-@property (copy, nonatomic) NSString* displayName;
+@property (copy, nonatomic) NSString* label;
 @property (copy, nonatomic) NSString* group;
 @property (copy, nonatomic) NSString* uuid;
 

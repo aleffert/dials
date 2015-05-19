@@ -67,7 +67,7 @@ public class CodeManager: NSObject {
             prefix = ""
         }
         let escapedName = NSRegularExpression.escapedPatternForString(name)
-        let pattern = "DLSAdd[A-Za-z]*Control\\([ ]*\(prefix)\"\(escapedName)\"[ ]*,([^,\n]*).*\\)"
+        let pattern = "DLSControl\\([ ]*\(prefix)\"\(escapedName)\"[ ]*[^)]*.*Of\\(([^,\n)]*)"
         return findSymbolWithPattern(pattern, inString: code)
     }
     

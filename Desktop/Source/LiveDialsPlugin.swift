@@ -77,7 +77,7 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
         let codeManager = CodeManager()
         let file = dial.file.toResult("Internal Error: Trying to save when file not present")
         file.bind {file -> Result<()> in
-            let symbol = codeManager.findSymbolWithName(dial.displayName, inFileAtPath:file)
+            let symbol = codeManager.findSymbolWithName(dial.label, inFileAtPath:file)
             return symbol.bind {symbol in
                 codeManager.updateSymbol(symbol, toValue: value, withEditor:dial.editor, atPath:file)
             }

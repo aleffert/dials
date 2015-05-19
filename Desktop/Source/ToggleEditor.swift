@@ -47,7 +47,7 @@ class ToggleEditorView : EditorView {
         didSet {
             let state = info?.value as? NSNumber
             button?.state = state?.integerValue ?? 0
-            button?.title = info?.displayName ?? "Option"
+            button?.title = info?.label ?? "Option"
         }
     }
 }

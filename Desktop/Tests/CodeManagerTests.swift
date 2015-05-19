@@ -28,7 +28,7 @@ class CodeManagerTests: XCTestCase {
         XCTAssertNotNil(path)
         return path.toResult("Could not find file: \(name)")
     }
-    
+
     func testFindSymbolBasic() {
         let path = sampleFilePathWithName("find-name.m")
         path.bind {
@@ -40,7 +40,7 @@ class CodeManagerTests: XCTestCase {
         }
     }
     
-    func testFindSymbolArguments() {
+    func testFindSymbolArgumentsObjC() {
         let path = sampleFilePathWithName("find-name.m")
         path.bind {
             CodeManager().findSymbolWithName("Other Content", inFileAtPath: $0)
@@ -49,6 +49,16 @@ class CodeManagerTests: XCTestCase {
             }.ifFailure {
                 XCTFail($0)
         }
+    }
+    
+    func testFindSymbolArgumentsSwiftBase() {
+        let symbol = CodeManager().findSymbolWithName("Test", inString: "DLSControl(\"Test\").colorOf(&foo)", ofLanguage: .Swift)
+        XCTAssertEqual(symbol.value ?? "", "foo", symbol.error ?? "Unknown Error")
+    }
+    
+    func testFindSymbolArgumentsSwiftSpaceDots() {
+        let symbol = CodeManager().findSymbolWithName("Test", inString: "DLSControl(\"Test\") . colorOf(&foo)", ofLanguage: .Swift)
+        XCTAssertEqual(symbol.value ?? "", "foo", symbol.error ?? "Unknown Error")
     }
     
     

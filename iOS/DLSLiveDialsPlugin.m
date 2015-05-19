@@ -9,10 +9,15 @@
 #import "DLSLiveDialsPlugin.h"
 
 #import "DLSActionDescription.h"
+#import "DLSColorDescription.h"
 #import "DLSLiveDialsMessages.h"
 #import "DLSLiveDial.h"
 #import "DLSPropertyWrapper.h"
 #import "DLSRemovable.h"
+#import "DLSSliderDescription.h"
+#import "DLSStepperDescription.h"
+#import "DLSTextFieldDescription.h"
+#import "DLSToggleDescription.h"
 #import "NSObject+DLSDeallocAction.h"
 
 @interface DLSActiveDialRecord : NSObject <DLSRemovable>
@@ -89,18 +94,18 @@ static DLSLiveDialsPlugin* sActivePlugin;
     [self.activeDials removeObjectForKey:uuid];
 }
 
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper value:(id)value editor:(id<DLSEditorDescription>)editor displayName:(NSString*)displayName canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
+- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditorDescription>)editor label:(NSString*)label canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
     __weak __typeof(self) owner = self;
     
     DLSLiveDial* dial = [[DLSLiveDial alloc] init];
-    dial.value = value;
+    dial.value = wrapper.getter();
     dial.group = self.currentGroup;
     dial.editor = editor;
     dial.file = file;
     dial.line = line;
     dial.canSave = canSave;
     dial.uuid = [NSUUID UUID].UUIDString;
-    dial.displayName = displayName;
+    dial.label = label;
     
     DLSActiveDialRecord* record = [[DLSActiveDialRecord alloc] init];
     record.wrapper = wrapper;
@@ -178,43 +183,184 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 @end
 
-@implementation NSObject (DLSLiveDialsHelpers)
+@interface DLSReferencePredial ()
 
-- (id <DLSRemovable>)dls_addDialForGetter:(id(^)(void))getter setter:(void(^)(id))setter name:(NSString*)displayName editor:(id<DLSEditorDescription>)editor canSave:(BOOL)canSave file:(char *)file line:(size_t)line {
-    DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] init];
-    wrapper.getter = getter;
-    wrapper.setter = setter;
-    
-    NSString* fileName = [NSString stringWithUTF8String:file];
-    
-    id value = wrapper.getter();
-    id <DLSRemovable> removable = [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper value:value editor:editor displayName:displayName canSave:canSave file:fileName line:line];
-    [self dls_performActionOnDealloc:^{
-        [removable remove];
-    }];
-    return removable;
+@property (copy, nonatomic) NSString* label;
+@property (assign, nonatomic) BOOL canSave;
+@property (weak, nonatomic) id owner;
+@property (copy, nonatomic) NSString* file;
+@property (assign, nonatomic) size_t line;
+
+@end
+
+@implementation DLSReferencePredial
+
+- (id)initWithLabel:(NSString *)label
+            canSave:(BOOL)canSave
+              owner:(id)owner
+               file:(NSString *)file
+               line:(size_t)line
+{
+    self = [super init];
+    if(self != nil) {
+        self.label = label;
+        self.canSave = canSave;
+        self.owner = owner;
+        self.file = file;
+        self.line = line;
+    }
+    return self;
 }
 
-- (id <DLSRemovable>)dls_addDialForProperty:(NSString *)property editor:(id<DLSEditorDescription>)editor file:(char *)file line:(size_t)line {
-    __weak __typeof(self) weakself = self;
-    id(^getter)(void) = ^{
-        return [weakself valueForKeyPath:property];
-    };
-    void(^setter)(id) = ^(id value) {
-        [weakself setValue:value forKeyPath:property];
-    };
-
-    return [self dls_addDialForGetter:getter setter:setter name:property editor:editor canSave:NO file:file line:line];
-}
-
-- (id <DLSRemovable>)dls_addDialForAction:(void (^)(void))action name:(NSString*)name file:(char *)file line:(size_t)line {
-    id(^getter)(void) = ^id{
+- (id <DLSRemovable> (^)(dispatch_block_t))actionOf {
+    DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
         return nil;
+    } setter:^(id __nullable v) {
+        // do nothing
+    }];
+    return ^(dispatch_block_t action){
+        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:[DLSActionDescription editor] label:self.label canSave:NO file:self.file line:self.line];
     };
-    void(^setter)(id) = ^(id value) {
-        action();
-    };
-    return [self dls_addDialForGetter:getter setter:setter name:name editor:[DLSActionDescription editor] canSave:NO file:file line:line];
 }
+
+- (id <DLSRemovable> (^)(DLSPropertyWrapper*, id <DLSEditorDescription>))wrapperOf {
+    return ^(DLSPropertyWrapper* wrapper, id <DLSEditorDescription> editor){
+        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:NO file:self.file line:self.line];
+    };
+}
+
+- (id <DLSRemovable>)buildWithEditor:(id <DLSEditorDescription>)editor wrapper:(DLSPropertyWrapper*)wrapper {
+    return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:self.canSave file:self.file line:self.line];
+}
+
+- (id <DLSRemovable>(^)(NSString*, id <DLSEditorDescription>))forKeyPath {
+    return ^(NSString* keypath, id <DLSEditorDescription>editor) {
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
+            return [self.owner valueForKeyPath:keypath];
+        } setter:^(id value) {
+            [self.owner setValue:value forKeyPath:keypath];
+        }];
+        
+        return [self buildWithEditor:editor wrapper:wrapper];
+    };
+}
+
+#define DLSMake(name, type, editor) \
+- (id <DLSRemovable>(^)(type __strong *))name { \
+    return ^(type __strong * value) { \
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^{ \
+            return *value; \
+        } setter:^(type newValue) { \
+            *value = newValue; \
+        }]; \
+        return [self buildWithEditor:editor wrapper:wrapper]; \
+    }; \
+}\
+
+#define DLSMakeNumeric(name, type, getter, editor) \
+- (id <DLSRemovable>(^)(type*))name { \
+    return ^(type* value) { \
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^{ \
+            return @(*value); \
+        } setter:^(NSNumber* newValue) { \
+            *value = [newValue getter]; \
+        }]; \
+        return [self buildWithEditor:editor wrapper:wrapper]; \
+    }; \
+}\
+
+
+DLSMake(colorOf, UIColor*, [[DLSColorDescription alloc] init])
+DLSMake(labelOf, NSString*, [DLSTextFieldDescription label])
+DLSMake(textFieldOf, NSString*, [DLSTextFieldDescription label])
+
+- (id <DLSRemovable>(^)(CGFloat*, CGFloat, CGFloat))sliderOf {
+    return ^(CGFloat* value, CGFloat min, CGFloat max) {
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
+            return @(*value);
+        } setter:^(id newValue) {
+            *value = [newValue floatValue];
+        }];
+        return [self buildWithEditor:[[DLSSliderDescription alloc] initWithMin:min max:max] wrapper:wrapper];
+    };
+}
+
+DLSMakeNumeric(stepperOf, CGFloat, floatValue, [DLSStepperDescription editor])
+DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleDescription editor])
+
+@end
+
+
+@interface DLSKeyPathPredial ()
+
+@property (copy, nonatomic) NSString* keyPath;
+@property (assign, nonatomic) BOOL canSave;
+@property (weak, nonatomic) id owner;
+@property (copy, nonatomic) NSString* file;
+@property (assign, nonatomic) size_t line;
+
+
+@end
+
+@implementation DLSKeyPathPredial
+
+- (id)initWithKeyPath:(NSString *)keyPath
+            canSave:(BOOL)canSave
+              owner:(id)owner
+               file:(NSString *)file
+               line:(size_t)line
+{
+    self = [super init];
+    if(self != nil) {
+        self.keyPath = keyPath;
+        self.canSave = canSave;
+        self.owner = owner;
+        self.file = file;
+        self.line = line;
+    }
+    return self;
+}
+
+- (id <DLSRemovable>(^)(id <DLSEditorDescription>))asEditor {
+    return ^(id <DLSEditorDescription> editor) {
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
+            return [self.owner valueForKeyPath:self.keyPath];
+        } setter:^(id value) {
+            [self.owner setValue:value forKeyPath:self.keyPath];
+        }];
+        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.keyPath canSave:self.canSave file:self.file line:self.line];
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asColor {
+    return ^{
+        return self.asEditor([DLSColorDescription editor]);
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asLabel {
+    return ^{
+        return self.asEditor([DLSTextFieldDescription label]);
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asTextField {
+    return ^{
+        return self.asEditor([DLSTextFieldDescription textField]);
+    };
+}
+
+- (id<DLSRemovable>(^)(CGFloat, CGFloat))asSlider {
+    return ^(CGFloat min, CGFloat max){
+        return self.asEditor([DLSSliderDescription sliderWithMin:min max:max]);
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asToggle {
+    return ^{
+        return self.asEditor([DLSToggleDescription editor]);
+    };
+}
+
 
 @end

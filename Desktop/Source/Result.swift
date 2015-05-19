@@ -42,10 +42,17 @@ public enum Result<A> {
         return self
     }
     
-    public var value : A?{
+    public var value : A? {
         switch self {
         case Success(let v): return v.value
         case Failure(_): return nil
+        }
+    }
+    
+    public var error : String? {
+        switch self {
+        case Success(_): return nil
+        case let Failure(e): return e
         }
     }
 }

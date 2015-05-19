@@ -59,7 +59,7 @@ class TextFieldEditorView: EditorView {
             if firstResponder == nil || firstResponder != field?.currentEditor() {
                 field?.stringValue = content ?? ""
             }
-            name?.stringValue = info?.displayName ?? "Text"
+            name?.stringValue = info?.label ?? "Text"
             
         }
     }
