@@ -47,11 +47,12 @@ public class CodeManager: NSObject {
     }
     
     private func findSymbolWithPattern(pattern : String, inString code : String) -> Result<String> {
-        return NSRegularExpression.compile(pattern).bind {matcher in
+        return NSRegularExpression.compile(pattern).bind {
+            matcher in
             let options = NSMatchingOptions()
             let match: AnyObject? = matcher.matchesInString(code, options: options, range: NSMakeRange(0, count(code))).first
             return (match as? NSTextCheckingResult).toResult("Description not found")
-            }.bind {(m : NSTextCheckingResult) in
+        }.bind {(m : NSTextCheckingResult) in
             let range = m.rangeAtIndex(1)
             let result = (code as NSString).substringWithRange(range).stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "\t\n\r &"))
             return Success(result)

@@ -27,7 +27,6 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @end
 
 @interface DLSViewRenderingRecord : NSObject <NSCoding>
-// TODO: Add remaining layer properties
 
 // See corresponding CALayer properties
 
@@ -35,7 +34,8 @@ extern NSString* const __nonnull DLSViewAdjustPluginName;
 @property (strong, nonatomic, nullable) DLSColor* borderColor;
 @property (strong, nonatomic, nullable) DLSColor* shadowColor;
 @property (assign, nonatomic) CATransform3D transform3D;
-@property (copy, nonatomic) NSDictionary* values;
+@property (copy, nonatomic) NSDictionary* geometryValues;
+@property (copy, nonatomic) NSDictionary* contentValues;
 
 @end
 

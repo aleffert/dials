@@ -134,32 +134,42 @@ static DLSViewAdjustPlugin* sActivePlugin;
     record.backgroundColor = view.backgroundColor;
     record.transform3D = view.layer.transform;
     
-    NSMutableDictionary* values = [[NSMutableDictionary alloc] init];
+    
+    NSMutableDictionary* contentValues = [[NSMutableDictionary alloc] init];
     for(NSString* key in @[
-                           @"anchorPoint",
                            @"borderWidth",
-                           @"bounds",
                            @"contentsRect",
                            @"contentsCenter",
                            @"contentMode",
                            @"contentsGravity",
+                           @"contentsScale",
                            @"cornerRadius",
                            @"hidden",
                            @"opacity",
-                           @"position",
                            @"shadowOpacity",
                            @"shadowRadius",
                            @"shadowOffset",
                            @"shadowPath"]) {
         id value = [view.layer valueForKey:key];
         if(value == nil) {
-            values[key] = [NSNull null];
+            contentValues[key] = [NSNull null];
         }
         else {
-            values[key] = value;
+            contentValues[key] = value;
         }
     }
-    record.values = values;
+    
+    NSMutableDictionary* geometryValues = [[NSMutableDictionary alloc] init];
+    for(NSString* key in @[
+                           @"anchorPoint",
+                           @"bounds",
+                           @"position",
+                           ]) {
+        geometryValues[key] = [view.layer valueForKey:key];
+    }
+    
+    record.contentValues = contentValues;
+    record.geometryValues = geometryValues;
     return record;
 }
 

@@ -102,8 +102,11 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 layer.contentLayer.shadowColor = record.renderingInfo.shadowColor?.CGColor
                 layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(currentDepth) * controlsView.depthOffset)
                 
-                for (key, value) in record.renderingInfo.values {
+                for (key, value) in record.renderingInfo.contentValues {
                     layer.contentLayer.setValue((value as? NSNull) != nil ? nil : value, forKey: key as! String)
+                }
+                for(key, value) in record.renderingInfo.geometryValues {
+                    layer.setValue(value, forKey: key as! String)
                 }
                 
                 layer.borderLayer.transform = layer.contentLayer.transform
