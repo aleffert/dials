@@ -10,10 +10,11 @@
 
 #import "DLSDescriptionContext.h"
 
+#import "DLSEditor.h"
 #import "DLSPropertyGroup.h"
 #import "DLSPropertyDescription.h"
 #import "DLSValueExchanger.h"
-
+#import "DLSValueMapper.h"
 
 @interface DLSDescriptionAccumulator ()
 
@@ -76,5 +77,9 @@ static NSString* DLSPropertyDescriptionExchangerKey = @"DLSPropertyDescriptionEx
 DLSPropertyDescription* DLSProperty(NSString* name, id <DLSEditor> editor) {
     DLSPropertyDescription* description = [DLSPropertyDescription propertyDescriptionWithName:name editor:editor label:nil];
     description.exchanger = [[DLSKeyPathExchanger alloc] initWithKeyPath:name];
+    if([editor conformsToProtocol:@protocol(DLSDefaultEditorMapping)]) {
+        DLSValueMapper* mapper = [(id <DLSDefaultEditorMapping>)editor defaultMapper];
+        description.composeMapper(mapper);
+    }
     return description;
 }

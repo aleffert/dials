@@ -12,26 +12,7 @@
 
 #import "DLSFloatArrayEditor.h"
 #import "DLSPropertyWrapper.h"
-
-@interface DLSValueMapper ()
-
-@property (copy, nonatomic) DLSMapper to;
-@property (copy, nonatomic) DLSMapper from;
-
-@end
-
-@implementation DLSValueMapper
-
-- (id)initWithFrom:(DLSMapper)from to:(DLSMapper)to {
-    self = [super init];
-    if(self != nil) {
-        self.from = from;
-        self.to  = to;
-    }
-    return self;
-}
-
-@end
+#import "DLSValueMapper.h"
 
 @interface DLSValueExchanger ()
 
@@ -86,18 +67,6 @@
 
 @end
 
-@implementation DLSCGColorMapper
-
-- (id)init {
-    return [super initWithFrom:^(id color) {
-        return [UIColor colorWithCGColor:(__bridge CGColorRef)color];
-    } to:^(UIColor* color) {
-        return (__bridge id)color.CGColor;
-    }];
-}
-
-@end
-
 
 @implementation DLSViewControllerClassExchanger
 
@@ -112,55 +81,6 @@
         return [parent class] ? [[NSStringFromClass([parent class]) componentsSeparatedByString:@"."] lastObject] : @"None";
     } setter:^(id value) {
         // nothing to do
-    }];
-}
-
-@end
-
-
-@implementation DLSEdgeInsetsMapper
-
-- (id)init {
-    return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeUIEdgeInsets([value UIEdgeInsetsValue]);
-    }to:^(NSDictionary* value) {
-        return [NSValue valueWithUIEdgeInsets:DLSDecodeUIEdgeInsets(value)];
-    }];
-}
-
-@end
-
-@implementation DLSPointMapper
-
-- (id)init {
-    return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeCGPoint([value CGPointValue]);
-    }to:^(NSDictionary* value) {
-        return [NSValue valueWithCGPoint:DLSDecodeCGPoint(value)];
-    }];
-}
-
-@end
-
-@implementation DLSRectMapper
-
-- (id)init {
-    return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeCGRect([value CGRectValue]);
-    }to:^(NSDictionary* value) {
-        return [NSValue valueWithCGRect:DLSDecodeCGRect(value)];
-    }];
-}
-
-@end
-
-@implementation DLSSizeMapper
-
-- (id)init {
-    return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeCGSize([value CGSizeValue]);
-    }to:^(NSDictionary* value) {
-        return [NSValue valueWithCGSize:DLSDecodeCGSize(value)];
     }];
 }
 

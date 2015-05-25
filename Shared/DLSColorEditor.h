@@ -16,3 +16,8 @@
 + (instancetype)editor;
 
 @end
+
+/// Same as a DLSColorEditor, but has a different default mapper
+@interface DLSCGColorEditor : DLSColorEditor
+
+@end

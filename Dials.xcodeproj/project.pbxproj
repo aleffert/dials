@@ -169,6 +169,8 @@
 		77100FB21B0784780082C38B /* DLSPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F521B0781360082C38B /* DLSPropertyDescription.m */; };
 		77100FB31B07848D0082C38B /* DLSPropertyDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F511B0781360082C38B /* DLSPropertyDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100FB81B078A6D0082C38B /* Sample Files in Resources */ = {isa = PBXBuildFile; fileRef = 77100FB71B078A6D0082C38B /* Sample Files */; };
+		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; };
+		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FD15C71B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
 		77FD15C81B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
@@ -349,6 +351,8 @@
 		77100F661B0781360082C38B /* NSObject+DLSDeallocAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DLSDeallocAction.h"; sourceTree = "<group>"; };
 		77100F671B0781360082C38B /* NSObject+DLSDeallocAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DLSDeallocAction.m"; sourceTree = "<group>"; };
 		77100FB71B078A6D0082C38B /* Sample Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Files"; sourceTree = "<group>"; };
+		775341C11B138A2F00BAE8CA /* DLSValueMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSValueMapper.h; sourceTree = "<group>"; };
+		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
 		77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSFloatArrayEditor.h; sourceTree = "<group>"; };
 		77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSFloatArrayEditor.m; sourceTree = "<group>"; };
 		77FD15CD1B0F6A3000ED950F /* FloatArrayEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatArrayEditor.swift; sourceTree = "<group>"; };
@@ -479,6 +483,8 @@
 		77100EEE1B0780AE0082C38B /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				775341C11B138A2F00BAE8CA /* DLSValueMapper.h */,
+				775341C21B138A2F00BAE8CA /* DLSValueMapper.m */,
 				77100EF01B0780AE0082C38B /* Dials-iOS.pch */,
 				77100EF11B0780AE0082C38B /* Dials.h */,
 				77100EF21B0780AE0082C38B /* DLSDescribable.h */,
@@ -717,6 +723,7 @@
 				77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */,
 				77100F921B0781360082C38B /* DLSRemovable.h in Headers */,
 				77100FB31B07848D0082C38B /* DLSPropertyDescription.h in Headers */,
+				775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */,
 				77100F731B0781360082C38B /* DLSChannel.h in Headers */,
 				77100F861B0781360082C38B /* DLSNetworkRequestsMessages.h in Headers */,
 				77100F8C1B0781360082C38B /* DLSPropertyGroup.h in Headers */,
@@ -990,6 +997,7 @@
 				77100F371B0780F50082C38B /* UIView+DLSDescribable.m in Sources */,
 				77100F6F1B0781360082C38B /* DLSBufferedStreamReader.m in Sources */,
 				77100F781B0781360082C38B /* DLSChannelStream.m in Sources */,
+				775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */,
 				77100F341B0780F50082C38B /* NSObject+DLSSwizzle.m in Sources */,
 				77100FA41B0781360082C38B /* DLSViewAdjustMessages.m in Sources */,
 				77100F321B0780F50082C38B /* DLSValueExchanger.m in Sources */,

@@ -11,7 +11,7 @@
 @implementation DLSToggleEditor
 
 + (instancetype)editor {
-    return [[DLSToggleEditor alloc] init];
+    return [[[self class] alloc] init];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

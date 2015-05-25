@@ -24,17 +24,17 @@
 + (void)dls_describe:(id <DLSDescriptionContext>)context {
     [context addGroupWithName:@"Layer"
                    properties: @[
-                                 DLSProperty(@"layer.cornerRadius", [DLSStepperEditor editor]).setLabel(@"Corner Radius"),
-                                 DLSProperty(@"layer.borderWidth", [DLSStepperEditor editor]).setLabel(@"Border Width"),
-                                 DLSProperty(@"layer.borderColor", [DLSColorEditor editor]).setLabel(@"Border Color").composeMapper([[DLSCGColorMapper alloc] init])
+                                 DLSProperty(@"layer.cornerRadius", [DLSStepperEditor editor]),
+                                 DLSProperty(@"layer.borderWidth", [DLSStepperEditor editor]),
+                                 DLSProperty(@"layer.borderColor", [DLSCGColorEditor editor])
                                  ]];
     [context addGroupWithName:@"View"
                    properties: @[
-                                 DLSProperty(@"dials.controller", [DLSTextFieldEditor label]).setLabel(@"Controller").setExchanger([[DLSViewControllerClassExchanger alloc] init]),
+                                 DLSProperty(@"dials.controller", [DLSTextFieldEditor label]).setExchanger([[DLSViewControllerClassExchanger alloc] init]),
                                  DLSProperty(@"alpha", [DLSSliderEditor zeroOneSlider]),
                                  DLSProperty(@"hidden", [DLSToggleEditor editor]),
-                                 DLSProperty(@"bounds", [[DLSRectEditor alloc] init]).composeMapper([[DLSRectMapper alloc] init]),
-                                 DLSProperty(@"frame", [[DLSRectEditor alloc] init]).composeMapper([[DLSRectMapper alloc] init]),
+                                 DLSProperty(@"bounds", [[DLSRectEditor alloc] init]),
+                                 DLSProperty(@"frame", [[DLSRectEditor alloc] init]),
                                  DLSProperty(@"clipsToBounds", [DLSToggleEditor editor]),
                                  DLSProperty(@"backgroundColor", [DLSColorEditor editor]).setLabel(@"Background")
                                  ]];

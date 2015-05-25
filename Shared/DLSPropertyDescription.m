@@ -12,10 +12,10 @@
 
 NSString* DLSNiceLabelWithName(NSString* name) {
     NSError* error = nil;
+    NSString* split = [[name componentsSeparatedByString:@"."] lastObject];
     NSRegularExpression* expression = [[NSRegularExpression alloc] initWithPattern:@"([A-Z])" options:0 error:&error];
-    NSString* spaced = [name stringByReplacingOccurrencesOfString:@"." withString:@" "];
     NSCAssert(error == nil, @"Error creating expression to match capitals: %@", error);
-    NSString* niceName = [[expression stringByReplacingMatchesInString:spaced options:0 range:NSMakeRange(0, spaced.length) withTemplate:@" $1"] capitalizedString];
+    NSString* niceName = [[expression stringByReplacingMatchesInString:split options:0 range:NSMakeRange(0, split.length) withTemplate:@" $1"] capitalizedString];
 
     return niceName;
 }
@@ -37,7 +37,7 @@ NSString* DLSNiceLabelWithName(NSString* name) {
 + (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditor>)type label:(NSString *)label {
     DLSPropertyDescription* description = [[DLSPropertyDescription alloc] init];
     description.name = name;
-    description.label = label ?: name;
+    description.label = label ?: DLSNiceLabelWithName(name);
     description.editor = type;
     return description;
 }

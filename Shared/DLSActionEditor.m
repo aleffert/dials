@@ -10,8 +10,8 @@
 
 @implementation DLSActionEditor
 
-+ (DLSActionEditor*)editor {
-    return [[DLSActionEditor alloc] init];
++ (instancetype)editor {
+    return [[[self class] alloc] init];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

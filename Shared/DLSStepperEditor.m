@@ -12,8 +12,8 @@
 
 @implementation DLSStepperEditor
 
-+ (DLSStepperEditor*)editor {
-    return [[DLSStepperEditor alloc] init];
++ (instancetype)editor {
+    return [[[self class] alloc] init];
 }
 
 - (id)init {

@@ -13,7 +13,7 @@
 @interface DLSStepperEditor : NSObject <DLSEditor>
 
 // defaults to zero -> inf, increment:1
-+ (DLSStepperEditor*)editor;
++ (instancetype)editor;
 
 @property (assign, nonatomic) double min;
 @property (assign, nonatomic) double max;

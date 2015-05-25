@@ -20,7 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditor>)editor label:(nullable NSString*)label;
 
 @property (readonly, nonatomic) DLSPropertyDescription* (^setLabel)(NSString* label);
-@property (readonly, nonatomic) DLSPropertyDescription* (^composeWrapper)(DLSPropertyWrapper* wrapper);
 
 /// Editor to use for this property
 @property (readonly, strong, nonatomic) id <DLSEditor> editor;

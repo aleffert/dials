@@ -198,7 +198,7 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
                 field?.useValue(stringFromNumber(value, requireIntegerPart: false))
             }
             
-            name?.stringValue = info?.name ?? ""
+            name?.stringValue = info?.label ?? ""
         }
     }
     

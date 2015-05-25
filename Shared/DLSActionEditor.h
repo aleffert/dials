@@ -13,6 +13,6 @@
 @interface DLSActionEditor : NSObject <DLSEditor>
 
 /// Represents a push button
-+ (DLSActionEditor*)editor;
++ (instancetype)editor;
 
 @end

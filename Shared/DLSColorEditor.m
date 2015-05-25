@@ -11,7 +11,7 @@
 @implementation DLSColorEditor
 
 + (instancetype)editor {
-    return [[DLSColorEditor alloc] init];
+    return [[[self class] alloc] init];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -22,5 +22,10 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     // no properties
 }
+
+@end
+
+
+@implementation DLSCGColorEditor
 
 @end
