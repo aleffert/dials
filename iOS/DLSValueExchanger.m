@@ -83,5 +83,18 @@
         // nothing to do
     }];
 }
+@end
 
+@implementation DLSTriggerLayoutExchanger
+
+- (DLSPropertyWrapper*)wrapperFromObject:(id)object {
+    return [[DLSPropertyWrapper alloc] initWithGetter:^id {
+        return @(0);
+    } setter:^(id value) {
+        if([object isKindOfClass:[UIView class]]) {
+            [object setNeedsLayout];
+            [object layoutIfNeeded];
+        }
+    }];
+}
 @end

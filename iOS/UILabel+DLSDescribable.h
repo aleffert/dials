@@ -10,6 +10,6 @@
 
 #import "DLSDescribable.h"
 
-@interface UILabel (DLSViewAdjust) <DLSDescribable>
+@interface UILabel (DLSDescribable) <DLSDescribable>
 
 @end

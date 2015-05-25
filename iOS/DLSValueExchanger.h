@@ -36,4 +36,8 @@ typedef void (^DLSValueTo)(id);
 @interface DLSViewControllerClassExchanger : DLSValueExchanger
 @end
 
+/// Triggers the layout process of a view
+@interface DLSTriggerLayoutExchanger : DLSValueExchanger
+@end
+
 NS_ASSUME_NONNULL_END

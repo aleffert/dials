@@ -26,6 +26,10 @@ typedef id __nonnull (^DLSMapper)(id);
 
 @end
 
+// Coerces a number to a printable string and back
+@interface DLSNumericDescriptionMapper : DLSValueMapper
+@end
+
 
 // Wraps up a CGColor so that everything who sees it gets a UIColor
 @interface DLSCGColorMapper : DLSValueMapper

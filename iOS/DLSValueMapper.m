@@ -31,6 +31,17 @@
 
 @end
 
+@implementation DLSNumericDescriptionMapper
+
+- (id)init {
+    return [super initWithFrom:^(NSNumber* value) {
+        return value.description;
+    } to:^(NSString* value) {
+        return @(value.doubleValue);
+    }];
+}
+
+@end
 
 @implementation DLSCGColorMapper
 

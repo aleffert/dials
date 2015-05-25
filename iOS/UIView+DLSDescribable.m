@@ -9,6 +9,7 @@
 
 #import "UIView+DLSDescribable.h"
 
+#import "DLSActionEditor.h"
 #import "DLSColorEditor.h"
 #import "DLSDescriptionContext.h"
 #import "DLSFloatArrayEditor.h"
@@ -31,12 +32,16 @@
     [context addGroupWithName:@"View"
                    properties: @[
                                  DLSProperty(@"dials.controller", [DLSTextFieldEditor label]).setExchanger([[DLSViewControllerClassExchanger alloc] init]),
+                                 DLSProperty(@"dials.triggerLayout", [[DLSActionEditor alloc] init]).setExchanger([[DLSTriggerLayoutExchanger alloc] init]),
+                                 DLSProperty(@"backgroundColor", [DLSColorEditor editor]).setLabel(@"Background"),
+                                 DLSProperty(@"tintColor", [DLSColorEditor editor]),
                                  DLSProperty(@"alpha", [DLSSliderEditor zeroOneSlider]),
                                  DLSProperty(@"hidden", [DLSToggleEditor editor]),
-                                 DLSProperty(@"bounds", [[DLSRectEditor alloc] init]),
+                                 DLSProperty(@"userInteractionEnabled", [DLSToggleEditor editor]),
                                  DLSProperty(@"frame", [[DLSRectEditor alloc] init]),
+                                 DLSProperty(@"bounds", [[DLSRectEditor alloc] init]),
+                                 DLSProperty(@"center", [[DLSPointEditor alloc] init]),
                                  DLSProperty(@"clipsToBounds", [DLSToggleEditor editor]),
-                                 DLSProperty(@"backgroundColor", [DLSColorEditor editor]).setLabel(@"Background")
                                  ]];
 }
 

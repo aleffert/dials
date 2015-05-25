@@ -92,7 +92,7 @@
 		77100F331B0780F50082C38B /* DLSViewAdjustPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F021B0780AE0082C38B /* DLSViewAdjustPlugin.m */; };
 		77100F341B0780F50082C38B /* NSObject+DLSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F051B0780AE0082C38B /* NSObject+DLSSwizzle.m */; };
 		77100F351B0780F50082C38B /* NSTimer+DLSBlockActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F071B0780AE0082C38B /* NSTimer+DLSBlockActions.m */; };
-		77100F361B0780F50082C38B /* UILabel+DLSViewAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F091B0780AE0082C38B /* UILabel+DLSViewAdjust.m */; };
+		77100F361B0780F50082C38B /* UILabel+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F091B0780AE0082C38B /* UILabel+DLSDescribable.m */; };
 		77100F371B0780F50082C38B /* UIView+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F0B1B0780AE0082C38B /* UIView+DLSDescribable.m */; };
 		77100F381B0780F50082C38B /* UIView+DLSViewAdjust.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F0D1B0780AE0082C38B /* UIView+DLSViewAdjust.m */; };
 		77100F691B0781360082C38B /* DLSActionEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F3B1B0781350082C38B /* DLSActionEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -169,6 +169,10 @@
 		77100FB21B0784780082C38B /* DLSPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F521B0781360082C38B /* DLSPropertyDescription.m */; };
 		77100FB31B07848D0082C38B /* DLSPropertyDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F511B0781360082C38B /* DLSPropertyDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100FB81B078A6D0082C38B /* Sample Files in Resources */ = {isa = PBXBuildFile; fileRef = 77100FB71B078A6D0082C38B /* Sample Files */; };
+		773769FC1B13A751001D81D3 /* UIControl+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */; };
+		773769FD1B13A751001D81D3 /* UIControl+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */; };
+		77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */; };
+		77376A011B13DB5B001D81D3 /* UIButton+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 773769FF1B13DB5B001D81D3 /* UIButton+DLSDescribable.m */; };
 		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -298,8 +302,8 @@
 		77100F051B0780AE0082C38B /* NSObject+DLSSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DLSSwizzle.m"; sourceTree = "<group>"; };
 		77100F061B0780AE0082C38B /* NSTimer+DLSBlockActions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimer+DLSBlockActions.h"; sourceTree = "<group>"; };
 		77100F071B0780AE0082C38B /* NSTimer+DLSBlockActions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+DLSBlockActions.m"; sourceTree = "<group>"; };
-		77100F081B0780AE0082C38B /* UILabel+DLSViewAdjust.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+DLSViewAdjust.h"; sourceTree = "<group>"; };
-		77100F091B0780AE0082C38B /* UILabel+DLSViewAdjust.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+DLSViewAdjust.m"; sourceTree = "<group>"; };
+		77100F081B0780AE0082C38B /* UILabel+DLSDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+DLSDescribable.h"; sourceTree = "<group>"; };
+		77100F091B0780AE0082C38B /* UILabel+DLSDescribable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+DLSDescribable.m"; sourceTree = "<group>"; };
 		77100F0A1B0780AE0082C38B /* UIView+DLSDescribable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+DLSDescribable.h"; sourceTree = "<group>"; };
 		77100F0B1B0780AE0082C38B /* UIView+DLSDescribable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+DLSDescribable.m"; sourceTree = "<group>"; };
 		77100F0C1B0780AE0082C38B /* UIView+DLSViewAdjust.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+DLSViewAdjust.h"; sourceTree = "<group>"; };
@@ -351,6 +355,10 @@
 		77100F661B0781360082C38B /* NSObject+DLSDeallocAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DLSDeallocAction.h"; sourceTree = "<group>"; };
 		77100F671B0781360082C38B /* NSObject+DLSDeallocAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DLSDeallocAction.m"; sourceTree = "<group>"; };
 		77100FB71B078A6D0082C38B /* Sample Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Files"; sourceTree = "<group>"; };
+		773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+DLSDescribable.h"; sourceTree = "<group>"; };
+		773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+DLSDescribable.m"; sourceTree = "<group>"; };
+		773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DLSDescribable.h"; sourceTree = "<group>"; };
+		773769FF1B13DB5B001D81D3 /* UIButton+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+DLSDescribable.m"; sourceTree = "<group>"; };
 		775341C11B138A2F00BAE8CA /* DLSValueMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSValueMapper.h; sourceTree = "<group>"; };
 		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
 		77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSFloatArrayEditor.h; sourceTree = "<group>"; };
@@ -613,6 +621,21 @@
 			name = "Library Additions";
 			sourceTree = "<group>";
 		};
+		77376A021B13DB6A001D81D3 /* View Descriptions */ = {
+			isa = PBXGroup;
+			children = (
+				773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */,
+				773769FF1B13DB5B001D81D3 /* UIButton+DLSDescribable.m */,
+				773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */,
+				773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */,
+				77100F081B0780AE0082C38B /* UILabel+DLSDescribable.h */,
+				77100F091B0780AE0082C38B /* UILabel+DLSDescribable.m */,
+				77100F0A1B0780AE0082C38B /* UIView+DLSDescribable.h */,
+				77100F0B1B0780AE0082C38B /* UIView+DLSDescribable.m */,
+			);
+			name = "View Descriptions";
+			sourceTree = "<group>";
+		};
 		77FD15C91B0F674100ED950F /* Editors */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,14 +685,11 @@
 		77FD15DD1B1251F700ED950F /* Library Additions */ = {
 			isa = PBXGroup;
 			children = (
+				77376A021B13DB6A001D81D3 /* View Descriptions */,
 				77100F041B0780AE0082C38B /* NSObject+DLSSwizzle.h */,
 				77100F051B0780AE0082C38B /* NSObject+DLSSwizzle.m */,
 				77100F061B0780AE0082C38B /* NSTimer+DLSBlockActions.h */,
 				77100F071B0780AE0082C38B /* NSTimer+DLSBlockActions.m */,
-				77100F081B0780AE0082C38B /* UILabel+DLSViewAdjust.h */,
-				77100F091B0780AE0082C38B /* UILabel+DLSViewAdjust.m */,
-				77100F0A1B0780AE0082C38B /* UIView+DLSDescribable.h */,
-				77100F0B1B0780AE0082C38B /* UIView+DLSDescribable.m */,
 				77100F0C1B0780AE0082C38B /* UIView+DLSViewAdjust.h */,
 				77100F0D1B0780AE0082C38B /* UIView+DLSViewAdjust.m */,
 			);
@@ -702,6 +722,7 @@
 				77100F961B0781360082C38B /* DLSStepperEditor.h in Headers */,
 				77100F6D1B0781360082C38B /* DLSBufferedStreamReader.h in Headers */,
 				77100F791B0781360082C38B /* DLSColorEditor.h in Headers */,
+				77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */,
 				77100FA51B0781360082C38B /* NSArray+DLSFunctionalAdditions.h in Headers */,
 				77100F8F1B0781360082C38B /* DLSPropertyWrapper.h in Headers */,
 				77100FA21B0781360082C38B /* DLSViewAdjustMessages.h in Headers */,
@@ -719,6 +740,7 @@
 				77FD15DA1B12475300ED950F /* DLSValueExchanger.h in Headers */,
 				77FD15DB1B124AB100ED950F /* DLSDescriptionContext.h in Headers */,
 				77100F9C1B0781360082C38B /* DLSToggleEditor.h in Headers */,
+				773769FC1B13A751001D81D3 /* UIControl+DLSDescribable.h in Headers */,
 				77100FAE1B0783630082C38B /* DLSDescribable.h in Headers */,
 				77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */,
 				77100F921B0781360082C38B /* DLSRemovable.h in Headers */,
@@ -988,6 +1010,7 @@
 				77100F311B0780F50082C38B /* DLSNetworkRequestsPlugin.m in Sources */,
 				77100F7B1B0781360082C38B /* DLSColorEditor.m in Sources */,
 				77100F9E1B0781360082C38B /* DLSToggleEditor.m in Sources */,
+				77376A011B13DB5B001D81D3 /* UIButton+DLSDescribable.m in Sources */,
 				77100FA71B0781360082C38B /* NSArray+DLSFunctionalAdditions.m in Sources */,
 				77100F821B0781360082C38B /* DLSLiveDial.m in Sources */,
 				77100F881B0781360082C38B /* DLSNetworkRequestsMessages.m in Sources */,
@@ -1006,7 +1029,8 @@
 				77100F851B0781360082C38B /* DLSLiveDialsMessages.m in Sources */,
 				77100F911B0781360082C38B /* DLSPropertyWrapper.m in Sources */,
 				77100F381B0780F50082C38B /* UIView+DLSViewAdjust.m in Sources */,
-				77100F361B0780F50082C38B /* UILabel+DLSViewAdjust.m in Sources */,
+				773769FD1B13A751001D81D3 /* UIControl+DLSDescribable.m in Sources */,
+				77100F361B0780F50082C38B /* UILabel+DLSDescribable.m in Sources */,
 				77100F6B1B0781360082C38B /* DLSActionEditor.m in Sources */,
 				77100FA11B0781360082C38B /* DLSTransform3D.m in Sources */,
 				77100F2D1B0780F50082C38B /* DLSDials.m in Sources */,
