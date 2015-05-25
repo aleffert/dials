@@ -8,7 +8,7 @@
 
 import Cocoa
 
-extension DLSTextFieldDescription : EditorViewGenerating {
+extension DLSTextFieldEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("TextFieldEditorView") as! TextFieldEditorView
         view.editorDescription = self
@@ -16,7 +16,7 @@ extension DLSTextFieldDescription : EditorViewGenerating {
     }
 }
 
-extension DLSTextFieldDescription : CodeGenerating {
+extension DLSTextFieldEditor : CodeGenerating {
     
     func codeForValue(value: NSCoding?, language: Language) -> String {
         let prefix : String
@@ -38,7 +38,7 @@ class TextFieldEditorView: EditorView {
     @IBOutlet private var field : NSTextField?
     @IBOutlet private var name : NSTextField?
     
-    var editorDescription : DLSTextFieldDescription? {
+    var editorDescription : DLSTextFieldEditor? {
         didSet {
             let editable = (editorDescription?.editable ?? false)
             field?.bezeled = editable

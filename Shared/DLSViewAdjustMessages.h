@@ -16,12 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString* const __nonnull DLSViewAdjustPluginName;
 
-@protocol DLSEditorDescription;
+@protocol DLSEditor;
 
 @interface DLSPropertyRecord : NSObject <NSCoding>
 
 @property (copy, nonatomic) NSString* name;
-@property (strong, nonatomic) id <DLSEditorDescription> editor;
+@property (strong, nonatomic) id <DLSEditor> editor;
 @property (strong, nonatomic, nullable) id <NSCoding> value;
 
 @end

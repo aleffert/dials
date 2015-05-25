@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 
-extension DLSSliderDescription : EditorViewGenerating {
+extension DLSSliderEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("SliderEditorView") as! SliderEditorView
         view.editorDescription = self
@@ -17,7 +17,7 @@ extension DLSSliderDescription : EditorViewGenerating {
     }
 }
 
-extension DLSSliderDescription : CodeGenerating {
+extension DLSSliderEditor : CodeGenerating {
     func codeForValue(value : NSCoding?, language : Language) -> String {
         if let v = value as? NSNumber {
             return stringFromNumber(v, requireIntegerPart: true)
@@ -35,7 +35,7 @@ class SliderEditorView : EditorView {
     @IBOutlet private var maxLabel : NSTextField?
     @IBOutlet private var currentLabel : NSTextField?
     
-    var editorDescription : DLSSliderDescription? {
+    var editorDescription : DLSSliderEditor? {
         didSet {
             slider?.minValue = editorDescription!.min
             slider?.maxValue = editorDescription!.max

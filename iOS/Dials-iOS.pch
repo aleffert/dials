@@ -9,7 +9,7 @@
 #ifndef Dials_iOS_pch
 #define Dials_iOS_pch
 
-#import <DialsShared.h>
-#import <Foundation/Foundation.h>
+@import Foundation
+@import UIKit
 
 #endif

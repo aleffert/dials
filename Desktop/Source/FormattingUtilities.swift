@@ -23,3 +23,15 @@ func stringFromNumber(value : NSNumber, requireIntegerPart : Bool = false) -> St
     formatter.minimumIntegerDigits = requireIntegerPart ? 1 : 0
     return formatter.stringFromNumber(value)!
 }
+
+extension String {
+    func formatWithParameters(parameters : [String:Any]) -> String {
+        let result = self.mutableCopy() as! NSMutableString
+        for (key, value) in parameters {
+            let range = NSMakeRange(0, result.length)
+            let token = "{\(key)}"
+            result.replaceOccurrencesOfString(token, withString: "\(value)", options: NSStringCompareOptions(), range: range)
+        }
+        return result as String
+    }
+}

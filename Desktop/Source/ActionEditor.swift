@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 
-extension DLSActionDescription : EditorViewGenerating {
+extension DLSActionEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         return EditorView.freshViewFromNib("ActionEditorView")
     }

@@ -15,8 +15,6 @@
 
 @protocol DLSDescribable <NSObject>
 
-+ (id <DLSValueExchanger>)dls_valueExchangerForProperty:(NSString*)property inGroup:(NSString*)group;
-
 /// Must call super
 + (void)dls_describe:(id <DLSDescriptionContext>)context;
 

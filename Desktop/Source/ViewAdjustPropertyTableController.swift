@@ -50,8 +50,8 @@ class ViewAdjustPropertyTableController: NSObject, PropertyGroupViewDelegate {
     
     func updateValues() {
         for group in groups() {
-            let view = groupViews[group.displayName]
-            let values : [String:NSCoding] = record?.values[group.displayName] as? [String:NSCoding] ?? [:]
+            let view = groupViews[group.label]
+            let values : [String:NSCoding] = record?.values[group.label] as? [String:NSCoding] ?? [:]
             for description in group.properties as! [DLSPropertyDescription] {
                 view?.takeValue(values[description.name], name: description.name)
             }
@@ -69,9 +69,9 @@ class ViewAdjustPropertyTableController: NSObject, PropertyGroupViewDelegate {
             groupView.delegate = self
             groupView.viewID = record?.viewID
             stackView?.addView(groupView, inGravity: .Top)
-            let values : [String:NSCoding] = record?.values[group.displayName] as? [String:NSCoding] ?? [:]
+            let values : [String:NSCoding] = record?.values[group.label] as? [String:NSCoding] ?? [:]
             groupView.useGroup(group, values: values)
-            groupViews[group.displayName] = groupView
+            groupViews[group.label] = groupView
         }
         
         if count(stackView?.views ?? []) == 0 {

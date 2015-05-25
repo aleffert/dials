@@ -8,14 +8,14 @@
 
 import Cocoa
 
-extension DLSToggleDescription : EditorViewGenerating {
+extension DLSToggleEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("ToggleEditorView") as! ToggleEditorView
         return view
     }
 }
 
-extension DLSToggleDescription : CodeGenerating {
+extension DLSToggleEditor : CodeGenerating {
 
     func codeForValue(value: NSCoding?, language: Language) -> String {
         let values : (t : String, f : String)

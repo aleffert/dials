@@ -19,4 +19,21 @@
     return self;
 }
 
+- (id)initWithKeyPath:(NSString*)keyPath object:(id)object {
+    __weak id owner = object;
+    return [self initWithGetter:^id  {
+        return [owner valueForKeyPath:keyPath];
+    } setter:^(id value) {
+        [owner setValue:value forKeyPath:keyPath];
+    }];
+}
+
+- (instancetype)composeWithGetterMap:(id (^)(id))getterMap setterMap:(id(^)(id))setterMap {
+    return [[DLSPropertyWrapper alloc] initWithGetter:^id {
+        return getterMap(self.getter());
+    } setter:^(id value) {
+        self.setter(setterMap(value));
+    }];
+}
+
 @end

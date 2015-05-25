@@ -8,16 +8,17 @@
 
 #import "DLSLiveDialsPlugin.h"
 
-#import "DLSActionDescription.h"
-#import "DLSColorDescription.h"
+#import "DLSActionEditor.h"
+#import "DLSColorEditor.h"
+#import "DLSFloatArrayEditor.h"
 #import "DLSLiveDialsMessages.h"
 #import "DLSLiveDial.h"
 #import "DLSPropertyWrapper.h"
 #import "DLSRemovable.h"
-#import "DLSSliderDescription.h"
-#import "DLSStepperDescription.h"
-#import "DLSTextFieldDescription.h"
-#import "DLSToggleDescription.h"
+#import "DLSSliderEditor.h"
+#import "DLSStepperEditor.h"
+#import "DLSTextFieldEditor.h"
+#import "DLSToggleEditor.h"
 #import "NSObject+DLSDeallocAction.h"
 
 @interface DLSActiveDialRecord : NSObject <DLSRemovable>
@@ -94,7 +95,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
     [self.activeDials removeObjectForKey:uuid];
 }
 
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditorDescription>)editor label:(NSString*)label canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
+- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor label:(NSString*)label canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
     __weak __typeof(self) owner = self;
     
     DLSLiveDial* dial = [[DLSLiveDial alloc] init];
@@ -219,30 +220,18 @@ static DLSLiveDialsPlugin* sActivePlugin;
         // do nothing
     }];
     return ^(dispatch_block_t action){
-        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:[DLSActionDescription editor] label:self.label canSave:NO file:self.file line:self.line];
+        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:[DLSActionEditor editor] label:self.label canSave:NO file:self.file line:self.line];
     };
 }
 
-- (id <DLSRemovable> (^)(DLSPropertyWrapper*, id <DLSEditorDescription>))wrapperOf {
-    return ^(DLSPropertyWrapper* wrapper, id <DLSEditorDescription> editor){
+- (id <DLSRemovable> (^)(DLSPropertyWrapper*, id <DLSEditor>))wrapperOf {
+    return ^(DLSPropertyWrapper* wrapper, id <DLSEditor> editor){
         return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:NO file:self.file line:self.line];
     };
 }
 
-- (id <DLSRemovable>)buildWithEditor:(id <DLSEditorDescription>)editor wrapper:(DLSPropertyWrapper*)wrapper {
+- (id <DLSRemovable>)buildWithEditor:(id <DLSEditor>)editor wrapper:(DLSPropertyWrapper*)wrapper {
     return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:self.canSave file:self.file line:self.line];
-}
-
-- (id <DLSRemovable>(^)(NSString*, id <DLSEditorDescription>))forKeyPath {
-    return ^(NSString* keypath, id <DLSEditorDescription>editor) {
-        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
-            return [self.owner valueForKeyPath:keypath];
-        } setter:^(id value) {
-            [self.owner setValue:value forKeyPath:keypath];
-        }];
-        
-        return [self buildWithEditor:editor wrapper:wrapper];
-    };
 }
 
 #define DLSMake(name, type, editor) \
@@ -269,10 +258,26 @@ static DLSLiveDialsPlugin* sActivePlugin;
     }; \
 }\
 
+#define DLSMakeWrapped(name, type, encoder, decoder, editor) \
+- (id <DLSRemovable>(^)(type*))name { \
+    return ^(type* value) { \
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^{ \
+            return encoder(*value); \
+        } setter:^(NSDictionary* newValue) { \
+            *value = decoder(newValue); \
+        }]; \
+        return [self buildWithEditor:editor wrapper:wrapper]; \
+    }; \
+}\
 
-DLSMake(colorOf, UIColor*, [[DLSColorDescription alloc] init])
-DLSMake(labelOf, NSString*, [DLSTextFieldDescription label])
-DLSMake(textFieldOf, NSString*, [DLSTextFieldDescription label])
+
+DLSMake(colorOf, UIColor*, [[DLSColorEditor alloc] init])
+DLSMakeWrapped(edgeInsetsOf, UIEdgeInsets, DLSEncodeUIEdgeInsets, DLSDecodeUIEdgeInsets, [[DLSEdgeInsetsEditor alloc] init])
+DLSMake(labelOf, NSString*, [DLSTextFieldEditor label])
+DLSMakeWrapped(pointOf, CGPoint, DLSEncodeCGPoint, DLSDecodeCGPoint, [[DLSPointEditor alloc] init])
+DLSMakeWrapped(sizeOf, CGSize, DLSEncodeCGSize, DLSDecodeCGSize, [[DLSSizeEditor alloc] init])
+DLSMakeWrapped(rectOf, CGRect, DLSEncodeCGRect, DLSDecodeCGRect, [[DLSRectEditor alloc] init])
+DLSMake(textFieldOf, NSString*, [DLSTextFieldEditor label])
 
 - (id <DLSRemovable>(^)(CGFloat*, CGFloat, CGFloat))sliderOf {
     return ^(CGFloat* value, CGFloat min, CGFloat max) {
@@ -281,12 +286,12 @@ DLSMake(textFieldOf, NSString*, [DLSTextFieldDescription label])
         } setter:^(id newValue) {
             *value = [newValue floatValue];
         }];
-        return [self buildWithEditor:[[DLSSliderDescription alloc] initWithMin:min max:max] wrapper:wrapper];
+        return [self buildWithEditor:[[DLSSliderEditor alloc] initWithMin:min max:max] wrapper:wrapper];
     };
 }
 
-DLSMakeNumeric(stepperOf, CGFloat, floatValue, [DLSStepperDescription editor])
-DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleDescription editor])
+DLSMakeNumeric(stepperOf, CGFloat, floatValue, [DLSStepperEditor editor])
+DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
 
 @end
 
@@ -321,44 +326,93 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleDescription editor])
     return self;
 }
 
-- (id <DLSRemovable>(^)(id <DLSEditorDescription>))asEditor {
-    return ^(id <DLSEditorDescription> editor) {
-        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
-            return [self.owner valueForKeyPath:self.keyPath];
-        } setter:^(id value) {
-            [self.owner setValue:value forKeyPath:self.keyPath];
-        }];
+- (id <DLSRemovable>(^)(id <DLSEditor>))asEditor {
+    return [self asEditorWithGetterMap:^(id value){
+        return value;
+    } setterMap:^id(id value) {
+        return value;
+    }];
+}
+
+- (id <DLSRemovable>(^)(id <DLSEditor>))asEditorWithGetterMap:(id (^)(id))getterMap setterMap:(id (^)(id))setterMap {
+    
+    return ^(id <DLSEditor> editor) {
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithKeyPath:self.keyPath object:self.owner];
         return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.keyPath canSave:self.canSave file:self.file line:self.line];
     };
 }
 
 - (id<DLSRemovable>(^)(void))asColor {
     return ^{
-        return self.asEditor([DLSColorDescription editor]);
+        return self.asEditor([DLSColorEditor editor]);
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asEdgeInsets {
+    return ^{
+        return [self asEditorWithGetterMap:^id(NSValue* value) {
+            UIEdgeInsets insets = [value UIEdgeInsetsValue];
+            return DLSEncodeUIEdgeInsets(insets);
+        } setterMap:^id(NSDictionary* value) {
+            return [NSValue valueWithUIEdgeInsets: DLSDecodeUIEdgeInsets(value)];
+        }]([[DLSEdgeInsetsEditor alloc] init]);
     };
 }
 
 - (id<DLSRemovable>(^)(void))asLabel {
     return ^{
-        return self.asEditor([DLSTextFieldDescription label]);
+        return self.asEditor([DLSTextFieldEditor label]);
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asPoint {
+    return ^{
+        return [self asEditorWithGetterMap:^id(NSValue* value) {
+            CGPoint point = [value CGPointValue];
+            return DLSEncodeCGPoint(point);
+        } setterMap:^id(NSDictionary* value) {
+            return [NSValue valueWithCGPoint: DLSDecodeCGPoint(value)];
+        }]([[DLSPointEditor alloc] init]);
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asRect {
+    return ^{
+        return [self asEditorWithGetterMap:^id(NSValue* value) {
+            CGRect rect = [value CGRectValue];
+            return DLSEncodeCGRect(rect);
+        } setterMap:^id(NSDictionary* value) {
+            return [NSValue valueWithCGRect: DLSDecodeCGRect(value)];
+        }]([[DLSRectEditor alloc] init]);
+    };
+}
+
+- (id<DLSRemovable>(^)(void))asSize {
+    return ^{
+        return [self asEditorWithGetterMap:^id(NSValue* value) {
+            CGSize size = [value CGSizeValue];
+            return DLSEncodeCGSize(size);
+        } setterMap:^id(NSDictionary* value) {
+            return [NSValue valueWithCGSize: DLSDecodeCGSize(value)];
+        }]([[DLSSizeEditor alloc] init]);
     };
 }
 
 - (id<DLSRemovable>(^)(void))asTextField {
     return ^{
-        return self.asEditor([DLSTextFieldDescription textField]);
+        return self.asEditor([DLSTextFieldEditor textField]);
     };
 }
 
 - (id<DLSRemovable>(^)(CGFloat, CGFloat))asSlider {
     return ^(CGFloat min, CGFloat max){
-        return self.asEditor([DLSSliderDescription sliderWithMin:min max:max]);
+        return self.asEditor([DLSSliderEditor sliderWithMin:min max:max]);
     };
 }
 
 - (id<DLSRemovable>(^)(void))asToggle {
     return ^{
-        return self.asEditor([DLSToggleDescription editor]);
+        return self.asEditor([DLSToggleEditor editor]);
     };
 }
 

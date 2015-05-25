@@ -8,21 +8,30 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DLSEditorDescription;
+@class DLSPropertyWrapper;
+
+@protocol DLSEditor;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface DLSPropertyDescription : NSObject <NSCoding>
 
-+ (nonnull DLSPropertyDescription*)propertyDescriptionWithName:(nonnull NSString*)name editor:(nonnull id <DLSEditorDescription>)editor;
-+ (nonnull DLSPropertyDescription*)propertyDescriptionWithName:(nonnull NSString*)name editor:(nonnull id <DLSEditorDescription>)editor displayName:(nonnull NSString*)displayName;
++ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditor>)editor;
++ (DLSPropertyDescription*)propertyDescriptionWithName:(NSString*)name editor:(id <DLSEditor>)editor label:(nullable NSString*)label;
 
-@property (readonly, strong, nonatomic, nonnull) id <DLSEditorDescription> editorDescription;
+@property (readonly, nonatomic) DLSPropertyDescription* (^setLabel)(NSString* label);
+@property (readonly, nonatomic) DLSPropertyDescription* (^composeWrapper)(DLSPropertyWrapper* wrapper);
+
+/// Editor to use for this property
+@property (readonly, strong, nonatomic) id <DLSEditor> editor;
+
 /// Should be unique within a class and its parents
-@property (readonly, copy, nonatomic, nonnull) NSString* name;
-/// Can be anything. If nil, the "name" property will be used for display
-@property (readonly, copy, nonatomic, nonnull) NSString* displayName;
+@property (readonly, copy, nonatomic) NSString* name;
+
+/// User facing label for this property.
+/// If nil, the "name" property will be used for display
+@property (readonly, copy, nonatomic) NSString* label;
 
 @end
 
-DLSPropertyDescription* __nonnull DLSProperty(NSString*__nonnull name, id <DLSEditorDescription> __nonnull description );
-
-DLSPropertyDescription* __nonnull DLSDisplayProperty(NSString*__nonnull displayName, NSString*__nonnull name, id <DLSEditorDescription> __nonnull description );
+NS_ASSUME_NONNULL_END

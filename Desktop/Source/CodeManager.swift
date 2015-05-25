@@ -72,7 +72,7 @@ public class CodeManager: NSObject {
         return findSymbolWithPattern(pattern, inString: code)
     }
     
-    public func updateSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditorDescription, atPath path : String) -> Result<()> {
+    public func updateSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditor, atPath path : String) -> Result<()> {
         // Swift needs monad syntax
         return languageForPath(path).bind {lang -> Result<String> in
             return self.loadFileAtPath(path).bind {code in

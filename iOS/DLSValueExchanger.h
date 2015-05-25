@@ -8,26 +8,64 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DLSValueExchanger <NSObject>
 
-- (id)extractValueFromObject:(id)object;
-- (void)applyValue:(id)value toObject:(id)object;
+
+NS_ASSUME_NONNULL_BEGIN
+
+typedef id __nonnull (^DLSMapper)(id);
+typedef id __nonnull (^DLSValueFrom)(void);
+typedef void (^DLSValueTo)(id);
+
+@class DLSPropertyWrapper;
+
+
+// This is essentially a lens. Eventually we'll add a typed swift version
+@interface DLSValueMapper : NSObject
+
+- (id)initWithFrom:(DLSMapper)from to:(DLSMapper)to;
+
+@property (readonly, copy, nonatomic) DLSMapper to;
+@property (readonly, copy, nonatomic) DLSMapper from;
 
 @end
 
-@interface DLSKeyPathExchanger : NSObject <DLSValueExchanger>
+@interface DLSValueExchanger : NSObject
 
-+ (instancetype)keyPathExchangerWithKeyPath:(NSString*)keyPath;
+- (DLSPropertyWrapper*)wrapperFromObject:(id)object;
+- (DLSValueExchanger*)transform:(DLSValueMapper*)mapper;
+
+@end
+
+
+@interface DLSKeyPathExchanger : DLSValueExchanger
+
+- (instancetype)initWithKeyPath:(NSString*)keyPath;
 
 @end
 
 // Wraps up a CGColor so that everything who sees it gets a UIColor
-@interface DLSCGColorCoercionExchanger : NSObject <DLSValueExchanger>
-
-- (id)initWithBackingExchanger:(id <DLSValueExchanger>)exchanger;
+@interface DLSCGColorMapper : DLSValueMapper
 
 @end
 
-@interface DLSViewControllerClassExchanger : NSObject <DLSValueExchanger>
+@interface DLSViewControllerClassExchanger : DLSValueExchanger
 
 @end
+
+@interface DLSEdgeInsetsMapper : DLSValueMapper
+
+@end
+
+@interface DLSPointMapper : DLSValueMapper
+
+@end
+
+@interface DLSRectMapper : DLSValueMapper
+
+@end
+
+@interface DLSSizeMapper : DLSValueMapper
+
+@end
+
+NS_ASSUME_NONNULL_END

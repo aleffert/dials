@@ -1,5 +1,5 @@
 //
-//  DLSEditorDescription.h
+//  DLSEditor.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/14/15.
@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /// Represents how a value wants to be edited.
-/// If the readOnly property returns true, then 
-@protocol DLSEditorDescription <NSObject, NSCoding>
+@protocol DLSEditor <NSObject, NSCoding>
 
 @end
 

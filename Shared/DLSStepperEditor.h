@@ -1,5 +1,5 @@
 //
-//  DLSStepperDescription.h
+//  DLSStepperEditor.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 4/20/15.
@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Dials/DLSEditorDescription.h>
+#import <Dials/DLSEditor.h>
 
-@interface DLSStepperDescription : NSObject <DLSEditorDescription>
+@interface DLSStepperEditor : NSObject <DLSEditor>
 
 // defaults to zero -> inf, increment:1
-+ (DLSStepperDescription*)editor;
++ (DLSStepperEditor*)editor;
 
 @property (assign, nonatomic) double min;
 @property (assign, nonatomic) double max;

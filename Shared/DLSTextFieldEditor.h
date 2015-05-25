@@ -1,5 +1,5 @@
 //
-//  DLSEditorDescription.h
+//  DLSTextFieldEditor.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 5/1/15.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Dials/DLSEditorDescription.h>
+#import <Dials/DLSEditor.h>
 
-@interface DLSTextFieldDescription : NSObject <DLSEditorDescription, NSCoding>
+@interface DLSTextFieldEditor : NSObject <DLSEditor, NSCoding>
 
 /// Represents an editable text field
 + (instancetype)textField;

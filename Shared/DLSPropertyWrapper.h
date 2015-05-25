@@ -8,11 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DLSPropertyWrapper : NSObject
 
-- (nonnull id)initWithGetter:(__nullable id (^__nonnull)(void))getter setter:(void(^__nonnull)(__nullable id))setter NS_DESIGNATED_INITIALIZER;
+- (id)initWithGetter:(__nullable id (^)(void))getter setter:(void(^)(__nullable id))setter NS_DESIGNATED_INITIALIZER;
+- (id)initWithKeyPath:(NSString*)keyPath object:(id)object;
 
-@property (copy, nonatomic, nonnull) __nullable id (^getter)(void);
-@property (copy, nonatomic, nonnull) void (^setter)(__nullable id);
+@property (copy, nonatomic) __nullable id (^getter)(void);
+@property (copy, nonatomic) void (^setter)(__nullable id);
 
 @end
+
+NS_ASSUME_NONNULL_END

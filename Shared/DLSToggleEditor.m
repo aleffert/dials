@@ -1,26 +1,25 @@
 //
-//  DLSColorDescription.m
+//  DLSToggleEditor.m
 //  Dials-Shared
 //
-//  Created by Akiva Leffert on 3/21/15.
+//  Created by Akiva Leffert on 3/14/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSColorDescription.h"
+#import "DLSToggleEditor.h"
 
-@implementation DLSColorDescription
+@implementation DLSToggleEditor
 
 + (instancetype)editor {
-    return [[DLSColorDescription alloc] init];
+    return [[DLSToggleEditor alloc] init];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    // no properties
     return [self init];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    // no properties
+    // No properties
 }
 
 @end

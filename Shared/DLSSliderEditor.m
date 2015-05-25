@@ -1,30 +1,30 @@
 //
-//  DLSSliderDescription.m
+//  DLSSliderEditor.m
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 1/24/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSSliderDescription.h"
+#import "DLSSliderEditor.h"
 
 #import "DLSConstants.h"
 
-@interface DLSSliderDescription ()
+@interface DLSSliderEditor ()
 
 @property (assign, nonatomic) double min;
 @property (assign, nonatomic) double max;
 
 @end
 
-@implementation DLSSliderDescription
+@implementation DLSSliderEditor
 
-+ (DLSSliderDescription*)zeroOneSlider {
++ (DLSSliderEditor*)zeroOneSlider {
     return [self sliderWithMin:0 max:1];
 }
 
-+ (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max {
-    DLSSliderDescription* description = [[DLSSliderDescription alloc] initWithMin:min max:max];
++ (DLSSliderEditor*)sliderWithMin:(double)min max:(double)max {
+    DLSSliderEditor* description = [[DLSSliderEditor alloc] initWithMin:min max:max];
     return description;
 }
 

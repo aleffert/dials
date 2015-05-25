@@ -8,11 +8,12 @@
 
 #import "DLSViewAdjustPlugin.h"
 
-#import <DialsShared.h>
 #import "DLSDescriptionContext.h"
-#import "DLSPropertyGroup.h"
 #import "DLSDescribable.h"
+#import "DLSPropertyGroup.h"
+#import "DLSRemovable.h"
 #import "DLSPropertyDescription.h"
+#import "DLSPropertyWrapper.h"
 #import "DLSValueExchanger.h"
 #import "DLSViewAdjustMessages.h"
 #import "NSArray+DLSFunctionalAdditions.h"
@@ -249,13 +250,13 @@ static DLSViewAdjustPlugin* sActivePlugin;
     for(DLSPropertyGroup* group in record.propertyGroups) {
         NSMutableDictionary* groupValues = [[NSMutableDictionary alloc] init];
         for(DLSPropertyDescription* description in group.properties) {
-            id <DLSValueExchanger> exchanger = [view.class dls_valueExchangerForProperty:description.name inGroup:group.displayName];
-            id <NSCoding> value = [exchanger extractValueFromObject:view];
+            DLSValueExchanger* exchanger = description.exchanger;
+            id <NSCoding> value = [exchanger wrapperFromObject:view].getter();
             if(value != nil) {
                 groupValues[description.name] = value;
             }
         }
-        values[group.displayName] = groupValues;
+        values[group.label] = groupValues;
     }
     record.values = values;
     message.record = record;
@@ -354,8 +355,16 @@ static DLSViewAdjustPlugin* sActivePlugin;
 
 - (void)handleViewChangeMessage:(DLSViewAdjustValueChangedMessage*)message {
     UIView* view = [self.viewIDs objectForKey:message.record.viewID];
-    id <DLSValueExchanger> exchanger = [view.class dls_valueExchangerForProperty:message.record.name inGroup:message.record.group];
-    [exchanger applyValue:message.record.value toObject:view];
+    NSArray* groups = [self descriptionGroupsForClass:view.class];
+    for(DLSPropertyGroup* group in groups) {
+        if([group.label isEqual:message.record.group]) {
+            for(DLSPropertyDescription* description in group.properties) {
+                if([description.name isEqual:message.record.name]) {
+                    [description.exchanger wrapperFromObject:view].setter(message.record.value);
+                }
+            }
+        }
+    }
 }
 
 - (void)viewChangedSurface:(UIView *)view {

@@ -1,5 +1,5 @@
 //
-//  DLSToggleDescription.h
+//  DLSToggleEditor.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/14/15.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Dials/DLSEditorDescription.h>
+#import <Dials/DLSEditor.h>
 
-@interface DLSToggleDescription : NSObject <DLSEditorDescription>
+@interface DLSToggleEditor : NSObject <DLSEditor>
 
 /// Represents a togglable check box
 + (instancetype)editor;

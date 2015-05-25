@@ -8,7 +8,7 @@
 
 import Cocoa
 
-extension DLSStepperDescription : EditorViewGenerating {
+extension DLSStepperEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("StepperEditorView") as! StepperEditorView
         view.editorDescription = self
@@ -16,7 +16,7 @@ extension DLSStepperDescription : EditorViewGenerating {
     }
 }
 
-extension DLSStepperDescription : CodeGenerating {
+extension DLSStepperEditor : CodeGenerating {
     
     func codeForValue(value: NSCoding?, language: Language) -> String {
         if let v = value as? NSNumber {
@@ -34,7 +34,7 @@ class StepperEditorView : EditorView {
     @IBOutlet var field : NSTextField?
     @IBOutlet var stepper : NSStepper?
 
-    var editorDescription : DLSStepperDescription? {
+    var editorDescription : DLSStepperEditor? {
         didSet {
             stepper?.minValue = editorDescription!.min
             stepper?.maxValue = editorDescription!.max

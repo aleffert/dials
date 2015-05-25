@@ -1,5 +1,5 @@
 //
-//  DLSActionDescription.h
+//  DLSActionEditor.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/15/15.
@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Dials/DLSEditorDescription.h>
+#import <Dials/DLSEditor.h>
 
-@interface DLSActionDescription : NSObject <DLSEditorDescription>
+@interface DLSActionEditor : NSObject <DLSEditor>
 
 /// Represents a push button
-+ (DLSActionDescription*)editor;
++ (DLSActionEditor*)editor;
 
 @end

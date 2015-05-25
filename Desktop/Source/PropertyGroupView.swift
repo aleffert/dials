@@ -43,19 +43,19 @@ class PropertyGroupView: NSView, EditorViewDelegate {
     }
     
     func useGroup(group : DLSPropertyGroup, values:[String:NSCoding]) {
-        groupName = group.displayName
-        groupView.title = group.displayName
+        groupName = group.label
+        groupView.title = group.label
         for view in propertyStack?.views ?? [] {
             propertyStack?.removeView(view as! NSView)
         }
         propertyViews = [:]
         for description in group.properties as! [DLSPropertyDescription] {
-            let generator = description.editorDescription as? EditorViewGenerating
+            let generator = description.editor as? EditorViewGenerating
             let view = generator?.generateView()
             view?.delegate = self
             view?.translatesAutoresizingMaskIntoConstraints = false
             let value = values[description.name]
-            view?.info = EditorInfo(editor : description.editorDescription, name : description.name, label : description.displayName, value : value)
+            view?.info = EditorInfo(editor : description.editor, name : description.name, label : description.label, value : value)
             if let v = view {
                 let container = NSView(frame:NSZeroRect)
                 container.translatesAutoresizingMaskIntoConstraints = false

@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Akiva Leffert. All rights reserved.
 //
 
+#import <objc/runtime.h>
+
 #import "NSObject+DLSDeallocAction.h"
 
 #import "DLSRemovable.h"
-#import <objc/runtime.h>
 
 @interface DLSDeallocActionRunner : NSObject <DLSRemovable>
 

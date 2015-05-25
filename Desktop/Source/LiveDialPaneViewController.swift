@@ -70,9 +70,9 @@ class LiveDialPaneViewController: NSViewController, LiveDialControllerDelegate {
         let index = dialControllers.indexOf {
             $0.dial.uuid == dialID
         }
-        if index != NSNotFound {
-            self.dialControllers.removeAtIndex(index)
-            let view = self.stackView?.views[index] as! NSView
+        if let i = index {
+            self.dialControllers.removeAtIndex(i)
+            let view = self.stackView?.views[i] as! NSView
             
             NSAnimationContext.runAnimationGroup({ctx in
                 ctx.allowsImplicitAnimation = true

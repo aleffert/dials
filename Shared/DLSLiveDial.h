@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol DLSEditorDescription;
+@protocol DLSEditor;
 
 @interface DLSLiveDial : NSObject <NSCoding>
 
-@property (strong, nonatomic) id <DLSEditorDescription> editor;
+@property (strong, nonatomic) id <DLSEditor> editor;
 @property (strong, nonatomic, nullable) id <NSCoding> value;
 
 @property (copy, nonatomic) NSString* label;

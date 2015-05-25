@@ -1,5 +1,5 @@
 //
-//  DLSSliderDescription.h
+//  DLSSliderEditor.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 1/24/15.
@@ -9,17 +9,17 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
-#import <Dials/DLSEditorDescription.h>
+#import <Dials/DLSEditor.h>
 
-@interface DLSSliderDescription : NSObject <DLSEditorDescription>
+@interface DLSSliderEditor : NSObject <DLSEditor>
 
 /// Represents a continuous slider for zero to one
-+ (DLSSliderDescription*)zeroOneSlider;
++ (DLSSliderEditor*)zeroOneSlider;
 
 /// Represents a continuous slider with the given min and max
 /// @param min The mininum value the slider can take
 /// @param max The maximum value the slider can take
-+ (DLSSliderDescription*)sliderWithMin:(double)min max:(double)max;
++ (DLSSliderEditor*)sliderWithMin:(double)min max:(double)max;
 
 /// Represents a continuous slider with the given min and max
 /// @param min The mininum value the slider can take

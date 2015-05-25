@@ -10,7 +10,7 @@
 
 @interface DLSPropertyGroup : NSObject <NSCoding>
 
-@property (copy, nonatomic, nonnull) NSString* displayName;
+@property (copy, nonatomic, nonnull) NSString* label;
 /// [DLSPropertyDescription]
 @property (copy, nonatomic, nonnull) NSArray* properties;
 

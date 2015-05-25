@@ -11,14 +11,14 @@
 #import "UIView+DLSDescribable.h"
 #import "DLSDescriptionContext.h"
 #import "DLSPropertyDescription.h"
-#import "DLSTextFieldDescription.h"
+#import "DLSTextFieldEditor.h"
 
 @implementation UILabel (DLSViewAdjust)
 
 + (void)dls_describe:(id<DLSDescriptionContext>)context {
     [super dls_describe:context];
     [context addGroupWithName:@"Label" properties:@[
-                                                    DLSProperty(@"text", [DLSTextFieldDescription textField])
+                                                    DLSProperty(@"text", [DLSTextFieldEditor textField])
                                                     ]];
 }
 

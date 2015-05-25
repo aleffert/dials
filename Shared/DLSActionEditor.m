@@ -1,17 +1,17 @@
 //
-//  DLSActionDescription.m
+//  DLSActionEditor.m
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/15/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSActionDescription.h"
+#import "DLSActionEditor.h"
 
-@implementation DLSActionDescription
+@implementation DLSActionEditor
 
-+ (DLSActionDescription*)editor {
-    return [[DLSActionDescription alloc] init];
++ (DLSActionEditor*)editor {
+    return [[DLSActionEditor alloc] init];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {

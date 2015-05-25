@@ -8,13 +8,13 @@
 
 import Cocoa
 
-extension DLSColorDescription : EditorViewGenerating {
+extension DLSColorEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         return EditorView.freshViewFromNib("ColorEditorView")
     }
 }
 
-extension DLSColorDescription : CodeGenerating {
+extension DLSColorEditor : CodeGenerating {
     
     func codeForValue(value: NSCoding?, language: Language) -> String {
         if let c = value as? NSColor {

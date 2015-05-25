@@ -39,6 +39,11 @@ static NSString* message = @"Something";
     
     DLSControl(@"Foo").toggleOf(&foo);
     DLSControl(@"Bar").sliderOf(&bar, 0, 5);
+    DLSControl(@"Group").wrapperOf([[DLSPropertyWrapper alloc] initWithGetter:^id  {
+        return @{@"x" : @(10), @"y" : @(20), @"width" : @(20), @"height" : @(30)};
+    } setter:^(id value) {
+        //
+    }], [[DLSRectEditor alloc] init]);
     
     [[DLSLiveDialsPlugin activePlugin] beginGroupWithName:@"ObjC Test Group"];
     DLSControlForKeyPath(box.alpha).asSlider(0, 1);

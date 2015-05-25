@@ -15,14 +15,14 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
-        DLSDecodeObject(aDecoder, displayName);
+        DLSDecodeObject(aDecoder, label);
         DLSDecodeObject(aDecoder, properties);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    DLSEncodeObject(aCoder, displayName);
+    DLSEncodeObject(aCoder, label);
     DLSEncodeObject(aCoder, properties);
 }
 

@@ -1,19 +1,19 @@
 //
-//  DLSStepperDescription.m
+//  DLSStepperEditor.m
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 4/20/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSStepperDescription.h"
+#import "DLSStepperEditor.h"
 
 #import "DLSConstants.h"
 
-@implementation DLSStepperDescription
+@implementation DLSStepperEditor
 
-+ (DLSStepperDescription*)editor {
-    return [[DLSStepperDescription alloc] init];
++ (DLSStepperEditor*)editor {
+    return [[DLSStepperEditor alloc] init];
 }
 
 - (id)init {

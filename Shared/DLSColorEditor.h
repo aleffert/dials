@@ -1,5 +1,5 @@
 //
-//  DLSColorDescription.h
+//  DLSColorEditor.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/21/15.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import <Dials/DLSEditorDescription.h>
+#import <Dials/DLSEditor.h>
 
-@interface DLSColorDescription : NSObject <DLSEditorDescription>
+@interface DLSColorEditor : NSObject <DLSEditor>
 
 /// Represents a color well
 + (instancetype)editor;

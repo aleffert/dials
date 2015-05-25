@@ -79,7 +79,7 @@ public extension DLSLiveDialsPlugin {
     /// :param: line        The line of code this dial is declared on.
     func addDial<A : AnyObject>(
         wrapper : PropertyWrapper<A>,
-        editor : DLSEditorDescription,
+        editor : DLSEditor,
         label : String,
         canSave : Bool,
         file : String = __FILE__,
@@ -109,7 +109,7 @@ public extension DLSLiveDialsPlugin {
 
 public extension DLSReferencePredial {
     
-    func editorOf<T : AnyObject>(inout source : T, editor : DLSEditorDescription) -> DLSRemovable {
+    func editorOf<T : AnyObject>(inout source : T, editor : DLSEditor) -> DLSRemovable {
         let wrapper = DLSPropertyWrapper(
             getter: {_ in
                 return source
@@ -121,12 +121,76 @@ public extension DLSReferencePredial {
         return wrapperOf(wrapper, editor)
     }
     
+    func editorOf<T>(inout source : T, editor : DLSEditor, getT : T -> AnyObject?, setT : AnyObject? -> T) -> DLSRemovable {
+        let wrapper = DLSPropertyWrapper(
+            getter: {_ in
+                return getT(source)
+            }, setter : {newValue in
+                source = setT(newValue)
+                return
+            }
+        )
+        return wrapperOf(wrapper, editor)
+    }
+    
+    func editorOf<T : AnyObject>(inout source : T?, editor : DLSEditor) -> DLSRemovable {
+        let wrapper = DLSPropertyWrapper(
+            getter: {_ in
+                return source
+            }, setter : {newValue in
+                source = newValue as! T?
+                return
+            }
+        )
+        return wrapperOf(wrapper, editor)
+    }
+    
     func colorOf(inout source : UIColor) -> DLSRemovable {
-        return editorOf(&source, editor: DLSColorDescription())
+        return editorOf(&source, editor: DLSColorEditor())
+    }
+    
+    func edgeInsetsOf(inout source : UIEdgeInsets) -> DLSRemovable {
+        return editorOf(&source, editor: DLSEdgeInsetsEditor(),
+            getT: {
+                DLSEncodeUIEdgeInsets($0) as NSDictionary
+            }, setT: {
+                DLSDecodeUIEdgeInsets($0 as! [NSObject:AnyObject])
+            }
+        )
+    }
+    
+    func pointOf(inout source : CGPoint) -> DLSRemovable {
+        return editorOf(&source, editor: DLSPointEditor(),
+            getT: {
+                DLSEncodeCGPoint($0) as NSDictionary
+            }, setT: {
+                DLSDecodeCGPoint($0 as! [NSObject:AnyObject])
+            }
+        )
+    }
+    
+    func rectOf(inout source : CGRect) -> DLSRemovable {
+        return editorOf(&source, editor: DLSRectEditor(),
+            getT: {
+                DLSEncodeCGRect($0) as NSDictionary
+            }, setT: {
+                DLSDecodeCGRect($0 as! [NSObject:AnyObject])
+            }
+        )
+    }
+    
+    func sizeOf(inout source : CGSize) -> DLSRemovable {
+        return editorOf(&source, editor: DLSSizeEditor(),
+            getT: {
+                DLSEncodeCGSize($0) as NSDictionary
+            }, setT: {
+                DLSDecodeCGSize($0 as! [NSObject:AnyObject])
+            }
+        )
     }
     
     func labelOf(inout source : NSString) -> DLSRemovable {
-        return editorOf(&source, editor: DLSTextFieldDescription.label())
+        return editorOf(&source, editor: DLSTextFieldEditor.label())
     }
     
     func stepperOf(inout source : CGFloat) -> DLSRemovable {
@@ -138,7 +202,7 @@ public extension DLSReferencePredial {
                 return
             }
         )
-        return wrapperOf(wrapper, DLSStepperDescription())
+        return wrapperOf(wrapper, DLSStepperEditor())
     }
     
     func sliderOf(inout source : CGFloat, min : Double = 0, max : Double = 1) -> DLSRemovable {
@@ -150,11 +214,11 @@ public extension DLSReferencePredial {
                 return
             }
         )
-        return wrapperOf(wrapper, DLSSliderDescription(min: min, max: max))
+        return wrapperOf(wrapper, DLSSliderEditor(min: min, max: max))
     }
     
     func textFieldOf(inout source : NSString) -> DLSRemovable {
-        return editorOf(&source, editor: DLSTextFieldDescription.textField())
+        return editorOf(&source, editor: DLSTextFieldEditor.textField())
     }
     
     func togggleOf(inout source : Bool) -> DLSRemovable {
@@ -166,6 +230,6 @@ public extension DLSReferencePredial {
                 return
             }
         )
-        return wrapperOf(wrapper, DLSToggleDescription())
+        return wrapperOf(wrapper, DLSToggleEditor())
     }
 }

@@ -14,19 +14,21 @@ FOUNDATION_EXPORT double Dials_iOSVersionNumber;
 //! Project version string for Dials-iOS.
 FOUNDATION_EXPORT const unsigned char Dials_iOSVersionString[];
 
-#import <Dials/DLSActionDescription.h>
-#import <Dials/DLSColorDescription.h>
+#import <Dials/DLSActionEditor.h>
+#import <Dials/DLSColorEditor.h>
 #import <Dials/DLSDescribable.h>
+#import <Dials/DLSDescriptionContext.h>
 #import <Dials/DLSDials.h>
-#import <Dials/DLSEditorDescription.h>
+#import <Dials/DLSEditor.h>
+#import <Dials/DLSFloatArrayEditor.h>
 #import <Dials/DLSLiveDialsPlugin.h>
-#import <Dials/DLSPropertyDescription.h>
 #import <Dials/DLSPropertyWrapper.h>
 #import <Dials/DLSRemovable.h>
-#import <Dials/DLSSliderDescription.h>
-#import <Dials/DLSStepperDescription.h>
-#import <Dials/DLSTextFieldDescription.h>
-#import <Dials/DLSToggleDescription.h>
+#import <Dials/DLSSliderEditor.h>
+#import <Dials/DLSStepperEditor.h>
+#import <Dials/DLSTextFieldEditor.h>
+#import <Dials/DLSToggleEditor.h>
+#import <Dials/DLSValueExchanger.h>
 #import <Dials/DLSViewAdjustPlugin.h>
 #import <Dials/NSObject+DLSDeallocAction.h>
 #import <Dials/UIView+DLSDescribable.h>

@@ -12,7 +12,7 @@
 #import <Dials/DLSPlugin.h>
 
 @class DLSPropertyWrapper;
-@protocol DLSEditorDescription;
+@protocol DLSEditor;
 @protocol DLSRemovable;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param file         The name of the file this dial is declared in.
 /// @param line         The line of code this dial is declared on.
 - (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper
-                                 editor:(id <DLSEditorDescription>)editor
+                                 editor:(id <DLSEditor>)editor
                                   label:(NSString*)label
                                 canSave:(BOOL)canSave
                                    file:(nullable NSString*)file
@@ -68,10 +68,14 @@ NS_ASSUME_NONNULL_BEGIN
                line:(size_t)line;
 
 @property (readonly, nonatomic) id <DLSRemovable>(^actionOf)(dispatch_block_t);
-@property (readonly, nonatomic) id <DLSRemovable>(^wrapperOf)(DLSPropertyWrapper*, id <DLSEditorDescription> editor);
+@property (readonly, nonatomic) id <DLSRemovable>(^wrapperOf)(DLSPropertyWrapper*, id <DLSEditor> editor);
 
 @property (readonly, nonatomic) id <DLSRemovable>(^colorOf)(UIColor* __strong __nullable * __nonnull);
+@property (readonly, nonatomic) id <DLSRemovable>(^edgeInsetsOf)(UIEdgeInsets* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^labelOf)(NSString* __strong __nullable * __nonnull);
+@property (readonly, nonatomic) id <DLSRemovable>(^pointOf)(CGPoint* __nonnull);
+@property (readonly, nonatomic) id <DLSRemovable>(^sizeOf)(CGSize* __nonnull);
+@property (readonly, nonatomic) id <DLSRemovable>(^rectOf)(CGRect* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^sliderOf)(CGFloat *  __nonnull, CGFloat min, CGFloat max);
 @property (readonly, nonatomic) id <DLSRemovable>(^stepperOf)(CGFloat * __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^textFieldOf)(NSString*__strong __nullable * __nonnull);
@@ -89,9 +93,13 @@ NS_ASSUME_NONNULL_BEGIN
                line:(size_t)line;
 
 
-@property (readonly, nonatomic) id <DLSRemovable>(^asEditor)(id <DLSEditorDescription> editor);
+@property (readonly, nonatomic) id <DLSRemovable>(^asEditor)(id <DLSEditor> editor);
 @property (readonly, nonatomic) id <DLSRemovable>(^asColor)(void);
+@property (readonly, nonatomic) id <DLSRemovable>(^asEdgeInsets)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asLabel)(void);
+@property (readonly, nonatomic) id <DLSRemovable>(^asPoint)(void);
+@property (readonly, nonatomic) id <DLSRemovable>(^asRect)(void);
+@property (readonly, nonatomic) id <DLSRemovable>(^asSize)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asTextField)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asSlider)(CGFloat min, CGFloat max);
 @property (readonly, nonatomic) id <DLSRemovable>(^asToggle)(void);

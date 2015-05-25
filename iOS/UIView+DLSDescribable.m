@@ -9,42 +9,34 @@
 
 #import "UIView+DLSDescribable.h"
 
-#import "DLSColorDescription.h"
+#import "DLSColorEditor.h"
 #import "DLSDescriptionContext.h"
+#import "DLSFloatArrayEditor.h"
 #import "DLSPropertyDescription.h"
-#import "DLSSliderDescription.h"
-#import "DLSStepperDescription.h"
-#import "DLSTextFieldDescription.h"
-#import "DLSToggleDescription.h"
+#import "DLSSliderEditor.h"
+#import "DLSStepperEditor.h"
+#import "DLSTextFieldEditor.h"
+#import "DLSToggleEditor.h"
 #import "DLSValueExchanger.h"
 
 @implementation UIView (DLSDescribable)
 
-+ (id <DLSValueExchanger>)dls_valueExchangerForProperty:(NSString*)property inGroup:(NSString*)group {
-    id <DLSValueExchanger> exchanger = [DLSKeyPathExchanger keyPathExchangerWithKeyPath:property];
-    if([property isEqualToString:@"layer.borderColor"]) {
-        return [[DLSCGColorCoercionExchanger alloc] initWithBackingExchanger:exchanger];
-    }
-    else if([property isEqualToString:@"dials.controller"]) {
-        return [[DLSViewControllerClassExchanger alloc] init];
-    }
-    return exchanger;
-}
-
 + (void)dls_describe:(id <DLSDescriptionContext>)context {
     [context addGroupWithName:@"Layer"
                    properties: @[
-                                 DLSDisplayProperty(@"Corner Radius", @"layer.cornerRadius", [DLSStepperDescription editor]),
-                                 DLSDisplayProperty(@"Border Width", @"layer.borderWidth", [DLSStepperDescription editor]),
-                                 DLSDisplayProperty(@"Border Color", @"layer.borderColor", [DLSColorDescription editor]),
+                                 DLSProperty(@"layer.cornerRadius", [DLSStepperEditor editor]).setLabel(@"Corner Radius"),
+                                 DLSProperty(@"layer.borderWidth", [DLSStepperEditor editor]).setLabel(@"Border Width"),
+                                 DLSProperty(@"layer.borderColor", [DLSColorEditor editor]).setLabel(@"Border Color").composeMapper([[DLSCGColorMapper alloc] init])
                                  ]];
     [context addGroupWithName:@"View"
                    properties: @[
-                                 DLSDisplayProperty(@"Controller", @"dials.controller", [DLSTextFieldDescription label]),
-                                 DLSProperty(@"alpha", [DLSSliderDescription zeroOneSlider]),
-                                 DLSProperty(@"hidden", [DLSToggleDescription editor]),
-                                 DLSProperty(@"clipsToBounds", [DLSToggleDescription editor]),
-                                 DLSDisplayProperty(@"Background", @"backgroundColor", [DLSColorDescription editor])
+                                 DLSProperty(@"dials.controller", [DLSTextFieldEditor label]).setLabel(@"Controller").setExchanger([[DLSViewControllerClassExchanger alloc] init]),
+                                 DLSProperty(@"alpha", [DLSSliderEditor zeroOneSlider]),
+                                 DLSProperty(@"hidden", [DLSToggleEditor editor]),
+                                 DLSProperty(@"bounds", [[DLSRectEditor alloc] init]).composeMapper([[DLSRectMapper alloc] init]),
+                                 DLSProperty(@"frame", [[DLSRectEditor alloc] init]).composeMapper([[DLSRectMapper alloc] init]),
+                                 DLSProperty(@"clipsToBounds", [DLSToggleEditor editor]),
+                                 DLSProperty(@"backgroundColor", [DLSColorEditor editor]).setLabel(@"Background")
                                  ]];
 }
 

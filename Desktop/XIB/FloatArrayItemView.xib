@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="FloatArrayItemViewNibOwner" customModule="Dials">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="5wq-kE-KGh"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="FloatArrayItemView" customModule="Dials" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="166" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0bk-5x-jnB">
+                    <rect key="frame" x="13" y="11" width="153" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="wnb-vB-Yaz"/>
+                    </constraints>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="QsY-CP-S3k">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <action selector="textChanged:" target="c22-O7-iKe" id="BSe-k7-uxN"/>
+                    </connections>
+                </textField>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FNy-O1-Rwm">
+                    <rect key="frame" x="-3" y="7" width="19" height="27"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="sKA-Xe-dl7"/>
+                    <connections>
+                        <action selector="stepperChanged:" target="c22-O7-iKe" id="dft-7k-FsP"/>
+                    </connections>
+                </stepper>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="241-Vo-cbH">
+                    <rect key="frame" x="75" y="0.0" width="29" height="11"/>
+                    <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="j1T-DM-w5a">
+                        <font key="font" metaFont="miniSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="FNy-O1-Rwm" firstAttribute="centerY" secondItem="0bk-5x-jnB" secondAttribute="centerY" id="87n-TY-E34"/>
+                <constraint firstItem="241-Vo-cbH" firstAttribute="centerX" secondItem="0bk-5x-jnB" secondAttribute="centerX" id="C1M-qx-7sb"/>
+                <constraint firstItem="0bk-5x-jnB" firstAttribute="leading" secondItem="FNy-O1-Rwm" secondAttribute="trailing" id="JlY-qA-m4i"/>
+                <constraint firstItem="FNy-O1-Rwm" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="O7I-nL-m23"/>
+                <constraint firstAttribute="bottom" secondItem="241-Vo-cbH" secondAttribute="bottom" id="Sj2-Ia-Jdw"/>
+                <constraint firstItem="241-Vo-cbH" firstAttribute="top" secondItem="0bk-5x-jnB" secondAttribute="bottom" id="YXc-uZ-XXf"/>
+                <constraint firstAttribute="trailing" secondItem="0bk-5x-jnB" secondAttribute="trailing" id="aIg-k3-Yvu"/>
+                <constraint firstItem="FNy-O1-Rwm" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="oLn-H9-wc2"/>
+            </constraints>
+            <connections>
+                <outlet property="field" destination="0bk-5x-jnB" id="hMh-AK-6Gp"/>
+                <outlet property="label" destination="241-Vo-cbH" id="vOA-B5-ETr"/>
+                <outlet property="stepper" destination="FNy-O1-Rwm" id="MPo-Bc-SyD"/>
+            </connections>
+            <point key="canvasLocation" x="26" y="313.5"/>
+        </customView>
+    </objects>
+</document>

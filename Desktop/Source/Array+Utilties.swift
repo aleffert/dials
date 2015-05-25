@@ -11,7 +11,7 @@ import Foundation
 extension Array {
     // This should really return an Int? instead of a sentinal
     // but it caused a weird crash when using it. Seems like a compiler bug
-    func indexOf(predicate : T -> Bool) -> Int {
+    func indexOf(predicate : T -> Bool) -> Int? {
         var i = 0
         for element in self {
             if predicate(element) {
@@ -19,6 +19,28 @@ extension Array {
             }
             i = i + 1
         }
-        return NSNotFound
+        return nil
+    }
+    
+    func indexed() -> [(T, Int)] {
+        var result : [(T, Int)] = []
+        var i = 0
+        for e in self {
+            let item = (e, i)
+            result.append(item)
+            i++
+        }
+        return result
+    }
+    
+    func withPrevious() -> [(T, T?)] {
+        var result : [(T, T?)] = []
+        var prev : T? = nil
+        for e in self {
+            let item = (e, prev)
+            result.append(item)
+            prev = e
+        }
+        return result
     }
 }

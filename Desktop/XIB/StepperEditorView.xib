@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="EditorViewNibOwner" customModule="Dials">
@@ -23,7 +23,7 @@
                     </connections>
                 </stepper>
                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VvJ-UL-tq4">
-                    <rect key="frame" x="115" y="2" width="66" height="19"/>
+                    <rect key="frame" x="113" y="2" width="68" height="19"/>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="de5-fS-CYU">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -48,7 +48,7 @@
                 <constraint firstItem="MVp-di-oKu" firstAttribute="centerY" secondItem="VvJ-UL-tq4" secondAttribute="centerY" id="ZRO-YM-uMD"/>
                 <constraint firstItem="VvJ-UL-tq4" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="bYG-Ok-IDI"/>
                 <constraint firstItem="MVp-di-oKu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FJ1-Af-sIt" secondAttribute="trailing" constant="8" id="d98-92-QcX"/>
-                <constraint firstItem="VvJ-UL-tq4" firstAttribute="leading" secondItem="MVp-di-oKu" secondAttribute="trailing" constant="2" id="dDd-cZ-vRP"/>
+                <constraint firstItem="VvJ-UL-tq4" firstAttribute="leading" secondItem="MVp-di-oKu" secondAttribute="trailing" id="dDd-cZ-vRP"/>
                 <constraint firstItem="MVp-di-oKu" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="250" constant="100" id="kYN-98-2Fv"/>
                 <constraint firstAttribute="trailing" secondItem="VvJ-UL-tq4" secondAttribute="trailing" id="mFE-O5-dY9"/>
                 <constraint firstAttribute="centerY" secondItem="FJ1-Af-sIt" secondAttribute="centerY" id="pib-fC-yef"/>
