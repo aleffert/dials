@@ -11,6 +11,7 @@
 #import "DLSActionEditor.h"
 #import "DLSColorEditor.h"
 #import "DLSFloatArrayEditor.h"
+#import "DLSImageEditor.h"
 #import "DLSLiveDialsMessages.h"
 #import "DLSLiveDial.h"
 #import "DLSPropertyWrapper.h"
@@ -272,11 +273,11 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 
 DLSMake(colorOf, UIColor*, [[DLSColorEditor alloc] init])
-DLSMakeWrapped(edgeInsetsOf, UIEdgeInsets, DLSEncodeUIEdgeInsets, DLSDecodeUIEdgeInsets, [[DLSEdgeInsetsEditor alloc] init])
+DLSMakeWrapped(edgeInsetsOf, UIEdgeInsets, DLSWrapUIEdgeInsets, DLSUnwrapUIEdgeInsets, [[DLSEdgeInsetsEditor alloc] init])
 DLSMake(labelOf, NSString*, [DLSTextFieldEditor label])
-DLSMakeWrapped(pointOf, CGPoint, DLSEncodeCGPoint, DLSDecodeCGPoint, [[DLSPointEditor alloc] init])
-DLSMakeWrapped(sizeOf, CGSize, DLSEncodeCGSize, DLSDecodeCGSize, [[DLSSizeEditor alloc] init])
-DLSMakeWrapped(rectOf, CGRect, DLSEncodeCGRect, DLSDecodeCGRect, [[DLSRectEditor alloc] init])
+DLSMakeWrapped(pointOf, CGPoint, DLSWrapCGPointPoint, DLSUnwrapCGPointPoint, [[DLSPointEditor alloc] init])
+DLSMakeWrapped(sizeOf, CGSize, DLSWrapCGPointSize, DLSUnwrapCGPointSize, [[DLSSizeEditor alloc] init])
+DLSMakeWrapped(rectOf, CGRect, DLSWrapCGPointRect, DLSUnwrapCGPointRect, [[DLSRectEditor alloc] init])
 DLSMake(textFieldOf, NSString*, [DLSTextFieldEditor label])
 
 - (id <DLSRemovable>(^)(CGFloat*, CGFloat, CGFloat))sliderOf {
@@ -352,9 +353,9 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     return ^{
         return [self asEditorWithGetterMap:^id(NSValue* value) {
             UIEdgeInsets insets = [value UIEdgeInsetsValue];
-            return DLSEncodeUIEdgeInsets(insets);
+            return DLSWrapUIEdgeInsets(insets);
         } setterMap:^id(NSDictionary* value) {
-            return [NSValue valueWithUIEdgeInsets: DLSDecodeUIEdgeInsets(value)];
+            return [NSValue valueWithUIEdgeInsets: DLSUnwrapUIEdgeInsets(value)];
         }]([[DLSEdgeInsetsEditor alloc] init]);
     };
 }
@@ -365,13 +366,20 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     };
 }
 
+- (id<DLSRemovable>(^)(void))asImage {
+    return ^{
+        return self.asEditor([DLSImageEditor editor]);
+    };
+}
+
+
 - (id<DLSRemovable>(^)(void))asPoint {
     return ^{
         return [self asEditorWithGetterMap:^id(NSValue* value) {
             CGPoint point = [value CGPointValue];
-            return DLSEncodeCGPoint(point);
+            return DLSWrapCGPointPoint(point);
         } setterMap:^id(NSDictionary* value) {
-            return [NSValue valueWithCGPoint: DLSDecodeCGPoint(value)];
+            return [NSValue valueWithCGPoint: DLSUnwrapCGPointPoint(value)];
         }]([[DLSPointEditor alloc] init]);
     };
 }
@@ -380,9 +388,9 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     return ^{
         return [self asEditorWithGetterMap:^id(NSValue* value) {
             CGRect rect = [value CGRectValue];
-            return DLSEncodeCGRect(rect);
+            return DLSWrapCGPointRect(rect);
         } setterMap:^id(NSDictionary* value) {
-            return [NSValue valueWithCGRect: DLSDecodeCGRect(value)];
+            return [NSValue valueWithCGRect: DLSUnwrapCGPointRect(value)];
         }]([[DLSRectEditor alloc] init]);
     };
 }
@@ -391,9 +399,9 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     return ^{
         return [self asEditorWithGetterMap:^id(NSValue* value) {
             CGSize size = [value CGSizeValue];
-            return DLSEncodeCGSize(size);
+            return DLSWrapCGPointSize(size);
         } setterMap:^id(NSDictionary* value) {
-            return [NSValue valueWithCGSize: DLSDecodeCGSize(value)];
+            return [NSValue valueWithCGSize: DLSUnwrapCGPointSize(value)];
         }]([[DLSSizeEditor alloc] init]);
     };
 }

@@ -22,9 +22,9 @@
                                 DLSProperty(@"imageEdgeInsets", [[DLSEdgeInsetsEditor alloc] init]),
                                 DLSProperty(@"titleEdgeInsets", [[DLSEdgeInsetsEditor alloc] init]),
                                 DLSProperty(@"contentEdgeInsets", [[DLSEdgeInsetsEditor alloc] init]),
-                                DLSProperty(@"adjustsImageWhenHighlighted", [[DLSToggleEditor alloc] init]),
-                                DLSProperty(@"adjustsImageWhenDisabled", [[DLSToggleEditor alloc] init]),
-                                DLSProperty(@"showsTouchWhenHighlighted", [[DLSToggleEditor alloc] init]),
+                                DLSProperty(@"adjustsImageWhenHighlighted", [[DLSToggleEditor alloc] init]).setLabel(@"Adjusts on Highlight"),
+                                DLSProperty(@"adjustsImageWhenDisabled", [[DLSToggleEditor alloc] init]).setLabel(@"Adjusts on Disable"),
+                                DLSProperty(@"showsTouchWhenHighlighted", [[DLSToggleEditor alloc] init]).setLabel(@"Shows Touch on Highlight"),
                                 ]];
 }
 

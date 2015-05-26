@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "DLSPropertyDescription.h"
+#import "UIView+DLSDescribable.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,9 +34,9 @@ DLSPropertyDescription* DLSProperty(NSString* name, id <DLSEditor> editor);
 
 @end
 
-/// Extensions to controls how this property is converted between representations.
+/// Extensions to control how this property is converted between representations.
 /// In particular, used for things that don't implement NSCoding like CGColorRef
-/// and NSValue
+/// and NSValues wrapped around CGRects
 @interface DLSPropertyDescription (DLSValueExtensions)
 
 /// Way to set this property onto a particular object

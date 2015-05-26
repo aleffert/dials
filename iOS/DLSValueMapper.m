@@ -10,6 +10,7 @@
 
 #import "DLSColorEditor.h"
 #import "DLSFloatArrayEditor.h"
+#import "DLSImageEditor.h"
 
 @interface DLSValueMapper ()
 
@@ -55,13 +56,25 @@
 
 @end
 
+@implementation DLSImageDataMapper
+
+- (id)init {
+    return [self initWithFrom:^(UIImage* image) {
+        return UIImagePNGRepresentation(image);
+    } to: ^(NSData* data) {
+        return [UIImage imageWithData:data];
+    }];
+}
+
+@end
+
 @implementation DLSEdgeInsetsMapper
 
 - (id)init {
     return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeUIEdgeInsets([value UIEdgeInsetsValue]);
+        return DLSWrapUIEdgeInsets([value UIEdgeInsetsValue]);
     }to:^(NSDictionary* value) {
-        return [NSValue valueWithUIEdgeInsets:DLSDecodeUIEdgeInsets(value)];
+        return [NSValue valueWithUIEdgeInsets:DLSUnwrapUIEdgeInsets(value)];
     }];
 }
 
@@ -71,9 +84,9 @@
 
 - (id)init {
     return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeCGPoint([value CGPointValue]);
+        return DLSWrapCGPointPoint([value CGPointValue]);
     }to:^(NSDictionary* value) {
-        return [NSValue valueWithCGPoint:DLSDecodeCGPoint(value)];
+        return [NSValue valueWithCGPoint:DLSUnwrapCGPointPoint(value)];
     }];
 }
 
@@ -83,9 +96,9 @@
 
 - (id)init {
     return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeCGRect([value CGRectValue]);
+        return DLSWrapCGPointRect([value CGRectValue]);
     }to:^(NSDictionary* value) {
-        return [NSValue valueWithCGRect:DLSDecodeCGRect(value)];
+        return [NSValue valueWithCGRect:DLSUnwrapCGPointRect(value)];
     }];
 }
 
@@ -95,9 +108,9 @@
 
 - (id)init {
     return [self initWithFrom:^(NSValue* value) {
-        return DLSEncodeCGSize([value CGSizeValue]);
+        return DLSWrapCGPointSize([value CGSizeValue]);
     }to:^(NSDictionary* value) {
-        return [NSValue valueWithCGSize:DLSDecodeCGSize(value)];
+        return [NSValue valueWithCGSize:DLSUnwrapCGPointSize(value)];
     }];
 }
 
@@ -122,6 +135,17 @@
 
 - (DLSValueMapper*)defaultMapper {
     return [[DLSEdgeInsetsMapper alloc] init];
+}
+
+@end
+
+@interface DLSImageEditor (DLSDefaultMapping) <DLSDefaultEditorMapping>
+@end
+
+@implementation DLSImageEditor (DLSDefaultMapping)
+
+- (DLSValueMapper*)defaultMapper {
+    return [[DLSImageDataMapper alloc] init];
 }
 
 @end

@@ -39,17 +39,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if TARGET_OS_IPHONE
 
-NSDictionary* DLSEncodeUIEdgeInsets(UIEdgeInsets insets);
-UIEdgeInsets DLSDecodeUIEdgeInsets(NSDictionary* values);
+NSDictionary* DLSWrapUIEdgeInsets(UIEdgeInsets insets);
+UIEdgeInsets DLSUnwrapUIEdgeInsets(NSDictionary* values);
 
-NSDictionary* DLSEncodeCGPoint(CGPoint point);
-CGPoint DLSDecodeCGPoint(NSDictionary* values);
+NSDictionary* DLSWrapCGPointPoint(CGPoint point);
+CGPoint DLSUnwrapCGPointPoint(NSDictionary* values);
 
-NSDictionary* DLSEncodeCGRect(CGRect rect);
-CGRect DLSDecodeCGRect(NSDictionary* values);
+NSDictionary* DLSWrapCGPointRect(CGRect rect);
+CGRect DLSUnwrapCGPointRect(NSDictionary* values);
 
-NSDictionary* DLSEncodeCGSize(CGSize size);
-CGSize DLSDecodeCGSize(NSDictionary* values);
+NSDictionary* DLSWrapCGPointSize(CGSize size);
+CGSize DLSUnwrapCGPointSize(NSDictionary* values);
 
 #endif
 

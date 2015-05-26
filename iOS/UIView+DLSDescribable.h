@@ -12,4 +12,6 @@
 
 @interface UIView (DLSDescribable) <DLSDescribable>
 
++ (void)dls_describe:(id<DLSDescriptionContext>)context __attribute__((objc_requires_super));
+
 @end

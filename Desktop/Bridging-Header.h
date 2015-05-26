@@ -13,6 +13,7 @@
 #import "DLSDescribable.h"
 #import "DLSEditor.h"
 #import "DLSFloatArrayEditor.h"
+#import "DLSImageEditor.h"
 #import "DLSLiveDial.h"
 #import "DLSLiveDialsMessages.h"
 #import "DLSNetworkRequestsMessages.h"

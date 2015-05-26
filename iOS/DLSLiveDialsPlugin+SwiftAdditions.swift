@@ -8,14 +8,6 @@
 
 import UIKit
 
-/// Simple class that does nothing, but allows returning a non-optional value
-/// for a cleaner interface
-class NullRemovable : NSObject, DLSRemovable {
-    func remove() {
-        // do nothing
-    }
-}
-
 public extension NSObject {
     
     func DLSControl(
@@ -152,19 +144,27 @@ public extension DLSReferencePredial {
     func edgeInsetsOf(inout source : UIEdgeInsets) -> DLSRemovable {
         return editorOf(&source, editor: DLSEdgeInsetsEditor(),
             getT: {
-                DLSEncodeUIEdgeInsets($0) as NSDictionary
+                DLSWrapUIEdgeInsets($0) as NSDictionary
             }, setT: {
-                DLSDecodeUIEdgeInsets($0 as! [NSObject:AnyObject])
+                DLSUnwrapUIEdgeInsets($0 as! [NSObject:AnyObject])
             }
         )
+    }
+    
+    func labelOf(inout source : NSString) -> DLSRemovable {
+        return editorOf(&source, editor: DLSTextFieldEditor.label())
+    }
+    
+    func imageOf(inout source : UIImage) -> DLSRemovable {
+        return editorOf(&source, editor: DLSImageEditor())
     }
     
     func pointOf(inout source : CGPoint) -> DLSRemovable {
         return editorOf(&source, editor: DLSPointEditor(),
             getT: {
-                DLSEncodeCGPoint($0) as NSDictionary
+                DLSWrapCGPointPoint($0) as NSDictionary
             }, setT: {
-                DLSDecodeCGPoint($0 as! [NSObject:AnyObject])
+                DLSUnwrapCGPointPoint($0 as! [NSObject:AnyObject])
             }
         )
     }
@@ -172,9 +172,9 @@ public extension DLSReferencePredial {
     func rectOf(inout source : CGRect) -> DLSRemovable {
         return editorOf(&source, editor: DLSRectEditor(),
             getT: {
-                DLSEncodeCGRect($0) as NSDictionary
+                DLSWrapCGPointRect($0) as NSDictionary
             }, setT: {
-                DLSDecodeCGRect($0 as! [NSObject:AnyObject])
+                DLSUnwrapCGPointRect($0 as! [NSObject:AnyObject])
             }
         )
     }
@@ -182,15 +182,11 @@ public extension DLSReferencePredial {
     func sizeOf(inout source : CGSize) -> DLSRemovable {
         return editorOf(&source, editor: DLSSizeEditor(),
             getT: {
-                DLSEncodeCGSize($0) as NSDictionary
+                DLSWrapCGPointSize($0) as NSDictionary
             }, setT: {
-                DLSDecodeCGSize($0 as! [NSObject:AnyObject])
+                DLSUnwrapCGPointSize($0 as! [NSObject:AnyObject])
             }
         )
-    }
-    
-    func labelOf(inout source : NSString) -> DLSRemovable {
-        return editorOf(&source, editor: DLSTextFieldEditor.label())
     }
     
     func stepperOf(inout source : CGFloat) -> DLSRemovable {

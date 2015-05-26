@@ -73,6 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) id <DLSRemovable>(^colorOf)(UIColor* __strong __nullable * __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^edgeInsetsOf)(UIEdgeInsets* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^labelOf)(NSString* __strong __nullable * __nonnull);
+@property (readonly, nonatomic) id <DLSRemovable>(^imageOf)(UIImage* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^pointOf)(CGPoint* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^sizeOf)(CGSize* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^rectOf)(CGRect* __nonnull);

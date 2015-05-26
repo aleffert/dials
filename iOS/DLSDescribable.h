@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class DLSPropertyDescription;
-
 @protocol DLSDescriptionContext;
-@protocol DLSValueExchanger;
 
 @protocol DLSDescribable <NSObject>
 

@@ -173,6 +173,19 @@
 		773769FD1B13A751001D81D3 /* UIControl+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */; };
 		77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */; };
 		77376A011B13DB5B001D81D3 /* UIButton+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 773769FF1B13DB5B001D81D3 /* UIButton+DLSDescribable.m */; };
+		77376A051B13E7E5001D81D3 /* UISwitch+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 77376A031B13E7E5001D81D3 /* UISwitch+DLSDescribable.h */; };
+		77376A061B13E7E5001D81D3 /* UISwitch+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A041B13E7E5001D81D3 /* UISwitch+DLSDescribable.m */; };
+		77376A091B13EAD0001D81D3 /* UISlider+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 77376A071B13EAD0001D81D3 /* UISlider+DLSDescribable.h */; };
+		77376A0A1B13EAD0001D81D3 /* UISlider+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A081B13EAD0001D81D3 /* UISlider+DLSDescribable.m */; };
+		77376A0D1B13EDBB001D81D3 /* UITextView+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 77376A0B1B13EDBB001D81D3 /* UITextView+DLSDescribable.h */; };
+		77376A0E1B13EDBB001D81D3 /* UITextView+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A0C1B13EDBB001D81D3 /* UITextView+DLSDescribable.m */; };
+		77376A111B13EF29001D81D3 /* DLSImageEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77376A0F1B13EF29001D81D3 /* DLSImageEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77376A121B13EF29001D81D3 /* DLSImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A101B13EF29001D81D3 /* DLSImageEditor.m */; };
+		77376A141B13F091001D81D3 /* ImageEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77376A131B13F091001D81D3 /* ImageEditor.swift */; };
+		77376A161B13F10F001D81D3 /* ImageEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77376A151B13F10F001D81D3 /* ImageEditorView.xib */; };
+		77376A191B13F286001D81D3 /* UIImageView+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 77376A171B13F286001D81D3 /* UIImageView+DLSDescribable.h */; };
+		77376A1A1B13F286001D81D3 /* UIImageView+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A181B13F286001D81D3 /* UIImageView+DLSDescribable.m */; };
+		77376A1B1B13F360001D81D3 /* DLSImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A101B13EF29001D81D3 /* DLSImageEditor.m */; };
 		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -359,6 +372,18 @@
 		773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+DLSDescribable.m"; sourceTree = "<group>"; };
 		773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DLSDescribable.h"; sourceTree = "<group>"; };
 		773769FF1B13DB5B001D81D3 /* UIButton+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+DLSDescribable.m"; sourceTree = "<group>"; };
+		77376A031B13E7E5001D81D3 /* UISwitch+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISwitch+DLSDescribable.h"; sourceTree = "<group>"; };
+		77376A041B13E7E5001D81D3 /* UISwitch+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISwitch+DLSDescribable.m"; sourceTree = "<group>"; };
+		77376A071B13EAD0001D81D3 /* UISlider+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISlider+DLSDescribable.h"; sourceTree = "<group>"; };
+		77376A081B13EAD0001D81D3 /* UISlider+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISlider+DLSDescribable.m"; sourceTree = "<group>"; };
+		77376A0B1B13EDBB001D81D3 /* UITextView+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+DLSDescribable.h"; sourceTree = "<group>"; };
+		77376A0C1B13EDBB001D81D3 /* UITextView+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+DLSDescribable.m"; sourceTree = "<group>"; };
+		77376A0F1B13EF29001D81D3 /* DLSImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSImageEditor.h; sourceTree = "<group>"; };
+		77376A101B13EF29001D81D3 /* DLSImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSImageEditor.m; sourceTree = "<group>"; };
+		77376A131B13F091001D81D3 /* ImageEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEditor.swift; sourceTree = "<group>"; };
+		77376A151B13F10F001D81D3 /* ImageEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageEditorView.xib; sourceTree = "<group>"; };
+		77376A171B13F286001D81D3 /* UIImageView+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+DLSDescribable.h"; sourceTree = "<group>"; };
+		77376A181B13F286001D81D3 /* UIImageView+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+DLSDescribable.m"; sourceTree = "<group>"; };
 		775341C11B138A2F00BAE8CA /* DLSValueMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSValueMapper.h; sourceTree = "<group>"; };
 		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
 		77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSFloatArrayEditor.h; sourceTree = "<group>"; };
@@ -562,6 +587,7 @@
 				77100E4F1B06F6210082C38B /* ActionEditor.swift */,
 				77100E561B06F6210082C38B /* ColorEditor.swift */,
 				77FD15CD1B0F6A3000ED950F /* FloatArrayEditor.swift */,
+				77376A131B13F091001D81D3 /* ImageEditor.swift */,
 				77100E761B06F6210082C38B /* SliderEditor.swift */,
 				77100E771B06F6210082C38B /* StepperEditor.swift */,
 				77100E781B06F6210082C38B /* TextFieldEditor.swift */,
@@ -630,6 +656,14 @@
 				773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */,
 				77100F081B0780AE0082C38B /* UILabel+DLSDescribable.h */,
 				77100F091B0780AE0082C38B /* UILabel+DLSDescribable.m */,
+				77376A171B13F286001D81D3 /* UIImageView+DLSDescribable.h */,
+				77376A181B13F286001D81D3 /* UIImageView+DLSDescribable.m */,
+				77376A031B13E7E5001D81D3 /* UISwitch+DLSDescribable.h */,
+				77376A041B13E7E5001D81D3 /* UISwitch+DLSDescribable.m */,
+				77376A071B13EAD0001D81D3 /* UISlider+DLSDescribable.h */,
+				77376A081B13EAD0001D81D3 /* UISlider+DLSDescribable.m */,
+				77376A0B1B13EDBB001D81D3 /* UITextView+DLSDescribable.h */,
+				77376A0C1B13EDBB001D81D3 /* UITextView+DLSDescribable.m */,
 				77100F0A1B0780AE0082C38B /* UIView+DLSDescribable.h */,
 				77100F0B1B0780AE0082C38B /* UIView+DLSDescribable.m */,
 			);
@@ -639,13 +673,15 @@
 		77FD15C91B0F674100ED950F /* Editors */ = {
 			isa = PBXGroup;
 			children = (
-				77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */,
-				77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */,
 				77100F3B1B0781350082C38B /* DLSActionEditor.h */,
 				77100F3C1B0781350082C38B /* DLSActionEditor.m */,
 				77100F461B0781360082C38B /* DLSColorEditor.h */,
 				77100F471B0781360082C38B /* DLSColorEditor.m */,
 				77100F4A1B0781360082C38B /* DLSEditor.h */,
+				77376A0F1B13EF29001D81D3 /* DLSImageEditor.h */,
+				77376A101B13EF29001D81D3 /* DLSImageEditor.m */,
+				77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */,
+				77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */,
 				77100F581B0781360082C38B /* DLSSliderEditor.h */,
 				77100F591B0781360082C38B /* DLSSliderEditor.m */,
 				77100F5A1B0781360082C38B /* DLSStepperEditor.h */,
@@ -665,6 +701,7 @@
 				77100E8D1B06F6210082C38B /* ColorEditorView.xib */,
 				77FD15D31B10F35700ED950F /* FloatArrayEditorView.xib */,
 				77FD15D51B10FAF100ED950F /* FloatArrayItemView.xib */,
+				77376A151B13F10F001D81D3 /* ImageEditorView.xib */,
 				77100E981B06F6210082C38B /* SliderEditorView.xib */,
 				77100E991B06F6210082C38B /* StepperEditorView.xib */,
 				77100E9A1B06F6210082C38B /* TextFieldEditorView.xib */,
@@ -718,6 +755,7 @@
 				77100F801B0781360082C38B /* DLSLiveDial.h in Headers */,
 				77100FAF1B0783730082C38B /* DLSDials.h in Headers */,
 				77100FAD1B07822B0082C38B /* Dials.h in Headers */,
+				77376A191B13F286001D81D3 /* UIImageView+DLSDescribable.h in Headers */,
 				77100FB11B0783B40082C38B /* UIView+DLSDescribable.h in Headers */,
 				77100F961B0781360082C38B /* DLSStepperEditor.h in Headers */,
 				77100F6D1B0781360082C38B /* DLSBufferedStreamReader.h in Headers */,
@@ -740,15 +778,19 @@
 				77FD15DA1B12475300ED950F /* DLSValueExchanger.h in Headers */,
 				77FD15DB1B124AB100ED950F /* DLSDescriptionContext.h in Headers */,
 				77100F9C1B0781360082C38B /* DLSToggleEditor.h in Headers */,
+				77376A111B13EF29001D81D3 /* DLSImageEditor.h in Headers */,
 				773769FC1B13A751001D81D3 /* UIControl+DLSDescribable.h in Headers */,
 				77100FAE1B0783630082C38B /* DLSDescribable.h in Headers */,
 				77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */,
 				77100F921B0781360082C38B /* DLSRemovable.h in Headers */,
 				77100FB31B07848D0082C38B /* DLSPropertyDescription.h in Headers */,
+				77376A091B13EAD0001D81D3 /* UISlider+DLSDescribable.h in Headers */,
+				77376A051B13E7E5001D81D3 /* UISwitch+DLSDescribable.h in Headers */,
 				775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */,
 				77100F731B0781360082C38B /* DLSChannel.h in Headers */,
 				77100F861B0781360082C38B /* DLSNetworkRequestsMessages.h in Headers */,
 				77100F8C1B0781360082C38B /* DLSPropertyGroup.h in Headers */,
+				77376A0D1B13EDBB001D81D3 /* UITextView+DLSDescribable.h in Headers */,
 				77100F9F1B0781360082C38B /* DLSTransform3D.h in Headers */,
 				77100F691B0781360082C38B /* DLSActionEditor.h in Headers */,
 			);
@@ -863,6 +905,7 @@
 				77100EE81B06F6210082C38B /* TextFieldEditorView.xib in Resources */,
 				77100EE51B06F6210082C38B /* PropertyGroupView.xib in Resources */,
 				77100EE01B06F6210082C38B /* MainMenu.xib in Resources */,
+				77376A161B13F10F001D81D3 /* ImageEditorView.xib in Resources */,
 				77FD15D41B10F35700ED950F /* FloatArrayEditorView.xib in Resources */,
 				77100EDD1B06F6210082C38B /* GroupContainerView.xib in Resources */,
 				77100EDC1B06F6210082C38B /* ConsoleWindow.xib in Resources */,
@@ -911,6 +954,7 @@
 				77100EC51B06F6210082C38B /* Result.swift in Sources */,
 				77100EB11B06F6210082C38B /* LiveDialController.swift in Sources */,
 				77100F7D1B0781360082C38B /* DLSConstants.m in Sources */,
+				77376A1B1B13F360001D81D3 /* DLSImageEditor.m in Sources */,
 				77100F8A1B0781360082C38B /* DLSPropertyDescription.m in Sources */,
 				77100ED01B06F6210082C38B /* ViewAdjustVisualOutlineController.swift in Sources */,
 				77100EA61B06F6210082C38B /* CodeManager.swift in Sources */,
@@ -961,6 +1005,7 @@
 				77100ED11B06F6210082C38B /* ViewControllerGrouper.swift in Sources */,
 				77100F9D1B0781360082C38B /* DLSToggleEditor.m in Sources */,
 				77100EAF1B06F6210082C38B /* FormattingUtilities.swift in Sources */,
+				77376A141B13F091001D81D3 /* ImageEditor.swift in Sources */,
 				77100EB21B06F6210082C38B /* LiveDialPaneViewController.swift in Sources */,
 				77100EA81B06F6210082C38B /* ConnectionStatusToolbarItem.swift in Sources */,
 				77100EB71B06F6210082C38B /* NetworkRequestsPlugin.swift in Sources */,
@@ -998,9 +1043,11 @@
 			files = (
 				77FD15C81B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */,
 				77FD15D91B1246AA00ED950F /* DLSProperty+SwiftAdditions.swift in Sources */,
+				77376A061B13E7E5001D81D3 /* UISwitch+DLSDescribable.m in Sources */,
 				77100F981B0781360082C38B /* DLSStepperEditor.m in Sources */,
 				77100F351B0780F50082C38B /* NSTimer+DLSBlockActions.m in Sources */,
 				77100F9B1B0781360082C38B /* DLSTextFieldEditor.m in Sources */,
+				77376A0A1B13EAD0001D81D3 /* UISlider+DLSDescribable.m in Sources */,
 				77100F7E1B0781360082C38B /* DLSConstants.m in Sources */,
 				77100FAA1B0781360082C38B /* NSObject+DLSDeallocAction.m in Sources */,
 				77100F331B0780F50082C38B /* DLSViewAdjustPlugin.m in Sources */,
@@ -1011,6 +1058,7 @@
 				77100F7B1B0781360082C38B /* DLSColorEditor.m in Sources */,
 				77100F9E1B0781360082C38B /* DLSToggleEditor.m in Sources */,
 				77376A011B13DB5B001D81D3 /* UIButton+DLSDescribable.m in Sources */,
+				77376A1A1B13F286001D81D3 /* UIImageView+DLSDescribable.m in Sources */,
 				77100FA71B0781360082C38B /* NSArray+DLSFunctionalAdditions.m in Sources */,
 				77100F821B0781360082C38B /* DLSLiveDial.m in Sources */,
 				77100F881B0781360082C38B /* DLSNetworkRequestsMessages.m in Sources */,
@@ -1021,6 +1069,7 @@
 				77100F6F1B0781360082C38B /* DLSBufferedStreamReader.m in Sources */,
 				77100F781B0781360082C38B /* DLSChannelStream.m in Sources */,
 				775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */,
+				77376A121B13EF29001D81D3 /* DLSImageEditor.m in Sources */,
 				77100F341B0780F50082C38B /* NSObject+DLSSwizzle.m in Sources */,
 				77100FA41B0781360082C38B /* DLSViewAdjustMessages.m in Sources */,
 				77100F321B0780F50082C38B /* DLSValueExchanger.m in Sources */,
@@ -1034,6 +1083,7 @@
 				77100F6B1B0781360082C38B /* DLSActionEditor.m in Sources */,
 				77100FA11B0781360082C38B /* DLSTransform3D.m in Sources */,
 				77100F2D1B0780F50082C38B /* DLSDials.m in Sources */,
+				77376A0E1B13EDBB001D81D3 /* UITextView+DLSDescribable.m in Sources */,
 				77100F951B0781360082C38B /* DLSSliderEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -79,35 +79,35 @@
 
 #if TARGET_OS_IPHONE
 
-NSDictionary* DLSEncodeUIEdgeInsets(UIEdgeInsets insets) {
+NSDictionary* DLSWrapUIEdgeInsets(UIEdgeInsets insets) {
     return @{@"top" : @(insets.top), @"left" : @(insets.left), @"bottom" : @(insets.bottom), @"right" : @(insets.right)};
 }
 
-UIEdgeInsets DLSDecodeUIEdgeInsets(NSDictionary* values) {
+UIEdgeInsets DLSUnwrapUIEdgeInsets(NSDictionary* values) {
     return UIEdgeInsetsMake([values[@"top"] floatValue], [values[@"left"] floatValue], [values[@"bottom"] floatValue], [values[@"right"] floatValue]);
 }
 
-NSDictionary* DLSEncodeCGPoint(CGPoint point) {
+NSDictionary* DLSWrapCGPointPoint(CGPoint point) {
     return @{@"x" : @(point.x), @"y" : @(point.y)};
 }
 
-CGPoint DLSDecodeCGPoint(NSDictionary* values) {
+CGPoint DLSUnwrapCGPointPoint(NSDictionary* values) {
     return CGPointMake([values[@"x"] floatValue], [values[@"y"] floatValue]);
 }
 
-NSDictionary* DLSEncodeCGSize(CGSize size) {
+NSDictionary* DLSWrapCGPointSize(CGSize size) {
     return @{@"width" : @(size.width), @"height" : @(size.height)};
 }
 
-CGSize DLSDecodeCGSize(NSDictionary* values) {
+CGSize DLSUnwrapCGPointSize(NSDictionary* values) {
     return CGSizeMake([values[@"width"] floatValue], [values[@"height"] floatValue]);
 }
 
-NSDictionary* DLSEncodeCGRect(CGRect rect) {
+NSDictionary* DLSWrapCGPointRect(CGRect rect) {
     return @{@"x" : @(rect.origin.x), @"y" : @(rect.origin.y), @"width" : @(rect.size.height), @"height" : @(rect.size.height)};
 }
 
-CGRect DLSDecodeCGRect(NSDictionary* values) {
+CGRect DLSUnwrapCGPointRect(NSDictionary* values) {
     return CGRectMake([values[@"x"] floatValue], [values[@"y"] floatValue], [values[@"width"] floatValue], [values[@"height"] floatValue]);
 }
 

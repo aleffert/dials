@@ -31,8 +31,14 @@ typedef id __nonnull (^DLSMapper)(id);
 @end
 
 
-// Wraps up a CGColor so that everything who sees it gets a UIColor
+/// In: CGColor.
+/// Out: UIColor (which Cocoa bridges to NSColor automatically).
 @interface DLSCGColorMapper : DLSValueMapper
+@end
+
+/// In: UIImage.
+/// Out: NSData.
+@interface DLSImageDataMapper : DLSValueMapper
 @end
 
 @interface DLSEdgeInsetsMapper : DLSValueMapper
