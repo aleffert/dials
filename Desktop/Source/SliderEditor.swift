@@ -12,7 +12,7 @@ import AppKit
 extension DLSSliderEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("SliderEditorView") as! SliderEditorView
-        view.editorDescription = self
+        view.editor = self
         return view
     }
 }
@@ -35,12 +35,12 @@ class SliderEditorView : EditorView {
     @IBOutlet private var maxLabel : NSTextField?
     @IBOutlet private var currentLabel : NSTextField?
     
-    var editorDescription : DLSSliderEditor? {
+    var editor : DLSSliderEditor? {
         didSet {
-            slider?.minValue = editorDescription!.min
-            slider?.maxValue = editorDescription!.max
-            minLabel?.stringValue = stringFromNumber(editorDescription!.min)
-            maxLabel?.stringValue = stringFromNumber(editorDescription!.max)
+            slider?.minValue = editor!.min
+            slider?.maxValue = editor!.max
+            minLabel?.stringValue = stringFromNumber(editor!.min)
+            maxLabel?.stringValue = stringFromNumber(editor!.max)
         }
     }
     

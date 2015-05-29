@@ -11,7 +11,7 @@ import Cocoa
 extension DLSTextFieldEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("TextFieldEditorView") as! TextFieldEditorView
-        view.editorDescription = self
+        view.editor = self
         return view
     }
 }
@@ -38,9 +38,9 @@ class TextFieldEditorView: EditorView {
     @IBOutlet private var field : NSTextField?
     @IBOutlet private var name : NSTextField?
     
-    var editorDescription : DLSTextFieldEditor? {
+    var editor : DLSTextFieldEditor? {
         didSet {
-            let editable = (editorDescription?.editable ?? false)
+            let editable = (editor?.editable ?? false)
             field?.bezeled = editable
             field?.drawsBackground = editable
             field?.editable = editable
@@ -49,7 +49,9 @@ class TextFieldEditorView: EditorView {
     }
     
     @IBAction func textFieldChanged(sender : NSTextField) {
-        delegate?.editorView(self, changedInfo: info!, toValue: sender.stringValue)
+        if editor?.editable ?? false {
+            delegate?.editorView(self, changedInfo: info!, toValue: sender.stringValue)
+        }
     }
     
     override var info : EditorInfo? {

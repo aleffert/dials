@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="EditorViewNibOwner" customModule="Dials" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="c22-O7-iKe" id="SGL-vD-pjJ"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="OptionEditorView" customModule="Dials">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xXi-sH-sDd">
+                    <rect key="frame" x="97" y="-2" width="386" height="22"/>
+                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="0YM-nZ-b4t" id="VRx-VG-5ig">
+                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystem"/>
+                        <menu key="menu" id="GBn-df-uMd">
+                            <items>
+                                <menuItem title="Item 1" state="on" id="0YM-nZ-b4t"/>
+                                <menuItem title="Item 2" id="DEs-cL-cAi"/>
+                                <menuItem title="Item 3" id="ibD-an-mmn"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                </popUpButton>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rCo-Me-444">
+                    <rect key="frame" x="-2" y="3" width="33" height="14"/>
+                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="lJ7-io-pa6">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="xXi-sH-sDd" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" priority="750" constant="100" id="7Yu-y6-6Lf"/>
+                <constraint firstItem="xXi-sH-sDd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rCo-Me-444" secondAttribute="trailing" constant="8" symbolic="YES" id="9dC-du-SjT"/>
+                <constraint firstAttribute="bottom" secondItem="xXi-sH-sDd" secondAttribute="bottom" constant="1" id="9p4-FK-G8R"/>
+                <constraint firstItem="rCo-Me-444" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="B0X-Dd-iC7"/>
+                <constraint firstAttribute="centerY" secondItem="rCo-Me-444" secondAttribute="centerY" id="Dsd-lJ-SSV"/>
+                <constraint firstItem="rCo-Me-444" firstAttribute="top" relation="greaterThanOrEqual" secondItem="c22-O7-iKe" secondAttribute="top" id="STg-QQ-wzy"/>
+                <constraint firstAttribute="trailing" secondItem="xXi-sH-sDd" secondAttribute="trailing" id="XXp-RI-2SI"/>
+                <constraint firstAttribute="centerY" secondItem="xXi-sH-sDd" secondAttribute="centerY" id="Y33-fj-Fbj"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rCo-Me-444" secondAttribute="bottom" id="aeR-Le-cgB"/>
+                <constraint firstItem="xXi-sH-sDd" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="1" id="nul-Mh-ONF"/>
+            </constraints>
+            <connections>
+                <outlet property="name" destination="rCo-Me-444" id="pyu-Wg-Sex"/>
+                <outlet property="popup" destination="xXi-sH-sDd" id="g6q-1m-q7Z"/>
+            </connections>
+            <point key="canvasLocation" x="249" y="115"/>
+        </customView>
+    </objects>
+</document>

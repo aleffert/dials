@@ -104,7 +104,7 @@ CGSize DLSUnwrapCGPointSize(NSDictionary* values) {
 }
 
 NSDictionary* DLSWrapCGPointRect(CGRect rect) {
-    return @{@"x" : @(rect.origin.x), @"y" : @(rect.origin.y), @"width" : @(rect.size.height), @"height" : @(rect.size.height)};
+    return @{@"x" : @(rect.origin.x), @"y" : @(rect.origin.y), @"width" : @(rect.size.width), @"height" : @(rect.size.height)};
 }
 
 CGRect DLSUnwrapCGPointRect(NSDictionary* values) {

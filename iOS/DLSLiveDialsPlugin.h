@@ -98,9 +98,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) id <DLSRemovable>(^asColor)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asEdgeInsets)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asLabel)(void);
+@property (readonly, nonatomic) id <DLSRemovable>(^asImage)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asPoint)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asRect)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asSize)(void);
+@property (readonly, nonatomic) id <DLSRemovable>(^asStepper)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asTextField)(void);
 @property (readonly, nonatomic) id <DLSRemovable>(^asSlider)(CGFloat min, CGFloat max);
 @property (readonly, nonatomic) id <DLSRemovable>(^asToggle)(void);

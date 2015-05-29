@@ -406,6 +406,12 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     };
 }
 
+- (id<DLSRemovable>(^)(void))asStepper {
+    return ^{
+        return self.asEditor([DLSStepperEditor editor]);
+    };
+}
+
 - (id<DLSRemovable>(^)(void))asTextField {
     return ^{
         return self.asEditor([DLSTextFieldEditor textField]);

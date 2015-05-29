@@ -11,7 +11,7 @@ import Cocoa
 extension DLSStepperEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("StepperEditorView") as! StepperEditorView
-        view.editorDescription = self
+        view.editor = self
         return view
     }
 }
@@ -34,11 +34,11 @@ class StepperEditorView : EditorView {
     @IBOutlet var field : NSTextField?
     @IBOutlet var stepper : NSStepper?
 
-    var editorDescription : DLSStepperEditor? {
+    var editor : DLSStepperEditor? {
         didSet {
-            stepper?.minValue = editorDescription!.min
-            stepper?.maxValue = editorDescription!.max
-            stepper?.increment = editorDescription!.increment
+            stepper?.minValue = editor!.min
+            stepper?.maxValue = editor!.max
+            stepper?.increment = editor!.increment
         }
     }
     

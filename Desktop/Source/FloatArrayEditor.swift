@@ -9,7 +9,7 @@
 extension DLSFloatArrayEditor : EditorViewGenerating {
     func generateView() -> EditorView {
         let view = EditorView.freshViewFromNib("FloatArrayEditorView") as! FloatArrayEditorView
-        view.editorDescription = self
+        view.editor = self
         return view
     }
 }
@@ -171,9 +171,9 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
         }
     }
     
-    private var editorDescription : DLSFloatArrayEditor? {
+    private var editor : DLSFloatArrayEditor? {
         didSet {
-            for label in (editorDescription?.labels ?? []) as! [String] {
+            for label in (editor?.labels ?? []) as! [String] {
                 let owner = FloatArrayItemViewNibOwner()
                 NSBundle.mainBundle().loadNibNamed("FloatArrayItemView", owner: owner, topLevelObjects: nil)
                 owner.view.map { view -> Void in
