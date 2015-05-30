@@ -8,23 +8,23 @@
 
 import Cocoa
 
-extension DLSOptionEditor : EditorViewGenerating {
+extension DLSPopupEditor : EditorViewGenerating {
     func generateView() -> EditorView {
-        let view = EditorView.freshViewFromNib("OptionEditorView") as! OptionEditorView
+        let view = EditorView.freshViewFromNib("PopupEditorView") as! PopupEditorView
         view.editor = self
         return view
     }
 }
 
 
-class OptionEditorView: EditorView {
+class PopupEditorView: EditorView {
     @IBOutlet private var name : NSTextField?
     @IBOutlet private var popup : NSPopUpButton?
     
-    var editor : DLSOptionEditor? {
+    var editor : DLSPopupEditor? {
         didSet {
             let menu = NSMenu()
-            for option in editor?.options as? [DLSOptionItem] ?? [] {
+            for option in editor?.options as? [DLSPopupOption] ?? [] {
                 let item = menu.addItemWithTitle(option.label, action: nil, keyEquivalent: "")!
                 item.target = self
                 item.action = Selector("itemChosen:")

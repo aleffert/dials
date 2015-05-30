@@ -1,5 +1,5 @@
 //
-//  DLSOptionEditor+DLSKnownTypes.h
+//  DLSPopupEditor+DLSKnownTypes.h
 //  Dials
 //
 //  Created by Akiva Leffert on 5/29/15.
@@ -8,7 +8,7 @@
 
 #import <Dials/Dials.h>
 
-@interface DLSOptionEditor (DLSKnownTypes)
+@interface DLSPopupEditor (DLSKnownTypes)
 
 /// NSTextAlignment
 + (instancetype)textAlignment;

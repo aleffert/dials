@@ -166,12 +166,12 @@ public extension DLSReferencePredial {
         return editorOf(&source, editor: DLSImageEditor())
     }
     
-    func optionsOf<T : DLSOptionEditing>(inout source : T) -> DLSRemovable {
-        let items = T.dls_optionItems
+    func optionsOf<T : DLSPopupEditing>(inout source : T) -> DLSRemovable {
+        let items = T.dls_popupItems
         let optionItems = items.map { (name, value) in
-            return DLSOptionItem(label: name, value: T.dls_wrapOptionValue(value))
+            return DLSPopupOption(label: name, value: T.dls_wrapValue(value))
         }
-        return editorOf(&source, editor: DLSOptionEditor(optionItems : optionItems), getT: T.dls_wrapOptionValue, setT: T.dls_unwrapOptionValue)
+        return editorOf(&source, editor: DLSPopupEditor(popupOptions : optionItems), getT: T.dls_wrapValue, setT: T.dls_unwrapValue)
     }
     
     func pointOf(inout source : CGPoint) -> DLSRemovable {

@@ -1,16 +1,16 @@
 //
-//  DLSOptionEditor.m
+//  DLSPopupEditor.m
 //  Dials
 //
 //  Created by Akiva Leffert on 5/25/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSOptionEditor.h"
+#import "DLSPopupEditor.h"
 
 #import "DLSConstants.h"
 
-@implementation DLSOptionItem
+@implementation DLSPopupOption
 
 - (id)initWithLabel:(NSString * __nonnull)label value:(id __nonnull)value {
     self = [super init];
@@ -37,15 +37,15 @@
 
 @end
 
-@interface DLSOptionEditor ()
+@interface DLSPopupEditor ()
 
 @property (copy, nonatomic) NSArray* options;
 
 @end
 
-@implementation DLSOptionEditor
+@implementation DLSPopupEditor
 
-- (id)initWithOptionItems:(NSArray * __nonnull)options {
+- (id)initWithPopupOptions:(NSArray * __nonnull)options {
     self = [super init];
     if(self != nil) {
         self.options = options;

@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DLSOptionItem : NSObject <NSCoding>
+@interface DLSPopupOption : NSObject <NSCoding>
 
 - (id)initWithLabel:(NSString*)label value:(id)value;
 
@@ -21,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface DLSOptionEditor : NSObject <DLSEditor>
+@interface DLSPopupEditor : NSObject <DLSEditor>
 
-// [DLSOptionItem]
-- (id)initWithOptionItems:(NSArray*)options;
+// [DLSPopupOption]
+- (id)initWithPopupOptions:(NSArray*)options;
 
 @property (readonly, copy, nonatomic) NSArray* options;
 

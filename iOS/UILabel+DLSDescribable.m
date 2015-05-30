@@ -10,8 +10,8 @@
 
 #import "DLSColorEditor.h"
 #import "DLSDescriptionContext.h"
-#import "DLSOptionEditor.h"
-#import "DLSOptionEditor+DLSKnownTypes.h"
+#import "DLSPopupEditor.h"
+#import "DLSPopupEditor+DLSKnownTypes.h"
 #import "DLSPropertyDescription.h"
 #import "DLSStepperEditor.h"
 #import "DLSTextFieldEditor.h"
@@ -28,7 +28,7 @@
                                 DLSProperty(@"text", [DLSTextFieldEditor textField]),
                                 DLSProperty(@"textColor", [[DLSColorEditor alloc] init]),
                                 DLSProperty(@"numberOfLines", [DLSTextFieldEditor textField]).composeMapper([[DLSNumericDescriptionMapper alloc] init]),
-                                DLSProperty(@"textAlignment", [DLSOptionEditor textAlignment]),
+                                DLSProperty(@"textAlignment", [DLSPopupEditor textAlignment]),
                                 DLSProperty(@"adjustsFontSizeToFitWidth", [DLSToggleEditor editor]).setLabel(@"Auto Adjust Font Size"),
                                 DLSProperty(@"preferredMaxLayoutWidth", [DLSStepperEditor editor]).setLabel(@"Max Layout Width"),
                                 DLSProperty(@"enabled", [DLSToggleEditor editor]),
