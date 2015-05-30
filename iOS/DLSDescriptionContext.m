@@ -16,35 +16,6 @@
 #import "DLSValueExchanger.h"
 #import "DLSValueMapper.h"
 
-@interface DLSDescriptionAccumulator ()
-
-@property (strong, nonatomic) NSMutableArray* savedGroups;
-
-@end
-
-@implementation DLSDescriptionAccumulator
-
-- (id)init {
-    self = [super init];
-    if(self != nil) {
-        self.savedGroups = [[NSMutableArray alloc] init];
-    }
-    return self;
-}
-
-- (void)addGroupWithName:(NSString*)name properties:(NSArray*)properties {
-    DLSPropertyGroup* group = [[DLSPropertyGroup alloc] init];
-    group.label = name;
-    group.properties = properties;
-    [self.savedGroups addObject:group];
-}
-
-- (NSArray*)groups {
-    return self.savedGroups.copy;
-}
-
-@end
-
 static NSString* DLSPropertyDescriptionExchangerKey = @"DLSPropertyDescriptionExchangerKey";
 
 @implementation DLSPropertyDescription (DLSValueExtensions)

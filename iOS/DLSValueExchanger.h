@@ -17,6 +17,7 @@ typedef void (^DLSValueTo)(id);
 
 @class DLSPropertyWrapper;
 
+/// Given an object, generates a way of reading/writing part of it
 @interface DLSValueExchanger : NSObject
 
 - (DLSPropertyWrapper*)wrapperFromObject:(id)object;
@@ -24,7 +25,7 @@ typedef void (^DLSValueTo)(id);
 
 @end
 
-
+/// Given an object, generates a way of reading/writing a particular keyPath
 @interface DLSKeyPathExchanger : DLSValueExchanger
 
 - (instancetype)initWithKeyPath:(NSString*)keyPath;

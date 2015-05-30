@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) id <DLSRemovable>(^colorOf)(UIColor* __strong __nullable * __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^edgeInsetsOf)(UIEdgeInsets* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^labelOf)(NSString* __strong __nullable * __nonnull);
-@property (readonly, nonatomic) id <DLSRemovable>(^imageOf)(UIImage* __nonnull);
+@property (readonly, nonatomic) id <DLSRemovable>(^imageOf)(UIImage* __strong __nullable * __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^pointOf)(CGPoint* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^sizeOf)(CGSize* __nonnull);
 @property (readonly, nonatomic) id <DLSRemovable>(^rectOf)(CGRect* __nonnull);
@@ -109,7 +109,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+/// Use this to start creating a control with the given label.
+/// Then use the methods on DLSReferencePredial to define the editor for the control.
+/// For example DLSControl("Name").colorOf(&someUIColor).
 #define DLSControl(label) [[DLSReferencePredial alloc] initWithLabel:label canSave:true owner:self file:@"" __FILE__ line:__LINE__]
+
+/// Use this to start creating a control with the given label based on a
+/// key path of the enclosing object.
+/// Then use the methods on DLSKeyPathPredial to define the editor for the control.
+/// For example DLSControl("backgroundColor").asColor()
 #define DLSControlForKeyPath(keypath) [[DLSKeyPathPredial alloc] initWithKeyPath:@"" #keypath canSave:true owner:self file:@"" __FILE__ line:__LINE__]
 
 NS_ASSUME_NONNULL_END

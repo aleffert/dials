@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol DLSRemovable;
 
 @interface NSTimer (DLSBlockActions)
@@ -15,3 +17,6 @@
 + (nonnull id <DLSRemovable>)dls_scheduledTimerWithTimeInterval:(NSTimeInterval)timeInterval repeats:(BOOL)repeats action:(void(^ __nonnull)(void))action;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

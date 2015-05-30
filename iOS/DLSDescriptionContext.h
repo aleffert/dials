@@ -22,15 +22,12 @@ DLSPropertyDescription* DLSProperty(NSString* name, id <DLSEditor> editor);
 
 @protocol DLSDescriptionContext <NSObject>
 
-// [DLSPropertyDescription]. Should be constructed using the DLSProperty functions
+/// Call this to add a new group for a view like "Layer", "Scroll View"
+/// @param name The user facing name of the group.
+/// Should be unique for a given object hierarchy.
+/// @param properties An array of DLSPropertyDescription.
+/// These should be constructed using the DLSProperty function
 - (void)addGroupWithName:(NSString*)name properties:(NSArray*)properties;
-
-@end
-
-@interface DLSDescriptionAccumulator : NSObject <DLSDescriptionContext>
-
-/// Array of DLSDescriptionGroup
-@property (readonly, nonatomic) NSArray* groups;
 
 @end
 

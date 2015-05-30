@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DLSPropertyGroup : NSObject <NSCoding>
 
 @property (copy, nonatomic, nonnull) NSString* label;
@@ -15,3 +17,5 @@
 @property (copy, nonatomic, nonnull) NSArray* properties;
 
 @end
+
+NS_ASSUME_NONNULL_END

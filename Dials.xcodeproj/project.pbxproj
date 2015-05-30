@@ -173,6 +173,8 @@
 		771683271B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 771683251B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.h */; };
 		771683281B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 771683261B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.m */; };
 		7716832A1B1A1FE4000A850F /* DLSPopupEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771683291B1A1FE4000A850F /* DLSPopupEditing.swift */; };
+		7716832D1B1A77B1000A850F /* DLSDescriptionAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */; };
+		7716832E1B1A77B1000A850F /* DLSDescriptionAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */; };
 		773769FC1B13A751001D81D3 /* UIControl+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */; };
 		773769FD1B13A751001D81D3 /* UIControl+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */; };
 		77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */; };
@@ -380,6 +382,8 @@
 		771683251B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DLSPopupEditor+DLSKnownTypes.h"; sourceTree = "<group>"; };
 		771683261B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DLSPopupEditor+DLSKnownTypes.m"; sourceTree = "<group>"; };
 		771683291B1A1FE4000A850F /* DLSPopupEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLSPopupEditing.swift; sourceTree = "<group>"; };
+		7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSDescriptionAccumulator.h; sourceTree = "<group>"; };
+		7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSDescriptionAccumulator.m; sourceTree = "<group>"; };
 		773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+DLSDescribable.h"; sourceTree = "<group>"; };
 		773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+DLSDescribable.m"; sourceTree = "<group>"; };
 		773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DLSDescribable.h"; sourceTree = "<group>"; };
@@ -531,6 +535,8 @@
 		77100EEE1B0780AE0082C38B /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */,
+				7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */,
 				775341C11B138A2F00BAE8CA /* DLSValueMapper.h */,
 				775341C21B138A2F00BAE8CA /* DLSValueMapper.m */,
 				77100EF01B0780AE0082C38B /* Dials-iOS.pch */,
@@ -783,6 +789,7 @@
 				77100F6D1B0781360082C38B /* DLSBufferedStreamReader.h in Headers */,
 				77100F791B0781360082C38B /* DLSColorEditor.h in Headers */,
 				77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */,
+				7716832D1B1A77B1000A850F /* DLSDescriptionAccumulator.h in Headers */,
 				77100FA51B0781360082C38B /* NSArray+DLSFunctionalAdditions.h in Headers */,
 				77100F8F1B0781360082C38B /* DLSPropertyWrapper.h in Headers */,
 				77100FA21B0781360082C38B /* DLSViewAdjustMessages.h in Headers */,
@@ -1081,6 +1088,7 @@
 				77100F8E1B0781360082C38B /* DLSPropertyGroup.m in Sources */,
 				77100F2E1B0780F50082C38B /* DLSLiveDialsPlugin+SwiftAdditions.swift in Sources */,
 				77100F721B0781360082C38B /* DLSBufferedStreamWriter.m in Sources */,
+				7716832E1B1A77B1000A850F /* DLSDescriptionAccumulator.m in Sources */,
 				77100F311B0780F50082C38B /* DLSNetworkRequestsPlugin.m in Sources */,
 				77100F7B1B0781360082C38B /* DLSColorEditor.m in Sources */,
 				77100F9E1B0781360082C38B /* DLSToggleEditor.m in Sources */,

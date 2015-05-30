@@ -10,8 +10,12 @@
 
 #import <Dials/DLSDescribable.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIView (DLSDescribable) <DLSDescribable>
 
 + (void)dls_describe:(id<DLSDescriptionContext>)context __attribute__((objc_requires_super));
 
 @end
+
+NS_ASSUME_NONNULL_END

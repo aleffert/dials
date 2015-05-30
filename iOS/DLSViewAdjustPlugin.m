@@ -10,6 +10,7 @@
 
 #import "DLSDescriptionContext.h"
 #import "DLSDescribable.h"
+#import "DLSDescriptionAccumulator.h"
 #import "DLSPropertyGroup.h"
 #import "DLSRemovable.h"
 #import "DLSPropertyDescription.h"
@@ -21,14 +22,17 @@
 #import "UIView+DLSDescribable.h"
 #import "UIView+DLSViewAdjust.h"
 
+
 @interface DLSViewAdjustPlugin ()
 
 /// NSString* (representing a class name) -> NSString* (representing a property name) -> DLSPropertyDescription
 @property (strong, nonatomic) NSMutableDictionary* classPropertyDescriptions;
 /// NSString* (representing a class name) -> Array of DLSDescriptionGroup*
 @property (strong, nonatomic) NSMutableDictionary* classDescriptions;
+
 @property (strong, nonatomic) id <DLSPluginContext> context;
 
+// weak -> weak so auto clears when the view gets cleared
 @property (strong, nonatomic) NSMapTable* viewIDs;
 
 @property (weak, nonatomic) UIView* selectedView;
@@ -75,7 +79,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
     
     [UIView dls_setListening:YES];
     __weak __typeof(self) weakself = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIWindowDidBecomeVisibleNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    self.windowChangedListener = [[NSNotificationCenter defaultCenter] addObserverForName:UIWindowDidBecomeVisibleNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         for(UIView* view in [self rootViews]) {
             [weakself viewChangedSurface:view];
         }

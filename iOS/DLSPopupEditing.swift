@@ -19,6 +19,7 @@ public protocol DLSPopupEditing : DLSValueWrapping {
     static var dls_popupItems : [(String, Self)] { get }
 }
 
+// TODO: Add way more types here
 extension NSTextAlignment : DLSPopupEditing {
     public static var dls_popupItems : [(String, NSTextAlignment)] {
         return [

@@ -17,16 +17,18 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
         
-        DLSGroupWithName("Swift Test Group") { control in
+        DLSGroupWithName("Swift Test Group") {
             DLSControl(keyPath: "view.backgroundColor")
-            DLSControl("example").sliderOf(&foo)
-            DLSControl("some color").colorOf(&color)
-            DLSControl("set color").actionOf {
+            DLSControl("Example Slider").sliderOf(&foo)
+            
+            DLSControl("Some Color").colorOf(&color)
+            
+            DLSControl("Set Color as Background").actionOf {
                 self.view.backgroundColor = self.color
             }
         }
     }
     
-    var color : UIColor? = UIColor(red:0.99, green:0.22, blue:0.3, alpha:1)
+    var color : UIColor = UIColor(red:0.99, green:0.22, blue:0.3, alpha:1)
 
 }

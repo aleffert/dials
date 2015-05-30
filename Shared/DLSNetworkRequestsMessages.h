@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSString* const DLSNetworkRequestsPluginName;
 
 @interface DLSNetworkConnectionMessage : NSObject <NSCoding>
@@ -40,3 +42,5 @@ extern NSString* const DLSNetworkRequestsPluginName;
 @property (strong, nonatomic) NSURLResponse* response;
 
 @end
+
+NS_ASSUME_NONNULL_END

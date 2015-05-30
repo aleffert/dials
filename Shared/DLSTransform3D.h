@@ -10,6 +10,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DLSTransform3D : NSObject <NSCoding>
 
 - (id)initWithTransform:(CATransform3D)transform;
@@ -17,3 +19,5 @@
 @property (readonly, nonatomic) CATransform3D transform;
 
 @end
+
+NS_ASSUME_NONNULL_END

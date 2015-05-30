@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIView (DLSViewAdjust)
 
 + (void)dls_setListening:(BOOL)listening;
@@ -15,3 +17,5 @@
 @property (readonly, nonatomic) NSString* dls_viewID;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -276,6 +276,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 DLSMake(colorOf, UIColor*, [[DLSColorEditor alloc] init])
 DLSMakeWrapped(edgeInsetsOf, UIEdgeInsets, DLSWrapUIEdgeInsets, DLSUnwrapUIEdgeInsets, [[DLSEdgeInsetsEditor alloc] init])
+DLSMake(imageOf, UIImage*, [[DLSImageEditor alloc] init])
 DLSMake(labelOf, NSString*, [DLSTextFieldEditor label])
 DLSMakeWrapped(pointOf, CGPoint, DLSWrapCGPointPoint, DLSUnwrapCGPointPoint, [[DLSPointEditor alloc] init])
 DLSMakeWrapped(sizeOf, CGSize, DLSWrapCGPointSize, DLSUnwrapCGPointSize, [[DLSSizeEditor alloc] init])

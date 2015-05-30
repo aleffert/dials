@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol DLSNetworkProxyProtocolDelegate
 
 - (void)connectionWithID:(NSString*)connectionID beganRequest:(NSURLRequest*)request;
@@ -22,3 +24,5 @@
 + (void)setDelegate:(id <DLSNetworkProxyProtocolDelegate>)delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END
