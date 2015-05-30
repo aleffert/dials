@@ -23,7 +23,7 @@ extension DLSFloatArrayEditor : CodeGenerating {
         let values = value as? [String:NSNumber] ?? [:]
         let fields = (labels as? [String]) ?? []
         let params = fields.map {key -> (String, String) in
-            let value = stringFromNumber(values[key] ?? NSNumber(float: 0))
+            let value = stringFromNumber(values[key] ?? (0 as NSNumber))
             return (key, value)
         }
         return constructor.formatWithParameters(Dictionary(elements : params))
@@ -204,7 +204,7 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
     
     func view(view: FloatArrayItemView, changedValue value: Double) {
         var values = (info?.value as? [String:NSNumber]) ?? [:]
-        values[view.label!.stringValue] = NSNumber(double: value)
+        values[view.label!.stringValue] = value as NSNumber
         info.map {
             delegate?.editorView(self, changedInfo: $0, toValue: values)
         }

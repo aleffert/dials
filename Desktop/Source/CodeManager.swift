@@ -17,6 +17,9 @@ public enum Language {
 // This is SUPER primitive. Hopefully some day the clang and swiftc libraries will
 // be part of the system, but for now clang is a super heavy dependency to be
 // avoided and swiftc isn't useful for this
+
+// In the mean time, we should at least replace some of this stuff with a relatively
+// simple CFG parser
 public class CodeManager: NSObject {
     
     private func languageForPath(path : String) -> Result<Language> {
@@ -89,7 +92,7 @@ public class CodeManager: NSObject {
                         pattern = "([\r\n ]+)(\(escapedSymbol))([\r\n ]*)=([\r\n ]*)(.*);"
                         template = "$1$2$3=$4\(replacementCode);"
                     case .Swift:
-                        pattern = "([\r\n ]+)(\(escapedSymbol))(.*)([\r\n ]*)=([\r\n ]*)(.*)"
+                        pattern = "([\r\n ]+)(\(escapedSymbol))(.*)([\r\n ]*)=([\r\n ]*)([^{}\r\n]*)"
                         template = "$1$2$3$4=$5\(replacementCode)"
                     }
                     

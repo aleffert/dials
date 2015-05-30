@@ -107,41 +107,45 @@ public func DLSGroupWithName(name: String, @noescape actions: () -> Void) {
 }
 
 public extension DLSReferencePredial {
+
     
     func editorOf<T : AnyObject>(inout source : T, editor : DLSEditor) -> DLSRemovable {
-        let wrapper = DLSPropertyWrapper(
-            getter: {_ in
-                return source
-            }, setter : {newValue in
-                source = newValue as! T
-                return
-            }
-        )
-        return wrapperOf(wrapper, editor)
+        return withUnsafeMutablePointer(&source) {(source : UnsafeMutablePointer<T>) in
+            let wrapper = DLSPropertyWrapper(
+                getter: {_ in
+                    return source.memory
+                }, setter : {newValue in
+                    source.memory = (newValue as! T)
+                    return
+                }
+            )
+            return wrapperOf(wrapper, editor)
+        }
     }
     
     func editorOf<T>(inout source : T, editor : DLSEditor, getT : T -> AnyObject, setT : AnyObject -> T) -> DLSRemovable {
-        let wrapper = DLSPropertyWrapper(
-            getter: {_ in
-                return getT(source)
-            }, setter : {newValue in
-                source = setT(newValue!)
-                return
-            }
-        )
-        return wrapperOf(wrapper, editor)
+        return withUnsafeMutablePointer(&source) {(var source : UnsafeMutablePointer<T>) in
+            let wrapper = DLSPropertyWrapper(
+                getter: {_ in
+                    return getT(source.memory)
+                }, setter : {newValue in
+                    
+                    source.put(setT(newValue!))
+                    return
+                }
+            )
+            return wrapperOf(wrapper, editor)
+        }
     }
     
-    func editorOf<T : AnyObject>(inout source : T?, editor : DLSEditor) -> DLSRemovable {
-        let wrapper = DLSPropertyWrapper(
-            getter: {_ in
-                return source
-            }, setter : {newValue in
-                source = newValue as! T?
-                return
-            }
-        )
-        return wrapperOf(wrapper, editor)
+    func editorOf(inout source : CGFloat, editor : DLSEditor) -> DLSRemovable {
+        let getT : CGFloat -> AnyObject = {
+            $0 as NSNumber
+        }
+        let setT : AnyObject -> CGFloat = {
+            $0 as! NSNumber as CGFloat
+        }
+        return editorOf(&source, editor: editor, getT: getT, setT: setT)
     }
     
     func colorOf(inout source : UIColor) -> DLSRemovable {
@@ -166,12 +170,13 @@ public extension DLSReferencePredial {
         return editorOf(&source, editor: DLSImageEditor())
     }
     
-    func optionsOf<T : DLSPopupEditing>(inout source : T) -> DLSRemovable {
+    func popupOf<T : DLSPopupEditing>(inout source : T) -> DLSRemovable {
         let items = T.dls_popupItems
         let optionItems = items.map { (name, value) in
             return DLSPopupOption(label: name, value: T.dls_wrapValue(value))
         }
-        return editorOf(&source, editor: DLSPopupEditor(popupOptions : optionItems), getT: T.dls_wrapValue, setT: T.dls_unwrapValue)
+        return editorOf(&source, editor: DLSPopupEditor(popupOptions : optionItems),
+            getT: T.dls_wrapValue, setT: T.dls_unwrapValue)
     }
     
     func pointOf(inout source : CGPoint) -> DLSRemovable {
@@ -205,27 +210,11 @@ public extension DLSReferencePredial {
     }
     
     func stepperOf(inout source : CGFloat) -> DLSRemovable {
-        let wrapper = DLSPropertyWrapper(
-            getter: {_ in
-                return source as NSNumber
-            }, setter : {newValue in
-                source = newValue as! CGFloat
-                return
-            }
-        )
-        return wrapperOf(wrapper, DLSStepperEditor())
+        return editorOf(&source, editor: DLSStepperEditor())
     }
     
     func sliderOf(inout source : CGFloat, min : Double = 0, max : Double = 1) -> DLSRemovable {
-        let wrapper = DLSPropertyWrapper(
-            getter: {_ in
-                return source as NSNumber
-            }, setter : {newValue in
-                source = newValue as! CGFloat
-                return
-            }
-        )
-        return wrapperOf(wrapper, DLSSliderEditor(min: min, max: max))
+        return editorOf(&source, editor: DLSSliderEditor(min: min, max: max))
     }
     
     func textFieldOf(inout source : NSString) -> DLSRemovable {
@@ -233,14 +222,12 @@ public extension DLSReferencePredial {
     }
     
     func togggleOf(inout source : Bool) -> DLSRemovable {
-        let wrapper = DLSPropertyWrapper(
-            getter: {_ in
-                return source as NSNumber
-            }, setter : {newValue in
-                source = newValue as! Bool
-                return
+        return editorOf(&source, editor: DLSToggleEditor(),
+            getT: {
+                $0 as NSNumber
+            }, setT: {
+                $0 as! NSNumber as Bool
             }
         )
-        return wrapperOf(wrapper, DLSToggleEditor())
     }
 }

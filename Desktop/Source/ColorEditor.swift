@@ -18,15 +18,15 @@ extension DLSColorEditor : CodeGenerating {
     
     func codeForValue(value: NSCoding?, language: Language) -> String {
         if let c = value as? NSColor {
-            let red = c.redComponent
-            let green = c.greenComponent
-            let blue = c.blueComponent
-            let alpha = c.alphaComponent
+            let red = stringFromNumber(c.redComponent, requireIntegerPart:true)
+            let green = stringFromNumber(c.greenComponent, requireIntegerPart:true)
+            let blue = stringFromNumber(c.blueComponent, requireIntegerPart:true)
+            let alpha = stringFromNumber(c.alphaComponent, requireIntegerPart:true)
             switch language {
             case .ObjC:
                 return "[[UIColor alloc] initWithRed:\(red) green:\(green) blue:\(blue) alpha:\(alpha)]"
             case .Swift:
-                return "UIColor(red:\(red) green:\(green) blue:\(blue) alpha:\(alpha))"
+                return "UIColor(red:\(red), green:\(green), blue:\(blue), alpha:\(alpha))"
             }
         }
         else {

@@ -10,10 +10,6 @@
 
 #import <Dials/Dials.h>
 
-@interface TestPlugin : NSObject <DLSPlugin>
-
-@end
-
 @interface AppDelegate ()
 
 @end

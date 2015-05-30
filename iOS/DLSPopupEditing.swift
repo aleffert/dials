@@ -30,7 +30,7 @@ extension NSTextAlignment : DLSPopupEditing {
     }
     
     public static func dls_wrapValue(value: NSTextAlignment) -> AnyObject {
-        return NSNumber(integer: value.rawValue)
+        return value.rawValue as NSNumber
     }
     
     public static func dls_unwrapValue(value: AnyObject) -> NSTextAlignment {

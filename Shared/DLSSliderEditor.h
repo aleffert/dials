@@ -11,6 +11,8 @@
 
 #import <Dials/DLSEditor.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DLSSliderEditor : NSObject <DLSEditor>
 
 /// Represents a continuous slider for zero to one
@@ -33,3 +35,6 @@
 @property (readonly, assign, nonatomic) double max;
 
 @end
+
+
+NS_ASSUME_NONNULL_END

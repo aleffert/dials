@@ -10,7 +10,6 @@ import UIKit
 import Dials
 
 var foo : CGFloat = 0.6
-var color : UIColor = UIColor(white: 1, alpha: 1)
 
 class TestViewController: UIViewController {
 
@@ -19,13 +18,15 @@ class TestViewController: UIViewController {
         self.view.backgroundColor = UIColor.lightGrayColor()
         
         DLSGroupWithName("Swift Test Group") { control in
-            DLSControl("perform").actionOf { _ in
-                NSLog("performed")
-            }
             DLSControl(keyPath: "view.backgroundColor")
             DLSControl("example").sliderOf(&foo)
             DLSControl("some color").colorOf(&color)
+            DLSControl("set color").actionOf {
+                self.view.backgroundColor = self.color
+            }
         }
     }
+    
+    var color : UIColor? = UIColor(red:0.99, green:0.22, blue:0.3, alpha:1)
 
 }

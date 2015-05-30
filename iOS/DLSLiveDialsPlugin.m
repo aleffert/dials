@@ -215,12 +215,14 @@ static DLSLiveDialsPlugin* sActivePlugin;
 }
 
 - (id <DLSRemovable> (^)(dispatch_block_t))actionOf {
-    DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
-        return nil;
-    } setter:^(id __nullable v) {
-        // do nothing
-    }];
     return ^(dispatch_block_t action){
+        
+        DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithGetter:^id {
+            return @"";
+        } setter:^(id __nullable v) {
+            action();
+        }];
+        
         return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:[DLSActionEditor editor] label:self.label canSave:NO file:self.file line:self.line];
     };
 }
