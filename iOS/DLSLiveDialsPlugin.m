@@ -227,7 +227,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 - (id <DLSRemovable> (^)(DLSPropertyWrapper*, id <DLSEditor>))wrapperOf {
     return ^(DLSPropertyWrapper* wrapper, id <DLSEditor> editor){
-        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:NO file:self.file line:self.line];
+        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:YES file:self.file line:self.line];
     };
 }
 
@@ -371,7 +371,6 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
         return self.asEditor([DLSImageEditor editor]);
     };
 }
-
 
 - (id<DLSRemovable>(^)(void))asPoint {
     return ^{

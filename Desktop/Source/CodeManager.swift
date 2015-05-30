@@ -104,6 +104,7 @@ public class CodeManager: NSObject {
                             return Failure("Couldn't find initializer for \"\(symbol)\" in \"\(path.lastPathComponent)\"")
                         }
                         else {
+                            // TODO show an option picker
                             return Failure("Too many matches for \"\(symbol)\" (\(replacementCount)) in \"\(path.lastPathComponent)\". Couldn't decide which to replace.")
                         }
                     }

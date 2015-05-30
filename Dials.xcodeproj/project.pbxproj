@@ -172,6 +172,7 @@
 		77100FB81B078A6D0082C38B /* Sample Files in Resources */ = {isa = PBXBuildFile; fileRef = 77100FB71B078A6D0082C38B /* Sample Files */; };
 		771683271B189F09000A850F /* DLSOptionEditor+DLSKnownTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 771683251B189F09000A850F /* DLSOptionEditor+DLSKnownTypes.h */; };
 		771683281B189F09000A850F /* DLSOptionEditor+DLSKnownTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 771683261B189F09000A850F /* DLSOptionEditor+DLSKnownTypes.m */; };
+		7716832A1B1A1FE4000A850F /* DLSOptionEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771683291B1A1FE4000A850F /* DLSOptionEditing.swift */; };
 		773769FC1B13A751001D81D3 /* UIControl+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */; };
 		773769FD1B13A751001D81D3 /* UIControl+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */; };
 		77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */; };
@@ -378,6 +379,7 @@
 		77100FB71B078A6D0082C38B /* Sample Files */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Sample Files"; sourceTree = "<group>"; };
 		771683251B189F09000A850F /* DLSOptionEditor+DLSKnownTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DLSOptionEditor+DLSKnownTypes.h"; sourceTree = "<group>"; };
 		771683261B189F09000A850F /* DLSOptionEditor+DLSKnownTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DLSOptionEditor+DLSKnownTypes.m"; sourceTree = "<group>"; };
+		771683291B1A1FE4000A850F /* DLSOptionEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLSOptionEditing.swift; sourceTree = "<group>"; };
 		773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+DLSDescribable.h"; sourceTree = "<group>"; };
 		773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+DLSDescribable.m"; sourceTree = "<group>"; };
 		773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DLSDescribable.h"; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 		77100EEE1B0780AE0082C38B /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				771683291B1A1FE4000A850F /* DLSOptionEditing.swift */,
 				775341C11B138A2F00BAE8CA /* DLSValueMapper.h */,
 				775341C21B138A2F00BAE8CA /* DLSValueMapper.m */,
 				77100EF01B0780AE0082C38B /* Dials-iOS.pch */,
@@ -1086,6 +1089,7 @@
 				77100FA71B0781360082C38B /* NSArray+DLSFunctionalAdditions.m in Sources */,
 				77100F821B0781360082C38B /* DLSLiveDial.m in Sources */,
 				77100F881B0781360082C38B /* DLSNetworkRequestsMessages.m in Sources */,
+				7716832A1B1A1FE4000A850F /* DLSOptionEditing.swift in Sources */,
 				77100F751B0781360082C38B /* DLSChannel.m in Sources */,
 				77100F2C1B0780F50082C38B /* DLSDescriptionContext.m in Sources */,
 				77100FB21B0784780082C38B /* DLSPropertyDescription.m in Sources */,

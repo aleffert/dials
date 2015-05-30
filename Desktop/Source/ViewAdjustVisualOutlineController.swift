@@ -28,8 +28,10 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     private let controlsView = VisualOutlineControlsView()
     private let bodyLayer = CATransformLayer()
     
+    // Delta from the active rotation gesture
     private var rotationOffset = NSZeroPoint
-    private var activeOffset = NSZeroPoint
+    // Delta from the active pan gesture
+    private var panOffset = NSZeroPoint
     private var gestureMagnification : CGFloat = 1
     
     private var currentSelection : NSString?
@@ -83,6 +85,7 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         let currentDepth = depth
         depth = depth + 1
         
+        var zPos : CGFloat = 0.0
         for node in nodes {
             if let record = hierarchy[node] {
                 let layer = layers[node] ?? ViewFacade(record : record)
@@ -100,6 +103,7 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 layer.contentLayer.borderColor = record.renderingInfo.borderColor?.CGColor
                 layer.contentLayer.contents = contents[record.viewID]
                 layer.contentLayer.shadowColor = record.renderingInfo.shadowColor?.CGColor
+                
                 layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(currentDepth) * controlsView.depthOffset)
                 
                 for (key, value) in record.renderingInfo.contentValues {
@@ -111,7 +115,11 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
                 
                 layer.borderLayer.transform = layer.contentLayer.transform
                 
+                // Add a small fudge factor so siblings are properly ordered
+                layer.zPosition = zPos
+                
                 visitNodes(record.children as! [NSString], parent : layer, depth : &depth, marking: &marking)
+                zPos += 0.001
             }
         }
     }
@@ -156,7 +164,7 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
         let scale = clampScale(gestureMagnification * controlsView.zoom)
         let translate = CATransform3DMakeTranslation(-screenSize.width / 2, -screenSize.height / 2, 0)
         let scaleTransform = CATransform3DMakeScale(scale, scale, scale)
-        let offset = CGPointMake(rotationOffset.x + activeOffset.x, rotationOffset.y + activeOffset.y)
+        let offset = CGPointMake(rotationOffset.x + panOffset.x, rotationOffset.y + panOffset.y)
         let xRotation = CATransform3DMakeRotation(offsetToRadians(offset.x), 0, 1, 0)
         let yRotation = CATransform3DMakeRotation(offsetToRadians(-offset.y), 1, 0, 0)
         let rotationTransform = CATransform3DConcat(xRotation, yRotation)
@@ -191,16 +199,16 @@ class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControls
     func panChangedWithDelta(delta : CGPoint) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        activeOffset = delta
+        panOffset = delta
         // Ideally we'd just reset the translation, but that seems to be buggy in AppKit
         updateBodyTransforms()
         CATransaction.commit()
     }
     
     func panStationary() {
-        rotationOffset.x = rotationOffset.x + activeOffset.x
-        rotationOffset.y = rotationOffset.y + activeOffset.y
-        activeOffset = NSZeroPoint
+        rotationOffset.x = rotationOffset.x + panOffset.x
+        rotationOffset.y = rotationOffset.y + panOffset.y
+        panOffset = NSZeroPoint
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         CATransaction.setAnimationDuration(0)

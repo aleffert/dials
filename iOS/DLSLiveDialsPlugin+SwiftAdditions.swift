@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 public extension NSObject {
     
     func DLSControl(
@@ -21,10 +22,9 @@ public extension NSObject {
         #keyPath : String,
         line : Int = __LINE__,
         file : String = __FILE__) -> DLSKeyPathPredial {
-            return DLSKeyPathPredial(keyPath: keyPath, canSave: true, owner : self, file : file, line : line)
+            return DLSKeyPathPredial(keyPath: keyPath, canSave: false, owner : self, file : file, line : line)
     }
 }
-
 
 /// Type carrying version of DLSPropertyWrapper
 public class PropertyWrapper<A : AnyObject> {
@@ -97,6 +97,13 @@ public extension DLSLiveDialsPlugin {
             line: Int(line)
         )
     }
+    
+}
+
+public func DLSGroupWithName(name: String, @noescape actions: () -> Void) {
+    DLSLiveDialsPlugin.activePlugin()?.beginGroupWithName(name)
+    actions()
+    DLSLiveDialsPlugin.activePlugin()?.endGroup()
 }
 
 public extension DLSReferencePredial {
@@ -113,12 +120,12 @@ public extension DLSReferencePredial {
         return wrapperOf(wrapper, editor)
     }
     
-    func editorOf<T>(inout source : T, editor : DLSEditor, getT : T -> AnyObject?, setT : AnyObject? -> T) -> DLSRemovable {
+    func editorOf<T>(inout source : T, editor : DLSEditor, getT : T -> AnyObject, setT : AnyObject -> T) -> DLSRemovable {
         let wrapper = DLSPropertyWrapper(
             getter: {_ in
                 return getT(source)
             }, setter : {newValue in
-                source = setT(newValue)
+                source = setT(newValue!)
                 return
             }
         )
@@ -157,6 +164,14 @@ public extension DLSReferencePredial {
     
     func imageOf(inout source : UIImage) -> DLSRemovable {
         return editorOf(&source, editor: DLSImageEditor())
+    }
+    
+    func optionsOf<T : DLSOptionEditing>(inout source : T) -> DLSRemovable {
+        let items = T.dls_optionItems
+        let optionItems = items.map { (name, value) in
+            return DLSOptionItem(label: name, value: T.dls_wrapOptionValue(value))
+        }
+        return editorOf(&source, editor: DLSOptionEditor(optionItems : optionItems), getT: T.dls_wrapOptionValue, setT: T.dls_unwrapOptionValue)
     }
     
     func pointOf(inout source : CGPoint) -> DLSRemovable {

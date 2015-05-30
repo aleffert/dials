@@ -24,8 +24,11 @@ enum BorderStyle {
 }
 
 class ViewFacade : CATransformLayer {
+    // This is for selection so it doesn't interfere with the content border properties
     let borderLayer = CALayer()
+    // This matches the view's properties
     let contentLayer = CALayer()
+    // This is the z depth
     var hierarchyDepth = 0
     
     var record : DLSViewHierarchyRecord!
@@ -41,8 +44,8 @@ class ViewFacade : CATransformLayer {
         let layoutManager = CAConstraintLayoutManager.layoutManager() as! CAConstraintLayoutManager
         self.layoutManager = layoutManager
         
-        addSublayer(borderLayer)
         addSublayer(contentLayer)
+        addSublayer(borderLayer)
         
         borderLayer.addConstraintsMatchingSuperviewBounds(insets: NSEdgeInsets(top: -1, left: -1, bottom: 1, right: 1))
         

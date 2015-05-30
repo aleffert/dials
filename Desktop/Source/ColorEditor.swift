@@ -48,6 +48,8 @@ class ColorEditorView : EditorView {
     
     override var info : EditorInfo? {
         didSet {
+            NSColorPanel.sharedColorPanel().showsAlpha = true
+            
             let color = info?.value as? NSColor
             well?.color = color ?? NSColor.clearColor()
             

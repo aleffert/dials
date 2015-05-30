@@ -10,21 +10,21 @@ import UIKit
 import Dials
 
 var foo : CGFloat = 0.6
+var color : UIColor = UIColor(white: 1, alpha: 1)
 
 class TestViewController: UIViewController {
-    
-    var color : UIColor = UIColor.grayColor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
         
-        DLSLiveDialsPlugin.activePlugin()?.groupWithName("Swift Test Group") {
-            self.DLSControl("perform").actionOf { _ in
+        DLSGroupWithName("Swift Test Group") { control in
+            DLSControl("perform").actionOf { _ in
                 NSLog("performed")
             }
-            self.DLSControl(keyPath: "view.backgroundColor")
-            self.DLSControl("example").sliderOf(&foo)
+            DLSControl(keyPath: "view.backgroundColor")
+            DLSControl("example").sliderOf(&foo)
+            DLSControl("some color").colorOf(&color)
         }
     }
 
