@@ -384,6 +384,7 @@
 		771683291B1A1FE4000A850F /* DLSPopupEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLSPopupEditing.swift; sourceTree = "<group>"; };
 		7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSDescriptionAccumulator.h; sourceTree = "<group>"; };
 		7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSDescriptionAccumulator.m; sourceTree = "<group>"; };
+		7716832F1B1A8B68000A850F /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
 		773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+DLSDescribable.h"; sourceTree = "<group>"; };
 		773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+DLSDescribable.m"; sourceTree = "<group>"; };
 		773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DLSDescribable.h"; sourceTree = "<group>"; };
@@ -633,6 +634,7 @@
 		77100FCC1B08EC670082C38B /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				7716832F1B1A8B68000A850F /* Plugin.h */,
 				77100E5F1B06F6210082C38B /* GroupContainerView.swift */,
 				77100E601B06F6210082C38B /* LiveDialController.swift */,
 				77100E611B06F6210082C38B /* LiveDialPaneViewController.swift */,

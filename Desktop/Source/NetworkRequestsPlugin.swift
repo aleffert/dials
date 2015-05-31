@@ -13,29 +13,29 @@ class NetworkRequestsPlugin: Plugin {
     var context : PluginContext?
     var controller : NetworkRequestsViewController?
     
-    var name : String {
+    @objc var name : String {
         return DLSNetworkRequestsPluginName
     }
     
-    var displayName : String {
+    @objc var displayName : String {
         return "Network"
     }
     
-    var shouldSortChildren : Bool {
+    @objc var shouldSortChildren : Bool {
         return true
     }
     
-    func connectedWithContext(context: PluginContext) {
+    @objc func connectedWithContext(context: PluginContext) {
         self.context = context
     }
     
-    func connectionClosed() {
-        controller.map { context?.removeViewController($0, plugin: self) }
+    @objc func connectionClosed() {
+        controller.map { self.context?.removeViewController($0, plugin: self) }
         context = nil
         controller = nil
     }
 
-    func receiveMessage(data: NSData) {
+    @objc func receiveMessage(data: NSData) {
         let message : AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
         if let m = message as? DLSNetworkConnectionBeganMessage {
             

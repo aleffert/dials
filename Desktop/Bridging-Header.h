@@ -27,3 +27,4 @@
 #import "DLSToggleEditor.h"
 #import "DLSViewAdjustMessages.h"
 #import "NSObject+DLSDeallocAction.h"
+#import "Plugin.h"

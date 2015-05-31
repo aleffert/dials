@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// Just a block + equality
 class Listener<A> {
     
     let block : A -> Void
@@ -16,7 +17,7 @@ class Listener<A> {
         self.block = block
     }
     
-    func call(o : A) {
+    private func call(o : A) {
         block(o)
     }
 }

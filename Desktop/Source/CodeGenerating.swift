@@ -8,7 +8,8 @@
 
 import Foundation
 
-/// Implement this protocol to support changes back to code
+/// Implement this protocol as an extension on a DLSEditor implementation to
+/// support sending changes back to code for that type
 protocol CodeGenerating {
     func codeForValue(value : NSCoding?, language : Language) -> String
 }
