@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString* const DLSLiveDialsPluginName;
+extern NSString* const DLSLiveDialsPluginIdentifier;
 extern NSString* const DLSLiveDialsPluginDefaultGroup;
 
 @class DLSLiveDial;

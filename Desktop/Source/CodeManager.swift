@@ -23,7 +23,7 @@ public enum Language {
 public class CodeManager: NSObject {
     
     private func languageForPath(path : String) -> Result<Language> {
-        if path.pathExtension == "m" || path.pathExtension == "mm" || path.pathExtension == "h" {
+        if contains(["m", "mm", "h"], path.pathExtension) {
             return Success(.ObjC)
         }
         else if path.pathExtension == "swift" {

@@ -8,6 +8,8 @@
 
 import Cocoa
 
+private let PluginPathExtension = "dialsplugin"
+
 class PluginController: NSObject {
     
     private var plugins : [Plugin] = []
@@ -15,21 +17,55 @@ class PluginController: NSObject {
     override init() {
         super.init()
         self.registerDefaultPlugins()
+        self.registerBundlePlugins()
+        self.registerAdjacentPlugins()
     }
     
-    func registerDefaultPlugins() {
+    private func registerDefaultPlugins() {
         registerPlugin(LiveDialsPlugin())
         registerPlugin(ViewAdjustPlugin())
         registerPlugin(NetworkRequestsPlugin())
     }
     
-    func registerPlugin(plugin : Plugin) {
+    private func registerPluginsFromPaths(paths : [String]) {
+        for path in paths {
+            if let bundle = NSBundle(path: path as String),
+                loaded = bundle.load() as Bool?,
+                pluginClass = bundle.principalClass as? NSObject.Type,
+                plugin = pluginClass() as? Plugin where loaded {
+                    registerPlugin(plugin)
+                    println("Loaded plugin: \(path.lastPathComponent)")
+            }
+            else {
+                println("Failed to load plugin: \(path.lastPathComponent)")
+            }
+        }
+    }
+    
+    private func registerBundlePlugins() {
+        let paths = NSBundle.mainBundle().pathsForResourcesOfType(PluginPathExtension, inDirectory: "PlugIns") as? [String] ?? []
+        registerPluginsFromPaths(paths)
+    }
+    
+    // We also pick up any plugins side by side with the app so that build products
+    // are easy to pick up
+    private func registerAdjacentPlugins() {
+        let bundlePath = NSBundle.mainBundle().bundlePath
+        if let adjacentPaths = NSFileManager.defaultManager().enumeratorAtPath(bundlePath.stringByDeletingLastPathComponent)?.allObjects as? [String] {
+            let paths = adjacentPaths.filter {
+                $0.pathExtension == PluginPathExtension
+            }
+            registerPluginsFromPaths(paths)
+        }
+    }
+    
+    private func registerPlugin(plugin : Plugin) {
         plugins.append(plugin)
     }
     
-    private func pluginWithName(name : String) -> Plugin? {
+    private func pluginWithIdentifier(identifier : String) -> Plugin? {
         for possible in plugins {
-            if possible.name == name {
+            if possible.identifier == identifier {
                 return possible
             }
         }
@@ -37,7 +73,7 @@ class PluginController: NSObject {
     }
     
     func routeMessage(data : NSData, channel : DLSChannel) {
-        let plugin = pluginWithName(channel.name)
+        let plugin = pluginWithIdentifier(channel.name)
         plugin?.receiveMessage(data)
     }
     

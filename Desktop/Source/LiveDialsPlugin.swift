@@ -10,9 +10,9 @@ import Cocoa
 
 class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     
-    var name : String = DLSLiveDialsPluginName
+    let identifier = DLSLiveDialsPluginName
 
-    var displayName : String = "Control Panel"
+    let label = "Control Panel"
     
     private var knownGroups : [String:LiveDialPaneViewController] = [:]
     private var context : PluginContext?

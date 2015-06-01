@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString* const DLSNetworkRequestsPluginName;
+extern NSString* const DLSNetworkRequestsPluginIdentifier;
 
 @interface DLSNetworkConnectionMessage : NSObject <NSCoding>
 

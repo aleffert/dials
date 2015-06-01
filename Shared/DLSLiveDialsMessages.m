@@ -10,7 +10,7 @@
 
 #import "DLSConstants.h"
 
-NSString* const DLSLiveDialsPluginName = @"com.akivaleffert.dials.live-dials";
+NSString* const DLSLiveDialsPluginIdentifier = @"com.akivaleffert.dials.live-dials";
 NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 
 @implementation DLSLiveDialsMessage

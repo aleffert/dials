@@ -19,8 +19,8 @@
 
 @implementation DLSNetworkRequestsPlugin
 
-- (NSString*)name {
-    return DLSNetworkRequestsPluginName;
+- (NSString*)identifier {
+    return DLSNetworkRequestsPluginIdentifier;
 }
 
 - (void)start {

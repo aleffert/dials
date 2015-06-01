@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString* const __nonnull DLSViewAdjustPluginName;
+extern NSString* const DLSViewAdjustPluginIdentifier;
 
 @protocol DLSEditor;
 

@@ -56,7 +56,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     func addViewController(controller: NSViewController, plugin: Plugin) {
         var found = false
         for group in groups {
-            if group.name == plugin.name {
+            if group.name == plugin.identifier {
                 group.items.append(controller)
                 if plugin.shouldSortChildren {
                     group.items.sort({ (left, right) -> Bool in
@@ -69,7 +69,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         }
         
         if !found {
-            let group = NamedGroup<NSViewController>(name: plugin.name, displayName: plugin.displayName)
+            let group = NamedGroup<NSViewController>(name: plugin.identifier, displayName: plugin.label)
             group.items = [controller]
             groups.append(group)
         }
@@ -81,7 +81,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     
     func removeViewController(controller: NSViewController, plugin: Plugin) {
         for group in groups {
-            if group.name == plugin.name {
+            if group.name == plugin.identifier {
                 group.items = group.items.filter { return $0 != controller }
             }
         }

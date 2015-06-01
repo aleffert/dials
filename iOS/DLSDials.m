@@ -118,7 +118,7 @@
 
 - (void)stream:(DLSChannelStream *)stream receivedMessage:(NSData *)data onChannel:(DLSChannel *)channel {
     for(id <DLSPlugin> plugin in self.plugins) {
-        if([plugin.name isEqual:channel.name]) {
+        if([plugin.identifier isEqual:channel.name]) {
             [plugin receiveMessage:data];
         }
     }
@@ -135,7 +135,7 @@
 }
 
 - (void)sendMessage:(NSData *)message fromPlugin:(id<DLSPlugin>)plugin {
-    DLSChannel* channel = [[DLSChannel alloc] initWithName:plugin.name];
+    DLSChannel* channel = [[DLSChannel alloc] initWithName:plugin.identifier];
     [self.stream sendMessage:message onChannel:channel];
 }
 

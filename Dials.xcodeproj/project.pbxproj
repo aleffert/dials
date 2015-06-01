@@ -41,7 +41,6 @@
 		77100EBD1B06F6210082C38B /* NSView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E6C1B06F6210082C38B /* NSView+Layout.swift */; };
 		77100EBE1B06F6210082C38B /* Optional+Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E6D1B06F6210082C38B /* Optional+Result.swift */; };
 		77100EBF1B06F6210082C38B /* Optional+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E6E1B06F6210082C38B /* Optional+Utilities.swift */; };
-		77100EC01B06F6210082C38B /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E6F1B06F6210082C38B /* Plugin.swift */; };
 		77100EC11B06F6210082C38B /* PluginContextBouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E701B06F6210082C38B /* PluginContextBouncer.swift */; };
 		77100EC21B06F6210082C38B /* PluginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E711B06F6210082C38B /* PluginController.swift */; };
 		77100EC31B06F6210082C38B /* PropertyGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E721B06F6210082C38B /* PropertyGroupView.swift */; };
@@ -259,7 +258,6 @@
 		77100E6C1B06F6210082C38B /* NSView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+Layout.swift"; sourceTree = "<group>"; };
 		77100E6D1B06F6210082C38B /* Optional+Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Result.swift"; sourceTree = "<group>"; };
 		77100E6E1B06F6210082C38B /* Optional+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Utilities.swift"; sourceTree = "<group>"; };
-		77100E6F1B06F6210082C38B /* Plugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
 		77100E701B06F6210082C38B /* PluginContextBouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginContextBouncer.swift; sourceTree = "<group>"; };
 		77100E711B06F6210082C38B /* PluginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginController.swift; sourceTree = "<group>"; };
 		77100E721B06F6210082C38B /* PropertyGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyGroupView.swift; sourceTree = "<group>"; };
@@ -384,7 +382,7 @@
 		771683291B1A1FE4000A850F /* DLSPopupEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DLSPopupEditing.swift; sourceTree = "<group>"; };
 		7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSDescriptionAccumulator.h; sourceTree = "<group>"; };
 		7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSDescriptionAccumulator.m; sourceTree = "<group>"; };
-		7716832F1B1A8B68000A850F /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		771683311B1A8FBA000A850F /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plugin.h; path = Desktop/Headers/Plugin.h; sourceTree = SOURCE_ROOT; };
 		773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+DLSDescribable.h"; sourceTree = "<group>"; };
 		773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+DLSDescribable.m"; sourceTree = "<group>"; };
 		773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DLSDescribable.h"; sourceTree = "<group>"; };
@@ -487,7 +485,6 @@
 				77100E5C1B06F6210082C38B /* DeviceController.swift */,
 				77100E5E1B06F6210082C38B /* FormattingUtilities.swift */,
 				77100E631B06F6210082C38B /* MapTable.swift */,
-				77100E6F1B06F6210082C38B /* Plugin.swift */,
 				77100E701B06F6210082C38B /* PluginContextBouncer.swift */,
 				77100E711B06F6210082C38B /* PluginController.swift */,
 				77100E731B06F6210082C38B /* RequestContentTabController.swift */,
@@ -634,7 +631,7 @@
 		77100FCC1B08EC670082C38B /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				7716832F1B1A8B68000A850F /* Plugin.h */,
+				771683311B1A8FBA000A850F /* Plugin.h */,
 				77100E5F1B06F6210082C38B /* GroupContainerView.swift */,
 				77100E601B06F6210082C38B /* LiveDialController.swift */,
 				77100E611B06F6210082C38B /* LiveDialPaneViewController.swift */,
@@ -1016,7 +1013,6 @@
 				77100F901B0781360082C38B /* DLSPropertyWrapper.m in Sources */,
 				77100EC31B06F6210082C38B /* PropertyGroupView.swift in Sources */,
 				77100EA21B06F6210082C38B /* Array+Utilties.swift in Sources */,
-				77100EC01B06F6210082C38B /* Plugin.swift in Sources */,
 				77376A221B142C48001D81D3 /* PopupEditor.swift in Sources */,
 				77100EA91B06F6210082C38B /* ConnectionStatusView.swift in Sources */,
 				77100EB51B06F6210082C38B /* MathUtils.swift in Sources */,
@@ -1156,7 +1152,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1201,7 +1197,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;

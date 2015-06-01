@@ -8,34 +8,28 @@
 
 import Cocoa
 
-class NetworkRequestsPlugin: Plugin {
+class NetworkRequestsPlugin: NSObject, Plugin {
     
     var context : PluginContext?
     var controller : NetworkRequestsViewController?
     
-    @objc var name : String {
-        return DLSNetworkRequestsPluginName
-    }
+    let identifier = DLSNetworkRequestsPluginName
     
-    @objc var displayName : String {
-        return "Network"
-    }
+    let label = "Network"
     
-    @objc var shouldSortChildren : Bool {
-        return true
-    }
+    let shouldSortChildren = true
     
-    @objc func connectedWithContext(context: PluginContext) {
+    func connectedWithContext(context: PluginContext) {
         self.context = context
     }
     
-    @objc func connectionClosed() {
+    func connectionClosed() {
         controller.map { self.context?.removeViewController($0, plugin: self) }
         context = nil
         controller = nil
     }
 
-    @objc func receiveMessage(data: NSData) {
+    func receiveMessage(data: NSData) {
         let message : AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
         if let m = message as? DLSNetworkConnectionBeganMessage {
             

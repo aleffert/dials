@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		771683441B1B60A1000A850F /* ExamplePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771683431B1B60A1000A850F /* ExamplePlugin.swift */; };
 		77567B581AC6C66900877A7B /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77567B571AC6C66900877A7B /* TestViewController.swift */; };
 		77567B5E1AC6CCD100877A7B /* Dials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77567B5D1AC6CCD100877A7B /* Dials.framework */; };
 		77567B6B1AC6FCD600877A7B /* Dials.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77567B5D1AC6CCD100877A7B /* Dials.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		775AD31E1B1C984A0069A810 /* DLSExamplePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 775AD31D1B1C984A0069A810 /* DLSExamplePlugin.m */; };
+		775AD3221B1C99740069A810 /* DLSExamplePluginMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3211B1C99740069A810 /* DLSExamplePluginMessages.m */; };
+		775AD3231B1C99740069A810 /* DLSExamplePluginMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3211B1C99740069A810 /* DLSExamplePluginMessages.m */; };
 		7792504D1A3348B900CCC229 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792504A1A3348B900CCC229 /* AppDelegate.m */; };
 		7792504E1A3348B900CCC229 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7792504C1A3348B900CCC229 /* ViewController.m */; };
 		779250571A3348C700CCC229 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779250541A3348C700CCC229 /* Images.xcassets */; };
@@ -32,9 +36,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		771683361B1A9139000A850F /* ExamplePlugin.dialsplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExamplePlugin.dialsplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		7716833D1B1A9219000A850F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7716833E1B1A94EF000A850F /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		771683431B1B60A1000A850F /* ExamplePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamplePlugin.swift; sourceTree = "<group>"; };
 		77567B561AC6C66800877A7B /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		77567B571AC6C66900877A7B /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestViewController.swift; path = Source/TestViewController.swift; sourceTree = "<group>"; };
 		77567B5D1AC6CCD100877A7B /* Dials.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dials.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		775AD31C1B1C984A0069A810 /* DLSExamplePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSExamplePlugin.h; sourceTree = "<group>"; };
+		775AD31D1B1C984A0069A810 /* DLSExamplePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSExamplePlugin.m; sourceTree = "<group>"; };
+		775AD3201B1C99740069A810 /* DLSExamplePluginMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSExamplePluginMessages.h; sourceTree = "<group>"; };
+		775AD3211B1C99740069A810 /* DLSExamplePluginMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSExamplePluginMessages.m; sourceTree = "<group>"; };
 		779250471A3348A900CCC229 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		779250491A3348B900CCC229 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Source/AppDelegate.h; sourceTree = "<group>"; };
 		7792504A1A3348B900CCC229 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Source/AppDelegate.m; sourceTree = "<group>"; };
@@ -48,6 +60,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		771683331B1A9139000A850F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77AAE52B1A33477E00998E36 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -59,11 +78,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		771683371B1A9139000A850F /* ExamplePlugin */ = {
+			isa = PBXGroup;
+			children = (
+				775AD3201B1C99740069A810 /* DLSExamplePluginMessages.h */,
+				775AD3211B1C99740069A810 /* DLSExamplePluginMessages.m */,
+				775AD31C1B1C984A0069A810 /* DLSExamplePlugin.h */,
+				775AD31D1B1C984A0069A810 /* DLSExamplePlugin.m */,
+				771683431B1B60A1000A850F /* ExamplePlugin.swift */,
+				771683381B1A9139000A850F /* Supporting Files */,
+				7716833E1B1A94EF000A850F /* Bridging-Header.h */,
+			);
+			name = ExamplePlugin;
+			path = DialsExample/ExamplePlugin;
+			sourceTree = "<group>";
+		};
+		771683381B1A9139000A850F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7716833D1B1A9219000A850F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		77AAE5251A33477D00998E36 = {
 			isa = PBXGroup;
 			children = (
 				77567B5D1AC6CCD100877A7B /* Dials.framework */,
 				77AAE5301A33477E00998E36 /* DialsExample */,
+				771683371B1A9139000A850F /* ExamplePlugin */,
 				77AAE52F1A33477E00998E36 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				77AAE52E1A33477E00998E36 /* DialsExample.app */,
+				771683361B1A9139000A850F /* ExamplePlugin.dialsplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,6 +149,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		771683351B1A9139000A850F /* ExamplePlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7716833C1B1A9139000A850F /* Build configuration list for PBXNativeTarget "ExamplePlugin" */;
+			buildPhases = (
+				771683321B1A9139000A850F /* Sources */,
+				771683331B1A9139000A850F /* Frameworks */,
+				771683341B1A9139000A850F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExamplePlugin;
+			productName = ExamplePlugin;
+			productReference = 771683361B1A9139000A850F /* ExamplePlugin.dialsplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
 		77AAE52D1A33477E00998E36 /* DialsExample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77AAE5511A33477E00998E36 /* Build configuration list for PBXNativeTarget "DialsExample" */;
@@ -132,6 +193,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Akiva Leffert";
 				TargetAttributes = {
+					771683351B1A9139000A850F = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
 					77AAE52D1A33477E00998E36 = {
 						CreatedOnToolsVersion = 6.1.1;
 					};
@@ -151,11 +215,19 @@
 			projectRoot = "";
 			targets = (
 				77AAE52D1A33477E00998E36 /* DialsExample */,
+				771683351B1A9139000A850F /* ExamplePlugin */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		771683341B1A9139000A850F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77AAE52C1A33477E00998E36 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,11 +241,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		771683321B1A9139000A850F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				771683441B1B60A1000A850F /* ExamplePlugin.swift in Sources */,
+				775AD3231B1C99740069A810 /* DLSExamplePluginMessages.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		77AAE52A1A33477E00998E36 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7792504D1A3348B900CCC229 /* AppDelegate.m in Sources */,
+				775AD3221B1C99740069A810 /* DLSExamplePluginMessages.m in Sources */,
+				775AD31E1B1C984A0069A810 /* DLSExamplePlugin.m in Sources */,
 				77AAE5341A33477E00998E36 /* main.m in Sources */,
 				77567B581AC6C66900877A7B /* TestViewController.swift in Sources */,
 				7792504E1A3348B900CCC229 /* ViewController.m in Sources */,
@@ -204,6 +287,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7716833A1B1A9139000A850F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/Desktop/Headers/",
+				);
+				INFOPLIST_FILE = DialsExample/ExamplePlugin/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DialsExample/ExamplePlugin/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WRAPPER_EXTENSION = dialsplugin;
+			};
+			name = Debug;
+		};
+		7716833B1B1A9139000A850F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/Desktop/Headers/",
+				);
+				INFOPLIST_FILE = DialsExample/ExamplePlugin/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "DialsExample/ExamplePlugin/Bridging-Header.h";
+				WRAPPER_EXTENSION = dialsplugin;
+			};
+			name = Release;
+		};
 		77AAE54F1A33477E00998E36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,6 +469,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7716833C1B1A9139000A850F /* Build configuration list for PBXNativeTarget "ExamplePlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7716833A1B1A9139000A850F /* Debug */,
+				7716833B1B1A9139000A850F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		77AAE5291A33477D00998E36 /* Build configuration list for PBXProject "DialsExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

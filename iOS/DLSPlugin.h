@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Unique identifier for a plugin. Should be the same as the name of the corresponding
 /// desktop plugin
-@property (readonly, nonatomic, copy) NSString* name;
+@property (readonly, nonatomic, copy) NSString* identifier;
 
 /// Called when Dials is started. This is the place to do anything that needs to be
 /// in place even before a desktop client is connected

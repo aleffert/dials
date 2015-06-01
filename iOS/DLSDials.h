@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param plugins An array of plugins that implement <DLSPlugin>.
 - (void)startWithPlugins:(NSArray*)plugins;
 
-/// @return A list of plugins implementing <DLSPlugin>.
+/// @return An array of plugins implementing <DLSPlugin>.
 /// If you want to add your own plugins, you can can call -startWithPlugins:
 /// with your own plugins appended to this array.
 - (NSArray*)defaultPlugins;

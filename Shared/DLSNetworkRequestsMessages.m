@@ -10,7 +10,7 @@
 
 #import "DLSConstants.h"
 
-NSString* const DLSNetworkRequestsPluginName = @"com.akivaleffert.dials.network";
+NSString* const DLSNetworkRequestsPluginIdentifier = @"com.akivaleffert.dials.network";
 
 @implementation DLSNetworkConnectionMessage
 - (id)initWithCoder:(NSCoder *)aDecoder {

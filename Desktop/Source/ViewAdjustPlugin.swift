@@ -8,28 +8,22 @@
 
 import Cocoa
 
-class ViewAdjustPlugin: Plugin, ViewAdjustViewControllerDelegate {
+class ViewAdjustPlugin: NSObject, Plugin, ViewAdjustViewControllerDelegate {
     
     var controller : ViewAdjustViewController?
     var context : PluginContext?
     
-    init() {
-        
+    override init() {
+        super.init()
     }
     
-    @objc var name : String {
-        return DLSViewAdjustPluginName
-    }
+    let identifier = DLSViewAdjustPluginName
     
-    @objc var shouldSortChildren : Bool {
-        return true
-    }
+    let label = "Views"
     
-    @objc var displayName : String {
-        return "Views"
-    }
+    let shouldSortChildren = true
     
-    @objc func connectedWithContext(context: PluginContext) {
+    func connectedWithContext(context: PluginContext) {
         self.context = context
         let controller = ViewAdjustViewController(nibName: "ViewAdjustViewController", bundle: nil)!
         controller.delegate = self
@@ -37,13 +31,13 @@ class ViewAdjustPlugin: Plugin, ViewAdjustViewControllerDelegate {
         self.context?.addViewController(controller, plugin: self)
     }
     
-    @objc func connectionClosed() {
+    func connectionClosed() {
         controller.bind { self.context?.removeViewController($0, plugin: self) }
         context = nil
         controller = nil
     }
     
-    @objc func receiveMessage(data: NSData) {
+    func receiveMessage(data: NSData) {
         let message : AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
         if let m = message as? DLSViewAdjustFullHierarchyMessage {
             handleFullHierarchyMessage(m)

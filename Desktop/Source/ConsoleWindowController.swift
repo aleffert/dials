@@ -220,7 +220,7 @@ extension ConsoleWindowController : PluginContext {
     }
     
     func sendMessage(data: NSData, plugin: Plugin) {
-        let channel = DLSChannel(name : plugin.name)
+        let channel = DLSChannel(name : plugin.label)
         self.currentConnection?.sendMessage(data, channel: channel)
     }
 }

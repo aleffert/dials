@@ -76,8 +76,8 @@ static DLSLiveDialsPlugin* sActivePlugin;
 }
 
 
-- (NSString*)name {
-    return DLSLiveDialsPluginName;
+- (NSString*)identifier {
+    return DLSLiveDialsPluginIdentifier;
 }
 
 - (void)connectedWithContext:(id<DLSPluginContext>)context {

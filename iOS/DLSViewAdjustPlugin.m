@@ -59,8 +59,8 @@ static DLSViewAdjustPlugin* sActivePlugin;
     sActivePlugin = plugin;
 }
 
-- (NSString*)name {
-    return DLSViewAdjustPluginName;
+- (NSString*)identifier {
+    return DLSViewAdjustPluginIdentifier;
 }
 
 - (void)start {

@@ -11,7 +11,7 @@
 #import "DLSConstants.h"
 #import "DLSTransform3D.h"
 
-NSString* const DLSViewAdjustPluginName = @"com.akivaleffert.dials.view-adjust";
+NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-adjust";
 
 @implementation DLSPropertyRecord
 
