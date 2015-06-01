@@ -17,7 +17,7 @@ class ViewAdjustPlugin: NSObject, Plugin, ViewAdjustViewControllerDelegate {
         super.init()
     }
     
-    let identifier = DLSViewAdjustPluginName
+    let identifier = DLSViewAdjustPluginIdentifier
     
     let label = "Views"
     

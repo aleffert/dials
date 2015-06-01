@@ -13,7 +13,7 @@ class NetworkRequestsPlugin: NSObject, Plugin {
     var context : PluginContext?
     var controller : NetworkRequestsViewController?
     
-    let identifier = DLSNetworkRequestsPluginName
+    let identifier = DLSNetworkRequestsPluginIdentifier
     
     let label = "Network"
     

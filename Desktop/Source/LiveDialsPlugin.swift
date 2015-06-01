@@ -10,7 +10,7 @@ import Cocoa
 
 class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     
-    let identifier = DLSLiveDialsPluginName
+    let identifier = DLSLiveDialsPluginIdentifier
 
     let label = "Control Panel"
     
