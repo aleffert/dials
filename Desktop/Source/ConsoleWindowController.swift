@@ -80,7 +80,7 @@ class ConsoleWindowController: NSWindowController {
             itemsChangedBroadcaster.notifyListeners(.Available(deviceController.knownDevices))
             if let lastKnown = lastKnownConnection() {
                 for device in deviceController.knownDevices {
-                    if device.displayName == lastKnown {
+                    if device.label == lastKnown {
                         connectToDevice(device)
                         break
                     }
@@ -101,7 +101,7 @@ class ConsoleWindowController: NSWindowController {
         if device != nil {
             self.pluginController.connectedWithContext(self.contextBouncer)
         }
-        device.bind { self.saveLastKnownConnection($0.displayName) }
+        device.bind { self.saveLastKnownConnection($0.label) }
     }
     
     func choseDeviceOption(sender : NSMenuItem) {

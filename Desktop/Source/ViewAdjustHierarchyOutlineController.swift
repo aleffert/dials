@@ -64,7 +64,7 @@ class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, 
         let cell = outlineView.makeViewWithIdentifier(tableColumn!.identifier!, owner: self) as! NSTableCellView
         
         let record = hierarchy[item as! NSString]
-        record.map { cell.textField!.stringValue = "\($0.displayName) - \($0.address)" }
+        record.map { cell.textField!.stringValue = "\($0.label) - \($0.address)" }
         return cell
     }
     

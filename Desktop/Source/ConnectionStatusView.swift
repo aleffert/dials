@@ -76,7 +76,7 @@ class ConnectionStatusView : NSView {
         items.append(NSMenuItem.separatorItem())
         
         for device in allDevices {
-            let item = NSMenuItem(title : device.displayName, action: action, keyEquivalent: "")
+            let item = NSMenuItem(title : device.label, action: action, keyEquivalent: "")
             item.representedObject = device
             items.append(item)
         }

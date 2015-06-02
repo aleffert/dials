@@ -19,11 +19,11 @@ private enum Row {
 class NamedGroup<A> {
     var items : [A] = []
     let name : String
-    let displayName : String
+    let label : String
     
-    init(name : String, displayName : String) {
+    init(name : String, label : String) {
         self.name = name
-        self.displayName = displayName;
+        self.label = label;
     }
 }
 
@@ -69,12 +69,12 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         }
         
         if !found {
-            let group = NamedGroup<NSViewController>(name: plugin.identifier, displayName: plugin.label)
+            let group = NamedGroup<NSViewController>(name: plugin.identifier, label: plugin.label)
             group.items = [controller]
             groups.append(group)
         }
         groups.sort { (left, right) -> Bool in
-            return left.displayName < right.displayName
+            return left.label < right.label
         }
         rows = buildRowList()
     }
@@ -114,9 +114,9 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         let item = rows[row]
         switch item {
         case .Heading(let group):
-            cell.textField?.stringValue = group.displayName
+            cell.textField?.stringValue = group.label
         case .Singleton(let group):
-            cell.textField?.stringValue = group.displayName
+            cell.textField?.stringValue = group.label
             cell.textField?.font = NSFont.boldSystemFontOfSize(11)
         case .Controller(let controller):
             cell.textField?.stringValue = controller.title ?? "Item"

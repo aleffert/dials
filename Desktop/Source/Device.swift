@@ -33,7 +33,7 @@ class Device: NSObject {
         return service.addresses?.count > 0
     }
     
-    var displayName : String {
+    var label : String {
         return "\(service.name)@\(service.hostName ?? VisibleStrings.UnknownHost.rv)"
     }
     

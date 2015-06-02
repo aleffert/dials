@@ -183,7 +183,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
     record.viewID = [self viewIDForView:view];
     record.superviewID = [self viewIDForView:view.superview];
     record.className = NSStringFromClass(view.class);
-    record.displayName = record.className;
+    record.label = record.className;
     record.children = [view.subviews dls_map:^id(UIView* child) {
         return [self viewIDForView:child];
     }];

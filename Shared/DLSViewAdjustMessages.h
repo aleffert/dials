@@ -45,7 +45,7 @@ extern NSString* const DLSViewAdjustPluginIdentifier;
 @property (copy, nonatomic, nullable) NSString* superviewID;
 /// [NSString(uuid)]
 @property (copy, nonatomic) NSArray* children;
-@property (copy, nonatomic) NSString* displayName;
+@property (copy, nonatomic) NSString* label;
 @property (copy, nonatomic) NSString* className;
 @property (copy, nonatomic) NSString* address;
 

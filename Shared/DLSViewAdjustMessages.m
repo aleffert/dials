@@ -67,8 +67,8 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
         DLSDecodeObject(aDecoder, viewID);
         DLSDecodeObject(aDecoder, superviewID);
         DLSDecodeObject(aDecoder, children);
-        DLSDecodeObject(aDecoder, displayName);
         DLSDecodeObject(aDecoder, className);
+        DLSDecodeObject(aDecoder, label);
         DLSDecodeObject(aDecoder, renderingInfo);
         DLSDecodeObject(aDecoder, address);
     }
@@ -79,8 +79,8 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
     DLSEncodeObject(aCoder, viewID);
     DLSEncodeObject(aCoder, superviewID);
     DLSEncodeObject(aCoder, children);
-    DLSEncodeObject(aCoder, displayName);
     DLSEncodeObject(aCoder, className);
+    DLSEncodeObject(aCoder, label);
     DLSEncodeObject(aCoder, renderingInfo);
     DLSEncodeObject(aCoder, address);
 }
