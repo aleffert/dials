@@ -1,12 +1,12 @@
 //
-//  ViewAdjustHierarchy.swift
+//  ViewHierarchy.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 4/24/15.
 //
 //
 
-class ViewAdjustHierarchy {
+class ViewHierarchy {
     var map : [NSString:DLSViewHierarchyRecord] = [:]
     var roots : [NSString] = []
     

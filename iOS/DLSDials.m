@@ -14,7 +14,7 @@
 #import "DLSLiveDialsPlugin.h"
 #import "DLSNetworkRequestsPlugin.h"
 #import "DLSPlugin.h"
-#import "DLSViewAdjustPlugin.h"
+#import "DLSViewsPlugin.h"
 
 /// Simple class to break the retain cycle, allowing a plugin to use a strong retain
 /// of its context to simplify the interface
@@ -65,7 +65,7 @@
 }
 
 - (NSArray*)defaultPlugins {
-    return @[[[DLSLiveDialsPlugin alloc] init], [[DLSViewAdjustPlugin alloc] init], [[DLSNetworkRequestsPlugin alloc] init]];
+    return @[[[DLSLiveDialsPlugin alloc] init], [[DLSViewsPlugin alloc] init], [[DLSNetworkRequestsPlugin alloc] init]];
 }
 
 - (void)startWithPlugins:(NSArray*)plugins {

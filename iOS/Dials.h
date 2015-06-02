@@ -31,6 +31,6 @@ FOUNDATION_EXPORT const unsigned char Dials_iOSVersionString[];
 #import <Dials/DLSTextFieldEditor.h>
 #import <Dials/DLSToggleEditor.h>
 #import <Dials/DLSValueExchanger.h>
-#import <Dials/DLSViewAdjustPlugin.h>
+#import <Dials/DLSViewsPlugin.h>
 #import <Dials/NSObject+DLSDeallocAction.h>
 #import <Dials/UIView+DLSDescribable.h>

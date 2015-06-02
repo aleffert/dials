@@ -1,5 +1,5 @@
 //
-//  UIView+DLSViewAdjust.h
+//  UIView+DLSViewsPlugin.h
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 4/18/15.
@@ -10,9 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIView (DLSViewAdjust)
+@interface UIView (DLSViews)
 
-+ (void)dls_setListening:(BOOL)listening;
++ (void)dls_setListeningForChanges:(BOOL)listening;
 
 @property (readonly, nonatomic) NSString* dls_viewID;
 

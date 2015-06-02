@@ -1,5 +1,5 @@
 //
-//  DLSViewAdjustMessages.h
+//  DLSViewsMessages.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 4/2/15.
@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString* const DLSViewAdjustPluginIdentifier;
+extern NSString* const DLSViewsPluginIdentifier;
 
 @protocol DLSEditor;
 
@@ -77,7 +77,7 @@ extern NSString* const DLSViewAdjustPluginIdentifier;
 @end
 
 #pragma mark Sent by iOS
-@interface DLSViewAdjustFullHierarchyMessage : NSObject <NSCoding>
+@interface DLSViewsFullHierarchyMessage : NSObject <NSCoding>
 
 /// [NSString(viewID) : DLSViewHierarchyRecord(view info)]
 @property (copy, nonatomic) NSDictionary* hierarchy;
@@ -87,13 +87,13 @@ extern NSString* const DLSViewAdjustPluginIdentifier;
 
 @end
 
-@interface DLSViewAdjustViewPropertiesMessage : NSObject <NSCoding>
+@interface DLSViewsViewPropertiesMessage : NSObject <NSCoding>
 
 @property (strong, nonatomic) DLSViewRecord* record;
 
 @end
 
-@interface DLSViewAdjustUpdatedViewsMessage : NSObject <NSCoding>
+@interface DLSViewsUpdatedViewsMessage : NSObject <NSCoding>
 
 /// [DLSViewHierarchyRecord]
 @property (copy, nonatomic) NSArray* records;
@@ -104,7 +104,7 @@ extern NSString* const DLSViewAdjustPluginIdentifier;
 @end
 
 
-@interface DLSViewAdjustUpdatedContentsMessage : NSObject <NSCoding>
+@interface DLSViewsUpdatedContentsMessage : NSObject <NSCoding>
 
 /// [NSString:NSData(UIImage)]
 @property (copy, nonatomic) NSDictionary* contents;
@@ -113,7 +113,7 @@ extern NSString* const DLSViewAdjustPluginIdentifier;
 @end
 
 #pragma mark Sent by Desktop
-@interface DLSViewAdjustSelectViewMessage : NSObject <NSCoding>
+@interface DLSViewsSelectViewMessage : NSObject <NSCoding>
 
 - (id)initWithViewID:(NSString* __nullable)viewID;
 
@@ -121,7 +121,7 @@ extern NSString* const DLSViewAdjustPluginIdentifier;
 
 @end
 
-@interface DLSViewAdjustValueChangedMessage : NSObject <NSCoding>
+@interface DLSViewsValueChangedMessage : NSObject <NSCoding>
 
 - (id)initWithRecord:(DLSChangeViewValueRecord*)record;
 

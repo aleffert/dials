@@ -1,5 +1,5 @@
 //
-//  UIView+DLSViewID.m
+//  UIView+DLSViewsPlugin.m
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 4/18/15.
@@ -8,14 +8,14 @@
 
 #import <objc/runtime.h>
 
-#import "UIView+DLSViewAdjust.h"
-#import "DLSViewAdjustPlugin.h"
+#import "UIView+DLSViewsPlugin.h"
+#import "DLSViewsPlugin.h"
 
 #import "NSObject+DLSSwizzle.h"
 
 static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
-@implementation CALayer (DLSViewAdjust)
+@implementation CALayer (DLSViews)
 
 - (UIView*)dls_view {
     UIView* view = [self.delegate isKindOfClass:[UIView class]] ? self.delegate : nil;
@@ -24,26 +24,26 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 - (void)dls_display {
     [self dls_display];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedDisplay:self.dls_view];
+    [[DLSViewsPlugin activePlugin] viewChangedDisplay:self.dls_view];
 }
 
 - (id <CAAction>)dls_actionForKey:(NSString *)key {
     id <CAAction> result = [self dls_actionForKey:key];
     
     if([key isEqualToString:@"contents"]) {
-        [[DLSViewAdjustPlugin activePlugin] viewChangedDisplay:self.dls_view];
+        [[DLSViewsPlugin activePlugin] viewChangedDisplay:self.dls_view];
     }
     else if(![key isEqualToString:@"delegate"] && ![key isEqualToString:@"sublayers"]) {
-        [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self.dls_view];
+        [[DLSViewsPlugin activePlugin] viewChangedSurface:self.dls_view];
     };
     return result;
 }
 
 @end
 
-@implementation UIView (DLSViewAdjust)
+@implementation UIView (DLSViews)
 
-+ (void)dls_setListening:(BOOL)listening {
++ (void)dls_setListeningForChanges:(BOOL)listening {
     static BOOL sIsListening = NO;
     if(sIsListening != listening) {
         sIsListening = listening;
@@ -80,48 +80,48 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 - (void)dls_didMoveToSuperview {
     [self dls_didMoveToSuperview];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self.superview];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self.superview];
 }
 
 - (void)dls_exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2 {
     [self dls_exchangeSubviewAtIndex:index1 withSubviewAtIndex:index2];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_insertSubview:(UIView *)view aboveSubview:(UIView *)siblingSubview {
     [self dls_insertSubview:view aboveSubview:siblingSubview];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_insertSubview:(UIView *)view atIndex:(NSInteger)index {
     [self dls_insertSubview:view atIndex:index];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_insertSubview:(UIView *)view belowSubview:(UIView *)siblingSubview {
     [self dls_insertSubview:view belowSubview:siblingSubview];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_bringSubviewToFront:(UIView*)view {
     [self dls_bringSubviewToFront:view];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_sendSubviewToBack:(UIView *)view {
     [self dls_sendSubviewToBack:view];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_didMoveToWindow {
     [self dls_didMoveToWindow];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self.superview];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedSurface:self];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self.superview];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 - (void)dls_drawRect:(CGRect)rect {
     [self dls_drawRect:rect];
-    [[DLSViewAdjustPlugin activePlugin] viewChangedDisplay:self];
+    [[DLSViewsPlugin activePlugin] viewChangedDisplay:self];
 }
 
 // Unique ID per view

@@ -25,6 +25,6 @@
 #import "DLSStepperEditor.h"
 #import "DLSTextFieldEditor.h"
 #import "DLSToggleEditor.h"
-#import "DLSViewAdjustMessages.h"
+#import "DLSViewsMessages.h"
 #import "NSObject+DLSDeallocAction.h"
 #import "Plugin.h"

@@ -1,5 +1,5 @@
 //
-//  ViewAdjustPropertyTableController.swift
+//  ViewPropertyTableController.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 4/19/15.
@@ -8,12 +8,12 @@
 
 import Cocoa
 
-protocol ViewAdjustPropertyTableControllerDelegate : class {
-    func tableController(controller : ViewAdjustPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+protocol ViewPropertyTableControllerDelegate : class {
+    func tableController(controller : ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord)
 }
 
-class ViewAdjustPropertyTableController: NSObject, PropertyGroupViewDelegate {
-    weak var delegate : ViewAdjustPropertyTableControllerDelegate?
+class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate {
+    weak var delegate : ViewPropertyTableControllerDelegate?
     
     var record : DLSViewRecord?
     var selectedViewID : NSString?

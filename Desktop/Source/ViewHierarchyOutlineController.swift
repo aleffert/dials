@@ -8,21 +8,21 @@
 
 import Cocoa
 
-protocol ViewAdjustHierarchyOutlineControllerDelegate : class {
-    func outlineController(controller : ViewAdjustHierarchyOutlineController, selectedViewWithID viewID: NSString?)
+protocol ViewHierarchyOutlineControllerDelegate : class {
+    func outlineController(controller : ViewsHierarchyOutlineController, selectedViewWithID viewID: NSString?)
 }
 
-class ViewAdjustHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
+class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
     @IBOutlet private var outlineView : NSOutlineView!
-    weak var delegate : ViewAdjustHierarchyOutlineControllerDelegate?
+    weak var delegate : ViewHierarchyOutlineControllerDelegate?
     
     // NSOutlineView requires direct object identity so we need a way to convert
     // ids to a canonical representation
     // TODO: GC these
     var canonicalKeys : [NSString: NSString] = [:]
     
-    let hierarchy = ViewAdjustHierarchy()
+    let hierarchy = ViewHierarchy()
     
     private func canonicalize(value : NSString) -> NSString {
         if let canon = canonicalKeys[value] {

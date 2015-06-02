@@ -1,5 +1,5 @@
 //
-//  UILabel+DLSViewAdjust.h
+//  UILabel+DLSViews.h
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 5/1/15.

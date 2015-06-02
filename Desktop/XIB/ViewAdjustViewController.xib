@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ViewAdjustViewController" customModule="Dials" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ViewsViewController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="hierarchyOutlineController" destination="IQn-sv-Ncx" id="HTD-PU-DGC"/>
                 <outlet property="propertyTableController" destination="aXz-rw-3Vm" id="SgA-oM-8J7"/>
@@ -181,7 +181,7 @@
                                         <rect key="frame" x="1" y="1" width="166" height="79"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <stackView orientation="vertical" alignment="left" spacing="4" hasEqualSpacing="YES" horizontalStackHuggingPriority="750" horizontalHuggingPriority="750" placeholderIntrinsicWidth="174" placeholderIntrinsicHeight="469" translatesAutoresizingMaskIntoConstraints="NO" id="4e1-5M-3Yu">
+                                            <stackView orientation="vertical" alignment="left" spacing="4" hasEqualSpacing="YES" horizontalStackHuggingPriority="750" horizontalHuggingPriority="750" misplaced="YES" placeholderIntrinsicWidth="174" placeholderIntrinsicHeight="469" translatesAutoresizingMaskIntoConstraints="NO" id="4e1-5M-3Yu">
                                                 <rect key="frame" x="0.0" y="1" width="174" height="469"/>
                                             </stackView>
                                         </subviews>
@@ -250,18 +250,18 @@
             </constraints>
             <point key="canvasLocation" x="256.5" y="283"/>
         </customView>
-        <customObject id="aXz-rw-3Vm" customClass="ViewAdjustPropertyTableController" customModule="Dials" customModuleProvider="target">
+        <customObject id="aXz-rw-3Vm" customClass="ViewPropertyTableController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="emptyView" destination="hK1-He-7kB" id="X42-Lk-ST7"/>
                 <outlet property="stackView" destination="4e1-5M-3Yu" id="Sri-Ay-Wkb"/>
             </connections>
         </customObject>
-        <customObject id="IQn-sv-Ncx" customClass="ViewAdjustHierarchyOutlineController" customModule="Dials" customModuleProvider="target">
+        <customObject id="IQn-sv-Ncx" customClass="ViewsHierarchyOutlineController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="outlineView" destination="Iez-KT-nUR" id="PYg-RW-HQu"/>
             </connections>
         </customObject>
-        <customObject id="rqI-S3-wMV" customClass="ViewAdjustVisualOutlineController" customModule="Dials" customModuleProvider="target">
+        <customObject id="rqI-S3-wMV" customClass="ViewsVisualOutlineController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="JYb-gz-P0O" id="IsB-8c-KTn"/>
                 <outlet property="view" destination="AFy-nW-3cg" id="YA2-7J-sgk"/>

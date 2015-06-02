@@ -1,5 +1,5 @@
 //
-//  ViewAdjustViewController.swift
+//  ViewsViewController.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 4/2/15.
@@ -8,18 +8,18 @@
 
 import Cocoa
 
-protocol ViewAdjustViewControllerDelegate : class {
-    func viewAdjustController(controller : ViewAdjustViewController, selectedViewWithID viewID : NSString?)
-    func viewAdjustController(controller : ViewAdjustViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+protocol ViewsViewControllerDelegate : class {
+    func ViewsController(controller : ViewsViewController, selectedViewWithID viewID : NSString?)
+    func ViewsController(controller : ViewsViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
 }
 
-class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineControllerDelegate, ViewAdjustPropertyTableControllerDelegate, ViewAdjustVisualOutlineControllerDelegate {
+class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDelegate, ViewPropertyTableControllerDelegate, ViewsVisualOutlineControllerDelegate {
     
-    weak var delegate : ViewAdjustViewControllerDelegate?
+    weak var delegate : ViewsViewControllerDelegate?
     
-    @IBOutlet var propertyTableController : ViewAdjustPropertyTableController!
-    @IBOutlet var hierarchyOutlineController : ViewAdjustHierarchyOutlineController!
-    @IBOutlet var visualOutlineController : ViewAdjustVisualOutlineController!
+    @IBOutlet var propertyTableController : ViewPropertyTableController!
+    @IBOutlet var hierarchyOutlineController : ViewsHierarchyOutlineController!
+    @IBOutlet var visualOutlineController : ViewsVisualOutlineController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,16 +52,16 @@ class ViewAdjustViewController: NSViewController, ViewAdjustHierarchyOutlineCont
         visualOutlineController.takeContents(contents, empties : empties)
     }
     
-    func outlineController(controller: ViewAdjustHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
-        delegate?.viewAdjustController(self, selectedViewWithID: viewID)
+    func outlineController(controller: ViewsHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
+        delegate?.ViewsController(self, selectedViewWithID: viewID)
         visualOutlineController.selectViewWithID(viewID)
     }
     
-    func visualOutlineController(controller: ViewAdjustVisualOutlineController, selectedViewWithID viewID: NSString?) {
+    func visualOutlineController(controller: ViewsVisualOutlineController, selectedViewWithID viewID: NSString?) {
         hierarchyOutlineController.selectViewWithID(viewID)
     }
     
-    func tableController(controller: ViewAdjustPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
-        delegate?.viewAdjustController(self, valueChangedWithRecord: record)
+    func tableController(controller: ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
+        delegate?.ViewsController(self, valueChangedWithRecord: record)
     }
 }

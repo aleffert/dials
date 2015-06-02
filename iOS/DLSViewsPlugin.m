@@ -1,12 +1,12 @@
 //
-//  DLSViewAdjustPlugin.m
+//  DLSViewsPlugin.m
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 4/2/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSViewAdjustPlugin.h"
+#import "DLSViewsPlugin.h"
 
 #import "DLSDescriptionContext.h"
 #import "DLSDescribable.h"
@@ -16,14 +16,14 @@
 #import "DLSPropertyDescription.h"
 #import "DLSPropertyWrapper.h"
 #import "DLSValueExchanger.h"
-#import "DLSViewAdjustMessages.h"
+#import "DLSViewsMessages.h"
 #import "NSArray+DLSFunctionalAdditions.h"
 #import "NSTimer+DLSBlockActions.h"
 #import "UIView+DLSDescribable.h"
-#import "UIView+DLSViewAdjust.h"
+#import "UIView+DLSViewsPlugin.h"
 
 
-@interface DLSViewAdjustPlugin ()
+@interface DLSViewsPlugin ()
 
 /// NSString* (representing a class name) -> NSString* (representing a property name) -> DLSPropertyDescription
 @property (strong, nonatomic) NSMutableDictionary* classPropertyDescriptions;
@@ -47,24 +47,24 @@
 
 @end
 
-static DLSViewAdjustPlugin* sActivePlugin;
+static DLSViewsPlugin* sActivePlugin;
 
-@implementation DLSViewAdjustPlugin
+@implementation DLSViewsPlugin
 
 + (instancetype)activePlugin {
     return sActivePlugin;
 }
 
-+ (void)setActivePlugin:(DLSViewAdjustPlugin*)plugin {
++ (void)setActivePlugin:(DLSViewsPlugin*)plugin {
     sActivePlugin = plugin;
 }
 
 - (NSString*)identifier {
-    return DLSViewAdjustPluginIdentifier;
+    return DLSViewsPluginIdentifier;
 }
 
 - (void)start {
-    [DLSViewAdjustPlugin setActivePlugin:self];
+    [DLSViewsPlugin setActivePlugin:self];
 }
 
 - (void)connectedWithContext:(id<DLSPluginContext>)context {
@@ -77,7 +77,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
     [self sendMessage:[self fullHierarchyMessage]];
     [self sendAllKnownViewContentsMessage];
     
-    [UIView dls_setListening:YES];
+    [UIView dls_setListeningForChanges:YES];
     __weak __typeof(self) weakself = self;
     self.windowChangedListener = [[NSNotificationCenter defaultCenter] addObserverForName:UIWindowDidBecomeVisibleNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         for(UIView* view in [self rootViews]) {
@@ -90,7 +90,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
     self.surfaceUpdatedViews = nil;
     self.displayUpdatedViews = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self.windowChangedListener];
-    [UIView dls_setListening:NO];
+    [UIView dls_setListeningForChanges:NO];
     self.classDescriptions = nil;
     self.classPropertyDescriptions = nil;
     self.context = nil;
@@ -100,10 +100,10 @@ static DLSViewAdjustPlugin* sActivePlugin;
 
 - (void)receiveMessage:(NSData *)message {
     id fullMessage = [NSKeyedUnarchiver unarchiveObjectWithData:message];
-    if([fullMessage isKindOfClass:[DLSViewAdjustSelectViewMessage class]]) {
+    if([fullMessage isKindOfClass:[DLSViewsSelectViewMessage class]]) {
         [self handleSelectViewMessage:fullMessage];
     }
-    else if([fullMessage isKindOfClass:[DLSViewAdjustValueChangedMessage class]]) {
+    else if([fullMessage isKindOfClass:[DLSViewsValueChangedMessage class]]) {
         [self handleViewChangeMessage:fullMessage];
     }
     else {
@@ -212,14 +212,14 @@ static DLSViewAdjustPlugin* sActivePlugin;
     }
 }
 
-- (DLSViewAdjustFullHierarchyMessage*)fullHierarchyMessage {
+- (DLSViewsFullHierarchyMessage*)fullHierarchyMessage {
     NSMutableDictionary* entries = [[NSMutableDictionary alloc] init];
     
     for(UIView* view in [self rootViews]) {
         [self captureView:view intoEntryMap:entries];
     }
     
-    DLSViewAdjustFullHierarchyMessage* message = [[DLSViewAdjustFullHierarchyMessage alloc] init];
+    DLSViewsFullHierarchyMessage* message = [[DLSViewsFullHierarchyMessage alloc] init];
     message.hierarchy = entries;
     message.roots = [self rootViewIDs];
     
@@ -244,7 +244,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
 
 - (void)sendInfoForView:(UIView*)view {
     
-    DLSViewAdjustViewPropertiesMessage* message = [[DLSViewAdjustViewPropertiesMessage alloc] init];
+    DLSViewsViewPropertiesMessage* message = [[DLSViewsViewPropertiesMessage alloc] init];
     
     DLSViewRecord* record = [[DLSViewRecord alloc] init];
     record.viewID = [self viewIDForView:view];
@@ -293,7 +293,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
         [records addObject:[self captureView:view]];
     }
     
-    DLSViewAdjustUpdatedViewsMessage* message = [[DLSViewAdjustUpdatedViewsMessage alloc] init];
+    DLSViewsUpdatedViewsMessage* message = [[DLSViewsUpdatedViewsMessage alloc] init];
     message.records = records;
     message.roots = [self rootViewIDs];
     
@@ -334,7 +334,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
         }
     }
     
-    DLSViewAdjustUpdatedContentsMessage* message = [[DLSViewAdjustUpdatedContentsMessage alloc] init];
+    DLSViewsUpdatedContentsMessage* message = [[DLSViewsUpdatedContentsMessage alloc] init];
     message.contents = records;
     message.empties = empties;
     
@@ -348,7 +348,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
     [self.context sendMessage:messageData fromPlugin:self];
 }
 
-- (void)handleSelectViewMessage:(DLSViewAdjustSelectViewMessage*)message {
+- (void)handleSelectViewMessage:(DLSViewsSelectViewMessage*)message {
     UIView* view = [self.viewIDs objectForKey:message.viewID];
     self.selectedView = view;
     [self sendInfoForView:view];
@@ -357,7 +357,7 @@ static DLSViewAdjustPlugin* sActivePlugin;
     }
 }
 
-- (void)handleViewChangeMessage:(DLSViewAdjustValueChangedMessage*)message {
+- (void)handleViewChangeMessage:(DLSViewsValueChangedMessage*)message {
     UIView* view = [self.viewIDs objectForKey:message.record.viewID];
     NSArray* groups = [self descriptionGroupsForClass:view.class];
     for(DLSPropertyGroup* group in groups) {

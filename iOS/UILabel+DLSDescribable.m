@@ -1,5 +1,5 @@
 //
-//  UILabel+DLSViewAdjust.m
+//  UILabel+DLSViews.m
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 5/1/15.
@@ -19,7 +19,7 @@
 #import "DLSValueMapper.h"
 #import "UIView+DLSDescribable.h"
 
-@implementation UILabel (DLSViewAdjust)
+@implementation UILabel (DLSViews)
 
 + (void)dls_describe:(id<DLSDescriptionContext>)context {
     [super dls_describe:context];

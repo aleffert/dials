@@ -1,17 +1,17 @@
 //
-//  DLSViewAdjustMessages.m
+//  DLSViewsMessages.m
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 4/2/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSViewAdjustMessages.h"
+#import "DLSViewsMessages.h"
 
 #import "DLSConstants.h"
 #import "DLSTransform3D.h"
 
-NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-adjust";
+NSString* const DLSViewsPluginIdentifier = @"com.akivaleffert.dials.view-adjust";
 
 @implementation DLSPropertyRecord
 
@@ -141,7 +141,7 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
 
 @end
 
-@implementation DLSViewAdjustFullHierarchyMessage
+@implementation DLSViewsFullHierarchyMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -161,7 +161,7 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
 
 @end
 
-@implementation DLSViewAdjustViewPropertiesMessage
+@implementation DLSViewsViewPropertiesMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -177,7 +177,7 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
 
 @end
 
-@implementation DLSViewAdjustSelectViewMessage
+@implementation DLSViewsSelectViewMessage
 
 - (id)initWithViewID:(NSString*)viewID {
     self = [super init];
@@ -201,7 +201,7 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
 
 @end
 
-@implementation DLSViewAdjustUpdatedViewsMessage
+@implementation DLSViewsUpdatedViewsMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
@@ -221,7 +221,7 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
 
 @end
 
-@implementation DLSViewAdjustUpdatedContentsMessage
+@implementation DLSViewsUpdatedContentsMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     if(self != nil) {
@@ -238,7 +238,7 @@ NSString* const DLSViewAdjustPluginIdentifier = @"com.akivaleffert.dials.view-ad
 
 @end
 
-@implementation DLSViewAdjustValueChangedMessage
+@implementation DLSViewsValueChangedMessage
 
 - (id)initWithRecord:(DLSChangeViewValueRecord*)record {
     self = [super init];

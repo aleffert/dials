@@ -1,5 +1,5 @@
 //
-//  ViewAdjustVisualOutlineController.swift
+//  ViewsVisualOutlineController.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 4/24/15.
@@ -13,16 +13,16 @@ import GLKit
 private let MinScale : CGFloat = 0.25
 private let MaxScale : CGFloat = 2.0
 
-protocol ViewAdjustVisualOutlineControllerDelegate : class {
-    func visualOutlineController(controller : ViewAdjustVisualOutlineController, selectedViewWithID  viewID: NSString?)
+protocol ViewsVisualOutlineControllerDelegate : class {
+    func visualOutlineController(controller : ViewsVisualOutlineController, selectedViewWithID  viewID: NSString?)
 }
 
-class ViewAdjustVisualOutlineController: NSViewController, VisualOutlineControlsViewDelegate {
-    weak var delegate : ViewAdjustVisualOutlineControllerDelegate?
+class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewDelegate {
+    weak var delegate : ViewsVisualOutlineControllerDelegate?
     
     @IBOutlet private var contentView : BackgroundColorView!
     
-    var hierarchy : ViewAdjustHierarchy!
+    var hierarchy : ViewHierarchy!
     
     private var layers : [NSString:ViewFacade] = [:]
     private let controlsView = VisualOutlineControlsView()

@@ -1,5 +1,5 @@
 //
-//  DLSViewAdjustPlugin.h
+//  DLSViewsPlugin.h
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 4/2/15.
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// and add ones custom to your own view types.
 /// To add properties for your custom view have it implement DLSDescribable.
 /// See UIView+DLSDescribable for an example.
-@interface DLSViewAdjustPlugin : NSObject <DLSPlugin>
+@interface DLSViewsPlugin : NSObject <DLSPlugin>
 
 /// Will be nil if Dials isn't started
 + (nullable instancetype)activePlugin;
