@@ -38,21 +38,42 @@ git submodule add Libraries/Dials git@github.com:aleffert/dials.git
 Once you have the files downloaded, you will need to do the following:
 
 1. Find ``Dials.xcodeproj`` and drag it into your project's workspace.
-2. Add ``Dials.framework`` as a library dependency for your iOS app in the "build phases" section of the target settings.  *Note*: Due to a bug in XCode, it may add this file with a weird path. In the Xcode "File" pane under "Identity and Type", you should see that the location is "Relative to Build Products" and the relative path is just be "Dials.framework".
+2. Add ``Dials.framework`` as a library dependency for your iOS app in the "build phases" section of the target settings.  *Note*: Due to a bug in XCode, it may add this file with a weird path. In the Xcode "File" pane under "Identity and Type", you should see that the location is "Relative to Build Products" and the relative path is just be "Dials.framework". If you don't, you should choose "Relative to Build Products", click the little folder icon next to the path, and choose the actual correct build products folder (typically deep inside ``~/Library/Developer/Xcode/DerivedData/``)
 3. Import ``Dials`` and add the following code to ``applicationDidFinishLaunching`` in your app delegate:
 
 Objective-C:
 ```
+#import <Dials/Dials.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    ... your code here ...
+
 #if DEBUG
     [[DLSDials shared] start];
 #endif
+
+    ... your code here ...
+
+}
 ```
 
 Swift:
 ```
+
+import Dials
+
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+
+    ... your code here ...
+
 #if DEBUG
     DLSDials.shared().start()
 #endif
+
+    ... your code here ...
+
+}
 ```
 
 
