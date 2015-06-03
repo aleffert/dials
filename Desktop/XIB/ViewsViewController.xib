@@ -181,7 +181,7 @@
                                         <rect key="frame" x="1" y="1" width="166" height="79"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <stackView orientation="vertical" alignment="left" spacing="4" hasEqualSpacing="YES" horizontalStackHuggingPriority="750" horizontalHuggingPriority="750" misplaced="YES" placeholderIntrinsicWidth="174" placeholderIntrinsicHeight="469" translatesAutoresizingMaskIntoConstraints="NO" id="4e1-5M-3Yu">
+                                            <stackView orientation="vertical" alignment="left" spacing="4" hasEqualSpacing="YES" horizontalStackHuggingPriority="750" horizontalHuggingPriority="750" placeholderIntrinsicWidth="174" placeholderIntrinsicHeight="469" translatesAutoresizingMaskIntoConstraints="NO" id="4e1-5M-3Yu">
                                                 <rect key="frame" x="0.0" y="1" width="174" height="469"/>
                                             </stackView>
                                         </subviews>

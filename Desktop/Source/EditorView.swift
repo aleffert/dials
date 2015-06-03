@@ -1,5 +1,5 @@
 //
-//  LiveDialView.swift
+//  EditorView.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 3/20/15.

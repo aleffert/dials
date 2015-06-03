@@ -1,5 +1,5 @@
 //
-//  DLSLiveDial.h
+//  DLSControlInfo.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/15/15.
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol DLSEditor;
 
-@interface DLSLiveDial : NSObject <NSCoding>
+@interface DLSControlInfo : NSObject <NSCoding>
 
 @property (strong, nonatomic) id <DLSEditor> editor;
 @property (strong, nonatomic, nullable) id <NSCoding> value;

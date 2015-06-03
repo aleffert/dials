@@ -1,5 +1,5 @@
 //
-//  LiveDialsPlugin.swift
+//  ControlPanelPlugin.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 12/6/14.
@@ -8,13 +8,13 @@
 
 import Cocoa
 
-class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
+class ControlPanelPlugin: NSObject, Plugin, ControlListPaneViewControllerDelegate {
     
-    let identifier = DLSLiveDialsPluginIdentifier
+    let identifier = DLSControlPanelPluginIdentifier
 
     let label = "Control Panel"
     
-    private var knownGroups : [String:LiveDialPaneViewController] = [:]
+    private var knownGroups : [String:ControlListPaneViewController] = [:]
     private var context : PluginContext?
     
     var shouldSortChildren : Bool {
@@ -22,20 +22,20 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
     }
     
     func receiveMessage(data: NSData) {
-        let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? DLSLiveDialsMessage
+        let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? DLSControlPanelMessage
         
         if let group = message?.group {
             if knownGroups[group] == nil {
-                let controller = LiveDialPaneViewController(group : group, delegate : self)!
+                let controller = ControlListPaneViewController(group : group, delegate : self)!
                 context?.addViewController(controller, plugin:self)
                 knownGroups[group] = controller
             }
         }
         
-        if let addMessage = message as? DLSLiveDialsAddMessage {
+        if let addMessage = message as? DLSControlPanelAddMessage {
             handleAddMessage(addMessage)
         }
-        else if let removeMessage = message as? DLSLiveDialsRemoveMessage {
+        else if let removeMessage = message as? DLSControlPanelRemoveMessage {
             handleRemoveMessage(removeMessage)
         }
     }
@@ -51,15 +51,15 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
         knownGroups = [:]
     }
     
-    func handleAddMessage(message : DLSLiveDialsAddMessage) {
+    func handleAddMessage(message : DLSControlPanelAddMessage) {
         let controller = knownGroups[message.group]
-        controller?.addDial(message.dial)
+        controller?.addControlWithInfo(message.info)
     }
     
-    func handleRemoveMessage(message : DLSLiveDialsRemoveMessage) {
+    func handleRemoveMessage(message : DLSControlPanelRemoveMessage) {
         let controller = knownGroups[message.group]
         if let c = controller {
-            c.removeDialWithID(message.uuid)
+            c.removeControlWithID(message.uuid)
             if c.isEmpty {
                 self.context?.removeViewController(c, plugin: self)
                 knownGroups.removeValueForKey(message.group)
@@ -67,19 +67,19 @@ class LiveDialsPlugin: NSObject, Plugin, LiveDialPaneViewControllerDelegate {
         }
     }
     
-    func paneController(controller: LiveDialPaneViewController, changedDial dial: DLSLiveDial, toValue value: NSCoding?) {
-        var message = DLSLiveDialsChangeMessage(UUID: dial.uuid, value: value, group : controller.group as String)
+    func paneController(controller: ControlListPaneViewController, changedControlInfo info: DLSControlInfo, toValue value: NSCoding?) {
+        var message = DLSControlPanelChangeMessage(UUID: info.uuid, value: value, group : controller.group as String)
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
         context?.sendMessage(data, plugin: self)
     }
     
-    func paneController(controller: LiveDialPaneViewController, shouldSaveDial dial: DLSLiveDial, withValue value: NSCoding?) {
+    func paneController(controller: ControlListPaneViewController, shouldSaveControlInfo info: DLSControlInfo, withValue value: NSCoding?) {
         let codeManager = CodeManager()
-        let file = dial.file.toResult("Internal Error: Trying to save when file not present")
+        let file = info.file.toResult("Internal Error: Trying to save when file not present")
         file.bind {file -> Result<()> in
-            let symbol = codeManager.findSymbolWithName(dial.label, inFileAtPath:file)
+            let symbol = codeManager.findSymbolWithName(info.label, inFileAtPath:file)
             return symbol.bind {symbol in
-                codeManager.updateSymbol(symbol, toValue: value, withEditor:dial.editor, atPath:file)
+                codeManager.updateSymbol(symbol, toValue: value, withEditor:info.editor, atPath:file)
             }
         }.ifFailure {message in
             let alert = NSAlert()

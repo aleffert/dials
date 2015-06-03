@@ -22,7 +22,7 @@ class PluginController: NSObject {
     }
     
     private func registerDefaultPlugins() {
-        registerPlugin(LiveDialsPlugin())
+        registerPlugin(ControlPanelPlugin())
         registerPlugin(ViewsPlugin())
         registerPlugin(NetworkRequestsPlugin())
     }

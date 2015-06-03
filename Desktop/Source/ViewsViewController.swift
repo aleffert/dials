@@ -9,8 +9,8 @@
 import Cocoa
 
 protocol ViewsViewControllerDelegate : class {
-    func ViewsController(controller : ViewsViewController, selectedViewWithID viewID : NSString?)
-    func ViewsController(controller : ViewsViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+    func viewsController(controller : ViewsViewController, selectedViewWithID viewID : NSString?)
+    func viewsController(controller : ViewsViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
 }
 
 class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDelegate, ViewPropertyTableControllerDelegate, ViewsVisualOutlineControllerDelegate {
@@ -53,7 +53,7 @@ class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDeleg
     }
     
     func outlineController(controller: ViewsHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
-        delegate?.ViewsController(self, selectedViewWithID: viewID)
+        delegate?.viewsController(self, selectedViewWithID: viewID)
         visualOutlineController.selectViewWithID(viewID)
     }
     
@@ -62,6 +62,6 @@ class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDeleg
     }
     
     func tableController(controller: ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
-        delegate?.ViewsController(self, valueChangedWithRecord: record)
+        delegate?.viewsController(self, valueChangedWithRecord: record)
     }
 }

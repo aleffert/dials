@@ -1,5 +1,5 @@
 //
-//  DLSLiveDialsPlugin+SwiftAdditions.swift
+//  DLSControlPanelPlugin+SwiftAdditions.swift
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 3/28/15.
@@ -14,15 +14,15 @@ public extension NSObject {
     func DLSControl(
         label : String,
         line : Int = __LINE__,
-        file : String = __FILE__) -> DLSReferencePredial {
-            return DLSReferencePredial(label: label, canSave: true, owner : self, file : file, line : line)
+        file : String = __FILE__) -> DLSReferenceControlBuilder {
+            return DLSReferenceControlBuilder(label: label, canSave: true, owner : self, file : file, line : line)
     }
     
     func DLSControl(
         #keyPath : String,
         line : Int = __LINE__,
-        file : String = __FILE__) -> DLSKeyPathPredial {
-            return DLSKeyPathPredial(keyPath: keyPath, canSave: false, owner : self, file : file, line : line)
+        file : String = __FILE__) -> DLSKeyPathControlBuilder {
+            return DLSKeyPathControlBuilder(keyPath: keyPath, canSave: false, owner : self, file : file, line : line)
     }
 }
 
@@ -57,18 +57,18 @@ public class PropertyWrapper<A : AnyObject> {
     }
 }
 
-/// Helpers for DLSLiveDialsPlugin to make it easier to use from Swift
-public extension DLSLiveDialsPlugin {
+/// Helpers for DLSControlPanelPlugin to make it easier to use from Swift
+public extension DLSControlPanelPlugin {
     
-    /// Adds a new dial.
+    /// Adds a new control.
     ///
     /// :param: wrapper     Moves data in and out of the underlying store.
     /// :param: value       The initial value.
     /// :param: editor      The desktop side editor for the property.
-    /// :param: label       The user facing name of the dial.
-    /// :param: canSave     Whether it is possible to save changes to this property directly back to your code.
-    /// :param: file        The name of the file this dial is declared in.
-    /// :param: line        The line of code this dial is declared on.
+    /// :param: label       The user facing name of the control.
+    /// :param: canSave     Whether it is possible to save changes from this control directly back to your code.
+    /// :param: file        The name of the file this control is declared in.
+    /// :param: line        The line of code this control is declared on.
     func addDial<A : AnyObject>(
         wrapper : PropertyWrapper<A>,
         editor : DLSEditor,
@@ -88,7 +88,7 @@ public extension DLSLiveDialsPlugin {
             }
         )
         
-        return addDialWithWrapper(
+        return addControlWithWrapper(
             wrapperWrapper,
             editor: editor,
             label: label,
@@ -101,12 +101,12 @@ public extension DLSLiveDialsPlugin {
 }
 
 public func DLSGroupWithName(name: String, @noescape actions: () -> Void) {
-    DLSLiveDialsPlugin.activePlugin()?.beginGroupWithName(name)
+    DLSControlPanelPlugin.activePlugin()?.beginGroupWithName(name)
     actions()
-    DLSLiveDialsPlugin.activePlugin()?.endGroup()
+    DLSControlPanelPlugin.activePlugin()?.endGroup()
 }
 
-public extension DLSReferencePredial {
+public extension DLSReferenceControlBuilder {
 
     
     func editorOf<T : AnyObject>(inout source : T, editor : DLSEditor) -> DLSRemovable {

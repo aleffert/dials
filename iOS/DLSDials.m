@@ -11,7 +11,7 @@
 #import "DLSChannel.h"
 #import "DLSChannelStream.h"
 #import "DLSConstants.h"
-#import "DLSLiveDialsPlugin.h"
+#import "DLSControlPanelPlugin.h"
 #import "DLSNetworkRequestsPlugin.h"
 #import "DLSPlugin.h"
 #import "DLSViewsPlugin.h"
@@ -65,7 +65,7 @@
 }
 
 - (NSArray*)defaultPlugins {
-    return @[[[DLSLiveDialsPlugin alloc] init], [[DLSViewsPlugin alloc] init], [[DLSNetworkRequestsPlugin alloc] init]];
+    return @[[[DLSControlPanelPlugin alloc] init], [[DLSViewsPlugin alloc] init], [[DLSNetworkRequestsPlugin alloc] init]];
 }
 
 - (void)startWithPlugins:(NSArray*)plugins {

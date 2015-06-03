@@ -1,19 +1,19 @@
 //
-//  DLSLiveDialsPlugin.m
+//  DLSControlPanelPlugin.m
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 12/13/14.
 //  Copyright (c) 2014 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSLiveDialsPlugin.h"
+#import "DLSControlPanelPlugin.h"
 
 #import "DLSActionEditor.h"
 #import "DLSColorEditor.h"
 #import "DLSFloatArrayEditor.h"
 #import "DLSImageEditor.h"
-#import "DLSLiveDialsMessages.h"
-#import "DLSLiveDial.h"
+#import "DLSControlPanelMessages.h"
+#import "DLSControlInfo.h"
 #import "DLSPropertyWrapper.h"
 #import "DLSRemovable.h"
 #import "DLSSliderEditor.h"
@@ -22,15 +22,15 @@
 #import "DLSToggleEditor.h"
 #import "NSObject+DLSDeallocAction.h"
 
-@interface DLSActiveDialRecord : NSObject <DLSRemovable>
+@interface DLSActiveControlRecord : NSObject <DLSRemovable>
 
-@property (strong, nonatomic) DLSLiveDial* dial;
+@property (strong, nonatomic) DLSControlInfo* info;
 @property (strong, nonatomic) DLSPropertyWrapper* wrapper;
 @property (copy, nonatomic) void (^removeAction)(void);
 
 @end
 
-@implementation DLSActiveDialRecord
+@implementation DLSActiveControlRecord
 
 - (void)remove {
     self.removeAction();
@@ -39,7 +39,7 @@
 
 @end
 
-@interface DLSLiveDialsPlugin ()
+@interface DLSControlPanelPlugin ()
 
 @property (strong, nonatomic) id <DLSPluginContext> context;
 
@@ -50,15 +50,15 @@
 
 @end
 
-static DLSLiveDialsPlugin* sActivePlugin;
+static DLSControlPanelPlugin* sActivePlugin;
 
-@implementation DLSLiveDialsPlugin
+@implementation DLSControlPanelPlugin
 
 + (instancetype)activePlugin {
     return sActivePlugin;
 }
 
-+ (void)setActivePlugin:(DLSLiveDialsPlugin*)plugin {
++ (void)setActivePlugin:(DLSControlPanelPlugin*)plugin {
     sActivePlugin = plugin;
 }
 
@@ -72,18 +72,18 @@ static DLSLiveDialsPlugin* sActivePlugin;
 }
 
 - (void)start {
-    [DLSLiveDialsPlugin setActivePlugin:self];
+    [DLSControlPanelPlugin setActivePlugin:self];
 }
 
 
 - (NSString*)identifier {
-    return DLSLiveDialsPluginIdentifier;
+    return DLSControlPanelPluginIdentifier;
 }
 
 - (void)connectedWithContext:(id<DLSPluginContext>)context {
     self.context = context;
-    for(DLSActiveDialRecord* record in self.activeDials.allValues) {
-        [self sendAddMessageForDial:record.dial];
+    for(DLSActiveControlRecord* record in self.activeDials.allValues) {
+        [self sendAddMessageForControl:record.info];
     }
 }
 
@@ -96,29 +96,29 @@ static DLSLiveDialsPlugin* sActivePlugin;
     [self.activeDials removeObjectForKey:uuid];
 }
 
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor label:(NSString*)label canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
+- (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor label:(NSString*)label canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
     __weak __typeof(self) owner = self;
     
-    DLSLiveDial* dial = [[DLSLiveDial alloc] init];
-    dial.value = wrapper.getter();
-    dial.group = self.currentGroup;
-    dial.editor = editor;
-    dial.file = file;
-    dial.line = line;
-    dial.canSave = canSave;
-    dial.uuid = [NSUUID UUID].UUIDString;
-    dial.label = label;
+    DLSControlInfo* info = [[DLSControlInfo alloc] init];
+    info.value = wrapper.getter();
+    info.group = self.currentGroup;
+    info.editor = editor;
+    info.file = file;
+    info.line = line;
+    info.canSave = canSave;
+    info.uuid = [NSUUID UUID].UUIDString;
+    info.label = label;
     
-    DLSActiveDialRecord* record = [[DLSActiveDialRecord alloc] init];
+    DLSActiveControlRecord* record = [[DLSActiveControlRecord alloc] init];
     record.wrapper = wrapper;
-    record.dial = dial;
+    record.info = info;
     record.removeAction = ^{
-        [owner removeRecordWithUUID:dial.uuid];
+        [owner removeRecordWithUUID:info.uuid];
     };
     
-    [self.activeDials setObject:record forKey:dial.uuid];
+    [self.activeDials setObject:record forKey:info.uuid];
     
-    [self sendAddMessageForDial:dial];
+    [self sendAddMessageForControl:info];
     return record;
 }
 
@@ -131,7 +131,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 - (void)receiveMessage:(NSData *)messageData {
     id message = [NSKeyedUnarchiver unarchiveObjectWithData:messageData];
-    if([message isKindOfClass:[DLSLiveDialsChangeMessage class]]) {
+    if([message isKindOfClass:[DLSControlPanelChangeMessage class]]) {
         [self handleChangeMessage:message];
     }
     else {
@@ -139,27 +139,27 @@ static DLSLiveDialsPlugin* sActivePlugin;
     }
 }
 
-- (void)handleChangeMessage:(DLSLiveDialsChangeMessage*)message {
-    DLSActiveDialRecord* record = self.activeDials[message.uuid];
-    record.dial.value = message.value;
+- (void)handleChangeMessage:(DLSControlPanelChangeMessage*)message {
+    DLSActiveControlRecord* record = self.activeDials[message.uuid];
+    record.info.value = message.value;
     if(record.wrapper.setter) {
         record.wrapper.setter(message.value);
     }
 }
 
-- (void)sendAddMessageForDial:(DLSLiveDial*)dial {
-    DLSLiveDialsAddMessage* message = [[DLSLiveDialsAddMessage alloc] init];
-    message.dial = dial;
-    message.group = dial.group;
+- (void)sendAddMessageForControl:(DLSControlInfo*)info {
+    DLSControlPanelAddMessage* message = [[DLSControlPanelAddMessage alloc] init];
+    message.info = info;
+    message.group = info.group;
     [self sendMessage:message];
 }
 
 - (void)sendRemoveMessageWithUUID:(NSString*)uuid {
-    DLSActiveDialRecord* record = self.activeDials[uuid];
+    DLSActiveControlRecord* record = self.activeDials[uuid];
     
-    DLSLiveDialsRemoveMessage* message = [[DLSLiveDialsRemoveMessage alloc] init];
+    DLSControlPanelRemoveMessage* message = [[DLSControlPanelRemoveMessage alloc] init];
     message.uuid = uuid;
-    message.group = record.dial.group;
+    message.group = record.info.group;
     [self sendMessage:message];
 }
 
@@ -170,7 +170,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
 }
 
 - (NSString*)currentGroup {
-    return [self.groups lastObject] ?: DLSLiveDialsPluginDefaultGroup;
+    return [self.groups lastObject] ?: DLSControlPanelPluginDefaultGroup;
 }
 
 - (void)endGroup {
@@ -185,7 +185,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 @end
 
-@interface DLSReferencePredial ()
+@interface DLSReferenceControlBuilder ()
 
 @property (copy, nonatomic) NSString* label;
 @property (assign, nonatomic) BOOL canSave;
@@ -195,7 +195,7 @@ static DLSLiveDialsPlugin* sActivePlugin;
 
 @end
 
-@implementation DLSReferencePredial
+@implementation DLSReferenceControlBuilder
 
 - (id)initWithLabel:(NSString *)label
             canSave:(BOOL)canSave
@@ -223,18 +223,18 @@ static DLSLiveDialsPlugin* sActivePlugin;
             action();
         }];
         
-        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:[DLSActionEditor editor] label:self.label canSave:NO file:self.file line:self.line];
+        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:[DLSActionEditor editor] label:self.label canSave:NO file:self.file line:self.line];
     };
 }
 
 - (id <DLSRemovable> (^)(DLSPropertyWrapper*, id <DLSEditor>))wrapperOf {
     return ^(DLSPropertyWrapper* wrapper, id <DLSEditor> editor){
-        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:YES file:self.file line:self.line];
+        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.label canSave:YES file:self.file line:self.line];
     };
 }
 
 - (id <DLSRemovable>)buildWithEditor:(id <DLSEditor>)editor wrapper:(DLSPropertyWrapper*)wrapper {
-    return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.label canSave:self.canSave file:self.file line:self.line];
+    return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.label canSave:self.canSave file:self.file line:self.line];
 }
 
 #define DLSMake(name, type, editor) \
@@ -300,7 +300,7 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
 @end
 
 
-@interface DLSKeyPathPredial ()
+@interface DLSKeyPathControlBuilder ()
 
 @property (copy, nonatomic) NSString* keyPath;
 @property (assign, nonatomic) BOOL canSave;
@@ -311,7 +311,7 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
 
 @end
 
-@implementation DLSKeyPathPredial
+@implementation DLSKeyPathControlBuilder
 
 - (id)initWithKeyPath:(NSString *)keyPath
             canSave:(BOOL)canSave
@@ -342,7 +342,7 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     
     return ^(id <DLSEditor> editor) {
         DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithKeyPath:self.keyPath object:self.owner];
-        return [[DLSLiveDialsPlugin activePlugin] addDialWithWrapper:wrapper editor:editor label:self.keyPath canSave:self.canSave file:self.file line:self.line];
+        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.keyPath canSave:self.canSave file:self.file line:self.line];
     };
 }
 

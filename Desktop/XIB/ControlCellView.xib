@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="LiveDialController" customModule="Dials" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ControlController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="bodyView" destination="c22-O7-iKe" id="85L-Mf-M7N"/>
                 <outlet property="containerView" destination="7vQ-La-BML" id="pec-8E-ChO"/>

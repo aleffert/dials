@@ -26,9 +26,9 @@
 		77100EAE1B06F6210082C38B /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E5D1B06F6210082C38B /* EditorView.swift */; };
 		77100EAF1B06F6210082C38B /* FormattingUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E5E1B06F6210082C38B /* FormattingUtilities.swift */; };
 		77100EB01B06F6210082C38B /* GroupContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E5F1B06F6210082C38B /* GroupContainerView.swift */; };
-		77100EB11B06F6210082C38B /* LiveDialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E601B06F6210082C38B /* LiveDialController.swift */; };
-		77100EB21B06F6210082C38B /* LiveDialPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E611B06F6210082C38B /* LiveDialPaneViewController.swift */; };
-		77100EB31B06F6210082C38B /* LiveDialsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E621B06F6210082C38B /* LiveDialsPlugin.swift */; };
+		77100EB11B06F6210082C38B /* ControlController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E601B06F6210082C38B /* ControlController.swift */; };
+		77100EB21B06F6210082C38B /* ControlListPaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E611B06F6210082C38B /* ControlListPaneViewController.swift */; };
+		77100EB31B06F6210082C38B /* ControlPanelPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E621B06F6210082C38B /* ControlPanelPlugin.swift */; };
 		77100EB41B06F6210082C38B /* MapTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E631B06F6210082C38B /* MapTable.swift */; };
 		77100EB51B06F6210082C38B /* MathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E641B06F6210082C38B /* MathUtils.swift */; };
 		77100EB61B06F6210082C38B /* NetworkRequestInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E651B06F6210082C38B /* NetworkRequestInfoView.swift */; };
@@ -56,7 +56,7 @@
 		77100ECD1B06F6210082C38B /* ViewsPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E7C1B06F6210082C38B /* ViewsPlugin.swift */; };
 		77100ECE1B06F6210082C38B /* ViewPropertyTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E7D1B06F6210082C38B /* ViewPropertyTableController.swift */; };
 		77100ECF1B06F6210082C38B /* ViewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E7E1B06F6210082C38B /* ViewsViewController.swift */; };
-		77100ED01B06F6210082C38B /* ViewAdjustVisualOutlineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E7F1B06F6210082C38B /* ViewAdjustVisualOutlineController.swift */; };
+		77100ED01B06F6210082C38B /* ViewsVisualOutlineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E7F1B06F6210082C38B /* ViewsVisualOutlineController.swift */; };
 		77100ED11B06F6210082C38B /* ViewControllerGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E801B06F6210082C38B /* ViewControllerGrouper.swift */; };
 		77100ED21B06F6210082C38B /* ViewFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E811B06F6210082C38B /* ViewFacade.swift */; };
 		77100ED31B06F6210082C38B /* ViewOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E821B06F6210082C38B /* ViewOwner.swift */; };
@@ -67,8 +67,8 @@
 		77100EDB1B06F6210082C38B /* ColorEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E8D1B06F6210082C38B /* ColorEditorView.xib */; };
 		77100EDC1B06F6210082C38B /* ConsoleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E8E1B06F6210082C38B /* ConsoleWindow.xib */; };
 		77100EDD1B06F6210082C38B /* GroupContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E8F1B06F6210082C38B /* GroupContainerView.xib */; };
-		77100EDE1B06F6210082C38B /* LiveDialCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E901B06F6210082C38B /* LiveDialCellView.xib */; };
-		77100EDF1B06F6210082C38B /* LiveDialPaneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E911B06F6210082C38B /* LiveDialPaneViewController.xib */; };
+		77100EDE1B06F6210082C38B /* ControlCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E901B06F6210082C38B /* ControlCellView.xib */; };
+		77100EDF1B06F6210082C38B /* ControlListPaneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E911B06F6210082C38B /* ControlListPaneViewController.xib */; };
 		77100EE01B06F6210082C38B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E921B06F6210082C38B /* MainMenu.xib */; };
 		77100EE11B06F6210082C38B /* NetworkRequestInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E931B06F6210082C38B /* NetworkRequestInfoView.xib */; };
 		77100EE21B06F6210082C38B /* NetworkRequestStatusGroupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E941B06F6210082C38B /* NetworkRequestStatusGroupView.xib */; };
@@ -79,13 +79,13 @@
 		77100EE71B06F6210082C38B /* StepperEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E991B06F6210082C38B /* StepperEditorView.xib */; };
 		77100EE81B06F6210082C38B /* TextFieldEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E9A1B06F6210082C38B /* TextFieldEditorView.xib */; };
 		77100EE91B06F6210082C38B /* ToggleEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E9B1B06F6210082C38B /* ToggleEditorView.xib */; };
-		77100EEA1B06F6210082C38B /* ViewAdjustViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E9C1B06F6210082C38B /* ViewAdjustViewController.xib */; };
+		77100EEA1B06F6210082C38B /* ViewsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E9C1B06F6210082C38B /* ViewsViewController.xib */; };
 		77100EEB1B06F6210082C38B /* VisualOutlineControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77100E9D1B06F6210082C38B /* VisualOutlineControlsView.xib */; };
 		77100EEC1B06F6980082C38B /* CodeManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E861B06F6210082C38B /* CodeManagerTests.swift */; };
 		77100F2C1B0780F50082C38B /* DLSDescriptionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100EF41B0780AE0082C38B /* DLSDescriptionContext.m */; };
 		77100F2D1B0780F50082C38B /* DLSDials.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100EF61B0780AE0082C38B /* DLSDials.m */; };
-		77100F2E1B0780F50082C38B /* DLSLiveDialsPlugin+SwiftAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100EF71B0780AE0082C38B /* DLSLiveDialsPlugin+SwiftAdditions.swift */; };
-		77100F2F1B0780F50082C38B /* DLSLiveDialsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100EF91B0780AE0082C38B /* DLSLiveDialsPlugin.m */; };
+		77100F2E1B0780F50082C38B /* DLSControlPanelPlugin+SwiftAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100EF71B0780AE0082C38B /* DLSControlPanelPlugin+SwiftAdditions.swift */; };
+		77100F2F1B0780F50082C38B /* DLSControlPanelPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100EF91B0780AE0082C38B /* DLSControlPanelPlugin.m */; };
 		77100F301B0780F50082C38B /* DLSNetworkProxyProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100EFB1B0780AE0082C38B /* DLSNetworkProxyProtocol.m */; };
 		77100F311B0780F50082C38B /* DLSNetworkRequestsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100EFD1B0780AE0082C38B /* DLSNetworkRequestsPlugin.m */; };
 		77100F321B0780F50082C38B /* DLSValueExchanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F001B0780AE0082C38B /* DLSValueExchanger.m */; };
@@ -118,12 +118,12 @@
 		77100F7D1B0781360082C38B /* DLSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F491B0781360082C38B /* DLSConstants.m */; };
 		77100F7E1B0781360082C38B /* DLSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F491B0781360082C38B /* DLSConstants.m */; };
 		77100F7F1B0781360082C38B /* DLSEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4A1B0781360082C38B /* DLSEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77100F801B0781360082C38B /* DLSLiveDial.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4B1B0781360082C38B /* DLSLiveDial.h */; };
-		77100F811B0781360082C38B /* DLSLiveDial.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4C1B0781360082C38B /* DLSLiveDial.m */; };
-		77100F821B0781360082C38B /* DLSLiveDial.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4C1B0781360082C38B /* DLSLiveDial.m */; };
-		77100F831B0781360082C38B /* DLSLiveDialsMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4D1B0781360082C38B /* DLSLiveDialsMessages.h */; };
-		77100F841B0781360082C38B /* DLSLiveDialsMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4E1B0781360082C38B /* DLSLiveDialsMessages.m */; };
-		77100F851B0781360082C38B /* DLSLiveDialsMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4E1B0781360082C38B /* DLSLiveDialsMessages.m */; };
+		77100F801B0781360082C38B /* DLSControlInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4B1B0781360082C38B /* DLSControlInfo.h */; };
+		77100F811B0781360082C38B /* DLSControlInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4C1B0781360082C38B /* DLSControlInfo.m */; };
+		77100F821B0781360082C38B /* DLSControlInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4C1B0781360082C38B /* DLSControlInfo.m */; };
+		77100F831B0781360082C38B /* DLSControlPanelMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4D1B0781360082C38B /* DLSControlPanelMessages.h */; };
+		77100F841B0781360082C38B /* DLSControlPanelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4E1B0781360082C38B /* DLSControlPanelMessages.m */; };
+		77100F851B0781360082C38B /* DLSControlPanelMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F4E1B0781360082C38B /* DLSControlPanelMessages.m */; };
 		77100F861B0781360082C38B /* DLSNetworkRequestsMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4F1B0781360082C38B /* DLSNetworkRequestsMessages.h */; };
 		77100F871B0781360082C38B /* DLSNetworkRequestsMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F501B0781360082C38B /* DLSNetworkRequestsMessages.m */; };
 		77100F881B0781360082C38B /* DLSNetworkRequestsMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F501B0781360082C38B /* DLSNetworkRequestsMessages.m */; };
@@ -164,7 +164,7 @@
 		77100FAD1B07822B0082C38B /* Dials.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100EF11B0780AE0082C38B /* Dials.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100FAE1B0783630082C38B /* DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100EF21B0780AE0082C38B /* DLSDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100FAF1B0783730082C38B /* DLSDials.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100EF51B0780AE0082C38B /* DLSDials.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77100FB01B07837F0082C38B /* DLSLiveDialsPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100EF81B0780AE0082C38B /* DLSLiveDialsPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		77100FB01B07837F0082C38B /* DLSControlPanelPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100EF81B0780AE0082C38B /* DLSControlPanelPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100FB11B0783B40082C38B /* UIView+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F0A1B0780AE0082C38B /* UIView+DLSDescribable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100FB21B0784780082C38B /* DLSPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F521B0781360082C38B /* DLSPropertyDescription.m */; };
 		77100FB31B07848D0082C38B /* DLSPropertyDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F511B0781360082C38B /* DLSPropertyDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -197,6 +197,7 @@
 		77376A221B142C48001D81D3 /* PopupEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77376A211B142C48001D81D3 /* PopupEditor.swift */; };
 		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
+		775AD3251B1DE8090069A810 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3241B1DE8090069A810 /* FlippedClipView.swift */; };
 		77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FD15C71B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
 		77FD15C81B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
@@ -243,9 +244,9 @@
 		77100E5D1B06F6210082C38B /* EditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		77100E5E1B06F6210082C38B /* FormattingUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormattingUtilities.swift; sourceTree = "<group>"; };
 		77100E5F1B06F6210082C38B /* GroupContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupContainerView.swift; sourceTree = "<group>"; };
-		77100E601B06F6210082C38B /* LiveDialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDialController.swift; sourceTree = "<group>"; };
-		77100E611B06F6210082C38B /* LiveDialPaneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDialPaneViewController.swift; sourceTree = "<group>"; };
-		77100E621B06F6210082C38B /* LiveDialsPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveDialsPlugin.swift; sourceTree = "<group>"; };
+		77100E601B06F6210082C38B /* ControlController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlController.swift; sourceTree = "<group>"; };
+		77100E611B06F6210082C38B /* ControlListPaneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlListPaneViewController.swift; sourceTree = "<group>"; };
+		77100E621B06F6210082C38B /* ControlPanelPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPanelPlugin.swift; sourceTree = "<group>"; };
 		77100E631B06F6210082C38B /* MapTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTable.swift; sourceTree = "<group>"; };
 		77100E641B06F6210082C38B /* MathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathUtils.swift; sourceTree = "<group>"; };
 		77100E651B06F6210082C38B /* NetworkRequestInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestInfoView.swift; sourceTree = "<group>"; };
@@ -273,7 +274,7 @@
 		77100E7C1B06F6210082C38B /* ViewsPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewsPlugin.swift; sourceTree = "<group>"; };
 		77100E7D1B06F6210082C38B /* ViewPropertyTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewPropertyTableController.swift; sourceTree = "<group>"; };
 		77100E7E1B06F6210082C38B /* ViewsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewsViewController.swift; sourceTree = "<group>"; };
-		77100E7F1B06F6210082C38B /* ViewAdjustVisualOutlineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAdjustVisualOutlineController.swift; sourceTree = "<group>"; };
+		77100E7F1B06F6210082C38B /* ViewsVisualOutlineController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewsVisualOutlineController.swift; sourceTree = "<group>"; };
 		77100E801B06F6210082C38B /* ViewControllerGrouper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerGrouper.swift; sourceTree = "<group>"; };
 		77100E811B06F6210082C38B /* ViewFacade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewFacade.swift; sourceTree = "<group>"; };
 		77100E821B06F6210082C38B /* ViewOwner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewOwner.swift; sourceTree = "<group>"; };
@@ -286,8 +287,8 @@
 		77100E8D1B06F6210082C38B /* ColorEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorEditorView.xib; sourceTree = "<group>"; };
 		77100E8E1B06F6210082C38B /* ConsoleWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsoleWindow.xib; sourceTree = "<group>"; };
 		77100E8F1B06F6210082C38B /* GroupContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GroupContainerView.xib; sourceTree = "<group>"; };
-		77100E901B06F6210082C38B /* LiveDialCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveDialCellView.xib; sourceTree = "<group>"; };
-		77100E911B06F6210082C38B /* LiveDialPaneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveDialPaneViewController.xib; sourceTree = "<group>"; };
+		77100E901B06F6210082C38B /* ControlCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlCellView.xib; sourceTree = "<group>"; };
+		77100E911B06F6210082C38B /* ControlListPaneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlListPaneViewController.xib; sourceTree = "<group>"; };
 		77100E921B06F6210082C38B /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		77100E931B06F6210082C38B /* NetworkRequestInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkRequestInfoView.xib; sourceTree = "<group>"; };
 		77100E941B06F6210082C38B /* NetworkRequestStatusGroupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NetworkRequestStatusGroupView.xib; sourceTree = "<group>"; };
@@ -298,7 +299,7 @@
 		77100E991B06F6210082C38B /* StepperEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperEditorView.xib; sourceTree = "<group>"; };
 		77100E9A1B06F6210082C38B /* TextFieldEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldEditorView.xib; sourceTree = "<group>"; };
 		77100E9B1B06F6210082C38B /* ToggleEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleEditorView.xib; sourceTree = "<group>"; };
-		77100E9C1B06F6210082C38B /* ViewAdjustViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAdjustViewController.xib; sourceTree = "<group>"; };
+		77100E9C1B06F6210082C38B /* ViewsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewsViewController.xib; sourceTree = "<group>"; };
 		77100E9D1B06F6210082C38B /* VisualOutlineControlsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VisualOutlineControlsView.xib; sourceTree = "<group>"; };
 		77100EF01B0780AE0082C38B /* Dials-iOS.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dials-iOS.pch"; sourceTree = "<group>"; };
 		77100EF11B0780AE0082C38B /* Dials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dials.h; sourceTree = "<group>"; };
@@ -307,9 +308,9 @@
 		77100EF41B0780AE0082C38B /* DLSDescriptionContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DLSDescriptionContext.m; sourceTree = "<group>"; };
 		77100EF51B0780AE0082C38B /* DLSDials.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DLSDials.h; sourceTree = "<group>"; };
 		77100EF61B0780AE0082C38B /* DLSDials.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DLSDials.m; sourceTree = "<group>"; };
-		77100EF71B0780AE0082C38B /* DLSLiveDialsPlugin+SwiftAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DLSLiveDialsPlugin+SwiftAdditions.swift"; sourceTree = "<group>"; };
-		77100EF81B0780AE0082C38B /* DLSLiveDialsPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DLSLiveDialsPlugin.h; sourceTree = "<group>"; };
-		77100EF91B0780AE0082C38B /* DLSLiveDialsPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DLSLiveDialsPlugin.m; sourceTree = "<group>"; };
+		77100EF71B0780AE0082C38B /* DLSControlPanelPlugin+SwiftAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DLSControlPanelPlugin+SwiftAdditions.swift"; sourceTree = "<group>"; };
+		77100EF81B0780AE0082C38B /* DLSControlPanelPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DLSControlPanelPlugin.h; sourceTree = "<group>"; };
+		77100EF91B0780AE0082C38B /* DLSControlPanelPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DLSControlPanelPlugin.m; sourceTree = "<group>"; };
 		77100EFA1B0780AE0082C38B /* DLSNetworkProxyProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DLSNetworkProxyProtocol.h; sourceTree = "<group>"; };
 		77100EFB1B0780AE0082C38B /* DLSNetworkProxyProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DLSNetworkProxyProtocol.m; sourceTree = "<group>"; };
 		77100EFC1B0780AE0082C38B /* DLSNetworkRequestsPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DLSNetworkRequestsPlugin.h; sourceTree = "<group>"; };
@@ -347,10 +348,10 @@
 		77100F481B0781360082C38B /* DLSConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSConstants.h; sourceTree = "<group>"; };
 		77100F491B0781360082C38B /* DLSConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSConstants.m; sourceTree = "<group>"; };
 		77100F4A1B0781360082C38B /* DLSEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSEditor.h; sourceTree = "<group>"; };
-		77100F4B1B0781360082C38B /* DLSLiveDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSLiveDial.h; sourceTree = "<group>"; };
-		77100F4C1B0781360082C38B /* DLSLiveDial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSLiveDial.m; sourceTree = "<group>"; };
-		77100F4D1B0781360082C38B /* DLSLiveDialsMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSLiveDialsMessages.h; sourceTree = "<group>"; };
-		77100F4E1B0781360082C38B /* DLSLiveDialsMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSLiveDialsMessages.m; sourceTree = "<group>"; };
+		77100F4B1B0781360082C38B /* DLSControlInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSControlInfo.h; sourceTree = "<group>"; };
+		77100F4C1B0781360082C38B /* DLSControlInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSControlInfo.m; sourceTree = "<group>"; };
+		77100F4D1B0781360082C38B /* DLSControlPanelMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSControlPanelMessages.h; sourceTree = "<group>"; };
+		77100F4E1B0781360082C38B /* DLSControlPanelMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSControlPanelMessages.m; sourceTree = "<group>"; };
 		77100F4F1B0781360082C38B /* DLSNetworkRequestsMessages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSNetworkRequestsMessages.h; sourceTree = "<group>"; };
 		77100F501B0781360082C38B /* DLSNetworkRequestsMessages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSNetworkRequestsMessages.m; sourceTree = "<group>"; };
 		77100F511B0781360082C38B /* DLSPropertyDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSPropertyDescription.h; sourceTree = "<group>"; };
@@ -404,6 +405,7 @@
 		77376A211B142C48001D81D3 /* PopupEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupEditor.swift; sourceTree = "<group>"; };
 		775341C11B138A2F00BAE8CA /* DLSValueMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSValueMapper.h; sourceTree = "<group>"; };
 		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
+		775AD3241B1DE8090069A810 /* FlippedClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedClipView.swift; sourceTree = "<group>"; };
 		77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSFloatArrayEditor.h; sourceTree = "<group>"; };
 		77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSFloatArrayEditor.m; sourceTree = "<group>"; };
 		77FD15CD1B0F6A3000ED950F /* FloatArrayEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatArrayEditor.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				77100E5A1B06F6210082C38B /* Device.swift */,
 				77100E5B1B06F6210082C38B /* DeviceConnection.swift */,
 				77100E5C1B06F6210082C38B /* DeviceController.swift */,
+				775AD3241B1DE8090069A810 /* FlippedClipView.swift */,
 				77100E5E1B06F6210082C38B /* FormattingUtilities.swift */,
 				77100E631B06F6210082C38B /* MapTable.swift */,
 				77100E701B06F6210082C38B /* PluginContextBouncer.swift */,
@@ -514,16 +517,16 @@
 			children = (
 				77100E8C1B06F6210082C38B /* ChannelCellView.xib */,
 				77100E8E1B06F6210082C38B /* ConsoleWindow.xib */,
+				77100E901B06F6210082C38B /* ControlCellView.xib */,
+				77100E911B06F6210082C38B /* ControlListPaneViewController.xib */,
 				77100E8F1B06F6210082C38B /* GroupContainerView.xib */,
-				77100E901B06F6210082C38B /* LiveDialCellView.xib */,
-				77100E911B06F6210082C38B /* LiveDialPaneViewController.xib */,
 				77100E921B06F6210082C38B /* MainMenu.xib */,
 				77100E931B06F6210082C38B /* NetworkRequestInfoView.xib */,
 				77100E941B06F6210082C38B /* NetworkRequestStatusGroupView.xib */,
 				77100E951B06F6210082C38B /* NetworkRequestStatusView.xib */,
 				77100E961B06F6210082C38B /* NetworkRequestsViewController.xib */,
 				77100E971B06F6210082C38B /* PropertyGroupView.xib */,
-				77100E9C1B06F6210082C38B /* ViewAdjustViewController.xib */,
+				77100E9C1B06F6210082C38B /* ViewsViewController.xib */,
 				77100E9D1B06F6210082C38B /* VisualOutlineControlsView.xib */,
 				77FD15D71B10FB2C00ED950F /* Editors */,
 			);
@@ -544,8 +547,8 @@
 				77100EF41B0780AE0082C38B /* DLSDescriptionContext.m */,
 				77100EF51B0780AE0082C38B /* DLSDials.h */,
 				77100EF61B0780AE0082C38B /* DLSDials.m */,
-				77100EF81B0780AE0082C38B /* DLSLiveDialsPlugin.h */,
-				77100EF91B0780AE0082C38B /* DLSLiveDialsPlugin.m */,
+				77100EF81B0780AE0082C38B /* DLSControlPanelPlugin.h */,
+				77100EF91B0780AE0082C38B /* DLSControlPanelPlugin.m */,
 				771683251B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.h */,
 				771683261B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.m */,
 				77100EFA1B0780AE0082C38B /* DLSNetworkProxyProtocol.h */,
@@ -578,10 +581,10 @@
 				77100F451B0781360082C38B /* DLSChannelStream.m */,
 				77100F481B0781360082C38B /* DLSConstants.h */,
 				77100F491B0781360082C38B /* DLSConstants.m */,
-				77100F4B1B0781360082C38B /* DLSLiveDial.h */,
-				77100F4C1B0781360082C38B /* DLSLiveDial.m */,
-				77100F4D1B0781360082C38B /* DLSLiveDialsMessages.h */,
-				77100F4E1B0781360082C38B /* DLSLiveDialsMessages.m */,
+				77100F4B1B0781360082C38B /* DLSControlInfo.h */,
+				77100F4C1B0781360082C38B /* DLSControlInfo.m */,
+				77100F4D1B0781360082C38B /* DLSControlPanelMessages.h */,
+				77100F4E1B0781360082C38B /* DLSControlPanelMessages.m */,
 				77100F4F1B0781360082C38B /* DLSNetworkRequestsMessages.h */,
 				77100F501B0781360082C38B /* DLSNetworkRequestsMessages.m */,
 				77100F511B0781360082C38B /* DLSPropertyDescription.h */,
@@ -632,23 +635,23 @@
 			isa = PBXGroup;
 			children = (
 				771683311B1A8FBA000A850F /* Plugin.h */,
+				77100E601B06F6210082C38B /* ControlController.swift */,
+				77100E611B06F6210082C38B /* ControlListPaneViewController.swift */,
+				77100E621B06F6210082C38B /* ControlPanelPlugin.swift */,
 				77100E5F1B06F6210082C38B /* GroupContainerView.swift */,
-				77100E601B06F6210082C38B /* LiveDialController.swift */,
-				77100E611B06F6210082C38B /* LiveDialPaneViewController.swift */,
-				77100E621B06F6210082C38B /* LiveDialsPlugin.swift */,
 				77100E651B06F6210082C38B /* NetworkRequestInfoView.swift */,
 				77100E661B06F6210082C38B /* NetworkRequestsPlugin.swift */,
 				77100E671B06F6210082C38B /* NetworkRequestStatusView.swift */,
 				77100E681B06F6210082C38B /* NetworkRequestsViewController.swift */,
 				77100E721B06F6210082C38B /* PropertyGroupView.swift */,
+				77100E801B06F6210082C38B /* ViewControllerGrouper.swift */,
+				77100E811B06F6210082C38B /* ViewFacade.swift */,
 				77100E7A1B06F6210082C38B /* ViewHierarchy.swift */,
 				77100E7B1B06F6210082C38B /* ViewHierarchyOutlineController.swift */,
 				77100E7C1B06F6210082C38B /* ViewsPlugin.swift */,
 				77100E7D1B06F6210082C38B /* ViewPropertyTableController.swift */,
 				77100E7E1B06F6210082C38B /* ViewsViewController.swift */,
-				77100E7F1B06F6210082C38B /* ViewAdjustVisualOutlineController.swift */,
-				77100E801B06F6210082C38B /* ViewControllerGrouper.swift */,
-				77100E811B06F6210082C38B /* ViewFacade.swift */,
+				77100E7F1B06F6210082C38B /* ViewsVisualOutlineController.swift */,
 				77100E841B06F6210082C38B /* VisualOutlineControlsView.swift */,
 			);
 			name = Plugins;
@@ -741,7 +744,7 @@
 			children = (
 				771683291B1A1FE4000A850F /* DLSPopupEditing.swift */,
 				77FD15D81B1246AA00ED950F /* DLSProperty+SwiftAdditions.swift */,
-				77100EF71B0780AE0082C38B /* DLSLiveDialsPlugin+SwiftAdditions.swift */,
+				77100EF71B0780AE0082C38B /* DLSControlPanelPlugin+SwiftAdditions.swift */,
 			);
 			name = "Swift Conveniences";
 			sourceTree = "<group>";
@@ -779,7 +782,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77100FAC1B07821D0082C38B /* DLSPlugin.h in Headers */,
-				77100F801B0781360082C38B /* DLSLiveDial.h in Headers */,
+				77100F801B0781360082C38B /* DLSControlInfo.h in Headers */,
 				77100FAF1B0783730082C38B /* DLSDials.h in Headers */,
 				77100FAD1B07822B0082C38B /* Dials.h in Headers */,
 				77376A191B13F286001D81D3 /* UIImageView+DLSDescribable.h in Headers */,
@@ -793,8 +796,8 @@
 				77100F8F1B0781360082C38B /* DLSPropertyWrapper.h in Headers */,
 				77100FA21B0781360082C38B /* DLSViewsMessages.h in Headers */,
 				77100F7F1B0781360082C38B /* DLSEditor.h in Headers */,
-				77100F831B0781360082C38B /* DLSLiveDialsMessages.h in Headers */,
-				77100FB01B07837F0082C38B /* DLSLiveDialsPlugin.h in Headers */,
+				77100F831B0781360082C38B /* DLSControlPanelMessages.h in Headers */,
+				77100FB01B07837F0082C38B /* DLSControlPanelPlugin.h in Headers */,
 				77100F6C1B0781360082C38B /* DLSBufferedStream.h in Headers */,
 				77100F701B0781360082C38B /* DLSBufferedStreamWriter.h in Headers */,
 				77100F7C1B0781360082C38B /* DLSConstants.h in Headers */,
@@ -931,7 +934,7 @@
 				77FD15D61B10FAF100ED950F /* FloatArrayItemView.xib in Resources */,
 				77100EDA1B06F6210082C38B /* ChannelCellView.xib in Resources */,
 				77100EDB1B06F6210082C38B /* ColorEditorView.xib in Resources */,
-				77100EDF1B06F6210082C38B /* LiveDialPaneViewController.xib in Resources */,
+				77100EDF1B06F6210082C38B /* ControlListPaneViewController.xib in Resources */,
 				770354B51B14AF0300880AD4 /* PopupEditorView.xib in Resources */,
 				77100EE81B06F6210082C38B /* TextFieldEditorView.xib in Resources */,
 				77100EE51B06F6210082C38B /* PropertyGroupView.xib in Resources */,
@@ -942,7 +945,7 @@
 				77100EDC1B06F6210082C38B /* ConsoleWindow.xib in Resources */,
 				77100EE61B06F6210082C38B /* SliderEditorView.xib in Resources */,
 				77100EEB1B06F6210082C38B /* VisualOutlineControlsView.xib in Resources */,
-				77100EEA1B06F6210082C38B /* ViewAdjustViewController.xib in Resources */,
+				77100EEA1B06F6210082C38B /* ViewsViewController.xib in Resources */,
 				77100EE41B06F6210082C38B /* NetworkRequestsViewController.xib in Resources */,
 				77100EE21B06F6210082C38B /* NetworkRequestStatusGroupView.xib in Resources */,
 				77100EE71B06F6210082C38B /* StepperEditorView.xib in Resources */,
@@ -951,7 +954,7 @@
 				77100EE31B06F6210082C38B /* NetworkRequestStatusView.xib in Resources */,
 				77100E9E1B06F6210082C38B /* Images.xcassets in Resources */,
 				77100EE11B06F6210082C38B /* NetworkRequestInfoView.xib in Resources */,
-				77100EDE1B06F6210082C38B /* LiveDialCellView.xib in Resources */,
+				77100EDE1B06F6210082C38B /* ControlCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,16 +986,16 @@
 				77100EB01B06F6210082C38B /* GroupContainerView.swift in Sources */,
 				77100EC91B06F6210082C38B /* TextFieldEditor.swift in Sources */,
 				77100EC51B06F6210082C38B /* Result.swift in Sources */,
-				77100EB11B06F6210082C38B /* LiveDialController.swift in Sources */,
+				77100EB11B06F6210082C38B /* ControlController.swift in Sources */,
 				77100F7D1B0781360082C38B /* DLSConstants.m in Sources */,
 				77376A1B1B13F360001D81D3 /* DLSImageEditor.m in Sources */,
 				77100F8A1B0781360082C38B /* DLSPropertyDescription.m in Sources */,
-				77100ED01B06F6210082C38B /* ViewAdjustVisualOutlineController.swift in Sources */,
+				77100ED01B06F6210082C38B /* ViewsVisualOutlineController.swift in Sources */,
 				77100EA61B06F6210082C38B /* CodeManager.swift in Sources */,
 				77100EB91B06F6210082C38B /* NetworkRequestsViewController.swift in Sources */,
 				77100EB81B06F6210082C38B /* NetworkRequestStatusView.swift in Sources */,
 				77376A1F1B1412A8001D81D3 /* DLSPopupEditor.m in Sources */,
-				77100F811B0781360082C38B /* DLSLiveDial.m in Sources */,
+				77100F811B0781360082C38B /* DLSControlInfo.m in Sources */,
 				77100FA31B0781360082C38B /* DLSViewsMessages.m in Sources */,
 				77100EA51B06F6210082C38B /* CodeGenerating.swift in Sources */,
 				77100F8D1B0781360082C38B /* DLSPropertyGroup.m in Sources */,
@@ -1014,13 +1017,14 @@
 				77100EC31B06F6210082C38B /* PropertyGroupView.swift in Sources */,
 				77100EA21B06F6210082C38B /* Array+Utilties.swift in Sources */,
 				77376A221B142C48001D81D3 /* PopupEditor.swift in Sources */,
+				775AD3251B1DE8090069A810 /* FlippedClipView.swift in Sources */,
 				77100EA91B06F6210082C38B /* ConnectionStatusView.swift in Sources */,
 				77100EB51B06F6210082C38B /* MathUtils.swift in Sources */,
 				77100EC21B06F6210082C38B /* PluginController.swift in Sources */,
 				77100F971B0781360082C38B /* DLSStepperEditor.m in Sources */,
 				77100EAD1B06F6210082C38B /* DeviceController.swift in Sources */,
 				77100EAC1B06F6210082C38B /* DeviceConnection.swift in Sources */,
-				77100F841B0781360082C38B /* DLSLiveDialsMessages.m in Sources */,
+				77100F841B0781360082C38B /* DLSControlPanelMessages.m in Sources */,
 				77100EAE1B06F6210082C38B /* EditorView.swift in Sources */,
 				77100F771B0781360082C38B /* DLSChannelStream.m in Sources */,
 				77100ED31B06F6210082C38B /* ViewOwner.swift in Sources */,
@@ -1030,7 +1034,7 @@
 				77100FA61B0781360082C38B /* NSArray+DLSFunctionalAdditions.m in Sources */,
 				77100EC71B06F6210082C38B /* SliderEditor.swift in Sources */,
 				77100ED51B06F6210082C38B /* VisualOutlineControlsView.swift in Sources */,
-				77100EB31B06F6210082C38B /* LiveDialsPlugin.swift in Sources */,
+				77100EB31B06F6210082C38B /* ControlPanelPlugin.swift in Sources */,
 				77100EA11B06F6210082C38B /* AppDelegate.swift in Sources */,
 				77FD15CE1B0F6A3000ED950F /* FloatArrayEditor.swift in Sources */,
 				77100ECA1B06F6210082C38B /* ToggleEditor.swift in Sources */,
@@ -1038,7 +1042,7 @@
 				77100F9D1B0781360082C38B /* DLSToggleEditor.m in Sources */,
 				77100EAF1B06F6210082C38B /* FormattingUtilities.swift in Sources */,
 				77376A141B13F091001D81D3 /* ImageEditor.swift in Sources */,
-				77100EB21B06F6210082C38B /* LiveDialPaneViewController.swift in Sources */,
+				77100EB21B06F6210082C38B /* ControlListPaneViewController.swift in Sources */,
 				77100EA81B06F6210082C38B /* ConnectionStatusToolbarItem.swift in Sources */,
 				77100EB71B06F6210082C38B /* NetworkRequestsPlugin.swift in Sources */,
 				77100FA91B0781360082C38B /* NSObject+DLSDeallocAction.m in Sources */,
@@ -1084,7 +1088,7 @@
 				77100FAA1B0781360082C38B /* NSObject+DLSDeallocAction.m in Sources */,
 				77100F331B0780F50082C38B /* DLSViewsPlugin.m in Sources */,
 				77100F8E1B0781360082C38B /* DLSPropertyGroup.m in Sources */,
-				77100F2E1B0780F50082C38B /* DLSLiveDialsPlugin+SwiftAdditions.swift in Sources */,
+				77100F2E1B0780F50082C38B /* DLSControlPanelPlugin+SwiftAdditions.swift in Sources */,
 				77100F721B0781360082C38B /* DLSBufferedStreamWriter.m in Sources */,
 				7716832E1B1A77B1000A850F /* DLSDescriptionAccumulator.m in Sources */,
 				77100F311B0780F50082C38B /* DLSNetworkRequestsPlugin.m in Sources */,
@@ -1093,7 +1097,7 @@
 				77376A011B13DB5B001D81D3 /* UIButton+DLSDescribable.m in Sources */,
 				77376A1A1B13F286001D81D3 /* UIImageView+DLSDescribable.m in Sources */,
 				77100FA71B0781360082C38B /* NSArray+DLSFunctionalAdditions.m in Sources */,
-				77100F821B0781360082C38B /* DLSLiveDial.m in Sources */,
+				77100F821B0781360082C38B /* DLSControlInfo.m in Sources */,
 				77100F881B0781360082C38B /* DLSNetworkRequestsMessages.m in Sources */,
 				7716832A1B1A1FE4000A850F /* DLSPopupEditing.swift in Sources */,
 				77100F751B0781360082C38B /* DLSChannel.m in Sources */,
@@ -1109,8 +1113,8 @@
 				77100FA41B0781360082C38B /* DLSViewsMessages.m in Sources */,
 				77100F321B0780F50082C38B /* DLSValueExchanger.m in Sources */,
 				77100F301B0780F50082C38B /* DLSNetworkProxyProtocol.m in Sources */,
-				77100F2F1B0780F50082C38B /* DLSLiveDialsPlugin.m in Sources */,
-				77100F851B0781360082C38B /* DLSLiveDialsMessages.m in Sources */,
+				77100F2F1B0780F50082C38B /* DLSControlPanelPlugin.m in Sources */,
+				77100F851B0781360082C38B /* DLSControlPanelMessages.m in Sources */,
 				77100F911B0781360082C38B /* DLSPropertyWrapper.m in Sources */,
 				77100F381B0780F50082C38B /* UIView+DLSViewsPlugin.m in Sources */,
 				773769FD1B13A751001D81D3 /* UIControl+DLSDescribable.m in Sources */,

@@ -1,5 +1,5 @@
 //
-//  DLSLiveDialsMessages.h
+//  DLSControlPanelMessages.h
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 3/14/15.
@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString* const DLSLiveDialsPluginIdentifier;
-extern NSString* const DLSLiveDialsPluginDefaultGroup;
+extern NSString* const DLSControlPanelPluginIdentifier;
+extern NSString* const DLSControlPanelPluginDefaultGroup;
 
-@class DLSLiveDial;
+@class DLSControlInfo;
 
-@interface DLSLiveDialsMessage : NSObject <NSCoding>
+@interface DLSControlPanelMessage : NSObject <NSCoding>
 
 - (id)initWithGroup:(NSString*)group;
 
@@ -23,19 +23,19 @@ extern NSString* const DLSLiveDialsPluginDefaultGroup;
 
 @end
 
-@interface DLSLiveDialsAddMessage : DLSLiveDialsMessage <NSCoding>
+@interface DLSControlPanelAddMessage : DLSControlPanelMessage <NSCoding>
 
-@property (strong, nonatomic) DLSLiveDial* dial;
+@property (strong, nonatomic) DLSControlInfo* info;
 
 @end
 
-@interface DLSLiveDialsRemoveMessage : DLSLiveDialsMessage <NSCoding>
+@interface DLSControlPanelRemoveMessage : DLSControlPanelMessage <NSCoding>
 
 @property (copy, nonatomic) NSString* uuid;
 
 @end
 
-@interface DLSLiveDialsChangeMessage : DLSLiveDialsMessage <NSCoding>
+@interface DLSControlPanelChangeMessage : DLSControlPanelMessage <NSCoding>
 
 - (id)initWithUUID:(NSString*)uuid value:(id <NSCoding> __nullable)value group:(NSString*)group;
 

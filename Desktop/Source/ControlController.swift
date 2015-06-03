@@ -1,5 +1,5 @@
 //
-//  LiveDialController.swift
+//  ControlController.swift
 //  Dials-Desktop
 //
 //  Created by Akiva Leffert on 3/19/15.
@@ -9,12 +9,12 @@
 import Foundation
 import AppKit
 
-protocol LiveDialControllerDelegate : class {
-    func dialController(controller : LiveDialController, changedDial dial : DLSLiveDial, toValue value : NSCoding?)
-    func dialController(controller : LiveDialController, shouldSaveDial dial : DLSLiveDial, withValue value : NSCoding?)
+protocol ControlControllerDelegate : class {
+    func controlController(controller : ControlController, changedControlInfo info : DLSControlInfo, toValue value : NSCoding?)
+    func controlController(controller : ControlController, shouldSaveControlInfo info : DLSControlInfo, withValue value : NSCoding?)
 }
 
-class LiveDialController : NSObject, EditorViewDelegate, Equatable {
+class ControlController : NSObject, EditorViewDelegate, Equatable {
     @IBOutlet var bodyView : NSView?
     @IBOutlet var containerView : NSView?
     @IBOutlet var revertButton : NSButton?
@@ -26,19 +26,19 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
     private var mouseInView : Bool = false
 
     private let contentView : EditorView
-    let dial : DLSLiveDial
+    let controlInfo : DLSControlInfo
     
-    weak var delegate : LiveDialControllerDelegate?
+    weak var delegate : ControlControllerDelegate?
     
-    init(dial : DLSLiveDial, contentView : EditorView, delegate : LiveDialControllerDelegate) {
-        contentView.info = EditorInfo(editor : dial.editor, name : dial.label, label : dial.label, value : dial.value())
-        self.dial = dial
+    init(controlInfo : DLSControlInfo, contentView : EditorView, delegate : ControlControllerDelegate) {
+        contentView.info = EditorInfo(editor : controlInfo.editor, name : controlInfo.label, label : controlInfo.label, value : controlInfo.value())
+        self.controlInfo = controlInfo
         self.delegate = delegate
         self.contentView = contentView
-        currentValue = dial.value()
+        currentValue = controlInfo.value()
         super.init()
         contentView.delegate = self
-        NSBundle.mainBundle().loadNibNamed("LiveDialCellView", owner: self, topLevelObjects: nil)
+        NSBundle.mainBundle().loadNibNamed("ControlCellView", owner: self, topLevelObjects: nil)
         bodyView?.translatesAutoresizingMaskIntoConstraints = false
         let area = NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .MouseEnteredAndExited | .InVisibleRect, owner: self, userInfo: nil)
         let currentBody = bodyView
@@ -55,7 +55,7 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.allowsImplicitAnimation = true
             self.revertButton?.enabled = self.contentView.readOnly && self.updated
-            self.saveButton?.enabled = self.dial.canSave && self.updated && self.dial.file != nil
+            self.saveButton?.enabled = self.controlInfo.canSave && self.updated && self.controlInfo.file != nil
             self.revertButton?.hidden = !self.mouseInView
             self.saveButton?.hidden = !self.mouseInView
             self.openButton?.hidden = !self.mouseInView
@@ -65,7 +65,7 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
     func editorView(view: EditorView, changedInfo info: EditorInfo, toValue value: NSCoding?) {
         currentValue = value
         updated = true
-        delegate?.dialController(self, changedDial:dial, toValue: value)
+        delegate?.controlController(self, changedControlInfo:controlInfo, toValue: value)
         validateButtons(animated: true)
     }
     
@@ -84,28 +84,28 @@ class LiveDialController : NSObject, EditorViewDelegate, Equatable {
     }
     
     @IBAction func openFilePressed(sender : AnyObject) {
-        dial.file.map { NSWorkspace.sharedWorkspace().openFile($0) }
+        controlInfo.file.map { NSWorkspace.sharedWorkspace().openFile($0) }
     }
     
     @IBAction func revertPressed(sender : AnyObject) {
         contentView.info = contentView.info
-        delegate?.dialController(self, changedDial: dial, toValue: contentView.info!.value)
+        delegate?.controlController(self, changedControlInfo: controlInfo, toValue: contentView.info!.value)
         updated = false
         validateButtons(animated: true)
     }
     
     @IBAction func saveFilePressed(sender : AnyObject) {
-        delegate?.dialController(self, shouldSaveDial : dial, withValue: currentValue)
-        dial.setValue(currentValue)
+        delegate?.controlController(self, shouldSaveControlInfo : controlInfo, withValue: currentValue)
+        controlInfo.setValue(currentValue)
         updated = false
         validateButtons(animated: true)
     }
 }
 
-func < (left : LiveDialController, right : LiveDialController) -> Bool {
-    return left.dial.label < right.dial.label
+func < (left : ControlController, right : ControlController) -> Bool {
+    return left.controlInfo.label < right.controlInfo.label
 }
 
-func == (left : LiveDialController, right : LiveDialController) -> Bool {
-    return left.dial.uuid == right.dial.uuid
+func == (left : ControlController, right : ControlController) -> Bool {
+    return left.controlInfo.uuid == right.controlInfo.uuid
 }

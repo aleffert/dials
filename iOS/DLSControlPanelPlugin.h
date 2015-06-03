@@ -1,5 +1,5 @@
 //
-//  DLSLiveDialsPlugin.h
+//  DLSControlPanelPlugin.h
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 12/13/14.
@@ -21,35 +21,36 @@ NS_ASSUME_NONNULL_BEGIN
 /// sliders connected to variables in your code.
 /// When used with a variable corresponding to a setter in a line of code, it can be used to
 /// update the value in your code directly from the desktop interface just be clicking a button.
-@interface DLSLiveDialsPlugin : NSObject <DLSPlugin>
+@interface DLSControlPanelPlugin : NSObject <DLSPlugin>
 
 /// Will be nil if Dials isn't started
 +(nullable instancetype)activePlugin;
 
-/// Begins a named dial group. All added dials be grouped in a pane under the given name.
+/// Begins a named control group. All added controls will be grouped in a
+/// pane under the given name.
 /// Should be balanced by a call to -endGroup.
 /// @param name Display name of the group.
 - (void)beginGroupWithName:(NSString*)name;
 
-/// End a named dial group.
+/// End a named control group.
 /// Should correspond to a call to beginGroupWithName:.
 - (void)endGroup;
 
-/// All dials added within actions will be grouped in a pane under the given name.
+/// All controls added within actions will be grouped in a pane under the given name.
 /// Block based variant of -beginGroupWithName: -endGroup pairing.
 /// @param name Display name of the group.
 /// @param actions Code that will be executed.
 - (void)groupWithName:(NSString*)name actions:(void (^)(void))actions;
 
-/// Adds a dial. Typically you don't call this directly and instead use one of the convenient macros
+/// Adds a control. Typically you don't call this directly and instead use one of the convenient macros
 /// or Swift based wrapper functions.
 /// @param wrapper      Moves data in and out of the underlying store.
 /// @param editor       The desktop side editor for the property.
-/// @param label        The user facing name of the dial.
+/// @param label        The user facing name of the control.
 /// @param canSave      Whether it is possible to save changes to this property directly back to your code.
-/// @param file         The name of the file this dial is declared in.
-/// @param line         The line of code this dial is declared on.
-- (id <DLSRemovable>)addDialWithWrapper:(DLSPropertyWrapper*)wrapper
+/// @param file         The name of the file this control is declared in.
+/// @param line         The line of code this control is declared on.
+- (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper
                                  editor:(id <DLSEditor>)editor
                                   label:(NSString*)label
                                 canSave:(BOOL)canSave
@@ -58,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface DLSReferencePredial : NSObject
+@interface DLSReferenceControlBuilder : NSObject
 
 /// This is not typically called explicitly. Instead, use the DLSControl convenience macro
 - (id)initWithLabel:(NSString *)label
@@ -84,9 +85,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface DLSKeyPathPredial : NSObject
+@interface DLSKeyPathControlBuilder : NSObject
 
-/// This is not typically called explicitly. Instead, use the DLSControl convenience macro
+/// This is not typically called explicitly. Instead, use the DLSControlForKeyPath convenience macro.
 - (id)initWithKeyPath:(NSString *)keyPath
             canSave:(BOOL)canSave
               owner:(id)owner
@@ -109,15 +110,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+#define DLSControlGroupWithName(name__, actions__) [[DLSControlPanelPlugin activePlugin] groupWithName:name__ actions:actions__]
+
 /// Use this to start creating a control with the given label.
-/// Then use the methods on DLSReferencePredial to define the editor for the control.
+/// Then use the methods on DLSReferenceControlBuilder to define the editor for the control.
 /// For example DLSControl("Name").colorOf(&someUIColor).
-#define DLSControl(label) [[DLSReferencePredial alloc] initWithLabel:label canSave:true owner:self file:@"" __FILE__ line:__LINE__]
+#define DLSControl(label) [[DLSReferenceControlBuilder alloc] initWithLabel:label canSave:true owner:self file:@"" __FILE__ line:__LINE__]
 
 /// Use this to start creating a control with the given label based on a
 /// key path of the enclosing object.
-/// Then use the methods on DLSKeyPathPredial to define the editor for the control.
+/// Then use the methods on DLSKeyPathControlBuilder to define the editor for the control.
 /// For example DLSControl("backgroundColor").asColor()
-#define DLSControlForKeyPath(keypath) [[DLSKeyPathPredial alloc] initWithKeyPath:@"" #keypath canSave:true owner:self file:@"" __FILE__ line:__LINE__]
+#define DLSControlForKeyPath(keypath) [[DLSKeyPathControlBuilder alloc] initWithKeyPath:@"" #keypath canSave:true owner:self file:@"" __FILE__ line:__LINE__]
 
 NS_ASSUME_NONNULL_END

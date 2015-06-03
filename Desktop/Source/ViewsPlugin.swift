@@ -76,13 +76,13 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
     
     //MARK: ViewsViewControllerDelegate
     
-    func ViewsController(controller: ViewsViewController, selectedViewWithID viewID: NSString?) {
+    func viewsController(controller: ViewsViewController, selectedViewWithID viewID: NSString?) {
         let message = DLSViewsSelectViewMessage(viewID: viewID as String?)
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
         context?.sendMessage(data, plugin: self)
     }
     
-    func ViewsController(controller: ViewsViewController, valueChangedWithRecord record: DLSChangeViewValueRecord) {
+    func viewsController(controller: ViewsViewController, valueChangedWithRecord record: DLSChangeViewValueRecord) {
         let message = DLSViewsValueChangedMessage(record : record)
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
         context?.sendMessage(data, plugin: self)

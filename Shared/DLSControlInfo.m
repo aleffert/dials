@@ -1,16 +1,16 @@
 //
-//  DLSLiveDial.m
+//  DLSControlInfo.m
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 3/15/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSLiveDial.h"
+#import "DLSControlInfo.h"
 
 #import "DLSConstants.h"
 
-@implementation DLSLiveDial
+@implementation DLSControlInfo
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];

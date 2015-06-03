@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DLSDescriptionAccumulator : NSObject <DLSDescriptionContext>
 
-/// Array of DLSDescriptionGroup
+/// [DLSDescriptionGroup]
 @property (readonly, nonatomic) NSArray* groups;
 
 @end

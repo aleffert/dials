@@ -45,14 +45,14 @@ static NSString* message = @"Something";
         //
     }], [[DLSRectEditor alloc] init]);
     
-    [[DLSLiveDialsPlugin activePlugin] beginGroupWithName:@"ObjC Test Group"];
-    DLSControlForKeyPath(box.alpha).asSlider(0, 1);
-    DLSControlForKeyPath(box.hidden).asToggle();
-    DLSControlForKeyPath(box.backgroundColor).asColor();
-    DLSControl(@"A stepper").stepperOf(&stepper);
-    DLSControlForKeyPath(label.text).asTextField();
-    DLSControl(@"A message").labelOf(&message);
-    [[DLSLiveDialsPlugin activePlugin] endGroup];
+    DLSControlGroupWithName(@"ObjC Test Group", ^{
+        DLSControlForKeyPath(box.alpha).asSlider(0, 1);
+        DLSControlForKeyPath(box.hidden).asToggle();
+        DLSControlForKeyPath(box.backgroundColor).asColor();
+        DLSControl(@"A stepper").stepperOf(&stepper);
+        DLSControlForKeyPath(label.text).asTextField();
+        DLSControl(@"A message").labelOf(&message);
+    });
 }
 
 - (IBAction)push:(id)sender {

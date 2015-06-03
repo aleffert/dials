@@ -1,19 +1,19 @@
 //
-//  DLSLiveDialsMessages.m
+//  DLSControlPanelMessages.m
 //  Dials-iOS
 //
 //  Created by Akiva Leffert on 3/14/15.
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import "DLSLiveDialsMessages.h"
+#import "DLSControlPanelMessages.h"
 
 #import "DLSConstants.h"
 
-NSString* const DLSLiveDialsPluginIdentifier = @"com.akivaleffert.dials.live-dials";
-NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
+NSString* const DLSControlPanelPluginIdentifier = @"com.akivaleffert.dials.control-panel";
+NSString* const DLSControlPanelPluginDefaultGroup = @"Top Level";
 
-@implementation DLSLiveDialsMessage
+@implementation DLSControlPanelMessage
 
 - (id)initWithGroup:(NSString *)group {
     if(self != nil) {
@@ -36,24 +36,24 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 
 @end
 
-@implementation DLSLiveDialsAddMessage
+@implementation DLSControlPanelAddMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if(self != nil) {
-        DLSDecodeObject(aDecoder, dial);
+        DLSDecodeObject(aDecoder, info);
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [super encodeWithCoder:aCoder];
-    DLSEncodeObject(aCoder, dial);
+    DLSEncodeObject(aCoder, info);
 }
 
 @end
 
-@implementation DLSLiveDialsRemoveMessage
+@implementation DLSControlPanelRemoveMessage
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -70,7 +70,7 @@ NSString* const DLSLiveDialsPluginDefaultGroup = @"Top Level";
 
 @end
 
-@implementation DLSLiveDialsChangeMessage
+@implementation DLSControlPanelChangeMessage
 
 - (id)initWithUUID:(NSString*)uuid value:(id <NSCoding>)value group:(NSString *)group{
     self = [super initWithGroup:group];
