@@ -11,7 +11,7 @@ Dials is a desktop app for controlling and debugging your iOS app. It has a simp
 
 ## Setup
 
-Dials is an unusual project in that it has an iOS component and a Mac component. As such, you can use Cocoapods or Carthage to fetch and version it, but you'll have to perform some additional manual steps afterward.
+Dials is an unusual project in that it has an iOS component and a desktop component. As such, you can use Cocoapods or Carthage to fetch and version it, but you'll have to perform some additional manual steps afterward.
 
 ### Fetch Using Cocoapods
 
@@ -76,4 +76,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 }
 ```
 
+### Running Dials
+
+Once you have Dials configured, you can start it by running your app in the simulator and then choosing the ``Dials.app`` scheme and running that at the same time.
 
