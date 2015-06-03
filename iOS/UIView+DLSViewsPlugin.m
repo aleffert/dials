@@ -49,7 +49,8 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
         sIsListening = listening;
         // cheap property changes
         NSError* error = nil;
-        [self dls_swizzleMethod:@selector(didMoveToSuperview) withMethod:@selector(dls_didMoveToSuperview) error:&error];
+        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
+        [self dls_swizzleMethod:@selector(willMoveToSuperview:) withMethod:@selector(dls_willMoveToSuperview:) error:&error];
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
         [self dls_swizzleMethod:@selector(exchangeSubviewAtIndex:withSubviewAtIndex:) withMethod:@selector(dls_exchangeSubviewAtIndex:withSubviewAtIndex:) error:&error];
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
@@ -63,7 +64,7 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
         [self dls_swizzleMethod:@selector(sendSubviewToBack:) withMethod:@selector(dls_sendSubviewToBack:) error:&error];
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(didMoveToWindow) withMethod:@selector(dls_didMoveToWindow) error:&error];
+        [self dls_swizzleMethod:@selector(willMoveToWindow:) withMethod:@selector(dls_willMoveToWindow:) error:&error];
         NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
         
         // expensive property changes
@@ -78,9 +79,10 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 // Observer methods
 
-- (void)dls_didMoveToSuperview {
-    [self dls_didMoveToSuperview];
+- (void)dls_willMoveToSuperview:(UIView*)superview {
+    [self dls_willMoveToSuperview:superview];
     [[DLSViewsPlugin activePlugin] viewChangedSurface:self.superview];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:superview];
 }
 
 - (void)dls_exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2 {
@@ -113,8 +115,8 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
     [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
-- (void)dls_didMoveToWindow {
-    [self dls_didMoveToWindow];
+- (void)dls_willMoveToWindow:(UIWindow*)window {
+    [self dls_willMoveToWindow:window];
     [[DLSViewsPlugin activePlugin] viewChangedSurface:self.superview];
     [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
