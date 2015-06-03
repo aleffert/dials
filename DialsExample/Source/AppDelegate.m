@@ -18,7 +18,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // You should enable dials on debug builds so you don't accidentally ship
+    // with it enabled.
+#if DEBUG
+    
     [[DLSDials shared] start];
+    
+#endif
+    
     return YES;
 }
 
