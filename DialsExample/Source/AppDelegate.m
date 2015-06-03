@@ -19,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    // You should enable dials on debug builds so you don't accidentally ship
+    // You should enable dials only on debug builds so you don't accidentally ship
     // with it enabled.
 #if DEBUG
     
