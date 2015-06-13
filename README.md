@@ -76,6 +76,8 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 }
 ```
 
+4. If your project does not already contain Swift code, go to the "Build Settings" pane for your target and set "Embedded Content Contains Swift Code" to "Yes".
+
 ### Running Dials
 
 Once you have Dials configured, you can start it by running your app in the simulator and then choosing the ``Dials.app`` scheme and running that at the same time.
