@@ -49,11 +49,11 @@ NSString* const DLSViewsPluginIdentifier = @"com.akivaleffert.dials.views";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    DLSEncodeObject(aCoder, backgroundColor);
-    DLSEncodeObject(aCoder, borderColor);
+    DLSEncodeColor(aCoder, backgroundColor);
+    DLSEncodeColor(aCoder, borderColor);
     DLSEncodeObject(aCoder, contentValues);
     DLSEncodeObject(aCoder, geometryValues);
-    DLSEncodeObject(aCoder, shadowColor);
+    DLSEncodeColor(aCoder, shadowColor);
     DLSEncodeTransform3D(aCoder, transform3D);
 }
 

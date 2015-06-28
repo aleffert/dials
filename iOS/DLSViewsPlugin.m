@@ -32,14 +32,16 @@
 
 @property (strong, nonatomic) id <DLSPluginContext> context;
 
-// weak -> weak so auto clears when the view gets cleared
+// strong -> weak so auto clears when the view gets cleared
 @property (strong, nonatomic) NSMapTable* viewIDs;
 
 @property (weak, nonatomic) UIView* selectedView;
 @property (strong, nonatomic) id <DLSRemovable> updateTimer;
 
-@property (strong, nonatomic) NSHashTable* surfaceUpdatedViews;
-@property (strong, nonatomic) NSHashTable* displayUpdatedViews;
+@property (strong, nonatomic) NSMutableSet* surfaceUpdatedViewIDs;
+@property (strong, nonatomic) NSMutableSet* displayUpdatedViewIDs;
+
+@property (strong, nonatomic) NSMutableSet* usedViewIDs;
 
 @property (strong, nonatomic) id windowChangedListener;
 @property (assign, nonatomic) BOOL surfaceViewChanged;
@@ -71,9 +73,15 @@ static DLSViewsPlugin* sActivePlugin;
     self.context = context;
     self.classDescriptions = [[NSMutableDictionary alloc] init];
     self.classPropertyDescriptions = [[NSMutableDictionary alloc] init];
-    self.surfaceUpdatedViews = [NSHashTable weakObjectsHashTable];
-    self.displayUpdatedViews = [NSHashTable weakObjectsHashTable];
+    @synchronized(self) {
+        self.surfaceUpdatedViewIDs = [[NSMutableSet alloc] init];
+    }
+    @synchronized(self) {
+        self.displayUpdatedViewIDs = [[NSMutableSet alloc] init];
+    }
+    
     self.viewIDs = [NSMapTable strongToWeakObjectsMapTable];
+    self.usedViewIDs = [[NSMutableSet alloc] init];
     [self sendMessage:[self fullHierarchyMessage]];
     [self sendAllKnownViewContentsMessage];
     
@@ -87,14 +95,20 @@ static DLSViewsPlugin* sActivePlugin;
 }
 
 - (void)connectionClosed {
-    self.surfaceUpdatedViews = nil;
-    self.displayUpdatedViews = nil;
+    @synchronized(self.surfaceUpdatedViewIDs) {
+        self.surfaceUpdatedViewIDs = nil;
+    }
+    @synchronized(self.displayUpdatedViewIDs) {
+        self.displayUpdatedViewIDs = nil;
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self.windowChangedListener];
     [UIView dls_setListeningForChanges:NO];
     self.classDescriptions = nil;
     self.classPropertyDescriptions = nil;
     self.context = nil;
-    self.viewIDs = nil;
+    @synchronized(self.viewIDs) {
+        self.viewIDs = nil;
+    }
     self.selectedView = nil;
 }
 
@@ -129,7 +143,16 @@ static DLSViewsPlugin* sActivePlugin;
 
 - (NSString*)viewIDForView:(UIView*)view {
     NSString* viewID = view.dls_viewID;
-    [self.viewIDs setObject:view forKey:viewID];
+    @synchronized(self.viewIDs) {
+        if(view == nil) {
+            return nil;
+        }
+        
+        if(![self.usedViewIDs containsObject:viewID]) {
+            [self.viewIDs setObject:view forKey:viewID];
+            [self.usedViewIDs addObject:viewID];
+        }
+    }
     return viewID;
 }
 
@@ -193,9 +216,10 @@ static DLSViewsPlugin* sActivePlugin;
 }
 
 - (NSArray*)rootViews {
-    return [[[UIApplication sharedApplication] windows] dls_map:^(UIWindow* window) {
-        return window.isKeyWindow ? window : nil;
-    }];
+//    return [[[UIApplication sharedApplication] windows] dls_map:^(UIWindow* window) {
+//        return window.isKeyWindow ? window : nil;
+//    }];
+    return [[UIApplication sharedApplication] windows];
 }
 
 - (NSArray*)rootViewIDs {
@@ -231,10 +255,9 @@ static DLSViewsPlugin* sActivePlugin;
 
 - (void)sendAllKnownViewContentsMessage {
     NSMutableArray* views = [[NSMutableArray alloc] init];
-    for(NSString* key in self.viewIDs.keyEnumerator) {
-        UIView* view = [self.viewIDs objectForKey:key];
-        if(key) {
-            [views addObject:view];
+    @synchronized(self.viewIDs) {
+        for(NSString* key in self.viewIDs.keyEnumerator) {
+            [views addObject:key];
         }
     }
     [self sendChangedDisplayViews:views];
@@ -243,7 +266,6 @@ static DLSViewsPlugin* sActivePlugin;
 #pragma mark Updates
 
 - (void)sendInfoForView:(UIView*)view {
-    
     DLSViewsViewPropertiesMessage* message = [[DLSViewsViewPropertiesMessage alloc] init];
     
     DLSViewRecord* record = [[DLSViewRecord alloc] init];
@@ -284,15 +306,26 @@ static DLSViewsPlugin* sActivePlugin;
 }
 
 - (void)sendChangedSurfaceViews {
-    for(UIView* view in [self rootViews]) {
-        [self.surfaceUpdatedViews addObject:view];
+    for(NSString* viewID in [self rootViewIDs]) {
+        [self.surfaceUpdatedViewIDs addObject:viewID];
+    }
+    
+
+    NSMutableArray* views = [[NSMutableArray alloc] init];
+    @synchronized(self.viewIDs) {
+        for(NSString* viewID in self.surfaceUpdatedViewIDs) {
+            UIView* view = [self.viewIDs objectForKey:viewID];
+            if(view != nil) {
+                [views addObject:view];
+            }
+        }
     }
     
     NSMutableArray* records = [[NSMutableArray alloc] init];
-    for(UIView* view in self.surfaceUpdatedViews) {
+    for(UIView* view in views) {
         [records addObject:[self captureView:view]];
     }
-    
+
     DLSViewsUpdatedViewsMessage* message = [[DLSViewsUpdatedViewsMessage alloc] init];
     message.records = records;
     message.roots = [self rootViewIDs];
@@ -302,7 +335,15 @@ static DLSViewsPlugin* sActivePlugin;
     [self sendMessage:message];
 }
 
-- (void)sendChangedDisplayViews:(NSArray*)views {
+- (void)sendChangedDisplayViews:(NSArray*)viewIDs {
+    NSMutableArray* views = [[NSMutableArray alloc] init];
+    for(NSString* viewID in viewIDs) {
+        UIView* view = [self.viewIDs objectForKey:viewID];
+        if(view != nil) {
+            [views addObject:view];
+        }
+    }
+    
     NSMutableDictionary* records = [[NSMutableDictionary alloc] init];
     NSMutableArray* empties = [[NSMutableArray alloc] init];
     for(UIView* view in views) {
@@ -375,18 +416,24 @@ static DLSViewsPlugin* sActivePlugin;
     if(view == nil) {
         return;
     }
-    [self.surfaceUpdatedViews addObject:view];
-    if(!self.surfaceViewChanged) {
-        self.surfaceViewChanged = YES;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.surfaceViewChanged = NO;
-            [self sendChangedSurfaceViews];
-            [self.surfaceUpdatedViews removeAllObjects];
-        });
-    }
+    
     if(view == self.selectedView) {
         self.selectedView = nil;
         [self.updateTimer remove];
+    }
+    @synchronized(self.surfaceUpdatedViewIDs) {
+        NSString* viewID = [self viewIDForView:view];
+        [self.surfaceUpdatedViewIDs addObject:viewID];
+        if(!self.surfaceViewChanged) {
+            self.surfaceViewChanged = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @synchronized(self.surfaceUpdatedViewIDs) {
+                    self.surfaceViewChanged = NO;
+                    [self sendChangedSurfaceViews];
+                    [self.surfaceUpdatedViewIDs removeAllObjects];
+                }
+            });
+        }
     }
 }
 
@@ -394,14 +441,20 @@ static DLSViewsPlugin* sActivePlugin;
     if(view == nil) {
         return;
     }
-    [self.displayUpdatedViews addObject:view];
-    if(!self.displayViewChanged) {
-        self.displayViewChanged = YES;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.displayViewChanged = NO;
-            [self sendChangedDisplayViews:self.displayUpdatedViews.allObjects];
-            [self.displayUpdatedViews removeAllObjects];
-        });
+    
+    NSString* viewID = [self viewIDForView:view];
+    @synchronized(self.displayUpdatedViewIDs) {
+        [self.displayUpdatedViewIDs addObject:viewID];
+        if(!self.displayViewChanged) {
+            self.displayViewChanged = YES;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @synchronized(self.displayUpdatedViewIDs) {
+                    self.displayViewChanged = NO;
+                    [self sendChangedDisplayViews:self.displayUpdatedViewIDs.allObjects];
+                    [self.displayUpdatedViewIDs removeAllObjects];
+                }
+            });
+        }
     }
 }
 

@@ -15,6 +15,19 @@
 
 static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
+// All this locking is because some layers may render on background threads
+// e.g. for web views
+static void DLSWithViewLock(void(^action)(void)) {
+    static dispatch_once_t onceToken;
+    static NSLock* lock = nil;
+    dispatch_once(&onceToken, ^{
+        lock = [[NSLock alloc] init];
+    });
+    [lock lock];
+    action();
+    [lock unlock];
+}
+
 @implementation CALayer (DLSViews)
 
 - (UIView*)dls_view {
@@ -43,37 +56,31 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
 
 @implementation UIView (DLSViews)
 
+#define DLSSwizzle(receiver, method) \
+[receiver dls_swizzleMethod:@selector(method) withMethod:@selector(dls_##method) error: &error];  \
+NSAssert(error == nil, @"Dials: Error swizzling in view change listeners")
+
 + (void)dls_setListeningForChanges:(BOOL)listening {
     static BOOL sIsListening = NO;
     if(sIsListening != listening) {
         sIsListening = listening;
+        
         // cheap property changes
         NSError* error = nil;
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(willMoveToSuperview:) withMethod:@selector(dls_willMoveToSuperview:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(exchangeSubviewAtIndex:withSubviewAtIndex:) withMethod:@selector(dls_exchangeSubviewAtIndex:withSubviewAtIndex:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(insertSubview:aboveSubview:) withMethod:@selector(dls_insertSubview:aboveSubview:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(insertSubview:atIndex:) withMethod:@selector(dls_insertSubview:atIndex:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(insertSubview:belowSubview:) withMethod:@selector(dls_insertSubview:belowSubview:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(bringSubviewToFront:) withMethod:@selector(dls_bringSubviewToFront:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(sendSubviewToBack:) withMethod:@selector(dls_sendSubviewToBack:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [self dls_swizzleMethod:@selector(willMoveToWindow:) withMethod:@selector(dls_willMoveToWindow:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        
+        DLSSwizzle(self, willMoveToSuperview:);
+        DLSSwizzle(self, didMoveToSuperview);
+        DLSSwizzle(self, exchangeSubviewAtIndex:withSubviewAtIndex:);
+        DLSSwizzle(self, insertSubview:aboveSubview:);
+        DLSSwizzle(self, insertSubview:atIndex:);
+        DLSSwizzle(self, insertSubview:belowSubview:);
+        DLSSwizzle(self, bringSubviewToFront:);
+        DLSSwizzle(self, sendSubviewToBack:);
+        DLSSwizzle(self, willMoveToWindow:);
+        DLSSwizzle(self, didMoveToWindow);
+
         // expensive property changes
-        [UIView dls_swizzleMethod:@selector(drawRect:) withMethod:@selector(dls_drawRect:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [CALayer dls_swizzleMethod:@selector(display) withMethod:@selector(dls_display) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
-        [CALayer dls_swizzleMethod:@selector(actionForKey:) withMethod:@selector(dls_actionForKey:) error:&error];
-        NSAssert(error == nil, @"Dials: Error swizzling in view change listeners");
+        DLSSwizzle(CALayer, display);
+        DLSSwizzle(CALayer, actionForKey:);
     }
 }
 
@@ -83,6 +90,11 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
     [self dls_willMoveToSuperview:superview];
     [[DLSViewsPlugin activePlugin] viewChangedSurface:self.superview];
     [[DLSViewsPlugin activePlugin] viewChangedSurface:superview];
+}
+
+- (void)dls_didMoveToSuperview {
+    [self dls_didMoveToSuperview];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self.superview];
 }
 
 - (void)dls_exchangeSubviewAtIndex:(NSInteger)index1 withSubviewAtIndex:(NSInteger)index2 {
@@ -121,18 +133,24 @@ static NSString* DLSViewIDKey = @"DLSViewIDKey";
     [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
-- (void)dls_drawRect:(CGRect)rect {
-    [self dls_drawRect:rect];
-    [[DLSViewsPlugin activePlugin] viewChangedDisplay:self];
+- (void)dls_didMoveToWindow {
+    [self dls_didMoveToWindow];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self.superview];
+    [[DLSViewsPlugin activePlugin] viewChangedSurface:self];
 }
 
 // Unique ID per view
 
 - (NSString*)dls_viewID {
-    NSString* viewID = objc_getAssociatedObject(self, &DLSViewIDKey);
+    __block NSString* viewID = objc_getAssociatedObject(self, &DLSViewIDKey);
     if(viewID == nil) {
-        viewID = [NSUUID UUID].UUIDString;
-        objc_setAssociatedObject(self, &DLSViewIDKey, viewID, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        DLSWithViewLock(^{
+            viewID = objc_getAssociatedObject(self, &DLSViewIDKey);
+            if(viewID == nil) {
+                viewID = [NSUUID UUID].UUIDString;
+                objc_setAssociatedObject(self, &DLSViewIDKey, viewID, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            }
+        });
     }
     
     return viewID;

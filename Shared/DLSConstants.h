@@ -34,6 +34,14 @@ extern NSString * const DLSNetServiceName;
 // Encoders
 
 #define DLSEncodeObject(coder, key) [coder encodeObject:self.key forKey:DLSConstant(key)]
+#define DLSEncodeColor(coder, key) \
+do { \
+    CGColorSpaceRef colorSpace = CGColorGetColorSpace(self.key.CGColor); \
+    CGColorSpaceModel model = CGColorSpaceGetModel(colorSpace);\
+    if(model == kCGColorSpaceModelRGB || model == kCGColorSpaceModelMonochrome) { \
+        [coder encodeObject:self.key forKey:DLSConstant(key)]; \
+    } \
+} while(false)
 #define DLSEncodeBool(coder, key) [coder encodeBool:self.key forKey:DLSConstant(key)]
 #define DLSEncodeInteger(coder, key) [coder encodeInteger:self.key forKey:DLSConstant(key)]
 #define DLSEncodeDouble(coder, key) [coder encodeDouble:self.key forKey:DLSConstant(key)]

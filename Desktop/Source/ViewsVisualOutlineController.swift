@@ -104,22 +104,23 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 layer.contentLayer.contents = contents[record.viewID]
                 layer.contentLayer.shadowColor = record.renderingInfo.shadowColor?.CGColor
                 
-                layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(currentDepth) * controlsView.depthOffset)
-                
+                layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(depth) * controlsView.depthOffset + zPos)
+
                 for (key, value) in record.renderingInfo.contentValues {
-                    layer.contentLayer.setValue((value as? NSNull) != nil ? nil : value, forKey: key as! String)
+                    layer.contentLayer.setValue((value as? NSNull) == nil ? value : nil, forKey: key as! String)
                 }
+                layer.hidden = layer.contentLayer.hidden || parent.hidden
                 for(key, value) in record.renderingInfo.geometryValues {
                     layer.setValue(value, forKey: key as! String)
                 }
                 
                 layer.borderLayer.transform = layer.contentLayer.transform
                 
-                // Add a small fudge factor so siblings are properly ordered
-                layer.zPosition = zPos
-                
                 visitNodes(record.children as! [NSString], parent : layer, depth : &depth, marking: &marking)
-                zPos += 0.001
+                if depth > 0 {
+                    // Add a small fudge factor so siblings are properly ordered
+                    zPos += 0.001
+                }
             }
         }
     }
