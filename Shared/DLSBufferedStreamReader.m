@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 
 @interface DLSBufferedStreamReader () <NSStreamDelegate>
 
+@property (strong, nonatomic) dispatch_queue_t queue;
 @property (strong, nonatomic) NSInputStream* stream;
 @property (assign, nonatomic) DLSBufferedStreamReaderState readState;
 @property (assign, nonatomic) DLSStreamSize bytesRemaining;
@@ -29,6 +30,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 - (id)initWithInputStream:(NSInputStream *)stream {
     self = [super init];
     if(self != nil) {
+        self.queue = dispatch_queue_create("com.akivaleffert.readstream", DISPATCH_QUEUE_SERIAL);
         self.stream = stream;
         self.stream.delegate = self;
         [self prepareForHeader];
@@ -43,15 +45,22 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 }
 
 - (void)open {
-    [self.stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.stream open];
+    dispatch_async(self.queue, ^{
+        [self.stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.stream open];
+        while((self.stream.streamStatus == NSStreamStatusOpen
+               || self.stream.streamStatus == NSStreamStatusOpening)
+              && [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+    });
 }
 
 - (void)close {
-    self.stream.delegate = nil;
-    [self.stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.stream close];
-    self.stream = nil;
+    dispatch_async(self.queue, ^{
+        self.stream.delegate = nil;
+        [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.stream close];
+        self.stream = nil;
+    });
 }
 
 - (void)readHeader {
@@ -63,7 +72,9 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
         [self.buffer getBytes:&bodySize length:sizeof(bodySize)];
         self.bytesRemaining = (DLSStreamSize)CFSwapInt32BigToHost(bodySize);
         if(self.bytesRemaining == 0) {
-            [self.delegate streamReader:self receivedMessage:[NSData data]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate streamReader:self receivedMessage:[NSData data]];
+            });
             [self prepareForHeader];
         }
         else {
@@ -79,7 +90,10 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
     DLSStreamSize bytesRead = (DLSStreamSize)[self.stream read:bytes maxLength:self.bytesRemaining];
     self.bytesRemaining = self.bytesRemaining - bytesRead;
     if(self.bytesRemaining == 0) {
-        [self.delegate streamReader:self receivedMessage:self.buffer];
+        NSData* buffer = self.buffer;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate streamReader:self receivedMessage:buffer];
+        });
         [self prepareForHeader];
     }
 }
@@ -95,6 +109,9 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
                 break;
         }
     }
+    if(self.stream.hasBytesAvailable) {
+        [self readAvailableBytes];
+    }
 }
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
@@ -103,9 +120,12 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
             [self readAvailableBytes];
             break;
         case NSStreamEventEndEncountered:
-        case NSStreamEventErrorOccurred:
-            [self.delegate streamReaderClosed:self];
+        case NSStreamEventErrorOccurred: {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate streamReaderClosed:self];
+            });
             break;
+        }
         case NSStreamEventNone:
         case NSStreamEventOpenCompleted:
         case NSStreamEventHasSpaceAvailable: {

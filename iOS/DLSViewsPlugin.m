@@ -22,6 +22,7 @@
 #import "UIView+DLSDescribable.h"
 #import "UIView+DLSViewsPlugin.h"
 
+static const NSTimeInterval DLSViewUpdateInterval = .1;
 
 @interface DLSViewsPlugin ()
 
@@ -36,7 +37,9 @@
 @property (strong, nonatomic) NSMapTable* viewIDs;
 
 @property (weak, nonatomic) UIView* selectedView;
-@property (strong, nonatomic) id <DLSRemovable> updateTimer;
+@property (strong, nonatomic) id <DLSRemovable> selectionUpdateTimer;
+@property (strong, nonatomic) id <DLSRemovable> updateDisplayTimer;
+@property (strong, nonatomic) id <DLSRemovable> updateSurfaceTimer;
 
 @property (strong, nonatomic) NSMutableSet* surfaceUpdatedViewIDs;
 @property (strong, nonatomic) NSMutableSet* displayUpdatedViewIDs;
@@ -44,8 +47,7 @@
 @property (strong, nonatomic) NSMutableSet* usedViewIDs;
 
 @property (strong, nonatomic) id windowChangedListener;
-@property (assign, nonatomic) BOOL surfaceViewChanged;
-@property (assign, nonatomic) BOOL displayViewChanged;
+
 
 @end
 
@@ -97,9 +99,11 @@ static DLSViewsPlugin* sActivePlugin;
 - (void)connectionClosed {
     @synchronized(self.surfaceUpdatedViewIDs) {
         self.surfaceUpdatedViewIDs = nil;
+        [self.updateSurfaceTimer remove];
     }
     @synchronized(self.displayUpdatedViewIDs) {
         self.displayUpdatedViewIDs = nil;
+        [self.updateDisplayTimer remove];
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self.windowChangedListener];
     [UIView dls_setListeningForChanges:NO];
@@ -291,13 +295,13 @@ static DLSViewsPlugin* sActivePlugin;
 }
 
 - (void)startSendingUpdatesForView:(UIView*)view {
-    [self.updateTimer remove];
+    [self.selectionUpdateTimer remove];
     
     __weak __typeof(self) weakself = self;
-    self.updateTimer = [NSTimer dls_scheduledTimerWithTimeInterval:.1 repeats:YES action:^{
+    self.selectionUpdateTimer = [NSTimer dls_scheduledTimerWithTimeInterval:.1 repeats:YES action:^{
         if(weakself.selectedView == nil) {
-            [weakself.updateTimer remove];
-            weakself.updateTimer = nil;
+            [weakself.selectionUpdateTimer remove];
+            weakself.selectionUpdateTimer = nil;
         }
         else {
             [self sendInfoForView:weakself.selectedView];
@@ -419,20 +423,20 @@ static DLSViewsPlugin* sActivePlugin;
     
     if(view == self.selectedView) {
         self.selectedView = nil;
-        [self.updateTimer remove];
+        [self.selectionUpdateTimer remove];
     }
     @synchronized(self.surfaceUpdatedViewIDs) {
         NSString* viewID = [self viewIDForView:view];
         [self.surfaceUpdatedViewIDs addObject:viewID];
-        if(!self.surfaceViewChanged) {
-            self.surfaceViewChanged = YES;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                @synchronized(self.surfaceUpdatedViewIDs) {
-                    self.surfaceViewChanged = NO;
-                    [self sendChangedSurfaceViews];
-                    [self.surfaceUpdatedViewIDs removeAllObjects];
+        if(self.updateSurfaceTimer == nil) {
+            __weak __typeof(self) weakself = self;
+            self.updateSurfaceTimer = [NSTimer dls_scheduledTimerWithTimeInterval:DLSViewUpdateInterval repeats:NO action:^{
+                @synchronized(weakself.surfaceUpdatedViewIDs) {
+                    weakself.updateSurfaceTimer = nil;
+                    [weakself sendChangedSurfaceViews];
+                    [weakself.surfaceUpdatedViewIDs removeAllObjects];
                 }
-            });
+            }];
         }
     }
 }
@@ -445,15 +449,15 @@ static DLSViewsPlugin* sActivePlugin;
     NSString* viewID = [self viewIDForView:view];
     @synchronized(self.displayUpdatedViewIDs) {
         [self.displayUpdatedViewIDs addObject:viewID];
-        if(!self.displayViewChanged) {
-            self.displayViewChanged = YES;
-            dispatch_async(dispatch_get_main_queue(), ^{
+        if(self.updateDisplayTimer == nil) {
+            __weak __typeof(self) weakself = self;
+            self.updateDisplayTimer = [NSTimer dls_scheduledTimerWithTimeInterval:DLSViewUpdateInterval repeats:NO action:^{
                 @synchronized(self.displayUpdatedViewIDs) {
-                    self.displayViewChanged = NO;
-                    [self sendChangedDisplayViews:self.displayUpdatedViewIDs.allObjects];
-                    [self.displayUpdatedViewIDs removeAllObjects];
+                    weakself.updateDisplayTimer = nil;
+                    [weakself sendChangedDisplayViews:self.displayUpdatedViewIDs.allObjects];
+                    [weakself.displayUpdatedViewIDs removeAllObjects];
                 }
-            });
+            }];
         }
     }
 }

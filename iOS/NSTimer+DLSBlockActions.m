@@ -39,7 +39,8 @@
 + (id <DLSRemovable>)dls_scheduledTimerWithTimeInterval:(NSTimeInterval)timeInterval repeats:(BOOL)repeats action:(void(^)(void))action {
     DLSTimerListener* listener = [[DLSTimerListener alloc] init];
     listener.action = action;
-    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:timeInterval target:listener selector:@selector(timerFired:) userInfo:listener repeats:repeats];
+    NSTimer* timer = [NSTimer timerWithTimeInterval:timeInterval target:listener selector:@selector(timerFired:) userInfo:listener repeats:repeats];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     listener.timer = timer;
     return listener;
 }

@@ -10,9 +10,6 @@
 
 #import "DLSBufferedStream.h"
 
-#import <arpa/inet.h>
-#import <net/if.h>
-
 @interface DLSQueuedMessage : NSObject
 
 @property (assign, nonatomic) DLSStreamSize bytesRemaining;
@@ -25,6 +22,7 @@
 
 @interface DLSBufferedStreamWriter () <NSStreamDelegate>
 
+@property (strong, nonatomic) dispatch_queue_t queue;
 @property (strong, nonatomic) NSMutableArray* messages;
 @property (strong, nonatomic) NSOutputStream* stream;
 
@@ -37,6 +35,7 @@
     if(self != nil) {
         self.stream = stream;
         self.stream.delegate = self;
+        self.queue = dispatch_queue_create("com.akivaleffert.streamwriter", DISPATCH_QUEUE_SERIAL);
         
         self.messages = [NSMutableArray array];
     }
@@ -44,15 +43,22 @@
 }
 
 - (void)open {
-    [self.stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.stream open];
+    dispatch_async(self.queue, ^{
+        [self.stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.stream open];
+        while((self.stream.streamStatus == NSStreamStatusOpen
+               || self.stream.streamStatus == NSStreamStatusOpening)
+              && [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+    });
 }
 
 - (void)close {
-    self.stream.delegate = nil;
-    [self.stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [self.stream close];
-    self.stream = nil;
+    dispatch_async(self.queue, ^{
+        self.stream.delegate = nil;
+        [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.stream close];
+        self.stream = nil;
+    });
 }
 
 - (void)enqueueMessage:(NSData *)data {
@@ -84,6 +90,9 @@
             }
         }
         else {
+            if(message) {
+                [self sendAvailableBytes];
+            }
             break;
         }
     }
@@ -92,9 +101,12 @@
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
     switch (eventCode) {
         case NSStreamEventErrorOccurred:
-        case NSStreamEventEndEncountered:
-            [self.delegate streamWriterClosed:self];
+        case NSStreamEventEndEncountered: {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate streamWriterClosed:self];
+            });
             break;
+        }
         case NSStreamEventHasSpaceAvailable:
             [self sendAvailableBytes];
             break;
