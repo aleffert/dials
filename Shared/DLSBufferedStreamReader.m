@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 
 @interface DLSBufferedStreamReader () <NSStreamDelegate>
 
+@property (strong, nonatomic) NSRunLoop* queueLoop;
 @property (strong, nonatomic) dispatch_queue_t queue;
 @property (strong, nonatomic) NSInputStream* stream;
 @property (assign, nonatomic) DLSBufferedStreamReaderState readState;
@@ -30,12 +31,31 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 - (id)initWithInputStream:(NSInputStream *)stream {
     self = [super init];
     if(self != nil) {
-        self.queue = dispatch_queue_create("com.akivaleffert.readstream", DISPATCH_QUEUE_SERIAL);
+        self.queue = dispatch_queue_create("com.akivaleffert.streamreader", DISPATCH_QUEUE_SERIAL);
         self.stream = stream;
         self.stream.delegate = self;
         [self prepareForHeader];
     }
     return self;
+}
+
+- (void)open {
+    dispatch_async(self.queue, ^{
+        self.queueLoop = [NSRunLoop currentRunLoop];
+        [self.stream scheduleInRunLoop:self.queueLoop forMode:NSDefaultRunLoopMode];
+        [self.stream open];
+        [self pumpStream:self.stream];
+    });
+}
+
+- (void)close {
+    dispatch_async(self.queue, ^{
+        self.queueLoop = nil;
+        self.stream.delegate = nil;
+        [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [self.stream close];
+        self.stream = nil;
+    });
 }
 
 - (void)prepareForHeader {
@@ -44,23 +64,14 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
     self.buffer = [NSMutableData dataWithLength:self.bytesRemaining];
 }
 
-- (void)open {
-    dispatch_async(self.queue, ^{
-        [self.stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [self.stream open];
-        while((self.stream.streamStatus == NSStreamStatusOpen
-               || self.stream.streamStatus == NSStreamStatusOpening)
-              && [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
-    });
-}
-
-- (void)close {
-    dispatch_async(self.queue, ^{
-        self.stream.delegate = nil;
-        [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [self.stream close];
-        self.stream = nil;
-    });
+- (void)pumpStream:(NSStream*)stream {
+    [self.queueLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
+    if(self.stream.streamStatus != NSStreamStatusClosed) {
+        NSStream* stream = self.stream;
+        dispatch_async(self.queue, ^{
+            [self pumpStream:stream];
+        });
+    }
 }
 
 - (void)readHeader {

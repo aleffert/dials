@@ -22,6 +22,7 @@
 
 @interface DLSBufferedStreamWriter () <NSStreamDelegate>
 
+@property (strong, nonatomic) NSRunLoop* queueLoop;
 @property (strong, nonatomic) dispatch_queue_t queue;
 @property (strong, nonatomic) NSMutableArray* messages;
 @property (strong, nonatomic) NSOutputStream* stream;
@@ -44,36 +45,50 @@
 
 - (void)open {
     dispatch_async(self.queue, ^{
-        [self.stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        self.queueLoop = [NSRunLoop currentRunLoop];
+        [self.stream scheduleInRunLoop:self.queueLoop forMode:NSDefaultRunLoopMode];
         [self.stream open];
-        while((self.stream.streamStatus == NSStreamStatusOpen
-               || self.stream.streamStatus == NSStreamStatusOpening)
-              && [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]);
+        [self pumpStream:self.stream];
     });
 }
 
 - (void)close {
     dispatch_async(self.queue, ^{
+        self.queueLoop = nil;
         self.stream.delegate = nil;
-        [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
         [self.stream close];
         self.stream = nil;
+        [self.messages removeAllObjects];
+        [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     });
 }
+
+- (void)pumpStream:(NSStream*)stream {
+    [self.queueLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
+    if(self.stream.streamStatus != NSStreamStatusClosed) {
+        NSStream* stream = self.stream;
+        dispatch_async(self.queue, ^{
+            [self pumpStream:stream];
+        });
+    }
+}
+
 
 - (void)enqueueMessage:(NSData *)data {
     DLSQueuedMessage* headerMessage = [[DLSQueuedMessage alloc] init];
     headerMessage.bytesRemaining = sizeof(DLSStreamSize);
     DLSStreamSize length = CFSwapInt32HostToBig((DLSStreamSize)data.length);
     headerMessage.data = [[NSData alloc] initWithBytes:&length length:sizeof(DLSStreamSize)];
-    [self.messages addObject:headerMessage];
     
     DLSQueuedMessage* bodyMessage = [[DLSQueuedMessage alloc] init];
     bodyMessage.data = data;
     bodyMessage.bytesRemaining = (DLSStreamSize)data.length;
-    [self.messages addObject:bodyMessage];
-    
-    [self sendAvailableBytes];
+    dispatch_async(self.queue, ^{
+        [self.messages addObject:headerMessage];
+        [self.messages addObject:bodyMessage];
+        
+        [self sendAvailableBytes];
+    });
 }
 
 - (void)sendAvailableBytes {
@@ -90,9 +105,6 @@
             }
         }
         else {
-            if(message) {
-                [self sendAvailableBytes];
-            }
             break;
         }
     }
