@@ -64,6 +64,7 @@ NSString* const DLSViewsPluginIdentifier = @"com.akivaleffert.dials.views";
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if(self != nil) {
+        DLSDecodeBool(aDecoder, selectable);
         DLSDecodeObject(aDecoder, viewID);
         DLSDecodeObject(aDecoder, superviewID);
         DLSDecodeObject(aDecoder, children);
@@ -76,6 +77,7 @@ NSString* const DLSViewsPluginIdentifier = @"com.akivaleffert.dials.views";
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodeBool(aCoder, selectable);
     DLSEncodeObject(aCoder, viewID);
     DLSEncodeObject(aCoder, superviewID);
     DLSEncodeObject(aCoder, children);

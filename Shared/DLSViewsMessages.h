@@ -49,6 +49,8 @@ extern NSString* const DLSViewsPluginIdentifier;
 @property (copy, nonatomic) NSString* className;
 @property (copy, nonatomic) NSString* address;
 
+@property (assign, nonatomic) BOOL selectable;
+
 @property (strong, nonatomic) DLSViewRenderingRecord* renderingInfo;
 
 @end

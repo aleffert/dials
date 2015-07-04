@@ -30,6 +30,7 @@ class ViewFacade : CATransformLayer {
     let contentLayer = CALayer()
     // This is the z depth
     var hierarchyDepth = 0
+    var selectable : Bool = true
     
     var record : DLSViewHierarchyRecord!
     

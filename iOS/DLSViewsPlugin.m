@@ -214,15 +214,13 @@ static DLSViewsPlugin* sActivePlugin;
     record.children = [view.subviews dls_map:^id(UIView* child) {
         return [self viewIDForView:child];
     }];
+    record.selectable = [view isKindOfClass:[UIWindow class]] ? [(UIWindow*)view isKeyWindow] : YES;
     record.address = [NSString stringWithFormat:@"%p", view];
     record.renderingInfo = [self renderingInfoForView:view];
     return record;
 }
 
 - (NSArray*)rootViews {
-//    return [[[UIApplication sharedApplication] windows] dls_map:^(UIWindow* window) {
-//        return window.isKeyWindow ? window : nil;
-//    }];
     return [[UIApplication sharedApplication] windows];
 }
 
