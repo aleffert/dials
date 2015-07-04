@@ -114,7 +114,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 }
                 
                 // These properties need to be inherited
-                layer.hidden = layer.contentLayer.hidden || parentLayer.hidden
+                layer.contentLayer.hidden = layer.contentLayer.hidden || (parent?.contentLayer.hidden ?? false)
                 layer.contentLayer.opacity = layer.contentLayer.opacity * (parent?.contentLayer.opacity ?? 1)
                 
                 for(key, value) in record.renderingInfo.geometryValues {
