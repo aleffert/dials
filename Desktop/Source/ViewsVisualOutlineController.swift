@@ -77,13 +77,15 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         bodyLayer.position = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds))
     }
     
-    private func visitNodes(nodes : [NSString], parent : CALayer, selectable : Bool, inout depth : Int, inout marking : Set<NSString>) {
+    private func visitNodes(nodes : [NSString], parent : ViewFacade?, inout depth : Int, inout marking : Set<NSString>) {
         
         // Need to gradually increase this so that children of siblings where
         // an earlier one has a deeper hierarchy than a later one don't appear on top
         // of the children of the later one
         let currentDepth = depth
         depth = depth + 1
+        
+        let parentLayer : CALayer = parent ?? bodyLayer
         
         var zPos : CGFloat = 0.0
         for node in nodes {
@@ -93,8 +95,8 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 layer.record = record
                 marking.remove(node)
                 layers[node] = layer
-                parent.addSublayer(layer)
-                layer.selectable = record.selectable && selectable
+                parentLayer.addSublayer(layer)
+                layer.selectable = record.selectable && (parent?.selectable ?? true)
                 
                 layer.hierarchyDepth = currentDepth
                 
@@ -110,14 +112,18 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 for (key, value) in record.renderingInfo.contentValues {
                     layer.contentLayer.setValue((value as? NSNull) == nil ? value : nil, forKey: key as! String)
                 }
-                layer.hidden = layer.contentLayer.hidden || parent.hidden
+                
+                // These properties need to be inherited
+                layer.hidden = layer.contentLayer.hidden || parentLayer.hidden
+                layer.contentLayer.opacity = layer.contentLayer.opacity * (parent?.contentLayer.opacity ?? 1)
+                
                 for(key, value) in record.renderingInfo.geometryValues {
                     layer.setValue(value, forKey: key as! String)
                 }
                 
                 layer.borderLayer.transform = layer.contentLayer.transform
                 
-                visitNodes(record.children as! [NSString], parent : layer, selectable : layer.selectable, depth : &depth, marking: &marking)
+                visitNodes(record.children as! [NSString], parent : layer, depth : &depth, marking: &marking)
                 if depth > 0 {
                     // Add a small fudge factor so siblings are properly ordered
                     zPos += 0.001
@@ -129,7 +135,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     func updateViews() {
         var unvisited = Set(layers.keys)
         var depth = 0
-        visitNodes(hierarchy.roots, parent : bodyLayer, selectable : true, depth : &depth, marking : &unvisited)
+        visitNodes(hierarchy.roots, parent : nil, depth : &depth, marking : &unvisited)
         for node in unvisited {
             if let layer = layers[node] {
                 layer.removeFromSuperlayer()
