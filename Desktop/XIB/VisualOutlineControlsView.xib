@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="VisualOutlineControlsView" customModule="Dials" customModuleProvider="target">
@@ -31,7 +31,7 @@
                         <constraint firstAttribute="width" priority="250" constant="150" id="TVi-8i-YeH"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="p6D-ka-3Dd"/>
                     </constraints>
-                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-1" maxValue="1" tickMarkPosition="above" sliderType="linear" id="lYN-OM-DB2"/>
+                    <sliderCell key="cell" controlSize="small" continuous="YES" state="on" alignment="left" minValue="-1" maxValue="1" doubleValue="-1" tickMarkPosition="above" sliderType="linear" id="lYN-OM-DB2"/>
                     <connections>
                         <action selector="zoomChanged:" target="-2" id="qTY-ST-7Bb"/>
                     </connections>
