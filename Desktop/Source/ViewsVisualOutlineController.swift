@@ -13,6 +13,7 @@ import GLKit
 private let MinScale : CGFloat = 0.25
 private let MaxScale : CGFloat = 2.0
 
+
 protocol ViewsVisualOutlineControllerDelegate : class {
     func visualOutlineController(controller : ViewsVisualOutlineController, selectedViewWithID  viewID: NSString?)
 }
@@ -38,15 +39,22 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     
     private var contents : [NSString:NSImage] = [:]
     
+    private let marginsLayer = MarginComparisonLayer()
+    
     var screenSize = CGSizeZero {
         didSet {
             updateBodyTransforms()
         }
     }
     
+    override var acceptsFirstResponder : Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
-        contentView.wantsLayer = true
         super.viewDidLoad()
+        
+        contentView.wantsLayer = true
         view.addSubview(controlsView)
         controlsView.addConstraintsMatchingSuperviewAttributes([.Bottom, .Left, .Right])
         controlsView.delegate = self
@@ -70,6 +78,9 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         self.dls_performActionOnDealloc {
             currentContent.removeTrackingArea(area)
         }
+        
+        bodyLayer.addSublayer(marginsLayer)
+        marginsLayer.hidden = true
     }
     
     override func viewDidLayout() {
@@ -346,15 +357,37 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         return firstLayerIntersectingRay(pos : positionOut, neg : positionIn)
     }
     
+    private func updateMarginsWithEvent(theEvent : NSEvent) {
+        marginsLayer.hidden = (marginsLayer.comparison == nil || (theEvent.modifierFlags & NSEventModifierFlags.AlternateKeyMask).rawValue == 0) || currentSelection == nil
+    }
+    
+    override func flagsChanged(theEvent: NSEvent) {
+        updateMarginsWithEvent(theEvent)
+    }
+    
     override func mouseMoved(theEvent: NSEvent) {
+        self.view.window?.makeFirstResponder(self)
         let viewLocation = contentView.convertPoint(theEvent.locationInWindow, fromView: nil)
         
-        if let layer = layerAtPointInContentView(viewLocation) {
-            layer.borderLayer.borderColor = BorderStyle.Highlighted.color.CGColor
+        marginsLayer.comparison = layerAtPointInContentView(viewLocation)
+        CATransaction.begin()
+        if let comparison = marginsLayer.comparison {
+            comparison.borderLayer.borderColor = BorderStyle.Highlighted.color.CGColor
+            marginsLayer.transform = CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0.001), comparison.contentLayer.transform)
         }
+        
+        if let selectionID = currentSelection, selection = layers[selectionID] {
+            marginsLayer.updateWithSelectionLayer(selection)
+        }
+        
+        CATransaction.setDisableActions(true)
+        CATransaction.commit()
+        updateMarginsWithEvent(theEvent)
     }
     
     override func mouseExited(theEvent: NSEvent) {
+        marginsLayer.comparison = nil
+        marginsLayer.hidden = true
         updateHighlights()
     }
     

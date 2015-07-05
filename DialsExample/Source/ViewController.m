@@ -12,8 +12,8 @@
 
 #import "DialsExample-Swift.h"
 
-static BOOL foo = true;
-static CGFloat bar = 2.12;
+static BOOL toggleValue = true;
+static CGFloat sliderValue = 2.12;
 static CGFloat stepper = 3;
 static NSString* message = @"Something";
 
@@ -28,24 +28,29 @@ static NSString* message = @"Something";
 
 @implementation ViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setToolbarHidden:false animated:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     DLSControlForKeyPath(view.backgroundColor).asColor();
-    DLSControl(@"Action").actionOf(^{
-        NSLog(@"action");
+    DLSControl(@"Toggle Kitten").actionOf(^{
+        self.image.alpha = 1 - self.image.alpha;
     });
     
-    DLSControl(@"Foo").toggleOf(&foo);
-    DLSControl(@"Bar").sliderOf(&bar, 0, 5);
+    DLSControl(@"Foo").toggleOf(&toggleValue);
+    DLSControl(@"Bar").sliderOf(&sliderValue, 0, 5);
     DLSControl(@"Group").wrapperOf([[DLSPropertyWrapper alloc] initWithGetter:^id  {
         return @{@"x" : @(10), @"y" : @(20), @"width" : @(20), @"height" : @(30)};
     } setter:^(id value) {
         //
     }], [[DLSRectEditor alloc] init]);
     
-    DLSControlGroupWithName(@"ObjC Test Group", ^{
+    DLSControlGroupWithName(@"Example Group (ObjC)", ^{
         DLSControlForKeyPath(box.alpha).asSlider(0, 1);
         DLSControlForKeyPath(box.hidden).asToggle();
         DLSControlForKeyPath(box.backgroundColor).asColor();

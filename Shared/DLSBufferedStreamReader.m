@@ -50,12 +50,19 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 
 - (void)close {
     dispatch_async(self.queue, ^{
-        self.queueLoop = nil;
-        self.stream.delegate = nil;
-        [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [self.stream close];
-        self.stream = nil;
+        [self cleanup];
     });
+}
+
+- (void)cleanup {
+    if(self.stream.streamStatus != NSStreamStatusClosed) {
+        [self.stream close];
+    }
+    
+    self.queueLoop = nil;
+    self.stream.delegate = nil;
+    [self.stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    self.stream = nil;
 }
 
 - (void)prepareForHeader {
@@ -66,7 +73,7 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
 
 - (void)pumpStream:(NSStream*)stream {
     [self.queueLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
-    if(self.stream.streamStatus != NSStreamStatusClosed) {
+    if(self.stream.streamStatus != NSStreamStatusClosed && self.stream.streamStatus != NSStreamStatusNotOpen) {
         NSStream* stream = self.stream;
         dispatch_async(self.queue, ^{
             [self pumpStream:stream];
@@ -132,6 +139,8 @@ typedef NS_ENUM(NSUInteger, DLSBufferedStreamReaderState) {
             break;
         case NSStreamEventEndEncountered:
         case NSStreamEventErrorOccurred: {
+            [self cleanup];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate streamReaderClosed:self];
             });

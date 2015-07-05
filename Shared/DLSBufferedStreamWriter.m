@@ -65,7 +65,7 @@
 
 - (void)pumpStream:(NSStream*)stream {
     [self.queueLoop runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
-    if(self.stream.streamStatus != NSStreamStatusClosed) {
+    if(self.stream.streamStatus != NSStreamStatusClosed && self.stream.streamStatus != NSStreamStatusNotOpen) {
         NSStream* stream = self.stream;
         dispatch_async(self.queue, ^{
             [self pumpStream:stream];

@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		770A09DD1B497A58007455F1 /* Dials.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77567B5D1AC6CCD100877A7B /* Dials.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		771683441B1B60A1000A850F /* ExamplePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771683431B1B60A1000A850F /* ExamplePlugin.swift */; };
 		77567B581AC6C66900877A7B /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77567B571AC6C66900877A7B /* TestViewController.swift */; };
 		77567B5E1AC6CCD100877A7B /* Dials.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77567B5D1AC6CCD100877A7B /* Dials.framework */; };
-		77567B6B1AC6FCD600877A7B /* Dials.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77567B5D1AC6CCD100877A7B /* Dials.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		775AD31E1B1C984A0069A810 /* DLSExamplePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 775AD31D1B1C984A0069A810 /* DLSExamplePlugin.m */; };
 		775AD3221B1C99740069A810 /* DLSExamplePluginMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3211B1C99740069A810 /* DLSExamplePluginMessages.m */; };
 		775AD3231B1C99740069A810 /* DLSExamplePluginMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3211B1C99740069A810 /* DLSExamplePluginMessages.m */; };
@@ -29,7 +29,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				77567B6B1AC6FCD600877A7B /* Dials.framework in CopyFiles */,
+				770A09DD1B497A58007455F1 /* Dials.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

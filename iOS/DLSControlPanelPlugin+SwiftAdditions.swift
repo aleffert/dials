@@ -107,15 +107,15 @@ public func DLSGroupWithName(name: String, @noescape actions: () -> Void) {
 }
 
 public extension DLSReferenceControlBuilder {
-
     
-    func editorOf<T : AnyObject>(inout source : T, editor : DLSEditor) -> DLSRemovable {
+    func editorOf<T>(inout source : T, editor : DLSEditor, getT : T -> AnyObject, setT : AnyObject -> T) -> DLSRemovable {
         return withUnsafeMutablePointer(&source) {(source : UnsafeMutablePointer<T>) in
             let wrapper = DLSPropertyWrapper(
                 getter: {_ in
-                    return source.memory
+                    return getT(source.memory)
                 }, setter : {newValue in
-                    source.memory = (newValue as! T)
+                    let value = setT(newValue!)
+                    source.memory = value
                     return
                 }
             )
@@ -123,19 +123,8 @@ public extension DLSReferenceControlBuilder {
         }
     }
     
-    func editorOf<T>(inout source : T, editor : DLSEditor, getT : T -> AnyObject, setT : AnyObject -> T) -> DLSRemovable {
-        return withUnsafeMutablePointer(&source) {(var source : UnsafeMutablePointer<T>) in
-            let wrapper = DLSPropertyWrapper(
-                getter: {_ in
-                    return getT(source.memory)
-                }, setter : {newValue in
-                    
-                    source.put(setT(newValue!))
-                    return
-                }
-            )
-            return wrapperOf(wrapper, editor)
-        }
+    func editorOf<T : AnyObject>(inout source : T, editor : DLSEditor) -> DLSRemovable {
+        return editorOf(&source, editor: editor, getT: { $0 as AnyObject }, setT: { $0 as! T })
     }
     
     func editorOf(inout source : CGFloat, editor : DLSEditor) -> DLSRemovable {

@@ -38,47 +38,57 @@ git submodule add Libraries/Dials git@github.com:aleffert/dials.git
 Once you have the files downloaded, you will need to do the following:
 
 1. Find ``Dials.xcodeproj`` and drag it into your project's workspace.
-2. Add ``Dials.framework`` as a library dependency for your iOS app in the "build phases" section of the target settings.  *Note*: Due to a bug in XCode, it may add this file with a weird path. In the Xcode "File" pane under "Identity and Type", you should see that the location is "Relative to Build Products" and the relative path is just be "Dials.framework". If you don't, you should choose "Relative to Build Products", click the little folder icon next to the path, and choose the actual correct build products folder (typically deep inside ``~/Library/Developer/Xcode/DerivedData/``)
-3. Import ``Dials`` and add the following code to ``applicationDidFinishLaunching`` in your app delegate:
+2. Add ``Dials.framework`` as a library dependency for your iOS app in the "Build Phases" section of the target settings.
+3. Still within "Build Phases", add a "Copy Files" build phase whose "Destination" is "Frameworks" (your project may already have this).
+4. Hit the "+" button and add "Dials.framework".
+5. Go to the "Build Settings" pane for your target and ensure "Embedded Content Contains Swift Code" is set to "Yes".
+6. Still within the "Build Settings" pane, ensure the "Runtime Search Paths" setting includes ``@executable_path/Frameworks``.
+7. Go to your application delegate and inside the ``applicationDidFinishLaunching`` method, call ``DLSDials.shared().start()``.
 
-Objective-C:
-```
-#import <Dials/Dials.h>
+    Objective-C:
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    ```
+    #import <Dials/Dials.h>
 
-    ... your code here ...
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-#if DEBUG
-    [[DLSDials shared] start];
-#endif
+        ... your code here ...
 
-    ... your code here ...
+    #if DEBUG
+        [[DLSDials shared] start];
+    #endif
 
-}
-```
+        ... your code here ...
 
-Swift:
-```
+    }
+    ```
 
-import Dials
+    Swift:
+    ```
 
-func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    import Dials
 
-    ... your code here ...
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
-#if DEBUG
-    DLSDials.shared().start()
-#endif
+        ... your code here ...
 
-    ... your code here ...
+    #if DEBUG
+        DLSDials.shared().start()
+    #endif
 
-}
-```
+        ... your code here ...
 
-4. If your project does not already contain Swift code, go to the "Build Settings" pane for your target and set "Embedded Content Contains Swift Code" to "Yes".
+    }
+    ```
 
 ### Running Dials
 
-Once you have Dials configured, you can start it by running your app in the simulator and then choosing the ``Dials.app`` scheme and running that at the same time.
+Once you have Dials configured, you can start it by running your app in the simulator and then, while your app is still running, choosing the ``Dials.app`` scheme from within Xcode and running that at the same time. You can also build ``Dials.app`` and run that from the finder, separately from Xcode.
+
+
+## Usage
+
+Dials is an extensible framework for writing your own plugins. See [here](Documentation/new-plugin.md) for information on adding a custom plugin.
+
+It comes with two plugins that require no additional work on your part: The View Adjust plugin and the Network Requests plugin.
 

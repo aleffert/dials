@@ -9,7 +9,8 @@
 import UIKit
 import Dials
 
-var foo : CGFloat = 0.6
+var sliderValue : CGFloat = 0.74
+var color : UIColor = UIColor(red:0.99, green:0.22, blue:0.3, alpha:1)
 
 class TestViewController: UIViewController {
 
@@ -17,18 +18,23 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
         
-        DLSGroupWithName("Swift Test Group") {
+        DLSGroupWithName("Example Group (Swift)") {
             DLSControl(keyPath: "view.backgroundColor")
-            DLSControl("Example Slider").sliderOf(&foo)
+            DLSControl("Example Slider").sliderOf(&sliderValue)
             
             DLSControl("Some Color").colorOf(&color)
             
             DLSControl("Set Color as Background").actionOf {
-                self.view.backgroundColor = self.color
+                self.view.backgroundColor = color
+            }
+            
+            DLSControl("Add Toolbar Button").actionOf {
+                var items = self.toolbarItems ?? []
+                items.append(UIBarButtonItem(title: "Item", style: .Plain, target: nil, action: nil))
+                self.toolbarItems = items
             }
         }
     }
     
-    var color : UIColor = UIColor(red:0.99, green:0.22, blue:0.3, alpha:1)
 
 }

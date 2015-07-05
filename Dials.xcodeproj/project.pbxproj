@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		770354B51B14AF0300880AD4 /* PopupEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 770354B41B14AF0300880AD4 /* PopupEditorView.xib */; };
+		770A09DA1B48E551007455F1 /* NSBezierPath+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A09D91B48E551007455F1 /* NSBezierPath+Helpers.swift */; };
+		770A09DC1B48E581007455F1 /* MarginComparisonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770A09DB1B48E581007455F1 /* MarginComparisonLayer.swift */; };
 		77100E9E1B06F6210082C38B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77100E4C1B06F6210082C38B /* Images.xcassets */; };
 		77100EA01B06F6210082C38B /* ActionEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E4F1B06F6210082C38B /* ActionEditor.swift */; };
 		77100EA11B06F6210082C38B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E501B06F6210082C38B /* AppDelegate.swift */; };
@@ -222,6 +224,8 @@
 
 /* Begin PBXFileReference section */
 		770354B41B14AF0300880AD4 /* PopupEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopupEditorView.xib; sourceTree = "<group>"; };
+		770A09D91B48E551007455F1 /* NSBezierPath+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBezierPath+Helpers.swift"; sourceTree = "<group>"; };
+		770A09DB1B48E581007455F1 /* MarginComparisonLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarginComparisonLayer.swift; sourceTree = "<group>"; };
 		77100E2B1B06F5EC0082C38B /* Dials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dials.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77100E3A1B06F5ED0082C38B /* DialsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DialsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77100E4B1B06F6210082C38B /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
@@ -490,7 +494,6 @@
 				77100E631B06F6210082C38B /* MapTable.swift */,
 				77100E701B06F6210082C38B /* PluginContextBouncer.swift */,
 				77100E711B06F6210082C38B /* PluginController.swift */,
-				77100E731B06F6210082C38B /* RequestContentTabController.swift */,
 				77100E741B06F6210082C38B /* Result.swift */,
 				77100E751B06F6210082C38B /* SidebarSplitViewController.swift */,
 				77100E821B06F6210082C38B /* ViewOwner.swift */,
@@ -639,11 +642,13 @@
 				77100E611B06F6210082C38B /* ControlListPaneViewController.swift */,
 				77100E621B06F6210082C38B /* ControlPanelPlugin.swift */,
 				77100E5F1B06F6210082C38B /* GroupContainerView.swift */,
+				770A09DB1B48E581007455F1 /* MarginComparisonLayer.swift */,
 				77100E651B06F6210082C38B /* NetworkRequestInfoView.swift */,
 				77100E661B06F6210082C38B /* NetworkRequestsPlugin.swift */,
 				77100E671B06F6210082C38B /* NetworkRequestStatusView.swift */,
 				77100E681B06F6210082C38B /* NetworkRequestsViewController.swift */,
 				77100E721B06F6210082C38B /* PropertyGroupView.swift */,
+				77100E731B06F6210082C38B /* RequestContentTabController.swift */,
 				77100E801B06F6210082C38B /* ViewControllerGrouper.swift */,
 				77100E811B06F6210082C38B /* ViewFacade.swift */,
 				77100E7A1B06F6210082C38B /* ViewHierarchy.swift */,
@@ -663,6 +668,7 @@
 				77FD15D11B10F20500ED950F /* Dictionary+Utilties.swift */,
 				77100E511B06F6210082C38B /* Array+Utilties.swift */,
 				77100E641B06F6210082C38B /* MathUtils.swift */,
+				770A09D91B48E551007455F1 /* NSBezierPath+Helpers.swift */,
 				77100E691B06F6210082C38B /* NSDate+PreciseFormatting.swift */,
 				77100E6A1B06F6210082C38B /* NSHTTPURLResponse+StatusCodes.swift */,
 				77100E6B1B06F6210082C38B /* NSRegularExpression+Result.swift */,
@@ -1036,6 +1042,7 @@
 				77100ED51B06F6210082C38B /* VisualOutlineControlsView.swift in Sources */,
 				77100EB31B06F6210082C38B /* ControlPanelPlugin.swift in Sources */,
 				77100EA11B06F6210082C38B /* AppDelegate.swift in Sources */,
+				770A09DC1B48E581007455F1 /* MarginComparisonLayer.swift in Sources */,
 				77FD15CE1B0F6A3000ED950F /* FloatArrayEditor.swift in Sources */,
 				77100ECA1B06F6210082C38B /* ToggleEditor.swift in Sources */,
 				77100ED11B06F6210082C38B /* ViewControllerGrouper.swift in Sources */,
@@ -1046,6 +1053,7 @@
 				77100EA81B06F6210082C38B /* ConnectionStatusToolbarItem.swift in Sources */,
 				77100EB71B06F6210082C38B /* NetworkRequestsPlugin.swift in Sources */,
 				77100FA91B0781360082C38B /* NSObject+DLSDeallocAction.m in Sources */,
+				770A09DA1B48E551007455F1 /* NSBezierPath+Helpers.swift in Sources */,
 				77100EB41B06F6210082C38B /* MapTable.swift in Sources */,
 				77100F741B0781360082C38B /* DLSChannel.m in Sources */,
 				77100F9A1B0781360082C38B /* DLSTextFieldEditor.m in Sources */,
