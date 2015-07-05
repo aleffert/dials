@@ -194,6 +194,7 @@ static DLSControlPanelPlugin* sActivePlugin;
 @property (weak, nonatomic) id owner;
 @property (copy, nonatomic) NSString* file;
 @property (assign, nonatomic) size_t line;
+@property (assign, nonatomic) BOOL used;
 
 @end
 
@@ -216,6 +217,12 @@ static DLSControlPanelPlugin* sActivePlugin;
     return self;
 }
 
+- (void)dealloc {
+    if(!self.used) {
+        NSLog(@"Dials control not used: %@. %@:%ld", self.label, self.file, (NSUInteger)self.line);
+    }
+}
+
 - (id <DLSRemovable> (^)(dispatch_block_t))actionOf {
     return ^(dispatch_block_t action){
         
@@ -225,17 +232,20 @@ static DLSControlPanelPlugin* sActivePlugin;
             action();
         }];
         
+        self.used = true;
         return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:[DLSActionEditor editor] label:self.label canSave:NO file:self.file line:self.line];
     };
 }
 
 - (id <DLSRemovable> (^)(DLSPropertyWrapper*, id <DLSEditor>))wrapperOf {
     return ^(DLSPropertyWrapper* wrapper, id <DLSEditor> editor){
+        self.used = true;
         return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.label canSave:YES file:self.file line:self.line];
     };
 }
 
 - (id <DLSRemovable>)buildWithEditor:(id <DLSEditor>)editor wrapper:(DLSPropertyWrapper*)wrapper {
+    self.used = true;
     return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.label canSave:self.canSave file:self.file line:self.line];
 }
 
@@ -310,6 +320,8 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
 @property (copy, nonatomic) NSString* file;
 @property (assign, nonatomic) size_t line;
 
+@property (assign, nonatomic) BOOL used;
+
 
 @end
 
@@ -332,6 +344,12 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     return self;
 }
 
+- (void)dealloc {
+    if(!self.used) {
+        NSLog(@"Dials control not used: %@. %@:%ld", self.keyPath, self.file, (NSUInteger)self.line);
+    }
+}
+
 - (id <DLSRemovable>(^)(id <DLSEditor>))asEditor {
     return [self asEditorWithGetterMap:^(id value){
         return value;
@@ -343,6 +361,7 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
 - (id <DLSRemovable>(^)(id <DLSEditor>))asEditorWithGetterMap:(id (^)(id))getterMap setterMap:(id (^)(id))setterMap {
     
     return ^(id <DLSEditor> editor) {
+        self.used = true;
         DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithKeyPath:self.keyPath object:self.owner];
         return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.keyPath canSave:self.canSave file:self.file line:self.line];
     };

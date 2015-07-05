@@ -121,6 +121,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// key path of the enclosing object.
 /// Then use the methods on DLSKeyPathControlBuilder to define the editor for the control.
 /// For example DLSControl("backgroundColor").asColor()
-#define DLSControlForKeyPath(keypath) [[DLSKeyPathControlBuilder alloc] initWithKeyPath:@"" #keypath canSave:true owner:self file:@"" __FILE__ line:__LINE__]
+#define DLSControlForKeyPath(keypath) [[DLSKeyPathControlBuilder alloc] initWithKeyPath:@"" #keypath canSave:false owner:self file:@"" __FILE__ line:__LINE__]
 
 NS_ASSUME_NONNULL_END

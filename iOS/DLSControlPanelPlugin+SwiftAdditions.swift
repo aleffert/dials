@@ -155,6 +155,19 @@ public extension DLSReferenceControlBuilder {
         return editorOf(&source, editor: DLSTextFieldEditor.label())
     }
     
+    func labelOf(inout source : String) -> DLSRemovable {
+        return editorOf(&source, editor: DLSTextFieldEditor.label(), getT: {$0 as NSString}, setT: {$0 as! String})
+    }
+    
+    func labelOf(source : UnsafeMutablePointer<String?>) -> DLSRemovable {
+        let wrapper = DLSPropertyWrapper(getter: { () -> AnyObject? in
+            return source.memory as NSString?
+            }) {
+                source.memory = $0 as? String
+        }
+        return wrapperOf(wrapper, DLSTextFieldEditor.label())
+    }
+    
     func imageOf(inout source : UIImage) -> DLSRemovable {
         return editorOf(&source, editor: DLSImageEditor())
     }
@@ -208,6 +221,19 @@ public extension DLSReferenceControlBuilder {
     
     func textFieldOf(inout source : NSString) -> DLSRemovable {
         return editorOf(&source, editor: DLSTextFieldEditor.textField())
+    }
+    
+    func textFieldOf(inout source : String) -> DLSRemovable {
+        return editorOf(&source, editor: DLSTextFieldEditor.textField(), getT: {$0 as NSString}, setT: {$0 as! String})
+    }
+    
+    func textFieldOf(source : UnsafeMutablePointer<String?>) -> DLSRemovable {
+        let wrapper = DLSPropertyWrapper(getter: { () -> AnyObject? in
+            return source.memory as NSString?
+        }) {
+            source.memory = $0 as? String
+        }
+        return wrapperOf(wrapper, DLSTextFieldEditor.textField())
     }
     
     func togggleOf(inout source : Bool) -> DLSRemovable {

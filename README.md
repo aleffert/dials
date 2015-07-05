@@ -5,9 +5,15 @@ Dials is a desktop app for controlling and debugging your iOS app. It has a simp
     1. Write properties and not just read them.
     2. Be easily extended to support custom properties for your own views.
     3. Be easily extended for new types of desktop editors.
-2. A network requests debugger that tells you all about what data your app is sending.
+    4. View the margins between views.
+2. A network requests debugger that tells you all about what data your app is sending and receiving.
 3. A control panel that lets you connect arbitrary pieces of code to controls on the desktop. You can then save changes directly back to your code with the push of a button.
 
+See it in action:
+
+- [Control Panel](Documentation/control-panel-example-1080.mp4)
+- [View Debugger](Documentation/view-debugger-example-1080.mp4)
+- [Network Watcher](Documentation/network-requests-example-1080.mp4)
 
 ## Setup
 

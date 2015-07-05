@@ -54,7 +54,7 @@ class ControlController : NSObject, EditorViewDelegate, Equatable {
     func validateButtons(#animated : Bool) {
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.allowsImplicitAnimation = true
-            self.revertButton?.enabled = self.contentView.readOnly && self.updated
+            self.revertButton?.enabled = self.updated
             self.saveButton?.enabled = self.controlInfo.canSave && self.updated && self.controlInfo.file != nil
             self.revertButton?.hidden = !self.mouseInView
             self.saveButton?.hidden = !self.mouseInView

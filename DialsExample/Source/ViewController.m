@@ -56,7 +56,7 @@ static NSString* message = @"Something";
         DLSControlForKeyPath(box.backgroundColor).asColor();
         DLSControl(@"A stepper").stepperOf(&stepper);
         DLSControlForKeyPath(label.text).asTextField();
-        DLSControl(@"A message").labelOf(&message);
+        DLSControl(@"A message").textFieldOf(&message);
     });
 }
 
