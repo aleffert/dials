@@ -20,6 +20,8 @@
 #import "DLSStepperEditor.h"
 #import "DLSTextFieldEditor.h"
 #import "DLSToggleEditor.h"
+
+#import "NSGeometry+DLSWrappers.h"
 #import "NSObject+DLSDeallocAction.h"
 
 @interface DLSActiveControlRecord : NSObject <DLSRemovable>

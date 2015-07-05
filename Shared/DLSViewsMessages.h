@@ -131,4 +131,14 @@ extern NSString* const DLSViewsPluginIdentifier;
 
 @end
 
+@interface DLSViewsInsetViewMessage : NSObject <NSCoding>
+
+/// @param insets Dictionary (top, left, bottom, right) representing the edge insets
+- (id)initWithViewID:(NSString*)viewID insets:(NSDictionary*)insets;
+
+@property (copy, nonatomic) NSString* viewID;
+@property (copy, nonatomic) NSDictionary* insets;
+
+@end
+
 NS_ASSUME_NONNULL_END

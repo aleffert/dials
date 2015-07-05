@@ -13,9 +13,13 @@ import GLKit
 private let MinScale : CGFloat = 0.25
 private let MaxScale : CGFloat = 2.0
 
+func * (lhs : NSEdgeInsets, rhs : NSEdgeInsets) -> NSEdgeInsets {
+    return NSEdgeInsets(top : lhs.top * rhs.top, left : lhs.left * rhs.left, bottom : lhs.bottom * rhs.bottom, right : lhs.right * rhs.right)
+}
 
 protocol ViewsVisualOutlineControllerDelegate : class {
-    func visualOutlineController(controller : ViewsVisualOutlineController, selectedViewWithID  viewID: NSString?)
+    func visualOutlineController(controller : ViewsVisualOutlineController, selectedViewWithID viewID: String?)
+    func visualOutlineController(controller : ViewsVisualOutlineController, appliedInsets insets : NSEdgeInsets, toViewWithID viewID : String)
 }
 
 class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewDelegate {
@@ -35,9 +39,9 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     private var panOffset = NSZeroPoint
     private var gestureMagnification : CGFloat = 1
     
-    private var currentSelection : NSString?
+    private var currentSelection : String?
     
-    private var contents : [NSString:NSImage] = [:]
+    private var contents : [String:NSImage] = [:]
     
     private let marginsLayer = MarginComparisonLayer()
     
@@ -153,9 +157,10 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 layers[node] = nil
             }
         }
+        updateSelectionMargins()
     }
     
-    func takeContents(contents : [NSString:NSData], empties : [NSString]) {
+    func takeContents(contents : [String:NSData], empties : [String]) {
         for (key, imageData) in contents {
             let image = NSImage(data: imageData)
             self.contents[key] = image
@@ -208,7 +213,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         }
     }
     
-    func selectViewWithID(viewID : NSString?) {
+    func selectViewWithID(viewID : String?) {
         currentSelection = viewID
         updateHighlights()
     }
@@ -357,7 +362,18 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         return firstLayerIntersectingRay(pos : positionOut, neg : positionIn)
     }
     
+    private func updateSelectionMargins() {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        if let selectionID = currentSelection, selection = layers[selectionID] {
+            marginsLayer.updateWithSelectionLayer(selection)
+        }
+        
+        CATransaction.commit()
+    }
+    
     private func updateMarginsWithEvent(theEvent : NSEvent) {
+        updateSelectionMargins()
         marginsLayer.hidden = (marginsLayer.comparison == nil || (theEvent.modifierFlags & NSEventModifierFlags.AlternateKeyMask).rawValue == 0) || currentSelection == nil
     }
     
@@ -375,14 +391,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
             marginsLayer.transform = CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0.001), comparison.contentLayer.transform)
         }
         
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        if let selectionID = currentSelection, selection = layers[selectionID] {
-            marginsLayer.updateWithSelectionLayer(selection)
-        }
-        
         updateMarginsWithEvent(theEvent)
-        CATransaction.commit()
     }
     
     override func mouseExited(theEvent: NSEvent) {
@@ -394,6 +403,55 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         updateHighlights()
     }
     
+    private func sendOffsetWithBase(base : NSEdgeInsets, mask : NSEdgeInsets, modifiers : NSEventModifierFlags) {
+        if let selection = currentSelection {
+            let insets : NSEdgeInsets
+            if (modifiers & NSEventModifierFlags.AlternateKeyMask).rawValue != 0 {
+                if (modifiers & NSEventModifierFlags.ShiftKeyMask).rawValue != 0 {
+                    insets = base * mask * NSEdgeInsetsMake(-1, -1, -1, -1)
+                }
+                else {
+                    insets = base * mask
+                }
+            }
+            else {
+                insets = base
+            }
+            
+            self.delegate?.visualOutlineController(self, appliedInsets: insets, toViewWithID: selection)
+        }
+    }
+    
+    override func keyDown(theEvent: NSEvent) {
+        if let key = theEvent.charactersIgnoringModifiers?.unicodeScalars {
+            switch Int(key[key.startIndex].value) {
+            case NSUpArrowFunctionKey:
+                sendOffsetWithBase(NSEdgeInsetsMake(-1, 0, 1, 0),
+                    mask : NSEdgeInsetsMake(1, 0, 0, 0),
+                    modifiers : theEvent.modifierFlags)
+                return
+            case NSDownArrowFunctionKey:
+                sendOffsetWithBase(NSEdgeInsetsMake(1, 0, -1, 0),
+                    mask : NSEdgeInsetsMake(0, 0, 1, 0),
+                    modifiers : theEvent.modifierFlags)
+                return
+            case NSLeftArrowFunctionKey:
+                sendOffsetWithBase(NSEdgeInsetsMake(0, -1, 0, 1),
+                    mask : NSEdgeInsetsMake(0, 1, 0, 0),
+                    modifiers : theEvent.modifierFlags)
+                return
+            case NSRightArrowFunctionKey:
+                sendOffsetWithBase(NSEdgeInsetsMake(0, 1, 0, -1),
+                    mask : NSEdgeInsetsMake(0, 0, 0, 1),
+                    modifiers : theEvent.modifierFlags)
+                return
+            default:
+                break
+            }
+        }
+        super.keyDown(theEvent)
+    }
+
     // MARK: Controls View Delegate
     
     func controlsView(view: VisualOutlineControlsView, changedZoom zoomScale: CGFloat) {

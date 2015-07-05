@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol ViewHierarchyOutlineControllerDelegate : class {
-    func outlineController(controller : ViewsHierarchyOutlineController, selectedViewWithID viewID: NSString?)
+    func outlineController(controller : ViewsHierarchyOutlineController, selectedViewWithID viewID: String?)
 }
 
 class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
@@ -75,7 +75,7 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
             delegate?.outlineController(self, selectedViewWithID: nil)
         }
         else {
-            let item = outlineView.itemAtRow(selectionIndexes.firstIndex) as! NSString
+            let item = outlineView.itemAtRow(selectionIndexes.firstIndex) as! String
             delegate?.outlineController(self, selectedViewWithID: item)
         }
     }

@@ -37,20 +37,5 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DLSRectEditor : DLSFloatArrayEditor
 @end
 
-#if TARGET_OS_IPHONE
-
-NSDictionary* DLSWrapUIEdgeInsets(UIEdgeInsets insets);
-UIEdgeInsets DLSUnwrapUIEdgeInsets(NSDictionary* values);
-
-NSDictionary* DLSWrapCGPointPoint(CGPoint point);
-CGPoint DLSUnwrapCGPointPoint(NSDictionary* values);
-
-NSDictionary* DLSWrapCGPointRect(CGRect rect);
-CGRect DLSUnwrapCGPointRect(NSDictionary* values);
-
-NSDictionary* DLSWrapCGPointSize(CGSize size);
-CGSize DLSUnwrapCGPointSize(NSDictionary* values);
-
-#endif
 
 NS_ASSUME_NONNULL_END

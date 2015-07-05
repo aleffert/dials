@@ -12,6 +12,8 @@
 #import "DLSFloatArrayEditor.h"
 #import "DLSImageEditor.h"
 
+#import "NSGeometry+DLSWrappers.h"
+
 @interface DLSValueMapper ()
 
 @property (copy, nonatomic) DLSMapper to;

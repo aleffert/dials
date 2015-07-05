@@ -26,5 +26,6 @@
 #import "DLSTextFieldEditor.h"
 #import "DLSToggleEditor.h"
 #import "DLSViewsMessages.h"
+#import "NSGeometry+DLSWrappers.h"
 #import "NSObject+DLSDeallocAction.h"
 #import "Plugin.h"

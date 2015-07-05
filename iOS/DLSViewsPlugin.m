@@ -18,6 +18,7 @@
 #import "DLSValueExchanger.h"
 #import "DLSViewsMessages.h"
 #import "NSArray+DLSFunctionalAdditions.h"
+#import "NSGeometry+DLSWrappers.h"
 #import "NSTimer+DLSBlockActions.h"
 #import "UIView+DLSDescribable.h"
 #import "UIView+DLSViewsPlugin.h"
@@ -123,6 +124,9 @@ static DLSViewsPlugin* sActivePlugin;
     }
     else if([fullMessage isKindOfClass:[DLSViewsValueChangedMessage class]]) {
         [self handleViewChangeMessage:fullMessage];
+    }
+    else if([fullMessage isKindOfClass:[DLSViewsInsetViewMessage class]]) {
+        [self handleInsetViewMessage:fullMessage];
     }
     else {
         NSAssert(NO, @"Unknown message type: %@", fullMessage);
@@ -389,6 +393,12 @@ static DLSViewsPlugin* sActivePlugin;
 - (void)sendMessage:(id <NSCoding>)message {
     NSData* messageData = [NSKeyedArchiver archivedDataWithRootObject:message];
     [self.context sendMessage:messageData fromPlugin:self];
+}
+
+- (void)handleInsetViewMessage:(DLSViewsInsetViewMessage*)message {
+    UIView* view = [self.viewIDs objectForKey:message.viewID];
+    UIEdgeInsets insets = DLSUnwrapUIEdgeInsets(message.insets);
+    view.frame = UIEdgeInsetsInsetRect(view.frame, insets);
 }
 
 - (void)handleSelectViewMessage:(DLSViewsSelectViewMessage*)message {

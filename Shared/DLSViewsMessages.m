@@ -263,3 +263,32 @@ NSString* const DLSViewsPluginIdentifier = @"com.akivaleffert.dials.views";
 }
 
 @end
+
+
+@implementation DLSViewsInsetViewMessage
+
+- (id)initWithViewID:(NSString*)viewID insets:(NSDictionary*)insets {
+    self = [super init];
+    if(self != nil) {
+        self.viewID = viewID;
+        self.insets = insets;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if(self != nil) {
+        DLSDecodeObject(aDecoder, viewID);
+        DLSDecodeObject(aDecoder, insets);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    DLSEncodeObject(aCoder, viewID);
+    DLSEncodeObject(aCoder, insets);
+}
+
+@end
+

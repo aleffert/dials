@@ -71,12 +71,12 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
     }
     
     func handleUpdatedContentsMessage(message : DLSViewsUpdatedContentsMessage) {
-        controller?.receivedContents(message.contents as! [NSString:NSData], empties : message.empties as! [NSString])
+        controller?.receivedContents(message.contents as! [String:NSData], empties : message.empties as! [String])
     }
     
     //MARK: ViewsViewControllerDelegate
     
-    func viewsController(controller: ViewsViewController, selectedViewWithID viewID: NSString?) {
+    func viewsController(controller: ViewsViewController, selectedViewWithID viewID: String?) {
         let message = DLSViewsSelectViewMessage(viewID: viewID as String?)
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
         context?.sendMessage(data, plugin: self)
@@ -84,6 +84,12 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
     
     func viewsController(controller: ViewsViewController, valueChangedWithRecord record: DLSChangeViewValueRecord) {
         let message = DLSViewsValueChangedMessage(record : record)
+        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+        context?.sendMessage(data, plugin: self)
+    }
+    
+    func viewController(controller: ViewsViewController, appliedInsets insets: NSEdgeInsets, toViewWithID viewID: String) {
+        let message = DLSViewsInsetViewMessage(viewID: viewID, insets: DLSWrapNSEdgeInsets(insets))
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
         context?.sendMessage(data, plugin: self)
     }

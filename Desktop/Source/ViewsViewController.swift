@@ -9,8 +9,9 @@
 import Cocoa
 
 protocol ViewsViewControllerDelegate : class {
-    func viewsController(controller : ViewsViewController, selectedViewWithID viewID : NSString?)
+    func viewsController(controller : ViewsViewController, selectedViewWithID viewID : String?)
     func viewsController(controller : ViewsViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+    func viewController(controller : ViewsViewController, appliedInsets : NSEdgeInsets, toViewWithID viewID : String)
 }
 
 class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDelegate, ViewPropertyTableControllerDelegate, ViewsVisualOutlineControllerDelegate {
@@ -48,17 +49,21 @@ class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDeleg
         visualOutlineController.screenSize = screenSize
     }
     
-    func receivedContents(contents : [NSString:NSData], empties:[NSString]) {
+    func receivedContents(contents : [String:NSData], empties:[String]) {
         visualOutlineController.takeContents(contents, empties : empties)
     }
     
-    func outlineController(controller: ViewsHierarchyOutlineController, selectedViewWithID viewID: NSString?) {
+    func outlineController(controller: ViewsHierarchyOutlineController, selectedViewWithID viewID: String?) {
         delegate?.viewsController(self, selectedViewWithID: viewID)
         visualOutlineController.selectViewWithID(viewID)
     }
     
-    func visualOutlineController(controller: ViewsVisualOutlineController, selectedViewWithID viewID: NSString?) {
+    func visualOutlineController(controller: ViewsVisualOutlineController, selectedViewWithID viewID: String?) {
         hierarchyOutlineController.selectViewWithID(viewID)
+    }
+    
+    func visualOutlineController(controller: ViewsVisualOutlineController, appliedInsets insets: NSEdgeInsets, toViewWithID viewID: String) {
+        delegate?.viewController(self, appliedInsets: insets, toViewWithID: viewID)
     }
     
     func tableController(controller: ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
