@@ -38,20 +38,32 @@ func average(l : CGFloat, r : CGFloat) -> CGFloat {
 
 // Assumes interval.0 < interval.1 and options.0 < options.1
 func nearest(#interval : (CGFloat, CGFloat), #options : (CGFloat, CGFloat)) -> (CGFloat?, CGFloat?) {
+    
+    func filterEqual(a : CGFloat?, b : CGFloat?) -> (CGFloat?, CGFloat?) {
+        var result = (a, b)
+        if a == interval.0 {
+            result.0 = nil
+        }
+        if b == interval.1 {
+            result.1 = nil
+        }
+        return result
+    }
+    
     if options.0 < interval.0 {
         if options.1 < interval.0 {
-            return (options.1, nil)
+            return filterEqual(options.1, nil)
         }
         else {
-            return (options.0, options.1)
+            return filterEqual(options.0, options.1)
         }
     }
     else {
         if options.0 > interval.1 {
-            return (nil, options.0)
+            return filterEqual(nil, options.0)
         }
         else {
-            return (options.0, options.1)
+            return filterEqual(options.0, options.1)
         }
     }
 }
@@ -79,15 +91,13 @@ class MarginComparisonLayer : CALayer {
         
         for text in textLayers {
             addSublayer(text)
-            text.bounds = CGRectMake(0, 0, 200, 25)
-            text.shadowColor = NSColor.whiteColor().CGColor
-            text.shadowRadius = 2
-            text.shadowOpacity = 1
-            text.shadowOffset = CGSizeZero
             text.font = NSFont.systemFontOfSize(18)
             text.fontSize = 18
             text.alignmentMode = kCAAlignmentCenter;
-            text.foregroundColor = NSColor.darkGrayColor().CGColor
+            text.foregroundColor = NSColor.whiteColor().CGColor
+            text.backgroundColor = NSColor.darkGrayColor().CGColor
+            text.cornerRadius = 6
+            text.masksToBounds = true
         }
     }
     
@@ -99,6 +109,15 @@ class MarginComparisonLayer : CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func sizeLabelToFit(layer : CATextLayer) {
+        let attributes = [NSFontAttributeName : layer.font]
+        var size = (layer.string as! NSString).sizeWithAttributes(attributes)
+        
+        size.width += 10
+        
+        layer.bounds = CGRectMake(0, 0, size.width, size.height)
+    }
+    
     var margins : [CAShapeLayer] {
         return [topMargin, bottomMargin, leftMargin, rightMargin]
     }
@@ -108,6 +127,8 @@ class MarginComparisonLayer : CALayer {
     }
     
     func updateWithSelectionLayer(selection : ViewFacade?) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         if let selection = selection, comparison = comparison {
             let selectionFrame = selection.convertRect(selection.contentLayer.bounds, toLayer:self)
             let comparisonFrame = comparison.convertRect(comparison.contentLayer.bounds, toLayer:self)
@@ -140,13 +161,16 @@ class MarginComparisonLayer : CALayer {
             for (center, layer, label, source, dest, labelDelta, makePoint) in edges {
                 if let c = center, end = dest {
                     label.hidden = false
-                    label.position = makePoint(c + labelDelta, average(source, end))
                     label.string = "\(fabs(source - end))"
+                    sizeLabelToFit(label)
+                    label.position = makePoint(c + labelDelta, average(source, end))
+                    
                     layer.path = NSBezierPath(
                         from: makePoint(c, source),
                         to: makePoint(c, end)).CGPath
                 }
             }
         }
+        CATransaction.commit()
     }
 }

@@ -370,24 +370,27 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         let viewLocation = contentView.convertPoint(theEvent.locationInWindow, fromView: nil)
         
         marginsLayer.comparison = layerAtPointInContentView(viewLocation)
-        CATransaction.begin()
         if let comparison = marginsLayer.comparison {
             comparison.borderLayer.borderColor = BorderStyle.Highlighted.color.CGColor
             marginsLayer.transform = CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0.001), comparison.contentLayer.transform)
         }
         
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         if let selectionID = currentSelection, selection = layers[selectionID] {
             marginsLayer.updateWithSelectionLayer(selection)
         }
         
-        CATransaction.setDisableActions(true)
-        CATransaction.commit()
         updateMarginsWithEvent(theEvent)
+        CATransaction.commit()
     }
     
     override func mouseExited(theEvent: NSEvent) {
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         marginsLayer.comparison = nil
         marginsLayer.hidden = true
+        CATransaction.commit()
         updateHighlights()
     }
     
