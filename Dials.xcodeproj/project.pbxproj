@@ -203,6 +203,7 @@
 		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		775AD3251B1DE8090069A810 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3241B1DE8090069A810 /* FlippedClipView.swift */; };
+		77F5D21C1B531E4200A1558A /* DLSViewsPlugin+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F5D21B1B531E4200A1558A /* DLSViewsPlugin+Internal.h */; };
 		77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FD15C71B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
 		77FD15C81B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
@@ -415,6 +416,7 @@
 		775341C11B138A2F00BAE8CA /* DLSValueMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSValueMapper.h; sourceTree = "<group>"; };
 		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
 		775AD3241B1DE8090069A810 /* FlippedClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedClipView.swift; sourceTree = "<group>"; };
+		77F5D21B1B531E4200A1558A /* DLSViewsPlugin+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DLSViewsPlugin+Internal.h"; sourceTree = "<group>"; };
 		77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSFloatArrayEditor.h; sourceTree = "<group>"; };
 		77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSFloatArrayEditor.m; sourceTree = "<group>"; };
 		77FD15CD1B0F6A3000ED950F /* FloatArrayEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatArrayEditor.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */,
 				775341C11B138A2F00BAE8CA /* DLSValueMapper.h */,
 				775341C21B138A2F00BAE8CA /* DLSValueMapper.m */,
+				77F5D21B1B531E4200A1558A /* DLSViewsPlugin+Internal.h */,
 				77100EF01B0780AE0082C38B /* Dials-iOS.pch */,
 				77100EF11B0780AE0082C38B /* Dials.h */,
 				77100EF21B0780AE0082C38B /* DLSDescribable.h */,
@@ -801,6 +804,7 @@
 				77376A191B13F286001D81D3 /* UIImageView+DLSDescribable.h in Headers */,
 				77100FB11B0783B40082C38B /* UIView+DLSDescribable.h in Headers */,
 				77100F961B0781360082C38B /* DLSStepperEditor.h in Headers */,
+				77F5D21C1B531E4200A1558A /* DLSViewsPlugin+Internal.h in Headers */,
 				77100F6D1B0781360082C38B /* DLSBufferedStreamReader.h in Headers */,
 				77100F791B0781360082C38B /* DLSColorEditor.h in Headers */,
 				77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */,

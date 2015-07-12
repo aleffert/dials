@@ -17,6 +17,7 @@
 #import "DLSPropertyWrapper.h"
 #import "DLSValueExchanger.h"
 #import "DLSViewsMessages.h"
+#import "DLSViewsPlugin+Internal.h"
 #import "NSArray+DLSFunctionalAdditions.h"
 #import "NSGeometry+DLSWrappers.h"
 #import "NSTimer+DLSBlockActions.h"
@@ -424,6 +425,11 @@ static DLSViewsPlugin* sActivePlugin;
     }
 }
 
+@end
+
+@implementation DLSViewsPlugin (Internal)
+
+
 - (void)viewChangedSurface:(UIView *)view {
     if(view == nil) {
         return;
@@ -469,5 +475,6 @@ static DLSViewsPlugin* sActivePlugin;
         }
     }
 }
+
 
 @end

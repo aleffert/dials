@@ -10,6 +10,7 @@
 
 #import "UIView+DLSViewsPlugin.h"
 #import "DLSViewsPlugin.h"
+#import "DLSViewsPlugin+Internal.h"
 
 #import "NSObject+DLSSwizzle.h"
 
