@@ -26,6 +26,11 @@ typedef id __nonnull (^DLSMapper)(id);
 
 @end
 
+// Coerces an array to its count as a string
+@interface DLSArrayCountMapper : DLSValueMapper
+
+@end
+
 // Coerces a number to a printable string and back
 @interface DLSNumericDescriptionMapper : DLSValueMapper
 @end

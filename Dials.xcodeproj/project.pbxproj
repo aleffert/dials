@@ -200,10 +200,12 @@
 		77376A1F1B1412A8001D81D3 /* DLSPopupEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A1D1B1412A8001D81D3 /* DLSPopupEditor.m */; };
 		77376A201B1412A8001D81D3 /* DLSPopupEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A1D1B1412A8001D81D3 /* DLSPopupEditor.m */; };
 		77376A221B142C48001D81D3 /* PopupEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77376A211B142C48001D81D3 /* PopupEditor.swift */; };
-		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; };
+		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		775AD3251B1DE8090069A810 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3241B1DE8090069A810 /* FlippedClipView.swift */; };
 		77F5D21C1B531E4200A1558A /* DLSViewsPlugin+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F5D21B1B531E4200A1558A /* DLSViewsPlugin+Internal.h */; };
+		77F5D21E1B53215500A1558A /* DLSRemovable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F5D21D1B53215500A1558A /* DLSRemovable.m */; };
+		77F5D21F1B53215500A1558A /* DLSRemovable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F5D21D1B53215500A1558A /* DLSRemovable.m */; };
 		77FD15C61B0F672500ED950F /* DLSFloatArrayEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77FD15C71B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
 		77FD15C81B0F672500ED950F /* DLSFloatArrayEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */; };
@@ -417,6 +419,7 @@
 		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
 		775AD3241B1DE8090069A810 /* FlippedClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedClipView.swift; sourceTree = "<group>"; };
 		77F5D21B1B531E4200A1558A /* DLSViewsPlugin+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DLSViewsPlugin+Internal.h"; sourceTree = "<group>"; };
+		77F5D21D1B53215500A1558A /* DLSRemovable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSRemovable.m; sourceTree = "<group>"; };
 		77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSFloatArrayEditor.h; sourceTree = "<group>"; };
 		77FD15C51B0F672500ED950F /* DLSFloatArrayEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSFloatArrayEditor.m; sourceTree = "<group>"; };
 		77FD15CD1B0F6A3000ED950F /* FloatArrayEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatArrayEditor.swift; sourceTree = "<group>"; };
@@ -605,6 +608,7 @@
 				77100F551B0781360082C38B /* DLSPropertyWrapper.h */,
 				77100F561B0781360082C38B /* DLSPropertyWrapper.m */,
 				77100F571B0781360082C38B /* DLSRemovable.h */,
+				77F5D21D1B53215500A1558A /* DLSRemovable.m */,
 				77100F601B0781360082C38B /* DLSTransform3D.h */,
 				77100F611B0781360082C38B /* DLSTransform3D.m */,
 				77100F621B0781360082C38B /* DLSViewsMessages.h */,
@@ -1033,6 +1037,7 @@
 				77100F871B0781360082C38B /* DLSNetworkRequestsMessages.m in Sources */,
 				77100F941B0781360082C38B /* DLSSliderEditor.m in Sources */,
 				77100F901B0781360082C38B /* DLSPropertyWrapper.m in Sources */,
+				77F5D21E1B53215500A1558A /* DLSRemovable.m in Sources */,
 				77100EC31B06F6210082C38B /* PropertyGroupView.swift in Sources */,
 				77100EA21B06F6210082C38B /* Array+Utilties.swift in Sources */,
 				77376A221B142C48001D81D3 /* PopupEditor.swift in Sources */,
@@ -1113,6 +1118,7 @@
 				77100F721B0781360082C38B /* DLSBufferedStreamWriter.m in Sources */,
 				7716832E1B1A77B1000A850F /* DLSDescriptionAccumulator.m in Sources */,
 				77100F311B0780F50082C38B /* DLSNetworkRequestsPlugin.m in Sources */,
+				77F5D21F1B53215500A1558A /* DLSRemovable.m in Sources */,
 				77100F7B1B0781360082C38B /* DLSColorEditor.m in Sources */,
 				77100F9E1B0781360082C38B /* DLSToggleEditor.m in Sources */,
 				770A09EC1B499C65007455F1 /* NSGeometry+DLSWrappers.m in Sources */,

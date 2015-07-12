@@ -34,6 +34,19 @@
 
 @end
 
+@implementation DLSArrayCountMapper
+
+- (id)init {
+    return [super initWithFrom:^(NSArray* value) {
+        return @(value.count).description;
+    } to:^(NSString* value){
+        NSAssert(NO, @"This should only be used with readonly editors");
+        return @[];
+    }];
+}
+
+@end
+
 @implementation DLSNumericDescriptionMapper
 
 - (id)init {

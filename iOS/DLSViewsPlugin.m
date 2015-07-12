@@ -26,6 +26,15 @@
 
 static const NSTimeInterval DLSViewUpdateInterval = .1;
 
+@interface DLSViewDescriptionGenerator : NSObject
+@property (copy, nonatomic) void(^generator)(id <DLSDescriptionContext>);
+@property (strong, nonatomic) Class klass;
+@end
+
+@implementation DLSViewDescriptionGenerator
+
+@end
+
 @interface DLSViewsPlugin ()
 
 /// NSString* (representing a class name) -> NSString* (representing a property name) -> DLSPropertyDescription
@@ -50,6 +59,9 @@ static const NSTimeInterval DLSViewUpdateInterval = .1;
 
 @property (strong, nonatomic) id windowChangedListener;
 
+// [DLSViewDescriptionGenerator]
+@property (strong, nonatomic) NSMutableArray* viewDescriptionGenerators;
+
 
 @end
 
@@ -63,6 +75,14 @@ static DLSViewsPlugin* sActivePlugin;
 
 + (void)setActivePlugin:(DLSViewsPlugin*)plugin {
     sActivePlugin = plugin;
+}
+
+- (id)init {
+    self = [super init];
+    if(self != nil) {
+        self.viewDescriptionGenerators = [[NSMutableArray alloc] init];
+    }
+    return self;
 }
 
 - (NSString*)identifier {
@@ -134,6 +154,18 @@ static DLSViewsPlugin* sActivePlugin;
     }
 }
 
+
+
+- (id <DLSRemovable>)addExtraViewDescriptionForClass:(Class)klass generator:(void (^)(id<DLSDescriptionContext>))generator {
+    DLSViewDescriptionGenerator* wrapper = [[DLSViewDescriptionGenerator alloc] init];
+    wrapper.generator = generator;
+    wrapper.klass = klass;
+    [self.viewDescriptionGenerators addObject:wrapper];
+    return [[DLSBlockRemovable alloc] initWithRemoveAction:^{
+        [self.viewDescriptionGenerators removeObject:wrapper];
+    }];
+}
+
 - (NSArray*)descriptionGroupsForClass:(Class)klass {
     if(klass == nil) {
         return @[];
@@ -144,6 +176,11 @@ static DLSViewsPlugin* sActivePlugin;
     if(result == nil) {
         DLSDescriptionAccumulator* accumulator = [[DLSDescriptionAccumulator alloc] init];
         [klass dls_describe:accumulator];
+        for(DLSViewDescriptionGenerator* wrapper in self.viewDescriptionGenerators) {
+            if([klass isSubclassOfClass:wrapper.klass]) {
+                wrapper.generator(accumulator);
+            }
+        }
         result = accumulator.groups.reverseObjectEnumerator.allObjects;
         self.classDescriptions[className] = result;
     }
@@ -475,6 +512,5 @@ static DLSViewsPlugin* sActivePlugin;
         }
     }
 }
-
 
 @end

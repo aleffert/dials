@@ -13,3 +13,9 @@
 - (void)remove;
 
 @end
+
+@interface DLSBlockRemovable : NSObject <DLSRemovable>
+
+- (id)initWithRemoveAction:(void(^)(void))action;
+
+@end
