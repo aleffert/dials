@@ -219,7 +219,7 @@ static DLSControlPanelPlugin* sActivePlugin;
 
 - (void)dealloc {
     if(!self.used) {
-        NSLog(@"Dials control not used: %@. %@:%ld", self.label, self.file, (NSUInteger)self.line);
+        NSLog(@"Dials control not used: %@. %@:%ul", self.label, self.file, (unsigned int)self.line);
     }
 }
 
@@ -346,7 +346,7 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
 
 - (void)dealloc {
     if(!self.used) {
-        NSLog(@"Dials control not used: %@. %@:%ld", self.keyPath, self.file, (NSUInteger)self.line);
+        NSLog(@"Dials control not used: %@. %@:%ul", self.keyPath, self.file, (unsigned int)self.line);
     }
 }
 
