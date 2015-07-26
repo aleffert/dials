@@ -20,6 +20,8 @@ typedef void (^DLSValueTo)(id);
 /// Given an object, generates a way of reading/writing part of it
 @interface DLSValueExchanger : NSObject
 
+- (id)initWithFrom:(DLSValueFrom(^)(id))from to:(DLSValueTo(^)(id))to NS_DESIGNATED_INITIALIZER;
+
 - (DLSPropertyWrapper*)wrapperFromObject:(id)object;
 - (DLSValueExchanger*)transform:(DLSValueMapper*)mapper;
 
@@ -35,10 +37,12 @@ typedef void (^DLSValueTo)(id);
 /// Extracts the class name of the owning view controller from the object
 /// if it's a view.
 @interface DLSViewControllerClassExchanger : DLSValueExchanger
+- (id)init;
 @end
 
 /// Triggers the layout process of a view
 @interface DLSTriggerLayoutExchanger : DLSValueExchanger
+- (id)init;
 @end
 
 NS_ASSUME_NONNULL_END

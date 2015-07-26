@@ -70,31 +70,42 @@
 
 @implementation DLSViewControllerClassExchanger
 
-- (DLSPropertyWrapper*)wrapperFromObject:(id)object {
-    return [[DLSPropertyWrapper alloc] initWithGetter:^id {
-        
-        id parent = [object nextResponder];
-        while (parent != nil && ![parent isKindOfClass:[UIViewController class]]) {
-            parent = [parent nextResponder];
-        }
-        // Skip the module name
-        return [parent class] ? [[NSStringFromClass([parent class]) componentsSeparatedByString:@"."] lastObject] : @"None";
-    } setter:^(id value) {
+- (id)init {
+    self = [super initWithFrom:^DLSValueFrom (id object) {
+        return ^{
+            id parent = [object nextResponder];
+            while (parent != nil && ![parent isKindOfClass:[UIViewController class]]) {
+                parent = [parent nextResponder];
+            }
+            // Skip the module name
+            return [parent class] ? [[NSStringFromClass([parent class]) componentsSeparatedByString:@"."] lastObject] : @"None";
+        };
+    } to:^DLSValueTo(id _) {
+        return ^(id _) {
         // nothing to do
+        };
     }];
+    
+    return self;
 }
 @end
 
 @implementation DLSTriggerLayoutExchanger
 
-- (DLSPropertyWrapper*)wrapperFromObject:(id)object {
-    return [[DLSPropertyWrapper alloc] initWithGetter:^id {
-        return @(0);
-    } setter:^(id value) {
-        if([object isKindOfClass:[UIView class]]) {
-            [object setNeedsLayout];
-            [object layoutIfNeeded];
-        }
+- (id)init {
+    self = [super initWithFrom:^DLSValueFrom (id object) {
+        return ^{
+            return @(0);
+        };
+    } to:^DLSValueTo (id object) {
+        return ^(id _) {
+            if([object isKindOfClass:[UIView class]]) {
+                [object setNeedsLayout];
+                [object layoutIfNeeded];
+            }
+        };
     }];
+    return self;
 }
+
 @end
