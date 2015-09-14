@@ -913,6 +913,7 @@
 		77100DFF1B06F5A30082C38B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Akiva Leffert";
 				TargetAttributes = {
