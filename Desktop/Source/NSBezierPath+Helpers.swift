@@ -17,12 +17,11 @@ extension NSBezierPath {
     }
     
     var CGPath : CGPathRef {
-        var i = 0
-        var numElements = self.elementCount
+        let numElements = self.elementCount
         let path = CGPathCreateMutable()
         if numElements > 0 {
             var closedPath = true
-            var points = NSPointArray.alloc(3)
+            let points = NSPointArray.alloc(3)
             for i in 0 ..< numElements {
                 switch elementAtIndex(i, associatedPoints: points) {
                 case .MoveToBezierPathElement:

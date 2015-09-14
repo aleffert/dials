@@ -32,14 +32,14 @@ extension CGRect {
     }
 }
 
-func average(l : CGFloat, r : CGFloat) -> CGFloat {
+func average(l : CGFloat, _ r : CGFloat) -> CGFloat {
     return (l + r) / 2
 }
 
 // Assumes interval.0 < interval.1 and options.0 < options.1
-func nearest(#interval : (CGFloat, CGFloat), #options : (CGFloat, CGFloat)) -> (CGFloat?, CGFloat?) {
+func nearest(interval interval : (CGFloat, CGFloat), options : (CGFloat, CGFloat)) -> (CGFloat?, CGFloat?) {
     
-    func filterEqual(a : CGFloat?, b : CGFloat?) -> (CGFloat?, CGFloat?) {
+    func filterEqual(a : CGFloat?, _ b : CGFloat?) -> (CGFloat?, CGFloat?) {
         var result = (a, b)
         if a == interval.0 {
             result.0 = nil
@@ -101,17 +101,26 @@ class MarginComparisonLayer : CALayer {
         }
     }
     
-    override init(layer : AnyObject!) {
+    override init(layer : AnyObject) {
         super.init(layer : layer)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func sizeLabelToFit(layer : CATextLayer) {
-        let attributes = [NSFontAttributeName : layer.font]
-        var size = (layer.string as! NSString).sizeWithAttributes(attributes)
+        let attributes : [String : AnyObject]
+        if let font = layer.font {
+            attributes = [NSFontAttributeName : font]
+        }
+        else {
+            attributes = [:]
+        }
+        guard let string = layer.string as? NSString else {
+            return
+        }
+        var size = string.sizeWithAttributes(attributes)
         
         size.width += 10
         

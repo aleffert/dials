@@ -20,8 +20,8 @@ class ActionEditorView : EditorView {
     @IBOutlet var button : NSButton?
     
     @IBAction func buttonPressed(sender : NSButton) {
-        info.map {
-            self.delegate?.editorView(self, changedInfo: $0, toValue: nil)
+        if let info = info {
+            self.delegate?.editorView(self, changedInfo: info, toValue: nil)
         }
     }
     

@@ -28,11 +28,12 @@ class ImageEditorView: EditorView {
     
     @IBAction func imageChanged(sender : NSImageView) {
         // per http://stackoverflow.com/questions/3038820/how-to-save-a-nsimage-as-a-new-file
-        if let tiffData = sender.image?.TIFFRepresentation, info = info {
-            NSBitmapImageRep(data:tiffData).map {rep -> Void in
-                let imageData = rep.representationUsingType(.NSPNGFileType, properties:[:])
-                delegate?.editorView(self, changedInfo: info, toValue: imageData)
-            }
+        if let tiffData = sender.image?.TIFFRepresentation,
+            info = info,
+            rep = NSBitmapImageRep(data:tiffData)
+        {
+            let imageData = rep.representationUsingType(.NSPNGFileType, properties:[:])
+            delegate?.editorView(self, changedInfo: info, toValue: imageData)
         }
     }
 }

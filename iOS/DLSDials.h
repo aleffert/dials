@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol DLSPlugin;
+
 @interface DLSDials : NSObject
 
 + (DLSDials*)shared;
@@ -21,12 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Starts Dials, telling all plugins to load and advertising it over Bonjour.
 /// @param plugins An array of plugins that implement <DLSPlugin>.
-- (void)startWithPlugins:(NSArray*)plugins;
+- (void)startWithPlugins:(NSArray<id<DLSPlugin>>*)plugins;
 
 /// @return An array of plugins implementing <DLSPlugin>.
 /// If you want to add your own plugins, you can can call -startWithPlugins:
 /// with your own plugins appended to this array.
-- (NSArray*)defaultPlugins;
+- (NSArray<id<DLSPlugin>>*)defaultPlugins;
 
 @end
 

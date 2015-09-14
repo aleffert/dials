@@ -27,35 +27,35 @@ class PluginController: NSObject {
         registerPlugin(NetworkRequestsPlugin())
     }
     
-    private func registerPluginsFromPaths(paths : [String]) {
-        for path in paths {
-            if let bundle = NSBundle(path: path as String),
+    private func registerPluginsFromURLs(urls : [NSURL]) {
+        for url in urls {
+            if let bundle = NSBundle(URL: url),
                 loaded = bundle.load() as Bool?,
                 pluginClass = bundle.principalClass as? NSObject.Type,
-                plugin = pluginClass() as? Plugin where loaded {
+                plugin = pluginClass.init() as? Plugin where loaded {
                     registerPlugin(plugin)
-                    println("Loaded plugin: \(path.lastPathComponent)")
+                    print("Loaded plugin: \(url.lastPathComponent)")
             }
             else {
-                println("Failed to load plugin: \(path.lastPathComponent)")
+                print("Failed to load plugin: \(url.lastPathComponent)")
             }
         }
     }
     
     private func registerBundlePlugins() {
-        let paths = NSBundle.mainBundle().pathsForResourcesOfType(PluginPathExtension, inDirectory: "PlugIns") as? [String] ?? []
-        registerPluginsFromPaths(paths)
+        let urls = NSBundle.mainBundle().URLsForResourcesWithExtension(PluginPathExtension, subdirectory: "PlugIns") ?? []
+        registerPluginsFromURLs(urls)
     }
     
     // We also pick up any plugins side by side with the app so that build products
     // are easy to pick up
     private func registerAdjacentPlugins() {
-        let bundlePath = NSBundle.mainBundle().bundlePath
-        if let adjacentPaths = NSFileManager.defaultManager().enumeratorAtPath(bundlePath.stringByDeletingLastPathComponent)?.allObjects as? [String] {
-            let paths = adjacentPaths.filter {
+        let bundleURL = NSBundle.mainBundle().bundleURL
+        if let adjacentPaths = NSFileManager.defaultManager().enumeratorAtURL(bundleURL, includingPropertiesForKeys: nil, options: [], errorHandler: nil) { // NSFileManager.defaultManager().enumeratorAtPath(bundlePath.URLByDeletingLastPathComponent)?.allObjects as? [String] {
+            let urls = adjacentPaths.filter {
                 $0.pathExtension == PluginPathExtension
-            }
-            registerPluginsFromPaths(paths)
+            } as? [NSURL] ?? []
+            registerPluginsFromURLs(urls)
         }
     }
     

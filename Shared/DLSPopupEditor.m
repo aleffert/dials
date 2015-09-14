@@ -39,7 +39,7 @@
 
 @interface DLSPopupEditor ()
 
-@property (copy, nonatomic) NSArray* options;
+@property (copy, nonatomic) NSArray<DLSPopupOption*>* options;
 
 @end
 

@@ -23,10 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DLSPopupEditor : NSObject <DLSEditor>
 
-// [DLSPopupOption]
-- (id)initWithPopupOptions:(NSArray*)options;
+- (id)initWithPopupOptions:(NSArray<DLSPopupOption*>*)options;
 
-@property (readonly, copy, nonatomic) NSArray* options;
+@property (readonly, copy, nonatomic) NSArray<DLSPopupOption*>* options;
 
 @end
 

@@ -38,7 +38,7 @@
 @property (assign, nonatomic) BOOL running;
 @property (strong, nonatomic) DLSChannelStream* stream;
 
-@property (strong, nonatomic) NSArray* plugins;
+@property (strong, nonatomic) NSArray<id<DLSPlugin>>* plugins;
 @property (strong, nonatomic) DLSPluginContextBouncer* contextBouncer;
 
 @end
@@ -64,11 +64,11 @@
     return self;
 }
 
-- (NSArray*)defaultPlugins {
+- (NSArray<id<DLSPlugin>>*)defaultPlugins {
     return @[[[DLSControlPanelPlugin alloc] init], [[DLSViewsPlugin alloc] init], [[DLSNetworkRequestsPlugin alloc] init]];
 }
 
-- (void)startWithPlugins:(NSArray*)plugins {
+- (void)startWithPlugins:(NSArray<id<DLSPlugin>>*)plugins {
     NSAssert(!self.running, @"Error: Dials already started");
     self.plugins = plugins;
     [self startBroadcast];

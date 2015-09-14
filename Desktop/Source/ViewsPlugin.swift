@@ -57,8 +57,8 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
     }
 
     func handleFullHierarchyMessage(message : DLSViewsFullHierarchyMessage) {
-        let hierarchy = message.hierarchy as! [NSString:DLSViewHierarchyRecord]
-        let roots = message.roots as! [NSString]
+        let hierarchy = message.hierarchy
+        let roots = message.roots
         controller?.receivedHierarchy(hierarchy, roots : roots, screenSize : message.screenSize)
     }
     
@@ -67,11 +67,11 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
     }
     
     func handleUpdatedViewsMessage(message : DLSViewsUpdatedViewsMessage) {
-        controller?.receivedUpdatedViews(message.records as! [DLSViewHierarchyRecord], roots: message.roots as! [NSString], screenSize : message.screenSize)
+        controller?.receivedUpdatedViews(message.records, roots: message.roots, screenSize : message.screenSize)
     }
     
     func handleUpdatedContentsMessage(message : DLSViewsUpdatedContentsMessage) {
-        controller?.receivedContents(message.contents as! [String:NSData], empties : message.empties as! [String])
+        controller?.receivedContents(message.contents, empties : message.empties)
     }
     
     //MARK: ViewsViewControllerDelegate

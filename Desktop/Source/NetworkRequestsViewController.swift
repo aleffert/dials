@@ -44,7 +44,7 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     
     func resultStringForRequest(request : NetworkRequestInfo) -> String {
         if let response = request.response {
-            if let httpResponse = request.response as? NSHTTPURLResponse {
+            if let httpResponse = response as? NSHTTPURLResponse {
                 return "\(httpResponse.statusCode) (\(httpResponse.statusCodeDescription))"
             }
             else {

@@ -11,13 +11,12 @@ import Foundation
 extension NSRegularExpression {
     class func compile(pattern : String, options : NSRegularExpressionOptions = NSRegularExpressionOptions()) -> Result<NSRegularExpression> {
         
-        var error : NSError?
-        let matcher = NSRegularExpression(pattern: pattern,
-            options: options,
-            error: &error)
-        if let e = error {
+        do {
+            let matcher = try NSRegularExpression(pattern: pattern,
+                        options: options)
+            return Success(matcher)
+        } catch let e as NSError {
             return Failure(e.localizedDescription)
         }
-        return Success(matcher!)
     }
 }

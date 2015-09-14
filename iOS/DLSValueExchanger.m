@@ -23,6 +23,19 @@
 
 @implementation DLSValueExchanger
 
+- (id)init {
+    self = [self initWithFrom:^DLSValueFrom(id object) {
+            return ^id{
+                return @(0);
+            };
+    } to:^DLSValueTo (id object) {
+        return ^(id value) {
+            // do nothing
+        };
+    }];
+    return self;
+}
+
 - (id)initWithFrom:(DLSValueFrom(^)(id))from to:(DLSValueTo(^)(id))to {
     self = [super init];
     if(self != nil) {

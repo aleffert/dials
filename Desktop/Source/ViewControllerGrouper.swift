@@ -47,7 +47,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
             }
             else {
                 result.append(Row.Heading(group))
-                result.extend(group.items.map{ Row.Controller($0) })
+                result.appendContentsOf(group.items.map{ Row.Controller($0) })
             }
         }
         return result
@@ -59,7 +59,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
             if group.name == plugin.identifier {
                 group.items.append(controller)
                 if plugin.shouldSortChildren {
-                    group.items.sort({ (left, right) -> Bool in
+                    group.items.sortInPlace({ (left, right) -> Bool in
                         return left.title < right.title
                     })
                 }
@@ -73,7 +73,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
             group.items = [controller]
             groups.append(group)
         }
-        groups.sort { (left, right) -> Bool in
+        groups.sortInPlace { (left, right) -> Bool in
             return left.label < right.label
         }
         rows = buildRowList()
@@ -181,7 +181,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
                 switch row {
                 case let .Singleton(group):
                     result.append(group.items[0])
-                case let .Heading(_):
+                case .Heading(_):
                     continue
                 case let .Controller(c):
                     result.append(c)
@@ -195,7 +195,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         let result = NSMutableIndexSet()
         for i in 0 ..< rows.count {
             if let c = controllerForRow(i) {
-                if (find(controllers, c) != nil) {
+                if (controllers.indexOf(c) != nil) {
                     result.addIndex(i)
                 }
             }
@@ -204,7 +204,6 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     }
     
     private func adjacentTabIndex(existingIndex : Int, range : [Int]) -> Int {
-        var index = existingIndex
         for i in range {
             let proposed = (i + existingIndex + rows.count) % rows.count
             let item = rows[proposed]
@@ -222,7 +221,7 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
     }
     
     func previousTabIndex(existingIndex : Int) -> Int {
-        return adjacentTabIndex(existingIndex, range : reverse(0 ..< rows.count))
+        return adjacentTabIndex(existingIndex, range : Array((0 ..< rows.count).reverse()))
     }
 
 }

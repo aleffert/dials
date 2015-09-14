@@ -45,7 +45,7 @@ class ControlPanelPlugin: NSObject, Plugin, ControlListPaneViewControllerDelegat
     }
     
     func connectionClosed() {
-        for (name, controller) in knownGroups {
+        for (_, controller) in knownGroups {
             context?.removeViewController(controller, plugin: self)
         }
         knownGroups = [:]
@@ -68,7 +68,7 @@ class ControlPanelPlugin: NSObject, Plugin, ControlListPaneViewControllerDelegat
     }
     
     func paneController(controller: ControlListPaneViewController, changedControlInfo info: DLSControlInfo, toValue value: NSCoding?) {
-        var message = DLSControlPanelChangeMessage(UUID: info.uuid, value: value, group : controller.group as String)
+        let message = DLSControlPanelChangeMessage(UUID: info.uuid, value: value, group : controller.group as String)
         let data = NSKeyedArchiver.archivedDataWithRootObject(message)
         context?.sendMessage(data, plugin: self)
     }
@@ -77,9 +77,10 @@ class ControlPanelPlugin: NSObject, Plugin, ControlListPaneViewControllerDelegat
         let codeManager = CodeManager()
         let file = info.file.toResult("Internal Error: Trying to save when file not present")
         file.bind {file -> Result<()> in
-            let symbol = codeManager.findSymbolWithName(info.label, inFileAtPath:file)
+            let url = NSURL(fileURLWithPath: file)
+            let symbol = codeManager.findSymbolWithName(info.label, inFileAtURL:url)
             return symbol.bind {symbol in
-                codeManager.updateSymbol(symbol, toValue: value, withEditor:info.editor, atPath:file)
+                codeManager.updateSymbol(symbol, toValue: value, withEditor:info.editor, atURL:url)
             }
         }.ifFailure {message in
             let alert = NSAlert()

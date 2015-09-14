@@ -45,10 +45,8 @@
 
 @property (strong, nonatomic) id <DLSPluginContext> context;
 
-/// Contents are NSString* (uuid) -> DLSDialRecord*
-@property (strong, nonatomic) NSMutableDictionary* activeDials;
-/// Contents are NSString*
-@property (strong, nonatomic) NSMutableArray* groups;
+@property (strong, nonatomic) NSMutableDictionary<NSString*, DLSActiveControlRecord*>* activeControls;
+@property (strong, nonatomic) NSMutableArray<NSString*>* groups;
 
 @end
 
@@ -67,7 +65,7 @@ static DLSControlPanelPlugin* sActivePlugin;
 - (id)init {
     self = [super init];
     if(self != nil) {
-        self.activeDials = [[NSMutableDictionary alloc] init];
+        self.activeControls = [[NSMutableDictionary alloc] init];
         self.groups = [[NSMutableArray alloc] init];
     }
     return self;
@@ -84,7 +82,7 @@ static DLSControlPanelPlugin* sActivePlugin;
 
 - (void)connectedWithContext:(id<DLSPluginContext>)context {
     self.context = context;
-    for(DLSActiveControlRecord* record in self.activeDials.allValues) {
+    for(DLSActiveControlRecord* record in self.activeControls.allValues) {
         [self sendAddMessageForControl:record.info];
     }
 }
@@ -95,7 +93,7 @@ static DLSControlPanelPlugin* sActivePlugin;
 
 - (void)removeRecordWithUUID:(NSString*)uuid {
     [self sendRemoveMessageWithUUID:uuid];
-    [self.activeDials removeObjectForKey:uuid];
+    [self.activeControls removeObjectForKey:uuid];
 }
 
 - (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor label:(NSString*)label canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
@@ -118,7 +116,7 @@ static DLSControlPanelPlugin* sActivePlugin;
         [owner removeRecordWithUUID:info.uuid];
     };
     
-    [self.activeDials setObject:record forKey:info.uuid];
+    [self.activeControls setObject:record forKey:info.uuid];
     
     [self sendAddMessageForControl:info];
     return record;
@@ -142,7 +140,7 @@ static DLSControlPanelPlugin* sActivePlugin;
 }
 
 - (void)handleChangeMessage:(DLSControlPanelChangeMessage*)message {
-    DLSActiveControlRecord* record = self.activeDials[message.uuid];
+    DLSActiveControlRecord* record = self.activeControls[message.uuid];
     record.info.value = message.value;
     if(record.wrapper.setter) {
         record.wrapper.setter(message.value);
@@ -157,7 +155,7 @@ static DLSControlPanelPlugin* sActivePlugin;
 }
 
 - (void)sendRemoveMessageWithUUID:(NSString*)uuid {
-    DLSActiveControlRecord* record = self.activeDials[uuid];
+    DLSActiveControlRecord* record = self.activeControls[uuid];
     
     DLSControlPanelRemoveMessage* message = [[DLSControlPanelRemoveMessage alloc] init];
     message.uuid = uuid;

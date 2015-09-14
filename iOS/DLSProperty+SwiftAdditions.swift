@@ -10,7 +10,7 @@ import UIKit
 
 func DLSProperty(name : String, label: String? = nil, editor : DLSEditor, _ exchanger : DLSValueExchanger? = nil) -> DLSPropertyDescription {
     let property = DLSProperty(name, editor)
-    exchanger.map { property.setExchanger($0) }
-    label.map { property.setLabel($0) }
+    if let exchanger = exchanger { property.setExchanger(exchanger) }
+    if let label = label { property.setLabel(label) }
     return property
 }

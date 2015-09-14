@@ -24,7 +24,7 @@
 
 @property (strong, nonatomic) NSRunLoop* queueLoop;
 @property (strong, nonatomic) dispatch_queue_t queue;
-@property (strong, nonatomic) NSMutableArray* messages;
+@property (strong, nonatomic) NSMutableArray<DLSQueuedMessage*>* messages;
 @property (strong, nonatomic) NSOutputStream* stream;
 
 @end

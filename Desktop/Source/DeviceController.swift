@@ -45,7 +45,7 @@ class DeviceController : NSObject, NSNetServiceBrowserDelegate, DeviceDelegate {
         return self.knownDevices.count > 0
     }
     
-    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didNotSearch errorDict: [NSObject : AnyObject]) {
+    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didNotSearch errorDict: [String : NSNumber]) {
         NSLog("Error starting bonjour browser: \(errorDict)")
     }
     

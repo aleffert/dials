@@ -29,7 +29,7 @@ extension Vec3 {
         return CGPoint(x : CGFloat(x), y : CGFloat(y))
     }
     
-    func offsetBy(dx : CGFloat = 0, dy : CGFloat = 0, dz : CGFloat = 0) -> Vec3 {
+    func offsetBy(dx dx : CGFloat = 0, dy : CGFloat = 0, dz : CGFloat = 0) -> Vec3 {
         return GLKVector3Make(x + Float(dx), y + Float(dy), z + Float(dz))
     }
     

@@ -9,7 +9,7 @@
 import Foundation
 
 extension Optional {
-    func toResult(failureString : String?) -> Result<T> {
+    func toResult(failureString : String?) -> Result<Wrapped> {
         if let v = self {
             return Success(v)
         }

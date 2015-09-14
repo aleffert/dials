@@ -39,7 +39,7 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate {
     }
     
     func groups() -> [DLSPropertyGroup] {
-        return self.record?.propertyGroups as? [DLSPropertyGroup] ?? []
+        return self.record?.propertyGroups ?? []
     }
     
     func clear() {
@@ -51,8 +51,8 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate {
     func updateValues() {
         for group in groups() {
             let view = groupViews[group.label]
-            let values : [String:NSCoding] = record?.values[group.label] as? [String:NSCoding] ?? [:]
-            for description in group.properties as! [DLSPropertyDescription] {
+            let values = record?.values[group.label] ?? [:]
+            for description in group.properties {
                 view?.takeValue(values[description.name], name: description.name)
             }
         }
@@ -61,7 +61,7 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate {
     func rebuildTable() {
         groupViews = [:]
         for view in stackView?.views ?? [] {
-            stackView?.removeView(view as! NSView)
+            stackView?.removeView(view )
         }
         for group in groups() {
             let groupView  = PropertyGroupView(frame : CGRectZero)
@@ -69,12 +69,12 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate {
             groupView.delegate = self
             groupView.viewID = record?.viewID
             stackView?.addView(groupView, inGravity: .Top)
-            let values : [String:NSCoding] = record?.values[group.label] as? [String:NSCoding] ?? [:]
+            let values = record?.values[group.label] ?? [:]
             groupView.useGroup(group, values: values)
             groupViews[group.label] = groupView
         }
         
-        if count(stackView?.views ?? []) == 0 {
+        if (stackView?.views ?? []).count == 0 {
             addEmptyView()
         }
         else {

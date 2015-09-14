@@ -34,7 +34,7 @@ class GroupContainerView: NSView {
     var contentView : NSView? {
         didSet {
             oldValue?.removeFromSuperview()
-            contentView.map { self.contentContainerView.addSubview($0) }
+            if let view = contentView { self.contentContainerView.addSubview(view) }
             contentView?.addConstraintsMatchingSuperviewBounds()
         }
     }

@@ -42,22 +42,22 @@ class ViewFacade : CATransformLayer {
         borderLayer.borderWidth = 1
         borderLayer.borderColor = NSColor.lightGrayColor().colorWithAlphaComponent(1.0).CGColor
         
-        let layoutManager = CAConstraintLayoutManager.layoutManager() as! CAConstraintLayoutManager
+        let layoutManager = CAConstraintLayoutManager() 
         self.layoutManager = layoutManager
         
         addSublayer(contentLayer)
         addSublayer(borderLayer)
         
-        borderLayer.addConstraintsMatchingSuperviewBounds(insets: NSEdgeInsets(top: -1, left: -1, bottom: 1, right: 1))
+        borderLayer.addConstraintsMatchingSuperviewBounds(NSEdgeInsets(top: -1, left: -1, bottom: 1, right: 1))
         
         contentLayer.addConstraintsMatchingSuperviewBounds()
     }
     
-    override init(layer : AnyObject!) {
+    override init(layer : AnyObject) {
         super.init(layer : layer)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

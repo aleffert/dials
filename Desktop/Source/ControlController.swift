@@ -14,7 +14,7 @@ protocol ControlControllerDelegate : class {
     func controlController(controller : ControlController, shouldSaveControlInfo info : DLSControlInfo, withValue value : NSCoding?)
 }
 
-class ControlController : NSObject, EditorViewDelegate, Equatable {
+class ControlController : NSObject, EditorViewDelegate {
     @IBOutlet var bodyView : NSView?
     @IBOutlet var containerView : NSView?
     @IBOutlet var revertButton : NSButton?
@@ -31,16 +31,16 @@ class ControlController : NSObject, EditorViewDelegate, Equatable {
     weak var delegate : ControlControllerDelegate?
     
     init(controlInfo : DLSControlInfo, contentView : EditorView, delegate : ControlControllerDelegate) {
-        contentView.info = EditorInfo(editor : controlInfo.editor, name : controlInfo.label, label : controlInfo.label, value : controlInfo.value())
+        contentView.info = EditorInfo(editor : controlInfo.editor, name : controlInfo.label, label : controlInfo.label, value : controlInfo.value)
         self.controlInfo = controlInfo
         self.delegate = delegate
         self.contentView = contentView
-        currentValue = controlInfo.value()
+        currentValue = controlInfo.value
         super.init()
         contentView.delegate = self
         NSBundle.mainBundle().loadNibNamed("ControlCellView", owner: self, topLevelObjects: nil)
         bodyView?.translatesAutoresizingMaskIntoConstraints = false
-        let area = NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .MouseEnteredAndExited | .InVisibleRect, owner: self, userInfo: nil)
+        let area = NSTrackingArea(rect: NSZeroRect, options: [.ActiveInActiveApp, .MouseEnteredAndExited, .InVisibleRect], owner: self, userInfo: nil)
         let currentBody = bodyView
         self.dls_performActionOnDealloc {
             currentBody?.removeTrackingArea(area)
@@ -51,7 +51,7 @@ class ControlController : NSObject, EditorViewDelegate, Equatable {
         validateButtons(animated : false)
     }
     
-    func validateButtons(#animated : Bool) {
+    func validateButtons(animated animated : Bool) {
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.allowsImplicitAnimation = true
             self.revertButton?.enabled = self.updated
@@ -84,7 +84,7 @@ class ControlController : NSObject, EditorViewDelegate, Equatable {
     }
     
     @IBAction func openFilePressed(sender : AnyObject) {
-        controlInfo.file.map { NSWorkspace.sharedWorkspace().openFile($0) }
+        if let file = controlInfo.file { NSWorkspace.sharedWorkspace().openFile(file) }
     }
     
     @IBAction func revertPressed(sender : AnyObject) {
@@ -96,7 +96,7 @@ class ControlController : NSObject, EditorViewDelegate, Equatable {
     
     @IBAction func saveFilePressed(sender : AnyObject) {
         delegate?.controlController(self, shouldSaveControlInfo : controlInfo, withValue: currentValue)
-        controlInfo.setValue(currentValue)
+        controlInfo.value = currentValue
         updated = false
         validateButtons(animated: true)
     }

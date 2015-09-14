@@ -24,11 +24,11 @@ class PopupEditorView: EditorView {
     var editor : DLSPopupEditor? {
         didSet {
             let menu = NSMenu()
-            for option in editor?.options as? [DLSPopupOption] ?? [] {
+            for option in editor?.options ?? [] {
                 let item = menu.addItemWithTitle(option.label, action: nil, keyEquivalent: "")!
                 item.target = self
                 item.action = Selector("itemChosen:")
-                item.representedObject = option.value()
+                item.representedObject = option.value
             }
             popup?.menu = menu
         }
@@ -36,7 +36,7 @@ class PopupEditorView: EditorView {
     
     override var info : EditorInfo? {
         didSet {
-            for item in popup?.menu?.itemArray as? [NSMenuItem] ?? [] {
+            for item in popup?.menu?.itemArray ?? [] {
                 if let object = item.representedObject as? NSObject, value = info?.value where object == value as? NSObject {
                     popup?.selectItem(item)
                 }
@@ -46,8 +46,8 @@ class PopupEditorView: EditorView {
     }
     
     func itemChosen(sender : NSMenuItem) {
-        info.map {
-            self.delegate?.editorView(self, changedInfo: $0, toValue: sender.representedObject as! NSCoding?)
+        if let info = info {
+            self.delegate?.editorView(self, changedInfo: info, toValue: sender.representedObject as! NSCoding?)
         }
     }
 

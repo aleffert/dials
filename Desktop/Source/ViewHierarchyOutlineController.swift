@@ -57,14 +57,15 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
 
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
         let record = hierarchy[item as! NSString]
-        return record.map {count($0.children) > 0} ?? false
+        return record.map {$0.children.count > 0} ?? false
     }
     
     func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-        let cell = outlineView.makeViewWithIdentifier(tableColumn!.identifier!, owner: self) as! NSTableCellView
+        let cell = outlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
         
-        let record = hierarchy[item as! NSString]
-        record.map { cell.textField!.stringValue = "\($0.label) - \($0.address)" }
+        if let record = hierarchy[item as! NSString] {
+            cell.textField!.stringValue = "\(record.label) - \(record.address)"
+        }
         return cell
     }
     
@@ -128,7 +129,7 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
             hierarchy[record.viewID] = record
         }
         
-        var selectedItem = selectedViewID
+        let selectedItem = selectedViewID
         
         outlineView.reloadData()
         

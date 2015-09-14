@@ -47,10 +47,10 @@ class ControlListPaneViewController: NSViewController, ControlControllerDelegate
         contentView.translatesAutoresizingMaskIntoConstraints = false
         let controller = ControlController(controlInfo : controlInfo, contentView : contentView, delegate : self)
         controlControllers.append(controller)
-        controlControllers.sort { (left, right) -> Bool in
+        controlControllers.sortInPlace { (left, right) -> Bool in
             left < right
         }
-        let i = find(controlControllers, controller)!
+        let i = controlControllers.indexOf(controller)!
         if(self.viewLoaded) {
             NSAnimationContext.runAnimationGroup({ctx in
                 ctx.allowsImplicitAnimation = true
@@ -63,17 +63,22 @@ class ControlListPaneViewController: NSViewController, ControlControllerDelegate
         let index = controlControllers.indexOf {
             $0.controlInfo.uuid == controlID
         }
-        if let i = index {
-            self.controlControllers.removeAtIndex(i)
-            let view = self.stackView?.views[i] as! NSView
-            
-            NSAnimationContext.runAnimationGroup({ctx in
-                ctx.allowsImplicitAnimation = true
-                self.stackView?.removeView(view)
-                }, completionHandler: nil)
+        guard let i = index else {
+            return
         }
+        
+        guard let view = self.stackView?.views[i] else {
+            return
+        }
+        
+        self.controlControllers.removeAtIndex(i)
+        
+        NSAnimationContext.runAnimationGroup({ctx in
+            ctx.allowsImplicitAnimation = true
+            self.stackView?.removeView(view)
+            }, completionHandler: nil)
     }
-    
+
     func controlController(controller: ControlController, changedControlInfo info: DLSControlInfo, toValue value: NSCoding?) {
         delegate?.paneController(self, changedControlInfo: info, toValue: value)
     }

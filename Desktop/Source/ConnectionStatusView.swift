@@ -39,12 +39,12 @@ class ConnectionStatusView : NSView {
         label.editable = false
         label.stringValue = VisibleStrings.NoDevicesFound.rv
         label.backgroundColor = NSColor.clearColor()
-        label.alignment = .CenterTextAlignment
+        label.alignment = .Center
         
         self.showNoDevicesLabel(animated: false)
         
         popup.frame = bounds
-        popup.autoresizingMask = .ViewWidthSizable | .ViewHeightSizable
+        popup.autoresizingMask = [.ViewWidthSizable, .ViewHeightSizable]
         addSubview(popup)
     }
     
@@ -66,7 +66,7 @@ class ConnectionStatusView : NSView {
         var items : [NSMenuItem] = []
         if let d = current {
             items.append(NSMenuItem(title : VisibleStrings.Disconnect.rv, action : action, keyEquivalent : ""))
-            if find(allDevices, d) == nil {
+            if allDevices.indexOf(d) == nil {
                 allDevices.insert(d, atIndex: 0)
             }
         }
@@ -80,17 +80,16 @@ class ConnectionStatusView : NSView {
             item.representedObject = device
             items.append(item)
         }
-        items.map {item -> Void in
+        for item in items {
             self.popup.menu?.addItem(item)
             if current?.isEqual(item.representedObject) ?? false {
                 self.popup.selectItem(item)
             }
-            return
         }
         popup.synchronizeTitleAndSelectedItem()
     }
     
-    private func showNoDevicesLabel(animated : Bool = true) {
+    private func showNoDevicesLabel(animated animated : Bool = true) {
         NSAnimationContext.runAnimationGroup({ (ctx) -> Void in
             ctx.duration = animated ? 0.2 : 0
             self.label.animator().hidden = false
@@ -100,9 +99,9 @@ class ConnectionStatusView : NSView {
     
     func useStatus(status : ConnectionStatus) {
         switch status {
-        case .None: showNoDevicesLabel(animated: true)
+        case .None: showNoDevicesLabel(animated:true)
         case let .Available(devices): showDevices(devices, current : nil, animated: true)
-        case let .Active(current : current, devices : devices): showDevices(devices, current : current, animated : true)
+        case let .Active(current : current, all : devices): showDevices(devices, current : current, animated : true)
         }
     }
 }

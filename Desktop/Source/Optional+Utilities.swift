@@ -9,7 +9,7 @@
 import Foundation
 
 extension Optional {
-    func bind<U>(f : T -> U?) -> U? {
+    func bind<U>(f : Wrapped -> U?) -> U? {
         if let v = self {
             return f(v)
         }

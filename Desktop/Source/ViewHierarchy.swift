@@ -24,7 +24,7 @@ class ViewHierarchy {
         for root in roots {
             if let record = self[root] {
                 entries[root] = record
-                collectActiveEntries(&entries, roots: record.children as! [NSString])
+                collectActiveEntries(&entries, roots: record.children)
             }
         }
     }

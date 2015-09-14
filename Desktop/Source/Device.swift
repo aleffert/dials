@@ -49,7 +49,7 @@ class Device: NSObject {
         return self.service.isEqual(service)
     }
     
-    func openConnection(#delegate : DeviceConnectionDelegate) -> DeviceConnection {
+    func openConnection(delegate delegate : DeviceConnectionDelegate) -> DeviceConnection {
         return DeviceConnection(device : self, service: service, delegate : delegate)
     }
     

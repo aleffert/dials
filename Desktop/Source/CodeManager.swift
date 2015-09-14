@@ -22,8 +22,8 @@ public enum Language {
 // simple CFG parser
 public class CodeManager: NSObject {
     
-    private func languageForPath(path : String) -> Result<Language> {
-        if contains(["m", "mm", "h"], path.pathExtension) {
+    private func languageForURL(path : NSURL) -> Result<Language> {
+        if ["m", "mm", "h"].contains(path.pathExtension ?? "") {
             return Success(.ObjC)
         }
         else if path.pathExtension == "swift" {
@@ -34,15 +34,18 @@ public class CodeManager: NSObject {
         }
     }
     
-    private func loadFileAtPath(path : String) -> Result<String> {
-        var error : NSError?
-        let content = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: &error)
-        return (content as String?).toResult(error?.localizedDescription)
+    private func loadFileAtURL(url : NSURL) -> Result<String> {
+        do {
+            let content = try NSString(contentsOfURL: url, encoding: NSUTF8StringEncoding)
+            return Success(content as String)
+        } catch let e as NSError {
+            return Failure(e.localizedDescription)
+        }
     }
     
-    public func findSymbolWithName(name : String, inFileAtPath path : String) -> Result<String> {
-        return languageForPath(path).bind {lang in
-            let content = self.loadFileAtPath(path)
+    public func findSymbolWithName(name : String, inFileAtURL url : NSURL) -> Result<String> {
+        return languageForURL(url).bind {lang in
+            let content = self.loadFileAtURL(url)
             return content.bind {
                 self.findSymbolWithName(name, inString: $0, ofLanguage : lang)
             }
@@ -53,7 +56,7 @@ public class CodeManager: NSObject {
         return NSRegularExpression.compile(pattern).bind {
             matcher in
             let options = NSMatchingOptions()
-            let match: AnyObject? = matcher.matchesInString(code, options: options, range: NSMakeRange(0, count(code))).first
+            let match: AnyObject? = matcher.matchesInString(code, options: options, range: NSMakeRange(0, code.characters.count)).first
             return (match as? NSTextCheckingResult).toResult("Description not found")
         }.bind {(m : NSTextCheckingResult) in
             let range = m.rangeAtIndex(1)
@@ -75,10 +78,10 @@ public class CodeManager: NSObject {
         return findSymbolWithPattern(pattern, inString: code)
     }
     
-    public func updateSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditor, atPath path : String) -> Result<()> {
+    public func updateSymbol(symbol : String, toValue value : NSCoding?, withEditor editor: DLSEditor, atURL url : NSURL) -> Result<()> {
         // Swift needs monad syntax
-        return languageForPath(path).bind {lang -> Result<String> in
-            return self.loadFileAtPath(path).bind {code in
+        return languageForURL(url).bind {lang -> Result<String> in
+            return self.loadFileAtURL(url).bind {code in
                 let escapedSymbol = NSRegularExpression.escapedPatternForString(symbol)
                 
                 let generator = (editor as? CodeGenerating).toResult("Cannot generate code")
@@ -97,30 +100,28 @@ public class CodeManager: NSObject {
                     }
                     
                     return NSRegularExpression.compile(pattern).bind {
-                        let range = NSMakeRange(0, count(code))
-                        var result = (code as NSString).mutableCopy() as! NSMutableString
+                        let range = NSMakeRange(0, code.characters.count)
+                        let result = (code as NSString).mutableCopy() as! NSMutableString
                         let replacementCount = $0.replaceMatchesInString(result, options: NSMatchingOptions(), range: range, withTemplate: template)
                         if replacementCount == 1 {
                             return Success(result as String)
                         }
                         else if replacementCount == 0 {
-                            return Failure("Couldn't find initializer for \"\(symbol)\" in \"\(path.lastPathComponent)\"")
+                            return Failure("Couldn't find initializer for \"\(symbol)\" in \"\(url.lastPathComponent)\"")
                         }
                         else {
                             // TODO show an option picker
-                            return Failure("Too many matches for \"\(symbol)\" (\(replacementCount)) in \"\(path.lastPathComponent)\". Couldn't decide which to replace.")
+                            return Failure("Too many matches for \"\(symbol)\" (\(replacementCount)) in \"\(url.lastPathComponent)\". Couldn't decide which to replace.")
                         }
                     }
                 }
             }
         }.bind {r in
-            var error : NSError?
-            (r as NSString).writeToFile(path, atomically : true, encoding: NSUTF8StringEncoding, error : &error)
-            if let e = error {
-                return Failure(e.localizedDescription)
-            }
-            else {
+            do {
+                try (r as NSString).writeToURL(url, atomically : true, encoding: NSUTF8StringEncoding)
                 return Success(())
+            } catch let e as NSError {
+                return Failure(e.localizedDescription)
             }
         }
     }

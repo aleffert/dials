@@ -21,7 +21,7 @@ extension DLSFloatArrayEditor : CodeGenerating {
         let constructor = self.constructor ?? ""
         
         let values = value as? [String:NSNumber] ?? [:]
-        let fields = (labels as? [String]) ?? []
+        let fields = (labels) ?? []
         let params = fields.map {key -> (String, String) in
             let value = stringFromNumber(values[key] ?? (0 as NSNumber))
             return (key, value)
@@ -173,10 +173,10 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
     
     private var editor : DLSFloatArrayEditor? {
         didSet {
-            for label in (editor?.labels ?? []) as! [String] {
+            for label in (editor?.labels ?? []){
                 let owner = FloatArrayItemViewNibOwner()
                 NSBundle.mainBundle().loadNibNamed("FloatArrayItemView", owner: owner, topLevelObjects: nil)
-                owner.view.map { view -> Void in
+                if let view = owner.view {
                     view.label?.stringValue = label
                     view.translatesAutoresizingMaskIntoConstraints = false
                     view.delegate = self
@@ -205,8 +205,8 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
     func view(view: FloatArrayItemView, changedValue value: Double) {
         var values = (info?.value as? [String:NSNumber]) ?? [:]
         values[view.label!.stringValue] = value as NSNumber
-        info.map {
-            delegate?.editorView(self, changedInfo: $0, toValue: values)
+        if let info = info {
+            delegate?.editorView(self, changedInfo: info, toValue: values)
         }
     }
 }

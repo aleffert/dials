@@ -11,7 +11,7 @@ import XCTest
 import Dials
 
 extension Optional {
-    func toResult(failureString : String) -> Result<T> {
+    func toResult(failureString : String) -> Result<Wrapped> {
         if let v = self {
             return Success(v)
         }
@@ -23,16 +23,17 @@ extension Optional {
 
 class CodeManagerTests: XCTestCase {
     
-    func sampleFilePathWithName(name : String) -> Result<String> {
-        let path = NSBundle(forClass: CodeManagerTests.classForCoder()).pathForResource(name.stringByDeletingPathExtension, ofType: name.pathExtension, inDirectory: "Sample Files")
+    func sampleFileURLWithName(name : String) -> Result<NSURL> {
+        let url = NSURL(fileURLWithPath: name)
+        let path = NSBundle(forClass: CodeManagerTests.classForCoder()).URLForResource(url.URLByDeletingPathExtension?.lastPathComponent, withExtension: url.pathExtension, subdirectory: "Sample Files")
         XCTAssertNotNil(path)
         return path.toResult("Could not find file: \(name)")
     }
 
     func testFindSymbolBasic() {
-        let path = sampleFilePathWithName("find-name.m")
+        let path = sampleFileURLWithName("find-name.m")
         path.bind {
-            return CodeManager().findSymbolWithName("Description", inFileAtPath: $0)
+            return CodeManager().findSymbolWithName("Description", inFileAtURL: $0)
         }.ifSuccess {(s : String) in
             XCTAssertEqual(s, "SomeBoolean")
         }.ifFailure {
@@ -41,9 +42,9 @@ class CodeManagerTests: XCTestCase {
     }
     
     func testFindSymbolArgumentsObjC() {
-        let path = sampleFilePathWithName("find-name.m")
+        let path = sampleFileURLWithName("find-name.m")
         path.bind {
-            CodeManager().findSymbolWithName("Other Content", inFileAtPath: $0)
+            CodeManager().findSymbolWithName("Other Content", inFileAtURL: $0)
             }.ifSuccess {
                 XCTAssertEqual($0, "SomeFloat")
             }.ifFailure {
@@ -63,9 +64,9 @@ class CodeManagerTests: XCTestCase {
     
     
     func testReplace() {
-        let path = sampleFilePathWithName("find-name.m")
+        let path = sampleFileURLWithName("find-name.m")
         path.bind {
-            CodeManager().findSymbolWithName("Other Content", inFileAtPath: $0)
+            CodeManager().findSymbolWithName("Other Content", inFileAtURL: $0)
             }.ifSuccess {
                 XCTAssertEqual($0, "SomeFloat")
             }.ifFailure {

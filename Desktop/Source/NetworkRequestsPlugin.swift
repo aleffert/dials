@@ -24,7 +24,9 @@ class NetworkRequestsPlugin: NSObject, Plugin {
     }
     
     func connectionClosed() {
-        controller.map { self.context?.removeViewController($0, plugin: self) }
+        if let controller = controller {
+            self.context?.removeViewController(controller, plugin: self)
+        }
         context = nil
         controller = nil
     }

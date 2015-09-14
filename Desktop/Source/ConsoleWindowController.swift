@@ -46,13 +46,13 @@ class ConsoleWindowController: NSWindowController {
         devicesChanged()
         bodyController.addChildViewController(sidebarController)
         
-        let contentView = window?.contentView as! NSView
+        let contentView = window?.contentView
         let sidebarView = sidebarController.view
         bodyView.addSubview(sidebarView)
         sidebarView.alphaValue = 0
         sidebarView.addConstraintsMatchingSuperviewBounds()
         
-        contentView.superview!.addConstraint(NSLayoutConstraint(item: bodyView, attribute: .Top, relatedBy: .Equal, toItem: window?.contentView, attribute: .Top, multiplier: 1, constant: 0))
+        contentView?.superview?.addConstraint(NSLayoutConstraint(item: bodyView, attribute: .Top, relatedBy: .Equal, toItem: window?.contentView, attribute: .Top, multiplier: 1, constant: 0))
         
         sidebarTable?.setDelegate(viewGrouper)
         sidebarTable?.setDataSource(viewGrouper)
@@ -168,11 +168,11 @@ class ConsoleWindowController: NSWindowController {
 }
 
 extension ConsoleWindowController : NSToolbarDelegate {
-    func toolbarAllowedItemIdentifiers(toolbar: NSToolbar) -> [AnyObject] {
+    func toolbarAllowedItemIdentifiers(toolbar: NSToolbar) -> [String] {
         return [NSToolbarFlexibleSpaceItemIdentifier, ConnectionStatusToolbarItemIdentifier]
     }
     
-    func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [AnyObject] {
+    func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [String] {
         return [NSToolbarFlexibleSpaceItemIdentifier, ConnectionStatusToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier]
     }
     

@@ -37,10 +37,7 @@ static const NSTimeInterval DLSViewUpdateInterval = .1;
 
 @interface DLSViewsPlugin ()
 
-/// NSString* (representing a class name) -> NSString* (representing a property name) -> DLSPropertyDescription
-@property (strong, nonatomic) NSMutableDictionary* classPropertyDescriptions;
-/// NSString* (representing a class name) -> Array of DLSDescriptionGroup*
-@property (strong, nonatomic) NSMutableDictionary* classDescriptions;
+@property (strong, nonatomic) NSMutableDictionary<NSString*, NSArray<DLSPropertyGroup*>*>* classDescriptions;
 
 @property (strong, nonatomic) id <DLSPluginContext> context;
 
@@ -52,15 +49,14 @@ static const NSTimeInterval DLSViewUpdateInterval = .1;
 @property (strong, nonatomic) id <DLSRemovable> updateDisplayTimer;
 @property (strong, nonatomic) id <DLSRemovable> updateSurfaceTimer;
 
-@property (strong, nonatomic) NSMutableSet* surfaceUpdatedViewIDs;
-@property (strong, nonatomic) NSMutableSet* displayUpdatedViewIDs;
+@property (strong, nonatomic) NSMutableSet<NSString*>* surfaceUpdatedViewIDs;
+@property (strong, nonatomic) NSMutableSet<NSString*>* displayUpdatedViewIDs;
 
-@property (strong, nonatomic) NSMutableSet* usedViewIDs;
+@property (strong, nonatomic) NSMutableSet<NSString*>* usedViewIDs;
 
 @property (strong, nonatomic) id windowChangedListener;
 
-// [DLSViewDescriptionGenerator]
-@property (strong, nonatomic) NSMutableArray* viewDescriptionGenerators;
+@property (strong, nonatomic) NSMutableArray<DLSViewDescriptionGenerator*>* viewDescriptionGenerators;
 
 
 @end
@@ -96,7 +92,6 @@ static DLSViewsPlugin* sActivePlugin;
 - (void)connectedWithContext:(id<DLSPluginContext>)context {
     self.context = context;
     self.classDescriptions = [[NSMutableDictionary alloc] init];
-    self.classPropertyDescriptions = [[NSMutableDictionary alloc] init];
     @synchronized(self) {
         self.surfaceUpdatedViewIDs = [[NSMutableSet alloc] init];
     }
@@ -130,7 +125,6 @@ static DLSViewsPlugin* sActivePlugin;
     [[NSNotificationCenter defaultCenter] removeObserver:self.windowChangedListener];
     [UIView dls_setListeningForChanges:NO];
     self.classDescriptions = nil;
-    self.classPropertyDescriptions = nil;
     self.context = nil;
     @synchronized(self.viewIDs) {
         self.viewIDs = nil;
@@ -166,13 +160,13 @@ static DLSViewsPlugin* sActivePlugin;
     }];
 }
 
-- (NSArray*)descriptionGroupsForClass:(Class)klass {
+- (NSArray<DLSPropertyGroup*>*)propertyGroupsForClass:(Class)klass {
     if(klass == nil) {
         return @[];
     }
     
     NSString* className = NSStringFromClass(klass);
-    NSArray* result = self.classDescriptions[className];
+    NSArray<DLSPropertyGroup*>* result = self.classDescriptions[className];
     if(result == nil) {
         DLSDescriptionAccumulator* accumulator = [[DLSDescriptionAccumulator alloc] init];
         [klass dls_describe:accumulator];
@@ -209,7 +203,7 @@ static DLSViewsPlugin* sActivePlugin;
     record.transform3D = view.layer.transform;
     
     
-    NSMutableDictionary* contentValues = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary<NSString*, id>* contentValues = [[NSMutableDictionary alloc] init];
     for(NSString* key in @[
                            @"borderWidth",
                            @"contentsRect",
@@ -233,7 +227,7 @@ static DLSViewsPlugin* sActivePlugin;
         }
     }
     
-    NSMutableDictionary* geometryValues = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary<NSString*, id>* geometryValues = [[NSMutableDictionary alloc] init];
     for(NSString* key in @[
                            @"anchorPoint",
                            @"bounds",
@@ -262,17 +256,17 @@ static DLSViewsPlugin* sActivePlugin;
     return record;
 }
 
-- (NSArray*)rootViews {
+- (NSArray<UIView*>*)rootViews {
     return [[UIApplication sharedApplication] windows];
 }
 
-- (NSArray*)rootViewIDs {
-    return [[self rootViews] dls_map:^id(UIWindow* window) {
-        return [self viewIDForView:window];
+- (NSArray<NSString*>*)rootViewIDs {
+    return [[self rootViews] dls_map:^id(UIView* view) {
+        return [self viewIDForView:view];
     }];
 }
 
-- (void)captureView:(UIView*)view intoEntryMap:(NSMutableDictionary*)entries {
+- (void)captureView:(UIView*)view intoEntryMap:(NSMutableDictionary<NSString*, DLSViewHierarchyRecord*>*)entries {
     DLSViewHierarchyRecord* record = [self captureView:view];
     [entries setObject:record forKey:record.viewID];
     for(UIView* subview in view.subviews) {
@@ -281,7 +275,7 @@ static DLSViewsPlugin* sActivePlugin;
 }
 
 - (DLSViewsFullHierarchyMessage*)fullHierarchyMessage {
-    NSMutableDictionary* entries = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary<NSString*, DLSViewHierarchyRecord*>* entries = [[NSMutableDictionary alloc] init];
     
     for(UIView* view in [self rootViews]) {
         [self captureView:view intoEntryMap:entries];
@@ -298,7 +292,7 @@ static DLSViewsPlugin* sActivePlugin;
 }
 
 - (void)sendAllKnownViewContentsMessage {
-    NSMutableArray* views = [[NSMutableArray alloc] init];
+    NSMutableArray<NSString*>* views = [[NSMutableArray alloc] init];
     @synchronized(self.viewIDs) {
         for(NSString* key in self.viewIDs.keyEnumerator) {
             [views addObject:key];
@@ -314,11 +308,11 @@ static DLSViewsPlugin* sActivePlugin;
     
     DLSViewRecord* record = [[DLSViewRecord alloc] init];
     record.viewID = [self viewIDForView:view];
-    record.propertyGroups = [self descriptionGroupsForClass:view.class];
+    record.propertyGroups = [self propertyGroupsForClass:view.class];
     record.className = NSStringFromClass(view.class);
-    NSMutableDictionary* values = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary<NSString*, NSDictionary<NSString*, id<NSCoding>>*>* values = [[NSMutableDictionary alloc] init];
     for(DLSPropertyGroup* group in record.propertyGroups) {
-        NSMutableDictionary* groupValues = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary<NSString*, id <NSCoding>>* groupValues = [[NSMutableDictionary alloc] init];
         for(DLSPropertyDescription* description in group.properties) {
             DLSValueExchanger* exchanger = description.exchanger;
             id <NSCoding> value = [exchanger wrapperFromObject:view].getter();
@@ -355,7 +349,7 @@ static DLSViewsPlugin* sActivePlugin;
     }
     
 
-    NSMutableArray* views = [[NSMutableArray alloc] init];
+    NSMutableArray<UIView*>* views = [[NSMutableArray alloc] init];
     @synchronized(self.viewIDs) {
         for(NSString* viewID in self.surfaceUpdatedViewIDs) {
             UIView* view = [self.viewIDs objectForKey:viewID];
@@ -365,7 +359,7 @@ static DLSViewsPlugin* sActivePlugin;
         }
     }
     
-    NSMutableArray* records = [[NSMutableArray alloc] init];
+    NSMutableArray<DLSViewHierarchyRecord*>* records = [[NSMutableArray alloc] init];
     for(UIView* view in views) {
         [records addObject:[self captureView:view]];
     }
@@ -379,8 +373,8 @@ static DLSViewsPlugin* sActivePlugin;
     [self sendMessage:message];
 }
 
-- (void)sendChangedDisplayViews:(NSArray*)viewIDs {
-    NSMutableArray* views = [[NSMutableArray alloc] init];
+- (void)sendChangedDisplayViews:(NSArray<NSString*>*)viewIDs {
+    NSMutableArray<UIView*>* views = [[NSMutableArray alloc] init];
     for(NSString* viewID in viewIDs) {
         UIView* view = [self.viewIDs objectForKey:viewID];
         if(view != nil) {
@@ -388,8 +382,8 @@ static DLSViewsPlugin* sActivePlugin;
         }
     }
     
-    NSMutableDictionary* records = [[NSMutableDictionary alloc] init];
-    NSMutableArray* empties = [[NSMutableArray alloc] init];
+    NSMutableDictionary<NSString*, NSData*>* records = [[NSMutableDictionary alloc] init];
+    NSMutableArray<NSString*>* empties = [[NSMutableArray alloc] init];
     for(UIView* view in views) {
         id image = view.layer.contents;
         UIImage* uiImage = nil;
@@ -450,7 +444,7 @@ static DLSViewsPlugin* sActivePlugin;
 
 - (void)handleViewChangeMessage:(DLSViewsValueChangedMessage*)message {
     UIView* view = [self.viewIDs objectForKey:message.record.viewID];
-    NSArray* groups = [self descriptionGroupsForClass:view.class];
+    NSArray<DLSPropertyGroup*>* groups = [self propertyGroupsForClass:view.class];
     for(DLSPropertyGroup* group in groups) {
         if([group.label isEqual:message.record.group]) {
             for(DLSPropertyDescription* description in group.properties) {

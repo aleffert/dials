@@ -46,10 +46,10 @@ class PropertyGroupView: NSView, EditorViewDelegate {
         groupName = group.label
         groupView.title = group.label
         for view in propertyStack?.views ?? [] {
-            propertyStack?.removeView(view as! NSView)
+            propertyStack?.removeView(view)
         }
         propertyViews = [:]
-        for description in group.properties as! [DLSPropertyDescription] {
+        for description in group.properties {
             let generator = description.editor as? EditorViewGenerating
             let view = generator?.generateView()
             view?.delegate = self

@@ -46,7 +46,7 @@ class RequestContentTabController: NSObject {
     }
     
     private static func requestContentTypeExtractor(info: NetworkRequestInfo) -> String? {
-        let map = info.request.allHTTPHeaderFields as? [String:String]
+        let map = info.request.allHTTPHeaderFields
         return map?["Content-Type"]
     }
     

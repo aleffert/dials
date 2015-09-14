@@ -41,8 +41,8 @@ class ColorEditorView : EditorView {
     @IBOutlet private var name : NSTextField?
     
     @IBAction func colorChanged(well : NSColorWell) {
-        info.map {
-            self.delegate?.editorView(self, changedInfo: $0, toValue: well.color)
+        if let info = info {
+            self.delegate?.editorView(self, changedInfo: info, toValue: well.color)
         }
     }
     

@@ -76,7 +76,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         let tapGesture = NSClickGestureRecognizer(target : self, action : Selector("click:"))
             contentView.addGestureRecognizer(tapGesture)
         
-        let area = NSTrackingArea(rect: NSZeroRect, options: .ActiveInActiveApp | .MouseEnteredAndExited | .MouseMoved | .InVisibleRect, owner: self, userInfo: nil)
+        let area = NSTrackingArea(rect: NSZeroRect, options: [.ActiveInActiveApp, .MouseEnteredAndExited, .MouseMoved, .InVisibleRect], owner: self, userInfo: nil)
         contentView.addTrackingArea(area)
         let currentContent = contentView
         self.dls_performActionOnDealloc {
@@ -125,7 +125,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(depth) * controlsView.depthOffset + zPos)
 
                 for (key, value) in record.renderingInfo.contentValues {
-                    layer.contentLayer.setValue((value as? NSNull) == nil ? value : nil, forKey: key as! String)
+                    layer.contentLayer.setValue((value as? NSNull) == nil ? value : nil, forKey: key)
                 }
                 
                 // These properties need to be inherited
@@ -133,12 +133,12 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 layer.contentLayer.opacity = layer.contentLayer.opacity * (parent?.contentLayer.opacity ?? 1)
                 
                 for(key, value) in record.renderingInfo.geometryValues {
-                    layer.setValue(value, forKey: key as! String)
+                    layer.setValue(value, forKey: key)
                 }
                 
                 layer.borderLayer.transform = layer.contentLayer.transform
                 
-                visitNodes(record.children as! [NSString], parent : layer, depth : &depth, marking: &marking)
+                visitNodes(record.children, parent : layer, depth : &depth, marking: &marking)
                 if depth > 0 {
                     // Add a small fudge factor so siblings are properly ordered
                     zPos += 0.001
@@ -298,7 +298,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     
     // MARK: Mouse Move Tracking
     
-    private func firstLayerIntersectingRay(#pos : Vec3, neg : Vec3) -> ViewFacade? {
+    private func firstLayerIntersectingRay(pos pos : Vec3, neg : Vec3) -> ViewFacade? {
         updateHighlights()
         
         var best : ViewFacade?
@@ -330,10 +330,10 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 if let parentID = best?.record.superviewID where parentID == layer.record.superviewID {
                     let parent = layers[parentID]
                     let bestParentIndex = parent?.record.children.indexOf {
-                        $0 as? String == best?.record.viewID
+                        $0 == best?.record.viewID
                     }
                     let currentParentIndex = parent?.record?.children.indexOf {
-                        $0 as? String == layer.record?.viewID
+                        $0 == layer.record?.viewID
                     }
                     higherSibling = currentParentIndex > bestParentIndex
                 }
@@ -353,11 +353,11 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         
         let locationOut = GLKVector3Make(Float(layerLocation.x - contentView.frame.size.width / 2), Float(layerLocation.y - contentView.frame.size.height / 2), endOfTheWorld)
         let transformedLocationOut = CATransform3DInvert(bodyLayer.transform) * locationOut
-        var positionOut = transformedLocationOut.offsetBy(dx: screenSize.width / 2, dy: screenSize.height / 2)
+        let positionOut = transformedLocationOut.offsetBy(dx: screenSize.width / 2, dy: screenSize.height / 2)
         
         let locationIn = GLKVector3Make(Float(layerLocation.x - contentView.frame.size.width / 2), Float(layerLocation.y - contentView.frame.size.height / 2), -endOfTheWorld)
         let transformedLocationIn = CATransform3DInvert(bodyLayer.transform) * locationIn
-        var positionIn = transformedLocationIn.offsetBy(dx: screenSize.width / 2, dy: screenSize.height / 2)
+        let positionIn = transformedLocationIn.offsetBy(dx: screenSize.width / 2, dy: screenSize.height / 2)
         
         return firstLayerIntersectingRay(pos : positionOut, neg : positionIn)
     }
@@ -374,7 +374,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     
     private func updateMarginsWithEvent(theEvent : NSEvent) {
         updateSelectionMargins()
-        marginsLayer.hidden = (marginsLayer.comparison == nil || (theEvent.modifierFlags & NSEventModifierFlags.AlternateKeyMask).rawValue == 0) || currentSelection == nil
+        marginsLayer.hidden = marginsLayer.comparison == nil || (!theEvent.modifierFlags.contains(.AlternateKeyMask)) || currentSelection == nil
     }
     
     override func flagsChanged(theEvent: NSEvent) {
@@ -406,8 +406,8 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     private func sendOffsetWithBase(base : NSEdgeInsets, mask : NSEdgeInsets, modifiers : NSEventModifierFlags) {
         if let selection = currentSelection {
             let insets : NSEdgeInsets
-            if (modifiers & NSEventModifierFlags.AlternateKeyMask).rawValue != 0 {
-                if (modifiers & NSEventModifierFlags.ShiftKeyMask).rawValue != 0 {
+            if (modifiers.contains(.AlternateKeyMask)) {
+                if (modifiers.contains(.ShiftKeyMask)) {
                     insets = base * mask * NSEdgeInsetsMake(-1, -1, -1, -1)
                 }
                 else {

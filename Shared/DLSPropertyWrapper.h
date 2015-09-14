@@ -10,13 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DLSPropertyWrapper : NSObject
+@interface DLSPropertyWrapper<A> : NSObject
 
-- (id)initWithGetter:(__nullable id (^)(void))getter setter:(void(^)(__nullable id))setter NS_DESIGNATED_INITIALIZER;
+- (id)initWithGetter:(__nullable A (^)(void))getter setter:(void(^)(__nullable A))setter NS_DESIGNATED_INITIALIZER;
 - (id)initWithKeyPath:(NSString*)keyPath object:(id)object;
 
-@property (copy, nonatomic) __nullable id (^getter)(void);
-@property (copy, nonatomic) void (^setter)(__nullable id);
+@property (copy, nonatomic) __nullable A (^getter)(void);
+@property (copy, nonatomic) void (^setter)(__nullable A);
 
 @end
 

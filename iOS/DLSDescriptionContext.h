@@ -27,7 +27,7 @@ DLSPropertyDescription* DLSProperty(NSString* name, id <DLSEditor> editor);
 /// Should be unique for a given object hierarchy.
 /// @param properties An array of DLSPropertyDescription.
 /// These should be constructed using the DLSProperty function
-- (void)addGroupWithName:(NSString*)name properties:(NSArray*)properties;
+- (void)addGroupWithName:(NSString*)name properties:(NSArray<DLSPropertyDescription*>*)properties;
 
 @end
 

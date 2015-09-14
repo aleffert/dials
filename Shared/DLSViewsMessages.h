@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString* const DLSViewsPluginIdentifier;
 
+@class DLSPropertyGroup;
+
 @protocol DLSEditor;
 
 @interface DLSPropertyRecord : NSObject <NSCoding>
@@ -34,8 +36,8 @@ extern NSString* const DLSViewsPluginIdentifier;
 @property (strong, nonatomic, nullable) DLSColor* borderColor;
 @property (strong, nonatomic, nullable) DLSColor* shadowColor;
 @property (assign, nonatomic) CATransform3D transform3D;
-@property (copy, nonatomic) NSDictionary* geometryValues;
-@property (copy, nonatomic) NSDictionary* contentValues;
+@property (copy, nonatomic) NSDictionary<NSString*,id>* geometryValues;
+@property (copy, nonatomic) NSDictionary<NSString*,id>* contentValues;
 
 @end
 
@@ -43,8 +45,7 @@ extern NSString* const DLSViewsPluginIdentifier;
 /// Unique id of the corresponding view
 @property (copy, nonatomic) NSString* viewID;
 @property (copy, nonatomic, nullable) NSString* superviewID;
-/// [NSString(uuid)]
-@property (copy, nonatomic) NSArray* children;
+@property (copy, nonatomic) NSArray<NSString*>* children;
 @property (copy, nonatomic) NSString* label;
 @property (copy, nonatomic) NSString* className;
 @property (copy, nonatomic) NSString* address;
@@ -59,11 +60,9 @@ extern NSString* const DLSViewsPluginIdentifier;
 @interface DLSViewRecord : NSObject <NSCoding>
 /// Unique id of the corresponding view
 @property (copy, nonatomic, nullable) NSString* viewID;
-/// [DLSPropertyGroup]
-@property (copy, nonatomic) NSArray* propertyGroups;
+@property (copy, nonatomic) NSArray<DLSPropertyGroup*>* propertyGroups;
 @property (copy, nonatomic) NSString* className;
-/// [NSString(group) : [NSString(name) : NSCoding(value)]
-@property (copy, nonatomic) NSDictionary* values;
+@property (copy, nonatomic) NSDictionary<NSString*, NSDictionary<NSString*, id <NSCoding>>*>* values;
 
 @end
 
@@ -82,9 +81,9 @@ extern NSString* const DLSViewsPluginIdentifier;
 @interface DLSViewsFullHierarchyMessage : NSObject <NSCoding>
 
 /// [NSString(viewID) : DLSViewHierarchyRecord(view info)]
-@property (copy, nonatomic) NSDictionary* hierarchy;
+@property (copy, nonatomic) NSDictionary<NSString*, DLSViewHierarchyRecord*>* hierarchy;
 /// NSString(record UUIDs)]
-@property (copy, nonatomic) NSArray* roots;
+@property (copy, nonatomic) NSArray<NSString*>* roots;
 @property (assign, nonatomic) CGSize screenSize;
 
 @end
@@ -98,9 +97,9 @@ extern NSString* const DLSViewsPluginIdentifier;
 @interface DLSViewsUpdatedViewsMessage : NSObject <NSCoding>
 
 /// [DLSViewHierarchyRecord]
-@property (copy, nonatomic) NSArray* records;
+@property (copy, nonatomic) NSArray<DLSViewHierarchyRecord*>* records;
 /// NSString(record UUIDs)]
-@property (copy, nonatomic) NSArray* roots;
+@property (copy, nonatomic) NSArray<NSString*>* roots;
 @property (assign, nonatomic) CGSize screenSize;
 
 @end
@@ -109,8 +108,8 @@ extern NSString* const DLSViewsPluginIdentifier;
 @interface DLSViewsUpdatedContentsMessage : NSObject <NSCoding>
 
 /// [NSString:NSData(UIImage)]
-@property (copy, nonatomic) NSDictionary* contents;
-@property (copy, nonatomic) NSArray* empties;
+@property (copy, nonatomic) NSDictionary<NSString*, NSData*>* contents;
+@property (copy, nonatomic) NSArray<NSString*>* empties;
 
 @end
 
@@ -137,7 +136,7 @@ extern NSString* const DLSViewsPluginIdentifier;
 - (id)initWithViewID:(NSString*)viewID insets:(NSDictionary*)insets;
 
 @property (copy, nonatomic) NSString* viewID;
-@property (copy, nonatomic) NSDictionary* insets;
+@property (copy, nonatomic) NSDictionary<NSString*, NSNumber*>* insets;
 
 @end
 

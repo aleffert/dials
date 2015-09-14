@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSArray (DLSFunctionalAdditions)
+@interface NSArray<ObjectType> (DLSFunctionalAdditions)
 
 /// Returns an array by applying a functional to every element of an array
 /// If the function returns nil, that item is ignored
-- (nonnull NSArray*)dls_map:(id __nullable (^ __nonnull)(id __nonnull o))mapper;
+- (nonnull NSArray*)dls_map:(id __nullable (^ __nonnull)(ObjectType __nonnull o))mapper;
 
 @end

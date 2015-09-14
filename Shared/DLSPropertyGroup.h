@@ -1,5 +1,5 @@
 //
-//  DLSDescriptionGroup.h
+//  DLSPropertyGroup.h
 //  Dials-Shared
 //
 //  Created by Akiva Leffert on 4/19/15.
@@ -10,11 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class DLSPropertyDescription;
+
 @interface DLSPropertyGroup : NSObject <NSCoding>
 
 @property (copy, nonatomic, nonnull) NSString* label;
-/// [DLSPropertyDescription]
-@property (copy, nonatomic, nonnull) NSArray* properties;
+@property (copy, nonatomic, nonnull) NSArray<DLSPropertyDescription*>* properties;
 
 @end
 

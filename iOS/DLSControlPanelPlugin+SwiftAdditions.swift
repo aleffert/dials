@@ -19,7 +19,7 @@ public extension NSObject {
     }
     
     func DLSControl(
-        #keyPath : String,
+        keyPath keyPath : String,
         line : Int = __LINE__,
         file : String = __FILE__) -> DLSKeyPathControlBuilder {
             return DLSKeyPathControlBuilder(keyPath: keyPath, canSave: false, owner : self, file : file, line : line)

@@ -12,7 +12,7 @@
 
 @interface DLSDescriptionAccumulator ()
 
-@property (strong, nonatomic) NSMutableArray* savedGroups;
+@property (strong, nonatomic) NSMutableArray<DLSPropertyGroup *>* savedGroups;
 
 @end
 
@@ -26,7 +26,7 @@
     return self;
 }
 
-- (void)addGroupWithName:(NSString*)name properties:(NSArray*)properties {
+- (void)addGroupWithName:(NSString*)name properties:(NSArray<DLSPropertyDescription*>*)properties {
     DLSPropertyGroup* group = [[DLSPropertyGroup alloc] init];
     group.label = name;
     group.properties = properties;

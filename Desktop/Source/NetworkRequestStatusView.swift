@@ -18,7 +18,7 @@ class NetworkRequestStatusGroupView : NSView {
 
 private func sortHeaderMap(map : [NSObject : AnyObject]) -> [(String, String)] {
     let elements = (map as? [String:String] ?? [:])
-    let pairs = sorted(elements) { $0.0 < $1.0 }
+    let pairs = elements.sort { $0.0 < $1.0 }
     return pairs
 }
 
@@ -147,7 +147,10 @@ class NetworkRequestStatusView: NSView {
         didSet {
             let data = requestInfo.map { self.dataExtractor($0) } ?? []
             while stackView.views.count > data.count {
-                stackView.removeView(stackView.views.last as! NSView)
+                guard let view = stackView.views.last else {
+                    break
+                }
+                stackView.removeView(view)
             }
             while stackView.views.count < data.count {
                 let owner = NetworkRequestStatusGroupViewOwner()

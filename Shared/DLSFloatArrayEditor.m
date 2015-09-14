@@ -12,7 +12,7 @@
 
 @interface DLSFloatArrayEditor ()
 
-@property (copy, nonatomic) NSArray* labels;
+@property (copy, nonatomic) NSArray<NSString*>* labels;
 @property (copy, nonatomic) NSString* constructor;
 
 @end
@@ -20,7 +20,7 @@
 @implementation DLSFloatArrayEditor
 
 
-- (id)initWithLabels:(NSArray*)labels constructor:(NSString*)constructor {
+- (id)initWithLabels:(NSArray<NSString*>*)labels constructor:(NSString*)constructor {
     self = [super init];
     if(self != nil) {
         self.labels = labels;

@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DLSFloatArrayEditor : NSObject <DLSEditor>
 
-- (id)initWithLabels:(NSArray*)labels constructor:(nullable NSString*)constructor;
+- (id)initWithLabels:(NSArray<NSString*>*)labels constructor:(nullable NSString*)constructor;
 
-@property (readonly, copy, nonatomic) NSArray* labels;
+@property (readonly, copy, nonatomic) NSArray<NSString*>* labels;
 @property (readonly, copy, nonatomic, nullable) NSString* constructor;
 
 @end

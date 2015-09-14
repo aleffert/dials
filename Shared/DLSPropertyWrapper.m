@@ -10,6 +10,15 @@
 
 @implementation DLSPropertyWrapper
 
+- (id)init {
+    self = [self initWithGetter:^{
+        return @"";
+    } setter:^(id value) {
+        // do nothing
+    }];
+    return self;
+}
+
 - (id)initWithGetter:(id (^)(void))getter setter:(void(^)(id))setter {
     self = [super init];
     if(self != nil) {

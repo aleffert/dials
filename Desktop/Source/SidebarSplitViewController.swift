@@ -54,7 +54,7 @@ class SidebarSplitViewController: NSSplitViewController {
     }
     
     func useSidebarContent(view : NSView) {
-        for child in sidebarItem.viewController.view.subviews as! Array<NSView> {
+        for child in sidebarItem.viewController.view.subviews {
             if child != view {
                 view.removeFromSuperview()
             }
@@ -64,7 +64,7 @@ class SidebarSplitViewController: NSSplitViewController {
     }
     
     func useBodyContent(view : NSView) {
-        for child in contentItem.viewController.view.subviews as! Array<NSView> {
+        for child in contentItem.viewController.view.subviews {
             if child != view {
                 child.removeFromSuperview()
             }
