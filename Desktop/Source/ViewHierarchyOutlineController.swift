@@ -50,7 +50,10 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
         }
         else {
             let record = hierarchy[item as! NSString]
-            let child = record?.children[index] as! NSString
+            guard let child = record?.children[index] else {
+                assertionFailure("Unexpected index")
+                return ""
+            }
             return canonicalize(child)
         }
     }
