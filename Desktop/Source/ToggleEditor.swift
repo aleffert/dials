@@ -8,8 +8,8 @@
 
 import Cocoa
 
-extension DLSToggleEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSToggleEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         let view = EditorView.freshViewFromNib("ToggleEditorView") as! ToggleEditorView
         return view
     }
@@ -40,14 +40,14 @@ class ToggleEditorView : EditorView {
     @IBOutlet private var button : NSButton?
     
     @IBAction private func buttonToggled(sender : NSButton) {
-        self.delegate?.editorView(self, changedInfo: info!, toValue: sender.state)
+        self.delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.state)
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
-            let state = info?.value as? NSNumber
+            let state = configuration?.value as? NSNumber
             button?.state = state?.integerValue ?? 0
-            button?.title = info?.label ?? "Option"
+            button?.title = configuration?.label ?? "Option"
         }
     }
 }

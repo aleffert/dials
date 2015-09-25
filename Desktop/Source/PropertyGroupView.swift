@@ -12,7 +12,7 @@ protocol PropertyGroupViewDelegate: class {
     func propertyGroupView(view : PropertyGroupView, changedItem name : String, toValue value : NSCoding?)
 }
 
-class PropertyGroupView: NSView, EditorViewDelegate {
+class PropertyGroupView: NSView, EditorControllerDelegate {
     
     weak var delegate : PropertyGroupViewDelegate?
     
@@ -20,7 +20,7 @@ class PropertyGroupView: NSView, EditorViewDelegate {
     @IBOutlet private var groupView : GroupContainerView!
     @IBOutlet private var propertyStack : NSStackView!
     
-    private var propertyViews : [String:EditorView] = [:]
+    private var propertyControllers : [String:EditorController] = [:]
     
     var groupName : String?
     
@@ -48,34 +48,33 @@ class PropertyGroupView: NSView, EditorViewDelegate {
         for view in propertyStack?.views ?? [] {
             propertyStack?.removeView(view)
         }
-        propertyViews = [:]
+        propertyControllers = [:]
         for description in group.properties {
-            let generator = description.editor as? EditorViewGenerating
-            let view = generator?.generateView()
-            view?.delegate = self
-            view?.translatesAutoresizingMaskIntoConstraints = false
+            let generator = description.editor as? EditorControllerGenerating
+            let controller = generator?.generateController()
+            controller?.delegate = self
+            controller?.view.translatesAutoresizingMaskIntoConstraints = false
             let value = values[description.name]
-            view?.info = EditorInfo(editor : description.editor, name : description.name, label : description.label, value : value)
-            if let v = view {
+            controller?.configuration = EditorInfo(editor : description.editor, name : description.name, label : description.label, value : value)
+            if let v = controller?.view {
                 let container = NSView(frame:NSZeroRect)
                 container.translatesAutoresizingMaskIntoConstraints = false
                 container.addSubview(v)
                 v.addConstraintsMatchingSuperviewBounds()
                 propertyStack?.addView(container, inGravity: .Top)
-                propertyViews[description.name] = v
+                propertyControllers[description.name] = controller
             }
         }
     }
     
     func takeValue(value : NSCoding?, name : String) {
-        let view = propertyViews[name]
-        if let v = view {
-            v.info = EditorInfo(editor : v.info!.editor, name : v.info!.name, label : v.info!.label, value : value)
+        if let controller = propertyControllers[name] {
+            controller.configuration = EditorInfo(editor : controller.configuration!.editor, name : controller.configuration!.name, label : controller.configuration!.label, value : value)
         }
     }
     
-    func editorView(view: EditorView, changedInfo info: EditorInfo, toValue value: NSCoding?) {
-        self.delegate?.propertyGroupView(self, changedItem: info.name, toValue: value)
+    func editorController(controller: EditorController, changedConfiguration configuration: EditorConfiguration, toValue value: NSCoding?) {
+        self.delegate?.propertyGroupView(self, changedItem: configuration.name, toValue: value)
     }
     
 }

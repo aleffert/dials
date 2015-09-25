@@ -8,8 +8,8 @@
 
 import Cocoa
 
-extension DLSStepperEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSStepperEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         let view = EditorView.freshViewFromNib("StepperEditorView") as! StepperEditorView
         view.editor = self
         return view
@@ -42,23 +42,23 @@ class StepperEditorView : EditorView {
         }
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
-            let floatValue = (info?.value as? NSNumber)?.floatValue ?? 0
+            let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
             stepper?.floatValue = floatValue
             field?.floatValue = floatValue
-            name?.stringValue = info?.label ?? "Stepper"
+            name?.stringValue = configuration?.label ?? "Stepper"
         }
     }
     
     @IBAction func textChanged(sender : NSTextField) {
         stepper?.floatValue = field?.floatValue ?? 0
-        delegate?.editorView(self, changedInfo: info!, toValue: sender.floatValue)
+        delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.floatValue)
     }
     
     @IBAction func stepperChanged(sender : NSStepper) {
         field?.floatValue = sender.floatValue
-        delegate?.editorView(self, changedInfo: info!, toValue: sender.floatValue)
+        delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.floatValue)
     }
 
 }

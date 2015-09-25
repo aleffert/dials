@@ -9,8 +9,8 @@
 import Foundation
 import AppKit
 
-extension DLSSliderEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSSliderEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         let view = EditorView.freshViewFromNib("SliderEditorView") as! SliderEditorView
         view.editor = self
         return view
@@ -46,16 +46,16 @@ class SliderEditorView : EditorView {
     
     @IBAction private func sliderChanged(sender : NSSlider) {
         currentLabel?.stringValue = stringFromNumber(sender.floatValue)
-        self.delegate?.editorView(self, changedInfo: info!, toValue: sender.floatValue)
+        self.delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.floatValue)
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
-            let floatValue = (info?.value as? NSNumber)?.floatValue ?? 0
+            let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
             slider?.floatValue = floatValue
             currentLabel?.stringValue = stringFromNumber(floatValue)
             
-            name?.stringValue = info?.label ?? "Slider"
+            name?.stringValue = configuration?.label ?? "Slider"
         }
     }
 }

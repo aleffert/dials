@@ -9,8 +9,8 @@
 import Foundation
 import AppKit
 
-extension DLSActionEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSActionEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         return EditorView.freshViewFromNib("ActionEditorView")
     }
 }
@@ -20,14 +20,14 @@ class ActionEditorView : EditorView {
     @IBOutlet var button : NSButton?
     
     @IBAction func buttonPressed(sender : NSButton) {
-        if let info = info {
-            self.delegate?.editorView(self, changedInfo: info, toValue: nil)
+        if let configuration = configuration {
+            self.delegate?.editorController(self, changedConfiguration: configuration, toValue: nil)
         }
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
-            button?.title = info!.label
+            button?.title = configuration!.label
         }
     }
     

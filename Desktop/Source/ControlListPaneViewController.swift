@@ -43,9 +43,9 @@ class ControlListPaneViewController: NSViewController, ControlControllerDelegate
     }
     
     func addControlWithInfo(controlInfo : DLSControlInfo) {
-        let contentView = (controlInfo.editor as! EditorViewGenerating).generateView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        let controller = ControlController(controlInfo : controlInfo, contentView : contentView, delegate : self)
+        let editorController = (controlInfo.editor as! EditorControllerGenerating).generateController()
+        editorController.view.translatesAutoresizingMaskIntoConstraints = false
+        let controller = ControlController(controlInfo : controlInfo, contentController : editorController, delegate : self)
         controlControllers.append(controller)
         controlControllers.sortInPlace { (left, right) -> Bool in
             left < right

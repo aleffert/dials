@@ -29,12 +29,15 @@ class PluginController: NSObject {
     
     private func registerPluginsFromURLs(urls : [NSURL]) {
         for url in urls {
-            if let bundle = NSBundle(URL: url),
-                loaded = bundle.load() as Bool?,
-                pluginClass = bundle.principalClass as? NSObject.Type,
-                plugin = pluginClass.init() as? Plugin where loaded {
-                    registerPlugin(plugin)
-                    print("Loaded plugin: \(url.lastPathComponent)")
+            let fileName = url.lastPathComponent ?? ""
+            if let bundle = NSBundle(URL: url), loaded = bundle.load() as Bool? where loaded {
+                print("Loaded plugin named: \(fileName)")
+                if let
+                    pluginClass = bundle.principalClass as? NSObject.Type,
+                    plugin = pluginClass.init() as? Plugin {
+                        registerPlugin(plugin)
+                        print("Registered plugin class:\(pluginClass)")
+                }
             }
             else {
                 print("Failed to load plugin: \(url.lastPathComponent)")
@@ -51,7 +54,8 @@ class PluginController: NSObject {
     // are easy to pick up
     private func registerAdjacentPlugins() {
         let bundleURL = NSBundle.mainBundle().bundleURL
-        if let adjacentPaths = NSFileManager.defaultManager().enumeratorAtURL(bundleURL, includingPropertiesForKeys: nil, options: [], errorHandler: nil) { // NSFileManager.defaultManager().enumeratorAtPath(bundlePath.URLByDeletingLastPathComponent)?.allObjects as? [String] {
+        if let searchURL = bundleURL.URLByDeletingLastPathComponent,
+            adjacentPaths = NSFileManager.defaultManager().enumeratorAtURL(searchURL, includingPropertiesForKeys: nil, options: [], errorHandler: nil) {
             let urls = adjacentPaths.filter {
                 $0.pathExtension == PluginPathExtension
             } as? [NSURL] ?? []

@@ -14,7 +14,7 @@ protocol ControlControllerDelegate : class {
     func controlController(controller : ControlController, shouldSaveControlInfo info : DLSControlInfo, withValue value : NSCoding?)
 }
 
-class ControlController : NSObject, EditorViewDelegate {
+class ControlController : NSObject, EditorControllerDelegate {
     @IBOutlet var bodyView : NSView?
     @IBOutlet var containerView : NSView?
     @IBOutlet var revertButton : NSButton?
@@ -25,19 +25,19 @@ class ControlController : NSObject, EditorViewDelegate {
     private var updated : Bool = false
     private var mouseInView : Bool = false
 
-    private let contentView : EditorView
+    private let contentController : EditorController
     let controlInfo : DLSControlInfo
     
     weak var delegate : ControlControllerDelegate?
     
-    init(controlInfo : DLSControlInfo, contentView : EditorView, delegate : ControlControllerDelegate) {
-        contentView.info = EditorInfo(editor : controlInfo.editor, name : controlInfo.label, label : controlInfo.label, value : controlInfo.value)
+    init(controlInfo : DLSControlInfo, contentController : EditorController, delegate : ControlControllerDelegate) {
+        contentController.configuration = EditorInfo(editor : controlInfo.editor, name : controlInfo.label, label : controlInfo.label, value : controlInfo.value)
         self.controlInfo = controlInfo
         self.delegate = delegate
-        self.contentView = contentView
+        self.contentController = contentController
         currentValue = controlInfo.value
         super.init()
-        contentView.delegate = self
+        contentController.delegate = self
         NSBundle.mainBundle().loadNibNamed("ControlCellView", owner: self, topLevelObjects: nil)
         bodyView?.translatesAutoresizingMaskIntoConstraints = false
         let area = NSTrackingArea(rect: NSZeroRect, options: [.ActiveInActiveApp, .MouseEnteredAndExited, .InVisibleRect], owner: self, userInfo: nil)
@@ -46,8 +46,8 @@ class ControlController : NSObject, EditorViewDelegate {
             currentBody?.removeTrackingArea(area)
         }
         bodyView?.addTrackingArea(area)
-        containerView?.addSubview(contentView)
-        contentView.addConstraintsMatchingSuperviewBounds()
+        containerView?.addSubview(contentController.view)
+        contentController.view.addConstraintsMatchingSuperviewBounds()
         validateButtons(animated : false)
     }
     
@@ -62,7 +62,7 @@ class ControlController : NSObject, EditorViewDelegate {
         }, completionHandler: nil)
     }
     
-    func editorView(view: EditorView, changedInfo info: EditorInfo, toValue value: NSCoding?) {
+    func editorController(controller: EditorController, changedConfiguration configuration: EditorConfiguration, toValue value: NSCoding?) {
         currentValue = value
         updated = true
         delegate?.controlController(self, changedControlInfo:controlInfo, toValue: value)
@@ -88,8 +88,8 @@ class ControlController : NSObject, EditorViewDelegate {
     }
     
     @IBAction func revertPressed(sender : AnyObject) {
-        contentView.info = contentView.info
-        delegate?.controlController(self, changedControlInfo: controlInfo, toValue: contentView.info!.value)
+        contentController.configuration = contentController.configuration
+        delegate?.controlController(self, changedControlInfo: controlInfo, toValue: contentController.configuration!.value)
         updated = false
         validateButtons(animated: true)
     }

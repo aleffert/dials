@@ -169,12 +169,12 @@ static DLSViewsPlugin* sActivePlugin;
     NSArray<DLSPropertyGroup*>* result = self.classDescriptions[className];
     if(result == nil) {
         DLSDescriptionAccumulator* accumulator = [[DLSDescriptionAccumulator alloc] init];
-        [klass dls_describe:accumulator];
         for(DLSViewDescriptionGenerator* wrapper in self.viewDescriptionGenerators) {
             if([klass isSubclassOfClass:wrapper.klass]) {
                 wrapper.generator(accumulator);
             }
         }
+        [klass dls_describe:accumulator];
         result = accumulator.groups.reverseObjectEnumerator.allObjects;
         self.classDescriptions[className] = result;
     }

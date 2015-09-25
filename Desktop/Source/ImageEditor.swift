@@ -8,8 +8,8 @@
 
 import Cocoa
 
-extension DLSImageEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSImageEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         return EditorView.freshViewFromNib("ImageEditorView")
     }
 }
@@ -18,22 +18,22 @@ class ImageEditorView: EditorView {
     @IBOutlet private var name : NSTextField?
     @IBOutlet private var imageWell : NSImageView?
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
-            let image = (info?.value as? NSData).flatMap { NSImage(data: $0) }
+            let image = (configuration?.value as? NSData).flatMap { NSImage(data: $0) }
             imageWell?.image = image
-            name?.stringValue = info?.label ?? "Image"
+            name?.stringValue = configuration?.label ?? "Image"
         }
     }
     
     @IBAction func imageChanged(sender : NSImageView) {
         // per http://stackoverflow.com/questions/3038820/how-to-save-a-nsimage-as-a-new-file
         if let tiffData = sender.image?.TIFFRepresentation,
-            info = info,
+            configuration = configuration,
             rep = NSBitmapImageRep(data:tiffData)
         {
             let imageData = rep.representationUsingType(.NSPNGFileType, properties:[:])
-            delegate?.editorView(self, changedInfo: info, toValue: imageData)
+            delegate?.editorController(self, changedConfiguration: configuration, toValue: imageData)
         }
     }
 }

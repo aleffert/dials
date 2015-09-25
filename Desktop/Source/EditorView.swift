@@ -9,29 +9,35 @@
 import Foundation
 import AppKit
 
-protocol EditorViewDelegate : class {
-    func editorView(view : EditorView, changedInfo info : EditorInfo, toValue value: NSCoding?)
+class EditorInfo : NSObject, EditorConfiguration {
+    let editor : DLSEditor
+    let name : String
+    let label : String
+    let value : NSCoding?
+    
+    init(editor : DLSEditor, name : String, label : String, value : NSCoding?) {
+        self.editor = editor
+        self.name = name
+        self.label = label
+        self.value = value
+    }
 }
 
 private class EditorViewNibOwner {
     @IBOutlet var view : EditorView?
 }
 
-struct EditorInfo {
-    let editor : DLSEditor
-    let name : String
-    let label : String
-    let value : NSCoding?
-}
-
 /// Subclass this to add a new editor
-class EditorView : NSView {
-    final weak var delegate : EditorViewDelegate?
-    var info : EditorInfo?
+class EditorView : NSView, EditorController {
+    final weak var delegate : EditorControllerDelegate?
+    var configuration : EditorConfiguration?
     
-    /// Whether the editor is read only
     var readOnly : Bool {
         return false
+    }
+    
+    var view : NSView {
+        return self
     }
     
     final class func freshViewFromNib(name : String) -> EditorView {
@@ -39,8 +45,4 @@ class EditorView : NSView {
         NSBundle.mainBundle().loadNibNamed(name, owner: owner, topLevelObjects: nil)
         return owner.view!
     }
-}
-
-protocol EditorViewGenerating {
-    func generateView() -> EditorView
 }

@@ -8,8 +8,8 @@
 
 import Cocoa
 
-extension DLSTextFieldEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSTextFieldEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         let view = EditorView.freshViewFromNib("TextFieldEditorView") as! TextFieldEditorView
         view.editor = self
         return view
@@ -50,18 +50,18 @@ class TextFieldEditorView: EditorView {
     
     @IBAction func textFieldChanged(sender : NSTextField) {
         if editor?.editable ?? false {
-            delegate?.editorView(self, changedInfo: info!, toValue: sender.stringValue)
+            delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.stringValue)
         }
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
-            let content = info?.value as? String
+            let content = configuration?.value as? String
             let firstResponder = field?.window?.firstResponder
             if firstResponder == nil || firstResponder != field?.currentEditor() {
                 field?.stringValue = content ?? ""
             }
-            name?.stringValue = info?.label ?? "Text"
+            name?.stringValue = configuration?.label ?? "Text"
             
         }
     }

@@ -8,8 +8,8 @@
 
 import Cocoa
 
-extension DLSColorEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSColorEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         return EditorView.freshViewFromNib("ColorEditorView")
     }
 }
@@ -41,19 +41,19 @@ class ColorEditorView : EditorView {
     @IBOutlet private var name : NSTextField?
     
     @IBAction func colorChanged(well : NSColorWell) {
-        if let info = info {
-            self.delegate?.editorView(self, changedInfo: info, toValue: well.color)
+        if let configuration = configuration {
+            self.delegate?.editorController(self, changedConfiguration: configuration, toValue: well.color)
         }
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
             NSColorPanel.sharedColorPanel().showsAlpha = true
             
-            let color = info?.value as? NSColor
+            let color = configuration?.value as? NSColor
             well?.color = color ?? NSColor.clearColor()
             
-            name?.stringValue = info?.label ?? "Color"
+            name?.stringValue = configuration?.label ?? "Color"
         }
     }
 }

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-extension DLSFloatArrayEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSFloatArrayEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         let view = EditorView.freshViewFromNib("FloatArrayEditorView") as! FloatArrayEditorView
         view.editor = self
         return view
@@ -190,23 +190,23 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
         }
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
-            let values = (info?.value as? [String:NSNumber]) ?? [:]
+            let values = (configuration?.value as? [String:NSNumber]) ?? [:]
             for (key, value) in values {
                 let field = indexedFields[key]
                 field?.useValue(stringFromNumber(value, requireIntegerPart: false))
             }
             
-            name?.stringValue = info?.label ?? ""
+            name?.stringValue = configuration?.label ?? ""
         }
     }
     
     func view(view: FloatArrayItemView, changedValue value: Double) {
-        var values = (info?.value as? [String:NSNumber]) ?? [:]
+        var values = (configuration?.value as? [String:NSNumber]) ?? [:]
         values[view.label!.stringValue] = value as NSNumber
-        if let info = info {
-            delegate?.editorView(self, changedInfo: info, toValue: values)
+        if let configuration = configuration {
+            delegate?.editorController(self, changedConfiguration: configuration, toValue: values)
         }
     }
 }

@@ -396,6 +396,7 @@
 		7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSDescriptionAccumulator.h; sourceTree = "<group>"; };
 		7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSDescriptionAccumulator.m; sourceTree = "<group>"; };
 		771683311B1A8FBA000A850F /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plugin.h; path = Desktop/Headers/Plugin.h; sourceTree = SOURCE_ROOT; };
+		77176C4D1BB4321800431544 /* Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Editor.h; path = Desktop/Headers/Editor.h; sourceTree = SOURCE_ROOT; };
 		773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+DLSDescribable.h"; sourceTree = "<group>"; };
 		773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+DLSDescribable.m"; sourceTree = "<group>"; };
 		773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DLSDescribable.h"; sourceTree = "<group>"; };
@@ -622,6 +623,7 @@
 		77100FCA1B08EC2B0082C38B /* Editors */ = {
 			isa = PBXGroup;
 			children = (
+				77176C4D1BB4321800431544 /* Editor.h */,
 				77100E5D1B06F6210082C38B /* EditorView.swift */,
 				77100E4F1B06F6210082C38B /* ActionEditor.swift */,
 				77100E561B06F6210082C38B /* ColorEditor.swift */,

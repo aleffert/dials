@@ -8,8 +8,8 @@
 
 import Cocoa
 
-extension DLSPopupEditor : EditorViewGenerating {
-    func generateView() -> EditorView {
+extension DLSPopupEditor : EditorControllerGenerating {
+    public func generateController() -> EditorController {
         let view = EditorView.freshViewFromNib("PopupEditorView") as! PopupEditorView
         view.editor = self
         return view
@@ -34,20 +34,20 @@ class PopupEditorView: EditorView {
         }
     }
     
-    override var info : EditorInfo? {
+    override var configuration : EditorConfiguration? {
         didSet {
             for item in popup?.menu?.itemArray ?? [] {
-                if let object = item.representedObject as? NSObject, value = info?.value where object == value as? NSObject {
+                if let object = item.representedObject as? NSObject, value = configuration?.value where object == value as? NSObject {
                     popup?.selectItem(item)
                 }
             }
-            name?.stringValue = info?.label ?? ""
+            name?.stringValue = configuration?.label ?? ""
         }
     }
     
     func itemChosen(sender : NSMenuItem) {
-        if let info = info {
-            self.delegate?.editorView(self, changedInfo: info, toValue: sender.representedObject as! NSCoding?)
+        if let configuration = configuration {
+            self.delegate?.editorController(self, changedConfiguration: configuration, toValue: sender.representedObject as! NSCoding?)
         }
     }
 
