@@ -2,8 +2,9 @@ machine:
     xcode:
         version: "7.0"
 dependencies:
-    - brew upgrade
-    - brew update xctool
+    pre:
+        - brew upgrade
+        - brew update xctool
 test:
     override:
         - xctool
