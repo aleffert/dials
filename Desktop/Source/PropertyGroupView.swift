@@ -8,11 +8,11 @@
 
 import Cocoa
 
-protocol PropertyGroupViewDelegate: class {
+protocol PropertyGroupViewDelegate: class, ViewQuerier {
     func propertyGroupView(view : PropertyGroupView, changedItem name : String, toValue value : NSCoding?)
 }
 
-class PropertyGroupView: NSView, EditorControllerDelegate {
+class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
     
     weak var delegate : PropertyGroupViewDelegate?
     
@@ -53,6 +53,10 @@ class PropertyGroupView: NSView, EditorControllerDelegate {
             let generator = description.editor as? EditorControllerGenerating
             let controller = generator?.generateController()
             controller?.delegate = self
+            if let querierOwner = controller as? ViewQuerierOwner {
+                querierOwner.viewQuerier = self
+            }
+            
             controller?.view.translatesAutoresizingMaskIntoConstraints = false
             let value = values[description.name]
             controller?.configuration = EditorInfo(editor : description.editor, name : description.name, label : description.label, value : value)
@@ -75,6 +79,10 @@ class PropertyGroupView: NSView, EditorControllerDelegate {
     
     func editorController(controller: EditorController, changedConfiguration configuration: EditorConfiguration, toValue value: NSCoding?) {
         self.delegate?.propertyGroupView(self, changedItem: configuration.name, toValue: value)
+    }
+    
+    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, file: String?, line: UInt) -> String {
+        return self.delegate?.nameForViewWithID(mainID, relativeToView: relativeID, withClass: className, file: file, line: line) ?? ViewHierarchy.defaultViewName
     }
     
 }

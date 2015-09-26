@@ -28,6 +28,7 @@ class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDeleg
         propertyTableController.delegate = self
         visualOutlineController.delegate = self
         visualOutlineController.hierarchy = hierarchyOutlineController.hierarchy
+        propertyTableController.hierarchy = hierarchyOutlineController.hierarchy
     }
     
     func receivedHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], roots : [NSString], screenSize : CGSize) {

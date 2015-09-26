@@ -30,3 +30,4 @@
 #import "NSGeometry+DLSWrappers.h"
 #import "NSObject+DLSDeallocAction.h"
 #import "Plugin.h"
+#import "ViewQuerier.h"

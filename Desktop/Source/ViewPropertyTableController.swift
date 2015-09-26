@@ -12,11 +12,12 @@ protocol ViewPropertyTableControllerDelegate : class {
     func tableController(controller : ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord)
 }
 
-class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate {
+class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuerier {
     weak var delegate : ViewPropertyTableControllerDelegate?
     
     var record : DLSViewRecord?
     var selectedViewID : NSString?
+    var hierarchy : ViewHierarchy?
     
     @IBOutlet var stackView : NSStackView?
     @IBOutlet var emptyView : NSView?
@@ -102,4 +103,22 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate {
         }
     }
     
+    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, file: String?, line: UInt) -> String {
+        if let mainID = mainID, hierarchy = hierarchy {
+            switch hierarchy.relationFrom(relativeID, toView:mainID) {
+            case .Same:
+                return "self"
+            case .Superview:
+                return "super"
+            case .None:
+                return ViewHierarchy.niceNameForClassName(ViewHierarchy.defaultViewName)
+            }
+        }
+        return ViewHierarchy.defaultViewName
+    }
+    
 }
+
+
+
+

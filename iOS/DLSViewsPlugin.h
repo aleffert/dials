@@ -34,8 +34,15 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// @param klass The class to add an editor for. Will also add it for any subclasses of that class.
 /// @param generator A function called by the system add that adds view description groups.
-/// @return A way to remove the added description functions
+/// @return A way to remove the added description functions.
 - (id <DLSRemovable>)addExtraViewDescriptionForClass:(Class)klass generator:(void(^)(id <DLSDescriptionContext> context))generator;
+
+
+/// Returns a unique ID for the given view. Can be used from custom description plugins.
+///
+/// @param view The view whose ID should be renamed.
+/// @return The view's id.
+- (NSString*)viewIDForView:(UIView*)view;
 
 @end
 
