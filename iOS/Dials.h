@@ -16,6 +16,7 @@ FOUNDATION_EXPORT const unsigned char Dials_iOSVersionString[];
 
 #import <Dials/DLSActionEditor.h>
 #import <Dials/DLSColorEditor.h>
+#import <Dials/DLSConstants.h>
 #import <Dials/DLSDescribable.h>
 #import <Dials/DLSDescriptionContext.h>
 #import <Dials/DLSDials.h>

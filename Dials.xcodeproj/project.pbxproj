@@ -119,7 +119,7 @@
 		77100F791B0781360082C38B /* DLSColorEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F461B0781360082C38B /* DLSColorEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100F7A1B0781360082C38B /* DLSColorEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F471B0781360082C38B /* DLSColorEditor.m */; };
 		77100F7B1B0781360082C38B /* DLSColorEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F471B0781360082C38B /* DLSColorEditor.m */; };
-		77100F7C1B0781360082C38B /* DLSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F481B0781360082C38B /* DLSConstants.h */; };
+		77100F7C1B0781360082C38B /* DLSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F481B0781360082C38B /* DLSConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100F7D1B0781360082C38B /* DLSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F491B0781360082C38B /* DLSConstants.m */; };
 		77100F7E1B0781360082C38B /* DLSConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F491B0781360082C38B /* DLSConstants.m */; };
 		77100F7F1B0781360082C38B /* DLSEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4A1B0781360082C38B /* DLSEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -174,6 +174,10 @@
 		77100FB21B0784780082C38B /* DLSPropertyDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77100F521B0781360082C38B /* DLSPropertyDescription.m */; };
 		77100FB31B07848D0082C38B /* DLSPropertyDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F511B0781360082C38B /* DLSPropertyDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77100FB81B078A6D0082C38B /* Sample Files in Resources */ = {isa = PBXBuildFile; fileRef = 77100FB71B078A6D0082C38B /* Sample Files */; };
+		771421811BB64D8900F0B94E /* Editor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77176C4D1BB4321800431544 /* Editor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		771421821BB64D9300F0B94E /* Plugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 771683311B1A8FBA000A850F /* Plugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		771421831BB64DAA00F0B94E /* DLSConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F481B0781360082C38B /* DLSConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		771421841BB64E1400F0B94E /* DLSEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77100F4A1B0781360082C38B /* DLSEditor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		771683271B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 771683251B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.h */; };
 		771683281B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 771683261B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.m */; };
 		7716832A1B1A1FE4000A850F /* DLSPopupEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771683291B1A1FE4000A850F /* DLSPopupEditing.swift */; };
@@ -853,6 +857,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		771421801BB64D8300F0B94E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				771421811BB64D8900F0B94E /* Editor.h in Headers */,
+				771421831BB64DAA00F0B94E /* DLSConstants.h in Headers */,
+				771421821BB64D9300F0B94E /* Plugin.h in Headers */,
+				771421841BB64E1400F0B94E /* DLSEditor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -863,6 +878,7 @@
 				77100E271B06F5EC0082C38B /* Sources */,
 				77100E281B06F5EC0082C38B /* Frameworks */,
 				77100E291B06F5EC0082C38B /* Resources */,
+				771421801BB64D8300F0B94E /* Headers */,
 			);
 			buildRules = (
 			);
