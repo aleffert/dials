@@ -28,4 +28,5 @@ test:
           -sdk macosx
           -workspace "Dials.xcworkspace"
           -scheme "Dials.app - Desktop"
+          build-tests
           run-tests
