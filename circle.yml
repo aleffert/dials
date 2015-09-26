@@ -3,8 +3,8 @@ machine:
         version: "7.0"
 dependencies:
     pre:
-        - brew upgrade
-        - brew update xctool
+        - brew update 
+        - brew upgrade xctool
 test:
     override:
         - xctool
