@@ -70,4 +70,19 @@ class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDeleg
     func tableController(controller: ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
         delegate?.viewsController(self, valueChangedWithRecord: record)
     }
+    
+    func tableController(controller: ViewPropertyTableController, highlightViewWithID viewID: String) {
+        visualOutlineController.highlightViewWithID(viewID)
+    }
+    
+    func tableController(controller: ViewPropertyTableController, clearHighlightForViewWithID viewID: String) {
+        visualOutlineController.unhighlightViewWithID(viewID)
+    }
+    
+    func tableController(controller: ViewPropertyTableController, selectViewWithID viewID: String) {
+        visualOutlineController.highlightViewWithID(nil)
+        hierarchyOutlineController.selectViewWithID(viewID)
+        delegate?.viewsController(self, selectedViewWithID: viewID)
+        
+    }
 }

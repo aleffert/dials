@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString*)nameForViewWithID:(nullable NSString*)mainID relativeToView:(NSString*)relativeID withClass:(nullable NSString*)sourceClass file:(nullable NSString*)file line:(NSUInteger)line;
 
+- (void)selectViewWithID:(NSString*)viewID;
+- (void)highlightViewWithID:(NSString*)viewID;
+- (void)clearHighlightForViewWithID:(NSString*)viewID;
+
 @end
 
 @protocol ViewQuerierOwner <NSObject>

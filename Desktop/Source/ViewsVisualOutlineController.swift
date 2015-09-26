@@ -39,6 +39,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     private var panOffset = NSZeroPoint
     private var gestureMagnification : CGFloat = 1
     
+    private var externalHighlight : String?
     private var currentSelection : String?
     
     private var contents : [String:NSImage] = [:]
@@ -206,6 +207,9 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         for layer in layers.values {
             if layer.record.viewID == self.currentSelection {
                 layer.borderLayer.borderColor = BorderStyle.Selected.color.CGColor
+            }
+            else if layer.record.viewID == self.externalHighlight {
+                layer.borderLayer.borderColor = BorderStyle.Highlighted.color.CGColor
             }
             else {
                 layer.borderLayer.borderColor = BorderStyle.Normal.color.CGColor
@@ -401,6 +405,18 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         marginsLayer.hidden = true
         CATransaction.commit()
         updateHighlights()
+    }
+    
+    func highlightViewWithID(viewID: String?) {
+        externalHighlight = viewID
+        updateHighlights()
+    }
+    
+    func unhighlightViewWithID(viewID: String) {
+        if externalHighlight == viewID {
+            externalHighlight = nil
+            updateHighlights()
+        }
     }
     
     private func sendOffsetWithBase(base : NSEdgeInsets, mask : NSEdgeInsets, modifiers : NSEventModifierFlags) {

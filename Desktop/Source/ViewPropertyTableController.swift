@@ -10,6 +10,9 @@ import Cocoa
 
 protocol ViewPropertyTableControllerDelegate : class {
     func tableController(controller : ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+    func tableController(controller : ViewPropertyTableController, selectViewWithID viewID: String)
+    func tableController(controller : ViewPropertyTableController, highlightViewWithID viewID: String)
+    func tableController(controller : ViewPropertyTableController, clearHighlightForViewWithID viewID: String)
 }
 
 class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuerier {
@@ -115,6 +118,19 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
             }
         }
         return ViewHierarchy.defaultViewName
+    }
+    
+    
+    func highlightViewWithID(viewID: String) {
+        self.delegate?.tableController(self, highlightViewWithID: viewID)
+    }
+    
+    func selectViewWithID(viewID: String) {
+        self.delegate?.tableController(self, selectViewWithID: viewID)
+    }
+    
+    func clearHighlightForViewWithID(viewID: String) {
+        self.delegate?.tableController(self, clearHighlightForViewWithID:viewID)
     }
     
 }

@@ -85,4 +85,15 @@ class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
         return self.delegate?.nameForViewWithID(mainID, relativeToView: relativeID, withClass: className, file: file, line: line) ?? ViewHierarchy.defaultViewName
     }
     
+    func highlightViewWithID(viewID: String) {
+        self.delegate?.highlightViewWithID(viewID)
+    }
+    
+    func clearHighlightForViewWithID(viewID: String) {
+        self.delegate?.clearHighlightForViewWithID(viewID)
+    }
+    
+    func selectViewWithID(viewID: String) {
+        self.delegate?.selectViewWithID(viewID)
+    }
 }
