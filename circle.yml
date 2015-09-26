@@ -12,14 +12,12 @@ test:
           -workspace 'Dials.xcworkspace'
           -scheme 'DialsExample'
           build
-          build-tests
-          run-tests
         - xctool -reporter pretty
           -reporter junit:$CIRCLE_TEST_REPORTS/xcode/desktop-results.xml
           -reporter plain:$CIRCLE_ARTIFACTS/desktop-xctool.log
           -sdk macosx
           -workspace 'Dials.xcworkspace'
-          -scheme 'Dials.app'
+          -scheme 'Dials+ExamplePlugin'
           build
           build-tests
           run-tests
