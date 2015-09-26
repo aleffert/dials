@@ -19,10 +19,3 @@ test:
           -workspace "Dials.xcworkspace"
           -scheme "Dials+ExamplePlugin - Desktop"
           build
-        - xctool -reporter pretty
-          -reporter junit:$CIRCLE_TEST_REPORTS/xcode/desktop-results.xml
-          -reporter plain:$CIRCLE_ARTIFACTS/desktop-xctool.log
-          -sdk macosx
-          -workspace 'Dials.xcworkspace'
-          -scheme "Dials.app - Desktop"
-          run-tests
