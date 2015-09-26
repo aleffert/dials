@@ -19,12 +19,12 @@ class ExamplePlugin : NSObject, Plugin {
     var context : PluginContext?
     var controller : NSViewController?
     
-    let identifier = ExamplePluginIdentifier
+    let identifier = DLSExamplePluginIdentifier
     let label = "Example"
     let shouldSortChildren = false
     
     func receiveMessage(message: NSData) {
-        println("got a message")
+        print("got a message")
     }
     
     func connectedWithContext(context: PluginContext) {

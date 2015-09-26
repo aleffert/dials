@@ -3,3 +3,4 @@
 //
 
 #import "Plugin.h"
+#import "DLSExamplePluginMessages.h"
