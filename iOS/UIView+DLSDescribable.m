@@ -31,11 +31,6 @@
                                  DLSProperty(@"layer.borderWidth", [DLSStepperEditor editor]),
                                  DLSProperty(@"layer.borderColor", [DLSCGColorEditor editor])
                                  ]];
-    [context addGroupWithName:@"Constraints"
-                   properties: @[
-                                 DLSProperty(@"Constraints", [[DLSConstraintsEditor alloc] init])
-                                 .setExchanger([[DLSConstraintsExchanger alloc] init])
-                                 ]];
     [context addGroupWithName:@"View"
                    properties: @[
                                  DLSProperty(@"dials.controller", [DLSTextFieldEditor label]).setExchanger([[DLSViewControllerClassExchanger alloc] init]),

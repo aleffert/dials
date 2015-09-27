@@ -15,10 +15,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class DLSAuxiliaryConstraintInformation;
+
 @interface DLSConstraintDescription : NSObject <NSCoding>
 
 #if TARGET_OS_IPHONE
-- (id)initWithView:(UIView*)view constraint:(NSLayoutConstraint*)constraint;
+- (id)initWithView:(UIView*)view constraint:(NSLayoutConstraint*)constraint extras:(NSArray<DLSAuxiliaryConstraintInformation*>*)extras;
 #endif
 
 @property (copy, nonatomic) NSString* affectedViewID;
@@ -38,6 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) CGFloat multiplier;
 @property (assign, nonatomic) CGFloat priority;
 @property (assign, nonatomic) BOOL active;
+
+@property (copy, nonatomic) NSArray<DLSAuxiliaryConstraintInformation*>* extras;
 
 @end
 

@@ -91,7 +91,7 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
 @implementation DLSConstraintDescription
 
 #if TARGET_OS_IPHONE
-- (id)initWithView:(UIView*)view constraint:(NSLayoutConstraint*)constraint {
+- (id)initWithView:(UIView*)view constraint:(NSLayoutConstraint*)constraint extras:(NSArray<DLSAuxiliaryConstraintInformation*>*)extras {
     self = [super init];
     if(self != nil) {
         id source = constraint.firstItem;

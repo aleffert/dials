@@ -10,6 +10,10 @@
 
 #import "DLSValueExchanger.h"
 
+@protocol DLSConstraintInformer;
+
 @interface DLSConstraintsExchanger : DLSValueExchanger
+
+- (id)initWithInformerProvider:(NSArray<id<DLSConstraintInformer>>*(^)(void))provider;
 
 @end

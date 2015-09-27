@@ -8,6 +8,9 @@
 
 #import "DLSViewsPlugin.h"
 
+#import "DLSConstraintsEditor.h"
+#import "DLSConstraintsExchanger.h"
+#import "DLSConstraintInformer.h"
 #import "DLSDescriptionContext.h"
 #import "DLSDescribable.h"
 #import "DLSDescriptionAccumulator.h"
@@ -57,6 +60,7 @@ static const NSTimeInterval DLSViewUpdateInterval = .1;
 @property (strong, nonatomic) id windowChangedListener;
 
 @property (strong, nonatomic) NSMutableArray<DLSViewDescriptionGenerator*>* viewDescriptionGenerators;
+@property (strong, nonatomic) NSMutableArray<id<DLSConstraintInformer>>* constraintInformers;
 
 
 @end
@@ -77,6 +81,8 @@ static DLSViewsPlugin* sActivePlugin;
     self = [super init];
     if(self != nil) {
         self.viewDescriptionGenerators = [[NSMutableArray alloc] init];
+        self.constraintInformers = [[NSMutableArray alloc] init];
+        [self installConstraintLoader];
     }
     return self;
 }
@@ -157,6 +163,28 @@ static DLSViewsPlugin* sActivePlugin;
     [self.viewDescriptionGenerators addObject:wrapper];
     return [[DLSBlockRemovable alloc] initWithRemoveAction:^{
         [self.viewDescriptionGenerators removeObject:wrapper];
+    }];
+}
+
+- (void)installConstraintLoader {
+    __weak __typeof(self) owner = self;
+    [self addExtraViewDescriptionForClass:[UIView class] generator:^(id<DLSDescriptionContext>  _Nonnull context) {
+        [context addGroupWithName:@"Constraints"
+                       properties:
+         @[
+           DLSProperty(@"Constraints", [[DLSConstraintsEditor alloc] init])
+           .setExchanger([[DLSConstraintsExchanger alloc] initWithInformerProvider:
+                          ^{
+                              return owner.constraintInformers;
+                          }])
+           ]];
+    }];
+}
+
+- (id <DLSRemovable>)addAuxiliaryConstraintInformer:(id <DLSConstraintInformer>)informer {
+    [self.constraintInformers addObject:informer];
+    return [[DLSBlockRemovable alloc] initWithRemoveAction:^{
+        [self.constraintInformers removeObject:informer];
     }];
 }
 

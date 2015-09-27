@@ -13,8 +13,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol DLSConstraintInformer;
 @protocol DLSDescriptionContext;
-@protocol DLSConstraintInforming;
 @protocol DLSRemovable;
 
 /// Plugin that allows you to view and customize properties of views.
@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A way to remove the added description functions.
 - (id <DLSRemovable>)addExtraViewDescriptionForClass:(Class)klass generator:(void(^)(id <DLSDescriptionContext> context))generator;
 
+- (id <DLSRemovable>)addAuxiliaryConstraintInformer:(id <DLSConstraintInformer>)informer;
 
 @end
 
