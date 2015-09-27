@@ -24,7 +24,7 @@ NSString* DLSPortableLayoutRelation(NSLayoutRelation relation) {
 
 NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
     // Case because the system actually sends values outside of the core range!
-    switch((NSUInteger)attribute) {
+    switch((NSInteger)attribute) {
         case NSLayoutAttributeLeft: return @"left";
         case NSLayoutAttributeRight: return @"right";
         case NSLayoutAttributeTop: return @"top";
@@ -54,7 +54,7 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
             // Not documented! Appears when autosizing is translated into constraints
             return @"rightInset";
         default:
-            NSLog(@"Unknown attribute %ld", attribute);
+            NSLog(@"Unknown attribute %ld", (long)attribute);
             return @"???";
     }
 }
