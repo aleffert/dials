@@ -81,8 +81,8 @@ class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
         self.delegate?.propertyGroupView(self, changedItem: configuration.name, toValue: value)
     }
     
-    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, file: String?, line: UInt) -> String {
-        return self.delegate?.nameForViewWithID(mainID, relativeToView: relativeID, withClass: className, file: file, line: line) ?? ViewHierarchy.defaultViewName
+    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?) -> String {
+        return self.delegate?.nameForViewWithID(mainID, relativeToView: relativeID, withClass: className) ?? ViewHierarchy.defaultViewName
     }
     
     func highlightViewWithID(viewID: String) {

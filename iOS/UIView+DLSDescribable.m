@@ -11,6 +11,8 @@
 
 #import "DLSActionEditor.h"
 #import "DLSColorEditor.h"
+#import "DLSConstraintsEditor.h"
+#import "DLSConstraintsExchanger.h"
 #import "DLSDescriptionContext.h"
 #import "DLSFloatArrayEditor.h"
 #import "DLSPropertyDescription.h"
@@ -28,6 +30,11 @@
                                  DLSProperty(@"layer.cornerRadius", [DLSStepperEditor editor]),
                                  DLSProperty(@"layer.borderWidth", [DLSStepperEditor editor]),
                                  DLSProperty(@"layer.borderColor", [DLSCGColorEditor editor])
+                                 ]];
+    [context addGroupWithName:@"Constraints"
+                   properties: @[
+                                 DLSProperty(@"Constraints", [[DLSConstraintsEditor alloc] init])
+                                 .setExchanger([[DLSConstraintsExchanger alloc] init])
                                  ]];
     [context addGroupWithName:@"View"
                    properties: @[

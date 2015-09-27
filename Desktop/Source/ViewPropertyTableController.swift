@@ -106,7 +106,7 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
         }
     }
     
-    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, file: String?, line: UInt) -> String {
+    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?) -> String {
         if let mainID = mainID, hierarchy = hierarchy {
             switch hierarchy.relationFrom(relativeID, toView:mainID) {
             case .Same:

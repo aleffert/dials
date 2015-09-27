@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-@class DLSViewsPlugin;
+#import "DLSViewsPlugin.h"
 
 @interface DLSViewsPlugin (Internal)
 
@@ -19,5 +19,11 @@
 /// Typically this is called automatically by the system when appropriate.
 /// @param view The changed view
 - (void)viewChangedDisplay:(UIView*)view;
+
+/// Returns a unique ID for the given view. Can be used from custom description plugins.
+///
+/// @param view The view whose ID should be renamed.
+/// @return The view's id.
+- (NSString*)viewIDForView:(UIView*)view;
 
 @end

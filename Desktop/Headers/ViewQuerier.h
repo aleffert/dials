@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ViewQuerier <NSObject>
 
-- (NSString*)nameForViewWithID:(nullable NSString*)mainID relativeToView:(NSString*)relativeID withClass:(nullable NSString*)sourceClass file:(nullable NSString*)file line:(NSUInteger)line;
+- (NSString*)nameForViewWithID:(nullable NSString*)mainID relativeToView:(NSString*)relativeID withClass:(nullable NSString*)sourceClass;
 
 - (void)selectViewWithID:(NSString*)viewID;
 - (void)highlightViewWithID:(NSString*)viewID;

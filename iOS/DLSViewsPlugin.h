@@ -14,6 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol DLSDescriptionContext;
+@protocol DLSConstraintInforming;
 @protocol DLSRemovable;
 
 /// Plugin that allows you to view and customize properties of views.
@@ -28,8 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /// Add an extra description group for a given class. Provides an easy way to
-/// Add properties for classes that are project specific or not part of the
-/// Dials distribution. For example, if your project has a custom ``extension`` for UIView
+/// add properties for classes that are project specific or not part of the
+/// Dials distribution. For example, if your project has a custom <code>extension</code> for UIView
 /// you could use this to add an editor for it.
 ///
 /// @param klass The class to add an editor for. Will also add it for any subclasses of that class.
@@ -37,12 +38,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A way to remove the added description functions.
 - (id <DLSRemovable>)addExtraViewDescriptionForClass:(Class)klass generator:(void(^)(id <DLSDescriptionContext> context))generator;
 
-
-/// Returns a unique ID for the given view. Can be used from custom description plugins.
-///
-/// @param view The view whose ID should be renamed.
-/// @return The view's id.
-- (NSString*)viewIDForView:(UIView*)view;
 
 @end
 

@@ -10,6 +10,8 @@
 #import "DLSChannel.h"
 #import "DLSChannelStream.h"
 #import "DLSColorEditor.h"
+#import "DLSConstraintDescription.h"
+#import "DLSConstraintsEditor.h"
 #import "DLSDescribable.h"
 #import "DLSEditor.h"
 #import "DLSFloatArrayEditor.h"

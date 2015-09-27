@@ -66,7 +66,7 @@ static NSString* message = @"Something";
 }
 
 - (IBAction)makeRequest:(id)sender {
-    NSURL* url = [NSURL URLWithString:@"http://placekitten.com/g/300/310"];
+    NSURL* url = [NSURL URLWithString:@"https://placekitten.com/g/300/310"];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{

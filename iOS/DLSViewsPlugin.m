@@ -181,20 +181,6 @@ static DLSViewsPlugin* sActivePlugin;
     return result;
 }
 
-- (NSString*)viewIDForView:(UIView*)view {
-    NSString* viewID = view.dls_viewID;
-    @synchronized(self.viewIDs) {
-        if(view == nil) {
-            return nil;
-        }
-        
-        if(![self.usedViewIDs containsObject:viewID]) {
-            [self.viewIDs setObject:view forKey:viewID];
-            [self.usedViewIDs addObject:viewID];
-        }
-    }
-    return viewID;
-}
 
 - (DLSViewRenderingRecord*)renderingInfoForView:(UIView*)view {
     DLSViewRenderingRecord* record = [[DLSViewRenderingRecord alloc] init];
@@ -460,6 +446,20 @@ static DLSViewsPlugin* sActivePlugin;
 
 @implementation DLSViewsPlugin (Internal)
 
+- (NSString*)viewIDForView:(UIView*)view {
+    NSString* viewID = view.dls_viewID;
+    @synchronized(self.viewIDs) {
+        if(view == nil) {
+            return nil;
+        }
+        
+        if(![self.usedViewIDs containsObject:viewID]) {
+            [self.viewIDs setObject:view forKey:viewID];
+            [self.usedViewIDs addObject:viewID];
+        }
+    }
+    return viewID;
+}
 
 - (void)viewChangedSurface:(UIView *)view {
     if(view == nil) {

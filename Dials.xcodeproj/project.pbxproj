@@ -183,7 +183,6 @@
 		7716832A1B1A1FE4000A850F /* DLSPopupEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771683291B1A1FE4000A850F /* DLSPopupEditing.swift */; };
 		7716832D1B1A77B1000A850F /* DLSDescriptionAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */; };
 		7716832E1B1A77B1000A850F /* DLSDescriptionAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */; };
-		771A89471BB71C7E008DD6F4 /* ViewQuerier.h in Headers */ = {isa = PBXBuildFile; fileRef = 771A89461BB71BF5008DD6F4 /* ViewQuerier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		773769FC1B13A751001D81D3 /* UIControl+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FA1B13A751001D81D3 /* UIControl+DLSDescribable.h */; };
 		773769FD1B13A751001D81D3 /* UIControl+DLSDescribable.m in Sources */ = {isa = PBXBuildFile; fileRef = 773769FB1B13A751001D81D3 /* UIControl+DLSDescribable.m */; };
 		77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */ = {isa = PBXBuildFile; fileRef = 773769FE1B13DB5B001D81D3 /* UIButton+DLSDescribable.h */; };
@@ -208,6 +207,20 @@
 		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		775AD3251B1DE8090069A810 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3241B1DE8090069A810 /* FlippedClipView.swift */; };
+		77C490D81BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */; settings = {ASSET_TAGS = (); }; };
+		77C490D91BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */; settings = {ASSET_TAGS = (); }; };
+		77C490DA1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */; settings = {ASSET_TAGS = (); }; };
+		77C490DB1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */; settings = {ASSET_TAGS = (); }; };
+		77C490E41BB78C9100345BEA /* DLSConstraintsExchanger.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E21BB78C9100345BEA /* DLSConstraintsExchanger.h */; settings = {ASSET_TAGS = (); }; };
+		77C490E51BB78C9100345BEA /* DLSConstraintsExchanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E31BB78C9100345BEA /* DLSConstraintsExchanger.m */; settings = {ASSET_TAGS = (); }; };
+		77C490E81BB78EAF00345BEA /* DLSConstraintDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E61BB78EAF00345BEA /* DLSConstraintDescription.h */; settings = {ASSET_TAGS = (); }; };
+		77C490E91BB78EAF00345BEA /* DLSConstraintDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E61BB78EAF00345BEA /* DLSConstraintDescription.h */; settings = {ASSET_TAGS = (); }; };
+		77C490EA1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */; settings = {ASSET_TAGS = (); }; };
+		77C490EB1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */; settings = {ASSET_TAGS = (); }; };
+		77C490F01BB795AE00345BEA /* ConstraintsEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C490ED1BB795AE00345BEA /* ConstraintsEditorView.xib */; settings = {ASSET_TAGS = (); }; };
+		77C490F11BB795AE00345BEA /* ConstraintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C490EE1BB795AE00345BEA /* ConstraintView.xib */; settings = {ASSET_TAGS = (); }; };
+		77C490F41BB795CB00345BEA /* ConstraintsEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C490F21BB795CB00345BEA /* ConstraintsEditorController.swift */; settings = {ASSET_TAGS = (); }; };
+		77C490F51BB795CB00345BEA /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C490F31BB795CB00345BEA /* ConstraintView.swift */; settings = {ASSET_TAGS = (); }; };
 		77F5D21C1B531E4200A1558A /* DLSViewsPlugin+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 77F5D21B1B531E4200A1558A /* DLSViewsPlugin+Internal.h */; };
 		77F5D21E1B53215500A1558A /* DLSRemovable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F5D21D1B53215500A1558A /* DLSRemovable.m */; };
 		77F5D21F1B53215500A1558A /* DLSRemovable.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F5D21D1B53215500A1558A /* DLSRemovable.m */; };
@@ -425,6 +438,16 @@
 		775341C11B138A2F00BAE8CA /* DLSValueMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSValueMapper.h; sourceTree = "<group>"; };
 		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
 		775AD3241B1DE8090069A810 /* FlippedClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedClipView.swift; sourceTree = "<group>"; };
+		77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSConstraintsEditor.h; sourceTree = "<group>"; };
+		77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSConstraintsEditor.m; sourceTree = "<group>"; };
+		77C490E21BB78C9100345BEA /* DLSConstraintsExchanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSConstraintsExchanger.h; sourceTree = "<group>"; };
+		77C490E31BB78C9100345BEA /* DLSConstraintsExchanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSConstraintsExchanger.m; sourceTree = "<group>"; };
+		77C490E61BB78EAF00345BEA /* DLSConstraintDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSConstraintDescription.h; sourceTree = "<group>"; };
+		77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSConstraintDescription.m; sourceTree = "<group>"; };
+		77C490ED1BB795AE00345BEA /* ConstraintsEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstraintsEditorView.xib; sourceTree = "<group>"; };
+		77C490EE1BB795AE00345BEA /* ConstraintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConstraintView.xib; sourceTree = "<group>"; };
+		77C490F21BB795CB00345BEA /* ConstraintsEditorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintsEditorController.swift; sourceTree = "<group>"; };
+		77C490F31BB795CB00345BEA /* ConstraintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintView.swift; sourceTree = "<group>"; };
 		77F5D21B1B531E4200A1558A /* DLSViewsPlugin+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DLSViewsPlugin+Internal.h"; sourceTree = "<group>"; };
 		77F5D21D1B53215500A1558A /* DLSRemovable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSRemovable.m; sourceTree = "<group>"; };
 		77FD15C41B0F672500ED950F /* DLSFloatArrayEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSFloatArrayEditor.h; sourceTree = "<group>"; };
@@ -503,6 +526,8 @@
 				77100E571B06F6210082C38B /* ConnectionStatusToolbarItem.swift */,
 				77100E581B06F6210082C38B /* ConnectionStatusView.swift */,
 				77100E591B06F6210082C38B /* ConsoleWindowController.swift */,
+				77C490F21BB795CB00345BEA /* ConstraintsEditorController.swift */,
+				77C490F31BB795CB00345BEA /* ConstraintView.swift */,
 				77100E5A1B06F6210082C38B /* Device.swift */,
 				77100E5B1B06F6210082C38B /* DeviceConnection.swift */,
 				77100E5C1B06F6210082C38B /* DeviceController.swift */,
@@ -537,6 +562,8 @@
 			children = (
 				77100E8C1B06F6210082C38B /* ChannelCellView.xib */,
 				77100E8E1B06F6210082C38B /* ConsoleWindow.xib */,
+				77C490ED1BB795AE00345BEA /* ConstraintsEditorView.xib */,
+				77C490EE1BB795AE00345BEA /* ConstraintView.xib */,
 				77100E901B06F6210082C38B /* ControlCellView.xib */,
 				77100E911B06F6210082C38B /* ControlListPaneViewController.xib */,
 				77100E8F1B06F6210082C38B /* GroupContainerView.xib */,
@@ -556,6 +583,8 @@
 		77100EEE1B0780AE0082C38B /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				77C490E21BB78C9100345BEA /* DLSConstraintsExchanger.h */,
+				77C490E31BB78C9100345BEA /* DLSConstraintsExchanger.m */,
 				7716832B1B1A77B1000A850F /* DLSDescriptionAccumulator.h */,
 				7716832C1B1A77B1000A850F /* DLSDescriptionAccumulator.m */,
 				775341C11B138A2F00BAE8CA /* DLSValueMapper.h */,
@@ -602,6 +631,8 @@
 				77100F451B0781360082C38B /* DLSChannelStream.m */,
 				77100F481B0781360082C38B /* DLSConstants.h */,
 				77100F491B0781360082C38B /* DLSConstants.m */,
+				77C490E61BB78EAF00345BEA /* DLSConstraintDescription.h */,
+				77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */,
 				77100F4B1B0781360082C38B /* DLSControlInfo.h */,
 				77100F4C1B0781360082C38B /* DLSControlInfo.m */,
 				77100F4D1B0781360082C38B /* DLSControlPanelMessages.h */,
@@ -730,6 +761,8 @@
 				77100F3C1B0781350082C38B /* DLSActionEditor.m */,
 				77100F461B0781360082C38B /* DLSColorEditor.h */,
 				77100F471B0781360082C38B /* DLSColorEditor.m */,
+				77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */,
+				77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */,
 				77100F4A1B0781360082C38B /* DLSEditor.h */,
 				77376A0F1B13EF29001D81D3 /* DLSImageEditor.h */,
 				77376A101B13EF29001D81D3 /* DLSImageEditor.m */,
@@ -820,6 +853,7 @@
 				77F5D21C1B531E4200A1558A /* DLSViewsPlugin+Internal.h in Headers */,
 				77100F6D1B0781360082C38B /* DLSBufferedStreamReader.h in Headers */,
 				77100F791B0781360082C38B /* DLSColorEditor.h in Headers */,
+				77C490D91BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */,
 				77376A001B13DB5B001D81D3 /* UIButton+DLSDescribable.h in Headers */,
 				7716832D1B1A77B1000A850F /* DLSDescriptionAccumulator.h in Headers */,
 				77100FA51B0781360082C38B /* NSArray+DLSFunctionalAdditions.h in Headers */,
@@ -849,11 +883,13 @@
 				77376A091B13EAD0001D81D3 /* UISlider+DLSDescribable.h in Headers */,
 				77376A051B13E7E5001D81D3 /* UISwitch+DLSDescribable.h in Headers */,
 				77376A1E1B1412A8001D81D3 /* DLSPopupEditor.h in Headers */,
+				77C490E91BB78EAF00345BEA /* DLSConstraintDescription.h in Headers */,
 				775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */,
 				77100F731B0781360082C38B /* DLSChannel.h in Headers */,
 				77100F861B0781360082C38B /* DLSNetworkRequestsMessages.h in Headers */,
 				77100F8C1B0781360082C38B /* DLSPropertyGroup.h in Headers */,
 				771683271B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.h in Headers */,
+				77C490E41BB78C9100345BEA /* DLSConstraintsExchanger.h in Headers */,
 				77376A0D1B13EDBB001D81D3 /* UITextView+DLSDescribable.h in Headers */,
 				77100F9F1B0781360082C38B /* DLSTransform3D.h in Headers */,
 				77100F691B0781360082C38B /* DLSActionEditor.h in Headers */,
@@ -866,8 +902,9 @@
 			files = (
 				771421811BB64D8900F0B94E /* Editor.h in Headers */,
 				771421831BB64DAA00F0B94E /* DLSConstants.h in Headers */,
+				77C490E81BB78EAF00345BEA /* DLSConstraintDescription.h in Headers */,
 				771421821BB64D9300F0B94E /* Plugin.h in Headers */,
-				771A89471BB71C7E008DD6F4 /* ViewQuerier.h in Headers */,
+				77C490D81BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */,
 				771421841BB64E1400F0B94E /* DLSEditor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -982,8 +1019,10 @@
 				77100EDB1B06F6210082C38B /* ColorEditorView.xib in Resources */,
 				77100EDF1B06F6210082C38B /* ControlListPaneViewController.xib in Resources */,
 				770354B51B14AF0300880AD4 /* PopupEditorView.xib in Resources */,
+				77C490F11BB795AE00345BEA /* ConstraintView.xib in Resources */,
 				77100EE81B06F6210082C38B /* TextFieldEditorView.xib in Resources */,
 				77100EE51B06F6210082C38B /* PropertyGroupView.xib in Resources */,
+				77C490F01BB795AE00345BEA /* ConstraintsEditorView.xib in Resources */,
 				77100EE01B06F6210082C38B /* MainMenu.xib in Resources */,
 				77376A161B13F10F001D81D3 /* ImageEditorView.xib in Resources */,
 				77FD15D41B10F35700ED950F /* FloatArrayEditorView.xib in Resources */,
@@ -1037,12 +1076,14 @@
 				77376A1B1B13F360001D81D3 /* DLSImageEditor.m in Sources */,
 				77100F8A1B0781360082C38B /* DLSPropertyDescription.m in Sources */,
 				77100ED01B06F6210082C38B /* ViewsVisualOutlineController.swift in Sources */,
+				77C490F41BB795CB00345BEA /* ConstraintsEditorController.swift in Sources */,
 				77100EA61B06F6210082C38B /* CodeManager.swift in Sources */,
 				77100EB91B06F6210082C38B /* NetworkRequestsViewController.swift in Sources */,
 				770A09EB1B499C65007455F1 /* NSGeometry+DLSWrappers.m in Sources */,
 				77100EB81B06F6210082C38B /* NetworkRequestStatusView.swift in Sources */,
 				77376A1F1B1412A8001D81D3 /* DLSPopupEditor.m in Sources */,
 				77100F811B0781360082C38B /* DLSControlInfo.m in Sources */,
+				77C490EA1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */,
 				77100FA31B0781360082C38B /* DLSViewsMessages.m in Sources */,
 				77100EA51B06F6210082C38B /* CodeGenerating.swift in Sources */,
 				77100F8D1B0781360082C38B /* DLSPropertyGroup.m in Sources */,
@@ -1069,6 +1110,7 @@
 				77100EA91B06F6210082C38B /* ConnectionStatusView.swift in Sources */,
 				77100EB51B06F6210082C38B /* MathUtils.swift in Sources */,
 				77100EC21B06F6210082C38B /* PluginController.swift in Sources */,
+				77C490F51BB795CB00345BEA /* ConstraintView.swift in Sources */,
 				77100F971B0781360082C38B /* DLSStepperEditor.m in Sources */,
 				77100EAD1B06F6210082C38B /* DeviceController.swift in Sources */,
 				77100EAC1B06F6210082C38B /* DeviceConnection.swift in Sources */,
@@ -1087,6 +1129,7 @@
 				770A09DC1B48E581007455F1 /* MarginComparisonLayer.swift in Sources */,
 				77FD15CE1B0F6A3000ED950F /* FloatArrayEditor.swift in Sources */,
 				77100ECA1B06F6210082C38B /* ToggleEditor.swift in Sources */,
+				77C490DA1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */,
 				77100ED11B06F6210082C38B /* ViewControllerGrouper.swift in Sources */,
 				77100F9D1B0781360082C38B /* DLSToggleEditor.m in Sources */,
 				77100EAF1B06F6210082C38B /* FormattingUtilities.swift in Sources */,
@@ -1135,6 +1178,7 @@
 				77100F9B1B0781360082C38B /* DLSTextFieldEditor.m in Sources */,
 				77376A0A1B13EAD0001D81D3 /* UISlider+DLSDescribable.m in Sources */,
 				77100F7E1B0781360082C38B /* DLSConstants.m in Sources */,
+				77C490E51BB78C9100345BEA /* DLSConstraintsExchanger.m in Sources */,
 				77100FAA1B0781360082C38B /* NSObject+DLSDeallocAction.m in Sources */,
 				77100F331B0780F50082C38B /* DLSViewsPlugin.m in Sources */,
 				77100F8E1B0781360082C38B /* DLSPropertyGroup.m in Sources */,
@@ -1158,6 +1202,7 @@
 				77100F371B0780F50082C38B /* UIView+DLSDescribable.m in Sources */,
 				77100F6F1B0781360082C38B /* DLSBufferedStreamReader.m in Sources */,
 				77100F781B0781360082C38B /* DLSChannelStream.m in Sources */,
+				77C490DB1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */,
 				771683281B189F09000A850F /* DLSPopupEditor+DLSKnownTypes.m in Sources */,
 				775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */,
 				77376A121B13EF29001D81D3 /* DLSImageEditor.m in Sources */,
@@ -1175,6 +1220,7 @@
 				77100FA11B0781360082C38B /* DLSTransform3D.m in Sources */,
 				77376A201B1412A8001D81D3 /* DLSPopupEditor.m in Sources */,
 				77100F2D1B0780F50082C38B /* DLSDials.m in Sources */,
+				77C490EB1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */,
 				77376A0E1B13EDBB001D81D3 /* UITextView+DLSDescribable.m in Sources */,
 				77100F951B0781360082C38B /* DLSSliderEditor.m in Sources */,
 			);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ConstraintViewOwner" customModule="Dials" customModuleProvider="target">
+            <connections>
+                <outlet property="constraintView" destination="c22-O7-iKe" id="Cq4-Rf-8KN"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="ConstraintView" customModule="Dials" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="337" height="18"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iU9-fN-ClW">
+                    <rect key="frame" x="8" y="2" width="321" height="14"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Message" id="BpU-BX-VyB">
+                        <font key="font" metaFont="smallSystem"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="iU9-fN-ClW" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="SB0-hf-fcO"/>
+                <constraint firstAttribute="bottom" secondItem="iU9-fN-ClW" secondAttribute="bottom" constant="2" id="WRA-Jd-yun"/>
+                <constraint firstAttribute="trailing" secondItem="iU9-fN-ClW" secondAttribute="trailing" constant="10" id="XAo-TZ-L0K"/>
+                <constraint firstItem="iU9-fN-ClW" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="10" id="bAv-7J-7Tv"/>
+            </constraints>
+            <connections>
+                <outlet property="info" destination="iU9-fN-ClW" id="fu2-qk-ehc"/>
+            </connections>
+            <point key="canvasLocation" x="232.5" y="159"/>
+        </customView>
+    </objects>
+</document>
