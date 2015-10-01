@@ -20,10 +20,8 @@ class ConstraintsEditorController : NSObject, EditorController, ViewQuerierOwner
     
     override init() {
         super.init()
-        bundle.loadNibNamed("ConstraintsEditorView", owner: self, topLevelObjects: nil)
+        NSBundle.mainBundle().loadNibNamed("ConstraintsEditorView", owner: self, topLevelObjects: nil)
     }
-    
-    private lazy var bundle : NSBundle = NSBundle(forClass: ConstraintsEditorController.self)
     
     var readOnly : Bool {
         return true
@@ -79,7 +77,7 @@ class ConstraintsEditorController : NSObject, EditorController, ViewQuerierOwner
                 
                 for constraint in constraints {
                     let owner = ConstraintViewOwner()
-                    bundle.loadNibNamed("ConstraintView", owner: owner, topLevelObjects: nil)
+                    NSBundle.mainBundle().loadNibNamed("ConstraintView", owner: owner, topLevelObjects: nil)
                     if let view = owner.constraintView {
                         view.delegate = self
                         constraintStack.addView(view, inGravity: .Top)
@@ -109,6 +107,17 @@ class ConstraintsEditorController : NSObject, EditorController, ViewQuerierOwner
     
     func constraintView(constraintView: ConstraintView, selectedViewWithID viewID: String) {
         self.viewQuerier?.selectViewWithID(viewID)
+    }
+    
+    func constraintView(constraintView: ConstraintView, updatedConstant constant: CGFloat, constraintID: String) {
+        self.delegate?.editorController(self, changedConfiguration: self.configuration!, toValue: DLSUpdateConstraintConstantMessage(constraintID: constraintID, constant: constant))
+        if let constraint = constraintView.constraint {
+            constraintView.fields = (
+                first: firstPartOfConstraintDescription(constraint),
+                relation: constraint.relation,
+                second: secondPartOfConstraintDescription(constraint)
+            )
+        }
     }
 
 }

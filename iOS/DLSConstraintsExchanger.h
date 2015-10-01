@@ -10,6 +10,8 @@
 
 #import "DLSValueExchanger.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol DLSConstraintInformer;
 
 @interface DLSConstraintsExchanger : DLSValueExchanger
@@ -17,3 +19,5 @@
 - (id)initWithInformerProvider:(NSArray<id<DLSConstraintInformer>>*(^)(void))provider;
 
 @end
+
+NS_ASSUME_NONNULL_END

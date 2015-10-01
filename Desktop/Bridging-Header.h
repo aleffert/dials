@@ -11,6 +11,7 @@
 #import "DLSChannelStream.h"
 #import "DLSColorEditor.h"
 #import "DLSConstraintDescription.h"
+#import "DLSConstraintEditorMessages.h"
 #import "DLSConstraintsEditor.h"
 #import "DLSDescribable.h"
 #import "DLSEditor.h"

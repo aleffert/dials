@@ -11,8 +11,10 @@
 #import "DLSConstraintsExchanger.h"
 
 #import "DLSConstraintDescription.h"
+#import "DLSConstraintEditorMessages.h"
 #import "DLSConstraintInformer.h"
-
+#import "DLSConstants.h"
+#import "NSLayoutConstraint+DLSUniqueness.h"
 
 NSArray<DLSConstraintDescription*>* DLSExtractConstraintsForView(UIView* view, NSArray<id<DLSConstraintInformer>> *(^provider)(void)) {
     NSArray<NSLayoutConstraint*>* horizontal = [view constraintsAffectingLayoutForAxis:UILayoutConstraintAxisHorizontal];
@@ -51,8 +53,15 @@ NSArray<DLSConstraintDescription*>* DLSExtractConstraintsForView(UIView* view, N
             }
         };
     } to:^DLSValueTo(id _) {
-        return ^(id _) {
-            // nothing to do
+        return ^(id message) {
+            if([message isKindOfClass:[DLSUpdateConstraintConstantMessage class]]) {
+                DLSUpdateConstraintConstantMessage* update = (DLSUpdateConstraintConstantMessage*)message;
+                NSLayoutConstraint* constraint = [NSLayoutConstraint dls_constraintWithID:update.constraintID];
+                constraint.constant = update.constant;
+            }
+            else {
+                NSAssert(NO, @"Unknown message: %@", message);
+            }
         };
     }];
     

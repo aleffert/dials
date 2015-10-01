@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="ConstraintsEditorController" customModule="Snaps" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="ConstraintsEditorController" customModule="Dials" customModuleProvider="target">
             <connections>
                 <outlet property="constraintStack" destination="TZd-bp-xBB" id="cE9-zr-Ew9"/>
                 <outlet property="editorView" destination="c22-O7-iKe" id="Toa-bk-KLb"/>
@@ -28,7 +28,7 @@
                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
                         </textField>
-                        <stackView orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TZd-bp-xBB">
+                        <stackView orientation="vertical" alignment="leading" spacing="2" hasEqualSpacing="YES" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="TZd-bp-xBB">
                             <rect key="frame" x="0.0" y="0.0" width="479.5" height="22"/>
                         </stackView>
                     </subviews>

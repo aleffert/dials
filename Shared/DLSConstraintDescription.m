@@ -12,7 +12,7 @@
 
 #if TARGET_OS_IPHONE
 #import "DLSViewsPlugin+Internal.h"
-#import <objc/runtime.h>
+#import "NSLayoutConstraint+DLSUniqueness.h"
 
 NSString* DLSPortableLayoutRelation(NSLayoutRelation relation) {
     switch(relation) {
@@ -58,33 +58,6 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
             return @"???";
     }
 }
-
-@interface NSLayoutConstraint (DLSUniqueness)
-
-@property (readonly, nonatomic) NSString* dls_constraintID;
-
-@end
-
-@implementation NSLayoutConstraint (DLSUniqueness)
-
-- (NSString*)dls_constraintID {
-    static NSString* constraintIDKey = @"";
-    static NSMapTable<NSString*, NSLayoutConstraint*>* constraints;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        constraints = [NSMapTable weakToStrongObjectsMapTable];
-    });
-    
-    NSString* result = objc_getAssociatedObject(self, &constraintIDKey);
-    if(result == nil) {
-        result = [NSUUID UUID].UUIDString;
-        [constraints setObject:self forKey:result];
-        objc_setAssociatedObject(self, &constraintIDKey, result, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    return result;
-}
-
-@end
 
 #endif
 
