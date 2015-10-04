@@ -17,7 +17,7 @@ extension DLSToggleEditor : EditorControllerGenerating {
 
 extension DLSToggleEditor : CodeGenerating {
 
-    func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func codeForValue(value: NSCoding?, language: Language) -> String {
         let values : (t : String, f : String)
         
         switch language {
@@ -40,7 +40,7 @@ class ToggleEditorView : EditorView {
     @IBOutlet private var button : NSButton?
     
     @IBAction private func buttonToggled(sender : NSButton) {
-        self.delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.state)
+        self.delegate?.editorController(self, changedToValue: sender.state)
     }
     
     override var configuration : EditorConfiguration? {

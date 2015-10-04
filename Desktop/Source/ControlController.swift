@@ -62,7 +62,7 @@ class ControlController : NSObject, EditorControllerDelegate {
         }, completionHandler: nil)
     }
     
-    func editorController(controller: EditorController, changedConfiguration configuration: EditorConfiguration, toValue value: NSCoding?) {
+    func editorController(controller: EditorController, changedToValue value: NSCoding?) {
         currentValue = value
         updated = true
         delegate?.controlController(self, changedControlInfo:controlInfo, toValue: value)

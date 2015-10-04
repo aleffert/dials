@@ -46,9 +46,7 @@ class PopupEditorView: EditorView {
     }
     
     func itemChosen(sender : NSMenuItem) {
-        if let configuration = configuration {
-            self.delegate?.editorController(self, changedConfiguration: configuration, toValue: sender.representedObject as! NSCoding?)
-        }
+        self.delegate?.editorController(self, changedToValue: sender.representedObject as! NSCoding?)
     }
 
 }

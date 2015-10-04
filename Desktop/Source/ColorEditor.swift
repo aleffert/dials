@@ -16,7 +16,7 @@ extension DLSColorEditor : EditorControllerGenerating {
 
 extension DLSColorEditor : CodeGenerating {
     
-    func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func codeForValue(value: NSCoding?, language: Language) -> String {
         if let c = value as? NSColor {
             let red = stringFromNumber(c.redComponent, requireIntegerPart:true)
             let green = stringFromNumber(c.greenComponent, requireIntegerPart:true)
@@ -41,9 +41,7 @@ class ColorEditorView : EditorView {
     @IBOutlet private var name : NSTextField?
     
     @IBAction func colorChanged(well : NSColorWell) {
-        if let configuration = configuration {
-            self.delegate?.editorController(self, changedConfiguration: configuration, toValue: well.color)
-        }
+        self.delegate?.editorController(self, changedToValue: well.color)
     }
     
     override var configuration : EditorConfiguration? {

@@ -119,7 +119,7 @@ class ConstraintsEditorController : NSObject, EditorController, ViewQuerierOwner
     }
     
     func constraintView(constraintView: ConstraintView, updatedConstant constant: CGFloat, constraintID: String) {
-        self.delegate?.editorController(self, changedConfiguration: self.configuration!, toValue: DLSUpdateConstraintConstantMessage(constraintID: constraintID, constant: constant))
+        self.delegate?.editorController(self, changedToValue: DLSUpdateConstraintConstantMessage(constraintID: constraintID, constant: constant))
         if let constraint = constraintView.constraint {
             constraintView.fields = (
                 first: firstPartOfConstraintDescription(constraint),

@@ -10,13 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol CodeHelper;
 @protocol DLSEditor;
 
-/// Implement this on your plugin if it needs to access to a CodeHelper.
+typedef NS_ENUM(NSUInteger, Language) {
+    LanguageObjC,
+    LanguageSwift
+};
+
+/// Implement this protocol on your plugin if it needs to access to a CodeHelper.
 /// CodeHelper provides useful utilties for modifying code on disk.
 @protocol CodeHelperOwner <NSObject>
 
-/// The <code>codeHelper</code> will be assigned by Dials when the plugin is loaded.
+/// The <code>codeHelper</code> will be automatically assigned by Dials when the plugin is loaded.
 @property (nonatomic, strong, nullable) id <CodeHelper> codeHelper;
 
 @end
@@ -36,6 +42,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return Whether the operation succeeded.
 - (BOOL)updateSymbol:(NSString*)symbol toValue:(nullable id<NSCoding>)value withEditor:(id <DLSEditor>)editor atURL:(NSURL*)url error:(NSError**)error;
 
+/// Replaces the assignment of <code>symbol</code> to a new string in a given file.
+/// For example, if your code in file <code>f</code> contains "let x = 3" and the
+/// string passed in is "4",
+/// it will modify the contents of <code>f</code> to contain "let x = 4".
+///
+/// @param symbol The symbol to update. This is typically the name of a variable.
+/// @param code The code string to replace it with.
+/// @param url A URL for the file to modify.
+/// @param error Will be set if the operation fails.
+/// @return Whether the operation succeeded.
 - (BOOL)updateSymbol:(NSString*)symbol toCode:(NSString*)code inLanguage:(Language)lang atURL:(NSURL*)url error:(NSError**)error;
 
 @end

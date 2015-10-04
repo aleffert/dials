@@ -77,8 +77,8 @@ class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
         }
     }
     
-    func editorController(controller: EditorController, changedConfiguration configuration: EditorConfiguration, toValue value: NSCoding?) {
-        self.delegate?.propertyGroupView(self, changedItem: configuration.name, toValue: value)
+    func editorController(controller: EditorController, changedToValue value: NSCoding?) {
+        self.delegate?.propertyGroupView(self, changedItem: controller.configuration!.name, toValue: value)
     }
     
     func saveConstraintWithInfo(info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {

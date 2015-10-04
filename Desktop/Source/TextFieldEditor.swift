@@ -18,7 +18,7 @@ extension DLSTextFieldEditor : EditorControllerGenerating {
 
 extension DLSTextFieldEditor : CodeGenerating {
     
-    func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func codeForValue(value: NSCoding?, language: Language) -> String {
         let prefix : String
         switch language {
         case .ObjC:
@@ -50,7 +50,7 @@ class TextFieldEditorView: EditorView {
     
     @IBAction func textFieldChanged(sender : NSTextField) {
         if editor?.editable ?? false {
-            delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.stringValue)
+            delegate?.editorController(self, changedToValue: sender.stringValue)
         }
     }
     

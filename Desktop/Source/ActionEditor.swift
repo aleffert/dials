@@ -20,9 +20,7 @@ class ActionEditorView : EditorView {
     @IBOutlet var button : NSButton?
     
     @IBAction func buttonPressed(sender : NSButton) {
-        if let configuration = configuration {
-            self.delegate?.editorController(self, changedConfiguration: configuration, toValue: nil)
-        }
+        self.delegate?.editorController(self, changedToValue: nil)
     }
     
     override var configuration : EditorConfiguration? {

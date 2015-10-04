@@ -17,7 +17,7 @@ extension DLSFloatArrayEditor : EditorControllerGenerating {
 
 extension DLSFloatArrayEditor : CodeGenerating {
     
-    func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func codeForValue(value: NSCoding?, language: Language) -> String {
         let constructor = self.constructor ?? ""
         
         let values = value as? [String:NSNumber] ?? [:]
@@ -205,8 +205,6 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
     func view(view: FloatArrayItemView, changedValue value: Double) {
         var values = (configuration?.value as? [String:NSNumber]) ?? [:]
         values[view.label!.stringValue] = value as NSNumber
-        if let configuration = configuration {
-            delegate?.editorController(self, changedConfiguration: configuration, toValue: values)
-        }
+        delegate?.editorController(self, changedToValue: values)
     }
 }

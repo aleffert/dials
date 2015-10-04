@@ -19,7 +19,6 @@
 		77100EA21B06F6210082C38B /* Array+Utilties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E511B06F6210082C38B /* Array+Utilties.swift */; };
 		77100EA31B06F6210082C38B /* BackgroundColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E521B06F6210082C38B /* BackgroundColorView.swift */; };
 		77100EA41B06F6210082C38B /* Broadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E531B06F6210082C38B /* Broadcaster.swift */; };
-		77100EA51B06F6210082C38B /* CodeGenerating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E541B06F6210082C38B /* CodeGenerating.swift */; };
 		77100EA61B06F6210082C38B /* CodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E551B06F6210082C38B /* CodeManager.swift */; };
 		77100EA71B06F6210082C38B /* ColorEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E561B06F6210082C38B /* ColorEditor.swift */; };
 		77100EA81B06F6210082C38B /* ConnectionStatusToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77100E571B06F6210082C38B /* ConnectionStatusToolbarItem.swift */; };
@@ -278,7 +277,6 @@
 		77100E511B06F6210082C38B /* Array+Utilties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Utilties.swift"; sourceTree = "<group>"; };
 		77100E521B06F6210082C38B /* BackgroundColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundColorView.swift; sourceTree = "<group>"; };
 		77100E531B06F6210082C38B /* Broadcaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broadcaster.swift; sourceTree = "<group>"; };
-		77100E541B06F6210082C38B /* CodeGenerating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeGenerating.swift; sourceTree = "<group>"; };
 		77100E551B06F6210082C38B /* CodeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeManager.swift; sourceTree = "<group>"; };
 		77100E561B06F6210082C38B /* ColorEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorEditor.swift; sourceTree = "<group>"; };
 		77100E571B06F6210082C38B /* ConnectionStatusToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusToolbarItem.swift; sourceTree = "<group>"; };
@@ -552,7 +550,6 @@
 				77100E501B06F6210082C38B /* AppDelegate.swift */,
 				77100E521B06F6210082C38B /* BackgroundColorView.swift */,
 				77100E531B06F6210082C38B /* Broadcaster.swift */,
-				77100E541B06F6210082C38B /* CodeGenerating.swift */,
 				77100E551B06F6210082C38B /* CodeManager.swift */,
 				77100E571B06F6210082C38B /* ConnectionStatusToolbarItem.swift */,
 				77100E581B06F6210082C38B /* ConnectionStatusView.swift */,
@@ -1139,7 +1136,6 @@
 				77100F811B0781360082C38B /* DLSControlInfo.m in Sources */,
 				77C490EA1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */,
 				77100FA31B0781360082C38B /* DLSViewsMessages.m in Sources */,
-				77100EA51B06F6210082C38B /* CodeGenerating.swift in Sources */,
 				77100F8D1B0781360082C38B /* DLSPropertyGroup.m in Sources */,
 				77100ED41B06F6210082C38B /* VisibleStrings.swift in Sources */,
 				77100ED21B06F6210082C38B /* ViewFacade.swift in Sources */,

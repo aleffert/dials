@@ -18,7 +18,7 @@ extension DLSSliderEditor : EditorControllerGenerating {
 }
 
 extension DLSSliderEditor : CodeGenerating {
-    func codeForValue(value : NSCoding?, language : Language) -> String {
+    public func codeForValue(value : NSCoding?, language : Language) -> String {
         if let v = value as? NSNumber {
             return stringFromNumber(v, requireIntegerPart: true)
         }
@@ -46,7 +46,7 @@ class SliderEditorView : EditorView {
     
     @IBAction private func sliderChanged(sender : NSSlider) {
         currentLabel?.stringValue = stringFromNumber(sender.floatValue)
-        self.delegate?.editorController(self, changedConfiguration: configuration!, toValue: sender.floatValue)
+        self.delegate?.editorController(self, changedToValue: sender.floatValue)
     }
     
     override var configuration : EditorConfiguration? {

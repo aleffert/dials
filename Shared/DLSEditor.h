@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 /// Represents how a value wants to be edited.
+/// Creates a correspondence 
 @protocol DLSEditor <NSObject, NSCoding>
 
 @end
