@@ -14,7 +14,7 @@
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
-
+@protocol DLSSourceLocation;
 @protocol DLSAuxiliaryConstraintInformation;
 
 @interface DLSConstraintDescription : NSObject <NSCoding>
@@ -42,6 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) BOOL active;
 
 @property (copy, nonatomic) NSArray<id <DLSAuxiliaryConstraintInformation>>* extras;
+
+// First extra that supplies a sourceLocation
+@property (readonly, nonatomic) id <DLSAuxiliaryConstraintInformation> locationExtra;
 
 @end
 

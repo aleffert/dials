@@ -10,7 +10,15 @@ import Cocoa
 
 private let PluginPathExtension = "dialsplugin"
 
-class PluginController: NSObject {
+protocol ConstraintInfoSource : class {
+    var constraintSources : [ConstraintPlugin] { get }
+}
+
+protocol ConstraintInfoOwner : class {
+    weak var constraintInfoSource : ConstraintInfoSource? { get set }
+}
+
+class PluginController: NSObject, ConstraintInfoSource {
     
     private var plugins : [Plugin] = []
     
@@ -19,6 +27,12 @@ class PluginController: NSObject {
         self.registerDefaultPlugins()
         self.registerBundlePlugins()
         self.registerAdjacentPlugins()
+    }
+    
+    var constraintSources : [ConstraintPlugin] {
+        return self.plugins.flatMap {
+            return $0 as? ConstraintPlugin
+        }
     }
     
     private func registerDefaultPlugins() {

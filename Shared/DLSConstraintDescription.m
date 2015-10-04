@@ -8,6 +8,7 @@
 
 #import "DLSConstraintDescription.h"
 
+#import "DLSAuxiliaryConstraintInformation.h"
 #import "DLSConstants.h"
 
 #if TARGET_OS_IPHONE
@@ -141,6 +142,15 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
 
 - (NSUInteger)hash {
     return self.constraintID.hash ^ self.constraintID.hash;
+}
+
+- (id <DLSAuxiliaryConstraintInformation>)locationExtra {
+    for(id <DLSAuxiliaryConstraintInformation> info in self.extras) {
+        if(info.location != nil) {
+            return info;
+        }
+    }
+    return nil;
 }
 
 @end

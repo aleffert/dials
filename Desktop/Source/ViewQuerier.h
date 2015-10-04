@@ -10,9 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol DLSAuxiliaryConstraintInformation;
+
 @protocol ViewQuerier <NSObject>
 
-- (NSString*)nameForViewWithID:(nullable NSString*)mainID relativeToView:(NSString*)relativeID withClass:(nullable NSString*)sourceClass;
+- (NSString*)nameForViewWithID:(nullable NSString*)mainID relativeToView:(NSString*)relativeID withClass:(nullable NSString*)sourceClass constraintInfo:(nullable id <DLSAuxiliaryConstraintInformation>)info;
 
 - (void)selectViewWithID:(NSString*)viewID;
 - (void)highlightViewWithID:(NSString*)viewID;

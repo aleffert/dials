@@ -35,7 +35,8 @@ class ConstraintsEditorController : NSObject, EditorController, ViewQuerierOwner
         guard let source = viewQuerier?.nameForViewWithID(
             description.sourceViewID,
             relativeToView: description.affectedViewID,
-            withClass: description.sourceClass) else {
+            withClass: description.sourceClass,
+            constraintInfo: nil) else {
                 return "Internal Error"
         }
         return "\(source).\(description.sourceAttribute)"
@@ -45,7 +46,9 @@ class ConstraintsEditorController : NSObject, EditorController, ViewQuerierOwner
         let dest = viewQuerier?.nameForViewWithID(
             description.destinationViewID,
             relativeToView: description.affectedViewID,
-            withClass: description.destinationClass)
+            withClass: description.destinationClass,
+            constraintInfo: description.locationExtra
+        )
         if let destName = dest, destAttribute = description.destinationAttribute {
             var result = "\(destName).\(destAttribute)"
             if description.multiplier != 1 {

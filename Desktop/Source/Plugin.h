@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol DLSAuxiliaryConstraintInformation;
 @protocol Plugin;
 
 @protocol PluginContext
@@ -67,7 +68,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ConstraintPlugin <NSObject>
 
+/// Unique identifier for the plugin. Should match the corresponding iOS side plugin.
+@property (readonly, nonatomic, copy) NSString* identifier;
+
 - (nullable NSError*)saveConstraint:(DLSConstraintDescription*)constraint;
+- (nullable NSString*)displayNameOfConstraint:(id <DLSAuxiliaryConstraintInformation>)info;
 
 @end
 

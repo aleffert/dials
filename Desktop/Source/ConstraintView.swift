@@ -28,13 +28,6 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
     
     var constraint : DLSConstraintDescription? = nil
     
-    private var sourceLocation : DLSSourceLocation? {
-        let location = constraint?.extras.reduce(nil) { (current : DLSSourceLocation?, extra : DLSAuxiliaryConstraintInformation) in
-            return current ?? extra.location
-        }
-        return location
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +79,7 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
             self.delegate?.constraintView(self, choseHighlightViewWithID:viewID)
         }
         editButton.hidden = false
-        self.allowsJump = sourceLocation != nil
+        self.allowsJump = constraint?.locationExtra != nil
     }
     
     override func mouseExited(theEvent: NSEvent) {
@@ -112,7 +105,7 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
     }
     
     @IBAction func jump(sender : NSButton) {
-        if let location = sourceLocation {
+        if let location = constraint?.locationExtra.location {
             NSTask.launchedTaskWithLaunchPath("/usr/bin/xed", arguments: ["-l", location.line.description, location.file])
         }
         else {

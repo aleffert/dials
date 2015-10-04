@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol DLSSourceLocation <NSCoding>
 
 @property (readonly, copy, nonatomic) NSString* file;
-@property (readonly, assign, nonatomic) NSUInteger line;
+@property (readonly, assign, nonatomic) NSInteger line;
 
 @end
 

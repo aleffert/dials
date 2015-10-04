@@ -202,8 +202,11 @@ extension ConsoleWindowController : PluginContext {
     }
     
     func addViewController(controller: NSViewController, plugin: Plugin) {
-         // Load the view now since having unloaded views makes the model simpler
+        // Load the view now since having unloaded views makes the model simpler
         let _ = controller.view
+        if let owner = controller as? ConstraintInfoOwner {
+            owner.constraintInfoSource = pluginController
+        }
         
         updateControllersWithAction {
             self.viewGrouper.addViewController(controller, plugin : plugin)

@@ -14,9 +14,14 @@ protocol ViewsViewControllerDelegate : class {
     func viewController(controller : ViewsViewController, appliedInsets : NSEdgeInsets, toViewWithID viewID : String)
 }
 
-class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDelegate, ViewPropertyTableControllerDelegate, ViewsVisualOutlineControllerDelegate {
+class ViewsViewController: NSViewController,
+ViewHierarchyOutlineControllerDelegate,
+ViewPropertyTableControllerDelegate,
+ViewsVisualOutlineControllerDelegate,
+ConstraintInfoOwner {
     
     weak var delegate : ViewsViewControllerDelegate?
+    weak var constraintInfoSource : ConstraintInfoSource?
     
     @IBOutlet var propertyTableController : ViewPropertyTableController!
     @IBOutlet var hierarchyOutlineController : ViewsHierarchyOutlineController!
@@ -83,6 +88,12 @@ class ViewsViewController: NSViewController, ViewHierarchyOutlineControllerDeleg
         visualOutlineController.highlightViewWithID(nil)
         hierarchyOutlineController.selectViewWithID(viewID)
         delegate?.viewsController(self, selectedViewWithID: viewID)
-        
+    }
+    
+    func tableController(controller: ViewPropertyTableController, nameOfConstraintWithInfo info: DLSAuxiliaryConstraintInformation) -> String? {
+        if let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first {
+            return plugin.displayNameOfConstraint(info)
+        }
+        return nil
     }
 }

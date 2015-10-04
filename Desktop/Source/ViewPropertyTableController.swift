@@ -13,6 +13,7 @@ protocol ViewPropertyTableControllerDelegate : class {
     func tableController(controller : ViewPropertyTableController, selectViewWithID viewID: String)
     func tableController(controller : ViewPropertyTableController, highlightViewWithID viewID: String)
     func tableController(controller : ViewPropertyTableController, clearHighlightForViewWithID viewID: String)
+    func tableController(controller : ViewPropertyTableController, nameOfConstraintWithInfo info:DLSAuxiliaryConstraintInformation) -> String?
 }
 
 class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuerier {
@@ -106,7 +107,7 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
         }
     }
     
-    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?) -> String {
+    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, constraintInfo info: DLSAuxiliaryConstraintInformation?) -> String {
         if let mainID = mainID, hierarchy = hierarchy {
             switch hierarchy.relationFrom(relativeID, toView:mainID) {
             case .Same:
@@ -114,7 +115,16 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
             case .Superview:
                 return "super"
             case .None:
-                return ViewHierarchy.niceNameForClassName(ViewHierarchy.defaultViewName)
+                
+                if let
+                    info = info,
+                    name = self.delegate?.tableController(self, nameOfConstraintWithInfo:info)
+                {
+                    return name
+                }
+                else {
+                    return ViewHierarchy.niceNameForClassName(ViewHierarchy.defaultViewName)
+                }
             }
         }
         return ViewHierarchy.defaultViewName
