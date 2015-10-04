@@ -91,9 +91,23 @@ ConstraintInfoOwner {
     }
     
     func tableController(controller: ViewPropertyTableController, nameOfConstraintWithInfo info: DLSAuxiliaryConstraintInformation) -> String? {
-        if let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first {
-            return plugin.displayNameOfConstraint(info)
+        guard let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first else {
+            // TODO show error
+            return nil
         }
-        return nil
+        return plugin.displayNameOfConstraint(info)
+    }
+    
+    func tableController(controller: ViewPropertyTableController, saveConstraintWithInfo info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
+        guard let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first else {
+            // TODO show error
+            return
+        }
+        do {
+            try plugin.saveConstraint(info, constant: constant)
+        }
+        catch _ as NSError {
+            // TODO show error
+        }
     }
 }

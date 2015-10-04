@@ -21,6 +21,7 @@ protocol ConstraintInfoOwner : class {
 class PluginController: NSObject, ConstraintInfoSource {
     
     private var plugins : [Plugin] = []
+    private let codeManager = CodeManager()
     
     override init() {
         super.init()
@@ -51,6 +52,9 @@ class PluginController: NSObject, ConstraintInfoSource {
                     plugin = pluginClass.init() as? Plugin {
                         registerPlugin(plugin)
                         print("Registered plugin class: \(pluginClass)")
+                        if let owner = plugin as? CodeHelperOwner {
+                            owner.codeHelper = codeManager
+                        }
                 }
             }
             else {

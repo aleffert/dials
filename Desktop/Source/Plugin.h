@@ -6,12 +6,10 @@
 //  Copyright (c) 2015 Akiva Leffert. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol DLSAuxiliaryConstraintInformation;
 @protocol Plugin;
 
 @protocol PluginContext
@@ -61,18 +59,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Called when a connection to a device is closed.
 /// After this call, the original context is no longer valid
 - (void)connectionClosed;
-
-@end
-
-@class DLSConstraintDescription;
-
-@protocol ConstraintPlugin <NSObject>
-
-/// Unique identifier for the plugin. Should match the corresponding iOS side plugin.
-@property (readonly, nonatomic, copy) NSString* identifier;
-
-- (nullable NSError*)saveConstraint:(DLSConstraintDescription*)constraint;
-- (nullable NSString*)displayNameOfConstraint:(id <DLSAuxiliaryConstraintInformation>)info;
 
 @end
 

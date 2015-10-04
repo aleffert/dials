@@ -8,7 +8,9 @@
 
 import Cocoa
 
-class ControlPanelPlugin: NSObject, Plugin, ControlListPaneViewControllerDelegate {
+class ControlPanelPlugin: NSObject, Plugin, CodeHelperOwner, ControlListPaneViewControllerDelegate {
+    
+    var codeHelper: CodeHelper?
     
     let identifier = DLSControlPanelPluginIdentifier
 
@@ -73,21 +75,32 @@ class ControlPanelPlugin: NSObject, Plugin, ControlListPaneViewControllerDelegat
         context?.sendMessage(data, plugin: self)
     }
     
+    private func showCodeUpdateError(message : String) {
+        let alert = NSAlert()
+        alert.messageText = "Error Updating Code"
+        alert.informativeText = message
+        alert.addButtonWithTitle("Okay")
+        alert.runModal()
+    }
+    
     func paneController(controller: ControlListPaneViewController, shouldSaveControlInfo info: DLSControlInfo, withValue value: NSCoding?) {
-        let codeManager = CodeManager()
-        let file = info.file.toResult("Internal Error: Trying to save when file not present")
-        file.bind {file -> Result<()> in
-            let url = NSURL(fileURLWithPath: file)
-            let symbol = codeManager.findSymbolWithName(info.label, inFileAtURL:url)
-            return symbol.bind {symbol in
-                codeManager.updateSymbol(symbol, toValue: value, withEditor:info.editor, atURL:url)
+        do {
+            guard let file = info.file else {
+                throw CodeError.InternalError
             }
-        }.ifFailure {message in
-            let alert = NSAlert()
-            alert.messageText = "Error Updating Code"
-            alert.informativeText = message
-            alert.addButtonWithTitle("Okay")
-            alert.runModal()
+            guard let codeManager = codeHelper as? CodeManager else {
+                throw CodeError.InternalError
+            }
+            let url = NSURL(fileURLWithPath: file)
+            let symbol = try codeManager.findSymbolWithName(info.label, inFileAtURL:url)
+            try codeManager.updateSymbol(symbol, toValue: value, withEditor:info.editor, atURL:url)
         }
+        catch let e as NSError {
+            showCodeUpdateError(e.localizedDescription)
+        }
+        catch let e as CodeError {
+            showCodeUpdateError(e.message)
+        }
+        
     }
 }

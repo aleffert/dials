@@ -153,4 +153,13 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
     return nil;
 }
 
+- (id <DLSAuxiliaryConstraintInformation>)saveExtra {
+    for(id <DLSAuxiliaryConstraintInformation> info in self.extras) {
+        if(info.supportsSaving) {
+            return info;
+        }
+    }
+    return nil;
+}
+
 @end

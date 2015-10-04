@@ -14,6 +14,7 @@ protocol ViewPropertyTableControllerDelegate : class {
     func tableController(controller : ViewPropertyTableController, highlightViewWithID viewID: String)
     func tableController(controller : ViewPropertyTableController, clearHighlightForViewWithID viewID: String)
     func tableController(controller : ViewPropertyTableController, nameOfConstraintWithInfo info:DLSAuxiliaryConstraintInformation) -> String?
+    func tableController(controller : ViewPropertyTableController, saveConstraintWithInfo info: DLSAuxiliaryConstraintInformation, constant : CGFloat)
 }
 
 class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuerier {
@@ -143,6 +144,9 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
         self.delegate?.tableController(self, clearHighlightForViewWithID:viewID)
     }
     
+    func saveConstraintWithInfo(info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
+        self.delegate?.tableController(self, saveConstraintWithInfo: info, constant: constant)
+    }
 }
 
 

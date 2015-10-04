@@ -10,6 +10,7 @@ import Cocoa
 
 protocol EditConstraintViewControllerDelegate : class {
     func editorController(controller : EditConstraintViewController, changedConstantToValue value : CGFloat)
+    func editorController(controller : EditConstraintViewController, choseSaveToValue value : CGFloat)
     
 }
 
@@ -19,6 +20,7 @@ class EditConstraintViewController : NSViewController {
     @IBOutlet var multiplier : NSTextField?
     @IBOutlet var priority : NSTextField?
     @IBOutlet var constantStepper : NSStepper?
+    @IBOutlet var saveButton : NSButton?
     
     weak var delegate : EditConstraintViewControllerDelegate?
     
@@ -41,6 +43,11 @@ class EditConstraintViewController : NSViewController {
         multiplier?.stringValue = stringFromNumber(constraint?.multiplier ?? 1)
         priority?.stringValue = stringFromNumber(constraint?.priority ?? 0)
         constantStepper?.floatValue = Float(constraint?.constant ?? 0)
+        saveButton?.hidden = constraint?.saveExtra == nil
+    }
+    
+    @IBAction func save(sender : NSButton) {
+        delegate?.editorController(self, choseSaveToValue: constraint?.constant ?? 0)
     }
     
     @IBAction func textChanged(sender : NSTextField) {

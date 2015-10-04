@@ -112,6 +112,12 @@ class ConstraintsEditorController : NSObject, EditorController, ViewQuerierOwner
         self.viewQuerier?.selectViewWithID(viewID)
     }
     
+    func constraintView(constraintView: ConstraintView, savedConstant constant: CGFloat, constraintID: String) {
+        if let constraint = constraintView.constraint, saveInfo = constraint.saveExtra {
+            self.viewQuerier?.saveConstraintWithInfo(saveInfo, constant: constant)
+        }
+    }
+    
     func constraintView(constraintView: ConstraintView, updatedConstant constant: CGFloat, constraintID: String) {
         self.delegate?.editorController(self, changedConfiguration: self.configuration!, toValue: DLSUpdateConstraintConstantMessage(constraintID: constraintID, constant: constant))
         if let constraint = constraintView.constraint {

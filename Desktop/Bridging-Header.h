@@ -6,6 +6,8 @@
 //
 //
 
+#import "ConstraintPlugin.h"
+#import "CodeHelper.h"
 #import "DLSActionEditor.h"
 #import "DLSAuxiliaryConstraintInformation.h"
 #import "DLSChannel.h"

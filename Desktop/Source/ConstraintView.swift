@@ -17,6 +17,7 @@ protocol ConstraintViewDelegate : class {
     func constraintView(constraintView : ConstraintView, clearedHighlightViewWithID viewID: String)
     func constraintView(constraintView : ConstraintView, selectedViewWithID viewID: String)
     func constraintView(constraintView : ConstraintView, updatedConstant constant: CGFloat, constraintID: String)
+    func constraintView(constraintView : ConstraintView, savedConstant constant: CGFloat, constraintID: String)
 }
 
 class ConstraintView : NSView, EditConstraintViewControllerDelegate {
@@ -105,11 +106,17 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
     }
     
     @IBAction func jump(sender : NSButton) {
-        if let location = constraint?.locationExtra.location {
+        if let location = constraint?.locationExtra?.location {
             NSTask.launchedTaskWithLaunchPath("/usr/bin/xed", arguments: ["-l", location.line.description, location.file])
         }
         else {
             assertionFailure("Jump button pressed, but shouldn't be visible")
+        }
+    }
+    
+    func editorController(controller: EditConstraintViewController, choseSaveToValue value: CGFloat) {
+        if let id = self.constraint?.constraintID {
+            self.delegate?.constraintView(self, savedConstant: value, constraintID: id)
         }
     }
     

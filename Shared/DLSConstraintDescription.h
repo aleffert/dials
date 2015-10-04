@@ -43,8 +43,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (copy, nonatomic) NSArray<id <DLSAuxiliaryConstraintInformation>>* extras;
 
-// First extra that supplies a sourceLocation
-@property (readonly, nonatomic) id <DLSAuxiliaryConstraintInformation> locationExtra;
+/// First extra that supplies a sourceLocation
+@property (readonly, nonatomic, nullable) id <DLSAuxiliaryConstraintInformation> locationExtra;
+
+/// First extra that supports saving
+@property (readonly, nonatomic, nullable) id <DLSAuxiliaryConstraintInformation> saveExtra;
 
 @end
 

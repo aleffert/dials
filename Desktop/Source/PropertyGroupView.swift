@@ -81,6 +81,10 @@ class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
         self.delegate?.propertyGroupView(self, changedItem: configuration.name, toValue: value)
     }
     
+    func saveConstraintWithInfo(info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
+        self.delegate?.saveConstraintWithInfo(info, constant: constant)
+    }
+    
     func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, constraintInfo: DLSAuxiliaryConstraintInformation?) -> String {
         return self.delegate?.nameForViewWithID(mainID, relativeToView: relativeID, withClass: className, constraintInfo : constraintInfo) ?? ViewHierarchy.defaultViewName
     }

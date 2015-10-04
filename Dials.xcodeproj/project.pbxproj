@@ -204,6 +204,8 @@
 		77376A1F1B1412A8001D81D3 /* DLSPopupEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A1D1B1412A8001D81D3 /* DLSPopupEditor.m */; };
 		77376A201B1412A8001D81D3 /* DLSPopupEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77376A1D1B1412A8001D81D3 /* DLSPopupEditor.m */; };
 		77376A221B142C48001D81D3 /* PopupEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77376A211B142C48001D81D3 /* PopupEditor.swift */; };
+		774CE5541BC18EEB00E128C3 /* ConstraintPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 774CE5531BC18EEB00E128C3 /* ConstraintPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		774CE5561BC1915B00E128C3 /* CodeHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 774CE5551BC1915B00E128C3 /* CodeHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		775AD3251B1DE8090069A810 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3241B1DE8090069A810 /* FlippedClipView.swift */; };
@@ -449,6 +451,8 @@
 		77376A1C1B1412A8001D81D3 /* DLSPopupEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSPopupEditor.h; sourceTree = "<group>"; };
 		77376A1D1B1412A8001D81D3 /* DLSPopupEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSPopupEditor.m; sourceTree = "<group>"; };
 		77376A211B142C48001D81D3 /* PopupEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupEditor.swift; sourceTree = "<group>"; };
+		774CE5531BC18EEB00E128C3 /* ConstraintPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstraintPlugin.h; sourceTree = "<group>"; };
+		774CE5551BC1915B00E128C3 /* CodeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodeHelper.h; sourceTree = "<group>"; };
 		775341C11B138A2F00BAE8CA /* DLSValueMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLSValueMapper.h; sourceTree = "<group>"; };
 		775341C21B138A2F00BAE8CA /* DLSValueMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLSValueMapper.m; sourceTree = "<group>"; };
 		775AD3241B1DE8090069A810 /* FlippedClipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlippedClipView.swift; sourceTree = "<group>"; };
@@ -542,6 +546,7 @@
 		77100E4E1B06F6210082C38B /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				774CE5551BC1915B00E128C3 /* CodeHelper.h */,
 				7767D64E1BC0A81600A3A301 /* DialsDesktop.h */,
 				7767D6311BBCBF0C00A3A301 /* EditConstraintViewController.swift */,
 				77100E501B06F6210082C38B /* AppDelegate.swift */,
@@ -721,6 +726,7 @@
 		77100FCC1B08EC670082C38B /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				774CE5531BC18EEB00E128C3 /* ConstraintPlugin.h */,
 				771683311B1A8FBA000A850F /* Plugin.h */,
 				77100E601B06F6210082C38B /* ControlController.swift */,
 				77100E611B06F6210082C38B /* ControlListPaneViewController.swift */,
@@ -948,7 +954,9 @@
 				77C490D81BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */,
 				771421841BB64E1400F0B94E /* DLSEditor.h in Headers */,
 				77C491051BB82ED100345BEA /* DLSAuxiliaryConstraintInformation.h in Headers */,
+				774CE5561BC1915B00E128C3 /* CodeHelper.h in Headers */,
 				7767D64F1BC0A81600A3A301 /* DialsDesktop.h in Headers */,
+				774CE5541BC18EEB00E128C3 /* ConstraintPlugin.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

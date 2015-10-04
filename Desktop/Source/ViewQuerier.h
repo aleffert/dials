@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString*)nameForViewWithID:(nullable NSString*)mainID relativeToView:(NSString*)relativeID withClass:(nullable NSString*)sourceClass constraintInfo:(nullable id <DLSAuxiliaryConstraintInformation>)info;
 
+- (void)saveConstraintWithInfo:(id <DLSAuxiliaryConstraintInformation>)info constant:(CGFloat)constant;
+
 - (void)selectViewWithID:(NSString*)viewID;
 - (void)highlightViewWithID:(NSString*)viewID;
 - (void)clearHighlightForViewWithID:(NSString*)viewID;
