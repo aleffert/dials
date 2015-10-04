@@ -63,4 +63,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@class DLSConstraintDescription;
+
+@protocol ConstraintPlugin <NSObject>
+
+- (nullable NSError*)saveConstraint:(DLSConstraintDescription*)constraint;
+
+@end
+
 NS_ASSUME_NONNULL_END

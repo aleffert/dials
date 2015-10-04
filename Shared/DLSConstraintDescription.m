@@ -64,7 +64,7 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
 @implementation DLSConstraintDescription
 
 #if TARGET_OS_IPHONE
-- (id)initWithView:(UIView*)view constraint:(NSLayoutConstraint*)constraint extras:(NSArray<DLSAuxiliaryConstraintInformation*>*)extras {
+- (id)initWithView:(UIView*)view constraint:(NSLayoutConstraint*)constraint extras:(NSArray<id <DLSAuxiliaryConstraintInformation>>*)extras {
     self = [super init];
     if(self != nil) {
         id source = constraint.firstItem;
@@ -85,6 +85,7 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
         if([destination isKindOfClass:[UIView class]]) {
             self.destinationViewID = [[DLSViewsPlugin activePlugin] viewIDForView:destination];
         }
+        self.extras = extras;
     }
     return self;
 }
@@ -106,6 +107,7 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
         DLSDecodeDouble(aDecoder, multiplier);
         DLSDecodeDouble(aDecoder, priority);
         DLSDecodeBool(aDecoder, active);
+        DLSDecodeObject(aDecoder, extras);
     }
     return self;
 }
@@ -124,6 +126,7 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
     DLSEncodeDouble(aCoder, multiplier);
     DLSEncodeDouble(aCoder, priority);
     DLSEncodeBool(aCoder, active);
+    DLSEncodeObject(aCoder, extras);
 }
 
 - (BOOL)isEqual:(id)object {

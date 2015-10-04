@@ -7,6 +7,7 @@
 //
 
 #import "DLSActionEditor.h"
+#import "DLSAuxiliaryConstraintInformation.h"
 #import "DLSChannel.h"
 #import "DLSChannelStream.h"
 #import "DLSColorEditor.h"
@@ -25,6 +26,7 @@
 #import "DLSPropertyGroup.h"
 #import "DLSRemovable.h"
 #import "DLSSliderEditor.h"
+#import "DLSSourceLocation.h"
 #import "DLSStepperEditor.h"
 #import "DLSTextFieldEditor.h"
 #import "DLSToggleEditor.h"

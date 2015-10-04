@@ -26,28 +26,44 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="iU9-fN-ClW">
-                    <rect key="frame" x="-2" y="2" width="312" height="14"/>
+                    <rect key="frame" x="-2" y="2" width="282" height="14"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Message" id="BpU-BX-VyB">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1J-r3-cAo">
+                    <rect key="frame" x="286" y="2" width="14" height="15"/>
+                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="jump-to" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="oby-cJ-Kqu">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="jump:" target="c22-O7-iKe" id="PXk-75-ked"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="A1J-r3-cAo" firstAttribute="leading" secondItem="iU9-fN-ClW" secondAttribute="trailing" constant="8" id="92r-jA-aux"/>
                 <constraint firstItem="8v1-cz-gI0" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="HM2-k2-AWB"/>
+                <constraint firstItem="A1J-r3-cAo" firstAttribute="centerY" secondItem="8v1-cz-gI0" secondAttribute="centerY" id="OwE-0V-wct"/>
                 <constraint firstAttribute="bottom" secondItem="8v1-cz-gI0" secondAttribute="bottom" constant="2" id="ScX-e9-a44"/>
                 <constraint firstItem="8v1-cz-gI0" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="UVE-aR-4QA"/>
                 <constraint firstItem="8v1-cz-gI0" firstAttribute="trailing" secondItem="c22-O7-iKe" secondAttribute="trailing" id="UfQ-T3-EcJ"/>
                 <constraint firstItem="iU9-fN-ClW" firstAttribute="centerY" secondItem="8v1-cz-gI0" secondAttribute="centerY" id="Ur4-ue-m8K"/>
                 <constraint firstAttribute="leading" secondItem="iU9-fN-ClW" secondAttribute="leading" id="XAo-TZ-L0K"/>
-                <constraint firstItem="iU9-fN-ClW" firstAttribute="trailing" secondItem="8v1-cz-gI0" secondAttribute="leading" constant="4" id="bZm-tY-wmv"/>
+                <constraint firstItem="8v1-cz-gI0" firstAttribute="leading" secondItem="A1J-r3-cAo" secondAttribute="trailing" constant="4" id="mms-1u-rC2"/>
             </constraints>
             <connections>
                 <outlet property="editButton" destination="8v1-cz-gI0" id="2VA-6c-RnO"/>
                 <outlet property="info" destination="iU9-fN-ClW" id="fu2-qk-ehc"/>
+                <outlet property="jumpButton" destination="A1J-r3-cAo" id="nVK-8u-OFN"/>
             </connections>
             <point key="canvasLocation" x="232.5" y="154.5"/>
         </customView>
     </objects>
+    <resources>
+        <image name="jump-to" width="10" height="10"/>
+    </resources>
 </document>

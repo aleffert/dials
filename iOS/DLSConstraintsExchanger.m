@@ -23,9 +23,9 @@ NSArray<DLSConstraintDescription*>* DLSExtractConstraintsForView(UIView* view, N
     NSMutableArray<DLSConstraintDescription*>* result = [[NSMutableArray alloc] init];
     for(NSLayoutConstraint* constraint in constraints) {
         if([constraint.firstItem isEqual:view] || [constraint.secondItem isEqual:view]) {
-            NSMutableArray<DLSAuxiliaryConstraintInformation*>* extras = [[NSMutableArray alloc] init];
+            NSMutableArray<id <DLSAuxiliaryConstraintInformation>>* extras = [[NSMutableArray alloc] init];
             for(id <DLSConstraintInformer> informer in provider()) {
-                DLSAuxiliaryConstraintInformation* info = [informer infoForConstraint:constraint];
+                id <DLSAuxiliaryConstraintInformation> info = [informer infoForConstraint:constraint];
                 if(info != nil) {
                     [extras addObject:info];
                 }

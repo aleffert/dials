@@ -10,12 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DLSAuxiliaryConstraintInformation : NSObject
+@protocol DLSSourceLocation;
 
-- (id)initWithPluginIdentifier:(NSString*)identifier userData:(id <NSCoding>)userData;
+@protocol DLSAuxiliaryConstraintInformation <NSObject, NSCoding>
 
 @property (readonly, copy, nonatomic) NSString* pluginIdentifier;
-@property (readonly, strong, nonatomic) id<NSCoding> userData;
+@property (readonly, assign, nonatomic) BOOL supportsSaving;
+@property (readonly, strong, nonatomic, nullable) id <DLSSourceLocation> location;
 
 @end
 

@@ -17,6 +17,7 @@
 #import "DLSPropertyWrapper.h"
 #import "DLSRemovable.h"
 #import "DLSSliderEditor.h"
+#import "DLSSourceLocation.h"
 #import "DLSStepperEditor.h"
 #import "DLSTextFieldEditor.h"
 #import "DLSToggleEditor.h"
@@ -96,7 +97,7 @@ static DLSControlPanelPlugin* sActivePlugin;
     [self.activeControls removeObjectForKey:uuid];
 }
 
-- (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor label:(NSString*)label canSave:(BOOL)canSave  file:(NSString*)file line:(size_t)line {
+- (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor label:(NSString*)label canSave:(BOOL)canSave file:(NSString*)file line:(size_t)line {
     __weak __typeof(self) owner = self;
     
     DLSControlInfo* info = [[DLSControlInfo alloc] init];

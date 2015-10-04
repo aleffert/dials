@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@class DLSAuxiliaryConstraintInformation;
+@protocol DLSAuxiliaryConstraintInformation;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol DLSConstraintInformer <NSObject>
 
-- (nullable DLSAuxiliaryConstraintInformation*)infoForConstraint:(NSLayoutConstraint*)constraint;
+- (nullable id<DLSAuxiliaryConstraintInformation>)infoForConstraint:(NSLayoutConstraint*)constraint;
 
 @end
 

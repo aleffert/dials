@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (assign, nonatomic) BOOL canSave;
 
-@property (copy, nonatomic, nullable) NSString* file;
+@property (strong, nonatomic, nullable) NSString* file;
 @property (assign, nonatomic) size_t line;
 
 @end

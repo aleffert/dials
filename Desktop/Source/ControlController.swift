@@ -84,7 +84,9 @@ class ControlController : NSObject, EditorControllerDelegate {
     }
     
     @IBAction func openFilePressed(sender : AnyObject) {
-        if let file = controlInfo.file { NSWorkspace.sharedWorkspace().openFile(file) }
+        if let file = controlInfo.file {
+            NSTask.launchedTaskWithLaunchPath("/usr/bin/xed", arguments: ["--line", controlInfo.line.description, file])
+        }
     }
     
     @IBAction func revertPressed(sender : AnyObject) {

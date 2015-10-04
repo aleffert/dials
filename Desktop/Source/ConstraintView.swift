@@ -24,8 +24,16 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
     
     @IBOutlet private var info : NSTextField!
     @IBOutlet private var editButton : NSButton!
+    @IBOutlet private var jumpButton : NSButton!
     
     var constraint : DLSConstraintDescription? = nil
+    
+    private var sourceLocation : DLSSourceLocation? {
+        let location = constraint?.extras.reduce(nil) { (current : DLSSourceLocation?, extra : DLSAuxiliaryConstraintInformation) in
+            return current ?? extra.location
+        }
+        return location
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +47,7 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
         info.addGestureRecognizer(chosenGesture)
         
         editButton.hidden = true
+        allowsJump = false
     }
     
     var complementaryViewID : String? {
@@ -77,6 +86,7 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
             self.delegate?.constraintView(self, choseHighlightViewWithID:viewID)
         }
         editButton.hidden = false
+        self.allowsJump = sourceLocation != nil
     }
     
     override func mouseExited(theEvent: NSEvent) {
@@ -86,11 +96,27 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
             self.delegate?.constraintView(self, clearedHighlightViewWithID:viewID)
         }
         editButton.hidden = true
+        self.allowsJump = false
     }
     
     var fields : (first : String, relation : String, second : String) = ("", "", "") {
         didSet {
             info.stringValue = "\(fields.first) \(fields.relation) \(fields.second)"
+        }
+    }
+    
+    var allowsJump : Bool = false {
+        didSet {
+            jumpButton.hidden = !allowsJump
+        }
+    }
+    
+    @IBAction func jump(sender : NSButton) {
+        if let location = sourceLocation {
+            NSTask.launchedTaskWithLaunchPath("/usr/bin/xed", arguments: ["-l", location.line.description, location.file])
+        }
+        else {
+            assertionFailure("Jump button pressed, but shouldn't be visible")
         }
     }
     

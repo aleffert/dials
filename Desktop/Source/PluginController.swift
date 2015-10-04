@@ -36,7 +36,7 @@ class PluginController: NSObject {
                     pluginClass = bundle.principalClass as? NSObject.Type,
                     plugin = pluginClass.init() as? Plugin {
                         registerPlugin(plugin)
-                        print("Registered plugin class:\(pluginClass)")
+                        print("Registered plugin class: \(pluginClass)")
                 }
             }
             else {
