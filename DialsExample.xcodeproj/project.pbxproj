@@ -302,7 +302,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/Desktop/Headers/",
+					"$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/Headers/",
 				);
 				INFOPLIST_FILE = DialsExample/ExamplePlugin/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -329,7 +329,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/Desktop/Headers/",
+					"$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/Headers/",
 				);
 				INFOPLIST_FILE = DialsExample/ExamplePlugin/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -436,10 +436,7 @@
 					"$(inherited)",
 					"$(BUILT_PRODUCTS_DIR)",
 				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/DialsShared/",
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = DialsExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
@@ -460,8 +457,8 @@
 					"$(BUILT_PRODUCTS_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
+					"$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/Headers/",
 					"$(inherited)",
-					"$(SRCROOT)/DialsShared/",
 				);
 				INFOPLIST_FILE = DialsExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
