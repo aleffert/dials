@@ -23,54 +23,64 @@ extension Optional {
 
 class CodeManagerTests: XCTestCase {
     
-    func sampleFileURLWithName(name : String) -> Result<NSURL> {
+    func sampleFileURLWithName(name : String) -> NSURL! {
         let url = NSURL(fileURLWithPath: name)
         let path = NSBundle(forClass: CodeManagerTests.classForCoder()).URLForResource(url.URLByDeletingPathExtension?.lastPathComponent, withExtension: url.pathExtension, subdirectory: "Sample Files")
         XCTAssertNotNil(path)
-        return path.toResult("Could not find file: \(name)")
+        return path
     }
 
     func testFindSymbolBasic() {
-        let path = sampleFileURLWithName("find-name.m")
-        path.bind {
-            return CodeManager().findSymbolWithName("Description", inFileAtURL: $0)
-        }.ifSuccess {(s : String) in
-            XCTAssertEqual(s, "SomeBoolean")
-        }.ifFailure {
-            XCTFail($0)
+        let url = sampleFileURLWithName("find-name.m")
+        do {
+            let symbol = try CodeManager().findSymbolWithName("Description", inFileAtURL: url)
+            XCTAssertEqual(symbol, "SomeBoolean")
+        }
+        catch let e as NSError {
+            XCTFail(e.localizedDescription)
         }
     }
     
     func testFindSymbolArgumentsObjC() {
-        let path = sampleFileURLWithName("find-name.m")
-        path.bind {
-            CodeManager().findSymbolWithName("Other Content", inFileAtURL: $0)
-            }.ifSuccess {
-                XCTAssertEqual($0, "SomeFloat")
-            }.ifFailure {
-                XCTFail($0)
+        let url = sampleFileURLWithName("find-name.m")
+        do {
+            let symbol = try CodeManager().findSymbolWithName("Other Content", inFileAtURL: url)
+            XCTAssertEqual(symbol, "SomeFloat")
+        }
+        catch let e as NSError {
+            XCTFail(e.localizedDescription)
         }
     }
     
     func testFindSymbolArgumentsSwiftBase() {
-        let symbol = CodeManager().findSymbolWithName("Test", inString: "DLSControl(\"Test\").colorOf(&foo)", ofLanguage: .Swift)
-        XCTAssertEqual(symbol.value ?? "", "foo", symbol.error ?? "Unknown Error")
+        do {
+            let symbol = try CodeManager().findSymbolWithName("Test", inString: "DLSControl(\"Test\").colorOf(&foo)", ofLanguage: .Swift)
+            XCTAssertEqual(symbol, "foo")
+        }
+        catch let e as NSError {
+            XCTFail(e.localizedDescription)
+        }
     }
     
     func testFindSymbolArgumentsSwiftSpaceDots() {
-        let symbol = CodeManager().findSymbolWithName("Test", inString: "DLSControl(\"Test\") . colorOf(&foo)", ofLanguage: .Swift)
-        XCTAssertEqual(symbol.value ?? "", "foo", symbol.error ?? "Unknown Error")
+        do {
+            let symbol = try CodeManager().findSymbolWithName("Test", inString: "DLSControl(\"Test\") . colorOf(&foo)", ofLanguage: .Swift)
+            XCTAssertEqual(symbol, "foo")
+        }
+        catch let e as NSError {
+            XCTFail(e.localizedDescription)
+        }
     }
     
     
     func testReplace() {
-        let path = sampleFileURLWithName("find-name.m")
-        path.bind {
-            CodeManager().findSymbolWithName("Other Content", inFileAtURL: $0)
-            }.ifSuccess {
-                XCTAssertEqual($0, "SomeFloat")
-            }.ifFailure {
-                XCTFail($0)
+        let url = sampleFileURLWithName("find-name.m")
+        do {
+            let symbol = try CodeManager().findSymbolWithName("Other Content", inFileAtURL: url)
+            XCTAssertEqual(symbol, "SomeFloat")
+        }
+        catch let e as NSError {
+            XCTFail(e.localizedDescription)
         }
     }
 }
