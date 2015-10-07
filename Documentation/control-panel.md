@@ -3,7 +3,13 @@ The Control Panel plugin lets you create screens of controls on the Desktop that
 Here is an example control panel:
 ![Control Panel Plugin Example](control-panel.png)
 
-To create a control, you need to declare it in your code. The DialsExample project that is part of the Dials distribution has a number of [Objective-C examples](../DialsExample/Source/ViewController.m) and [Swift examples](../DialsExample/Source/ViewController.m).
+And here is a video of the feature in action:
+
+<video controls preload> 
+<source src="https://github.com/aleffert/dials/raw/master/Documentation/control-panel-example-1080.mp4"></source> 
+</video>
+
+To create a control, you need to declare it in your code. The DialsExample project that is part of the Dials distribution has a number of [Objective-C examples](../DialsExample/Source/ViewController.m) and [Swift examples](../DialsExample/Source/TestViewController.swift).
 
 To declare a control you can simply call the ``DLSControl`` function. This will create a control in the desktop app that will automatically go away when the calling object gets deallocated. Here's an example that creates a new Slider.
 
@@ -41,5 +47,5 @@ Swift:
 DLSControl("someProperty").asColor()
 ```
 
-There is a full list of editors in [``DLSControlPanelPlugin.h``](../iOS/Source/DLSControlPanelPlugin.h).
+There is a full list of editors in [``DLSControlPanelPlugin.h``](../iOS/DLSControlPanelPlugin.h).
 
