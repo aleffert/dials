@@ -3,11 +3,7 @@ The Control Panel plugin lets you create screens of controls on the Desktop that
 Here is an example control panel:
 ![Control Panel Plugin Example](control-panel.png)
 
-And here is a video of the feature in action:
-
-<video controls preload> 
-<source src="https://github.com/aleffert/dials/raw/master/Documentation/control-panel-example-1080.mp4"></source> 
-</video>
+And [here is a video of the feature in action](control-panel-example-1080.mp4?raw=true).
 
 To create a control, you need to declare it in your code. The DialsExample project that is part of the Dials distribution has a number of [Objective-C examples](../DialsExample/Source/ViewController.m) and [Swift examples](../DialsExample/Source/TestViewController.swift).
 
