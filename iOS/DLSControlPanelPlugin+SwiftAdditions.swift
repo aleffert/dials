@@ -11,6 +11,7 @@ import UIKit
 
 public extension NSObject {
     
+    /// Create a new control whose lifetime matches self
     func DLSControl(
         label : String,
         line : Int = __LINE__,
@@ -18,6 +19,7 @@ public extension NSObject {
             return DLSReferenceControlBuilder(label: label, canSave: true, owner : self, file : file, line : line)
     }
     
+    /// Create a new control whose lifetime matches self
     func DLSControl(
         keyPath keyPath : String,
         line : Int = __LINE__,

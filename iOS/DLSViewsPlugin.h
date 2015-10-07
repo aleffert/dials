@@ -38,6 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @return A way to remove the added description functions.
 - (id <DLSRemovable>)addExtraViewDescriptionForClass:(Class)klass generator:(void(^)(id <DLSDescriptionContext> context))generator;
 
+/// Adds additional information to NSLayoutConstraints captured by this plugin. Can be used
+/// in conjunction with an autolayout library to support extra editing features.
+///
+/// @param informer A class implementing a protocol that returns extra information given an
+/// NSLayoutConstraint. Will connect to a corresponding desktop plugin that implements
+/// <code>ConstraintPlugin</code>.
+/// @return A way to remove the added description functions.
 - (id <DLSRemovable>)addAuxiliaryConstraintInformer:(id <DLSConstraintInformer>)informer;
 
 @end
