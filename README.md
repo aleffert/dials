@@ -17,7 +17,7 @@ See it in action:
 - [View Debugger](Documentation/view-debugger-example-1080.mp4)
 - [Network Watcher](Documentation/network-requests-example-1080.mp4)
 
-Additionally, check out [Snaps](http://github.com/aleffert/snaps/) a Dials plugin that extends the built in autolayout constraint editor to write your changes back to your code when you're using the [SnapKit](http://github.com/SnapKit/SnapKit/) library for layout.
+Additionally, check out [Snaps](http://github.com/aleffert/snaps/), a Dials plugin that extends Dials' built in autolayout constraint editor to write your changes back to your code when you're using the [SnapKit](http://github.com/SnapKit/SnapKit/) autolayout library.
 
 ## Setup
 

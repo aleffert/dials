@@ -1,7 +1,7 @@
 The Control Panel plugin lets you create screens of controls on the Desktop that will modify values in your running iOS app. It will also save changes to a value back to your code if you press the save button attached to that control.
 
 Here is an example control panel:
-![Control Panel Plugin Example](control-panel-example.png)
+![Control Panel Plugin Example](control-panel.png)
 
 To create a control, you need to declare it in your code. The DialsExample project that is part of the Dials distribution has a number of [Objective-C examples](DialsExample/Source/ViewController.m) and [Swift examples](DialsExample/Source/ViewController.m).
 
