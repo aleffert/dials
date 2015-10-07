@@ -110,7 +110,7 @@ The Control Panel plugin requires you to declare in your code each control that 
 
 ### Contributing
 
-Dials welcomes your contributions for new editors, new plugins, smarter code understanding, or any other cool idea you come up with. We're also always happy to see smaller things like documentation improvements, unit tests, or general housekeeping. You're also encouraged to publish free standing Dials plugins like [Snaps](http://github.com/aleffert/snaps/) that aren't part of the core Dials distribution.
+Dials welcomes your contributions for new editors, new plugins, smarter code understanding, or any other cool idea you come up with. We're also always thrilled to see smaller things like bug fixes, documentation improvements, unit tests, or general housekeeping. You're also encouraged to publish free standing Dials plugins like [Snaps](http://github.com/aleffert/snaps/) that aren't part of the core Dials distribution. If you do, please let us know so we can be excited about it!
 
 
 

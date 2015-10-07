@@ -33,7 +33,7 @@ DLSPropertyDescription* DLSProperty(NSString* name, id <DLSEditor> editor);
 
 /// Extensions to control how this property is converted between representations.
 /// In particular, used for things that don't implement NSCoding like CGColorRef
-/// and NSValues wrapped around CGRects
+/// and NSValues wrapped around CGRects. See UIView+DLSDescribable for examples
 @interface DLSPropertyDescription (DLSValueExtensions)
 
 /// Way to set this property onto a particular object
