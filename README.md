@@ -1,19 +1,23 @@
 # Dials
-Dials is a desktop app for controlling and debugging your iOS app. It has a simple extensible architecture to make it easy for you to add your own plugins without having to worry about the details of setting up and maintaining a network connection. It also comes with several useful built in plugins:
+Dials is a desktop app for controlling and debugging your iOS app. It has a simple extensible architecture to make it easy for you to add your own plugins without having to worry about the details of setting up and maintaining a connection between your iOS app and the desktop display. It also comes with several useful built in plugins:
 
 1. A view debugger similar to the Xcode view debugger but it can:
     1. Write properties and not just read them.
     2. Be easily extended to support custom properties for your own views.
     3. Be easily extended for new types of desktop editors.
     4. View the margins between views.
+
 2. A network requests debugger that tells you all about what data your app is sending and receiving.
-3. A control panel that lets you connect arbitrary pieces of code to controls on the desktop. You can then save changes directly back to your code with the push of a button.
+
+3. A control panel that lets you connect arbitrary variables to controls on the desktop. In addition to sending the new values back to your running application, you can also save changes directly back to your code with the push of a button.
 
 See it in action:
 
 - [Control Panel](Documentation/control-panel-example-1080.mp4)
 - [View Debugger](Documentation/view-debugger-example-1080.mp4)
 - [Network Watcher](Documentation/network-requests-example-1080.mp4)
+
+Additionally, check out [Snaps](http://github.com/aleffert/snaps/) a Dials plugin that extends the built in autolayout constraint editor to write your changes back to your code when using the [SnapKit](http://github.com/SnapKit/SnapKit/) library.
 
 ## Setup
 
@@ -89,12 +93,10 @@ Once you have the files downloaded, you will need to do the following:
 
 ### Running Dials
 
-Once you have Dials configured, you can start it by running your app in the simulator and then, while your app is still running, choosing the ``Dials.app`` scheme from within Xcode and running that at the same time. You can also build ``Dials.app`` and run that from the finder, separately from Xcode.
+Once you have Dials configured, you can start it by running your app in the simulator and then, while your app is still running, choosing the ``Dials.app`` scheme from within Xcode and running that at the same time. You can also build ``Dials.app`` and afterward, run that executable from the Finder without involving Xcode.
 
 
-## Usage
+### Usage
 
-Dials is an extensible framework for writing your own plugins. See [here](Documentation/new-plugin.md) for information on adding a custom plugin.
-
-It comes with two plugins that require no additional work on your part: The View Adjust plugin and the Network Requests plugin.
+Dials comes with two plugins that require no additional work on your part: The Views plugin and the Network Requests plugin. However, the Views plugin gains additional power if you extend it to support your custom views. See the documentation for more details.
 
