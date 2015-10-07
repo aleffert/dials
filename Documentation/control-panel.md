@@ -1,6 +1,6 @@
 The Control Panel plugin lets you create screens of controls on the Desktop that will modify values in your running iOS app. It will also save changes to a value back to your code if you press the save button attached to that control.
 
-Here is an example control panel:
+Here is an example control panel that contrains two *example groups* of controls:
 ![Control Panel Plugin Example](control-panel.png)
 
 And [here is a video of the feature in action](control-panel-example-1080.mp4?raw=true).
@@ -13,18 +13,26 @@ Objective-C:
 ```
 NSColor* aColor = [UIColor blackColor];
 
-...
+@implementation SomeClass
 
-DLSControl(@"My Color").colorOf(&aColor);
+- (void)someMethod {
+    DLSControl(@"My Color").colorOf(&aColor);
+}
+
+@end
 ```
 
 Swift:
 ```
 var aColor = UIColor.blackColor()
 
-...
+class Some Class {
 
-DLSControl("My Color").colorOf(&aColor);
+    func someMethod() {
+        DLSControl("My Color").colorOf(&aColor)
+    }
+
+}
 
 ```
 
