@@ -1,7 +1,11 @@
+## Using the Control Panel plugin
+
 The Control Panel plugin lets you create screens of controls on the Desktop that will modify values in your running iOS app. It will also save changes to a value back to your code if you press the save button attached to that control.
 
-Here is an example control panel that contrains two *example groups* of controls:
+Here is an example control panel:
 ![Control Panel Plugin Example](control-panel.png)
+
+You can see that there are several items under "Control Panel" in the left sidebar. The plugin lets you group your controls under a name to organize them.
 
 And [here is a video of the feature in action](control-panel-example-1080.mp4?raw=true).
 
@@ -36,7 +40,7 @@ class Some Class {
 
 ```
 
-When your code gets called your control will show up under the Control Panel tab in the Dials desktop app. You can create groups of controls using ``DLSControlGroupWithName``. That will nest any controls created in the associated block together in a tab within the desktop app with the given name. If no group is currently specified, controls will appear under the "Top Level" item listed with Control Panel.
+When your code gets called your control will show up under the Control Panel tab in the Dials desktop app. You can create groups of controls using ``DLSControlGroupWithName``. That will nest any controls created in the associated block together in a tab within the desktop app with the given group name. If no group is currently specified, controls will appear under the "Top Level" item listed with Control Panel.
 
 
 There is also a variant of ``DLSControl`` that works with Key-Value coding compliant keypaths.
@@ -51,5 +55,5 @@ Swift:
 DLSControl("someProperty").asColor()
 ```
 
-There is a full list of editors in [``DLSControlPanelPlugin.h``](../iOS/DLSControlPanelPlugin.h).
+You can find a list of built in editors in [``DLSControlPanelPlugin.h``](../iOS/DLSControlPanelPlugin.h) or you can add your own by [writing an editor plugin](new-plugin.md).
 

@@ -17,7 +17,7 @@ See it in action:
 - [View Debugger](Documentation/view-debugger-example-1080.mp4?raw=true)
 - [Network Watcher](Documentation/network-requests-example-1080.mp4?raw=true)
 
-Additionally, check out [Snaps](http://github.com/aleffert/snaps/), a Dials plugin that extends Dials' built in autolayout constraint editor to write your changes back to your code when you're using the [SnapKit](http://github.com/SnapKit/SnapKit/) autolayout library.
+Additionally, check out [Snaps](http://github.com/aleffert/snaps/), a Dials plugin that extends Dials' built in autolayout editor to write your changes back to your code.
 
 ## Setup
 
@@ -98,7 +98,7 @@ Note that we recommend only enabling Dials in ``DEBUG`` builds since it creates 
 
 ### Running Dials
 
-Once you have Dials configured, you can start it by running your app in the simulator and then, while your app is still running, choosing the ``Dials.app`` scheme from within Xcode and running that at the same time. You can also build ``Dials.app`` and afterward, run that executable from the Finder without involving Xcode.
+Once you have Dials configured, you can start it by running your app in the simulator on a device and then, while your app is still running, choosing the ``Dials.app`` scheme from within Xcode and running that at the same time. You can also build ``Dials.app`` and afterward, run that executable from the Finder without involving Xcode.
 
 
 ### Usage
