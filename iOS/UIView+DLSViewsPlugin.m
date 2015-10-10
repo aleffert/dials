@@ -57,17 +57,12 @@ static void DLSWithViewLock(void(^action)(void)) {
 
 @implementation UIView (DLSViews)
 
-#define DLSSwizzle(receiver, method) \
-[receiver dls_swizzleMethod:@selector(method) withMethod:@selector(dls_##method) error: &error];  \
-NSAssert(error == nil, @"Dials: Error swizzling in view change listeners")
-
 + (void)dls_setListeningForChanges:(BOOL)listening {
     static BOOL sIsListening = NO;
     if(sIsListening != listening) {
         sIsListening = listening;
         
         // cheap property changes
-        NSError* error = nil;
         DLSSwizzle(self, willMoveToSuperview:);
         DLSSwizzle(self, didMoveToSuperview);
         DLSSwizzle(self, exchangeSubviewAtIndex:withSubviewAtIndex:);

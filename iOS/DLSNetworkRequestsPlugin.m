@@ -10,10 +10,21 @@
 
 #import "DLSNetworkRequestsMessages.h"
 #import "DLSNetworkProxyProtocol.h"
+#import "NSObject+DLSSwizzle.h"
 
 @interface DLSNetworkRequestsPlugin () <DLSNetworkProxyProtocolDelegate>
 
 @property (strong, nonatomic) id <DLSPluginContext> context;
+
+@end
+
+@implementation NSURLSessionConfiguration (DLSNetworkInterception)
+
+- (NSArray*)dls_protocolClasses {
+    NSArray* original = [self dls_protocolClasses];
+    NSArray* result = [@[ [DLSNetworkProxyProtocol class] ] arrayByAddingObjectsFromArray:original];
+    return result;
+}
 
 @end
 
@@ -25,6 +36,16 @@
 
 - (void)start {
     [NSURLProtocol registerClass:[DLSNetworkProxyProtocol class]];
+    
+    // NSURLSessionConfiguration is an illusion. The protocolClasses method
+    // is only implemented on __NSCFURLSessionConfiguration which is the concrete
+    // subclass returned by the NSURLSessionConfiguration class methods.
+    // You can see this by calling [[NSURLSession alloc] init] and trying to
+    // set the protocolClasses property on it which just crashes.
+    // So instead of swizzling NSURLSessionConfiguration directly,
+    // we just swizzle whatever class is returned here.
+    NSURLSessionConfiguration* configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    DLSSwizzle(configuration.class, protocolClasses);
     [DLSNetworkProxyProtocol setDelegate:self];
 }
 
