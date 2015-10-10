@@ -227,8 +227,7 @@ static DLSViewsPlugin* sActivePlugin;
                            @"opacity",
                            @"shadowOpacity",
                            @"shadowRadius",
-                           @"shadowOffset",
-                           @"shadowPath"]) {
+                           @"shadowOffset"]) {
         id value = [view.layer valueForKey:key];
         if(value == nil) {
             contentValues[key] = [NSNull null];
