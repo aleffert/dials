@@ -206,13 +206,13 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     func updateHighlights() {
         for layer in layers.values {
             if layer.record.viewID == self.currentSelection {
-                layer.borderLayer.borderColor = BorderStyle.Selected.color.CGColor
+                layer.borderStyle = .Selected
             }
             else if layer.record.viewID == self.externalHighlight {
-                layer.borderLayer.borderColor = BorderStyle.Highlighted.color.CGColor
+                layer.borderStyle = .Highlighted
             }
             else {
-                layer.borderLayer.borderColor = BorderStyle.Normal.color.CGColor
+                layer.borderStyle = .Normal
             }
         }
     }
@@ -391,7 +391,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         
         marginsLayer.comparison = layerAtPointInContentView(viewLocation)
         if let comparison = marginsLayer.comparison {
-            comparison.borderLayer.borderColor = BorderStyle.Highlighted.color.CGColor
+            comparison.borderStyle = .Highlighted
             marginsLayer.transform = CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0.001), comparison.contentLayer.transform)
         }
         

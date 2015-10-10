@@ -14,11 +14,18 @@ enum BorderStyle {
     case Selected
     case Highlighted
     
-    var color : NSColor {
-        switch(self) {
+    private var color : NSColor {
+        switch self {
         case Normal: return NSColor.lightGrayColor().colorWithAlphaComponent(0.4)
         case Selected: return NSColor.blueColor()
         case Highlighted: return NSColor.greenColor()
+        }
+    }
+    
+    private var width : CGFloat {
+        switch self {
+        case Normal: return 1
+        case Selected, Highlighted: return 2
         }
     }
 }
@@ -39,8 +46,7 @@ class ViewFacade : CATransformLayer {
         
         super.init()
         
-        borderLayer.borderWidth = 1
-        borderLayer.borderColor = NSColor.lightGrayColor().colorWithAlphaComponent(1.0).CGColor
+        self.borderStyle = .Normal
         
         let layoutManager = CAConstraintLayoutManager() 
         self.layoutManager = layoutManager
@@ -51,6 +57,13 @@ class ViewFacade : CATransformLayer {
         borderLayer.addConstraintsMatchingSuperviewBounds(NSEdgeInsets(top: -1, left: -1, bottom: 1, right: 1))
         
         contentLayer.addConstraintsMatchingSuperviewBounds()
+    }
+    
+    var borderStyle : BorderStyle = .Normal {
+        didSet {
+            borderLayer.borderWidth = borderStyle.width
+            borderLayer.borderColor = borderStyle.color.CGColor
+        }
     }
     
     override init(layer : AnyObject) {
