@@ -137,14 +137,18 @@ static void DLSWithViewLock(void(^action)(void)) {
 
 // Unique ID per view
 
+- (NSString*)dls_assignedViewID {
+    return objc_getAssociatedObject(self, &DLSViewIDKey);
+}
+
 - (NSString*)dls_viewID {
-    __block NSString* viewID = objc_getAssociatedObject(self, &DLSViewIDKey);
+    __block NSString* viewID = self.dls_assignedViewID;
     if(viewID == nil) {
         DLSWithViewLock(^{
-            viewID = objc_getAssociatedObject(self, &DLSViewIDKey);
+            viewID = self.dls_assignedViewID;
             if(viewID == nil) {
                 viewID = [NSUUID UUID].UUIDString;
-                objc_setAssociatedObject(self, &DLSViewIDKey, viewID, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                objc_setAssociatedObject(self, &DLSViewIDKey, viewID, OBJC_ASSOCIATION_RETAIN);
             }
         });
     }

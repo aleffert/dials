@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)dls_setListeningForChanges:(BOOL)listening;
 
+/// Returns the view's unique id, assigning it if necessary
+@property (readonly, nonatomic) NSString* dls_assignedViewID;
+/// Returns the view's unique id, assigning it if necessary
 @property (readonly, nonatomic) NSString* dls_viewID;
 
 @end

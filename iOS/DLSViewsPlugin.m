@@ -55,8 +55,6 @@ static const NSTimeInterval DLSViewUpdateInterval = .1;
 @property (strong, nonatomic) NSMutableSet<NSString*>* surfaceUpdatedViewIDs;
 @property (strong, nonatomic) NSMutableSet<NSString*>* displayUpdatedViewIDs;
 
-@property (strong, nonatomic) NSMutableSet<NSString*>* usedViewIDs;
-
 @property (strong, nonatomic) id windowChangedListener;
 
 @property (strong, nonatomic) NSMutableArray<DLSViewDescriptionGenerator*>* viewDescriptionGenerators;
@@ -106,7 +104,6 @@ static DLSViewsPlugin* sActivePlugin;
     }
     
     self.viewIDs = [NSMapTable strongToWeakObjectsMapTable];
-    self.usedViewIDs = [[NSMutableSet alloc] init];
     [self sendMessage:[self fullHierarchyMessage]];
     [self sendAllKnownViewContentsMessage];
     
@@ -475,15 +472,14 @@ static DLSViewsPlugin* sActivePlugin;
 @implementation DLSViewsPlugin (Internal)
 
 - (NSString*)viewIDForView:(UIView*)view {
-    NSString* viewID = view.dls_viewID;
+    if(view == nil) {
+        return nil;
+    }
+    NSString* viewID = view.dls_assignedViewID;
     @synchronized(self.viewIDs) {
-        if(view == nil) {
-            return nil;
-        }
-        
-        if(![self.usedViewIDs containsObject:viewID]) {
-            [self.viewIDs setObject:view forKey:viewID];
-            [self.usedViewIDs addObject:viewID];
+        if(viewID == nil) {
+            viewID = view.dls_viewID;
+            [self.viewIDs setObject:view forKey:view.dls_viewID];
         }
     }
     return viewID;
