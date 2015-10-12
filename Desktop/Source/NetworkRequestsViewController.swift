@@ -36,6 +36,11 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet var emptyView : NSView?
     @IBOutlet var infoView : NetworkRequestInfoView?
     
+    deinit {
+        tableView?.setDelegate(nil)
+        tableView?.setDataSource(nil)
+    }
+    
     override func viewDidAppear() {
         super.viewDidAppear()
         // If we don't do this, the table won't properly account for the content inset.
