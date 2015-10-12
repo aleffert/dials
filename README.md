@@ -13,7 +13,7 @@ Dials is a desktop app for controlling and debugging your iOS app. It has a simp
 
 See it in action:
 
-- [Control Panel](Documentation/control-panel-example-1080.mp4?raw=true)
+- [Control Panel](Documentation/control-panel.html?raw=true)
 - [View Debugger](Documentation/views-plugin-example.mp4?raw=true)
 - [Network Watcher](Documentation/network-requests-example.mp4?raw=true)
 
