@@ -103,4 +103,11 @@
     });
 }
 
+- (void)connectionCancelledWithID:(NSString *)connectionID {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        DLSNetworkConnectionCancelledMessage* message = [[DLSNetworkConnectionCancelledMessage alloc] init];
+        [self sendMessage:message forConnectionID:connectionID];
+    });
+}
+
 @end

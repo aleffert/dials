@@ -74,10 +74,17 @@ class NetworkRequestStatusView: NSView {
     }
     
     private static func requestMessageFields(info : NetworkRequestInfo) -> [(String, String)] {
-        var fields : [(String, String)] = [
+        var fields : [(String, String)] = []
+        
+        if let URL = info.request.URL {
+            let field = ("URL", URL.absoluteString)
+            fields.append(field)
+        }
+        
+        fields.appendContentsOf([
             ("Start Date", info.startTime.preciseDateString),
             ("End Date", info.endTime?.preciseDateString ?? "In Progress")
-        ]
+        ])
         
         if let method = info.request.HTTPMethod {
             let field = ("Method", method)

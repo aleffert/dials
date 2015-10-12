@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)connectionWithID:(NSString*)connectionID receivedData:(NSData*)data;
 - (void)connectionWithID:(NSString*)connectionID completedWithResponse:(NSURLResponse*)response;
 - (void)connectionWithID:(NSString*)connectionID failedWithError:(NSError*)error;
+- (void)connectionCancelledWithID:(NSString*)connectionID;
 
 @end
 

@@ -40,7 +40,7 @@ extension NSHTTPURLResponse {
             
             // Failure
             case 400: return "Bad Request"
-            case 401: return "Unauthorised"
+            case 401: return "Unauthorized"
             case 402: return "Payment Required"
             case 403: return "Forbidden"
             case 404: return "Not Found"

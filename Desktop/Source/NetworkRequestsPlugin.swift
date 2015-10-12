@@ -52,5 +52,8 @@ class NetworkRequestsPlugin: NSObject, Plugin {
         else if let m = message as? DLSNetworkConnectionReceivedDataMessage {
             controller?.handleReceivedDataMessage(m)
         }
+        else if let m = message as? DLSNetworkConnectionCancelledMessage {
+            controller?.handleCancelMessage(m)
+        }
     }
 }

@@ -96,3 +96,7 @@ NSString* const DLSNetworkRequestsPluginIdentifier = @"com.akivaleffert.dials.ne
 }
 
 @end
+
+@implementation DLSNetworkConnectionCancelledMessage
+
+@end

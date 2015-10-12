@@ -43,4 +43,9 @@ extern NSString* const DLSNetworkRequestsPluginIdentifier;
 
 @end
 
+@interface DLSNetworkConnectionCancelledMessage : DLSNetworkConnectionMessage <NSCoding>
+
+@end
+
+
 NS_ASSUME_NONNULL_END

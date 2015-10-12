@@ -19,6 +19,7 @@ class NetworkRequestInfo {
     var response : NSURLResponse?
     var error : NSError?
     var data : NSMutableData?
+    var cancelled : Bool = false
     
     init(request : NSURLRequest, startTime : NSDate) {
         self.request = request
@@ -51,13 +52,14 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
                 return "Loaded"
             }
         }
+        else if request.cancelled {
+            return "Cancelled"
+        }
+        else if let error = request.error {
+            return "Error (\(error.code))"
+        }
         else {
-            if let error = request.error {
-                return "Error (\(error.code))"
-            }
-            else {
-                return "Loading"
-            }
+            return "Loading"
         }
     }
     
@@ -97,29 +99,53 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
         }
     }
     
+    func reload() {
+        let atBottom : Bool
+        if let clipView = tableView?.enclosingScrollView?.contentView {
+            let documentRect = clipView.documentRect
+            let bounds = clipView.bounds
+            atBottom = bounds.maxY == documentRect.height
+        }
+        else {
+            atBottom = false
+        }
+        
+        tableView?.reloadData()
+        if atBottom {
+            tableView?.scrollToEndOfDocument(self)
+        }
+    }
+    
     func handleBeganMessage(message : DLSNetworkConnectionBeganMessage) {
         let info = NetworkRequestInfo(request: message.request, startTime: message.timestamp)
         requests.append(info)
         requestIndex[message.connectionID] = info
-        tableView?.reloadData()
+        reload()
     }
     
     func handleCompletedMessage(message : DLSNetworkConnectionCompletedMessage) {
         let info = requestIndex[message.connectionID]
         info?.response = message.response
         info?.endTime = message.timestamp
-        tableView?.reloadData()
+        reload()
     }
     
     func handleFailedMessage(message : DLSNetworkConnectionFailedMessage) {
         let info = requestIndex[message.connectionID]
         info?.error = message.error
-        tableView?.reloadData()
+        reload()
     }
     
     func handleReceivedDataMessage(message : DLSNetworkConnectionReceivedDataMessage) {
         let info = requestIndex[message.connectionID]
         info?.data?.appendData(message.data)
-        tableView?.reloadData()
+        reload()
+    }
+    
+    func handleCancelMessage(message : DLSNetworkConnectionCancelledMessage) {
+        let info = requestIndex[message.connectionID]
+        info?.endTime = message.timestamp
+        info?.cancelled = true
+        reload()
     }
 }

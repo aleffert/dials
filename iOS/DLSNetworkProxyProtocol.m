@@ -43,6 +43,7 @@ static id <DLSNetworkProxyProtocolDelegate> sDelegate;
 }
 - (void)stopLoading {
     [self.underlyingConnection cancel];
+    [sDelegate connectionCancelledWithID:self.uuid];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
