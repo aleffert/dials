@@ -92,7 +92,7 @@ ConstraintInfoOwner {
     
     func tableController(controller: ViewPropertyTableController, nameOfConstraintWithInfo info: DLSAuxiliaryConstraintInformation) -> String? {
         guard let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first else {
-            // TODO show error
+            print("Plugin not found: \(info.pluginIdentifier)")
             return nil
         }
         return plugin.displayNameOfConstraint(info)
@@ -100,14 +100,22 @@ ConstraintInfoOwner {
     
     func tableController(controller: ViewPropertyTableController, saveConstraintWithInfo info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
         guard let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first else {
-            // TODO show error
+            showSaveError("Plugin not found: " + info.pluginIdentifier)
             return
         }
         do {
             try plugin.saveConstraint(info, constant: constant)
         }
-        catch _ as NSError {
-            // TODO show error
+        catch let e as NSError {
+            showSaveError(e.localizedDescription)
         }
+    }
+    
+    func showSaveError(message : String) {
+        let alert = NSAlert()
+        alert.messageText = "Error Updating Code"
+        alert.informativeText = message
+        alert.addButtonWithTitle("Okay")
+        alert.runModal()
     }
 }
