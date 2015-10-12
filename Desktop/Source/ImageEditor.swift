@@ -35,4 +35,8 @@ class ImageEditorView: EditorView {
             delegate?.editorController(self, changedToValue: imageData)
         }
     }
+    
+    @IBAction func clearImage(sender : NSButton) {
+        delegate?.editorController(self, changedToValue: nil)
+    }
 }

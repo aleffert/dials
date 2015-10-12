@@ -44,9 +44,11 @@ class StepperEditorView : EditorView {
     
     override var configuration : EditorConfiguration? {
         didSet {
-            let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
-            stepper?.floatValue = floatValue
-            field?.floatValue = floatValue
+            if !(stepper?.highlighted ?? false) && field?.currentEditor() == nil {
+                let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
+                stepper?.floatValue = floatValue
+                field?.floatValue = floatValue
+            }
             name?.stringValue = configuration?.label ?? "Stepper"
         }
     }

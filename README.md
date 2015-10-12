@@ -15,9 +15,9 @@ See it in action:
 
 - [Control Panel](Documentation/control-panel-example-1080.mp4?raw=true)
 - [View Debugger](Documentation/view-debugger-example-1080.mp4?raw=true)
-- [Network Watcher](Documentation/network-requests-example-1080.mp4?raw=true)
+- [Network Watcher](Documentation/network-requests-example.mp4?raw=true)
 
-Additionally, check out [Snaps](http://github.com/aleffert/snaps/), a Dials plugin that extends Dials' built in autolayout editor to write your changes back to your code.
+Additionally, check out [Snaps](http://github.com/aleffert/snaps/), a Dials plugin that extends Dials' built in autolayout editor to enable you to save your changes directly back to your source code.
 
 ## Setup
 

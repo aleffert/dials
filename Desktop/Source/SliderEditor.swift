@@ -51,10 +51,12 @@ class SliderEditorView : EditorView {
     
     override var configuration : EditorConfiguration? {
         didSet {
-            let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
-            slider?.floatValue = floatValue
-            currentLabel?.stringValue = stringFromNumber(floatValue)
-            
+            if !(slider?.highlighted ?? false) {
+                let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
+                slider?.floatValue = floatValue
+                currentLabel?.stringValue = stringFromNumber(floatValue)
+                
+            }
             name?.stringValue = configuration?.label ?? "Slider"
         }
     }

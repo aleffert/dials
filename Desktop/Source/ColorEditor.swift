@@ -47,9 +47,10 @@ class ColorEditorView : EditorView {
     override var configuration : EditorConfiguration? {
         didSet {
             NSColorPanel.sharedColorPanel().showsAlpha = true
-            
-            let color = configuration?.value as? NSColor
-            well?.color = color ?? NSColor.clearColor()
+            if !(well?.active ?? false) {
+                let color = configuration?.value as? NSColor
+                well?.color = color ?? NSColor.clearColor()
+            }
             
             name?.stringValue = configuration?.label ?? "Color"
         }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="EditorViewNibOwner" customModule="Dials" customModuleProvider="target">
@@ -15,9 +15,9 @@
             <rect key="frame" x="0.0" y="0.0" width="180" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S5C-ht-V5g">
-                    <rect key="frame" x="-2" y="66" width="33" height="14"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="2b3-wR-1MU">
+                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5C-ht-V5g">
+                    <rect key="frame" x="-2" y="66" width="74" height="14"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Label" id="2b3-wR-1MU">
                         <font key="font" metaFont="smallSystem"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -34,10 +34,23 @@
                         <action selector="imageChanged:" target="c22-O7-iKe" id="Ztc-eF-WHt"/>
                     </connections>
                 </imageView>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PGb-du-KEy">
+                    <rect key="frame" x="78" y="66" width="14" height="15"/>
+                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="clear" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="bK5-X7-Slb">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="smallSystemBold"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="clearImage:" target="c22-O7-iKe" id="O4s-Ij-LUu"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="lvB-Ox-8GW" firstAttribute="leading" secondItem="PGb-du-KEy" secondAttribute="trailing" constant="8" symbolic="YES" id="QUK-pc-pgv"/>
                 <constraint firstItem="lvB-Ox-8GW" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="100" id="T7k-dp-UAA"/>
+                <constraint firstItem="PGb-du-KEy" firstAttribute="centerY" secondItem="S5C-ht-V5g" secondAttribute="centerY" id="km9-r2-rue"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lvB-Ox-8GW" secondAttribute="trailing" id="koC-1j-ugw"/>
+                <constraint firstItem="PGb-du-KEy" firstAttribute="leading" secondItem="S5C-ht-V5g" secondAttribute="trailing" constant="8" id="s08-15-8Qh"/>
                 <constraint firstItem="S5C-ht-V5g" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="uNe-40-Qcz"/>
                 <constraint firstItem="lvB-Ox-8GW" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="wb4-GV-bM2"/>
                 <constraint firstAttribute="bottom" secondItem="lvB-Ox-8GW" secondAttribute="bottom" id="yf6-RA-oAG"/>
@@ -49,4 +62,7 @@
             </connections>
         </customView>
     </objects>
+    <resources>
+        <image name="clear" width="11" height="11"/>
+    </resources>
 </document>

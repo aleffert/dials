@@ -77,6 +77,7 @@ NSString* DLSPortableLayoutAttribute(NSLayoutAttribute attribute) {
         self.relation = DLSPortableLayoutRelation(constraint.relation);
         self.constant = constraint.constant;
         self.multiplier = constraint.multiplier;
+        self.priority = constraint.priority;
         self.active = constraint.active;
         self.sourceAttribute = DLSPortableLayoutAttribute(constraint.firstAttribute);
         self.destinationAttribute = DLSPortableLayoutAttribute(constraint.secondAttribute);
