@@ -97,8 +97,7 @@ static DLSControlPanelPlugin* sActivePlugin;
     [self.activeControls removeObjectForKey:uuid];
 }
 
-- (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor label:(NSString*)label canSave:(BOOL)canSave file:(NSString*)file line:(size_t)line {
-    __weak __typeof(self) owner = self;
+- (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper editor:(id<DLSEditor>)editor owner:(id)owner label:(NSString*)label canSave:(BOOL)canSave file:(NSString*)file line:(size_t)line {
     
     DLSControlInfo* info = [[DLSControlInfo alloc] init];
     info.value = wrapper.getter();
@@ -113,8 +112,14 @@ static DLSControlPanelPlugin* sActivePlugin;
     DLSActiveControlRecord* record = [[DLSActiveControlRecord alloc] init];
     record.wrapper = wrapper;
     record.info = info;
+    __weak __typeof(self) weakself = self;
+    __weak id <DLSRemovable> removable = [owner dls_performActionOnDealloc:^{
+        [weakself removeRecordWithUUID:info.uuid];
+    }];
+
     record.removeAction = ^{
-        [owner removeRecordWithUUID:info.uuid];
+        [weakself removeRecordWithUUID:info.uuid];
+        [removable remove];
     };
     
     [self.activeControls setObject:record forKey:info.uuid];
@@ -232,20 +237,20 @@ static DLSControlPanelPlugin* sActivePlugin;
         }];
         
         self.used = true;
-        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:[DLSActionEditor editor] label:self.label canSave:NO file:self.file line:self.line];
+        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:[DLSActionEditor editor] owner:self.owner label:self.label canSave:NO file:self.file line:self.line];
     };
 }
 
 - (id <DLSRemovable> (^)(DLSPropertyWrapper*, id <DLSEditor>))wrapperOf {
     return ^(DLSPropertyWrapper* wrapper, id <DLSEditor> editor){
         self.used = true;
-        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.label canSave:YES file:self.file line:self.line];
+        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor owner:self.owner label:self.label canSave:YES file:self.file line:self.line];
     };
 }
 
 - (id <DLSRemovable>)buildWithEditor:(id <DLSEditor>)editor wrapper:(DLSPropertyWrapper*)wrapper {
     self.used = true;
-    return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.label canSave:self.canSave file:self.file line:self.line];
+    return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor owner:self.owner label:self.label canSave:self.canSave file:self.file line:self.line];
 }
 
 #define DLSMake(name, type, editor) \
@@ -362,7 +367,7 @@ DLSMakeNumeric(toggleOf, BOOL, boolValue, [DLSToggleEditor editor])
     return ^(id <DLSEditor> editor) {
         self.used = true;
         DLSPropertyWrapper* wrapper = [[DLSPropertyWrapper alloc] initWithKeyPath:self.keyPath object:self.owner];
-        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor label:self.keyPath canSave:self.canSave file:self.file line:self.line];
+        return [[DLSControlPanelPlugin activePlugin] addControlWithWrapper:wrapper editor:editor owner:self.owner label:self.keyPath canSave:self.canSave file:self.file line:self.line];
     };
 }
 

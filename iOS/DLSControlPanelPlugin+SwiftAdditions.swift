@@ -75,6 +75,7 @@ public extension DLSControlPanelPlugin {
         wrapper : PropertyWrapper<A>,
         editor : DLSEditor,
         label : String,
+        owner : NSObject,
         canSave : Bool,
         file : String = __FILE__,
         line : UInt = __LINE__
@@ -93,6 +94,7 @@ public extension DLSControlPanelPlugin {
         return addControlWithWrapper(
             wrapperWrapper,
             editor: editor,
+            owner: owner,
             label: label,
             canSave: canSave,
             file: file,

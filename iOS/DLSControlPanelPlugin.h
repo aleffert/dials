@@ -51,11 +51,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param file         The name of the file this control is declared in.
 /// @param line         The line of code this control is declared on.
 - (id <DLSRemovable>)addControlWithWrapper:(DLSPropertyWrapper*)wrapper
-                                 editor:(id <DLSEditor>)editor
-                                  label:(NSString*)label
-                                canSave:(BOOL)canSave
-                                   file:(nullable NSString*)file
-                                   line:(size_t)line;
+                                    editor:(id <DLSEditor>)editor
+                                     owner:(id)owner
+                                     label:(NSString*)label
+                                   canSave:(BOOL)canSave
+                                      file:(nullable NSString*)file
+                                      line:(size_t)line;
 
 @end
 
@@ -64,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// This is not typically called explicitly. Instead, use the DLSControl convenience macro
 - (id)initWithLabel:(NSString *)label
             canSave:(BOOL)canSave
-              owner:(id)owner
+              owner:(nullable id)owner
                file:(NSString *)file
                line:(size_t)line;
 
