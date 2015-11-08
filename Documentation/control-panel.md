@@ -30,7 +30,7 @@ Swift:
 ```
 var aColor = UIColor.blackColor()
 
-class Some Class {
+class SomeClass {
 
     func someMethod() {
         DLSControl("My Color").colorOf(&aColor)
