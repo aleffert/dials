@@ -66,7 +66,7 @@ Once you have the files downloaded, you will need to do the following:
 
         ... your code here ...
 
-    #if DEBUG
+    #if TARGET_IPHONE_SIMULATOR 
         [[DLSDials shared] start];
     #endif
 
@@ -85,7 +85,7 @@ Once you have the files downloaded, you will need to do the following:
 
         ... your code here ...
 
-    #if DEBUG
+    #if TARGET_IPHONE_SIMULATOR
         DLSDials.shared().start()
     #endif
 
@@ -94,11 +94,11 @@ Once you have the files downloaded, you will need to do the following:
     }
     ```
     
-Note that we recommend only enabling Dials in ``DEBUG`` builds since it creates a back door into your app.
+Note that we recommend only enabling Dials in simulator builds to prevent you from shipping your app with it enabled.
 
 ### Running Dials
 
-Once you have Dials configured, you can start it by running your app in the simulator on a device and then, while your app is still running, choosing the ``Dials.app`` scheme from within Xcode and running that at the same time. You can also build ``Dials.app`` and afterward, run that executable from the Finder without involving Xcode.
+Once you have Dials configured, you can start it by running your app from Xcode. Then, while your app is still running, choosing the ``Dials.app`` scheme from within Xcode and running that at the same time. You can also build ``Dials.app`` and afterward, run that executable from the Finder without involving Xcode.
 
 
 ### Usage
