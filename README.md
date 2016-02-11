@@ -21,9 +21,9 @@ Additionally, check out [Snaps](http://github.com/aleffert/snaps/), a Dials plug
 
 ## Setup
 
-Dials is an unusual project in that it has an iOS component and a desktop component. As such, you can use Cocoapods or Carthage to fetch and version it, but you'll have to perform some additional manual steps afterward.
+Dials is an unusual project in that it has an iOS component and a desktop component. As such, you can use CocoaPods or Carthage to fetch and version it, but you'll have to perform some additional manual steps afterward.
 
-### Fetch Using Cocoapods
+### Fetch Using CocoaPods
 
 Add the following to your ``Podfile``:
 ```
