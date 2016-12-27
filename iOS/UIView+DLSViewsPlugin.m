@@ -32,7 +32,7 @@ static void DLSWithViewLock(void(^action)(void)) {
 @implementation CALayer (DLSViews)
 
 - (UIView*)dls_view {
-    UIView* view = [self.delegate isKindOfClass:[UIView class]] ? self.delegate : nil;
+    UIView* view = (UIView*)([self.delegate isKindOfClass:[UIView class]] ? self.delegate : nil);
     return view;
 }
 

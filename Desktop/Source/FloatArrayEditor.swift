@@ -17,12 +17,12 @@ extension DLSFloatArrayEditor : EditorControllerGenerating {
 
 extension DLSFloatArrayEditor : CodeGenerating {
     
-    public func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func code(forValue value: NSCoding?, language: Language) -> String {
         let constructor = self.constructor ?? ""
         
         let values = value as? [String:NSNumber] ?? [:]
-        let fields = (labels) ?? []
-        let params = fields.map {key -> (String, String) in
+        let fields = (labels)
+        let params = fields.map {key -> (key: String, value: String) in
             let value = stringFromNumber(values[key] ?? (0 as NSNumber))
             return (key, value)
         }
@@ -42,7 +42,7 @@ private class FloatArrayItem {
 }
 
 protocol FloatArrayItemViewDelegate : class {
-    func view(view : FloatArrayItemView, changedValue: Double)
+    func view(_ view : FloatArrayItemView, changedValue: Double)
 }
 
 class FloatArrayItemView : NSView {
@@ -59,17 +59,17 @@ class FloatArrayItemView : NSView {
         stepper?.increment = 1
     }
 
-    @IBAction func textChanged(sender : NSTextField) {
+    @IBAction func textChanged(_ sender : NSTextField) {
         stepper?.floatValue = field?.floatValue ?? 0
         delegate?.view(self, changedValue: sender.doubleValue)
     }
 
-    @IBAction func stepperChanged(sender : NSStepper) {
+    @IBAction func stepperChanged(_ sender : NSStepper) {
         field?.floatValue = sender.floatValue
         delegate?.view(self, changedValue: sender.doubleValue)
     }
 
-    func useValue(value : String) {
+    func useValue(_ value : String) {
         stepper?.stringValue = value
         field?.stringValue = value
     }
@@ -77,18 +77,18 @@ class FloatArrayItemView : NSView {
 }
 
 class FloatArrayItemViewNibOwner {
-    @IBOutlet private var view : FloatArrayItemView?
+    @IBOutlet fileprivate var view : FloatArrayItemView?
 }
 
 class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
     
-    @IBOutlet private var container : NSView!
-    @IBOutlet private var name : NSTextField?
+    @IBOutlet fileprivate var container : NSView!
+    @IBOutlet fileprivate var name : NSTextField?
     
-    private var orderedFields : [FloatArrayItemView] = []
-    private var indexedFields : [String:FloatArrayItemView] = [:]
+    fileprivate var orderedFields : [FloatArrayItemView] = []
+    fileprivate var indexedFields : [String:FloatArrayItemView] = [:]
     
-    private func columnCountForItemCount(count : Int) -> Int {
+    fileprivate func columnCountForItemCount(_ count : Int) -> Int {
         if orderedFields.count < 2 {
             return 1
         }
@@ -103,7 +103,7 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
         }
     }
     
-    private func addConstraintsForEditors() {
+    fileprivate func addConstraintsForEditors() {
         let columns = columnCountForItemCount(orderedFields.count)
         
         var first : NSView? = nil
@@ -120,47 +120,47 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
             if let prev = prev {
                 if column == 0 {
                     leadingAnchor = container
-                    leadingAlignAttribute = .Leading
+                    leadingAlignAttribute = .leading
                     leadingOffset = 0
                     topAnchor = prev
-                    topAlignAttribute = .Bottom
+                    topAlignAttribute = .bottom
                     topOffset = 4
                     
                 }
                 else {
                     leadingAnchor = prev
-                    leadingAlignAttribute = .Trailing
+                    leadingAlignAttribute = .trailing
                     leadingOffset = 4
                     topAnchor = prev
-                    topAlignAttribute = .Top
+                    topAlignAttribute = .top
                     topOffset = 0
                 }
                 
-                let widthConstraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: first!, attribute: .Width, multiplier: 1, constant: 0)
+                let widthConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: first!, attribute: .width, multiplier: 1, constant: 0)
                 container.addConstraint(widthConstraint)
             }
             else {
                 leadingAnchor = container
-                leadingAlignAttribute = .Leading
+                leadingAlignAttribute = .leading
                 leadingOffset = 0
                 topAnchor = container
-                topAlignAttribute = .Top
+                topAlignAttribute = .top
                 topOffset = 0
             }
             
-            let topConstraint = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: topAnchor, attribute: topAlignAttribute, multiplier: 1, constant: topOffset)
+            let topConstraint = NSLayoutConstraint(item: view, attribute: .top, relatedBy: .equal, toItem: topAnchor, attribute: topAlignAttribute, multiplier: 1, constant: topOffset)
             container.addConstraint(topConstraint)
             
-            let leadingConstraint = NSLayoutConstraint(item: view, attribute: .Leading, relatedBy: .Equal, toItem: leadingAnchor, attribute: leadingAlignAttribute, multiplier: 1, constant: leadingOffset)
+            let leadingConstraint = NSLayoutConstraint(item: view, attribute: .leading, relatedBy: .equal, toItem: leadingAnchor, attribute: leadingAlignAttribute, multiplier: 1, constant: leadingOffset)
             container.addConstraint(leadingConstraint)
             
             if column + 1 == columns {
-                let trailingConstraint = NSLayoutConstraint(item: view, attribute: .Trailing, relatedBy: .Equal, toItem: container, attribute: .Trailing, multiplier: 1, constant: 0)
+                let trailingConstraint = NSLayoutConstraint(item: view, attribute: .trailing, relatedBy: .equal, toItem: container, attribute: .trailing, multiplier: 1, constant: 0)
                 container.addConstraint(trailingConstraint)
             }
             
             if i + 1 == orderedFields.count {
-                let bottomConstraint = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal, toItem: container, attribute: .Bottom, multiplier: 1, constant: 0)
+                let bottomConstraint = NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1, constant: 0)
                 container.addConstraint(bottomConstraint)
             }
             
@@ -171,11 +171,11 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
         }
     }
     
-    private var editor : DLSFloatArrayEditor? {
+    fileprivate var editor : DLSFloatArrayEditor? {
         didSet {
             for label in (editor?.labels ?? []){
                 let owner = FloatArrayItemViewNibOwner()
-                NSBundle.mainBundle().loadNibNamed("FloatArrayItemView", owner: owner, topLevelObjects: nil)
+                Bundle.main.loadNibNamed("FloatArrayItemView", owner: owner, topLevelObjects: nil)
                 if let view = owner.view {
                     view.label?.stringValue = label
                     view.translatesAutoresizingMaskIntoConstraints = false
@@ -202,9 +202,9 @@ class FloatArrayEditorView : EditorView, FloatArrayItemViewDelegate {
         }
     }
     
-    func view(view: FloatArrayItemView, changedValue value: Double) {
+    func view(_ view: FloatArrayItemView, changedValue value: Double) {
         var values = (configuration?.value as? [String:NSNumber]) ?? [:]
         values[view.label!.stringValue] = value as NSNumber
-        delegate?.editorController(self, changedToValue: values)
+        delegate?.editorController(self, changedToValue: values as NSCoding?)
     }
 }

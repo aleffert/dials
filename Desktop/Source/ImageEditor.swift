@@ -15,28 +15,28 @@ extension DLSImageEditor : EditorControllerGenerating {
 }
 
 class ImageEditorView: EditorView {
-    @IBOutlet private var name : NSTextField?
-    @IBOutlet private var imageWell : NSImageView?
+    @IBOutlet fileprivate var name : NSTextField?
+    @IBOutlet fileprivate var imageWell : NSImageView?
     
     override var configuration : EditorConfiguration? {
         didSet {
-            let image = (configuration?.value as? NSData).flatMap { NSImage(data: $0) }
+            let image = (configuration?.value as? Data).flatMap { NSImage(data: $0) }
             imageWell?.image = image
             name?.stringValue = configuration?.label ?? "Image"
         }
     }
     
-    @IBAction func imageChanged(sender : NSImageView) {
+    @IBAction func imageChanged(_ sender : NSImageView) {
         // per http://stackoverflow.com/questions/3038820/how-to-save-a-nsimage-as-a-new-file
-        if let tiffData = sender.image?.TIFFRepresentation,
-            rep = NSBitmapImageRep(data:tiffData)
+        if let tiffData = sender.image?.tiffRepresentation,
+            let rep = NSBitmapImageRep(data:tiffData)
         {
-            let imageData = rep.representationUsingType(.NSPNGFileType, properties:[:])
-            delegate?.editorController(self, changedToValue: imageData)
+            let imageData = rep.representation(using: .PNG, properties:[:])
+            delegate?.editorController(self, changedToValue: imageData as NSCoding?)
         }
     }
     
-    @IBAction func clearImage(sender : NSButton) {
+    @IBAction func clearImage(_ sender : NSButton) {
         delegate?.editorController(self, changedToValue: nil)
     }
 }

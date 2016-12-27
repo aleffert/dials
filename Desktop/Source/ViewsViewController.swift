@@ -9,9 +9,9 @@
 import Cocoa
 
 protocol ViewsViewControllerDelegate : class {
-    func viewsController(controller : ViewsViewController, selectedViewWithID viewID : String?)
-    func viewsController(controller : ViewsViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
-    func viewController(controller : ViewsViewController, appliedInsets : NSEdgeInsets, toViewWithID viewID : String)
+    func viewsController(_ controller : ViewsViewController, selectedViewWithID viewID : String?)
+    func viewsController(_ controller : ViewsViewController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+    func viewController(_ controller : ViewsViewController, appliedInsets : EdgeInsets, toViewWithID viewID : String)
 }
 
 class ViewsViewController: NSViewController,
@@ -36,17 +36,17 @@ ConstraintInfoOwner {
         propertyTableController.hierarchy = hierarchyOutlineController.hierarchy
     }
     
-    func receivedHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], roots : [NSString], screenSize : CGSize) {
+    func receivedHierarchy(_ hierarchy : [String : DLSViewHierarchyRecord], roots : [String], screenSize : CGSize) {
         hierarchyOutlineController.useHierarchy(hierarchy, roots : roots)
         visualOutlineController.updateViews()
         visualOutlineController.screenSize = screenSize
     }
     
-    func receivedViewRecord(record : DLSViewRecord) {
+    func receivedViewRecord(_ record : DLSViewRecord) {
         propertyTableController?.useRecord(record)
     }
     
-    func receivedUpdatedViews(records : [DLSViewHierarchyRecord], roots : [NSString], screenSize : CGSize) {
+    func receivedUpdatedViews(_ records : [DLSViewHierarchyRecord], roots : [String], screenSize : CGSize) {
         hierarchyOutlineController.takeUpdateRecords(records, roots : roots)
         if !hierarchyOutlineController.hasSelection {
             propertyTableController.clear()
@@ -55,50 +55,50 @@ ConstraintInfoOwner {
         visualOutlineController.screenSize = screenSize
     }
     
-    func receivedContents(contents : [String:NSData], empties:[String]) {
+    func receivedContents(_ contents : [String:Data], empties:[String]) {
         visualOutlineController.takeContents(contents, empties : empties)
     }
     
-    func outlineController(controller: ViewsHierarchyOutlineController, selectedViewWithID viewID: String?) {
+    func outlineController(_ controller: ViewsHierarchyOutlineController, selectedViewWithID viewID: String?) {
         delegate?.viewsController(self, selectedViewWithID: viewID)
         visualOutlineController.selectViewWithID(viewID)
     }
     
-    func visualOutlineController(controller: ViewsVisualOutlineController, selectedViewWithID viewID: String?) {
+    func visualOutlineController(_ controller: ViewsVisualOutlineController, selectedViewWithID viewID: String?) {
         hierarchyOutlineController.selectViewWithID(viewID)
     }
     
-    func visualOutlineController(controller: ViewsVisualOutlineController, appliedInsets insets: NSEdgeInsets, toViewWithID viewID: String) {
+    func visualOutlineController(_ controller: ViewsVisualOutlineController, appliedInsets insets: EdgeInsets, toViewWithID viewID: String) {
         delegate?.viewController(self, appliedInsets: insets, toViewWithID: viewID)
     }
     
-    func tableController(controller: ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
+    func tableController(_ controller: ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord) {
         delegate?.viewsController(self, valueChangedWithRecord: record)
     }
     
-    func tableController(controller: ViewPropertyTableController, highlightViewWithID viewID: String) {
+    func tableController(_ controller: ViewPropertyTableController, highlightViewWithID viewID: String) {
         visualOutlineController.highlightViewWithID(viewID)
     }
     
-    func tableController(controller: ViewPropertyTableController, clearHighlightForViewWithID viewID: String) {
+    func tableController(_ controller: ViewPropertyTableController, clearHighlightForViewWithID viewID: String) {
         visualOutlineController.unhighlightViewWithID(viewID)
     }
     
-    func tableController(controller: ViewPropertyTableController, selectViewWithID viewID: String) {
+    func tableController(_ controller: ViewPropertyTableController, selectViewWithID viewID: String) {
         visualOutlineController.highlightViewWithID(nil)
         hierarchyOutlineController.selectViewWithID(viewID)
         delegate?.viewsController(self, selectedViewWithID: viewID)
     }
     
-    func tableController(controller: ViewPropertyTableController, nameOfConstraintWithInfo info: DLSAuxiliaryConstraintInformation) -> String? {
+    func tableController(_ controller: ViewPropertyTableController, nameOfConstraintWithInfo info: DLSAuxiliaryConstraintInformation) -> String? {
         guard let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first else {
             print("Plugin not found: \(info.pluginIdentifier)")
             return nil
         }
-        return plugin.displayNameOfConstraint(info)
+        return plugin.displayName(ofConstraint: info)
     }
     
-    func tableController(controller: ViewPropertyTableController, saveConstraintWithInfo info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
+    func tableController(_ controller: ViewPropertyTableController, saveConstraintWithInfo info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
         guard let plugin = self.constraintInfoSource?.constraintSources.filter({$0.identifier == info.pluginIdentifier }).first else {
             showSaveError("Plugin not found: " + info.pluginIdentifier)
             return
@@ -111,11 +111,11 @@ ConstraintInfoOwner {
         }
     }
     
-    func showSaveError(message : String) {
+    func showSaveError(_ message : String) {
         let alert = NSAlert()
         alert.messageText = "Error Updating Code"
         alert.informativeText = message
-        alert.addButtonWithTitle("Okay")
+        alert.addButton(withTitle: "Okay")
         alert.runModal()
     }
 }

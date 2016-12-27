@@ -208,31 +208,31 @@
 		775341C31B138A2F00BAE8CA /* DLSValueMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 775341C11B138A2F00BAE8CA /* DLSValueMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		775341C41B138A2F00BAE8CA /* DLSValueMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 775341C21B138A2F00BAE8CA /* DLSValueMapper.m */; };
 		775AD3251B1DE8090069A810 /* FlippedClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 775AD3241B1DE8090069A810 /* FlippedClipView.swift */; };
-		7767D6301BBC1B2300A3A301 /* EditConstraintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7767D62F1BBC1B2300A3A301 /* EditConstraintViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		7767D6321BBCBF0C00A3A301 /* EditConstraintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767D6311BBCBF0C00A3A301 /* EditConstraintViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		7767D6361BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D6341BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h */; settings = {ASSET_TAGS = (); }; };
-		7767D6371BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D6341BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h */; settings = {ASSET_TAGS = (); }; };
-		7767D6381BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767D6351BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m */; settings = {ASSET_TAGS = (); }; };
-		7767D6391BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767D6351BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m */; settings = {ASSET_TAGS = (); }; };
-		7767D63D1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D63A1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.h */; settings = {ASSET_TAGS = (); }; };
-		7767D63F1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767D63B1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.m */; settings = {ASSET_TAGS = (); }; };
+		7767D6301BBC1B2300A3A301 /* EditConstraintViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7767D62F1BBC1B2300A3A301 /* EditConstraintViewController.xib */; };
+		7767D6321BBCBF0C00A3A301 /* EditConstraintViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7767D6311BBCBF0C00A3A301 /* EditConstraintViewController.swift */; };
+		7767D6361BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D6341BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h */; };
+		7767D6371BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D6341BBCCDCD00A3A301 /* DLSConstraintEditorMessages.h */; };
+		7767D6381BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767D6351BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m */; };
+		7767D6391BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767D6351BBCCDCD00A3A301 /* DLSConstraintEditorMessages.m */; };
+		7767D63D1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D63A1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.h */; };
+		7767D63F1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.m in Sources */ = {isa = PBXBuildFile; fileRef = 7767D63B1BBCCF0300A3A301 /* NSLayoutConstraint+DLSUniqueness.m */; };
 		7767D6491BC05B7700A3A301 /* DLSSourceLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D6471BC05B7700A3A301 /* DLSSourceLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7767D64A1BC05B7700A3A301 /* DLSSourceLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D6471BC05B7700A3A301 /* DLSSourceLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7767D64F1BC0A81600A3A301 /* DialsDesktop.h in Headers */ = {isa = PBXBuildFile; fileRef = 7767D64E1BC0A81600A3A301 /* DialsDesktop.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77C490D81BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */; settings = {ASSET_TAGS = (); }; };
-		77C490D91BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */; settings = {ASSET_TAGS = (); }; };
-		77C490DA1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */; settings = {ASSET_TAGS = (); }; };
-		77C490DB1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */; settings = {ASSET_TAGS = (); }; };
-		77C490E41BB78C9100345BEA /* DLSConstraintsExchanger.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E21BB78C9100345BEA /* DLSConstraintsExchanger.h */; settings = {ASSET_TAGS = (); }; };
-		77C490E51BB78C9100345BEA /* DLSConstraintsExchanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E31BB78C9100345BEA /* DLSConstraintsExchanger.m */; settings = {ASSET_TAGS = (); }; };
+		77C490D81BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */; };
+		77C490D91BB78BDC00345BEA /* DLSConstraintsEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490D61BB78BDC00345BEA /* DLSConstraintsEditor.h */; };
+		77C490DA1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */; };
+		77C490DB1BB78BDC00345BEA /* DLSConstraintsEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490D71BB78BDC00345BEA /* DLSConstraintsEditor.m */; };
+		77C490E41BB78C9100345BEA /* DLSConstraintsExchanger.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E21BB78C9100345BEA /* DLSConstraintsExchanger.h */; };
+		77C490E51BB78C9100345BEA /* DLSConstraintsExchanger.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E31BB78C9100345BEA /* DLSConstraintsExchanger.m */; };
 		77C490E81BB78EAF00345BEA /* DLSConstraintDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E61BB78EAF00345BEA /* DLSConstraintDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77C490E91BB78EAF00345BEA /* DLSConstraintDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E61BB78EAF00345BEA /* DLSConstraintDescription.h */; settings = {ASSET_TAGS = (); }; };
-		77C490EA1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */; settings = {ASSET_TAGS = (); }; };
-		77C490EB1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */; settings = {ASSET_TAGS = (); }; };
-		77C490F01BB795AE00345BEA /* ConstraintsEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C490ED1BB795AE00345BEA /* ConstraintsEditorView.xib */; settings = {ASSET_TAGS = (); }; };
-		77C490F11BB795AE00345BEA /* ConstraintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C490EE1BB795AE00345BEA /* ConstraintView.xib */; settings = {ASSET_TAGS = (); }; };
-		77C490F41BB795CB00345BEA /* ConstraintsEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C490F21BB795CB00345BEA /* ConstraintsEditorController.swift */; settings = {ASSET_TAGS = (); }; };
-		77C490F51BB795CB00345BEA /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C490F31BB795CB00345BEA /* ConstraintView.swift */; settings = {ASSET_TAGS = (); }; };
+		77C490E91BB78EAF00345BEA /* DLSConstraintDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C490E61BB78EAF00345BEA /* DLSConstraintDescription.h */; };
+		77C490EA1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */; };
+		77C490EB1BB78EAF00345BEA /* DLSConstraintDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C490E71BB78EAF00345BEA /* DLSConstraintDescription.m */; };
+		77C490F01BB795AE00345BEA /* ConstraintsEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C490ED1BB795AE00345BEA /* ConstraintsEditorView.xib */; };
+		77C490F11BB795AE00345BEA /* ConstraintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77C490EE1BB795AE00345BEA /* ConstraintView.xib */; };
+		77C490F41BB795CB00345BEA /* ConstraintsEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C490F21BB795CB00345BEA /* ConstraintsEditorController.swift */; };
+		77C490F51BB795CB00345BEA /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C490F31BB795CB00345BEA /* ConstraintView.swift */; };
 		77C491051BB82ED100345BEA /* DLSAuxiliaryConstraintInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C491031BB82ED100345BEA /* DLSAuxiliaryConstraintInformation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77C491061BB82ED100345BEA /* DLSAuxiliaryConstraintInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C491031BB82ED100345BEA /* DLSAuxiliaryConstraintInformation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		77C4910A1BB82F5A00345BEA /* DLSConstraintInformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C491091BB82F5A00345BEA /* DLSConstraintInformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1022,18 +1022,21 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Akiva Leffert";
 				TargetAttributes = {
 					77100E2A1B06F5EC0082C38B = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0810;
 					};
 					77100E391B06F5ED0082C38B = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 77100E2A1B06F5EC0082C38B;
 					};
 					77100F121B0780C50082C38B = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -1302,8 +1305,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1347,8 +1352,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1367,6 +1374,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -1384,6 +1392,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akivaleffert.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Desktop/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1397,6 +1406,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akivaleffert.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Desktop/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1417,6 +1427,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akivaleffert.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/MacOS/Dials";
 			};
 			name = Debug;
@@ -1434,6 +1445,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akivaleffert.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dials.app/Contents/MacOS/Dials";
 			};
 			name = Release;
@@ -1441,7 +1453,7 @@
 		77100F271B0780C50082C38B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
@@ -1460,6 +1472,7 @@
 				PRODUCT_NAME = Dials;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1469,7 +1482,7 @@
 		77100F281B0780C50082C38B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1483,6 +1496,7 @@
 				PRODUCT_NAME = Dials;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

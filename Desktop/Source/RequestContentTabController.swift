@@ -9,9 +9,9 @@
 import Cocoa
 
 struct RequestDataExtractor {
-    let metadataExtractor : NetworkRequestInfo -> [(String, NSAttributedString)]
-    let contentTypeExtractor : NetworkRequestInfo -> String?
-    let dataExtractor : NetworkRequestInfo -> NSData?
+    let metadataExtractor : (NetworkRequestInfo) -> [(String, NSAttributedString)]
+    let contentTypeExtractor : (NetworkRequestInfo) -> String?
+    let dataExtractor : (NetworkRequestInfo) -> Data?
 }
 
 class RequestContentTabController: NSObject {
@@ -29,8 +29,8 @@ class RequestContentTabController: NSObject {
     
     override func awakeFromNib() {
         hexView.font = NSFont(name: "Menlo", size: 11.0)
-        hexView.enclosingScrollView?.horizontalScrollElasticity = .None
-        textView.enclosingScrollView?.horizontalScrollElasticity = .None
+        hexView.enclosingScrollView?.horizontalScrollElasticity = .none
+        textView.enclosingScrollView?.horizontalScrollElasticity = .none
     }
     
     var dataExtractor : RequestDataExtractor =
@@ -45,13 +45,13 @@ class RequestContentTabController: NSObject {
         }
     }
     
-    private static func requestContentTypeExtractor(info: NetworkRequestInfo) -> String? {
+    fileprivate static func requestContentTypeExtractor(_ info: NetworkRequestInfo) -> String? {
         let map = info.request.allHTTPHeaderFields
         return map?["Content-Type"]
     }
     
-    private static func requestDataExtractor(info : NetworkRequestInfo) -> NSData? {
-        return info.request.HTTPBody
+    fileprivate static func requestDataExtractor(_ info : NetworkRequestInfo) -> Data? {
+        return info.request.httpBody
     }
     
     static let requestDataExtractor : RequestDataExtractor = RequestDataExtractor(
@@ -60,13 +60,13 @@ class RequestContentTabController: NSObject {
         dataExtractor: RequestContentTabController.requestDataExtractor
     )
     
-    private static func responseContentTypeExtractor(info: NetworkRequestInfo) -> String? {
-        let map = (info.response as? NSHTTPURLResponse)?.allHeaderFields as? [String:String]
+    fileprivate static func responseContentTypeExtractor(_ info: NetworkRequestInfo) -> String? {
+        let map = (info.response as? HTTPURLResponse)?.allHeaderFields as? [String:String]
         return map?["Content-Type"]
     }
     
-    private static func responseDataExtractor(info : NetworkRequestInfo) -> NSData? {
-        return info.data
+    fileprivate static func responseDataExtractor(_ info : NetworkRequestInfo) -> Data? {
+        return info.data as Data?
     }
     
     static let responseDataExtractor : RequestDataExtractor = RequestDataExtractor(
@@ -75,14 +75,14 @@ class RequestContentTabController: NSObject {
         dataExtractor: RequestContentTabController.responseDataExtractor
     )
     
-    private func addTabViewItem(item : NSTabViewItem) {
-        if !(tabView.tabViewItems as NSArray).containsObject(item) {
+    fileprivate func addTabViewItem(_ item : NSTabViewItem) {
+        if !(tabView.tabViewItems as NSArray).contains(item) {
             self.tabView.addTabViewItem(item)
         }
     }
     
-    private func removeTabViewItem(item : NSTabViewItem) {
-        if (tabView.tabViewItems as NSArray).containsObject(item) {
+    fileprivate func removeTabViewItem(_ item : NSTabViewItem) {
+        if (tabView.tabViewItems as NSArray).contains(item) {
             self.tabView.removeTabViewItem(item)
         }
     }
@@ -94,7 +94,7 @@ class RequestContentTabController: NSObject {
             
             if let data = requestInfo.flatMap({ dataExtractor.dataExtractor($0) }) {
                 addTabViewItem(hexItem)
-                hexView.string = data.description.stringByTrimmingCharactersInSet(NSCharacterSet(charactersInString: "<>"))
+                hexView.string = data.description.trimmingCharacters(in: CharacterSet(charactersIn: "<>"))
                 if contentType?.hasPrefix("image") ?? false {
                     removeTabViewItem(textItem)
                     addTabViewItem(imageItem)
@@ -103,7 +103,7 @@ class RequestContentTabController: NSObject {
                 else {
                     removeTabViewItem(imageItem)
                     addTabViewItem(textItem)
-                    textView.string = NSString(data : data, encoding : NSUTF8StringEncoding) as? String
+                    textView.string = NSString(data : data, encoding : String.Encoding.utf8.rawValue) as? String
                 }
             }
             else {

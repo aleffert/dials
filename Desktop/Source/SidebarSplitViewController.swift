@@ -13,28 +13,28 @@ private let SidebarSplitViewName = "SidebarSplitViewName"
 
 class EmptyViewController : NSViewController {
     override func loadView() {
-        self.view = NSView(frame: CGRectMake(0, 0, 100, 100))
-        self.view.addConstraint(NSLayoutConstraint(item: self.view, attribute: .Width, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: SidebarMinWidth))
+        self.view = NSView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        self.view.addConstraint(NSLayoutConstraint(item: self.view, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: SidebarMinWidth))
     }
 }
 
 class SidebarSplitViewController: NSSplitViewController {
     
-    private let sidebarItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
-    private let contentItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
+    fileprivate let sidebarItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
+    fileprivate let contentItem = NSSplitViewItem(viewController: EmptyViewController(nibName: nil, bundle: nil)!)
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setupItems()
     }
     
-    private func setupItems() {
+    fileprivate func setupItems() {
         sidebarItem.canCollapse = true
-        sidebarItem.collapsed = true
+        sidebarItem.isCollapsed = true
     }
     
     override func viewDidLoad() {
@@ -45,15 +45,15 @@ class SidebarSplitViewController: NSSplitViewController {
     }
     
     override func loadView() {
-        self.splitView = NSSplitView(frame: CGRectZero)
-        self.splitView.vertical = true
-        self.splitView.dividerStyle = .Thin
+        self.splitView = NSSplitView(frame: CGRect.zero)
+        self.splitView.isVertical = true
+        self.splitView.dividerStyle = .thin
         self.splitView.autosaveName = SidebarSplitViewName
         self.splitView.identifier = SidebarSplitViewName
         self.view = self.splitView
     }
     
-    func useSidebarContent(view : NSView) {
+    func useSidebarContent(_ view : NSView) {
         for child in sidebarItem.viewController.view.subviews {
             if child != view {
                 view.removeFromSuperview()
@@ -63,7 +63,7 @@ class SidebarSplitViewController: NSSplitViewController {
         view.addConstraintsMatchingSuperviewBounds()
     }
     
-    func useBodyContent(view : NSView) {
+    func useBodyContent(_ view : NSView) {
         for child in contentItem.viewController.view.subviews {
             if child != view {
                 child.removeFromSuperview()
@@ -74,19 +74,19 @@ class SidebarSplitViewController: NSSplitViewController {
     }
     
     func showSidebar() {
-        sidebarItem.animator().collapsed = false
+        sidebarItem.animator().isCollapsed = false
     }
     
     func hideSidebar() {
-        sidebarItem.animator().collapsed = true
+        sidebarItem.animator().isCollapsed = true
     }
     
     var isSidebarVisible : Bool {
-        return !sidebarItem.collapsed
+        return !sidebarItem.isCollapsed
     }
     
     func toggleSidebar() {
-        sidebarItem.animator().collapsed = !sidebarItem.collapsed
+        sidebarItem.animator().isCollapsed = !sidebarItem.isCollapsed
     }
 
 }

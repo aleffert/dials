@@ -16,20 +16,20 @@ class ControlPanelPlugin: NSObject, Plugin, CodeHelperOwner, ControlListPaneView
 
     let label = "Control Panel"
     
-    private var knownGroups : [String:ControlListPaneViewController] = [:]
-    private var context : PluginContext?
+    fileprivate var knownGroups : [String:ControlListPaneViewController] = [:]
+    fileprivate var context : PluginContext?
     
     var shouldSortChildren : Bool {
         return true
     }
     
-    func receiveMessage(data: NSData) {
-        let message = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? DLSControlPanelMessage
+    func receiveMessage(_ data: Data) {
+        let message = NSKeyedUnarchiver.unarchiveObject(with: data) as? DLSControlPanelMessage
         
         if let group = message?.group {
             if knownGroups[group] == nil {
                 let controller = ControlListPaneViewController(group : group, delegate : self)!
-                context?.addViewController(controller, plugin:self)
+                context?.add(controller, plugin:self)
                 knownGroups[group] = controller
             }
         }
@@ -42,58 +42,58 @@ class ControlPanelPlugin: NSObject, Plugin, CodeHelperOwner, ControlListPaneView
         }
     }
     
-    func connectedWithContext(context: PluginContext) {
+    func connected(with context: PluginContext) {
         self.context = context
     }
     
     func connectionClosed() {
         for (_, controller) in knownGroups {
-            context?.removeViewController(controller, plugin: self)
+            context?.remove(controller, plugin: self)
         }
         knownGroups = [:]
     }
     
-    func handleAddMessage(message : DLSControlPanelAddMessage) {
+    func handleAddMessage(_ message : DLSControlPanelAddMessage) {
         let controller = knownGroups[message.group]
         controller?.addControlWithInfo(message.info)
     }
     
-    func handleRemoveMessage(message : DLSControlPanelRemoveMessage) {
+    func handleRemoveMessage(_ message : DLSControlPanelRemoveMessage) {
         let controller = knownGroups[message.group]
         if let c = controller {
             c.removeControlWithID(message.uuid)
             if c.isEmpty {
-                self.context?.removeViewController(c, plugin: self)
-                knownGroups.removeValueForKey(message.group)
+                self.context?.remove(c, plugin: self)
+                knownGroups.removeValue(forKey: message.group)
             }
         }
     }
     
-    func paneController(controller: ControlListPaneViewController, changedControlInfo info: DLSControlInfo, toValue value: NSCoding?) {
-        let message = DLSControlPanelChangeMessage(UUID: info.uuid, value: value, group : controller.group as String)
-        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+    func paneController(_ controller: ControlListPaneViewController, changedControlInfo info: DLSControlInfo, toValue value: NSCoding?) {
+        let message = DLSControlPanelChangeMessage(uuid: info.uuid, value: value, group : controller.group as String)
+        let data = NSKeyedArchiver.archivedData(withRootObject: message)
         context?.sendMessage(data, plugin: self)
     }
     
-    private func showCodeUpdateError(message : String) {
+    fileprivate func showCodeUpdateError(_ message : String) {
         let alert = NSAlert()
         alert.messageText = "Error Updating Code"
         alert.informativeText = message
-        alert.addButtonWithTitle("Okay")
+        alert.addButton(withTitle: "Okay")
         alert.runModal()
     }
     
-    func paneController(controller: ControlListPaneViewController, shouldSaveControlInfo info: DLSControlInfo, withValue value: NSCoding?) {
+    func paneController(_ controller: ControlListPaneViewController, shouldSaveControlInfo info: DLSControlInfo, withValue value: NSCoding?) {
         do {
             guard let file = info.file else {
-                throw CodeError.InternalError
+                throw CodeError.internalError
             }
             guard let codeManager = codeHelper as? CodeManager else {
-                throw CodeError.InternalError
+                throw CodeError.internalError
             }
-            let url = NSURL(fileURLWithPath: file)
+            let url = URL(fileURLWithPath: file)
             let symbol = try codeManager.findSymbolWithName(info.label, inFileAtURL:url)
-            try codeManager.updateSymbol(symbol, toValue: value, withEditor:info.editor, atURL:url)
+            try codeManager.updateSymbol(symbol, toValue: value, with:info.editor, at:url)
         }
         catch let e as NSError {
             showCodeUpdateError(e.localizedDescription)

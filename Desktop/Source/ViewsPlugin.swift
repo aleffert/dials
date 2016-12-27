@@ -23,22 +23,22 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
     
     let shouldSortChildren = true
     
-    func connectedWithContext(context: PluginContext) {
+    func connected(with context: PluginContext) {
         self.context = context
         let controller = ViewsViewController(nibName: "ViewsViewController", bundle: nil)!
         controller.delegate = self
         self.controller = controller
-        self.context?.addViewController(controller, plugin: self)
+        self.context?.add(controller, plugin: self)
     }
     
     func connectionClosed() {
-        controller.bind { self.context?.removeViewController($0, plugin: self) }
+        controller.bind { self.context?.remove($0, plugin: self) }
         context = nil
         controller = nil
     }
     
-    func receiveMessage(data: NSData) {
-        let message : AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
+    func receiveMessage(_ data: Data) {
+        let message : AnyObject? = NSKeyedUnarchiver.unarchiveObject(with: data) as AnyObject?
         if let m = message as? DLSViewsFullHierarchyMessage {
             handleFullHierarchyMessage(m)
         }
@@ -56,41 +56,41 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
         }
     }
 
-    func handleFullHierarchyMessage(message : DLSViewsFullHierarchyMessage) {
+    func handleFullHierarchyMessage(_ message : DLSViewsFullHierarchyMessage) {
         let hierarchy = message.hierarchy
         let roots = message.roots
         controller?.receivedHierarchy(hierarchy, roots : roots, screenSize : message.screenSize)
     }
     
-    func handleViewPropertiesMessage(message : DLSViewsViewPropertiesMessage) {
+    func handleViewPropertiesMessage(_ message : DLSViewsViewPropertiesMessage) {
         controller?.receivedViewRecord(message.record)
     }
     
-    func handleUpdatedViewsMessage(message : DLSViewsUpdatedViewsMessage) {
+    func handleUpdatedViewsMessage(_ message : DLSViewsUpdatedViewsMessage) {
         controller?.receivedUpdatedViews(message.records, roots: message.roots, screenSize : message.screenSize)
     }
     
-    func handleUpdatedContentsMessage(message : DLSViewsUpdatedContentsMessage) {
+    func handleUpdatedContentsMessage(_ message : DLSViewsUpdatedContentsMessage) {
         controller?.receivedContents(message.contents, empties : message.empties)
     }
     
     //MARK: ViewsViewControllerDelegate
     
-    func viewsController(controller: ViewsViewController, selectedViewWithID viewID: String?) {
+    func viewsController(_ controller: ViewsViewController, selectedViewWithID viewID: String?) {
         let message = DLSViewsSelectViewMessage(viewID: viewID as String?)
-        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+        let data = NSKeyedArchiver.archivedData(withRootObject: message)
         context?.sendMessage(data, plugin: self)
     }
     
-    func viewsController(controller: ViewsViewController, valueChangedWithRecord record: DLSChangeViewValueRecord) {
+    func viewsController(_ controller: ViewsViewController, valueChangedWithRecord record: DLSChangeViewValueRecord) {
         let message = DLSViewsValueChangedMessage(record : record)
-        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+        let data = NSKeyedArchiver.archivedData(withRootObject: message)
         context?.sendMessage(data, plugin: self)
     }
     
-    func viewController(controller: ViewsViewController, appliedInsets insets: NSEdgeInsets, toViewWithID viewID: String) {
+    func viewController(_ controller: ViewsViewController, appliedInsets insets: EdgeInsets, toViewWithID viewID: String) {
         let message = DLSViewsInsetViewMessage(viewID: viewID, insets: DLSWrapNSEdgeInsets(insets))
-        let data = NSKeyedArchiver.archivedDataWithRootObject(message)
+        let data = NSKeyedArchiver.archivedData(withRootObject: message)
         context?.sendMessage(data, plugin: self)
     }
 }

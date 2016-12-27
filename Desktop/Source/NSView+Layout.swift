@@ -9,23 +9,23 @@
 import Cocoa
 
 extension NSView {
-    func addConstraintsMatchingSuperviewBounds(insets : NSEdgeInsets = NSEdgeInsetsZero) -> [NSLayoutConstraint] {
+    @discardableResult func addConstraintsMatchingSuperviewBounds(_ insets : EdgeInsets = NSEdgeInsetsZero) -> [NSLayoutConstraint] {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         var constraints : [NSLayoutConstraint] = []
         
         let attributes = [
-            (NSLayoutAttribute.Top, insets.top),
-            (NSLayoutAttribute.Bottom, insets.bottom),
-            (NSLayoutAttribute.Leading, insets.left),
-            (NSLayoutAttribute.Trailing, insets.right)
+            (NSLayoutAttribute.top, insets.top),
+            (NSLayoutAttribute.bottom, insets.bottom),
+            (NSLayoutAttribute.leading, insets.left),
+            (NSLayoutAttribute.trailing, insets.right)
         ]
         
         for (attribute, constant) in attributes {
             let constraint = NSLayoutConstraint(
                 item: self,
                 attribute: attribute,
-                relatedBy: .Equal,
+                relatedBy: .equal,
                 toItem: superview,
                 attribute: attribute,
                 multiplier: 1,
@@ -39,7 +39,7 @@ extension NSView {
         return constraints
     }
     
-    func addConstraintsMatchingSuperviewAttributes(attributes : [NSLayoutAttribute]) -> [NSLayoutConstraint] {
+     @discardableResult func addConstraintsMatchingSuperviewAttributes(_ attributes : [NSLayoutAttribute]) -> [NSLayoutConstraint] {
         self.translatesAutoresizingMaskIntoConstraints = false
         
         var constraints : [NSLayoutConstraint] = []
@@ -48,7 +48,7 @@ extension NSView {
             let constraint = NSLayoutConstraint(
                 item: self,
                 attribute: attribute,
-                relatedBy: .Equal,
+                relatedBy: .equal,
                 toItem: superview,
                 attribute: attribute,
                 multiplier: 1,
@@ -64,15 +64,15 @@ extension NSView {
 }
 
 extension CALayer {
-    func addConstraintsMatchingSuperviewBounds(insets : NSEdgeInsets = NSEdgeInsetsZero) -> [CAConstraint] {
+     @discardableResult func addConstraintsMatchingSuperviewBounds(_ insets : EdgeInsets = NSEdgeInsetsZero) -> [CAConstraint] {
         
         var constraints : [CAConstraint] = []
         
         let attributes = [
-            (CAConstraintAttribute.MinY, insets.top),
-            (CAConstraintAttribute.MaxY, insets.bottom),
-            (CAConstraintAttribute.MinX, insets.left),
-            (CAConstraintAttribute.MaxX, insets.right)
+            (CAConstraintAttribute.minY, insets.top),
+            (CAConstraintAttribute.maxY, insets.bottom),
+            (CAConstraintAttribute.minX, insets.left),
+            (CAConstraintAttribute.maxX, insets.right)
         ]
         
         for (attribute, offset) in attributes {

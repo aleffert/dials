@@ -13,15 +13,15 @@ private let ResultColumnIdentifier = "ResultColumnIdentifier"
 private let TimestampColumnIdentifier = "TimestampColumnIdentifier"
 
 class NetworkRequestInfo {
-    let request : NSURLRequest
-    let startTime : NSDate
-    var endTime : NSDate?
-    var response : NSURLResponse?
+    let request : URLRequest
+    let startTime : Date
+    var endTime : Date?
+    var response : URLResponse?
     var error : NSError?
     var data : NSMutableData?
     var cancelled : Bool = false
     
-    init(request : NSURLRequest, startTime : NSDate) {
+    init(request : URLRequest, startTime : Date) {
         self.request = request
         self.startTime = startTime
         self.data = NSMutableData()
@@ -37,8 +37,8 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet var infoView : NetworkRequestInfoView?
     
     deinit {
-        tableView?.setDelegate(nil)
-        tableView?.setDataSource(nil)
+        tableView?.delegate = nil
+        tableView?.dataSource = nil
     }
     
     override func viewDidAppear() {
@@ -48,9 +48,9 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
         tableView?.tile()
     }
     
-    func resultStringForRequest(request : NetworkRequestInfo) -> String {
+    func resultStringForRequest(_ request : NetworkRequestInfo) -> String {
         if let response = request.response {
-            if let httpResponse = response as? NSHTTPURLResponse {
+            if let httpResponse = response as? HTTPURLResponse {
                 return "\(httpResponse.statusCode) (\(httpResponse.statusCodeDescription))"
             }
             else {
@@ -68,15 +68,15 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
         }
     }
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return requests.count
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.make(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let request = requests[row]
         if tableColumn?.identifier == URLColumnIdentifier {
-            cell.textField?.stringValue = request.request.URL?.absoluteString ?? ""
+            cell.textField?.stringValue = request.request.url?.absoluteString ?? ""
         }
         else if tableColumn?.identifier == ResultColumnIdentifier {
             cell.textField?.stringValue = resultStringForRequest(request)
@@ -87,18 +87,18 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
         return cell
     }
     
-    func tableViewSelectionDidChange(notification: NSNotification) {
+    func tableViewSelectionDidChange(_ notification: Notification) {
         let selection = tableView?.selectedRow ?? -1
         if selection != -1 {
-            emptyView?.hidden = true
-            infoView?.hidden = false
+            emptyView?.isHidden = true
+            infoView?.isHidden = false
             
             let info = requests[selection]
             infoView?.requestInfo = info
         }
         else {
-            emptyView?.hidden = false
-            infoView?.hidden = true
+            emptyView?.isHidden = false
+            infoView?.isHidden = true
             
             infoView?.requestInfo = nil
         }
@@ -121,33 +121,33 @@ class NetworkRequestsViewController: NSViewController, NSTableViewDataSource, NS
         }
     }
     
-    func handleBeganMessage(message : DLSNetworkConnectionBeganMessage) {
+    func handleBeganMessage(_ message : DLSNetworkConnectionBeganMessage) {
         let info = NetworkRequestInfo(request: message.request, startTime: message.timestamp)
         requests.append(info)
         requestIndex[message.connectionID] = info
         reload()
     }
     
-    func handleCompletedMessage(message : DLSNetworkConnectionCompletedMessage) {
+    func handleCompletedMessage(_ message : DLSNetworkConnectionCompletedMessage) {
         let info = requestIndex[message.connectionID]
         info?.response = message.response
         info?.endTime = message.timestamp
         reload()
     }
     
-    func handleFailedMessage(message : DLSNetworkConnectionFailedMessage) {
+    func handleFailedMessage(_ message : DLSNetworkConnectionFailedMessage) {
         let info = requestIndex[message.connectionID]
-        info?.error = message.error
+        info?.error = message.error as NSError?
         reload()
     }
     
-    func handleReceivedDataMessage(message : DLSNetworkConnectionReceivedDataMessage) {
+    func handleReceivedDataMessage(_ message : DLSNetworkConnectionReceivedDataMessage) {
         let info = requestIndex[message.connectionID]
-        info?.data?.appendData(message.data)
+        info?.data?.append(message.data)
         reload()
     }
     
-    func handleCancelMessage(message : DLSNetworkConnectionCancelledMessage) {
+    func handleCancelMessage(_ message : DLSNetworkConnectionCancelledMessage) {
         let info = requestIndex[message.connectionID]
         info?.endTime = message.timestamp
         info?.cancelled = true

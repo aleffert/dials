@@ -16,26 +16,26 @@ class NetworkRequestStatusGroupView : NSView {
     @IBOutlet var contentLabel : NSTextField!
 }
 
-private func sortHeaderMap(map : [NSObject : AnyObject]) -> [(String, String)] {
+private func sortHeaderMap(_ map : [AnyHashable: Any]) -> [(String, String)] {
     let elements = (map as? [String:String] ?? [:])
-    let pairs = elements.sort { $0.0 < $1.0 }
+    let pairs = elements.sorted { $0.0 < $1.0 }
     return pairs
 }
 
-extension NSURLRequest {
+extension URLRequest {
     var sortedHeaders : [(String, String)] {
         return sortHeaderMap(allHTTPHeaderFields ?? [:])
     }
 }
 
-extension NSURLResponse {
+extension URLResponse {
     var sortedHeaders : [(String, String)] {
-        return sortHeaderMap( (self as? NSHTTPURLResponse)?.allHeaderFields ?? [:])
+        return sortHeaderMap( (self as? HTTPURLResponse)?.allHeaderFields ?? [:])
     }
 }
 
 class NetworkRequestStatusView: NSView {
-    typealias DataExtractor = NetworkRequestInfo -> [(String, NSAttributedString)]
+    typealias DataExtractor = (NetworkRequestInfo) -> [(String, NSAttributedString)]
     
     @IBOutlet var contentView : NSView!
     @IBOutlet var stackView : NSStackView!
@@ -51,42 +51,42 @@ class NetworkRequestStatusView: NSView {
     }
     
     func setup() {
-        NSBundle.mainBundle().loadNibNamed("NetworkRequestStatusView", owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed("NetworkRequestStatusView", owner: self, topLevelObjects: nil)
         addSubview(contentView)
         contentView.addConstraintsMatchingSuperviewBounds()
     }
     
-    static func formatPairs(pairs : [(String, String)]) -> NSAttributedString {
+    static func formatPairs(_ pairs : [(String, String)]) -> NSAttributedString {
         let result = NSMutableAttributedString()
         for (key, value) in pairs {
             if result.length > 0 {
-                result.appendAttributedString(NSAttributedString(string: "\n"))
+                result.append(NSAttributedString(string: "\n"))
             }
-            result.appendAttributedString(NSAttributedString(string : key, attributes : [
-                NSFontAttributeName : NSFont.boldSystemFontOfSize(10)
+            result.append(NSAttributedString(string : key, attributes : [
+                NSFontAttributeName : NSFont.boldSystemFont(ofSize: 10)
                 ]))
-            result.appendAttributedString(NSAttributedString(string : "\t"))
-            result.appendAttributedString(NSAttributedString(string : value, attributes : [
-                NSFontAttributeName : NSFont.systemFontOfSize(10)
+            result.append(NSAttributedString(string : "\t"))
+            result.append(NSAttributedString(string : value, attributes : [
+                NSFontAttributeName : NSFont.systemFont(ofSize: 10)
                 ]))
         }
         return result
     }
     
-    private static func requestMessageFields(info : NetworkRequestInfo) -> [(String, String)] {
+    fileprivate static func requestMessageFields(_ info : NetworkRequestInfo) -> [(String, String)] {
         var fields : [(String, String)] = []
         
-        if let URL = info.request.URL {
+        if let URL = info.request.url {
             let field = ("URL", URL.absoluteString)
             fields.append(field)
         }
         
-        fields.appendContentsOf([
+        fields.append(contentsOf: [
             ("Start Date", info.startTime.preciseDateString),
             ("End Date", info.endTime?.preciseDateString ?? "In Progress")
         ])
         
-        if let method = info.request.HTTPMethod {
+        if let method = info.request.httpMethod {
             let field = ("Method", method)
             fields.append(field)
         }
@@ -96,14 +96,14 @@ class NetworkRequestStatusView: NSView {
             fields.append(field)
         }
         
-        if let size = info.request.HTTPBody?.length {
+        if let size = info.request.httpBody?.count {
             let field = ("Size", "\(size) bytes")
             fields.append(field)
         }
         return fields
     }
     
-    static func requestDataExtractor(info : NetworkRequestInfo) -> [(String, NSAttributedString)] {
+    static func requestDataExtractor(_ info : NetworkRequestInfo) -> [(String, NSAttributedString)] {
         return [
             ("Message", formatPairs(requestMessageFields(info))),
             ("Headers", formatPairs(info.request.sortedHeaders))
@@ -111,9 +111,9 @@ class NetworkRequestStatusView: NSView {
     }
     
     
-    private static func responseMessageFields(info : NetworkRequestInfo) -> [(String, String)]? {
+    fileprivate static func responseMessageFields(_ info : NetworkRequestInfo) -> [(String, String)]? {
         var fields : [(String, String)] = []
-        if let response = info.response as? NSHTTPURLResponse {
+        if let response = info.response as? HTTPURLResponse {
             let field = ("Status", "\(response.statusCode) (\(response.statusCodeDescription))")
             fields.append(field)
         }
@@ -124,7 +124,7 @@ class NetworkRequestStatusView: NSView {
         return fields.count > 0 ? fields : nil
     }
     
-    static func responseDataExtractor(info : NetworkRequestInfo) -> [(String, NSAttributedString)] {
+    static func responseDataExtractor(_ info : NetworkRequestInfo) -> [(String, NSAttributedString)] {
         var elements : [(String, NSAttributedString)] = []
         if let response = info.response {
             let headers = response.sortedHeaders
@@ -161,13 +161,13 @@ class NetworkRequestStatusView: NSView {
             }
             while stackView.views.count < data.count {
                 let owner = NetworkRequestStatusGroupViewOwner()
-                NSBundle.mainBundle().loadNibNamed("NetworkRequestStatusGroupView", owner: owner, topLevelObjects: nil)
+                Bundle.main.loadNibNamed("NetworkRequestStatusGroupView", owner: owner, topLevelObjects: nil)
                 let body = owner.view
                 
-                let groupView = GroupContainerView(frame: CGRectZero)
+                let groupView = GroupContainerView(frame: CGRect.zero)
                 groupView.translatesAutoresizingMaskIntoConstraints = false
                 groupView.contentView = body
-                stackView.addView(groupView, inGravity: .Top)
+                stackView.addView(groupView, in: .top)
             }
             
             for ((title, content), view) in zip(data, stackView.views as! [GroupContainerView]) {

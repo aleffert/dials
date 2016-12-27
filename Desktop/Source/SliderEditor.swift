@@ -18,7 +18,7 @@ extension DLSSliderEditor : EditorControllerGenerating {
 }
 
 extension DLSSliderEditor : CodeGenerating {
-    public func codeForValue(value : NSCoding?, language : Language) -> String {
+    public func code(forValue value : NSCoding?, language : Language) -> String {
         if let v = value as? NSNumber {
             return stringFromNumber(v, requireIntegerPart: true)
         }
@@ -29,11 +29,11 @@ extension DLSSliderEditor : CodeGenerating {
 }
 
 class SliderEditorView : EditorView {
-    @IBOutlet private var slider : NSSlider?
-    @IBOutlet private var name : NSTextField?
-    @IBOutlet private var minLabel : NSTextField?
-    @IBOutlet private var maxLabel : NSTextField?
-    @IBOutlet private var currentLabel : NSTextField?
+    @IBOutlet fileprivate var slider : NSSlider?
+    @IBOutlet fileprivate var name : NSTextField?
+    @IBOutlet fileprivate var minLabel : NSTextField?
+    @IBOutlet fileprivate var maxLabel : NSTextField?
+    @IBOutlet fileprivate var currentLabel : NSTextField?
     
     var editor : DLSSliderEditor? {
         didSet {
@@ -44,14 +44,14 @@ class SliderEditorView : EditorView {
         }
     }
     
-    @IBAction private func sliderChanged(sender : NSSlider) {
+    @IBAction fileprivate func sliderChanged(_ sender : NSSlider) {
         currentLabel?.stringValue = stringFromNumber(sender.floatValue)
-        self.delegate?.editorController(self, changedToValue: sender.floatValue)
+        self.delegate?.editorController(self, changedToValue: sender.floatValue as NSCoding?)
     }
     
     override var configuration : EditorConfiguration? {
         didSet {
-            if !(slider?.highlighted ?? false) {
+            if !(slider?.isHighlighted ?? false) {
                 let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
                 slider?.floatValue = floatValue
                 currentLabel?.stringValue = stringFromNumber(floatValue)

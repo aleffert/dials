@@ -19,25 +19,25 @@ class NetworkRequestsPlugin: NSObject, Plugin {
     
     let shouldSortChildren = true
     
-    func connectedWithContext(context: PluginContext) {
+    func connected(with context: PluginContext) {
         self.context = context
     }
     
     func connectionClosed() {
         if let controller = controller {
-            self.context?.removeViewController(controller, plugin: self)
+            self.context?.remove(controller, plugin: self)
         }
         context = nil
         controller = nil
     }
 
-    func receiveMessage(data: NSData) {
-        let message : AnyObject? = NSKeyedUnarchiver.unarchiveObjectWithData(data)
+    func receiveMessage(_ data: Data) {
+        let message : AnyObject? = NSKeyedUnarchiver.unarchiveObject(with: data) as AnyObject?
         if let m = message as? DLSNetworkConnectionBeganMessage {
             
             if controller == nil && context != nil {
                 let viewController = NetworkRequestsViewController(nibName: "NetworkRequestsViewController", bundle: nil)!
-                context?.addViewController(viewController, plugin: self)
+                context?.add(viewController, plugin: self)
                 controller = viewController
             }
             

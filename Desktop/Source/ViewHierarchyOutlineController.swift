@@ -9,22 +9,22 @@
 import Cocoa
 
 protocol ViewHierarchyOutlineControllerDelegate : class {
-    func outlineController(controller : ViewsHierarchyOutlineController, selectedViewWithID viewID: String?)
+    func outlineController(_ controller : ViewsHierarchyOutlineController, selectedViewWithID viewID: String?)
 }
 
 class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
-    @IBOutlet private var outlineView : NSOutlineView!
+    @IBOutlet fileprivate var outlineView : NSOutlineView!
     weak var delegate : ViewHierarchyOutlineControllerDelegate?
     
     // NSOutlineView requires direct object identity so we need a way to convert
     // ids to a canonical representation
     // TODO: GC these
-    var canonicalKeys : [NSString: NSString] = [:]
+    var canonicalKeys : [String: Any] = [:]
     
     let hierarchy = ViewHierarchy()
     
-    private func canonicalize(value : NSString) -> NSString {
+    fileprivate func canonicalize(_ value : String) -> Any {
         if let canon = canonicalKeys[value] {
             return canon
         }
@@ -34,22 +34,22 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
         }
     }
     
-    func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
+    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if item == nil {
             return hierarchy.roots.count
         }
         else {
-            let record = hierarchy[item as! NSString]
+            let record = hierarchy[item as! String]
             return record?.children.count ?? 0
         }
     }
     
-    func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
+    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if item == nil {
             return canonicalize(hierarchy.roots[index])
         }
         else {
-            let record = hierarchy[item as! NSString]
+            let record = hierarchy[item as! NSString as String]
             guard let child = record?.children[index] else {
                 assertionFailure("Unexpected index")
                 return ""
@@ -58,33 +58,33 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
         }
     }
 
-    func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-        let record = hierarchy[item as! NSString]
+    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+        let record = hierarchy[item as! NSString as String]
         return record.map {$0.children.count > 0} ?? false
     }
     
-    func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-        let cell = outlineView.makeViewWithIdentifier(tableColumn!.identifier, owner: self) as! NSTableCellView
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        let cell = outlineView.make(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         
-        if let record = hierarchy[item as! NSString] {
+        if let record = hierarchy[item as! NSString as String] {
             cell.textField!.stringValue = "\(record.label) - \(record.address)"
         }
         return cell
     }
     
-    func outlineViewSelectionDidChange(notification: NSNotification) {
+    func outlineViewSelectionDidChange(_ notification: Notification) {
         let outlineView = notification.object as! NSOutlineView
         let selectionIndexes = outlineView.selectedRowIndexes
         if selectionIndexes.count == 0 {
             delegate?.outlineController(self, selectedViewWithID: nil)
         }
         else {
-            let item = outlineView.itemAtRow(selectionIndexes.firstIndex) as! String
+            let item = outlineView.item(atRow: selectionIndexes.first!) as! String
             delegate?.outlineController(self, selectedViewWithID: item)
         }
     }
     
-    func useHierarchy(hierarchy : [NSString : DLSViewHierarchyRecord], roots : [NSString]) {
+    func useHierarchy(_ hierarchy : [String : DLSViewHierarchyRecord], roots : [String]) {
         self.hierarchy.map = hierarchy
         self.hierarchy.roots = roots
         outlineView.reloadData()
@@ -94,31 +94,31 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
         return outlineView?.selectedRow != -1
     }
     
-    private var selectedViewID : String? {
+    fileprivate var selectedViewID : String? {
         let selectedRow = outlineView!.selectedRow
         var selectedItem : String? = nil
         if selectedRow != -1 {
-            selectedItem = outlineView.itemAtRow(selectedRow) as? String
+            selectedItem = outlineView.item(atRow: selectedRow) as? String
         }
         return selectedItem
     }
     
-    func selectViewWithID(viewID : NSString?) {
+    func selectViewWithID(_ viewID : String?) {
         if let viewID = viewID {
-            var parents : [NSString] = []
+            var parents : [String] = []
             var current = hierarchy[viewID]?.superviewID
             while current != nil {
-                parents.insert(current!, atIndex: 0)
-                current = hierarchy[current!]?.superviewID
+                parents.insert(current! as NSString as String, at: 0)
+                current = hierarchy[current! as NSString as String]?.superviewID
             }
             
             for item in parents {
                 outlineView.expandItem(canonicalize(item))
             }
             
-            let row = outlineView.rowForItem(canonicalize(viewID))
+            let row = outlineView.row(forItem: canonicalize(viewID))
             if row != -1 {
-                outlineView.selectRowIndexes(NSIndexSet(index:row), byExtendingSelection: false)
+                outlineView.selectRowIndexes(IndexSet(integer:row), byExtendingSelection: false)
             }
         }
         else {
@@ -126,7 +126,7 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
         }
     }
     
-    func takeUpdateRecords(records : [DLSViewHierarchyRecord], roots : [NSString]) {
+    func takeUpdateRecords(_ records : [DLSViewHierarchyRecord], roots : [String]) {
         self.hierarchy.roots = roots
         for record in records {
             hierarchy[record.viewID] = record
@@ -137,9 +137,9 @@ class ViewsHierarchyOutlineController : NSObject, NSOutlineViewDataSource, NSOut
         outlineView.reloadData()
         
         if let item = selectedItem {
-            let row = outlineView.rowForItem(item)
+            let row = outlineView.row(forItem: item)
             if row != -1 {
-                outlineView.selectRowIndexes(NSIndexSet(index:row), byExtendingSelection: false)
+                outlineView.selectRowIndexes(IndexSet(integer:row), byExtendingSelection: false)
             }
         }
         

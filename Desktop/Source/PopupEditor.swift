@@ -18,16 +18,16 @@ extension DLSPopupEditor : EditorControllerGenerating {
 
 
 class PopupEditorView: EditorView {
-    @IBOutlet private var name : NSTextField?
-    @IBOutlet private var popup : NSPopUpButton?
+    @IBOutlet fileprivate var name : NSTextField?
+    @IBOutlet fileprivate var popup : NSPopUpButton?
     
     var editor : DLSPopupEditor? {
         didSet {
             let menu = NSMenu()
             for option in editor?.options ?? [] {
-                let item = menu.addItemWithTitle(option.label, action: nil, keyEquivalent: "")!
+                let item = menu.addItem(withTitle: option.label, action: nil, keyEquivalent: "")
                 item.target = self
-                item.action = Selector("itemChosen:")
+                item.action = #selector(PopupEditorView.itemChosen(_:))
                 item.representedObject = option.value
             }
             popup?.menu = menu
@@ -36,16 +36,16 @@ class PopupEditorView: EditorView {
     
     override var configuration : EditorConfiguration? {
         didSet {
-            for item in popup?.menu?.itemArray ?? [] {
-                if let object = item.representedObject as? NSObject, value = configuration?.value where object == value as? NSObject {
-                    popup?.selectItem(item)
+            for item in popup?.menu?.items ?? [] {
+                if let object = item.representedObject as? NSObject, let value = configuration?.value, object == value as? NSObject {
+                    popup?.select(item)
                 }
             }
             name?.stringValue = configuration?.label ?? ""
         }
     }
     
-    func itemChosen(sender : NSMenuItem) {
+    func itemChosen(_ sender : NSMenuItem) {
         self.delegate?.editorController(self, changedToValue: sender.representedObject as! NSCoding?)
     }
 

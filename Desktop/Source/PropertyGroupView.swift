@@ -9,7 +9,7 @@
 import Cocoa
 
 protocol PropertyGroupViewDelegate: class, ViewQuerier {
-    func propertyGroupView(view : PropertyGroupView, changedItem name : String, toValue value : NSCoding?)
+    func propertyGroupView(_ view : PropertyGroupView, changedItem name : String, toValue value : NSCoding?)
 }
 
 class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
@@ -17,10 +17,10 @@ class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
     weak var delegate : PropertyGroupViewDelegate?
     
     var viewID : String?
-    @IBOutlet private var groupView : GroupContainerView!
-    @IBOutlet private var propertyStack : NSStackView!
+    @IBOutlet fileprivate var groupView : GroupContainerView!
+    @IBOutlet fileprivate var propertyStack : NSStackView!
     
-    private var propertyControllers : [String:EditorController] = [:]
+    fileprivate var propertyControllers : [String:EditorController] = [:]
     
     var groupName : String?
     
@@ -35,14 +35,14 @@ class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
     }
     
     func setup() {
-        NSBundle.mainBundle().loadNibNamed("PropertyGroupView", owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed("PropertyGroupView", owner: self, topLevelObjects: nil)
         groupView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(groupView)
         groupView.addConstraintsMatchingSuperviewBounds()
         groupView.contentView = propertyStack
     }
     
-    func useGroup(group : DLSPropertyGroup, values:[String:NSCoding]) {
+    func useGroup(_ group : DLSPropertyGroup, values:[String:NSCoding]) {
         groupName = group.label
         groupView.title = group.label
         for view in propertyStack?.views ?? [] {
@@ -65,39 +65,39 @@ class PropertyGroupView: NSView, EditorControllerDelegate, ViewQuerier {
                 container.translatesAutoresizingMaskIntoConstraints = false
                 container.addSubview(v)
                 v.addConstraintsMatchingSuperviewBounds()
-                propertyStack?.addView(container, inGravity: .Top)
+                propertyStack?.addView(container, in: .top)
                 propertyControllers[description.name] = controller
             }
         }
     }
     
-    func takeValue(value : NSCoding?, name : String) {
+    func takeValue(_ value : NSCoding?, name : String) {
         if let controller = propertyControllers[name] {
             controller.configuration = EditorInfo(editor : controller.configuration!.editor, name : controller.configuration!.name, label : controller.configuration!.label, value : value)
         }
     }
     
-    func editorController(controller: EditorController, changedToValue value: NSCoding?) {
+    func editorController(_ controller: EditorController, changedToValue value: NSCoding?) {
         self.delegate?.propertyGroupView(self, changedItem: controller.configuration!.name, toValue: value)
     }
     
-    func saveConstraintWithInfo(info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
-        self.delegate?.saveConstraintWithInfo(info, constant: constant)
+    func saveConstraint(withInfo info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
+        self.delegate?.saveConstraint(withInfo: info, constant: constant)
     }
     
-    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, constraintInfo: DLSAuxiliaryConstraintInformation?) -> String {
-        return self.delegate?.nameForViewWithID(mainID, relativeToView: relativeID, withClass: className, constraintInfo : constraintInfo) ?? ViewHierarchy.defaultViewName
+    func nameForView(withID mainID: String?, relativeToView relativeID: String, withClass className: String?, constraintInfo: DLSAuxiliaryConstraintInformation?) -> String {
+        return self.delegate?.nameForView(withID: mainID, relativeToView: relativeID, withClass: className, constraintInfo : constraintInfo) ?? ViewHierarchy.defaultViewName
     }
     
-    func highlightViewWithID(viewID: String) {
-        self.delegate?.highlightViewWithID(viewID)
+    func highlightView(withID viewID: String) {
+        self.delegate?.highlightView(withID: viewID)
     }
     
-    func clearHighlightForViewWithID(viewID: String) {
-        self.delegate?.clearHighlightForViewWithID(viewID)
+    func clearHighlightForView(withID viewID: String) {
+        self.delegate?.clearHighlightForView(withID: viewID)
     }
     
-    func selectViewWithID(viewID: String) {
-        self.delegate?.selectViewWithID(viewID)
+    func selectView(withID viewID: String) {
+        self.delegate?.selectView(withID: viewID)
     }
 }

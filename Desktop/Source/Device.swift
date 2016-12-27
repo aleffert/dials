@@ -7,25 +7,49 @@
 //
 
 import Cocoa
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 let DeviceDidResolveAddressNotification : String = "DeviceDidResolveAddressNotification";
 
 protocol DeviceDelegate : class {
-    func deviceDidResolveAddress(device : Device)
+    func deviceDidResolveAddress(_ device : Device)
 }
 
 class Device: NSObject {
-    private let service : NSNetService
-    private weak var delegate : DeviceDelegate?
+    fileprivate let service : NetService
+    fileprivate weak var delegate : DeviceDelegate?
     
-    init(service : NSNetService, delegate : DeviceDelegate) {
+    init(service : NetService, delegate : DeviceDelegate) {
         self.service = service
         self.delegate = delegate
         super.init()
         service.delegate = self
         
         if service.hostName == nil {
-            service.resolveWithTimeout(60);
+            service.resolve(withTimeout: 60);
         }
     }
     
@@ -45,11 +69,11 @@ class Device: NSObject {
         return service.hostName
     }
     
-    func isBackedByNetService(service : NSNetService) -> Bool {
+    func isBackedByNetService(_ service : NetService) -> Bool {
         return self.service.isEqual(service)
     }
     
-    func openConnection(delegate delegate : DeviceConnectionDelegate) -> DeviceConnection {
+    func openConnection(delegate : DeviceConnectionDelegate) -> DeviceConnection {
         return DeviceConnection(device : self, service: service, delegate : delegate)
     }
     
@@ -59,7 +83,7 @@ class Device: NSObject {
         }
     }
     
-    override func isEqual(object: AnyObject?) -> Bool {
+    override func isEqual(_ object: Any?) -> Bool {
         if let device = object as? Device {
             return device.service .isEqual(self.service)
         }
@@ -67,8 +91,8 @@ class Device: NSObject {
     }
 }
 
-extension Device : NSNetServiceDelegate {
-    func netServiceDidResolveAddress(sender: NSNetService) {
+extension Device : NetServiceDelegate {
+    func netServiceDidResolveAddress(_ sender: NetService) {
         delegate?.deviceDidResolveAddress(self)
     }
 }

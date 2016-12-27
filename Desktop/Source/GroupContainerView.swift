@@ -9,9 +9,9 @@
 import AppKit
 
 class GroupContainerView: NSView {
-    @IBOutlet private var titleView : NSTextField!
-    @IBOutlet private var contentContainerView : NSView!
-    @IBOutlet private var bodyView : NSView!
+    @IBOutlet fileprivate var titleView : NSTextField!
+    @IBOutlet fileprivate var contentContainerView : NSView!
+    @IBOutlet fileprivate var bodyView : NSView!
     
     
     override init(frame frameRect: NSRect) {
@@ -25,7 +25,7 @@ class GroupContainerView: NSView {
     }
     
     func setup() {
-        NSBundle.mainBundle().loadNibNamed("GroupContainerView", owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed("GroupContainerView", owner: self, topLevelObjects: nil)
         addSubview(bodyView)
         bodyView.translatesAutoresizingMaskIntoConstraints = false
         bodyView.addConstraintsMatchingSuperviewBounds()
@@ -44,7 +44,7 @@ class GroupContainerView: NSView {
             return titleView.stringValue
         }
         set {
-            titleView.stringValue = newValue ?? ""
+            titleView.stringValue = newValue 
         }
     }
 }

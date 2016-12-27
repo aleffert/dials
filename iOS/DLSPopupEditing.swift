@@ -11,8 +11,8 @@ import Foundation
 // Simply implement this protocol to allow your type to be represented as a popup option list
 
 public protocol DLSValueWrapping {
-    static func dls_wrapValue(value : Self) -> AnyObject
-    static func dls_unwrapValue(value : AnyObject) -> Self
+    static func dls_wrapValue(_ value : Self) -> AnyObject
+    static func dls_unwrapValue(_ value : AnyObject) -> Self
 }
 
 public protocol DLSPopupEditing : DLSValueWrapping {
@@ -23,18 +23,18 @@ public protocol DLSPopupEditing : DLSValueWrapping {
 extension NSTextAlignment : DLSPopupEditing {
     public static var dls_popupItems : [(String, NSTextAlignment)] {
         return [
-            ("Left", .Left),
-            ("Center", .Center),
-            ("Right", .Right),
-            ("Natural", .Natural),
+            ("Left", .left),
+            ("Center", .center),
+            ("Right", .right),
+            ("Natural", .natural),
         ]
     }
     
-    public static func dls_wrapValue(value: NSTextAlignment) -> AnyObject {
+    public static func dls_wrapValue(_ value: NSTextAlignment) -> AnyObject {
         return value.rawValue as NSNumber
     }
     
-    public static func dls_unwrapValue(value: AnyObject) -> NSTextAlignment {
-        return NSTextAlignment(rawValue: (value as? NSNumber)?.integerValue ?? 0) ?? .Natural
+    public static func dls_unwrapValue(_ value: AnyObject) -> NSTextAlignment {
+        return NSTextAlignment(rawValue: (value as? NSNumber)?.intValue ?? 0) ?? .natural
     }
 }

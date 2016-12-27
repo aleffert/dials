@@ -18,7 +18,7 @@ extension DLSStepperEditor : EditorControllerGenerating {
 
 extension DLSStepperEditor : CodeGenerating {
     
-    public func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func code(forValue value: NSCoding?, language: Language) -> String {
         if let v = value as? NSNumber {
             return stringFromNumber(v, requireIntegerPart: true)
         }
@@ -44,7 +44,7 @@ class StepperEditorView : EditorView {
     
     override var configuration : EditorConfiguration? {
         didSet {
-            if !(stepper?.highlighted ?? false) && field?.currentEditor() == nil {
+            if !(stepper?.isHighlighted ?? false) && field?.currentEditor() == nil {
                 let floatValue = (configuration?.value as? NSNumber)?.floatValue ?? 0
                 stepper?.floatValue = floatValue
                 field?.floatValue = floatValue
@@ -53,14 +53,14 @@ class StepperEditorView : EditorView {
         }
     }
     
-    @IBAction func textChanged(sender : NSTextField) {
+    @IBAction func textChanged(_ sender : NSTextField) {
         stepper?.floatValue = field?.floatValue ?? 0
-        delegate?.editorController(self, changedToValue: sender.floatValue)
+        delegate?.editorController(self, changedToValue: sender.floatValue as NSCoding?)
     }
     
-    @IBAction func stepperChanged(sender : NSStepper) {
+    @IBAction func stepperChanged(_ sender : NSStepper) {
         field?.floatValue = sender.floatValue
-        delegate?.editorController(self, changedToValue: sender.floatValue)
+        delegate?.editorController(self, changedToValue: sender.floatValue as NSCoding?)
     }
 
 }

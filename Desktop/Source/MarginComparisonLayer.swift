@@ -9,37 +9,37 @@
 import Foundation
 
 extension CGRect {
-    func horizontalIntersectionWithRect(rect : CGRect) -> CGFloat? {
-        let testRect = CGRectMake(rect.origin.x, self.origin.y, rect.size.width, self.size.height)
-        let intersection = CGRectIntersection(testRect, self)
-        if CGRectIsNull(intersection) {
+    func horizontalIntersectionWithRect(_ rect : CGRect) -> CGFloat? {
+        let testRect = CGRect(x: rect.origin.x, y: self.origin.y, width: rect.size.width, height: self.size.height)
+        let intersection = testRect.intersection(self)
+        if intersection.isNull {
             return nil
         }
         else {
-            return CGRectGetMidX(intersection)
+            return intersection.midX
         }
     }
     
-    func verticalIntersectionWithRect(rect : CGRect) -> CGFloat? {
-        let testRect = CGRectMake(self.origin.x, rect.origin.y, self.size.width, rect.size.height)
-        let intersection = CGRectIntersection(testRect, self)
-        if CGRectIsNull(intersection) {
+    func verticalIntersectionWithRect(_ rect : CGRect) -> CGFloat? {
+        let testRect = CGRect(x: self.origin.x, y: rect.origin.y, width: self.size.width, height: rect.size.height)
+        let intersection = testRect.intersection(self)
+        if intersection.isNull {
             return nil
         }
         else {
-            return CGRectGetMidY(intersection)
+            return intersection.midY
         }
     }
 }
 
-func average(l : CGFloat, _ r : CGFloat) -> CGFloat {
+func average(_ l : CGFloat, _ r : CGFloat) -> CGFloat {
     return (l + r) / 2
 }
 
 // Assumes interval.0 < interval.1 and options.0 < options.1
-func nearest(interval interval : (CGFloat, CGFloat), options : (CGFloat, CGFloat)) -> (CGFloat?, CGFloat?) {
+func nearest(interval : (CGFloat, CGFloat), options : (CGFloat, CGFloat)) -> (CGFloat?, CGFloat?) {
     
-    func filterEqual(a : CGFloat?, _ b : CGFloat?) -> (CGFloat?, CGFloat?) {
+    func filterEqual(_ a : CGFloat?, _ b : CGFloat?) -> (CGFloat?, CGFloat?) {
         var result = (a, b)
         if a == interval.0 {
             result.0 = nil
@@ -86,22 +86,22 @@ class MarginComparisonLayer : CALayer {
         for margin in margins {
             addSublayer(margin)
             margin.lineWidth = 1
-            margin.strokeColor = NSColor.orangeColor().CGColor
+            margin.strokeColor = NSColor.orange.cgColor
         }
         
         for text in textLayers {
             addSublayer(text)
-            text.font = NSFont.systemFontOfSize(18)
+            text.font = NSFont.systemFont(ofSize: 18)
             text.fontSize = 18
             text.alignmentMode = kCAAlignmentCenter;
-            text.foregroundColor = NSColor.whiteColor().CGColor
-            text.backgroundColor = NSColor.darkGrayColor().CGColor
+            text.foregroundColor = NSColor.white.cgColor
+            text.backgroundColor = NSColor.darkGray.cgColor
             text.cornerRadius = 6
             text.masksToBounds = true
         }
     }
     
-    override init(layer : AnyObject) {
+    override init(layer : Any) {
         super.init(layer : layer)
     }
     
@@ -109,7 +109,7 @@ class MarginComparisonLayer : CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func sizeLabelToFit(layer : CATextLayer) {
+    func sizeLabelToFit(_ layer : CATextLayer) {
         let attributes : [String : AnyObject]
         if let font = layer.font {
             attributes = [NSFontAttributeName : font]
@@ -120,11 +120,11 @@ class MarginComparisonLayer : CALayer {
         guard let string = layer.string as? NSString else {
             return
         }
-        var size = string.sizeWithAttributes(attributes)
+        var size = string.size(withAttributes: attributes)
         
         size.width += 10
         
-        layer.bounds = CGRectMake(0, 0, size.width, size.height)
+        layer.bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
     }
     
     var margins : [CAShapeLayer] {
@@ -135,19 +135,19 @@ class MarginComparisonLayer : CALayer {
         return [topText, bottomText, leftText, rightText]
     }
     
-    func updateWithSelectionLayer(selection : ViewFacade?) {
+    func updateWithSelectionLayer(_ selection : ViewFacade?) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        if let selection = selection, comparison = comparison {
-            let selectionFrame = selection.convertRect(selection.contentLayer.bounds, toLayer:self)
-            let comparisonFrame = comparison.convertRect(comparison.contentLayer.bounds, toLayer:self)
+        if let selection = selection, let comparison = comparison {
+            let selectionFrame = selection.convert(selection.contentLayer.bounds, to:self)
+            let comparisonFrame = comparison.convert(comparison.contentLayer.bounds, to:self)
             
             for margin in margins {
                 margin.path = NSBezierPath().CGPath
             }
             
             for text in textLayers {
-                text.hidden = true
+                text.isHidden = true
             }
             
             let cx = selectionFrame.horizontalIntersectionWithRect(comparisonFrame)
@@ -161,15 +161,15 @@ class MarginComparisonLayer : CALayer {
                 interval:(selectionFrame.minX, selectionFrame.maxX),
                 options:(comparisonFrame.minX, comparisonFrame.maxX))
             
-            let edges = [
-                (cx, topMargin, topText, selectionFrame.minY, topDest, -30 as CGFloat, CGPointMake),
-                (cx, bottomMargin, bottomText, selectionFrame.maxY, bottomDest, -30 as CGFloat, CGPointMake),
-                (cy, leftMargin, leftText, selectionFrame.minX, leftDest, -10 as CGFloat, {CGPointMake($1, $0)}),
-                (cy, rightMargin, rightText, selectionFrame.maxX, rightDest, -10 as CGFloat, {CGPointMake($1, $0)})
+            let edges : [(CGFloat?, CAShapeLayer, CATextLayer, CGFloat, CGFloat?, CGFloat, (CGFloat, CGFloat) -> CGPoint)] = [
+                (cx, topMargin, topText, selectionFrame.minY, topDest, -30 as CGFloat, CGPoint.init),
+                (cx, bottomMargin, bottomText, selectionFrame.maxY, bottomDest, -30 as CGFloat, CGPoint.init),
+                (cy, leftMargin, leftText, selectionFrame.minX, leftDest, -10 as CGFloat, {CGPoint(x: $1, y: $0)}),
+                (cy, rightMargin, rightText, selectionFrame.maxX, rightDest, -10 as CGFloat, {CGPoint(x: $1, y: $0)})
             ]
             for (center, layer, label, source, dest, labelDelta, makePoint) in edges {
-                if let c = center, end = dest {
-                    label.hidden = false
+                if let c = center, let end = dest {
+                    label.isHidden = false
                     label.string = "\(fabs(source - end))"
                     sizeLabelToFit(label)
                     label.position = makePoint(c + labelDelta, average(source, end))

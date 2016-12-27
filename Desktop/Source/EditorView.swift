@@ -40,9 +40,9 @@ class EditorView : NSView, EditorController {
         return self
     }
     
-    final class func freshViewFromNib(name : String) -> EditorView {
+    final class func freshViewFromNib(_ name : String) -> EditorView {
         let owner = EditorViewNibOwner()
-        NSBundle.mainBundle().loadNibNamed(name, owner: owner, topLevelObjects: nil)
+        Bundle.main.loadNibNamed(name, owner: owner, topLevelObjects: nil)
         return owner.view!
     }
 }

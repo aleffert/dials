@@ -17,13 +17,13 @@ extension DLSToggleEditor : EditorControllerGenerating {
 
 extension DLSToggleEditor : CodeGenerating {
 
-    public func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func code(forValue value: NSCoding?, language: Language) -> String {
         let values : (t : String, f : String)
         
         switch language {
-        case .ObjC:
+        case .objC:
             values = (t : "YES", f : "NO")
-        case .Swift:
+        case .swift:
             values = (t : "true", f : "false")
         }
         
@@ -37,16 +37,16 @@ extension DLSToggleEditor : CodeGenerating {
 }
 
 class ToggleEditorView : EditorView {
-    @IBOutlet private var button : NSButton?
+    @IBOutlet fileprivate var button : NSButton?
     
-    @IBAction private func buttonToggled(sender : NSButton) {
-        self.delegate?.editorController(self, changedToValue: sender.state)
+    @IBAction fileprivate func buttonToggled(_ sender : NSButton) {
+        self.delegate?.editorController(self, changedToValue: sender.state as NSCoding?)
     }
     
     override var configuration : EditorConfiguration? {
         didSet {
             let state = configuration?.value as? NSNumber
-            button?.state = state?.integerValue ?? 0
+            button?.state = state?.intValue ?? 0
             button?.title = configuration?.label ?? "Option"
         }
     }

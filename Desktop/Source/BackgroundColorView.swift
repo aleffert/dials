@@ -12,18 +12,18 @@ import Cocoa
     
     @IBInspectable var backgroundColor : NSColor?
     
-    override var opaque : Bool {
+    override var isOpaque : Bool {
         return false
     }
 
-    override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
-        let color = backgroundColor ?? NSColor.clearColor()
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
+        let color = backgroundColor ?? NSColor.clear
         color.setFill()
         NSRectFill(dirtyRect)
     }
     
-    override var flipped : Bool {
+    override var isFlipped : Bool {
         return true
     }
     

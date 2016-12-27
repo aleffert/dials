@@ -9,21 +9,21 @@
 import Cocoa
 
 protocol VisualOutlineControlsViewDelegate : class {
-    func controlsView(view : VisualOutlineControlsView, changedZoom zoomScale : CGFloat)
-    func controlsView(view : VisualOutlineControlsView, changedDepth depth : CGFloat)
-    func controlsViewResetTransform(view : VisualOutlineControlsView)
+    func controlsView(_ view : VisualOutlineControlsView, changedZoom zoomScale : CGFloat)
+    func controlsView(_ view : VisualOutlineControlsView, changedDepth depth : CGFloat)
+    func controlsViewResetTransform(_ view : VisualOutlineControlsView)
 }
 
 class VisualOutlineControlsView: NSView {
-    @IBOutlet private var bodyView : NSView!
-    @IBOutlet private var zoomSlider : NSSlider!
-    @IBOutlet private var depthSlider : NSSlider!
+    @IBOutlet fileprivate var bodyView : NSView!
+    @IBOutlet fileprivate var zoomSlider : NSSlider!
+    @IBOutlet fileprivate var depthSlider : NSSlider!
     
     weak var delegate : VisualOutlineControlsViewDelegate?
     
     override init(frame frameRect: NSRect) {
         super.init(frame : frameRect)
-        NSBundle.mainBundle().loadNibNamed("VisualOutlineControlsView", owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed("VisualOutlineControlsView", owner: self, topLevelObjects: nil)
         addSubview(bodyView)
         bodyView.addConstraintsMatchingSuperviewBounds()
     }
@@ -32,19 +32,19 @@ class VisualOutlineControlsView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @IBAction private func zoomChanged(sender : NSSlider) {
+    @IBAction fileprivate func zoomChanged(_ sender : NSSlider) {
         self.delegate?.controlsView(self, changedZoom: CGFloat(sender.floatValue))
     }
     
-    @IBAction private func resetTransform(sender : AnyObject) {
+    @IBAction fileprivate func resetTransform(_ sender : AnyObject) {
         self.delegate?.controlsViewResetTransform(self)
     }
     
-    @IBAction private func depthChanged(sender : NSSlider) {
+    @IBAction fileprivate func depthChanged(_ sender : NSSlider) {
         self.delegate?.controlsView(self, changedDepth: CGFloat(sender.floatValue))
     }
     
-    @IBAction private func resetZoom(sender : AnyObject) {
+    @IBAction fileprivate func resetZoom(_ sender : AnyObject) {
         zoom = 1
         self.delegate?.controlsView(self, changedZoom: 1)
     }

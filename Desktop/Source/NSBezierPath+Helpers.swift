@@ -12,35 +12,36 @@ extension NSBezierPath {
     
     convenience init(from : CGPoint, to : CGPoint) {
         self.init()
-        moveToPoint(from)
-        lineToPoint(to)
+        move(to: from)
+        line(to: to)
     }
     
-    var CGPath : CGPathRef {
+    var CGPath : CGPath {
         let numElements = self.elementCount
-        let path = CGPathCreateMutable()
+        let path = CGMutablePath()
         if numElements > 0 {
             var closedPath = true
-            let points = NSPointArray.alloc(3)
+            let points = NSPointArray.allocate(capacity: 3)
+            
             for i in 0 ..< numElements {
-                switch elementAtIndex(i, associatedPoints: points) {
-                case .MoveToBezierPathElement:
-                    CGPathMoveToPoint(path, nil, points[0].x, points[0].y)
-                case .LineToBezierPathElement:
-                    CGPathAddLineToPoint(path, nil, points[0].x, points[0].y)
-                case .CurveToBezierPathElement:
-                    CGPathAddCurveToPoint(path, nil, points[0].x, points[0].y, points[1].x, points[1].y, points[2].x, points[2].y)
-                case .ClosePathBezierPathElement:
-                    CGPathCloseSubpath(path)
+                switch element(at: i, associatedPoints: points) {
+                case .moveToBezierPathElement:
+                    path.move(to: points[0], transform: CGAffineTransform.identity)
+                case .lineToBezierPathElement:
+                    path.addLine(to: points[0], transform: CGAffineTransform.identity)
+                case .curveToBezierPathElement:
+                    path.addCurve(to: points[0], control1: points[1], control2: points[2])
+                case .closePathBezierPathElement:
+                    path.closeSubpath()
                     closedPath = true
                 }
             }
             
             if !closedPath {
-                CGPathCloseSubpath(path)
+                path.closeSubpath()
             }
             
-            points.destroy(3)
+            points.deinitialize(count: 3)
         }
         return path
     }

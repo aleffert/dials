@@ -17,7 +17,7 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         DLSGroupWithName("Example Group (Swift)") {
             DLSControl("Some Color").colorOf(&color)
@@ -28,7 +28,7 @@ class TestViewController: UIViewController {
 
             DLSControl("Add Toolbar Button").actionOf {[weak self] in
                 var items = self?.toolbarItems ?? []
-                items.append(UIBarButtonItem(title: buttonTitle, style: .Plain, target: nil, action: nil))
+                items.append(UIBarButtonItem(title: buttonTitle, style: .plain, target: nil, action: nil))
                 self?.toolbarItems = items
             }
 

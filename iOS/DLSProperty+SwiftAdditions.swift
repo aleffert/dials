@@ -8,9 +8,9 @@
 
 import UIKit
 
-func DLSProperty(name : String, label: String? = nil, editor : DLSEditor, _ exchanger : DLSValueExchanger? = nil) -> DLSPropertyDescription {
+func DLSProperty(_ name : String, label: String? = nil, editor : DLSEditor, _ exchanger : DLSValueExchanger? = nil) -> DLSPropertyDescription {
     let property = DLSProperty(name, editor)
-    if let exchanger = exchanger { property.setExchanger(exchanger) }
-    if let label = label { property.setLabel(label) }
+    if let exchanger = exchanger { let _ = property.setExchanger(exchanger) }
+    if let label = label { let _ = property.setLabel(label) }
     return property
 }

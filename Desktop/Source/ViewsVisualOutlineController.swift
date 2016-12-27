@@ -8,45 +8,69 @@
 
 import AppKit
 import GLKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 
 private let MinScale : CGFloat = 0.25
 private let MaxScale : CGFloat = 2.0
 
-func * (lhs : NSEdgeInsets, rhs : NSEdgeInsets) -> NSEdgeInsets {
-    return NSEdgeInsets(top : lhs.top * rhs.top, left : lhs.left * rhs.left, bottom : lhs.bottom * rhs.bottom, right : lhs.right * rhs.right)
+func * (lhs : EdgeInsets, rhs : EdgeInsets) -> EdgeInsets {
+    return EdgeInsets(top : lhs.top * rhs.top, left : lhs.left * rhs.left, bottom : lhs.bottom * rhs.bottom, right : lhs.right * rhs.right)
 }
 
 protocol ViewsVisualOutlineControllerDelegate : class {
-    func visualOutlineController(controller : ViewsVisualOutlineController, selectedViewWithID viewID: String?)
-    func visualOutlineController(controller : ViewsVisualOutlineController, appliedInsets insets : NSEdgeInsets, toViewWithID viewID : String)
+    func visualOutlineController(_ controller : ViewsVisualOutlineController, selectedViewWithID viewID: String?)
+    func visualOutlineController(_ controller : ViewsVisualOutlineController, appliedInsets insets : EdgeInsets, toViewWithID viewID : String)
 }
 
 class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewDelegate {
     weak var delegate : ViewsVisualOutlineControllerDelegate?
     
-    @IBOutlet private var contentView : BackgroundColorView!
+    @IBOutlet fileprivate var contentView : BackgroundColorView!
     
     var hierarchy : ViewHierarchy!
     
-    private var layers : [NSString:ViewFacade] = [:]
-    private let controlsView = VisualOutlineControlsView()
-    private let bodyLayer = CATransformLayer()
+    fileprivate var layers : [String:ViewFacade] = [:]
+    fileprivate let controlsView = VisualOutlineControlsView()
+    fileprivate let bodyLayer = CATransformLayer()
     
     // Delta from the active rotation gesture
-    private var rotationOffset = NSZeroPoint
+    fileprivate var rotationOffset = NSZeroPoint
     // Delta from the active pan gesture
-    private var panOffset = NSZeroPoint
-    private var gestureMagnification : CGFloat = 1
+    fileprivate var panOffset = NSZeroPoint
+    fileprivate var gestureMagnification : CGFloat = 1
     
-    private var externalHighlight : String?
-    private var currentSelection : String?
+    fileprivate var externalHighlight : String?
+    fileprivate var currentSelection : String?
     
-    private var contents : [String:NSImage] = [:]
+    fileprivate var contents : [String:NSImage] = [:]
     
-    private let marginsLayer = MarginComparisonLayer()
+    fileprivate let marginsLayer = MarginComparisonLayer()
     
-    var screenSize = CGSizeZero {
+    var screenSize = CGSize.zero {
         didSet {
             updateBodyTransforms()
         }
@@ -61,39 +85,39 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         
         contentView.wantsLayer = true
         view.addSubview(controlsView)
-        controlsView.addConstraintsMatchingSuperviewAttributes([.Bottom, .Left, .Right])
+        controlsView.addConstraintsMatchingSuperviewAttributes([.bottom, .left, .right])
         controlsView.delegate = self
         
         contentView?.layer!.addSublayer(bodyLayer)
         
         updateBodyTransforms()
         
-        let panGesture = NSPanGestureRecognizer(target: self, action: Selector("pan:"))
+        let panGesture = NSPanGestureRecognizer(target: self, action: #selector(ViewsVisualOutlineController.pan(_:)))
         contentView.addGestureRecognizer(panGesture)
         
-        let zoomGesture = NSMagnificationGestureRecognizer(target : self, action : Selector("magnify:"))
+        let zoomGesture = NSMagnificationGestureRecognizer(target : self, action : #selector(ViewsVisualOutlineController.magnify(_:)))
         contentView.addGestureRecognizer(zoomGesture)
         
-        let tapGesture = NSClickGestureRecognizer(target : self, action : Selector("click:"))
+        let tapGesture = NSClickGestureRecognizer(target : self, action : #selector(ViewsVisualOutlineController.click(_:)))
             contentView.addGestureRecognizer(tapGesture)
         
-        let area = NSTrackingArea(rect: NSZeroRect, options: [.ActiveInActiveApp, .MouseEnteredAndExited, .MouseMoved, .InVisibleRect], owner: self, userInfo: nil)
+        let area = NSTrackingArea(rect: NSZeroRect, options: [.activeInActiveApp, .mouseEnteredAndExited, .mouseMoved, .inVisibleRect], owner: self, userInfo: nil)
         contentView.addTrackingArea(area)
         let currentContent = contentView
-        self.dls_performActionOnDealloc {
-            currentContent.removeTrackingArea(area)
+        self.dls_performAction {
+            currentContent?.removeTrackingArea(area)
         }
         
         bodyLayer.addSublayer(marginsLayer)
-        marginsLayer.hidden = true
+        marginsLayer.isHidden = true
     }
     
     override func viewDidLayout() {
         super.viewDidLayout()
-        bodyLayer.position = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds))
+        bodyLayer.position = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
     }
     
-    private func visitNodes(nodes : [NSString], parent : ViewFacade?, inout depth : Int, inout marking : Set<NSString>) {
+    fileprivate func visitNodes(_ nodes : [String], parent : ViewFacade?, depth : inout Int, marking : inout Set<String>) {
         
         // Need to gradually increase this so that children of siblings where
         // an earlier one has a deeper hierarchy than a later one don't appear on top
@@ -118,10 +142,10 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 
                 layer.transform = record.renderingInfo.transform3D
                 
-                layer.contentLayer.backgroundColor = record.renderingInfo.backgroundColor?.CGColor
-                layer.contentLayer.borderColor = record.renderingInfo.borderColor?.CGColor
+                layer.contentLayer.backgroundColor = record.renderingInfo.backgroundColor?.cgColor
+                layer.contentLayer.borderColor = record.renderingInfo.borderColor?.cgColor
                 layer.contentLayer.contents = contents[record.viewID]
-                layer.contentLayer.shadowColor = record.renderingInfo.shadowColor?.CGColor
+                layer.contentLayer.shadowColor = record.renderingInfo.shadowColor?.cgColor
                 
                 layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(depth) * controlsView.depthOffset + zPos)
 
@@ -130,7 +154,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 }
                 
                 // These properties need to be inherited
-                layer.contentLayer.hidden = layer.contentLayer.hidden || (parent?.contentLayer.hidden ?? false)
+                layer.contentLayer.isHidden = layer.contentLayer.isHidden || (parent?.contentLayer.isHidden ?? false)
                 layer.contentLayer.opacity = layer.contentLayer.opacity * (parent?.contentLayer.opacity ?? 1)
                 
                 for(key, value) in record.renderingInfo.geometryValues {
@@ -139,7 +163,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 
                 layer.borderLayer.transform = layer.contentLayer.transform
                 
-                visitNodes(record.children, parent : layer, depth : &depth, marking: &marking)
+                visitNodes(record.children as [String], parent : layer, depth : &depth, marking: &marking)
                 if depth > 0 {
                     // Add a small fudge factor so siblings are properly ordered
                     zPos += 0.001
@@ -161,7 +185,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         updateSelectionMargins()
     }
     
-    func takeContents(contents : [String:NSData], empties : [String]) {
+    func takeContents(_ contents : [String:Data], empties : [String]) {
         for (key, imageData) in contents {
             let image = NSImage(data: imageData)
             self.contents[key] = image
@@ -174,12 +198,12 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         // TODO Garbage collect this
     }
     
-    func offsetToRadians(v : CGFloat) -> CGFloat {
+    func offsetToRadians(_ v : CGFloat) -> CGFloat {
         // Reasonable translation betwen point deltas and a rotation. Entirely empirical
         return v / 120
     }
     
-    func clampScale(scale : CGFloat) -> CGFloat {
+    func clampScale(_ scale : CGFloat) -> CGFloat {
         let clamped = clamp(scale, min: MinScale, max: MaxScale)
         let delta = scale - clamped
         return clamped + delta / 4
@@ -189,14 +213,14 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         let scale = clampScale(gestureMagnification * controlsView.zoom)
         let translate = CATransform3DMakeTranslation(-screenSize.width / 2, -screenSize.height / 2, 0)
         let scaleTransform = CATransform3DMakeScale(scale, scale, scale)
-        let offset = CGPointMake(rotationOffset.x + panOffset.x, rotationOffset.y + panOffset.y)
+        let offset = CGPoint(x: rotationOffset.x + panOffset.x, y: rotationOffset.y + panOffset.y)
         let xRotation = CATransform3DMakeRotation(offsetToRadians(offset.x), 0, 1, 0)
         let yRotation = CATransform3DMakeRotation(offsetToRadians(-offset.y), 1, 0, 0)
         let rotationTransform = CATransform3DConcat(xRotation, yRotation)
         bodyLayer.transform = CATransform3DConcat(CATransform3DConcat(translate, scaleTransform), rotationTransform)
     }
     
-    func updateDepths(depth : CGFloat) {
+    func updateDepths(_ depth : CGFloat) {
         for layer in layers.values {
             layer.contentLayer.transform = CATransform3DMakeTranslation(0.0, 0.0, CGFloat(layer.hierarchyDepth) * depth)
             layer.borderLayer.transform = layer.contentLayer.transform
@@ -206,25 +230,25 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
     func updateHighlights() {
         for layer in layers.values {
             if layer.record.viewID == self.currentSelection {
-                layer.borderStyle = .Selected
+                layer.borderStyle = .selected
             }
             else if layer.record.viewID == self.externalHighlight {
-                layer.borderStyle = .Highlighted
+                layer.borderStyle = .highlighted
             }
             else {
-                layer.borderStyle = .Normal
+                layer.borderStyle = .normal
             }
         }
     }
     
-    func selectViewWithID(viewID : String?) {
+    func selectViewWithID(_ viewID : String?) {
         currentSelection = viewID
         updateHighlights()
     }
     
     // MARK: Gesture Handling
     
-    func panChangedWithDelta(delta : CGPoint) {
+    func panChangedWithDelta(_ delta : CGPoint) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         panOffset = delta
@@ -252,28 +276,28 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         }
     }
     
-    func pan(sender : NSPanGestureRecognizer) {
+    func pan(_ sender : NSPanGestureRecognizer) {
         switch sender.state {
-        case .Began:
+        case .began:
             fallthrough
-        case .Changed:
-            panChangedWithDelta(sender.translationInView(contentView))
-        case .Ended:
+        case .changed:
+            panChangedWithDelta(sender.translation(in: contentView))
+        case .ended:
             panEnded()
         default:
             break
         }
     }
     
-    func magnify(sender : NSMagnificationGestureRecognizer) {
+    func magnify(_ sender : NSMagnificationGestureRecognizer) {
         switch sender.state {
-        case .Changed:
+        case .changed:
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             gestureMagnification = 1 + sender.magnification
             updateBodyTransforms()
             CATransaction.commit()
-        case .Ended:
+        case .ended:
             controlsView.zoom = gestureMagnification * controlsView.zoom
             gestureMagnification = 1
             updateBodyTransforms()
@@ -282,34 +306,34 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         }
     }
     
-    func click(sender : NSClickGestureRecognizer) {
-        let location = sender.locationInView(contentView)
+    func click(_ sender : NSClickGestureRecognizer) {
+        let location = sender.location(in: contentView)
         let layer = layerAtPointInContentView(location)
         
         self.delegate?.visualOutlineController(self, selectedViewWithID: layer?.record.viewID)
     }
     
-    override func scrollWheel(theEvent: NSEvent) {
-        if theEvent.phase == .Changed {
+    override func scrollWheel(with theEvent: NSEvent) {
+        if theEvent.phase == .changed {
             panChangedWithDelta(CGPoint(x : theEvent.scrollingDeltaX, y : theEvent.scrollingDeltaY))
             panStationary()
             CATransaction.commit()
         }
-        else if theEvent.phase == .Ended {
+        else if theEvent.phase == .ended {
             panEnded()
         }
     }
     
     // MARK: Mouse Move Tracking
     
-    private func firstLayerIntersectingRay(pos pos : Vec3, neg : Vec3) -> ViewFacade? {
+    fileprivate func firstLayerIntersectingRay(pos : Vec3, neg : Vec3) -> ViewFacade? {
         updateHighlights()
         
         var best : ViewFacade?
-        var bestDistance : CGFloat = CGFloat.max
+        var bestDistance : CGFloat = CGFloat.greatestFiniteMagnitude
 
         for layer in layers.values {
-            if layer.hidden || !layer.selectable {
+            if layer.isHidden || !layer.selectable {
                 continue
             }
             let z = Float(layer.hierarchyDepth) * Float(controlsView.depthOffset)
@@ -317,8 +341,8 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
             let x = CGFloat(pct * (pos.x - neg.x) + neg.x)
             let y = CGFloat(pct * (pos.y - neg.y) + neg.y)
             
-            let topLeft = layer.convertPoint(layer.bounds.origin, toLayer : bodyLayer)
-            let bottomRight = layer.convertPoint(layer.bounds.max, toLayer : bodyLayer)
+            let topLeft = layer.convert(layer.bounds.origin, to : bodyLayer)
+            let bottomRight = layer.convert(layer.bounds.max, to : bodyLayer)
             
             if x >= topLeft.x && x <= bottomRight.x && y >= topLeft.y && y <= bottomRight.y {
                 // intersects. let's check distance
@@ -331,7 +355,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 // they may have the same distance
                 // so make sure we account for the subview ordering
                 var higherSibling = false
-                if let parentID = best?.record.superviewID where parentID == layer.record.superviewID {
+                if let parentID = best?.record.superviewID, parentID == layer.record.superviewID {
                     let parent = layers[parentID]
                     let bestParentIndex = parent?.record.children.indexOf {
                         $0 == best?.record.viewID
@@ -351,9 +375,9 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         return best
     }
     
-    private func layerAtPointInContentView(location : CGPoint) -> ViewFacade? {
+    fileprivate func layerAtPointInContentView(_ location : CGPoint) -> ViewFacade? {
         let endOfTheWorld : Float = 10000.0
-        let layerLocation = contentView.convertPointToLayer(location)
+        let layerLocation = contentView.convertToLayer(location)
         
         let locationOut = GLKVector3Make(Float(layerLocation.x - contentView.frame.size.width / 2), Float(layerLocation.y - contentView.frame.size.height / 2), endOfTheWorld)
         let transformedLocationOut = CATransform3DInvert(bodyLayer.transform) * locationOut
@@ -366,64 +390,64 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         return firstLayerIntersectingRay(pos : positionOut, neg : positionIn)
     }
     
-    private func updateSelectionMargins() {
+    fileprivate func updateSelectionMargins() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        if let selectionID = currentSelection, selection = layers[selectionID] {
+        if let selectionID = currentSelection, let selection = layers[selectionID] {
             marginsLayer.updateWithSelectionLayer(selection)
         }
         
         CATransaction.commit()
     }
     
-    private func updateMarginsWithEvent(theEvent : NSEvent) {
+    fileprivate func updateMarginsWithEvent(_ theEvent : NSEvent) {
         updateSelectionMargins()
-        marginsLayer.hidden = marginsLayer.comparison == nil || (!theEvent.modifierFlags.contains(.AlternateKeyMask)) || currentSelection == nil
+        marginsLayer.isHidden = marginsLayer.comparison == nil || (!theEvent.modifierFlags.contains(.option)) || currentSelection == nil
     }
     
-    override func flagsChanged(theEvent: NSEvent) {
+    override func flagsChanged(with theEvent: NSEvent) {
         updateMarginsWithEvent(theEvent)
     }
     
-    override func mouseMoved(theEvent: NSEvent) {
+    override func mouseMoved(with theEvent: NSEvent) {
         self.view.window?.makeFirstResponder(self)
-        let viewLocation = contentView.convertPoint(theEvent.locationInWindow, fromView: nil)
+        let viewLocation = contentView.convert(theEvent.locationInWindow, from: nil)
         
         marginsLayer.comparison = layerAtPointInContentView(viewLocation)
         if let comparison = marginsLayer.comparison {
-            comparison.borderStyle = .Highlighted
+            comparison.borderStyle = .highlighted
             marginsLayer.transform = CATransform3DConcat(CATransform3DMakeTranslation(0, 0, 0.001), comparison.contentLayer.transform)
         }
         
         updateMarginsWithEvent(theEvent)
     }
     
-    override func mouseExited(theEvent: NSEvent) {
+    override func mouseExited(with theEvent: NSEvent) {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         marginsLayer.comparison = nil
-        marginsLayer.hidden = true
+        marginsLayer.isHidden = true
         CATransaction.commit()
         updateHighlights()
     }
     
-    func highlightViewWithID(viewID: String?) {
+    func highlightViewWithID(_ viewID: String?) {
         externalHighlight = viewID
         updateHighlights()
     }
     
-    func unhighlightViewWithID(viewID: String) {
+    func unhighlightViewWithID(_ viewID: String) {
         if externalHighlight == viewID {
             externalHighlight = nil
             updateHighlights()
         }
     }
     
-    private func sendOffsetWithBase(base : NSEdgeInsets, mask : NSEdgeInsets, modifiers : NSEventModifierFlags) {
+    fileprivate func sendOffsetWithBase(_ base : EdgeInsets, mask : EdgeInsets, modifiers : NSEventModifierFlags) {
         if let selection = currentSelection {
-            let insets : NSEdgeInsets
-            if (modifiers.contains(.AlternateKeyMask)) {
-                if (modifiers.contains(.ShiftKeyMask)) {
+            let insets : EdgeInsets
+            if (modifiers.contains(.option)) {
+                if (modifiers.contains(.shift)) {
                     insets = base * mask * NSEdgeInsetsMake(-1, -1, -1, -1)
                 }
                 else {
@@ -438,7 +462,7 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
         }
     }
     
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
         if let key = theEvent.charactersIgnoringModifiers?.unicodeScalars {
             switch Int(key[key.startIndex].value) {
             case NSUpArrowFunctionKey:
@@ -465,20 +489,20 @@ class ViewsVisualOutlineController: NSViewController, VisualOutlineControlsViewD
                 break
             }
         }
-        super.keyDown(theEvent)
+        super.keyDown(with: theEvent)
     }
 
     // MARK: Controls View Delegate
     
-    func controlsView(view: VisualOutlineControlsView, changedZoom zoomScale: CGFloat) {
+    func controlsView(_ view: VisualOutlineControlsView, changedZoom zoomScale: CGFloat) {
         updateBodyTransforms()
     }
     
-    func controlsView(view: VisualOutlineControlsView, changedDepth depth: CGFloat) {
+    func controlsView(_ view: VisualOutlineControlsView, changedDepth depth: CGFloat) {
         updateDepths(depth)
     }
     
-    func controlsViewResetTransform(view: VisualOutlineControlsView) {
+    func controlsViewResetTransform(_ view: VisualOutlineControlsView) {
         rotationOffset = NSZeroPoint
         updateBodyTransforms()
     }

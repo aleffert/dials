@@ -15,7 +15,7 @@ class ConnectionStatusToolbarItem: NSToolbarItem {
     let statusView : ConnectionStatusView
     
     init(itemIdentifier: String, changeBroadcaster : Broadcaster<ConnectionStatus>) {
-        self.statusView = ConnectionStatusView(frame : CGRectMake(0, 0, 250, 30))
+        self.statusView = ConnectionStatusView(frame : CGRect(x: 0, y: 0, width: 250, height: 30))
         super.init(itemIdentifier: itemIdentifier)
         self.view = statusView
         changeBroadcaster.addListener(self) {[weak self] status in

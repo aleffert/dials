@@ -9,7 +9,7 @@
 import Cocoa
 
 class FlippedClipView : NSClipView {
-    override var flipped : Bool {
+    override var isFlipped : Bool {
         return true;
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension NSHTTPURLResponse {
+extension HTTPURLResponse {
     var statusCodeDescription : String {
         switch statusCode {
             case 100: return "Continue"

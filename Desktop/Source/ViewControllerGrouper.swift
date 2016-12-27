@@ -7,13 +7,26 @@
 //
 
 import Cocoa
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 let ViewControllerGrouperCellIdentifier = "ViewControllerGrouperCellIdentifier"
 
 private enum Row {
-    case Singleton(NamedGroup<NSViewController>)
-    case Heading(NamedGroup<NSViewController>)
-    case Controller(NSViewController)
+    case singleton(NamedGroup<NSViewController>)
+    case heading(NamedGroup<NSViewController>)
+    case controller(NSViewController)
 }
 
 class NamedGroup<A> {
@@ -30,36 +43,36 @@ class NamedGroup<A> {
 typealias ViewControllerGroup = NamedGroup<NSViewController>
 
 protocol ViewControllerGrouperDelegate : class {
-    func controllerGroupSelectedController(controller : NSViewController)
+    func controllerGroupSelectedController(_ controller : NSViewController)
 }
 
 class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
     weak var delegate : ViewControllerGrouperDelegate?
-    private var groups : [ViewControllerGroup] = []
-    private var rows : [Row] = []
+    fileprivate var groups : [ViewControllerGroup] = []
+    fileprivate var rows : [Row] = []
     
-    private func buildRowList() -> [Row] {
+    fileprivate func buildRowList() -> [Row] {
         var result : [Row] = []
         for group in groups {
             if group.items.count == 1 {
-                 result.append(Row.Singleton(group))
+                 result.append(Row.singleton(group))
             }
             else {
-                result.append(Row.Heading(group))
-                result.appendContentsOf(group.items.map{ Row.Controller($0) })
+                result.append(Row.heading(group))
+                result.append(contentsOf: group.items.map{ Row.controller($0) })
             }
         }
         return result
     }
 
-    func addViewController(controller: NSViewController, plugin: Plugin) {
+    func addViewController(_ controller: NSViewController, plugin: Plugin) {
         var found = false
         for group in groups {
             if group.name == plugin.identifier {
                 group.items.append(controller)
                 if plugin.shouldSortChildren {
-                    group.items.sortInPlace({ (left, right) -> Bool in
+                    group.items.sort(by: { (left, right) -> Bool in
                         return left.title < right.title
                     })
                 }
@@ -73,13 +86,13 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
             group.items = [controller]
             groups.append(group)
         }
-        groups.sortInPlace { (left, right) -> Bool in
+        groups.sort { (left, right) -> Bool in
             return left.label < right.label
         }
         rows = buildRowList()
     }
     
-    func removeViewController(controller: NSViewController, plugin: Plugin) {
+    func removeViewController(_ controller: NSViewController, plugin: Plugin) {
         for group in groups {
             if group.name == plugin.identifier {
                 group.items = group.items.filter { return $0 != controller }
@@ -93,77 +106,77 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         return rows.count > 0
     }
     
-    func controllerForRow(row : Int) -> NSViewController? {
+    func controllerForRow(_ row : Int) -> NSViewController? {
         let item = rows[row]
         switch item {
-        case .Heading(_):
+        case .heading(_):
             return nil
-        case .Singleton(let group):
+        case .singleton(let group):
             return group.items[0]
-        case .Controller(let controller):
+        case .controller(let controller):
             return controller
         }
     }
     
-    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+    func numberOfRows(in tableView: NSTableView) -> Int {
         return rows.count
     }
     
-    func tableView(tableView: NSTableView, viewForTableColumn tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeViewWithIdentifier(ViewControllerGrouperCellIdentifier, owner: nil) as! NSTableCellView
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.make(withIdentifier: ViewControllerGrouperCellIdentifier, owner: nil) as! NSTableCellView
         let item = rows[row]
         switch item {
-        case .Heading(let group):
+        case .heading(let group):
             cell.textField?.stringValue = group.label
-        case .Singleton(let group):
+        case .singleton(let group):
             cell.textField?.stringValue = group.label
-            cell.textField?.font = NSFont.boldSystemFontOfSize(11)
-        case .Controller(let controller):
+            cell.textField?.font = NSFont.boldSystemFont(ofSize: 11)
+        case .controller(let controller):
             cell.textField?.stringValue = controller.title ?? "Item"
-            cell.textField?.font = NSFont.systemFontOfSize(12)
+            cell.textField?.font = NSFont.systemFont(ofSize: 12)
         }
         return cell
     }
     
-    func tableView(tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         let item = rows[row]
         switch item {
-        case .Singleton(_): fallthrough
-        case .Heading(_):
+        case .singleton(_): fallthrough
+        case .heading(_):
             if row == 0 {
                 return 20
             }
             else {
                 return 24
             }
-        case .Controller(_):
+        case .controller(_):
             return 20
         }
     }
     
-    func tableView(tableView: NSTableView, isGroupRow row: Int) -> Bool {
+    func tableView(_ tableView: NSTableView, isGroupRow row: Int) -> Bool {
         let item = rows[row]
         switch item {
-        case .Singleton(_): return false
-        case .Heading(_): return true
-        case .Controller(_): return false
+        case .singleton(_): return false
+        case .heading(_): return true
+        case .controller(_): return false
         }
     }
     
-    func tableView(tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: NSIndexSet) -> NSIndexSet {
+    func tableView(_ tableView: NSTableView, selectionIndexesForProposedSelection proposedSelectionIndexes: IndexSet) -> IndexSet {
         let resultSet = NSMutableIndexSet()
-        var index = proposedSelectionIndexes.firstIndex
-        while index != NSNotFound {
-            let groupRow = self.tableView(tableView, isGroupRow: index as Int)
+        var index = proposedSelectionIndexes.first
+        while index != nil {
+            let groupRow = self.tableView(tableView, isGroupRow: index! as Int)
             if !groupRow {
-                resultSet.addIndex(index)
+                resultSet.add(index!)
             }
-            index = proposedSelectionIndexes.indexGreaterThanIndex(index)
+            index = proposedSelectionIndexes.integerGreaterThan(index!)
         }
-        return resultSet
+        return resultSet as IndexSet
     }
     
-    func tableViewSelectionDidChange(notification: NSNotification) {
+    func tableViewSelectionDidChange(_ notification: Notification) {
         let tableView = notification.object as! NSTableView
         let selection = tableView.selectedRow
         if selection != -1 {
@@ -173,17 +186,17 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         }
     }
     
-    func controllersForRowIndexes(indexes : NSIndexSet) -> [NSViewController] {
+    func controllersForRowIndexes(_ indexes : IndexSet) -> [NSViewController] {
         var result : [NSViewController] = []
         for i in 0 ..< rows.count {
             let row = rows[i]
-            if indexes.containsIndex(i) {
+            if indexes.contains(i) {
                 switch row {
-                case let .Singleton(group):
+                case let .singleton(group):
                     result.append(group.items[0])
-                case .Heading(_):
+                case .heading(_):
                     continue
-                case let .Controller(c):
+                case let .controller(c):
                     result.append(c)
                 }
             }
@@ -191,37 +204,37 @@ class ViewControllerGrouper: NSObject, NSTableViewDelegate, NSTableViewDataSourc
         return result
     }
     
-    func rowIndexesForControllers(controllers : [NSViewController]) -> NSIndexSet {
+    func rowIndexesForControllers(_ controllers : [NSViewController]) -> IndexSet {
         let result = NSMutableIndexSet()
         for i in 0 ..< rows.count {
             if let c = controllerForRow(i) {
-                if (controllers.indexOf(c) != nil) {
-                    result.addIndex(i)
+                if (controllers.index(of: c) != nil) {
+                    result.add(i)
                 }
             }
         }
-        return result
+        return result as IndexSet
     }
     
-    private func adjacentTabIndex(existingIndex : Int, range : [Int]) -> Int {
+    fileprivate func adjacentTabIndex(_ existingIndex : Int, range : [Int]) -> Int {
         for i in range {
             let proposed = (i + existingIndex + rows.count) % rows.count
             let item = rows[proposed]
             switch item {
-            case .Singleton(_): return proposed
-            case .Controller(_): return proposed
-            case .Heading(_): continue
+            case .singleton(_): return proposed
+            case .controller(_): return proposed
+            case .heading(_): continue
             }
         }
         return existingIndex
     }
     
-    func nextTabIndex(existingIndex : Int) -> Int {
+    func nextTabIndex(_ existingIndex : Int) -> Int {
         return adjacentTabIndex(existingIndex, range : Array(1 ... rows.count))
     }
     
-    func previousTabIndex(existingIndex : Int) -> Int {
-        return adjacentTabIndex(existingIndex, range : Array((0 ..< rows.count).reverse()))
+    func previousTabIndex(_ existingIndex : Int) -> Int {
+        return adjacentTabIndex(existingIndex, range : Array((0 ..< rows.count).reversed()))
     }
 
 }

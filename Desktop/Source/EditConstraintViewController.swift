@@ -9,8 +9,8 @@
 import Cocoa
 
 protocol EditConstraintViewControllerDelegate : class {
-    func editorController(controller : EditConstraintViewController, changedConstantToValue value : CGFloat)
-    func editorController(controller : EditConstraintViewController, choseSaveToValue value : CGFloat)
+    func editorController(_ controller : EditConstraintViewController, changedConstantToValue value : CGFloat)
+    func editorController(_ controller : EditConstraintViewController, choseSaveToValue value : CGFloat)
     
 }
 
@@ -38,24 +38,24 @@ class EditConstraintViewController : NSViewController {
         updateFromConstraint()
     }
     
-    private func updateFromConstraint() {
+    fileprivate func updateFromConstraint() {
         constant?.stringValue = stringFromNumber(constraint?.constant ?? 0)
         multiplier?.stringValue = stringFromNumber(constraint?.multiplier ?? 1)
         priority?.stringValue = stringFromNumber(constraint?.priority ?? 0)
         constantStepper?.floatValue = Float(constraint?.constant ?? 0)
-        saveButton?.hidden = constraint?.saveExtra == nil
+        saveButton?.isHidden = constraint?.saveExtra == nil
     }
     
-    @IBAction func save(sender : NSButton) {
+    @IBAction func save(_ sender : NSButton) {
         delegate?.editorController(self, choseSaveToValue: constraint?.constant ?? 0)
     }
     
-    @IBAction func textChanged(sender : NSTextField) {
+    @IBAction func textChanged(_ sender : NSTextField) {
         constantStepper?.floatValue = sender.floatValue
         delegate?.editorController(self, changedConstantToValue: CGFloat(sender.floatValue))
     }
     
-    @IBAction func stepperChanged(sender : NSStepper) {
+    @IBAction func stepperChanged(_ sender : NSStepper) {
         constant?.floatValue = sender.floatValue
         delegate?.editorController(self, changedConstantToValue: CGFloat(sender.floatValue))
     }

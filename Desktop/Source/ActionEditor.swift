@@ -19,7 +19,7 @@ class ActionEditorView : EditorView {
     
     @IBOutlet var button : NSButton?
     
-    @IBAction func buttonPressed(sender : NSButton) {
+    @IBAction func buttonPressed(_ sender : NSButton) {
         self.delegate?.editorController(self, changedToValue: nil)
     }
     

@@ -13,12 +13,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     private var consoleWindowController : ConsoleWindowController?
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         consoleWindowController = ConsoleWindowController(windowNibName: "ConsoleWindow")
         consoleWindowController?.window?.makeKeyAndOrderFront(nil)
     }
     
-    func applicationDidBecomeActive(notification: NSNotification) {
+    func applicationDidBecomeActive(_ notification: Notification) {
         consoleWindowController?.window?.makeKeyAndOrderFront(nil)
     }
 

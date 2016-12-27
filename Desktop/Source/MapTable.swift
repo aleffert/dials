@@ -9,29 +9,29 @@
 import Foundation
 
 enum MapTableKind {
-    case WeakToWeak
-    case WeakToStrong
-    case StrongToWeak
-    case StrongToStrong
+    case weakToWeak
+    case weakToStrong
+    case strongToWeak
+    case strongToStrong
 }
 
 private class MapTableBacking<A : AnyObject, B : AnyObject> {
-    let backing : NSMapTable
+    let backing : NSMapTable<AnyObject, AnyObject>
     
     init(kind : MapTableKind) {
         switch(kind) {
-        case .WeakToWeak:
-            backing = NSMapTable.weakToWeakObjectsMapTable()
-        case .WeakToStrong:
-            backing = NSMapTable.weakToStrongObjectsMapTable()
-        case .StrongToWeak:
-            backing = NSMapTable.strongToWeakObjectsMapTable()
-        case .StrongToStrong:
-            backing = NSMapTable.strongToStrongObjectsMapTable()
+        case .weakToWeak:
+            backing = NSMapTable.weakToWeakObjects()
+        case .weakToStrong:
+            backing = NSMapTable.weakToStrongObjects()
+        case .strongToWeak:
+            backing = NSMapTable.strongToWeakObjects()
+        case .strongToStrong:
+            backing = NSMapTable.strongToStrongObjects()
         }
     }
     
-    private init(backing : NSMapTable) {
+    fileprivate init(backing : NSMapTable<AnyObject, AnyObject>) {
         self.backing = backing
     }
     
@@ -41,14 +41,14 @@ private class MapTableBacking<A : AnyObject, B : AnyObject> {
     
     subscript(key : A) -> B? {
         get {
-            return backing.objectForKey(key) as? B
+            return backing.object(forKey: key) as? B
         }
         set {
             if let v = newValue {
                 backing.setObject(v, forKey: key)
             }
             else {
-                backing.removeObjectForKey(key)
+                backing.removeObject(forKey: key)
             }
         }
     }
@@ -56,7 +56,7 @@ private class MapTableBacking<A : AnyObject, B : AnyObject> {
 
 struct MapTable<A : AnyObject, B : AnyObject> {
     
-    private var backing : MapTableBacking<A, B>
+    fileprivate var backing : MapTableBacking<A, B>
     
     init(kind : MapTableKind) {
         backing = MapTableBacking(kind : kind)
@@ -67,7 +67,7 @@ struct MapTable<A : AnyObject, B : AnyObject> {
             return backing[key]
         }
         set {
-            if !isUniquelyReferencedNonObjC(&self.backing) {
+            if !isKnownUniquelyReferenced(&self.backing) {
                 backing = backing.copy()
             }
             backing[key] = newValue

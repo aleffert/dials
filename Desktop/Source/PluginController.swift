@@ -20,8 +20,8 @@ protocol ConstraintInfoOwner : class {
 
 class PluginController: NSObject, ConstraintInfoSource {
     
-    private var plugins : [Plugin] = []
-    private let codeManager = CodeManager()
+    fileprivate var plugins : [Plugin] = []
+    fileprivate let codeManager = CodeManager()
     
     override init() {
         super.init()
@@ -36,20 +36,20 @@ class PluginController: NSObject, ConstraintInfoSource {
         }
     }
     
-    private func registerDefaultPlugins() {
+    fileprivate func registerDefaultPlugins() {
         registerPlugin(ControlPanelPlugin())
         registerPlugin(ViewsPlugin())
         registerPlugin(NetworkRequestsPlugin())
     }
     
-    private func registerPluginsFromURLs(urls : [NSURL]) {
+    fileprivate func registerPluginsFromURLs(_ urls : [URL]) {
         for url in urls {
-            let fileName = url.lastPathComponent ?? ""
-            if let bundle = NSBundle(URL: url), loaded = bundle.load() as Bool? where loaded {
+            let fileName = url.lastPathComponent 
+            if let bundle = Bundle(url: url), let loaded = bundle.load() as Bool?, loaded {
                 print("Loaded plugin named: \(fileName)")
                 if let
                     pluginClass = bundle.principalClass as? NSObject.Type,
-                    plugin = pluginClass.init() as? Plugin {
+                    let plugin = pluginClass.init() as? Plugin {
                         registerPlugin(plugin)
                         print("Registered plugin class: \(pluginClass)")
                         if let owner = plugin as? CodeHelperOwner {
@@ -63,29 +63,30 @@ class PluginController: NSObject, ConstraintInfoSource {
         }
     }
     
-    private func registerBundlePlugins() {
-        let urls = NSBundle.mainBundle().URLsForResourcesWithExtension(PluginPathExtension, subdirectory: "PlugIns") ?? []
+    fileprivate func registerBundlePlugins() {
+        let urls = Bundle.main.urls(forResourcesWithExtension: PluginPathExtension, subdirectory: "PlugIns") ?? []
         registerPluginsFromURLs(urls)
     }
     
     // We also pick up any plugins side by side with the app so that build products
     // are easy to pick up
-    private func registerAdjacentPlugins() {
-        let bundleURL = NSBundle.mainBundle().bundleURL
-        if let searchURL = bundleURL.URLByDeletingLastPathComponent,
-            adjacentPaths = NSFileManager.defaultManager().enumeratorAtURL(searchURL, includingPropertiesForKeys: nil, options: [], errorHandler: nil) {
+    fileprivate func registerAdjacentPlugins() {
+        let bundleURL = Bundle.main.bundleURL
+        let searchURL = bundleURL.deletingLastPathComponent()
+        
+        if let adjacentPaths = FileManager.default.enumerator(at: searchURL, includingPropertiesForKeys: nil, options: [], errorHandler: nil) {
             let urls = adjacentPaths.filter {
-                $0.pathExtension == PluginPathExtension
-            } as? [NSURL] ?? []
+                ($0 as! URL).pathExtension == PluginPathExtension
+            } as? [URL] ?? []
             registerPluginsFromURLs(urls)
         }
     }
     
-    private func registerPlugin(plugin : Plugin) {
+    fileprivate func registerPlugin(_ plugin : Plugin) {
         plugins.append(plugin)
     }
     
-    private func pluginWithIdentifier(identifier : String) -> Plugin? {
+    fileprivate func pluginWithIdentifier(_ identifier : String) -> Plugin? {
         for possible in plugins {
             if possible.identifier == identifier {
                 return possible
@@ -94,7 +95,7 @@ class PluginController: NSObject, ConstraintInfoSource {
         return nil
     }
     
-    func routeMessage(data : NSData, channel : DLSChannel) {
+    func routeMessage(_ data : Data, channel : DLSChannel) {
         let plugin = pluginWithIdentifier(channel.name)
         plugin?.receiveMessage(data)
     }
@@ -105,9 +106,9 @@ class PluginController: NSObject, ConstraintInfoSource {
         }
     }
     
-    func connectedWithContext(context : PluginContext) {
+    func connectedWithContext(_ context : PluginContext) {
         for plugin in plugins {
-            plugin.connectedWithContext(context)
+            plugin.connected(with: context)
         }
     }
 

@@ -9,12 +9,12 @@
 import Cocoa
 
 protocol ViewPropertyTableControllerDelegate : class {
-    func tableController(controller : ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord)
-    func tableController(controller : ViewPropertyTableController, selectViewWithID viewID: String)
-    func tableController(controller : ViewPropertyTableController, highlightViewWithID viewID: String)
-    func tableController(controller : ViewPropertyTableController, clearHighlightForViewWithID viewID: String)
-    func tableController(controller : ViewPropertyTableController, nameOfConstraintWithInfo info:DLSAuxiliaryConstraintInformation) -> String?
-    func tableController(controller : ViewPropertyTableController, saveConstraintWithInfo info: DLSAuxiliaryConstraintInformation, constant : CGFloat)
+    func tableController(_ controller : ViewPropertyTableController, valueChangedWithRecord record : DLSChangeViewValueRecord)
+    func tableController(_ controller : ViewPropertyTableController, selectViewWithID viewID: String)
+    func tableController(_ controller : ViewPropertyTableController, highlightViewWithID viewID: String)
+    func tableController(_ controller : ViewPropertyTableController, clearHighlightForViewWithID viewID: String)
+    func tableController(_ controller : ViewPropertyTableController, nameOfConstraintWithInfo info:DLSAuxiliaryConstraintInformation) -> String?
+    func tableController(_ controller : ViewPropertyTableController, saveConstraintWithInfo info: DLSAuxiliaryConstraintInformation, constant : CGFloat)
 }
 
 class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuerier {
@@ -33,10 +33,10 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
         addEmptyView()
     }
     
-    func useRecord(record : DLSViewRecord) {
+    func useRecord(_ record : DLSViewRecord) {
         let lastViewID = self.record?.viewID
         self.record = record
-        if let viewID = self.record?.viewID where viewID == lastViewID {
+        if let viewID = self.record?.viewID, viewID == lastViewID {
             updateValues()
         }
         else {
@@ -70,11 +70,11 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
             stackView?.removeView(view )
         }
         for group in groups() {
-            let groupView  = PropertyGroupView(frame : CGRectZero)
+            let groupView  = PropertyGroupView(frame : CGRect.zero)
             groupView.translatesAutoresizingMaskIntoConstraints = false
             groupView.delegate = self
             groupView.viewID = record?.viewID
-            stackView?.addView(groupView, inGravity: .Top)
+            stackView?.addView(groupView, in: .top)
             let values = record?.values[group.label] ?? [:]
             groupView.useGroup(group, values: values)
             groupViews[group.label] = groupView
@@ -84,7 +84,7 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
             addEmptyView()
         }
         else {
-            emptyView?.hidden = true
+            emptyView?.isHidden = true
         }
     }
     
@@ -92,11 +92,11 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
         // add a dummy view to the stack so autolayout doesn't get confused
         let view = NSView(frame : NSZeroRect)
         view.translatesAutoresizingMaskIntoConstraints = false
-        stackView?.addView(view, inGravity: .Top)
-        emptyView?.hidden = false
+        stackView?.addView(view, in: .top)
+        emptyView?.isHidden = false
     }
     
-    func propertyGroupView(view: PropertyGroupView, changedItem name: String, toValue value: NSCoding?) {
+    func propertyGroupView(_ view: PropertyGroupView, changedItem name: String, toValue value: NSCoding?) {
         
         if view.viewID == record?.viewID {
             // make sure this comes from the current view
@@ -108,18 +108,18 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
         }
     }
     
-    func nameForViewWithID(mainID: String?, relativeToView relativeID: String, withClass className: String?, constraintInfo info: DLSAuxiliaryConstraintInformation?) -> String {
-        if let mainID = mainID, hierarchy = hierarchy {
+    func nameForView(withID mainID: String?, relativeToView relativeID: String, withClass className: String?, constraintInfo info: DLSAuxiliaryConstraintInformation?) -> String {
+        if let mainID = mainID, let hierarchy = hierarchy {
             switch hierarchy.relationFrom(relativeID, toView:mainID) {
-            case .Same:
+            case .same:
                 return "self"
-            case .Superview:
+            case .superview:
                 return "super"
-            case .None:
+            case .none:
                 
                 if let
                     info = info,
-                    name = self.delegate?.tableController(self, nameOfConstraintWithInfo:info)
+                    let name = self.delegate?.tableController(self, nameOfConstraintWithInfo:info)
                 {
                     return name
                 }
@@ -132,19 +132,19 @@ class ViewPropertyTableController: NSObject, PropertyGroupViewDelegate, ViewQuer
     }
     
     
-    func highlightViewWithID(viewID: String) {
+    func highlightView(withID viewID: String) {
         self.delegate?.tableController(self, highlightViewWithID: viewID)
     }
     
-    func selectViewWithID(viewID: String) {
+    func selectView(withID viewID: String) {
         self.delegate?.tableController(self, selectViewWithID: viewID)
     }
     
-    func clearHighlightForViewWithID(viewID: String) {
+    func clearHighlightForView(withID viewID: String) {
         self.delegate?.tableController(self, clearHighlightForViewWithID:viewID)
     }
     
-    func saveConstraintWithInfo(info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
+    func saveConstraint(withInfo info: DLSAuxiliaryConstraintInformation, constant: CGFloat) {
         self.delegate?.tableController(self, saveConstraintWithInfo: info, constant: constant)
     }
 }

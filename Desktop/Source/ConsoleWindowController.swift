@@ -12,32 +12,32 @@ private let LastKnownDeviceKey = "DLSLastKnownDeviceKey"
 
 class ConsoleWindowController: NSWindowController {
     
-    @IBOutlet private var emptyView : NSView!
-    @IBOutlet private var bodyView : NSView!
-    @IBOutlet private var sidebarTable : NSTableView!
+    @IBOutlet fileprivate var emptyView : NSView!
+    @IBOutlet fileprivate var bodyView : NSView!
+    @IBOutlet fileprivate var sidebarTable : NSTableView!
     
-    @IBOutlet private var bodyController : NSViewController!
+    @IBOutlet fileprivate var bodyController : NSViewController!
     
     
-    private let deviceController : DeviceController = DeviceController()
-    private var currentConnection : DeviceConnection?
+    fileprivate let deviceController : DeviceController = DeviceController()
+    fileprivate var currentConnection : DeviceConnection?
     
-    private let pluginController : PluginController = PluginController()
-    private let viewGrouper : ViewControllerGrouper = ViewControllerGrouper()
-    private let itemsChangedBroadcaster : Broadcaster<ConnectionStatus> = Broadcaster()
-    private let sidebarController = SidebarSplitViewController(nibName : nil, bundle : nil)!
-    private lazy var contextBouncer : PluginContextBouncer = {
+    fileprivate let pluginController : PluginController = PluginController()
+    fileprivate let viewGrouper : ViewControllerGrouper = ViewControllerGrouper()
+    fileprivate let itemsChangedBroadcaster : Broadcaster<ConnectionStatus> = Broadcaster()
+    fileprivate let sidebarController = SidebarSplitViewController(nibName : nil, bundle : nil)!
+    fileprivate lazy var contextBouncer : PluginContextBouncer = {
         return PluginContextBouncer(backing: self)
     }()
     
     override func awakeFromNib() {
-        window?.titleVisibility = .Hidden
+        window?.titleVisibility = .hidden
         window?.contentViewController = bodyController
     }
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        window?.movableByWindowBackground = true
+        window?.isMovableByWindowBackground = true
         
         
         deviceController.delegate = self
@@ -52,32 +52,32 @@ class ConsoleWindowController: NSWindowController {
         sidebarView.alphaValue = 0
         sidebarView.addConstraintsMatchingSuperviewBounds()
         
-        contentView?.superview?.addConstraint(NSLayoutConstraint(item: bodyView, attribute: .Top, relatedBy: .Equal, toItem: window?.contentView, attribute: .Top, multiplier: 1, constant: 0))
+        contentView?.superview?.addConstraint(NSLayoutConstraint(item: bodyView, attribute: .top, relatedBy: .equal, toItem: window?.contentView, attribute: .top, multiplier: 1, constant: 0))
         
-        sidebarTable?.setDelegate(viewGrouper)
-        sidebarTable?.setDataSource(viewGrouper)
+        sidebarTable?.delegate = viewGrouper
+        sidebarTable?.dataSource = viewGrouper
         sidebarTable?.floatsGroupRows = false
         sidebarController.useSidebarContent(sidebarTable!.enclosingScrollView!)
         
-        sidebarTable?.registerNib(NSNib(nibNamed: "ChannelCellView", bundle: nil)!, forIdentifier: ViewControllerGrouperCellIdentifier)
+        sidebarTable?.register(NSNib(nibNamed: "ChannelCellView", bundle: nil)!, forIdentifier: ViewControllerGrouperCellIdentifier)
         
         viewGrouper.delegate = self
     }
     
-    private func lastKnownConnection() -> String? {
-        return NSUserDefaults.standardUserDefaults().objectForKey(LastKnownDeviceKey) as? String
+    fileprivate func lastKnownConnection() -> String? {
+        return UserDefaults.standard.object(forKey: LastKnownDeviceKey) as? String
     }
     
-    private func saveLastKnownConnection(connection : String) {
-        NSUserDefaults.standardUserDefaults().setObject(connection, forKey: LastKnownDeviceKey)
+    fileprivate func saveLastKnownConnection(_ connection : String) {
+        UserDefaults.standard.set(connection, forKey: LastKnownDeviceKey)
     }
     
-    private func devicesChanged() {
+    fileprivate func devicesChanged() {
         if let device = currentConnection?.device {
-            itemsChangedBroadcaster.notifyListeners(.Active(current : device, all : deviceController.knownDevices))
+            itemsChangedBroadcaster.notifyListeners(.active(current : device, all : deviceController.knownDevices))
         }
         else if deviceController.hasDevices {
-            itemsChangedBroadcaster.notifyListeners(.Available(deviceController.knownDevices))
+            itemsChangedBroadcaster.notifyListeners(.available(deviceController.knownDevices))
             if let lastKnown = lastKnownConnection() {
                 for device in deviceController.knownDevices {
                     if device.label == lastKnown {
@@ -88,11 +88,11 @@ class ConsoleWindowController: NSWindowController {
             }
         }
         else {
-            itemsChangedBroadcaster.notifyListeners(.None)
+            itemsChangedBroadcaster.notifyListeners(.none)
         }
     }
     
-    func connectToDevice(device : Device?) {
+    func connectToDevice(_ device : Device?) {
         currentConnection?.close()
         currentConnection = device?.openConnection(delegate : self)
         showSidebarIfNecessary()
@@ -104,7 +104,7 @@ class ConsoleWindowController: NSWindowController {
         device.bind { self.saveLastKnownConnection($0.label) }
     }
     
-    func choseDeviceOption(sender : NSMenuItem) {
+    func choseDeviceOption(_ sender : NSMenuItem) {
         let device = (sender.representedObject as! Device?)
         deviceController.saveLastDevice(device)
         if device == nil && self.currentConnection != nil {
@@ -115,8 +115,8 @@ class ConsoleWindowController: NSWindowController {
     }
     
     func showSidebarIfNecessary() {
-        if currentConnection != nil && !self.emptyView.hidden {
-            self.emptyView.animator().hidden = true
+        if currentConnection != nil && !self.emptyView.isHidden {
+            self.emptyView.animator().isHidden = true
             self.sidebarController.view.animator().alphaValue = 1
         }
         
@@ -126,8 +126,8 @@ class ConsoleWindowController: NSWindowController {
     }
     
     func hideSidebarIfNecessary() {
-        if currentConnection == nil && self.emptyView.hidden {
-            self.emptyView.animator().hidden = false
+        if currentConnection == nil && self.emptyView.isHidden {
+            self.emptyView.animator().isHidden = false
             self.sidebarController.view.animator().alphaValue = 0
         }
         
@@ -136,11 +136,11 @@ class ConsoleWindowController: NSWindowController {
         }
     }
     
-    override func validateMenuItem(menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == Selector("showPreviousTab:") || menuItem.action == Selector("showNextTab:") {
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(ConsoleWindowController.showPreviousTab(_:)) || menuItem.action == #selector(ConsoleWindowController.showNextTab(_:)) {
             return self.viewGrouper.hasMultipleItems
         }
-        else if menuItem.action == Selector("toggleSidebar:") {
+        else if menuItem.action == #selector(ConsoleWindowController.toggleSidebar(_:)) {
             if sidebarController.isSidebarVisible {
                 menuItem.title = "Hide Sidebar"
             }
@@ -152,31 +152,31 @@ class ConsoleWindowController: NSWindowController {
         return true
     }
     
-    func toggleSidebar(sender : AnyObject) {
+    func toggleSidebar(_ sender : AnyObject) {
         sidebarController.toggleSidebar()
     }
     
-    func showPreviousTab(sender : NSMenuItem) {
+    func showPreviousTab(_ sender : NSMenuItem) {
         let index = viewGrouper.previousTabIndex(sidebarTable.selectedRow)
-        sidebarTable.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+        sidebarTable.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
     
-    func showNextTab(sender : NSMenuItem) {
+    func showNextTab(_ sender : NSMenuItem) {
         let index = viewGrouper.nextTabIndex(sidebarTable.selectedRow)
-        sidebarTable.selectRowIndexes(NSIndexSet(index: index), byExtendingSelection: false)
+        sidebarTable.selectRowIndexes(IndexSet(integer: index), byExtendingSelection: false)
     }
 }
 
 extension ConsoleWindowController : NSToolbarDelegate {
-    func toolbarAllowedItemIdentifiers(toolbar: NSToolbar) -> [String] {
+    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
         return [NSToolbarFlexibleSpaceItemIdentifier, ConnectionStatusToolbarItemIdentifier]
     }
     
-    func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [String] {
+    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
         return [NSToolbarFlexibleSpaceItemIdentifier, ConnectionStatusToolbarItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier]
     }
     
-    func toolbar(toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         if itemIdentifier == ConnectionStatusToolbarItemIdentifier {
             return ConnectionStatusToolbarItem(changeBroadcaster: itemsChangedBroadcaster)
         }
@@ -188,7 +188,7 @@ extension ConsoleWindowController : NSToolbarDelegate {
 
 extension ConsoleWindowController : PluginContext {
     
-    private func updateControllersWithAction(action : () -> ()) {
+    fileprivate func updateControllersWithAction(_ action : () -> ()) {
         let currentIndexes = sidebarTable.selectedRowIndexes;
         let currentSelection = viewGrouper.controllersForRowIndexes(currentIndexes)
         
@@ -201,7 +201,7 @@ extension ConsoleWindowController : PluginContext {
         }
     }
     
-    func addViewController(controller: NSViewController, plugin: Plugin) {
+    func add(_ controller: NSViewController, plugin: Plugin) {
         // Load the view now since having unloaded views makes the model simpler
         let _ = controller.view
         if let owner = controller as? ConstraintInfoOwner {
@@ -214,7 +214,7 @@ extension ConsoleWindowController : PluginContext {
         showSidebarIfNecessary()
     }
     
-    func removeViewController(controller: NSViewController, plugin: Plugin) {
+    func remove(_ controller: NSViewController, plugin: Plugin) {
         updateControllersWithAction {
             self.viewGrouper.removeViewController(controller, plugin : plugin)
         }
@@ -222,7 +222,7 @@ extension ConsoleWindowController : PluginContext {
         hideSidebarIfNecessary()
     }
     
-    func sendMessage(data: NSData, plugin: Plugin) {
+    func sendMessage(_ data: Data, plugin: Plugin) {
         let channel = DLSChannel(name : plugin.identifier)
         self.currentConnection?.sendMessage(data, channel: channel)
     }
@@ -230,28 +230,28 @@ extension ConsoleWindowController : PluginContext {
 
 extension ConsoleWindowController : DeviceControllerDelegate {
     
-    func deviceControllerUpdatedDevices(controller: DeviceController) {
+    func deviceControllerUpdatedDevices(_ controller: DeviceController) {
         devicesChanged()
     }
     
 }
 
 extension ConsoleWindowController : ViewControllerGrouperDelegate {
-    func controllerGroupSelectedController(controller: NSViewController) {
+    func controllerGroupSelectedController(_ controller: NSViewController) {
         sidebarController.useBodyContent(controller.view)
     }
 }
 
 extension ConsoleWindowController : DeviceConnectionDelegate {
     
-    func connectionClosed(connection: DeviceConnection) {
+    func connectionClosed(_ connection: DeviceConnection) {
         pluginController.connectionClosed()
         currentConnection = nil;
         hideSidebarIfNecessary()
         devicesChanged()
     }
     
-    func connection(connection: DeviceConnection, receivedData: NSData, channel: DLSChannel) {
+    func connection(_ connection: DeviceConnection, receivedData: Data, channel: DLSChannel) {
         pluginController.routeMessage(receivedData, channel : channel)
     }
     

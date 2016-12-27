@@ -7,16 +7,16 @@
 //
 
 enum ViewRelation {
-    case Same
-    case Superview
-    case None
+    case same
+    case superview
+    case none
 }
 
 class ViewHierarchy {
-    var map : [NSString:DLSViewHierarchyRecord] = [:]
-    var roots : [NSString] = []
+    var map : [String:DLSViewHierarchyRecord] = [:]
+    var roots : [String] = []
     
-    subscript(key : NSString) -> DLSViewHierarchyRecord? {
+    subscript(key : String) -> DLSViewHierarchyRecord? {
         get {
             return map[key]
         }
@@ -26,42 +26,42 @@ class ViewHierarchy {
     }
     
     
-    private func collectActiveEntries(inout entries : [NSString:DLSViewHierarchyRecord], roots : [NSString]) {
+    fileprivate func collectActiveEntries(_ entries : inout [String:DLSViewHierarchyRecord], roots : [String]) {
         for root in roots {
             if let record = self[root] {
                 entries[root] = record
-                collectActiveEntries(&entries, roots: record.children)
+                collectActiveEntries(&entries, roots: record.children as [String])
             }
         }
     }
     
     func collectGarbage() {
-        var activeEntries : [NSString:DLSViewHierarchyRecord] = [:]
+        var activeEntries : [String:DLSViewHierarchyRecord] = [:]
         collectActiveEntries(&activeEntries, roots:roots)
         map = activeEntries
     }
     
-    func relationFrom(baseID : String, toView viewID: String) -> ViewRelation {
+    func relationFrom(_ baseID : String, toView viewID: String) -> ViewRelation {
         if baseID == viewID {
-            return .Same
+            return .same
         }
-        else if let record = map[viewID] where record.children.contains(baseID) {
-            return .Superview
+        else if let record = map[viewID], record.children.contains(baseID) {
+            return .superview
         }
         else {
-            return .None
+            return .none
         }
     }
     
-    static func niceNameForClassName(name : String?) -> String {
+    static func niceNameForClassName(_ name : String?) -> String {
         guard let name = name else {
             return defaultViewName
         }
-        guard let expression = try? NSRegularExpression(pattern: "([A-Z])", options: NSRegularExpressionOptions()) else {
+        guard let expression = try? NSRegularExpression(pattern: "([A-Z])", options: NSRegularExpression.Options()) else {
             return name
         }
-        let withSplitter = expression.stringByReplacingMatchesInString(name, options: NSMatchingOptions(), range: NSRange(location: 0, length: name.characters.count), withTemplate: "$1@")
-        let parts = withSplitter.componentsSeparatedByString("@")
+        let withSplitter = expression.stringByReplacingMatches(in: name, options: NSRegularExpression.MatchingOptions(), range: NSRange(location: 0, length: name.characters.count), withTemplate: "$1@")
+        let parts = withSplitter.components(separatedBy: "@")
         var finalParts : [String] = []
         var finishedPrefix = false
         var last : String? = nil
@@ -69,21 +69,21 @@ class ViewHierarchy {
             if part.characters.count > 1 {
                 finishedPrefix = true
                 if let first = last {
-                    finalParts.append(first.lowercaseString)
+                    finalParts.append(first.lowercased())
                 }
             }
             if finishedPrefix {
                 if finalParts.count > 1 {
-                    finalParts.append(part.capitalizedString)
+                    finalParts.append(part.capitalized)
                 }
                 else {
-                    finalParts.append(part.lowercaseString)
+                    finalParts.append(part.lowercased())
                 }
             }
             last = part
         }
         
-        return finalParts.joinWithSeparator("")
+        return finalParts.joined(separator: "")
         
     }
     

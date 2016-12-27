@@ -14,7 +14,7 @@ typealias Mat4 = GLKMatrix4
 
 extension CGRect {
     var max : CGPoint {
-        return CGPoint(x : CGRectGetMaxX(self), y : CGRectGetMaxY(self))
+        return CGPoint(x : self.maxX, y : self.maxY)
     }
 }
 
@@ -29,7 +29,7 @@ extension Vec3 {
         return CGPoint(x : CGFloat(x), y : CGFloat(y))
     }
     
-    func offsetBy(dx dx : CGFloat = 0, dy : CGFloat = 0, dz : CGFloat = 0) -> Vec3 {
+    func offsetBy(dx : CGFloat = 0, dy : CGFloat = 0, dz : CGFloat = 0) -> Vec3 {
         return GLKVector3Make(x + Float(dx), y + Float(dy), z + Float(dz))
     }
     
@@ -54,6 +54,6 @@ func * (left : CATransform3D, right : Vec3) -> Vec3 {
     return left.matrix4 * right
 }
 
-func clamp(value : CGFloat, min minValue : CGFloat, max maxValue : CGFloat) -> CGFloat {
+func clamp(_ value : CGFloat, min minValue : CGFloat, max maxValue : CGFloat) -> CGFloat {
     return min(max(value, minValue), maxValue)
 }

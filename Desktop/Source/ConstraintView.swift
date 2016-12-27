@@ -13,19 +13,19 @@ class ConstraintViewOwner : NSObject {
 }
 
 protocol ConstraintViewDelegate : class {
-    func constraintView(constraintView : ConstraintView, choseHighlightViewWithID viewID: String)
-    func constraintView(constraintView : ConstraintView, clearedHighlightViewWithID viewID: String)
-    func constraintView(constraintView : ConstraintView, selectedViewWithID viewID: String)
-    func constraintView(constraintView : ConstraintView, updatedConstant constant: CGFloat, constraintID: String)
-    func constraintView(constraintView : ConstraintView, savedConstant constant: CGFloat, constraintID: String)
+    func constraintView(_ constraintView : ConstraintView, choseHighlightViewWithID viewID: String)
+    func constraintView(_ constraintView : ConstraintView, clearedHighlightViewWithID viewID: String)
+    func constraintView(_ constraintView : ConstraintView, selectedViewWithID viewID: String)
+    func constraintView(_ constraintView : ConstraintView, updatedConstant constant: CGFloat, constraintID: String)
+    func constraintView(_ constraintView : ConstraintView, savedConstant constant: CGFloat, constraintID: String)
 }
 
 class ConstraintView : NSView, EditConstraintViewControllerDelegate {
     weak var delegate : ConstraintViewDelegate?
     
-    @IBOutlet private var info : NSTextField!
-    @IBOutlet private var editButton : NSButton!
-    @IBOutlet private var jumpButton : NSButton!
+    @IBOutlet fileprivate var info : NSTextField!
+    @IBOutlet fileprivate var editButton : NSButton!
+    @IBOutlet fileprivate var jumpButton : NSButton!
     
     var constraint : DLSConstraintDescription? = nil
     
@@ -33,22 +33,22 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
         super.awakeFromNib()
         translatesAutoresizingMaskIntoConstraints = false
         
-        let area = NSTrackingArea(rect: NSZeroRect, options: [.ActiveInActiveApp, .MouseEnteredAndExited, .InVisibleRect], owner: self, userInfo:nil)
+        let area = NSTrackingArea(rect: NSZeroRect, options: [.activeInActiveApp, .mouseEnteredAndExited, .inVisibleRect], owner: self, userInfo:nil)
         self.addTrackingArea(area)
         
-        let chosenGesture = NSClickGestureRecognizer(target: self, action: Selector("chose:"))
+        let chosenGesture = NSClickGestureRecognizer(target: self, action: #selector(ConstraintView.chose(_:)))
         chosenGesture.numberOfClicksRequired = 2
         info.addGestureRecognizer(chosenGesture)
         
-        editButton.hidden = true
+        editButton.isHidden = true
         allowsJump = false
     }
     
     var complementaryViewID : String? {
-        if let viewID = constraint?.sourceViewID where constraint?.affectedViewID != viewID {
+        if let viewID = constraint?.sourceViewID, constraint?.affectedViewID != viewID {
             return viewID
         }
-        else if let viewID = constraint?.destinationViewID where constraint?.affectedViewID != viewID {
+        else if let viewID = constraint?.destinationViewID, constraint?.affectedViewID != viewID {
             return viewID
         }
         else {
@@ -56,40 +56,40 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
         }
     }
     
-    func chose(theEvent: NSEvent) {
+    func chose(_ theEvent: NSEvent) {
         if let viewID = complementaryViewID {
             self.delegate?.constraintView(self, selectedViewWithID: viewID)
         }
     }
     
-    @IBAction func edit(sender: NSButton) {
+    @IBAction func edit(_ sender: NSButton) {
         let controller = EditConstraintViewController()
         controller.constraint = self.constraint
         controller.delegate = self
         
         let popover = NSPopover()
         popover.contentViewController = controller
-        popover.behavior = NSPopoverBehavior.Transient
-        popover.showRelativeToRect(sender.bounds, ofView: sender, preferredEdge: .MinY)
+        popover.behavior = NSPopoverBehavior.transient
+        popover.show(relativeTo: sender.bounds, of: sender, preferredEdge: .minY)
     }
     
-    override func mouseEntered(theEvent: NSEvent) {
-        super.mouseEntered(theEvent)
+    override func mouseEntered(with theEvent: NSEvent) {
+        super.mouseEntered(with: theEvent)
         
         if let viewID = complementaryViewID {
             self.delegate?.constraintView(self, choseHighlightViewWithID:viewID)
         }
-        editButton.hidden = false
+        editButton.isHidden = false
         self.allowsJump = constraint?.locationExtra != nil
     }
     
-    override func mouseExited(theEvent: NSEvent) {
-        super.mouseExited(theEvent)
+    override func mouseExited(with theEvent: NSEvent) {
+        super.mouseExited(with: theEvent)
         
         if let viewID = complementaryViewID {
             self.delegate?.constraintView(self, clearedHighlightViewWithID:viewID)
         }
-        editButton.hidden = true
+        editButton.isHidden = true
         self.allowsJump = false
     }
     
@@ -101,26 +101,26 @@ class ConstraintView : NSView, EditConstraintViewControllerDelegate {
     
     var allowsJump : Bool = false {
         didSet {
-            jumpButton.hidden = !allowsJump
+            jumpButton.isHidden = !allowsJump
         }
     }
     
-    @IBAction func jump(sender : NSButton) {
+    @IBAction func jump(_ sender : NSButton) {
         if let location = constraint?.locationExtra?.location {
-            NSTask.launchedTaskWithLaunchPath("/usr/bin/xed", arguments: ["-l", location.line.description, location.file])
+            Process.launchedProcess(launchPath: "/usr/bin/xed", arguments: ["-l", location.line.description, location.file])
         }
         else {
             assertionFailure("Jump button pressed, but shouldn't be visible")
         }
     }
     
-    func editorController(controller: EditConstraintViewController, choseSaveToValue value: CGFloat) {
+    func editorController(_ controller: EditConstraintViewController, choseSaveToValue value: CGFloat) {
         if let id = self.constraint?.constraintID {
             self.delegate?.constraintView(self, savedConstant: value, constraintID: id)
         }
     }
     
-    func editorController(controller: EditConstraintViewController, changedConstantToValue value: CGFloat) {
+    func editorController(_ controller: EditConstraintViewController, changedConstantToValue value: CGFloat) {
         self.constraint?.constant = value
         if let id = self.constraint?.constraintID {
             self.delegate?.constraintView(self, updatedConstant: value, constraintID: id)

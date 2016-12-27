@@ -24,8 +24,8 @@ class NetworkRequestInfoView: NSView {
         setup()
     }
     
-    private func setup() {
-        NSBundle.mainBundle().loadNibNamed("NetworkRequestInfoView", owner: self, topLevelObjects: nil)
+    fileprivate func setup() {
+        Bundle.main.loadNibNamed("NetworkRequestInfoView", owner: self, topLevelObjects: nil)
         addSubview(self.contentView)
         contentView.addConstraintsMatchingSuperviewBounds()
         requestTabController.dataExtractor = RequestContentTabController.requestDataExtractor

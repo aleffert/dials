@@ -12,45 +12,36 @@ import UIKit
 public extension NSObject {
     
     /// Create a new control whose lifetime matches self
-    func DLSControl(
-        label : String,
-        line : Int = __LINE__,
-        file : String = __FILE__) -> DLSReferenceControlBuilder {
+    @discardableResult func DLSControl(
+        _ label : String,
+        line : Int = #line,
+        file : String = #file) -> DLSReferenceControlBuilder {
             return DLSReferenceControlBuilder(label: label, canSave: true, owner : self, file : file, line : line)
     }
     
     /// Create a new control whose lifetime matches self
-    func DLSControl(
-        keyPath keyPath : String,
-        line : Int = __LINE__,
-        file : String = __FILE__) -> DLSKeyPathControlBuilder {
+    @discardableResult func DLSControl(
+        keyPath : String,
+        line : Int = #line,
+        file : String = #file) -> DLSKeyPathControlBuilder {
             return DLSKeyPathControlBuilder(keyPath: keyPath, canSave: false, owner : self, file : file, line : line)
     }
 }
 
 /// Type carrying version of DLSPropertyWrapper
-public class PropertyWrapper<A : AnyObject> {
+class PropertyWrapper<A : AnyObject> {
     
     let get : () -> A
-    let set : A -> ()
+    let set : (A) -> ()
     
-    init(get : () -> A, set : A -> ()) {
+    init(get : @escaping () -> A, set : @escaping (A) -> ()) {
         self.get = get
         self.set = set
     }
     
-    init(inout value : A) {
-        get = {
-            value
-        }
-        set = {
-            value = $0
-        }
-    }
-    
     init(_ owner : AnyObject, _ keyPath : String) {
         get = {[weak owner] in
-            return owner?.valueForKeyPath(keyPath) as! A
+            return owner?.value(forKeyPath: keyPath) as! A
         }
         set = {[weak owner] (v : A) in
             owner?.setValue(v, forKeyPath:keyPath)
@@ -72,27 +63,17 @@ public extension DLSControlPanelPlugin {
     /// :param: file        The name of the file this control is declared in.
     /// :param: line        The line of code this control is declared on.
     func addDial<A : AnyObject>(
-        wrapper : PropertyWrapper<A>,
+        _ wrapper : DLSPropertyWrapper<A>,
         editor : DLSEditor,
         label : String,
         owner : NSObject,
         canSave : Bool,
-        file : String = __FILE__,
-        line : UInt = __LINE__
+        file : String = #file,
+        line : UInt = #line
         ) -> DLSRemovable
     {
-        
-        let wrapperWrapper = DLSPropertyWrapper(
-            getter: {
-                wrapper.get()
-            },
-            setter : {
-                wrapper.set($0 as! A)
-            }
-        )
-        
-        return addControlWithWrapper(
-            wrapperWrapper,
+        return addControl(
+            with: wrapper as! DLSPropertyWrapper<AnyObject>,
             editor: editor,
             owner: owner,
             label: label,
@@ -104,22 +85,22 @@ public extension DLSControlPanelPlugin {
     
 }
 
-public func DLSGroupWithName(name: String, @noescape actions: () -> Void) {
-    DLSControlPanelPlugin.activePlugin()?.beginGroupWithName(name)
+public func DLSGroupWithName(_ name: String, actions: () -> Void) {
+    DLSControlPanelPlugin.active()?.beginGroup(withName: name)
     actions()
-    DLSControlPanelPlugin.activePlugin()?.endGroup()
+    DLSControlPanelPlugin.active()?.endGroup()
 }
 
 public extension DLSReferenceControlBuilder {
     
-    func editorOf<T>(inout source : T, editor : DLSEditor, getT : T -> AnyObject, setT : AnyObject -> T) -> DLSRemovable {
-        return withUnsafeMutablePointer(&source) {(source : UnsafeMutablePointer<T>) in
+    @discardableResult func editorOf<T>(_ source : inout T, editor : DLSEditor, getT : @escaping (T) -> AnyObject, setT : @escaping (AnyObject) -> T) -> DLSRemovable {
+        return withUnsafeMutablePointer(to: &source) {(source : UnsafeMutablePointer<T>) in
             let wrapper = DLSPropertyWrapper(
                 getter: {_ in
-                    return getT(source.memory)
+                    return getT(source.pointee)
                 }, setter : {newValue in
                     let value = setT(newValue!)
-                    source.memory = value
+                    source.pointee = value
                     return
                 }
             )
@@ -127,56 +108,56 @@ public extension DLSReferenceControlBuilder {
         }
     }
     
-    func editorOf<T : AnyObject>(inout source : T, editor : DLSEditor) -> DLSRemovable {
+    @discardableResult func editorOf<T : AnyObject>(_ source : inout T, editor : DLSEditor) -> DLSRemovable {
         return editorOf(&source, editor: editor, getT: { $0 as AnyObject }, setT: { $0 as! T })
     }
     
-    func editorOf(inout source : CGFloat, editor : DLSEditor) -> DLSRemovable {
-        let getT : CGFloat -> AnyObject = {
+    @discardableResult func editorOf(_ source : inout CGFloat, editor : DLSEditor) -> DLSRemovable {
+        let getT : (CGFloat) -> AnyObject = {
             $0 as NSNumber
         }
-        let setT : AnyObject -> CGFloat = {
+        let setT : (AnyObject) -> CGFloat = {
             $0 as! NSNumber as CGFloat
         }
         return editorOf(&source, editor: editor, getT: getT, setT: setT)
     }
     
-    func colorOf(inout source : UIColor) -> DLSRemovable {
+    @discardableResult func colorOf(_ source : inout UIColor) -> DLSRemovable {
         return editorOf(&source, editor: DLSColorEditor())
     }
     
-    func edgeInsetsOf(inout source : UIEdgeInsets) -> DLSRemovable {
+    @discardableResult func edgeInsetsOf(_ source : inout UIEdgeInsets) -> DLSRemovable {
         return editorOf(&source, editor: DLSEdgeInsetsEditor(),
             getT: {
                 DLSWrapUIEdgeInsets($0) as NSDictionary
             }, setT: {
-                DLSUnwrapUIEdgeInsets($0 as! [NSObject:AnyObject])
+                DLSUnwrapUIEdgeInsets($0 as! [AnyHashable: Any])
             }
         )
     }
     
-    func labelOf(inout source : NSString) -> DLSRemovable {
+    @discardableResult func labelOf(_ source : inout NSString) -> DLSRemovable {
         return editorOf(&source, editor: DLSTextFieldEditor.label())
     }
     
-    func labelOf(inout source : String) -> DLSRemovable {
+    @discardableResult func labelOf(_ source : inout String) -> DLSRemovable {
         return editorOf(&source, editor: DLSTextFieldEditor.label(), getT: {$0 as NSString}, setT: {$0 as! String})
     }
     
-    func labelOf(source : UnsafeMutablePointer<String?>) -> DLSRemovable {
+    @discardableResult func labelOf(_ source : UnsafeMutablePointer<String?>) -> DLSRemovable {
         let wrapper = DLSPropertyWrapper(getter: { () -> AnyObject? in
-            return source.memory as NSString?
+            return source.pointee as NSString?
             }) {
-                source.memory = $0 as? String
+                source.pointee = $0 as? String
         }
         return wrapperOf(wrapper, DLSTextFieldEditor.label())
     }
     
-    func imageOf(inout source : UIImage) -> DLSRemovable {
+    @discardableResult func imageOf(_ source : inout UIImage) -> DLSRemovable {
         return editorOf(&source, editor: DLSImageEditor())
     }
     
-    func popupOf<T : DLSPopupEditing>(inout source : T) -> DLSRemovable {
+    @discardableResult func popupOf<T : DLSPopupEditing>(_ source : inout T) -> DLSRemovable {
         let items = T.dls_popupItems
         let optionItems = items.map { (name, value) in
             return DLSPopupOption(label: name, value: T.dls_wrapValue(value))
@@ -185,62 +166,62 @@ public extension DLSReferenceControlBuilder {
             getT: T.dls_wrapValue, setT: T.dls_unwrapValue)
     }
     
-    func pointOf(inout source : CGPoint) -> DLSRemovable {
+    @discardableResult func pointOf(_ source : inout CGPoint) -> DLSRemovable {
         return editorOf(&source, editor: DLSPointEditor(),
             getT: {
                 DLSWrapCGPointPoint($0) as NSDictionary
             }, setT: {
-                DLSUnwrapCGPointPoint($0 as! [NSObject:AnyObject])
+                DLSUnwrapCGPointPoint($0 as! [AnyHashable: Any])
             }
         )
     }
     
-    func rectOf(inout source : CGRect) -> DLSRemovable {
+    @discardableResult func rectOf(_ source : inout CGRect) -> DLSRemovable {
         return editorOf(&source, editor: DLSRectEditor(),
             getT: {
                 DLSWrapCGPointRect($0) as NSDictionary
             }, setT: {
-                DLSUnwrapCGPointRect($0 as! [NSObject:AnyObject])
+                DLSUnwrapCGPointRect($0 as! [AnyHashable: Any])
             }
         )
     }
     
-    func sizeOf(inout source : CGSize) -> DLSRemovable {
+    @discardableResult func sizeOf(_ source : inout CGSize) -> DLSRemovable {
         return editorOf(&source, editor: DLSSizeEditor(),
             getT: {
                 DLSWrapCGPointSize($0) as NSDictionary
             }, setT: {
-                DLSUnwrapCGPointSize($0 as! [NSObject:AnyObject])
+                DLSUnwrapCGPointSize($0 as! [AnyHashable: Any])
             }
         )
     }
     
-    func stepperOf(inout source : CGFloat) -> DLSRemovable {
+    @discardableResult func stepperOf(_ source : inout CGFloat) -> DLSRemovable {
         return editorOf(&source, editor: DLSStepperEditor())
     }
     
-    func sliderOf(inout source : CGFloat, min : Double = 0, max : Double = 1) -> DLSRemovable {
+    @discardableResult func sliderOf(_ source : inout CGFloat, min : Double = 0, max : Double = 1) -> DLSRemovable {
         return editorOf(&source, editor: DLSSliderEditor(min: min, max: max))
     }
     
-    func textFieldOf(inout source : NSString) -> DLSRemovable {
+    @discardableResult func textFieldOf(_ source : inout NSString) -> DLSRemovable {
         return editorOf(&source, editor: DLSTextFieldEditor.textField())
     }
     
-    func textFieldOf(inout source : String) -> DLSRemovable {
+    @discardableResult func textFieldOf(_ source : inout String) -> DLSRemovable {
         return editorOf(&source, editor: DLSTextFieldEditor.textField(), getT: {$0 as NSString}, setT: {$0 as! String})
     }
     
-    func textFieldOf(source : UnsafeMutablePointer<String?>) -> DLSRemovable {
+    @discardableResult func textFieldOf(_ source : UnsafeMutablePointer<String?>) -> DLSRemovable {
         let wrapper = DLSPropertyWrapper(getter: { () -> AnyObject? in
-            return source.memory as NSString?
+            return source.pointee as NSString?
         }) {
-            source.memory = $0 as? String
+            source.pointee = $0 as? String
         }
         return wrapperOf(wrapper, DLSTextFieldEditor.textField())
     }
     
-    func togggleOf(inout source : Bool) -> DLSRemovable {
+    @discardableResult func togggleOf(_ source : inout Bool) -> DLSRemovable {
         return editorOf(&source, editor: DLSToggleEditor(),
             getT: {
                 $0 as NSNumber

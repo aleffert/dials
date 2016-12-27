@@ -18,12 +18,12 @@ extension DLSTextFieldEditor : EditorControllerGenerating {
 
 extension DLSTextFieldEditor : CodeGenerating {
     
-    public func codeForValue(value: NSCoding?, language: Language) -> String {
+    public func code(forValue value: NSCoding?, language: Language) -> String {
         let prefix : String
         switch language {
-        case .ObjC:
+        case .objC:
             prefix = "@"
-        case .Swift:
+        case .swift:
             prefix = ""
         }
         if let s = value as? NSString {
@@ -35,22 +35,22 @@ extension DLSTextFieldEditor : CodeGenerating {
 
 class TextFieldEditorView: EditorView {
     
-    @IBOutlet private var field : NSTextField?
-    @IBOutlet private var name : NSTextField?
+    @IBOutlet fileprivate var field : NSTextField?
+    @IBOutlet fileprivate var name : NSTextField?
     
     var editor : DLSTextFieldEditor? {
         didSet {
-            let editable = (editor?.editable ?? false)
-            field?.bezeled = editable
+            let editable = (editor?.isEditable ?? false)
+            field?.isBezeled = editable
             field?.drawsBackground = editable
-            field?.editable = editable
-            field?.selectable = true
+            field?.isEditable = editable
+            field?.isSelectable = true
         }
     }
     
-    @IBAction func textFieldChanged(sender : NSTextField) {
-        if editor?.editable ?? false {
-            delegate?.editorController(self, changedToValue: sender.stringValue)
+    @IBAction func textFieldChanged(_ sender : NSTextField) {
+        if editor?.isEditable ?? false {
+            delegate?.editorController(self, changedToValue: sender.stringValue as NSCoding?)
         }
     }
     
@@ -67,6 +67,6 @@ class TextFieldEditorView: EditorView {
     }
 
     override var readOnly : Bool {
-        return field?.editable ?? false
+        return field?.isEditable ?? false
     }
 }

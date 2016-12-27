@@ -9,18 +9,18 @@
 import Cocoa
 
 protocol DeviceConnectionDelegate : class {
-    func connectionClosed(connection : DeviceConnection)
-    func connection(connection : DeviceConnection, receivedData : NSData, channel : DLSChannel)
+    func connectionClosed(_ connection : DeviceConnection)
+    func connection(_ connection : DeviceConnection, receivedData : Data, channel : DLSChannel)
 }
 
 class DeviceConnection : NSObject, DLSChannelStreamDelegate  {
     
     let device : Device
-    private let stream : DLSChannelStream
+    fileprivate let stream : DLSChannelStream
     
-    private weak var delegate : DeviceConnectionDelegate?
+    fileprivate weak var delegate : DeviceConnectionDelegate?
     
-    init(device : Device, service : NSNetService, delegate : DeviceConnectionDelegate) {
+    init(device : Device, service : NetService, delegate : DeviceConnectionDelegate) {
         self.device = device
         self.delegate = delegate
         self.stream = DLSChannelStream(netService: service)
@@ -28,7 +28,7 @@ class DeviceConnection : NSObject, DLSChannelStreamDelegate  {
         self.stream.delegate = self
     }
     
-    func isConnectedToDevice(device : Device?) -> Bool {
+    func isConnectedToDevice(_ device : Device?) -> Bool {
         return self.device.isEqual(device)
     }
     
@@ -36,15 +36,15 @@ class DeviceConnection : NSObject, DLSChannelStreamDelegate  {
         self.stream.close()
     }
     
-    func sendMessage(message : NSData, channel : DLSChannel) {
-        self.stream.sendMessage(message, onChannel: channel)
+    func sendMessage(_ message : Data, channel : DLSChannel) {
+        self.stream.sendMessage(message, on: channel)
     }
     
-    func stream(stream: DLSChannelStream, receivedMessage data: NSData, onChannel channel: DLSChannel) {
+    func stream(_ stream: DLSChannelStream, receivedMessage data: Data, on channel: DLSChannel) {
         delegate?.connection(self, receivedData: data, channel: channel)
     }
     
-    func streamClosed(stream: DLSChannelStream) {
+    func streamClosed(_ stream: DLSChannelStream) {
         delegate?.connectionClosed(self)
     }
 }

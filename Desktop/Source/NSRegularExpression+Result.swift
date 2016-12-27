@@ -9,7 +9,7 @@
 import Foundation
 
 extension NSRegularExpression {
-    class func compile(pattern : String, options : NSRegularExpressionOptions = NSRegularExpressionOptions()) -> Result<NSRegularExpression> {
+    class func compile(_ pattern : String, options : NSRegularExpression.Options = NSRegularExpression.Options()) -> Result<NSRegularExpression> {
         
         do {
             let matcher = try NSRegularExpression(pattern: pattern,

@@ -10,22 +10,22 @@ import Cocoa
 
 
 enum BorderStyle {
-    case Normal
-    case Selected
-    case Highlighted
+    case normal
+    case selected
+    case highlighted
     
-    private var color : NSColor {
+    fileprivate var color : NSColor {
         switch self {
-        case Normal: return NSColor.lightGrayColor().colorWithAlphaComponent(0.4)
-        case Selected: return NSColor.blueColor()
-        case Highlighted: return NSColor.greenColor()
+        case .normal: return NSColor.lightGray.withAlphaComponent(0.4)
+        case .selected: return NSColor.blue
+        case .highlighted: return NSColor.green
         }
     }
     
-    private var width : CGFloat {
+    fileprivate var width : CGFloat {
         switch self {
-        case Normal: return 1
-        case Selected, Highlighted: return 2
+        case .normal: return 1
+        case .selected, .highlighted: return 2
         }
     }
 }
@@ -46,7 +46,7 @@ class ViewFacade : CATransformLayer {
         
         super.init()
         
-        self.borderStyle = .Normal
+        self.borderStyle = .normal
         
         let layoutManager = CAConstraintLayoutManager() 
         self.layoutManager = layoutManager
@@ -54,19 +54,19 @@ class ViewFacade : CATransformLayer {
         addSublayer(contentLayer)
         addSublayer(borderLayer)
         
-        borderLayer.addConstraintsMatchingSuperviewBounds(NSEdgeInsets(top: -1, left: -1, bottom: 1, right: 1))
+        borderLayer.addConstraintsMatchingSuperviewBounds(EdgeInsets(top: -1, left: -1, bottom: 1, right: 1))
         
         contentLayer.addConstraintsMatchingSuperviewBounds()
     }
     
-    var borderStyle : BorderStyle = .Normal {
+    var borderStyle : BorderStyle = .normal {
         didSet {
             borderLayer.borderWidth = borderStyle.width
-            borderLayer.borderColor = borderStyle.color.CGColor
+            borderLayer.borderColor = borderStyle.color.cgColor
         }
     }
     
-    override init(layer : AnyObject) {
+    override init(layer : Any) {
         super.init(layer : layer)
     }
     

@@ -10,8 +10,8 @@ import Foundation
 import AppKit
 
 protocol ControlControllerDelegate : class {
-    func controlController(controller : ControlController, changedControlInfo info : DLSControlInfo, toValue value : NSCoding?)
-    func controlController(controller : ControlController, shouldSaveControlInfo info : DLSControlInfo, withValue value : NSCoding?)
+    func controlController(_ controller : ControlController, changedControlInfo info : DLSControlInfo, toValue value : NSCoding?)
+    func controlController(_ controller : ControlController, shouldSaveControlInfo info : DLSControlInfo, withValue value : NSCoding?)
 }
 
 class ControlController : NSObject, EditorControllerDelegate {
@@ -21,11 +21,11 @@ class ControlController : NSObject, EditorControllerDelegate {
     @IBOutlet var saveButton : NSButton?
     @IBOutlet var openButton : NSButton?
     
-    private var currentValue : NSCoding?
-    private var updated : Bool = false
-    private var mouseInView : Bool = false
+    fileprivate var currentValue : NSCoding?
+    fileprivate var updated : Bool = false
+    fileprivate var mouseInView : Bool = false
 
-    private let contentController : EditorController
+    fileprivate let contentController : EditorController
     let controlInfo : DLSControlInfo
     
     weak var delegate : ControlControllerDelegate?
@@ -38,11 +38,11 @@ class ControlController : NSObject, EditorControllerDelegate {
         currentValue = controlInfo.value
         super.init()
         contentController.delegate = self
-        NSBundle.mainBundle().loadNibNamed("ControlCellView", owner: self, topLevelObjects: nil)
+        Bundle.main.loadNibNamed("ControlCellView", owner: self, topLevelObjects: nil)
         bodyView?.translatesAutoresizingMaskIntoConstraints = false
-        let area = NSTrackingArea(rect: NSZeroRect, options: [.ActiveInActiveApp, .MouseEnteredAndExited, .InVisibleRect], owner: self, userInfo: nil)
+        let area = NSTrackingArea(rect: NSZeroRect, options: [.activeInActiveApp, .mouseEnteredAndExited, .inVisibleRect], owner: self, userInfo: nil)
         let currentBody = bodyView
-        self.dls_performActionOnDealloc {
+        self.dls_performAction {
             currentBody?.removeTrackingArea(area)
         }
         bodyView?.addTrackingArea(area)
@@ -51,18 +51,18 @@ class ControlController : NSObject, EditorControllerDelegate {
         validateButtons(animated : false)
     }
     
-    func validateButtons(animated animated : Bool) {
+    func validateButtons(animated : Bool) {
         NSAnimationContext.runAnimationGroup({ ctx in
             ctx.allowsImplicitAnimation = true
-            self.revertButton?.enabled = self.updated
-            self.saveButton?.enabled = self.controlInfo.canSave && self.updated && self.controlInfo.file != nil
-            self.revertButton?.hidden = !self.mouseInView
-            self.saveButton?.hidden = !self.mouseInView
-            self.openButton?.hidden = !self.mouseInView
+            self.revertButton?.isEnabled = self.updated
+            self.saveButton?.isEnabled = self.controlInfo.canSave && self.updated && self.controlInfo.file != nil
+            self.revertButton?.isHidden = !self.mouseInView
+            self.saveButton?.isHidden = !self.mouseInView
+            self.openButton?.isHidden = !self.mouseInView
         }, completionHandler: nil)
     }
     
-    func editorController(controller: EditorController, changedToValue value: NSCoding?) {
+    func editorController(_ controller: EditorController, changedToValue value: NSCoding?) {
         currentValue = value
         updated = true
         delegate?.controlController(self, changedControlInfo:controlInfo, toValue: value)
@@ -73,30 +73,30 @@ class ControlController : NSObject, EditorControllerDelegate {
         return bodyView!
     }
     
-    func mouseEntered(theEvent: NSEvent) {
+    func mouseEntered(_ theEvent: NSEvent) {
         mouseInView = true
         validateButtons(animated: true)
     }
     
-    func mouseExited(theEvent: NSEvent) {
+    func mouseExited(_ theEvent: NSEvent) {
         mouseInView = false
         validateButtons(animated: true)
     }
     
-    @IBAction func openFilePressed(sender : AnyObject) {
+    @IBAction func openFilePressed(_ sender : AnyObject) {
         if let file = controlInfo.file {
-            NSTask.launchedTaskWithLaunchPath("/usr/bin/xed", arguments: ["--line", controlInfo.line.description, file])
+            Process.launchedProcess(launchPath: "/usr/bin/xed", arguments: ["--line", controlInfo.line.description, file])
         }
     }
     
-    @IBAction func revertPressed(sender : AnyObject) {
+    @IBAction func revertPressed(_ sender : AnyObject) {
         contentController.configuration = contentController.configuration
         delegate?.controlController(self, changedControlInfo: controlInfo, toValue: contentController.configuration!.value)
         updated = false
         validateButtons(animated: true)
     }
     
-    @IBAction func saveFilePressed(sender : AnyObject) {
+    @IBAction func saveFilePressed(_ sender : AnyObject) {
         delegate?.controlController(self, shouldSaveControlInfo : controlInfo, withValue: currentValue)
         controlInfo.value = currentValue
         updated = false
