@@ -23,18 +23,18 @@ class ExamplePlugin : NSObject, Plugin {
     let label = "Example"
     let shouldSortChildren = false
     
-    func receiveMessage(message: NSData) {
+    func receiveMessage(_ message: Data) {
         print("got a message")
     }
     
-    func connectedWithContext(context: PluginContext) {
+    func connected(with context: PluginContext) {
         self.context = context
         self.controller = ExampleViewController(nibName: nil, bundle: nil)
-        self.context?.addViewController(self.controller!, plugin: self)
+        self.context?.add(self.controller!, plugin: self)
     }
     
     func connectionClosed() {
-        self.context?.addViewController(self.controller!, plugin: self)
+        self.context?.add(self.controller!, plugin: self)
         self.context = nil
         self.controller = nil
     }
