@@ -7,24 +7,20 @@ dependencies:
         - brew upgrade xctool || true
 test:
     override:
-        - xctool
-          -reporter pretty
-          -reporter plain:$CIRCLE_ARTIFACTS/ios-xctool.log
+        - xcodebuild
           -sdk iphonesimulator
           -workspace "Dials.xcworkspace"
           -scheme "DialsExample - iOS"
-          build
-        - xctool -reporter pretty
-          -reporter plain:$CIRCLE_ARTIFACTS/desktop-xctool.log
+          build | tee $CIRCLE_ARTIFACTS/xcode_raw.log | xcpretty
+        - xcodebuild
           -sdk macosx
           -workspace "Dials.xcworkspace"
           -scheme "Dials+ExamplePlugin - Desktop"
-          build
-        - xctool -reporter pretty
-          -reporter junit:$CIRCLE_TEST_REPORTS/xcode/tests-results.xml
-          -reporter plain:$CIRCLE_ARTIFACTS/desktop-xctool.log
+          build | tee $CIRCLE_ARTIFACTS/xcode_raw.log | xcpretty
+        - xcodebuild
           -sdk macosx
           -workspace "Dials.xcworkspace"
           -scheme "Dials.app - Desktop"
           build-tests
           run-tests
+          build | tee $CIRCLE_ARTIFACTS/xcode_raw.log | xcpretty
