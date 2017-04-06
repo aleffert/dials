@@ -29,7 +29,7 @@ enum CodeError : Error {
         case .descriptionNotFound:
             return "Description Not Found"
         case let .codeGenerationFailed(editor, value):
-            return "Couldn't generate code for \(value) using editor: \(type(of: editor))"
+            return "Couldn't generate code for \(String(describing: value)) using editor: \(type(of: editor))"
         case let .unableToFindInitializer(symbol, url):
             return "Couldn't find initializer for \"\(symbol)\" in \"\(url.lastPathComponent)\""
         case let .tooManyMatches(symbol, url):

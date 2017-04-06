@@ -54,8 +54,8 @@ class FloatArrayItemView : NSView {
     weak var delegate : FloatArrayItemViewDelegate?
     
     override func awakeFromNib() {
-        stepper?.minValue = -Double(FLT_MAX)
-        stepper?.maxValue = Double(FLT_MAX)
+        stepper?.minValue = -Double.greatestFiniteMagnitude
+        stepper?.maxValue = Double.greatestFiniteMagnitude
         stepper?.increment = 1
     }
 

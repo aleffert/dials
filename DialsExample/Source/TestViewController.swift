@@ -22,11 +22,11 @@ class TestViewController: UIViewController {
         DLSGroupWithName("Example Group (Swift)") {
             DLSControl("Some Color").colorOf(&color)
             
-            DLSControl("Set Color as Background").actionOf {[weak self] in
+            _ = DLSControl("Set Color as Background").actionOf {[weak self] in
                 self?.view.backgroundColor = color
             }
 
-            DLSControl("Add Toolbar Button").actionOf {[weak self] in
+            _ = DLSControl("Add Toolbar Button").actionOf {[weak self] in
                 var items = self?.toolbarItems ?? []
                 items.append(UIBarButtonItem(title: buttonTitle, style: .plain, target: nil, action: nil))
                 self?.toolbarItems = items

@@ -31,8 +31,8 @@ class EditConstraintViewController : NSViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        constantStepper?.minValue = -Double(FLT_MAX)
-        constantStepper?.maxValue = Double(FLT_MAX)
+        constantStepper?.minValue = -Double.greatestFiniteMagnitude
+        constantStepper?.maxValue = Double.greatestFiniteMagnitude
         constantStepper?.increment = 1
         
         updateFromConstraint()

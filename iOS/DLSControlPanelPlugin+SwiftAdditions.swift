@@ -117,7 +117,7 @@ public extension DLSReferenceControlBuilder {
             $0 as NSNumber
         }
         let setT : (AnyObject) -> CGFloat = {
-            $0 as! NSNumber as CGFloat
+            CGFloat(($0 as! NSNumber).floatValue)
         }
         return editorOf(&source, editor: editor, getT: getT, setT: setT)
     }
@@ -226,7 +226,7 @@ public extension DLSReferenceControlBuilder {
             getT: {
                 $0 as NSNumber
             }, setT: {
-                $0 as! NSNumber as Bool
+                ($0 as! NSNumber).boolValue
             }
         )
     }

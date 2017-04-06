@@ -103,7 +103,7 @@ class RequestContentTabController: NSObject {
                 else {
                     removeTabViewItem(imageItem)
                     addTabViewItem(textItem)
-                    textView.string = NSString(data : data, encoding : String.Encoding.utf8.rawValue) as? String
+                    textView.string = NSString(data : data, encoding : String.Encoding.utf8.rawValue) as String?
                 }
             }
             else {

@@ -1027,11 +1027,11 @@
 				TargetAttributes = {
 					77100E2A1B06F5EC0082C38B = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0820;
 					};
 					77100E391B06F5ED0082C38B = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0820;
 						TestTargetID = 77100E2A1B06F5EC0082C38B;
 					};
 					77100F121B0780C50082C38B = {

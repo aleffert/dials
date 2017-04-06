@@ -52,7 +52,7 @@ class ViewsPlugin: NSObject, Plugin, ViewsViewControllerDelegate {
             handleUpdatedContentsMessage(m)
         }
         else {
-            assertionFailure("Unknown message type: \(message)")
+            assertionFailure("Unknown message type: \(String(describing: message))")
         }
     }
 
